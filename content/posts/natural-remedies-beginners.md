@@ -31,3 +31,4 @@ Holistic health works best when it’s simple, consistent, and eco-aware. Here a
 
 Start small, go consistent, and favour low-impact options.
 
+
