@@ -1,30 +1,31 @@
 ---
-title: "7 Eco-Friendly Habits for a Healthier Home"
-date: "2025-09-01"
-description: "Simple changes that reduce toxins, save money, and bring balance to your home environment."
+title: "Herbal Teas for Holistic Healing"
+date: "2025-09-02"
+description: "Gentle teas that soothe the mind and body — chamomile, ginger, peppermint, and more."
 ---
 
-Living eco-friendly isn’t about perfection — it’s about consistency. These small habits can support your holistic lifestyle while reducing environmental impact:
+Herbal teas are one of the simplest ways to connect with holistic healing. They combine ritual, warmth, and gentle plant medicine.
 
-### 1) Choose natural cleaners
-DIY solutions like vinegar + lemon work as well as harsh chemicals.
+### Chamomile 🌼
+- Calming for stress and sleep.
+- Lovely night-time ritual.
 
-### 2) Open windows daily
-Fresh air clears toxins and supports circadian rhythm.
+### Ginger 🌿
+- Supports digestion and circulation.
+- Great in colder months.
 
-### 3) Use beeswax or soy candles
-Avoid paraffin — it releases petroleum byproducts.
+### Peppermint 🍃
+- Soothes headaches and bloating.
+- Refreshing and cooling.
 
-### 4) Indoor plants
-Peace lilies and spider plants filter air naturally.
+### Rooibos ❤️
+- Naturally caffeine-free.
+- Rich in antioxidants.
 
-### 5) Reusable over disposable
-From water bottles to cloth towels, cut waste at the source.
+### Green Tea 🍵
+- Gentle energy boost.
+- Linked to heart and brain health.
 
-### 6) Cook from scratch
-Less packaging, better nutrition.
+> Tip: Source organically, and steep in a mindful moment rather than rushing.
 
-### 7) Mindful energy use
-Switch off devices at night, let in natural light.
-
-**Bottom line:** A healthier home is one that works with nature, not against it.
+**Bottom line:** Herbal teas bring healing, comfort, and a daily dose of wellness.
