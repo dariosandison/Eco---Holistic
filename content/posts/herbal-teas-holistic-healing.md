@@ -29,3 +29,4 @@ Herbal teas are one of the simplest ways to connect with holistic healing. They 
 > Tip: Source organically, and steep in a mindful moment rather than rushing.
 
 **Bottom line:** Herbal teas bring healing, comfort, and a daily dose of wellness.
+
