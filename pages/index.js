@@ -22,3 +22,4 @@ export async function getStaticProps() {
   const posts = getAllPosts();
   return { props: { posts } };
 }
+
