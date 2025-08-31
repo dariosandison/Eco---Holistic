@@ -1,55 +1,39 @@
-import { getAllPosts, getPostBySlug } from "../../lib/posts";
+import { getAllSlugs, getPostBySlug } from "../../lib/posts";
 import Head from "next/head";
+import { remark } from "remark";
+import html from "remark-html";
 
 export default function Post({ post }) {
+  if (!post) return <p>Post not found.</p>;
+
   return (
-    <>
-    <script
-  type="application/ld+json"
-  dangerouslySetInnerHTML={{
-    __html: JSON.stringify({
-      "@context": "https://schema.org",
-      "@type": "BlogPosting",
-      headline: post.title,
-      description: post.description,
-      datePublished: post.date,
-      author: {
-        "@type": "Organization",
-        name: "Wild & Well",
-      },
-      publisher: {
-        "@type": "Organization",
-        name: "Wild & Well",
-        logo: {
-          "@type": "ImageObject",
-          url: "https://www.wild-and-well.store/favicon.ico",
-        },
-      },
-      mainEntityOfPage: {
-        "@type": "WebPage",
-        "@id": `https://www.wild-and-well.store/posts/${post.slug}`,
-      },
-    }),
-  }}
-/>
-
+    <div style={{ padding: "2rem", fontFamily: "sans-serif" }}>
       <Head>
-        <title>{post.title} | Wild & Well</title>
-        <meta
-          name="description"
-          content={post.description || "Read more on holistic living, eco-friendly health, and mindful wellness."}
-        />
+        <title>{post.title} | Wild + Well</title>
+        <meta name="description" content={post.description} />
+      </Head>
+      <article>
+        <h1>{post.title}</h1>
+        <p><em>{post.date}</em></p>
+        <div dangerouslySetInnerHTML={{ __html: post.contentHtml }} />
+      </article>
+    </div>
+  );
+}
 
-        {/* Open Graph */}
-        <meta property="og:type" content="article" />
-        <meta property="og:title" content={`${post.title} | Wild & Well`} />
-        <meta property="og:description" content={post.description} />
-        <meta
-          property="og:url"
-          content={`https://www.wild-and-well.store/posts/${post.slug}`}
-        />
-        <meta property="og:image" content="/cover.jpg" />
+export async function getStaticPaths() {
+  const slugs = getAllSlugs();
+  const paths = slugs.map((slug) => ({ params: { slug } }));
 
-        {/* Twitter */}
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content={
+  return { paths, fallback: false };
+}
+
+export async function getStaticProps({ params }) {
+  const post = getPostBySlug(params.slug);
+
+  // Convert markdown -> HTML
+  const processedContent = await remark().use(html).process(post.content);
+  post.contentHtml = processedContent.toString();
+
+  return { props: { post } };
+}
