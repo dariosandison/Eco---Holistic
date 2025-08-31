@@ -1,5 +1,20 @@
 import "@/styles/globals.css";
 import Head from "next/head";
+import "@/styles/globals.css";
+import Head from "next/head";
+import Nav from "../components/Nav";   // 👈 import Nav
+
+export default function App({ Component, pageProps }) {
+  return (
+    <>
+      <Head>
+        {/* existing SEO meta tags */}
+      </Head>
+      <Nav />   {/* 👈 navigation appears on all pages */}
+      <Component {...pageProps} />
+    </>
+  );
+}
 
 export default function App({ Component, pageProps }) {
   return (
