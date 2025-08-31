@@ -1,0 +1,61 @@
+/* globals.css */
+
+body {
+  font-family: Georgia, serif;
+  line-height: 1.7;
+  color: #2c2c2c;
+  background-color: #fafafa;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+}
+
+header {
+  text-align: center;
+  margin-bottom: 2.5rem;
+}
+
+h1 {
+  font-size: 2.5rem;
+  color: #184d2b;
+}
+
+.subtitle {
+  font-size: 1.2rem;
+  color: #555;
+}
+
+h2 {
+  font-size: 1.6rem;
+  margin-bottom: 0.2rem;
+}
+
+.date {
+  font-size: 0.9rem;
+  color: #777;
+}
+
+article {
+  margin-bottom: 2.5rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid #ddd;
+}
+
+a {
+  color: #2c5530;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+.readmore {
+  font-weight: bold;
+  color: #0a7f3f;
+}
