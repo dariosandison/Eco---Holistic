@@ -1,35 +1,10 @@
-import Link from "next/link";
-import { getAllPosts } from "../lib/posts";
+import "../styles/globals.css";
+import Layout from "../components/Layout";
 
-export default function Home({ posts }) {
+export default function MyApp({ Component, pageProps }) {
   return (
-    <div className="container">
-      <header>
-        <h1>🌿 Eco + Holistic Blog</h1>
-        <p className="subtitle">
-          Natural living, eco-friendly health, and mindful wellness
-        </p>
-      </header>
-
-      <section>
-        {posts.map((p) => (
-          <article key={p.slug}>
-            <h2>
-              <Link href={`/posts/${p.slug}`}>{p.title}</Link>
-            </h2>
-            <p className="date">{p.date}</p>
-            <p>{p.description}</p>
-            <Link href={`/posts/${p.slug}`} className="readmore">
-              Read more →
-            </Link>
-          </article>
-        ))}
-      </section>
-    </div>
+    <Layout>
+      <Component {...pageProps} />
+    </Layout>
   );
-}
-
-export async function getStaticProps() {
-  const posts = getAllPosts();
-  return { props: { posts } };
 }
