@@ -1,13 +1,11 @@
-import { getAllPosts, getPost } from "../../lib/posts";
-import { remark } from "remark";
-import html from "remark-html";
+import { getAllPosts, getPostBySlug } from "../../lib/posts";
 
 export default function Post({ post }) {
   return (
-    <div style={{ maxWidth: "800px", margin: "2rem auto", fontFamily: "Georgia, serif", lineHeight: "1.7" }}>
+    <div className="container">
       <article>
-        <h1 style={{ fontSize: "2rem", marginBottom: "0.5rem" }}>{post.title}</h1>
-        <p style={{ color: "#777", fontSize: "0.9rem" }}>{post.date}</p>
+        <h1>{post.title}</h1>
+        <p className="date">{post.date}</p>
         <div dangerouslySetInnerHTML={{ __html: post.contentHtml }} />
       </article>
     </div>
@@ -16,17 +14,13 @@ export default function Post({ post }) {
 
 export async function getStaticPaths() {
   const posts = getAllPosts();
-  const paths = posts.map((p) => ({ params: { slug: p.slug } }));
-  return { paths, fallback: false };
+  return {
+    paths: posts.map((p) => ({ params: { slug: p.slug } })),
+    fallback: false
+  };
 }
 
 export async function getStaticProps({ params }) {
-  const post = getPost(params.slug);
-
-  // Convert Markdown to HTML
-  const processedContent = await remark().use(html).process(post.content);
-  const contentHtml = processedContent.toString();
-
-  return { props: { post: { ...post, contentHtml } } };
+  const post = await getPostBySlug(params.slug);
+  return { props: { post } };
 }
-
