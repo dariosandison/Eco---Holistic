@@ -4,7 +4,29 @@ import Head from "next/head";
 export default function App({ Component, pageProps }) {
   return (
     <>
-      <Head>
+      <script
+  type="application/ld+json"
+  dangerouslySetInnerHTML={{
+    __html: JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      name: "Wild & Well",
+      url: "https://www.wild-and-well.store",
+      logo: "https://www.wild-and-well.store/favicon.ico",
+      sameAs: [
+        "https://www.facebook.com/yourpage",
+        "https://www.instagram.com/yourpage",
+        "https://www.twitter.com/yourpage"
+      ],
+      mainEntityOfPage: {
+        "@type": "WebPage",
+        "@id": "https://www.wild-and-well.store"
+      }
+    }),
+  }}
+/>
+
+    <Head>
         {/* Basic Meta */}
         <title>Eco + Holistic Blog | Natural Living & Mindful Wellness</title>
         <meta
