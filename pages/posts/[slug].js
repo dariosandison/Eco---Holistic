@@ -4,6 +4,35 @@ import Head from "next/head";
 export default function Post({ post }) {
   return (
     <>
+    <script
+  type="application/ld+json"
+  dangerouslySetInnerHTML={{
+    __html: JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "BlogPosting",
+      headline: post.title,
+      description: post.description,
+      datePublished: post.date,
+      author: {
+        "@type": "Organization",
+        name: "Wild & Well",
+      },
+      publisher: {
+        "@type": "Organization",
+        name: "Wild & Well",
+        logo: {
+          "@type": "ImageObject",
+          url: "https://www.wild-and-well.store/favicon.ico",
+        },
+      },
+      mainEntityOfPage: {
+        "@type": "WebPage",
+        "@id": `https://www.wild-and-well.store/posts/${post.slug}`,
+      },
+    }),
+  }}
+/>
+
       <Head>
         <title>{post.title} | Wild & Well</title>
         <meta
