@@ -1,12 +1,9 @@
-// pages/sitemap.xml.js
+// pages/sitemap.js
+
 export async function getServerSideProps({ res }) {
   const baseUrl = "https://www.wild-and-well.store";
 
-  const staticPages = [
-    "",
-    "/about",
-    "/blog"
-  ];
+  const staticPages = ["", "/about", "/blog"];
 
   // Import posts dynamically
   const fs = require("fs");
@@ -14,7 +11,7 @@ export async function getServerSideProps({ res }) {
   const postsDirectory = path.join(process.cwd(), "content/posts");
   const postFiles = fs.readdirSync(postsDirectory);
 
-  const posts = postFiles.map(file => {
+  const posts = postFiles.map((file) => {
     const slug = file.replace(/\.md$/, "");
     return `/posts/${slug}`;
   });
@@ -24,12 +21,13 @@ export async function getServerSideProps({ res }) {
   const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
   <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     ${allPages
-      .map(url => {
+      .map((url) => {
         return `
         <url>
           <loc>${baseUrl}${url}</loc>
           <priority>${url === "" ? "1.0" : "0.8"}</priority>
-        </url>`;
+        </url>
+        `;
       })
       .join("")}
   </urlset>`;
@@ -42,5 +40,6 @@ export async function getServerSideProps({ res }) {
 }
 
 export default function Sitemap() {
+  // No UI, sitemap is served as XML
   return null;
 }
