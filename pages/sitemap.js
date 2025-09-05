@@ -43,3 +43,13 @@ export default function Sitemap() {
   // No UI, sitemap is served as XML
   return null;
 }
+module.exports = {
+  async rewrites() {
+    return [
+      {
+        source: '/sitemap.xml',
+        destination: '/sitemap',
+      },
+    ];
+  },
+};
