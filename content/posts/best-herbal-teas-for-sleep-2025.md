@@ -7,10 +7,14 @@ description: "Science-backed herbs like chamomile, lemon balm, and valerian to h
 > **Affiliate note:** We may earn from qualifying purchases. It helps us keep the site ad-light.
 
 ## Quick Picks
-- **Overall:** [Chamomile + Lemon Balm Blend]({{AFFILIATE_LINK}})
-- **Extra Calming:** [Valerian Night Tea]({{AFFILIATE_LINK}})
-- **Caffeine-Free Chai:** [Rooibos Vanilla]({{AFFILIATE_LINK}})
-- **Budget Loose Leaf:** [Organic Chamomile (1 lb)]({{AFFILIATE_LINK}})
+- **Overall:** [Chamomile + Lemon Balm Blend](https://www.amazon.co.uk/?tag=wildandwell0c-21
+)
+- **Extra Calming:** [Valerian Night Tea](https://www.amazon.co.uk/?tag=wildandwell0c-21
+)
+- **Caffeine-Free Chai:** [Rooibos Vanilla](https://www.amazon.co.uk/?tag=wildandwell0c-21
+)
+- **Budget Loose Leaf:** [Organic Chamomile (1 lb)](https://www.amazon.co.uk/?tag=wildandwell0c-21
+)
 
 ### How to brew for best results
 - **200°F (just off boil)** for most herbs; **5–8 min** steep.
