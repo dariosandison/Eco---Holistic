@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>https://www.wild-and-well.store/</loc></url>
+  <url><loc>https://www.wild-and-well.store/recommended</loc></url>
+  <url><loc>https://www.wild-and-well.store/disclosure</loc></url>
+  <url><loc>https://www.wild-and-well.store/privacy</loc></url>
+  <url><loc>https://www.wild-and-well.store/cookies</loc></url>
+  <!-- Add one line per blog post as you publish:
+  <url><loc>https://www.wild-and-well.store/posts/YOUR-SLUG</loc></url>
+  -->
+</urlset>
