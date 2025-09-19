@@ -64,3 +64,16 @@ export default function Footer() {
     </footer>
   );
 }
+// components/Footer.js
+export default function Footer() {
+  return (
+    <footer style={{marginTop: 40, padding: "20px 0", borderTop: "1px solid #eee"}}>
+      <div style={{maxWidth: 860, margin: "0 auto", padding: "0 20px", display: "flex", gap: 16, flexWrap: "wrap"}}>
+        <a href="/disclosure">Affiliate Disclosure</a>
+        <a href="/privacy">Privacy Policy</a>
+        <a href="/cookies">Cookie Policy</a>
+        <span style={{marginLeft: "auto"}}>© {new Date().getFullYear()} Wild &amp; Well</span>
+      </div>
+    </footer>
+  );
+}
