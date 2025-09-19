@@ -27,3 +27,4 @@ import Script from "next/script";
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date()); gtag('config', 'G-XXXX');
 `}</Script>
+import Footer from "../components/Footer";
