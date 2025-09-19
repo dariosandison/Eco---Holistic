@@ -19,3 +19,11 @@ export default function App({ Component, pageProps }) {
     </>
   );
 }
+import Script from "next/script";
+// inside the App component, just after <Head>…
+<Script async src={`https://www.googletagmanager.com/gtag/js?id=G-XXXX`} />
+<Script id="ga4">{`
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date()); gtag('config', 'G-XXXX');
+`}</Script>
