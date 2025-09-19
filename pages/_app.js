@@ -2,6 +2,7 @@ import "@/styles/globals.css";
 import Head from "next/head";
 import Script from "next/script";
 import Nav from "../components/Nav";
+import Footer from "../components/Footer";
 
 export default function App({ Component, pageProps }) {
   const GA_ID = process.env.NEXT_PUBLIC_GA_ID; // set later in Vercel
@@ -28,7 +29,9 @@ export default function App({ Component, pageProps }) {
       )}
 
       <Nav />
-      <Component {...pageProps} />
+<Component {...pageProps} />
+<Footer />   {/* 👈 add this */}
+
     </>
   );
 }
