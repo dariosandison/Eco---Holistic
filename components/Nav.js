@@ -45,3 +45,5 @@ export default function Nav() {
     </header>
   );
 }
+// inside your menu <ul>
+<li><a href="/disclosure">Disclosure</a></li>
