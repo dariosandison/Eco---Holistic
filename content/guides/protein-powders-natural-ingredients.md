@@ -1,7 +1,7 @@
 ---
 title: Protein Powders with Natural Ingredients — better blends, fewer additives
 excerpt: Three easy choices for shakes, oats, or smoothies—whey, plant, and unflavoured.
-cover: /cover.jpg
+cover: /cover.png
 date: 2025-08-31
 tags: [protein, fitness, food]
 avoid:
