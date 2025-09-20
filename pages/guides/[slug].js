@@ -5,7 +5,6 @@ import Link from "next/link";
 import { remark } from "remark";
 import html from "remark-html";
 
-// tiny front-matter parser (kept in sync with index.js)
 function parseFrontmatter(src) {
   const fm = { title: "", excerpt: "", date: "", cover: "/cover.jpg", tags: [] };
   if (src.startsWith("---")) {
@@ -86,7 +85,7 @@ export default function GuidePage({ slug, frontmatter, htmlContent }) {
       <main className="wrap">
         <nav className="crumbs">
           <Link href="/">Home</Link> <span>›</span>{" "}
-          <Link href="/#guides">Guides</Link> <span>›</span>{" "}
+          <Link href="/guides">Guides</Link> <span>›</span>{" "}
           <span className="here">{title}</span>
         </nav>
 
@@ -118,7 +117,7 @@ export default function GuidePage({ slug, frontmatter, htmlContent }) {
           </footer>
         </article>
 
-        <Link href="/" className="back">
+        <Link href="/guides" className="back">
           ← Back to all guides
         </Link>
       </main>
