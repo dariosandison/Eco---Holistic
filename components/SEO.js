@@ -1,46 +1,29 @@
-import Head from 'next/head';
+import React from "react";
+import Head from "next/head";
 
 export default function SEO({
-  title = 'Wild & Well – Eco & Holistic Living',
-  description = 'Guides to eco-friendly living, holistic wellness, and simple product picks.',
-  path = '/',
-  image = '/cover.jpg'
+  title = "Wild & Well",
+  description = "Your guide to eco-living, holistic health, and mindful wellness.",
+  path = "/",
+  image = "/cover.jpg",
 }) {
-  const url = `https://www.wild-and-well.store${path}`;
-  const fullTitle = title;
-
-  const jsonLd = {
-    '@context': 'https://schema.org',
-    '@type': 'WebSite',
-    name: 'Wild & Well',
-    url: 'https://www.wild-and-well.store',
-    potentialAction: {
-      '@type': 'SearchAction',
-      target: 'https://www.wild-and-well.store/search?q={query}',
-      'query-input': 'required name=query'
-    }
-  };
+  const site = "https://wild-and-well.store";
+  const url = `${site}${path}`;
 
   return (
     <Head>
-      <title>{fullTitle}</title>
+      <title>{title}</title>
       <meta name="description" content={description} />
-
-      <meta property="og:title" content={fullTitle} />
+      <link rel="canonical" href={url} />
+      <meta property="og:type" content="article" />
+      <meta property="og:title" content={title} />
       <meta property="og:description" content={description} />
-      <meta property="og:type" content="website" />
       <meta property="og:url" content={url} />
-      <meta property="og:image" content={image} />
-
+      <meta property="og:image" content={`${site}${image}`} />
       <meta name="twitter:card" content="summary_large_image" />
-      <meta name="twitter:title" content={fullTitle} />
+      <meta name="twitter:title" content={title} />
       <meta name="twitter:description" content={description} />
-      <meta name="twitter:image" content={image} />
-
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
+      <meta name="twitter:image" content={`${site}${image}`} />
     </Head>
   );
 }
