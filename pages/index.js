@@ -85,7 +85,7 @@ export default function Home({ allGuides, featured, categories }) {
       <main className="wrap">
         <header className="hero">
           <p className="eyebrow">
-            Bite-size, practical reads for eco-friendly living and holistic wellness.
+          
           </p>
           <h1 className="h1">
             Your guide to eco-living, holistic health, and mindful wellness.
