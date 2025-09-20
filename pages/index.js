@@ -1,265 +1,125 @@
-// pages/index.js
-import React, { useState } from "react";
+import React from "react";
 import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
-import Head from "next/head";
-import Link from "next/link";
+import SEO from "../components/SEO";
 
-export default function Home({ guides, tags }) {
-  const [query, setQuery] = useState("");
-  const [active, setActive] = useState("All");
-  const [logoOk, setLogoOk] = useState(true); // logo fallback
+const GUIDES_DIR = path.join(process.cwd(), "content", "guides");
 
-  const filtered = guides.filter((g) => {
-    const byTag = active === "All" || (g.tags || []).includes(active);
-    const q = query.trim().toLowerCase();
-    const byQuery =
-      !q ||
-      g.title.toLowerCase().includes(q) ||
-      (g.description || "").toLowerCase().includes(q) ||
-      (g.tags || []).some((t) => t.toLowerCase().includes(q));
-    return byTag && byQuery;
-  });
-
+export default function Home({ guides }) {
   return (
     <>
-      <Head>
-        <title>Wild & Well — Eco & Holistic Guides</title>
-        <meta
-          name="description"
-          content="Your guide to eco-living, holistic health, and mindful wellness. Search bite-size"
-        />
-      </Head>
+      <SEO title="Wild & Well — Eco & holistic picks that just work" path="/" />
 
-      {/* HERO (centered) */}
-      <header className="hero">
-        <div className="logoWrap">
-          {logoOk ? (
-            // IMPORTANT: make sure this path matches your actual file in /public
-            // If your file is /public/logo.svg.jpg leave as-is; otherwise change src below.
-            <img
-              src="/logo.png"
-              alt="Wild & Well"
-              width="260"
-              height="120"
-              onError={() => setLogoOk(false)}
-            />
-          ) : (
-            <div className="logoText">Wild & Well</div>
-          )}
-        </div>
+      <main className="wrap">
+        <header className="hero">
+          <img src="/logo.svg" alt="Wild & Well" className="logo" />
+          <h1 className="tag1">
+            Your guide to eco-living, holistic health, and mindful wellness.
+          </h1>
+          <p className="tag2">
+            Bite-size, practical reads for eco-friendly living and holistic wellness.
+          </p>
 
-        {/* SWAPPED ORDER: "Your guide…" is now the main headline */}
-        <p className="taglineMain">
-          Your guide to eco-living, holistic health, and mindful wellness.
-        </p>
-        <p className="taglineSub">
-          .
-        </p>
-      </header>
+          <div className="chips">
+            {["starter", "water", "cleaning", "supplements", "protein"].map((c) => (
+              <a className="chip" key={c} href={`/guides/${c === "starter" ? "wellness-starter" : c}`}>
+                {c}
+              </a>
+            ))}
+          </div>
+        </header>
 
-      {/* CONTROLS */}
-      <section className="controls">
-        <input
-          value={query}
-          onChange={(e) => setQuery(e.target.value)}
-          placeholder='Search guides (e.g., "water", "protein", "cleaning")'
-          aria-label="Search guides"
-        />
-        <div className="tags">
-          {tags.map((t) => (
-            <button
-              key={t}
-              onClick={() => setActive(t)}
-              className={`tag ${active === t ? "active" : ""}`}
-            >
-              {t.toLowerCase()}
-            </button>
-          ))}
-        </div>
-      </section>
+        <section className="start">
+          <h2>Start here</h2>
+          <div className="grid">
+            <a className="card" href="/guides/wellness-starter">Wellness Starter</a>
+            <a className="card" href="/guides/water-filters">Water Filters</a>
+            <a className="card" href="/guides/safer-cleaning">Safer Cleaning</a>
+            <a className="card" href="/guides/vitamin-supplements-minimal-additives">Minimal-Additive Vitamins</a>
+            <a className="card" href="/guides/protein-powders-natural-ingredients">Natural Protein</a>
+          </div>
+        </section>
 
-      {/* GRID */}
-      <main className="grid">
-        {filtered.map((g) => (
-          <Link key={g.slug} href={`/guides/${g.slug}`} className="card">
-            <article>
-              <h3>{g.title}</h3>
-              <p className="desc">{g.description}</p>
-              {!!(g.tags || []).length && (
-                <div className="cardTags">
-                  {(g.tags || []).slice(0, 4).map((t) => (
-                    <span key={t} className="pill">
-                      {t}
-                    </span>
-                  ))}
-                </div>
-              )}
-            </article>
-          </Link>
-        ))}
-        {!filtered.length && (
-          <p className="empty">No matches. Try a different search.</p>
-        )}
+        <section>
+          <h2>Latest guides</h2>
+          <ul className="list">
+            {guides.map((g) => (
+              <li key={g.slug}>
+                <a href={`/guides/${g.slug}`}>{g.title}</a>
+                {g.excerpt ? <p>{g.excerpt}</p> : null}
+              </li>
+            ))}
+          </ul>
+        </section>
+
+        <section className="email">
+          <h3>Get one small eco upgrade each week</h3>
+          <form
+            action="https://formsubmit.co/hello@wild-and-well.store"
+            method="POST"
+          >
+            <input type="email" name="email" placeholder="you@example.com" required />
+            <button type="submit">Subscribe</button>
+          </form>
+          <small>We’ll send practical, low-tox tips. Unsubscribe anytime.</small>
+        </section>
       </main>
 
       <style jsx>{`
-        .hero {
-          max-width: 900px;
-          margin: 28px auto 8px;
-          padding: 0 16px;
-          text-align: center;
+        .wrap { max-width: 980px; margin: 0 auto; padding: 0 16px 40px; }
+        .hero { text-align: center; padding: 24px 0 12px; }
+        .logo { height: 36px; margin: 12px auto 16px; display: block; }
+        .tag1 { font-size: 1.35rem; margin: 8px 0 6px; }
+        .tag2 { color: #4b5563; margin: 0 0 16px; }
+        .chips { display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; }
+        .chip {
+          border: 1px solid #e5e7eb; border-radius: 999px; padding: 8px 12px;
+          text-decoration: none; color: #111827; background:#fff;
         }
-        .logoWrap {
-          display: inline-flex;
-          align-items: center;
-          justify-content: center;
-          margin: 4px auto 4px;
-        }
-        .logoWrap img {
-          display: block;
-        }
-        .logoText {
-          font-size: 2rem;
-          font-weight: 800;
-          letter-spacing: 0.2px;
-        }
-
-        /* SWAPPED SIZES */
-        .taglineMain {
-          margin: 8px 0 2px;
-          font-size: 1.25rem;
-          color: #111827;
-          font-weight: 700;
-        }
-        .taglineSub {
-          margin: 2px 0 0;
-          font-size: 1.02rem;
-          color: #374151;
-        }
-
-        .controls {
-          max-width: 960px;
-          margin: 12px auto 20px;
-          padding: 0 16px;
-        }
-        input {
-          width: 100%;
-          font-size: 1rem;
-          padding: 12px 14px;
-          border-radius: 10px;
-          border: 1px solid #e5e7eb;
-          outline: none;
-        }
-        input:focus {
-          border-color: #93c5fd;
-          box-shadow: 0 0 0 3px rgba(147, 197, 253, 0.35);
-        }
-        .tags {
-          display: flex;
-          flex-wrap: wrap;
-          gap: 10px;
-          margin: 14px 0 0;
-          justify-content: center;
-        }
-        .tag {
-          padding: 8px 12px;
-          border-radius: 999px;
-          border: 1px solid #e5e7eb;
-          background: #fff;
-          color: #111827;
-          cursor: pointer;
-        }
-        .tag.active {
-          background: #e8f3ff;
-          border-color: #bfdbfe;
-          color: #1d4ed8;
-          font-weight: 600;
-        }
-
-        .grid {
-          max-width: 1100px;
-          margin: 10px auto 40px;
-          padding: 0 16px 8px;
+        .chip:hover { background:#f3f4f6; }
+        .start .grid {
           display: grid;
-          grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-          gap: 16px;
+          grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+          gap: 12px;
         }
         .card {
-          display: block;
-          text-decoration: none;
-          color: inherit;
-          border: 1px solid #e5e7eb;
-          border-radius: 14px;
-          background: #fff;
-          transition: transform 0.15s ease, box-shadow 0.15s ease;
+          display: block; border:1px solid #e5e7eb; border-radius:12px;
+          padding: 14px; text-decoration:none; color:#111827; background:#fff;
         }
-        .card:hover {
-          transform: translateY(-2px);
-          box-shadow: 0 6px 24px rgba(0, 0, 0, 0.06);
-        }
-        article {
-          padding: 16px 16px 14px;
-        }
-        h3 {
-          margin: 0 0 6px;
-          font-size: 1.05rem;
-        }
-        .desc {
-          margin: 0 0 10px;
-          color: #4b5563;
-          line-height: 1.45;
-        }
-        .cardTags {
-          display: flex;
-          gap: 8px;
-          flex-wrap: wrap;
-        }
-        .pill {
-          font-size: 0.8rem;
-          padding: 4px 8px;
-          border-radius: 999px;
-          background: #f3f4f6;
-          color: #374151;
-        }
-        .empty {
-          grid-column: 1 / -1;
-          color: #6b7280;
-          text-align: center;
-          padding: 24px 0;
-        }
+        .card:hover { background:#fafafa; }
+        h2 { margin: 18px 0 10px; }
+        .list { list-style: none; padding: 0; display: grid; gap: 12px; }
+        .list li { border:1px solid #e5e7eb; border-radius:12px; padding:12px; background:#fff; }
+        .list li p { margin:6px 0 0; color:#4b5563; }
+        .email { text-align:center; border:1px dashed #cbd5e1; border-radius:12px; padding:16px; margin-top: 24px; }
+        input { padding:10px; border:1px solid #d1d5db; border-radius:10px; width:260px; max-width: 70vw; }
+        button { margin-left:8px; padding:10px 14px; border:none; border-radius:10px; background:#2563eb; color:#fff; }
+        button:hover { background:#1d4ed8; }
       `}</style>
     </>
   );
 }
 
 export async function getStaticProps() {
-  const DIR = path.join(process.cwd(), "content", "guides");
-  const files = fs.readdirSync(DIR).filter((f) => f.endsWith(".md"));
+  const files = fs.readdirSync(GUIDES_DIR).filter((f) => f.endsWith(".md"));
+  const guidesRaw = await Promise.all(
+    files.map(async (f) => {
+      const raw = fs.readFileSync(path.join(GUIDES_DIR, f), "utf8");
+      const { data } = matter(raw);
+      return {
+        slug: f.replace(/\.md$/, ""),
+        title: data.title || f,
+        excerpt: data.excerpt || data.description || "",
+        date: data.date || null,
+      };
+    })
+  );
 
-  const guides = files.map((file) => {
-    const slug = file.replace(/\.md$/, "");
-    const raw = fs.readFileSync(path.join(DIR, file), "utf8");
-    const { data, content } = matter(raw);
+  // Sort newest first if dates exist
+  const guides = guidesRaw
+    .sort((a, b) => (b.date || "").localeCompare(a.date || ""))
+    .slice(0, 9);
 
-    const snippet =
-      (data.description || data.excerpt || "")
-        .toString()
-        .trim() ||
-      content.replace(/\s+/g, " ").slice(0, 180).trim() + "…";
-
-    return {
-      slug,
-      title: data.title || slug,
-      description: snippet,
-      tags: Array.isArray(data.tags) ? data.tags : [],
-    };
-  });
-
-  const tagSet = new Set();
-  guides.forEach((g) => (g.tags || []).forEach((t) => tagSet.add(t)));
-  const tags = ["All", ...Array.from(tagSet).sort((a, b) => a.localeCompare(b))];
-
-  return { props: { guides, tags } };
+  return { props: { guides } };
 }
