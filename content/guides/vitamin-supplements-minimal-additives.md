@@ -1,33 +1,45 @@
 ---
-title: "Vitamins with Minimal Additives: Read Labels Like a Pro"
-excerpt: "How to pick cleaner capsules and sensible doses — plus straightforward options for common vitamins."
-date: "2025-09-20"
-cover: "/cover.jpg"
-tags: ["supplements","vitamins","wellness"]
+title: Vitamins with Minimal Additives — clean labels, simple formulas
+excerpt: How to pick vitamins with fewer fillers and clear dosing.
+cover: /cover.jpg
+date: 2025-08-31
+tags: [vitamins, supplements, wellness]
+avoid:
+  - “Proprietary blends” with tiny amounts of everything.
+  - Artificial colours and unnecessary sweeteners in capsules.
+  - Mega-doses without a reason—more isn’t always better.
+lookfor:
+  - “Free from” notes (e.g., no artificial colours/sweeteners).
+  - Straightforward strengths per capsule or tablet.
+  - Third-party testing where available.
+products:
+  - title: Vitamin D3 (1000–2000 IU)
+    image: https://images.unsplash.com/photo-1599050751795-5cda8a2f7fdf?q=80&w=1200
+    href: https://www.amazon.co.uk/s?k=vitamin+D3+1000+IU+minimal+additives&tag=wildandwell0c-21
+    badge: Daily basic*
+    why: Simple single-ingredient product; often tiny capsules with few fillers.
+    pros: ["Small capsules", "Clear dose"]
+    cons: ["Check carrier oil if allergic"]
+  - title: Magnesium Glycinate
+    image: https://images.unsplash.com/photo-1598986646512-643fa37ee3ee?q=80&w=1200
+    href: https://www.amazon.co.uk/s?k=magnesium+glycinate+minimal+additives&tag=wildandwell0c-21
+    badge: Gentle option*
+    why: Popular for relaxation; many brands use fewer fillers than tablets.
+    pros: ["Often well-tolerated", "Capsules over tablets"]
+    cons: ["Capsules can be large"]
+  - title: Vitamin C (Powder)
+    image: https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?q=80&w=1200
+    href: https://www.amazon.co.uk/s?k=vitamin+C+powder+ascorbic+acid&tag=wildandwell0c-21
+    badge: Additive-light
+    why: Pure powder lets you control dose; mix with water or juice.
+    pros: ["No capsule fillers", "Flexible dose"]
+    cons: ["Sour taste", "Measure carefully"]
+faqs:
+  - q: How do I spot extra additives?
+    a: Check the “Other ingredients” section—fewer is usually better. Capsules often have fewer excipients than hard tablets.
+  - q: Is powder better?
+    a: It can be if you want minimal additives or flexible dosing, but capsules are more convenient.
+  - q: Do I need a multivitamin?
+    a: Not always. Many people prefer targeted single nutrients. If you do take a multi, choose one with sensible doses and a transparent label.
 ---
-
-## What to avoid — and why
-- **Artificial colours/flavours** — unnecessary in capsules.  
-- **Titanium dioxide** (colourant) — avoid if you prefer minimal excipients.  
-- **Gummy overload** — often more sugar/gelatin, less precise dosing.  
-- **Mega-doses** without a reason — more ≠ better.
-
-## What to look for — and why
-- **Short excipient lists** (e.g., capsule + rice flour).  
-- **Capsule shells** like **HPMC (hypromellose)** or gelatin if you tolerate it.  
-- **Third-party testing** (NSF, Informed Choice) or brand transparency.  
-- **Forms that suit you** (e.g., **methylcobalamin** B12 if you prefer active forms).
-
-## Clean basics (UK Amazon)
-- **Vitamin D3 (1,000–4,000 IU) ± K2:**  
-  <https://www.amazon.co.uk/s?k=vitamin+D3+K2+capsules+no+additives&tag=wildandwell0c-21>
-- **Vitamin C powder (unflavoured ascorbic acid):**  
-  <https://www.amazon.co.uk/s?k=vitamin+c+powder+ascorbic+acid&tag=wildandwell0c-21>
-- **Magnesium glycinate (gentle):**  
-  <https://www.amazon.co.uk/s?k=magnesium+glycinate+capsules&tag=wildandwell0c-21>
-- **B-complex with methyl B12/folate:**  
-  <https://www.amazon.co.uk/s?k=methyl+b+complex+capsules&tag=wildandwell0c-21>
-
-> **Note:** Check your own diet, meds, and goals. If you have a condition or take prescriptions, talk to a clinician first.
-
-*Educational only, not medical advice. Some links are affiliate links. As an Amazon Associate, we earn from qualifying purchases.*
+*Information here is educational, not medical advice. If you have a condition, are pregnant, or take medication, speak to a professional before supplementing.
