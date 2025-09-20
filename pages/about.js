@@ -1,4 +1,7 @@
 import SEO from "../components/SEO";
+<SEO title="About" path="/about" />
+
+import SEO from "../components/SEO";
 
 export default function About() {
   return (
