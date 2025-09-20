@@ -18,7 +18,7 @@ const products = [
       "Plastic-free packaging"
     ],
     why: "An easy daily swap that cuts plastic at the source.",
-    url: "https://www.amazon.co.uk/dp/ASIN1/?tag=your-tag-20"
+    url: "https://www.amazon.co.uk/dp/ASIN1/?tag=wildandwell0c-21"
   },
   {
     name: "Toothpaste Tablets (Fluoride)",
@@ -28,7 +28,7 @@ const products = [
       "Recyclable or refillable jar"
     ],
     why: "No squeezed tubes; just bite, brush, and rinse.",
-    url: "https://www.amazon.co.uk/dp/ASIN2/?tag=your-tag-20"
+    url: "https://www.amazon.co.uk/dp/ASIN2/?tag=wildandwell0c-21"
   },
   {
     name: "Stainless Steel Tongue Scraper",
@@ -38,7 +38,7 @@ const products = [
       "Ergonomic grip"
     ],
     why: "Removes buildup that brushing can miss.",
-    url: "https://www.amazon.co.uk/dp/ASIN3/?tag=your-tag-20"
+    url: "https://www.amazon.co.uk/dp/ASIN3/?tag=wildandwell0c-21"
   },
   {
     name: "Natural Dental Floss + Refill",
@@ -48,7 +48,7 @@ const products = [
       "Light natural coating"
     ],
     why: "Ditches plastic flossers for a lower-waste habit.",
-    url: "https://www.amazon.co.uk/dp/ASIN4/?tag=your-tag-20"
+    url: "https://www.amazon.co.uk/dp/ASIN4/?tag=wildandwell0c-21"
   }
 ];
 // ===== END EDITABLE AREA =====

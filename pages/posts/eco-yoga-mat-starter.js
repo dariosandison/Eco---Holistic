@@ -18,7 +18,7 @@ const products = [
       "Cork resists odor & bacteria"
     ],
     why: "Durable, low-odor surface with great traction for flows and hot yoga.",
-    url: "https://www.amazon.co.uk/dp/ASIN5/?tag=your-tag-20"
+    url: "https://www.amazon.co.uk/dp/ASIN5/?tag=wildandwell0c-21"
   },
   {
     name: "Cork Yoga Block (Set of 2)",
@@ -28,7 +28,7 @@ const products = [
       "Non-slip texture"
     ],
     why: "Stable alignment aid for balance poses and gentle support.",
-    url: "https://www.amazon.co.uk/dp/ASIN6/?tag=your-tag-20"
+    url: "https://www.amazon.co.uk/dp/ASIN6/?tag=wildandwell0c-21"
   },
   {
     name: "Organic Cotton Yoga Strap (8 ft)",
@@ -38,7 +38,7 @@ const products = [
       "Plastic-free packaging"
     ],
     why: "Improves flexibility and safe stretching across all levels.",
-    url: "https://www.amazon.co.uk/dp/ASIN7/?tag=your-tag-20"
+    url: "https://www.amazon.co.uk/dp/ASIN7/?tag=wildandwell0c-21"
   },
   {
     name: "Insulated Stainless Steel Bottle (500 ml)",
@@ -48,7 +48,7 @@ const products = [
       "Fits standard mat bags"
     ],
     why: "Hydration without plastic; perfect for studio or trail.",
-    url: "https://www.amazon.co.uk/dp/ASIN8/?tag=your-tag-20"
+    url: "https://www.amazon.co.uk/dp/ASIN8/?tag=wildandwell0c-21"
   }
 ];
 // ===== END EDITABLE AREA =====

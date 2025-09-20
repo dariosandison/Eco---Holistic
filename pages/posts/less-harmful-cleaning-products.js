@@ -17,7 +17,7 @@ const products = [
       "Plant-based surfactants"
     ],
     why: "One bottle replaces several cleaners—great first swap that cuts plastic & cost.",
-    url: "https://www.amazon.co.uk/dp/ASIN201/?tag=your-tag-20"
+    url: "https://www.amazon.co.uk/dp/ASIN201/?tag=wildandwell0c-21"
   },
   {
     name: "Microfibre Cleaning Cloth Set",
@@ -27,7 +27,7 @@ const products = [
       "Use colour-coding by room"
     ],
     why: "Reduces chemical load and paper towel waste; excellent for glass & mirrors.",
-    url: "https://www.amazon.co.uk/dp/ASIN202/?tag=your-tag-20"
+    url: "https://www.amazon.co.uk/dp/ASIN202/?tag=wildandwell0c-21"
   },
   {
     name: "Oxygen Bleach (Sodium Percarbonate) Powder",
@@ -37,7 +37,7 @@ const products = [
       "Biodegrades to soda ash + oxygen"
     ],
     why: "Laundry boost and bathroom grout refresh without chlorine fumes.",
-    url: "https://www.amazon.co.uk/dp/ASIN203/?tag=your-tag-20"
+    url: "https://www.amazon.co.uk/dp/ASIN203/?tag=wildandwell0c-21"
   },
   {
     name: "Fragrance-Free Dishwasher Tablets (Short INCI)",
@@ -47,7 +47,7 @@ const products = [
       "Check packaging for phosphates-free"
     ],
     why: "Easier on skin and indoor air; look for transparent ingredient lists.",
-    url: "https://www.amazon.co.uk/dp/ASIN204/?tag=your-tag-20"
+    url: "https://www.amazon.co.uk/dp/ASIN204/?tag=wildandwell0c-21"
   },
   {
     name: "Citric Acid (Food Grade) + Refillable Spray Bottle",
@@ -57,7 +57,7 @@ const products = [
       "DIY: 1–2 tbsp per 500 ml warm water"
     ],
     why: "Effective descaler without harsh mineral acids; cheap, simple, reliable.",
-    url: "https://www.amazon.co.uk/dp/ASIN205/?tag=your-tag-20"
+    url: "https://www.amazon.co.uk/dp/ASIN205/?tag=wildandwell0c-21"
   }
 ];
 // ===== END EDITABLE AREA =====

@@ -18,7 +18,7 @@ const products = [
       "For all hair types"
     ],
     why: "Cuts bottles and shipping weight while keeping hair balanced.",
-    url: "https://www.amazon.co.uk/dp/ASIN1/?tag=your-tag-20"
+    url: "https://www.amazon.co.uk/dp/ASIN1/?tag=wildandwell0c-21"
   },
   {
     name: "Nourishing Solid Conditioner Bar",
@@ -28,7 +28,7 @@ const products = [
       "Zero-waste packaging"
     ],
     why: "Pairs with the shampoo bar to reduce plastic drastically.",
-    url: "https://www.amazon.co.uk/dp/ASIN2/?tag=your-tag-20"
+    url: "https://www.amazon.co.uk/dp/ASIN2/?tag=wildandwell0c-21"
   },
   {
     name: "Sisal Soap Saver Pouch",
@@ -38,7 +38,7 @@ const products = [
       "Compostable fiber"
     ],
     why: "Extends bar life and boosts lather while exfoliating.",
-    url: "https://www.amazon.co.uk/dp/ASIN3/?tag=your-tag-20"
+    url: "https://www.amazon.co.uk/dp/ASIN3/?tag=wildandwell0c-21"
   },
   {
     name: "Stainless Safety Razor + Blades",
@@ -48,7 +48,7 @@ const products = [
       "Long-lasting metal build"
     ],
     why: "Saves money over cartridges and eliminates mixed-plastic waste.",
-    url: "https://www.amazon.co.uk/dp/ASIN4/?tag=your-tag-20"
+    url: "https://www.amazon.co.uk/dp/ASIN4/?tag=wildandwell0c-21"
   }
 ];
 // ===== END EDITABLE AREA =====

@@ -17,7 +17,7 @@ const products = [
       "Stainless body, long-life elements"
     ],
     why: "Great entry option with excellent taste improvement and broad contaminant reduction.",
-    url: "https://www.amazon.co.uk/dp/ASIN11/?tag=your-tag-20"
+    url: "https://www.amazon.co.uk/dp/ASIN11/?tag=wildandwell0c-21"
   },
   {
     name: "Under-Sink 3-Stage Carbon Block System",
@@ -27,7 +27,7 @@ const products = [
       "Good for chlorine, VOCs, microplastics"
     ],
     why: "Best day-to-day convenience: fast fill rate for cooking and drinking.",
-    url: "https://www.amazon.co.uk/dp/ASIN12/?tag=your-tag-20"
+    url: "https://www.amazon.co.uk/dp/ASIN12/?tag=wildandwell0c-21"
   },
   {
     name: "Shower Filter (Vitamin C + KDF/Carbon Blend)",
@@ -37,7 +37,7 @@ const products = [
       "Tool-free replacement"
     ],
     why: "Quick win for skin barrier and hair feel—especially in chlorinated areas.",
-    url: "https://www.amazon.co.uk/dp/ASIN13/?tag=your-tag-20"
+    url: "https://www.amazon.co.uk/dp/ASIN13/?tag=wildandwell0c-21"
   },
   {
     name: "At-Home Water Test Kit (Multi-Parameter)",
@@ -47,7 +47,7 @@ const products = [
       "Fast strips + guide"
     ],
     why: "Measure first—then match the filter to the problem.",
-    url: "https://www.amazon.co.uk/dp/ASIN14/?tag=your-tag-20"
+    url: "https://www.amazon.co.uk/dp/ASIN14/?tag=wildandwell0c-21"
   },
   {
     name: "Glass or Stainless Steel Bottle (500–750 ml)",
@@ -57,7 +57,7 @@ const products = [
       "Durable for daily carry"
     ],
     why: "Keep filtered water clean on the go—skip single-use plastic.",
-    url: "https://www.amazon.co.uk/dp/ASIN15/?tag=your-tag-20"
+    url: "https://www.amazon.co.uk/dp/ASIN15/?tag=wildandwell0c-21"
   }
 ];
 // ===== END EDITABLE AREA =====

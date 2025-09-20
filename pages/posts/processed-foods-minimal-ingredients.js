@@ -17,7 +17,7 @@ const products = [
       "Great base with fruit & yogurt"
     ],
     why: "A simple cereal without a chemistry set of additives.",
-    url: "https://www.amazon.co.uk/dp/ASIN401/?tag=your-tag-20"
+    url: "https://www.amazon.co.uk/dp/ASIN401/?tag=wildandwell0c-21"
   },
   {
     name: "100% Peanut Butter (No Sugar, No Palm Oil)",
@@ -27,7 +27,7 @@ const products = [
       "Use in porridge, toast, sauces"
     ],
     why: "Nut butters are often loaded with sugar/oils—this one keeps it clean.",
-    url: "https://www.amazon.co.uk/dp/ASIN402/?tag=your-tag-20"
+    url: "https://www.amazon.co.uk/dp/ASIN402/?tag=wildandwell0c-21"
   },
   {
     name: "Whole-Leaf Tinned Tomatoes (BPA-Free Lining)",
@@ -37,7 +37,7 @@ const products = [
       "Budget-friendly & shelf-stable"
     ],
     why: "Tomatoes are a weeknight hero—choose cans with simple labels.",
-    url: "https://www.amazon.co.uk/dp/ASIN403/?tag=your-tag-20"
+    url: "https://www.amazon.co.uk/dp/ASIN403/?tag=wildandwell0c-21"
   },
   {
     name: "Plain Natural Yogurt (Live Cultures)",
@@ -47,7 +47,7 @@ const products = [
       "Check sugar: ≤ 6g/100g (from milk)"
     ],
     why: "Versatile protein source; add fruit/honey yourself to control sweetness.",
-    url: "https://www.amazon.co.uk/dp/ASIN404/?tag=your-tag-20"
+    url: "https://www.amazon.co.uk/dp/ASIN404/?tag=wildandwell0c-21"
   },
   {
     name: "70%+ Dark Chocolate (Short Label)",
@@ -57,7 +57,7 @@ const products = [
       "Look for ethically sourced brands"
     ],
     why: "A simple treat that avoids emulsifiers and long additive lists.",
-    url: "https://www.amazon.co.uk/dp/ASIN405/?tag=your-tag-20"
+    url: "https://www.amazon.co.uk/dp/ASIN405/?tag=wildandwell0c-21"
   }
 ];
 // ===== END EDITABLE AREA =====
