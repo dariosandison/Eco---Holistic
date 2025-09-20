@@ -1,3 +1,6 @@
+import SEO from "../components/SEO";
+<SEO title="Recommended" path="/recommended" />
+
 // pages/recommended.js
 import Head from "next/head";
 import ProductCard from "../components/ProductCard";
