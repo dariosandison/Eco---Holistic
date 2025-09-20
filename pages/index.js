@@ -1,4 +1,5 @@
 // pages/index.js
+import React, { useState } from "react";
 import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
@@ -7,19 +8,18 @@ import Link from "next/link";
 import Image from "next/image";
 
 export default function Home({ guides, tags }) {
-  // simple client-side filters
-  const [query, setQuery] = React.useState("");
-  const [active, setActive] = React.useState("All");
+  const [query, setQuery] = useState("");
+  const [active, setActive] = useState("All");
 
   const filtered = guides.filter((g) => {
-    const matchesTag = active === "All" || (g.tags || []).includes(active);
+    const byTag = active === "All" || (g.tags || []).includes(active);
     const q = query.trim().toLowerCase();
-    const matchesQuery =
+    const byQuery =
       !q ||
       g.title.toLowerCase().includes(q) ||
       (g.description || "").toLowerCase().includes(q) ||
       (g.tags || []).some((t) => t.toLowerCase().includes(q));
-    return matchesTag && matchesQuery;
+    return byTag && byQuery;
   });
 
   return (
@@ -35,9 +35,8 @@ export default function Home({ guides, tags }) {
       {/* HERO */}
       <header className="hero">
         <div className="logoWrap">
-          {/* Use your real file living in /public (screenshot showed /logo.svg.jpg) */}
           <Image
-            src="/logo.svg.jpg"
+            src="/logo.svg.jpg"   // change if your file name/path differs
             alt="Wild & Well"
             width={260}
             height={120}
@@ -57,7 +56,6 @@ export default function Home({ guides, tags }) {
           placeholder='Search guides (e.g., "water", "protein", "cleaning")'
           aria-label="Search guides"
         />
-
         <div className="tags">
           {tags.map((t) => (
             <button
@@ -143,7 +141,6 @@ export default function Home({ guides, tags }) {
           border: 1px solid #e5e7eb;
           background: #fff;
           color: #111827;
-          text-transform: none;
           cursor: pointer;
         }
         .tag.active {
@@ -218,7 +215,6 @@ export async function getStaticProps() {
     const raw = fs.readFileSync(path.join(DIR, file), "utf8");
     const { data, content } = matter(raw);
 
-    // short description fallback
     const snippet =
       (data.description || data.excerpt || "")
         .toString()
