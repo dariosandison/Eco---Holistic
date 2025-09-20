@@ -1,45 +1,40 @@
+<!-- /content/guides/safer-cleaning.md -->
 ---
-title: Safer Cleaning — fewer fumes, simpler ingredients
-excerpt: Easy swaps for kitchens and bathrooms that still get the job done.
-cover: /cover.png
-date: 2025-08-31
-tags: [cleaning, home, low-waste]
-avoid:
-  - Strong artificial fragrances if they give you headaches.
-  - “One-wipe kills everything” claims with no ingredient transparency.
-  - Single-use wipes for everyday cleaning.
-lookfor:
-  - Concentrates that make multiple bottles.
-  - Short ingredient lists you recognise.
-  - Refillable or bulk options to cut plastic.
-products:
-  - title: All-Purpose Cleaner Concentrate
-    image: https://images.unsplash.com/photo-1615634260167-3e6e62ca1b7e?q=80&w=1200
-    href: https://www.amazon.co.uk/s?k=all+purpose+cleaner+concentrate+natural&tag=wildandwell0c-21
-    badge: One bottle, many jobs
-    why: Dilute for surfaces, floors, and more—less clutter, less plastic.
-    pros: ["Budget friendly", "Less plastic", "Versatile"]
-    cons: ["Needs measuring", "Fragrance varies by brand"]
-  - title: Glass & Mirror Spray (Fragrance-free)
-    image: https://images.unsplash.com/photo-1628760602761-7a736d9193a3?q=80&w=1200
-    href: https://www.amazon.co.uk/s?k=fragrance+free+glass+cleaner&tag=wildandwell0c-21
-    badge: Clear finish
-    why: Fewer streaks and fewer fumes for small spaces.
-    pros: ["Low odour", "Works fast"]
-    cons: ["Use microfibre for best result"]
-  - title: Scrub Pads (Coconut or Cellulose)
-    image: https://images.unsplash.com/photo-1615485737657-6f5a8f9b6f1f?q=80&w=1200
-    href: https://www.amazon.co.uk/s?k=coconut+scrub+pad&tag=wildandwell0c-21
-    badge: Low-waste
-    why: Gentle abrasives that don’t scratch most cookware.
-    pros: ["Compostable options", "Grippy"]
-    cons: ["Wear faster than plastic scourers"]
-faqs:
-  - q: Are essential oils always safe?
-    a: They’re potent—great in small amounts but can irritate some people. Fragrance-free is safest if you’re sensitive.
-  - q: Do natural cleaners disinfect?
-    a: Some do, but for high-risk tasks use an approved disinfectant and follow the dwell time on the label.
-  - q: How do I minimise plastic?
-    a: Use concentrates, refills, and durable spray bottles. Buy bigger once you know you like a product.
+title: "Safer Cleaning: Fewer Harsh Chemicals, Same Sparkle"
+description: "What to avoid, easy swaps, and a few DIY basics for a fresher home."
+date: "2025-09-20"
+updated: "2025-09-20"
+cover: "/cover.png"
+readingTime: "6 min"
 ---
-Start with one concentrate and a good cloth. Keep a fragrance-free glass spray for mirrors and screens. Add a gentle scrub pad for cookware and grout. Fewer bottles, fewer headaches.
+
+You don’t need a cupboard full of strong fragrances to stay clean.
+
+## What to avoid (and why)
+- **Heavy synthetic fragrance:** Can irritate airways and linger on fabrics.
+- **Quats** (disinfectants) for everyday wiping—they’re for specific germs, not daily dust.
+- **Chlorine bleach daily use:** Great for specific sanitising jobs, but not routine wiping.
+- **Harsh solvents** on food surfaces—save them for sticky messes only.
+
+## Better everyday choices
+- **Concentrated castile soap** for most surfaces.  
+- **Microfiber cloths** lift grime with water alone.  
+- **Citric acid** or **white vinegar** for limescale (avoid on stone).  
+- **Fragrance-free laundry liquid** for skin-friendly clothes and bedding.
+
+**Quick Picks**
+- Castile Soap (Unscented) → <https://www.amazon.co.uk/s?k=castile+soap+unscented&tag=wildandwell0c-21>  
+- Microfiber Cloths → <https://www.amazon.co.uk/s?k=microfiber+cleaning+cloths&tag=wildandwell0c-21>  
+- Citric Acid (Descaler) → <https://www.amazon.co.uk/s?k=citric+acid+food+grade&tag=wildandwell0c-21>  
+- Fragrance-Free Laundry → <https://www.amazon.co.uk/s?k=fragrance+free+laundry+detergent&tag=wildandwell0c-21>
+
+## 3 tiny DIYs
+- **All-purpose:** 1 tsp castile + 500 ml warm water (shake).  
+- **Glass:** 1 part white vinegar + 3 parts water (microfiber wipe).  
+- **Limescale:** Sprinkle citric acid on wet surface → wait → rinse.
+
+### FAQ
+**Do I need antibacterial spray daily?** Not usually. Clean first; disinfect only when needed (illness, raw meat spills, etc.).  
+**Is “eco” always safer?** Labels can mislead—short ingredient lists and clear dilution ratios are your friends.
+
+*As an Amazon Associate, we earn from qualifying purchases.*
