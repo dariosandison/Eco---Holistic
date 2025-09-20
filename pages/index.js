@@ -39,7 +39,7 @@ export default function Home({ guides, tags }) {
             // IMPORTANT: make sure this path matches your actual file in /public
             // If your file is /public/logo.svg.jpg leave as-is; otherwise change src below.
             <img
-              src="/logo.svg.jpg"
+              src="/logo.png"
               alt="Wild & Well"
               width="260"
               height="120"
