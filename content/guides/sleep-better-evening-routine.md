@@ -1,7 +1,7 @@
 ---
 title: "Sleep better — a simple evening routine that works"
 excerpt: "Light, temperature, magnesium/theanine basics, and little tools that make a big difference."
-cover: "/cover.jpg"
+cover: "/cover.png"
 date: 2025-09-20
 tags: ["wellness", "sleep", "evening"]
 
