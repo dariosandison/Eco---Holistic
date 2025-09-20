@@ -1,3 +1,7 @@
+import SEO from "../components/SEO";
+// inside your component render:
+<SEO title="Eco + Holistic Blog" path="/" />
+
 import Head from "next/head";
 import Link from "next/link";
 
