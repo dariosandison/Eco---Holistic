@@ -1,291 +1,241 @@
-import Head from "next/head";
-import Link from "next/link";
+// pages/index.js
 import fs from "fs";
 import path from "path";
-import { useMemo, useState } from "react";
+import matter from "gray-matter";
+import Head from "next/head";
+import Link from "next/link";
+import Image from "next/image";
 
-// same tiny front-matter parser used elsewhere
-function parseFrontmatter(src) {
-  const fm = { title: "", excerpt: "", date: "", cover: "/cover.jpg", tags: [] };
-  if (src.startsWith("---")) {
-    const end = src.indexOf("---", 3);
-    if (end !== -1) {
-      const head = src.slice(3, end).trim();
-      head.split("\n").forEach((line) => {
-        const m = line.match(/^(\w+):\s*(.*)$/);
-        if (!m) return;
-        const key = m[1];
-        let val = m[2].trim();
-        if (
-          (val.startsWith('"') && val.endsWith('"')) ||
-          (val.startsWith("'") && val.endsWith("'"))
-        ) {
-          val = val.slice(1, -1);
-        } else if (val.startsWith("[")) {
-          try {
-            val = JSON.parse(val.replace(/'/g, '"'));
-          } catch {
-            val = [];
-          }
-        }
-        fm[key] = val;
-      });
-      const content = src.slice(end + 3).trim();
-      return { data: fm, content };
-    }
-  }
-  return { data: fm, content: src };
-}
+export default function Home({ guides, tags }) {
+  // simple client-side filters
+  const [query, setQuery] = React.useState("");
+  const [active, setActive] = React.useState("All");
 
-export async function getStaticProps() {
-  const guidesDir = path.join(process.cwd(), "content", "guides");
-  const files = fs.readdirSync(guidesDir).filter((f) => f.endsWith(".md"));
-
-  const guides = files
-    .map((file) => {
-      const slug = file.replace(/\.md$/, "");
-      const raw = fs.readFileSync(path.join(guidesDir, file), "utf8");
-      const { data } = parseFrontmatter(raw);
-      return {
-        slug,
-        title: data.title || slug,
-        excerpt: data.excerpt || "",
-        date: data.date || "",
-        cover: data.cover || "/cover.jpg",
-        tags: Array.isArray(data.tags) ? data.tags : [],
-      };
-    })
-    .sort((a, b) => (a.date > b.date ? -1 : 1));
-
-  // collect unique tags
-  const tagSet = new Set();
-  guides.forEach((g) => (g.tags || []).forEach((t) => tagSet.add(t)));
-  const allTags = Array.from(tagSet).sort((a, b) => a.localeCompare(b));
-
-  return { props: { guides, allTags } };
-}
-
-export default function GuidesIndex({ guides, allTags }) {
-  const [q, setQ] = useState("");
-  const [tag, setTag] = useState("");
-
-  const filtered = useMemo(() => {
-    const ql = q.trim().toLowerCase();
-    return guides.filter((g) => {
-      const matchesQ =
-        !ql ||
-        g.title.toLowerCase().includes(ql) ||
-        g.excerpt.toLowerCase().includes(ql) ||
-        (g.tags || []).some((t) => t.toLowerCase().includes(ql));
-      const matchesTag = !tag || (g.tags || []).includes(tag);
-      return matchesQ && matchesTag;
-    });
-  }, [guides, q, tag]);
+  const filtered = guides.filter((g) => {
+    const matchesTag = active === "All" || (g.tags || []).includes(active);
+    const q = query.trim().toLowerCase();
+    const matchesQuery =
+      !q ||
+      g.title.toLowerCase().includes(q) ||
+      (g.description || "").toLowerCase().includes(q) ||
+      (g.tags || []).some((t) => t.toLowerCase().includes(q));
+    return matchesTag && matchesQuery;
+  });
 
   return (
     <>
       <Head>
-        <title>All Guides • Wild & Well</title>
+        <title>Wild & Well — Eco & Holistic Guides</title>
         <meta
           name="description"
-          content="Browse every Wild & Well guide: water filters, safer cleaning, low-waste body care, and supplements with simpler ingredients."
+          content="Your guide to eco-living, holistic health, and mindful wellness. Search bite-size, practical guides and product picks."
         />
       </Head>
 
-      <main className="wrap">
-        <header className="hero">
-          <h1>All Guides</h1>
-          <p className="deck">
-            Bite-size, practical reads for eco-friendly living and holistic wellness.
-          </p>
-
-          <div className="controls">
-            <input
-              value={q}
-              onChange={(e) => setQ(e.target.value)}
-              placeholder="Search guides (e.g., “water”, “protein”, “cleaning”)"
-              aria-label="Search guides"
-            />
-            <div className="tagrow">
-              <button
-                className={!tag ? "chip active" : "chip"}
-                onClick={() => setTag("")}
-              >
-                All
-              </button>
-              {allTags.map((t) => (
-                <button
-                  key={t}
-                  className={tag === t ? "chip active" : "chip"}
-                  onClick={() => setTag(t)}
-                >
-                  {t}
-                </button>
-              ))}
-            </div>
-          </div>
-        </header>
-
-        <section className="grid">
-          {filtered.map((g) => (
-            <article key={g.slug} className="card">
-              <Link href={`/guides/${g.slug}`} className="imageWrap" aria-label={g.title}>
-                <img src={g.cover || "/cover.jpg"} alt="" />
-              </Link>
-              <div className="body">
-                <h2>
-                  <Link href={`/guides/${g.slug}`}>{g.title}</Link>
-                </h2>
-                {g.excerpt && <p className="excerpt">{g.excerpt}</p>}
-                {g.tags?.length > 0 && (
-                  <div className="tags">
-                    {g.tags.slice(0, 4).map((t) => (
-                      <span className="tag" key={t}>
-                        {t}
-                      </span>
-                    ))}
-                  </div>
-                )}
-                <Link href={`/guides/${g.slug}`} className="cta">
-                  Read guide →
-                </Link>
-              </div>
-            </article>
-          ))}
-        </section>
-
-        {filtered.length === 0 && (
-          <p className="empty">No matches. Try a different search or tag.</p>
-        )}
-
-        <p className="fineprint">
-          Some links are affiliate links. We may earn a small commission at no extra cost to
-          you. As an Amazon Associate, we earn from qualifying purchases.
+      {/* HERO */}
+      <header className="hero">
+        <div className="logoWrap">
+          {/* Use your real file living in /public (screenshot showed /logo.svg.jpg) */}
+          <Image
+            src="/logo.svg.jpg"
+            alt="Wild & Well"
+            width={260}
+            height={120}
+            priority
+          />
+        </div>
+        <p className="tagline">
+          Your guide to eco-living, holistic health, and mindful wellness.
         </p>
+      </header>
+
+      {/* CONTROLS */}
+      <section className="controls">
+        <input
+          value={query}
+          onChange={(e) => setQuery(e.target.value)}
+          placeholder='Search guides (e.g., "water", "protein", "cleaning")'
+          aria-label="Search guides"
+        />
+
+        <div className="tags">
+          {tags.map((t) => (
+            <button
+              key={t}
+              onClick={() => setActive(t)}
+              className={`tag ${active === t ? "active" : ""}`}
+            >
+              {t.toLowerCase()}
+            </button>
+          ))}
+        </div>
+      </section>
+
+      {/* GRID */}
+      <main className="grid">
+        {filtered.map((g) => (
+          <Link key={g.slug} href={`/guides/${g.slug}`} className="card">
+            <article>
+              <h3>{g.title}</h3>
+              <p className="desc">{g.description}</p>
+              {!!(g.tags || []).length && (
+                <div className="cardTags">
+                  {(g.tags || []).slice(0, 4).map((t) => (
+                    <span key={t} className="pill">
+                      {t}
+                    </span>
+                  ))}
+                </div>
+              )}
+            </article>
+          </Link>
+        ))}
+        {!filtered.length && (
+          <p className="empty">No matches. Try a different search.</p>
+        )}
       </main>
 
       <style jsx>{`
-        .wrap {
-          max-width: 1100px;
-          margin: 0 auto;
-          padding: 30px 16px 56px;
-        }
         .hero {
+          max-width: 900px;
+          margin: 28px auto 8px;
+          padding: 0 16px;
           text-align: center;
-          margin-bottom: 12px;
         }
-        h1 {
-          font-size: 2rem;
-          margin: 0 0 6px;
+        .logoWrap {
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          margin: 4px auto 6px;
         }
-        .deck {
-          color: #4b5563;
-          margin: 0 0 14px;
+        .tagline {
+          margin: 8px 0 2px;
+          font-size: 1.05rem;
+          color: #374151;
         }
+
         .controls {
-          display: grid;
-          gap: 12px;
-          justify-items: center;
+          max-width: 960px;
+          margin: 12px auto 20px;
+          padding: 0 16px;
         }
         input {
-          width: min(680px, 100%);
-          border: 1px solid #e5e7eb;
-          border-radius: 10px;
-          padding: 10px 12px;
-          font-size: 1rem;
-        }
-        .tagrow {
-          display: flex;
-          flex-wrap: wrap;
-          gap: 8px;
-          justify-content: center;
-        }
-        .chip {
-          border: 1px solid #d1d5db;
-          background: #fff;
-          padding: 6px 10px;
-          border-radius: 999px;
-          font-size: 0.9rem;
-          cursor: pointer;
-        }
-        .chip.active {
-          background: #eff6ff;
-          color: #1d4ed8;
-          border-color: #bfdbfe;
-          font-weight: 600;
-        }
-        .grid {
-          display: grid;
-          grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-          gap: 18px;
-          margin-top: 20px;
-        }
-        .card {
-          border: 1px solid #e5e7eb;
-          border-radius: 14px;
-          overflow: hidden;
-          background: #fff;
-          display: flex;
-          flex-direction: column;
-        }
-        .imageWrap {
-          display: block;
-          aspect-ratio: 16/9;
-          background: #f3f4f6;
-          overflow: hidden;
-        }
-        img {
           width: 100%;
-          height: 100%;
-          object-fit: cover;
-          display: block;
+          font-size: 1rem;
+          padding: 12px 14px;
+          border-radius: 10px;
+          border: 1px solid #e5e7eb;
+          outline: none;
         }
-        .body {
-          padding: 14px 14px 12px;
-          display: flex;
-          flex-direction: column;
-          gap: 8px;
-        }
-        h2 {
-          font-size: 1.1rem;
-          line-height: 1.35;
-          margin: 0;
-        }
-        .excerpt {
-          color: #4b5563;
-          margin: 0;
-          min-height: 44px;
+        input:focus {
+          border-color: #93c5fd;
+          box-shadow: 0 0 0 3px rgba(147, 197, 253, 0.35);
         }
         .tags {
           display: flex;
           flex-wrap: wrap;
-          gap: 8px;
+          gap: 10px;
+          margin: 14px 0 0;
         }
         .tag {
-          font-size: 0.8rem;
-          color: #2563eb;
-          background: #eff6ff;
-          border: 1px solid #bfdbfe;
-          padding: 2px 8px;
+          padding: 8px 12px;
           border-radius: 999px;
+          border: 1px solid #e5e7eb;
+          background: #fff;
+          color: #111827;
+          text-transform: none;
+          cursor: pointer;
         }
-        .cta {
-          margin-top: 4px;
+        .tag.active {
+          background: #e8f3ff;
+          border-color: #bfdbfe;
+          color: #1d4ed8;
           font-weight: 600;
+        }
+
+        .grid {
+          max-width: 1100px;
+          margin: 10px auto 40px;
+          padding: 0 16px 8px;
+          display: grid;
+          grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+          gap: 16px;
+        }
+        .card {
+          display: block;
           text-decoration: none;
+          color: inherit;
+          border: 1px solid #e5e7eb;
+          border-radius: 14px;
+          background: #fff;
+          transition: transform 0.15s ease, box-shadow 0.15s ease;
+        }
+        .card:hover {
+          transform: translateY(-2px);
+          box-shadow: 0 6px 24px rgba(0, 0, 0, 0.06);
+        }
+        article {
+          padding: 16px 16px 14px;
+        }
+        h3 {
+          margin: 0 0 6px;
+          font-size: 1.05rem;
+        }
+        .desc {
+          margin: 0 0 10px;
+          color: #4b5563;
+          line-height: 1.45;
+        }
+        .cardTags {
+          display: flex;
+          gap: 8px;
+          flex-wrap: wrap;
+        }
+        .pill {
+          font-size: 0.8rem;
+          padding: 4px 8px;
+          border-radius: 999px;
+          background: #f3f4f6;
+          color: #374151;
         }
         .empty {
-          text-align: center;
+          grid-column: 1 / -1;
           color: #6b7280;
-          margin-top: 18px;
-        }
-        .fineprint {
-          color: #6b7280;
-          font-size: 0.85rem;
           text-align: center;
-          margin-top: 28px;
+          padding: 24px 0;
         }
       `}</style>
     </>
   );
+}
+
+export async function getStaticProps() {
+  const DIR = path.join(process.cwd(), "content", "guides");
+  const files = fs.readdirSync(DIR).filter((f) => f.endsWith(".md"));
+
+  const guides = files.map((file) => {
+    const slug = file.replace(/\.md$/, "");
+    const raw = fs.readFileSync(path.join(DIR, file), "utf8");
+    const { data, content } = matter(raw);
+
+    // short description fallback
+    const snippet =
+      (data.description || data.excerpt || "")
+        .toString()
+        .trim() ||
+      content.replace(/\s+/g, " ").slice(0, 180).trim() + "…";
+
+    return {
+      slug,
+      title: data.title || slug,
+      description: snippet,
+      tags: Array.isArray(data.tags) ? data.tags : [],
+    };
+  });
+
+  const tagSet = new Set();
+  guides.forEach((g) => (g.tags || []).forEach((t) => tagSet.add(t)));
+  const tags = ["All", ...Array.from(tagSet).sort((a, b) => a.localeCompare(b))];
+
+  return { props: { guides, tags } };
 }
