@@ -1,162 +1,216 @@
 // pages/index.js
+import React from "react";
+import Head from "next/head";
+import Link from "next/link";
 import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
-import Head from "next/head";
-import Link from "next/link";
-
-const GUIDES_DIR = path.join(process.cwd(), "content", "guides");
-
-function normalizeDate(value) {
-  if (!value) return "";
-  if (typeof value === "string") return value;
-  try {
-    return new Date(value).toISOString().slice(0, 10);
-  } catch {
-    return "";
-  }
-}
 
 export async function getStaticProps() {
-  const files = fs.readdirSync(GUIDES_DIR).filter((f) => f.endsWith(".md"));
-  const guides = files.map((fn) => {
-    const raw = fs.readFileSync(path.join(GUIDES_DIR, fn), "utf8");
-    const { data } = matter(raw);
-    const slug = fn.replace(/\.md$/, "");
-    return {
-      title: data.title || slug,
-      excerpt: data.excerpt || "",
-      date: normalizeDate(data.date),
-      tags: Array.isArray(data.tags) ? data.tags : [],
-      slug,
-    };
-  });
+  const guidesDir = path.join(process.cwd(), "content", "guides");
+  const files = fs.readdirSync(guidesDir).filter((f) => f.endsWith(".md"));
 
-  // Sort newest first using string dates
-  guides.sort((a, b) => (b.date || "").localeCompare(a.date || ""));
+  const guides = files
+    .map((filename) => {
+      const raw = fs.readFileSync(path.join(guidesDir, filename), "utf8");
+      const { data } = matter(raw);
+      const slug = filename.replace(/\.md$/, "");
 
-  // Build tag cloud
-  const tagCounts = {};
-  guides.forEach((g) => g.tags.forEach((t) => (tagCounts[t] = (tagCounts[t] || 0) + 1)));
-  const tags = Object.keys(tagCounts).sort();
+      // Always keep date as a *string* for Next serialization.
+      const dateStr = (data.date || "").toString();
+      const ts = dateStr ? new Date(dateStr).getTime() : 0; // for sorting only
+      const datePretty = dateStr
+        ? new Date(dateStr).toLocaleDateString("en-GB", {
+            year: "numeric",
+            month: "short",
+            day: "2-digit",
+          })
+        : "";
 
-  return { props: { guides, tags } };
+      return {
+        slug,
+        title: data.title || slug,
+        excerpt:
+          data.excerpt ||
+          data.description ||
+          "Quick, practical take from Wild & Well.",
+        cover: data.cover || "/cover.png",
+        date: dateStr,
+        datePretty,
+        _ts: ts,
+      };
+    })
+    .sort((a, b) => b._ts - a._ts)
+    .map(({ _ts, ...rest }) => rest); // strip helper before returning
+
+  return { props: { guides } };
 }
 
-export default function Home({ guides, tags }) {
+export default function Home({ guides }) {
+  const title = "Wild & Well — Bite-size wellness & eco-living guides";
+  const desc =
+    "Bite-size, practical reads for eco-friendly living and holistic wellness.";
+
   return (
     <>
       <Head>
-        <title>Wild & Well — Guides</title>
-        <meta
-          name="description"
-          content="Bite-size, practical reads for eco-friendly living and holistic wellness."
-        />
+        <title>{title}</title>
+        <meta name="description" content={desc} />
+        <meta property="og:title" content="Wild & Well" />
+        <meta property="og:description" content={desc} />
+        <meta property="og:type" content="website" />
+        <meta property="og:image" content="/cover.png" />
+        <meta property="og:url" content="https://www.wild-and-well.store" />
+        <meta name="twitter:card" content="summary_large_image" />
       </Head>
 
       <main className="wrap">
-        <header className="hero">
+        {/* Logo instead of a page title */}
+        <div className="logoWrap">
           <img src="/logo.png" alt="Wild & Well" className="logo" />
-                <h1 className="strap">Your guide to eco-living, holistic health, and mindful wellness.</h1>
-      
+        </div>
+
+        {/* Swapped + centered hero lines */}
+        <header className="hero">
+          <p className="eyebrow">Bite-size, practical reads for eco-friendly living and holistic wellness.</p>
+          <h1 className="h1">Your guide to eco-living, holistic health, and mindful wellness.</h1>
         </header>
 
-        {tags?.length > 0 && (
-          <nav className="tags">
-            {tags.map((t) => (
-              <a key={t} href={`#tag-${t}`} className="chip">
-                {t}
-              </a>
-            ))}
-          </nav>
-        )}
-
+        {/* Guides grid */}
         <section className="grid">
           {guides.map((g) => (
-            <Link key={g.slug} href={`/guides/${g.slug}`} className="card">
-              <h3>{g.title}</h3>
-              {g.excerpt && <p>{g.excerpt}</p>}
-              <span className="meta">
-                {g.date}
-                {g.tags?.length ? ` • ${g.tags.join(", ")}` : ""}
-              </span>
+            <Link href={`/guides/${g.slug}`} key={g.slug} className="card">
+              <article>
+                <div className="thumb">
+                  <img src={g.cover} alt={g.title} />
+                </div>
+                <div className="meta">
+                  {g.datePretty && <span className="date">{g.datePretty}</span>}
+                </div>
+                <h2 className="title">{g.title}</h2>
+                <p className="excerpt">{g.excerpt}</p>
+                <span className="cta">Read guide →</span>
+              </article>
             </Link>
           ))}
         </section>
+
+        <p className="fine">
+          As an Amazon Associate, we earn from qualifying purchases.
+        </p>
       </main>
 
       <style jsx>{`
         .wrap {
           max-width: 1100px;
-          margin: 0 auto;
-          padding: 24px 16px 64px;
+          margin: 24px auto 64px;
+          padding: 0 16px;
+        }
+        .logoWrap {
+          display: flex;
+          justify-content: center;
+          margin: 8px 0 10px;
+        }
+        .logo {
+          width: 120px;
+          height: auto;
+          object-fit: contain;
         }
         .hero {
           text-align: center;
-          margin: 24px 0 8px;
+          margin: 8px auto 22px;
+          max-width: 880px;
         }
-        .logo {
-          width: 44px;
-          height: 44px;
-          margin: 0 auto 10px;
-          display: block;
-        }
-        .strap {
-          font-size: 1.35rem;
-          margin: 0 0 6px;
-        }
-        .sub {
-          color: #6b7280;
-          margin: 0 0 18px;
-        }
-        .tags {
-          display: flex;
-          flex-wrap: wrap;
-          gap: 8px;
-          justify-content: center;
-          margin-bottom: 12px;
-        }
-        .chip {
-          border: 1px solid #e5e7eb;
-          padding: 6px 10px;
-          border-radius: 999px;
-          font-size: 0.9rem;
+        .eyebrow {
+          margin: 0 0 8px;
           color: #374151;
-          text-decoration: none;
+          font-weight: 600;
+          font-size: 1.05rem;
+          line-height: 1.45;
         }
-        .chip:hover {
-          background: #f3f4f6;
+        .h1 {
+          margin: 0;
+          font-size: 1.85rem;
+          line-height: 1.25;
+          letter-spacing: -0.01em;
+          color: #111827;
         }
+        @media (min-width: 860px) {
+          .h1 { font-size: 2.1rem; }
+          .eyebrow { font-size: 1.1rem; }
+        }
+
         .grid {
           display: grid;
           grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-          gap: 14px;
-          margin-top: 8px;
+          gap: 16px;
+          margin-top: 18px;
         }
         .card {
-          border: 1px solid #e5e7eb;
-          border-radius: 12px;
-          padding: 14px;
           text-decoration: none;
           color: inherit;
-          transition: box-shadow 0.15s ease;
+        }
+        .card article {
+          border: 1px solid #e5e7eb;
+          border-radius: 14px;
           background: #fff;
+          overflow: hidden;
+          height: 100%;
+          display: flex;
+          flex-direction: column;
+          transition: box-shadow 0.15s ease, border-color 0.15s ease;
         }
-        .card:hover {
-          box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
+        .card article:hover {
+          border-color: #d1d5db;
+          box-shadow: 0 6px 18px rgba(17, 24, 39, 0.06);
         }
-        .card h3 {
-          margin: 0 0 6px;
-          font-size: 1.05rem;
+        .thumb {
+          width: 100%;
+          aspect-ratio: 16/9;
+          background: #f3f4f6;
+          overflow: hidden;
         }
-        .card p {
-          margin: 0 0 8px;
-          color: #4b5563;
+        .thumb img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          display: block;
         }
         .meta {
-          display: inline-block;
+          padding: 10px 14px 0;
           color: #6b7280;
-          font-size: 0.85rem;
+          font-size: 0.9rem;
+        }
+        .date {
+          background: #f3f4f6;
+          border: 1px solid #e5e7eb;
+          padding: 2px 8px;
+          border-radius: 999px;
+        }
+        .title {
+          font-size: 1.1rem;
+          line-height: 1.35;
+          padding: 6px 14px 0;
+          margin: 0;
+          color: #111827;
+        }
+        .excerpt {
+          padding: 8px 14px 0;
+          margin: 0;
+          color: #4b5563;
+          flex: 1;
+        }
+        .cta {
+          display: block;
+          padding: 12px 14px 14px;
+          color: #0f766e;
+          font-weight: 700;
+        }
+        .fine {
+          color: #6b7280;
+          font-size: 0.9rem;
+          text-align: center;
+          margin-top: 20px;
         }
       `}</style>
     </>
