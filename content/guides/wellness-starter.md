@@ -1,7 +1,7 @@
 ---
 title: Wellness Starter — simple swaps that make a difference
 excerpt: Five low-effort upgrades to feel better at home—without going extreme.
-cover: /cover.jpg
+cover: /cover.png
 date: 2025-08-31
 tags: [starter, wellness, home]
 avoid:
