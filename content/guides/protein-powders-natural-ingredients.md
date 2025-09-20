@@ -1,45 +1,33 @@
+<!-- /content/guides/protein-powders-natural-ingredients.md -->
 ---
-title: Protein Powders with Natural Ingredients — better blends, fewer additives
-excerpt: Three easy choices for shakes, oats, or smoothies—whey, plant, and unflavoured.
-cover: /cover.png
-date: 2025-08-31
-tags: [protein, fitness, food]
-avoid:
-  - Long lists of gums, artificial colours, or very sweet flavourings.
-  - “Diet” claims that mostly add stimulants.
-  - Tiny tubs with high cost per serving.
-lookfor:
-  - Short ingredient lists; ideally just protein + simple flavour/sweetener.
-  - Unflavoured options if you’re sensitive to sweetness.
-  - Clear scoop size and protein per serving.
-products:
-  - title: Grass-Fed Whey Concentrate (Unflavoured)
-    image: https://images.unsplash.com/photo-1549576490-b0b4831ef60a?q=80&w=1200
-    href: https://www.amazon.co.uk/s?k=unflavoured+whey+protein+concentrate&tag=wildandwell0c-21
-    badge: Simple + mixable
-    why: Great texture, easy in oats/smoothies, minimal ingredients.
-    pros: ["Smooth", "Versatile", "Good value"]
-    cons: ["Dairy-based"]
-  - title: Pea or Pea+Rice Protein (Unflavoured)
-    image: https://images.unsplash.com/photo-1512621776951-a57141f2eefd?q=80&w=1200
-    href: https://www.amazon.co.uk/s?k=pea+protein+unflavoured&tag=wildandwell0c-21
-    badge: Plant-based
-    why: Solid amino acid profile; blends well with banana or cocoa.
-    pros: ["Dairy-free", "Often single-ingredient"]
-    cons: ["Earthy taste unflavoured"]
-  - title: Lightly Flavoured Whey/Plant with Natural Sweetener
-    image: https://images.unsplash.com/photo-1542442828-287ea5ebdf9b?q=80&w=1200
-    href: https://www.amazon.co.uk/s?k=natural+flavour+whey+protein+stevia&tag=wildandwell0c-21
-    badge: Ready-to-shake
-    why: If you prefer flavour, pick brands that keep it simple and not overly sweet.
-    pros: ["Convenient", "Tasty"]
-    cons: ["Sweetness varies by brand"]
-faqs:
-  - q: How much protein do I need?
-    a: Needs vary. A snack of ~20–30g protein works well for many. Food first; powders are just convenient.
-  - q: Are artificial sweeteners bad?
-    a: Some people prefer to avoid them. If you’re sensitive, choose unflavoured or lightly sweetened with simple ingredients.
-  - q: Can I bake with protein powder?
-    a: Yes—unflavoured is easiest. Start with oats, pancakes, or banana bread.
+title: "Protein Powders With Natural Ingredients (That Don’t Taste Like Chemicals)"
+description: "Unflavoured or lightly flavoured options without artificial sweeteners or long additive lists."
+date: "2025-09-20"
+updated: "2025-09-20"
+cover: "/cover.png"
+readingTime: "6 min"
 ---
-Pick one tub you’ll actually use: whey for smoothness, pea for plant-based, or unflavoured for total control. Keep it simple; add fruit, cocoa, or spices for flavour.
+
+If the label reads like a science experiment, you can do better.
+
+## What to avoid
+- **Artificial sweeteners (e.g., sucralose, acesulfame-K)** if you prefer a clean taste.  
+- **Multiple gums and thickeners** (a little is fine; long lists can feel chalky).  
+- **Hidden oils** and dessert-style mixes when you want simple protein.
+
+## Better picks by type
+- **Whey isolate (unflavoured):** High protein, mixes easily.  
+- **Pea protein (unflavoured):** Plant-based, neutral.  
+- **Pumpkin/hemp/collagen:** Single-ingredient simplicity.
+
+**Quick Picks**
+- Unflavoured Whey Isolate → <https://www.amazon.co.uk/s?k=unflavoured+whey+isolate&tag=wildandwell0c-21>  
+- Unflavoured Pea Protein → <https://www.amazon.co.uk/s?k=unflavoured+pea+protein&tag=wildandwell0c-21>  
+- Pumpkin Seed Protein → <https://www.amazon.co.uk/s?k=pumpkin+seed+protein+powder&tag=wildandwell0c-21>  
+- Collagen Peptides (Unflavoured) → <https://www.amazon.co.uk/s?k=collagen+peptides+unflavoured&tag=wildandwell0c-21>
+
+### Use it well
+- Blend with banana + cinnamon; or shake with milk of choice.  
+- For baking, start at **20–25 g** per recipe to keep texture soft.
+
+*As an Amazon Associate, we earn from qualifying purchases.*
