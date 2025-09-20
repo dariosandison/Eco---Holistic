@@ -5,11 +5,11 @@ import path from "path";
 import matter from "gray-matter";
 import Head from "next/head";
 import Link from "next/link";
-import Image from "next/image";
 
 export default function Home({ guides, tags }) {
   const [query, setQuery] = useState("");
   const [active, setActive] = useState("All");
+  const [logoOk, setLogoOk] = useState(true); // logo fallback
 
   const filtered = guides.filter((g) => {
     const byTag = active === "All" || (g.tags || []).includes(active);
@@ -32,22 +32,30 @@ export default function Home({ guides, tags }) {
         />
       </Head>
 
-      {/* HERO (logo centered, swapped taglines) */}
+      {/* HERO (centered) */}
       <header className="hero">
         <div className="logoWrap">
-          <Image
-            src="/logo.svg.jpg"  // ensure this file exists in /public
-            alt="Wild & Well"
-            width={260}
-            height={120}
-            priority
-          />
+          {logoOk ? (
+            // IMPORTANT: make sure this path matches your actual file in /public
+            // If your file is /public/logo.svg.jpg leave as-is; otherwise change src below.
+            <img
+              src="/logo.svg.jpg"
+              alt="Wild & Well"
+              width="260"
+              height="120"
+              onError={() => setLogoOk(false)}
+            />
+          ) : (
+            <div className="logoText">Wild & Well</div>
+          )}
         </div>
+
+        {/* SWAPPED ORDER: "Your guide…" is now the main headline */}
         <p className="taglineMain">
-          Bite-size, practical reads for eco-friendly living and holistic wellness.
+          Your guide to eco-living, holistic health, and mindful wellness.
         </p>
         <p className="taglineSub">
-          Your guide to eco-living, holistic health, and mindful wellness.
+          Bite-size, practical reads for eco-friendly living and holistic wellness.
         </p>
       </header>
 
@@ -109,11 +117,21 @@ export default function Home({ guides, tags }) {
           justify-content: center;
           margin: 4px auto 4px;
         }
+        .logoWrap img {
+          display: block;
+        }
+        .logoText {
+          font-size: 2rem;
+          font-weight: 800;
+          letter-spacing: 0.2px;
+        }
+
+        /* SWAPPED SIZES */
         .taglineMain {
           margin: 8px 0 2px;
-          font-size: 1.15rem;
+          font-size: 1.25rem;
           color: #111827;
-          font-weight: 600;
+          font-weight: 700;
         }
         .taglineSub {
           margin: 2px 0 0;
