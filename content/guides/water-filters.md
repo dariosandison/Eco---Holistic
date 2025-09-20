@@ -1,7 +1,7 @@
 ---
 title: Best Water Filters (UK) — simple choices, including fluoride options
 excerpt: Clear picks to improve taste and reduce common contaminants. Includes options that can reduce fluoride.
-cover: /cover.jpg
+cover: /cover.png
 date: 2025-08-31
 tags: [water, home, wellness]
 avoid:
