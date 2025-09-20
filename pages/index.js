@@ -25,7 +25,7 @@ export async function getStaticProps() {
         data.excerpt ||
         data.description ||
         "Quick, practical take from Wild & Well.",
-      cover: data.cover || "/cover.png",
+      cover: data.cover || "",
       category: data.category || "Other",
       date: dateStr,
       ts,
@@ -66,9 +66,6 @@ export default function Home({ allGuides, featured, categories }) {
   const showSearchResults = query.length > 0 || active !== "All";
   const cards = showSearchResults ? filtered : featured;
 
-  const title = "Wild & Well — Bite-size wellness & eco-living guides";
-  const desc =
-    "Bite-size, practical reads for eco-friendly living and holistic wellness.";
 
   return (
     <>
@@ -87,13 +84,12 @@ export default function Home({ allGuides, featured, categories }) {
       <main className="wrap">
         {/* Logo */}
         <div className="logoWrap">
-          <img src="/logo.png" alt="Wild & Well" className="logo" />
+          <img src="" alt="Wild & Well" className="logo" />
         </div>
 
         {/* Swapped + centered hero lines */}
         <header className="hero">
           <p className="eyebrow">
-            Bite-size, practical reads for eco-friendly living and holistic wellness.
           </p>
           <h1 className="h1">
             Your guide to eco-living, holistic health, and mindful wellness.
