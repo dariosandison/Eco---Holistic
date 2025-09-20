@@ -32,18 +32,21 @@ export default function Home({ guides, tags }) {
         />
       </Head>
 
-      {/* HERO */}
+      {/* HERO (logo centered, swapped taglines) */}
       <header className="hero">
         <div className="logoWrap">
           <Image
-            src="/logo.svg.jpg"   // change if your file name/path differs
+            src="/logo.svg.jpg"  // ensure this file exists in /public
             alt="Wild & Well"
             width={260}
             height={120}
             priority
           />
         </div>
-        <p className="tagline">
+        <p className="taglineMain">
+          Bite-size, practical reads for eco-friendly living and holistic wellness.
+        </p>
+        <p className="taglineSub">
           Your guide to eco-living, holistic health, and mindful wellness.
         </p>
       </header>
@@ -104,11 +107,17 @@ export default function Home({ guides, tags }) {
           display: inline-flex;
           align-items: center;
           justify-content: center;
-          margin: 4px auto 6px;
+          margin: 4px auto 4px;
         }
-        .tagline {
+        .taglineMain {
           margin: 8px 0 2px;
-          font-size: 1.05rem;
+          font-size: 1.15rem;
+          color: #111827;
+          font-weight: 600;
+        }
+        .taglineSub {
+          margin: 2px 0 0;
+          font-size: 1.02rem;
           color: #374151;
         }
 
@@ -134,6 +143,7 @@ export default function Home({ guides, tags }) {
           flex-wrap: wrap;
           gap: 10px;
           margin: 14px 0 0;
+          justify-content: center;
         }
         .tag {
           padding: 8px 12px;
