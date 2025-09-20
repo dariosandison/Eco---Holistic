@@ -1,30 +1,22 @@
-import "../styles/globals.css";
-import Head from "next/head";
-import Nav from "../components/Nav";
-import Footer from "../components/Footer";
+import '../styles/globals.css';
+import Head from 'next/head';
+import Nav from '../components/Nav';
+import Footer from '../components/Footer';
 
 export default function App({ Component, pageProps }) {
-  const siteName = "Wild & Well";
-  const siteUrl = "https://www.wild-and-well.store";
-  const siteDesc =
-    "Eco-friendly living, holistic health, and mindful wellness.";
-
   return (
     <>
       <Head>
-        <meta charSet="utf-8" />
+        {/* Baseline meta + fonts */}
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta name="description" content={siteDesc} />
+        <meta charSet="UTF-8" />
         <link rel="icon" href="/favicon.ico" />
-
-        {/* Social previews */}
-        <meta property="og:site_name" content={siteName} />
-        <meta property="og:type" content="website" />
-        <meta property="og:url" content={siteUrl} />
-        <meta property="og:title" content={siteName} />
-        <meta property="og:description" content={siteDesc} />
-        <meta property="og:image" content="/cover.jpg" />
-        <meta name="twitter:card" content="summary_large_image" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Merriweather:wght@400;700&display=swap"
+          rel="stylesheet"
+        />
       </Head>
 
       <Nav />
