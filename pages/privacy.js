@@ -1,3 +1,6 @@
+import SEO from "../components/SEO";
+<SEO title="Privacy Policy" path="/privacy" noindex />
+
 // pages/privacy.js
 export default function Privacy() {
   return (
