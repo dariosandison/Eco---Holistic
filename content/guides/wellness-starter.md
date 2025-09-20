@@ -1,66 +1,69 @@
+<!-- /content/guides/wellness-starter.md -->
 ---
-title: "Wellness Starter — simple swaps that make a difference"
-excerpt: "Five low-effort upgrades to feel better at home—without going extreme."
+title: "Wellness Starter: 5 Low-Effort Upgrades for a Healthier Home"
+description: "Quick wins for better sleep, cleaner air and water, gentler products, and daily routines that actually stick."
+date: "2025-09-20"
+updated: "2025-09-20"
 cover: "/cover.png"
-date: 2025-08-31
-tags: ["starter", "wellness", "home"]
-
-avoid:
-  - "All-or-nothing thinking; start with one or two changes."
-  - "Products that overpromise “detox” without saying how."
-  - "Expensive subscriptions before you’ve tried basics."
-
-lookfor:
-  - "Small habits you’ll stick to daily."
-  - "Clear ingredients and simple materials."
-  - "Reusables that genuinely replace disposables."
-
-products:
-  - title: "Stainless Steel Water Bottle (500–750ml)"
-    image: "https://images.unsplash.com/photo-1513836279014-a89f7a76ae86?q=80&w=1200"
-    href: "https://www.amazon.co.uk/s?k=stainless+steel+water+bottle&tag=wildandwell0c-21"
-    badge: "Everyday hydration"
-    why: "Ditching plastic bottles is the easiest low-tox, low-waste win."
-    pros:
-      - "Keeps drinks cold/hot"
-      - "Durable"
-      - "No plastic taste"
-    cons:
-      - "Heavier than plastic"
-      - "Needs regular cleaning"
-
-  - title: "Natural All-Purpose Cleaner (Concentrate)"
-    image: "https://images.unsplash.com/photo-1615634260167-3e6e62ca1b7e?q=80&w=1200"
-    href: "https://www.amazon.co.uk/s?k=natural+all+purpose+cleaner+concentrate&tag=wildandwell0c-21"
-    badge: "Home basics"
-    why: "A good concentrate replaces several bottles and reduces harsh fumes."
-    pros:
-      - "Less plastic"
-      - "Budget friendly"
-      - "Versatile"
-    cons:
-      - "Check dilution"
-      - "Fragrance can still bother some"
-
-  - title: "Magnesium Glycinate"
-    image: "https://images.unsplash.com/photo-1598986646512-643fa37ee3ee?q=80&w=1200"
-    href: "https://www.amazon.co.uk/s?k=magnesium+glycinate&tag=wildandwell0c-21"
-    badge: "Gentle supplement*"
-    why: "Popular for relaxation and sleep support with fewer additives in many formulas."
-    pros:
-      - "Often well-tolerated"
-      - "Simple dosing"
-    cons:
-      - "Check for fillers"
-      - "Not medical advice"
-
-faqs:
-  - q: "What’s the best place to start?"
-    a: "Pick one change that removes friction: a reusable bottle, a low-fume cleaner, or improving sleep hygiene. Momentum > perfection."
-  - q: "Are “natural” products always safer?"
-    a: "Not always. Look for transparent labels and short ingredient lists."
-  - q: "Do I need lots of supplements?"
-    a: "Not by default. Food, sleep, and movement matter most. If you supplement, choose minimal-additive options and check with a professional if unsure."
+readingTime: "6 min"
 ---
 
-Start small. Swap one disposable for a reusable, improve the air you breathe, and pick gentle products that still work. The goal isn’t perfect—it’s feeling better with easier, cleaner habits you’ll keep.
+Want quick, meaningful improvement without overhauling your life? Start here. These small changes create outsized gains in how you feel day-to-day.
+
+## 1) Water you enjoy drinking
+- **Why it matters:** Better taste → you drink more; basic filtration can reduce chlorine by-products and some micro-impurities.
+- **Easy options:** A **carbon jug** or **under-sink carbon** system. For the deepest removal (incl. **fluoride**), **reverse osmosis (RO)**.
+
+**Quick Picks**
+- Carbon Jug → <https://www.amazon.co.uk/s?k=water+filter+jug+nsf+certified&tag=wildandwell0c-21>
+- Under-Sink Carbon → <https://www.amazon.co.uk/s?k=under+sink+water+filter+nsf&tag=wildandwell0c-21>
+- RO System → <https://www.amazon.co.uk/s?k=reverse+osmosis+system+uk&tag=wildandwell0c-21>
+
+---
+
+## 2) Sleep that resets you
+- **Why:** Light and temperature nudge your body clock.
+- **Do now:** Dim screens 2 hours before bed; keep the room **cool, dark, and quiet**.
+
+**Quick Picks**
+- Blackout Curtains → <https://www.amazon.co.uk/s?k=blackout+curtains+bedroom&tag=wildandwell0c-21>
+- Warm 2200K Bulbs → <https://www.amazon.co.uk/s?k=2200k+led+bulb+e27&tag=wildandwell0c-21>
+- Eye Mask (comfy) → <https://www.amazon.co.uk/s?k=silk+sleep+mask&tag=wildandwell0c-21>
+
+---
+
+## 3) Air that’s easier to breathe
+- **Why:** Indoors ≠ always cleaner. A compact **HEPA H13** purifier captures fine particles and pollen.
+- **Note:** Avoid **ozone/ionizer** modes in bedrooms.
+
+**Quick Picks**
+- Bedroom HEPA H13 → <https://www.amazon.co.uk/s?k=hepa+h13+air+purifier+bedroom&tag=wildandwell0c-21>
+
+---
+
+## 4) Gentle, low-waste basics
+- **Why:** Fewer harsh fragrances/solvents = calmer skin and sinuses.
+- **Swap:** Concentrated **castile soap**, **microfiber cloths**, **fragrance-free laundry**.
+
+**Quick Picks**
+- Castile Soap → <https://www.amazon.co.uk/s?k=castile+soap+unscented&tag=wildandwell0c-21>
+- Microfiber Cloths → <https://www.amazon.co.uk/s?k=microfiber+cleaning+cloths&tag=wildandwell0c-21>
+- Fragrance-Free Laundry → <https://www.amazon.co.uk/s?k=fragrance+free+laundry+detergent&tag=wildandwell0c-21>
+
+---
+
+## 5) Simple, consistent movement
+- **Why:** 10–20 minutes daily beats a long workout once a month.
+- **Do now:** Walks, mobility, light strength.
+
+**Quick Picks**
+- Cork Yoga Mat → <https://www.amazon.co.uk/s?k=cork+yoga+mat&tag=wildandwell0c-21>
+- Light Dumbbells → <https://www.amazon.co.uk/s?k=neoprene+dumbbells&tag=wildandwell0c-21>
+
+---
+
+### FAQ
+**Do I need everything at once?** No. Pick the easiest win for your home and build momentum.  
+**RO removes minerals — is that bad?** You can remineralise with a pinch of sea salt or a remineralisation cartridge.
+
+*As an Amazon Associate, we earn from qualifying purchases.*
