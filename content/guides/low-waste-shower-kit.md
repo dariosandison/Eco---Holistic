@@ -1,34 +1,34 @@
 ---
-title: "Build a Low-Waste Shower Kit"
+title: "Low-Waste Shower Kit: Cleaner for You, Kinder to the Planet"
+excerpt: "Swap plastic-heavy routines for bar formats, refills, and a durable razor — without sacrificing comfort."
 date: "2025-09-20"
-excerpt: "Simple, planet-friendly swaps for a clean, low-tox routine."
 cover: "/cover.jpg"
+tags: ["bath","low-waste","bodycare"]
 ---
 
-> *Affiliate note:* This guide contains affiliate links. As an Amazon Associate, we may earn from qualifying purchases at no extra cost to you.
+## What to avoid — and why
+- **Microbeads/microplastics** in scrubs — unnecessary abrasion + environmental load.  
+- **Strong synthetic fragrances** if you’re sensitive.  
+- **Single-use plastic** when a bar/refill works as well.
 
-## Why go low-waste?
-Cutting plastic in the bathroom is one of the easiest ways to lower household waste. Bars last longer, refillables save money, and you avoid unnecessary ingredients.
+## What to look for — and why
+- **Solid bars** (soap, shampoo, conditioner) → less packaging, travel-friendly.  
+- **Refill pouches** for body wash if you prefer liquids.  
+- **Safety razor** → close shave, low long-term cost.
 
-## Starter kit (swaps that work)
-- **Solid Shampoo Bar (Tin)** — Travel-friendly, plastic-free cleansing.  
-  <a class="btn" href="https://www.amazon.co.uk/dp/B08QJ8G1M6?tag=wildandwell0c-21" target="_blank" rel="noopener">Shop</a>
-- **Solid Conditioner Bar** — Detangles and softens without bottles.  
-  <a class="btn" href="https://www.amazon.co.uk/dp/B08QJ82KH5?tag=wildandwell0c-21" target="_blank" rel="noopener">Shop</a>
-- **Refillable Metal Bottle** — Use with concentrates or DIY body wash.  
-  <a class="btn" href="https://www.amazon.co.uk/dp/B09C2N8Q1S?tag=wildandwell0c-21" target="_blank" rel="noopener">Shop</a>
-- **Safety Razor** — Durable handle, close shave, less waste.  
-  <a class="btn" href="https://www.amazon.co.uk/dp/B07T8D1VSV?tag=wildandwell0c-21" target="_blank" rel="noopener">Shop</a>
-- **Natural Fiber Washcloth** — Gently exfoliates; fully washable.  
-  <a class="btn" href="https://www.amazon.co.uk/dp/B07V6C2N1N?tag=wildandwell0c-21" target="_blank" rel="noopener">Shop</a>
-- **Draining Soap Tray** — Helps bars last longer between uses.  
-  <a class="btn" href="https://www.amazon.co.uk/dp/B0892M8ZJZ?tag=wildandwell0c-21" target="_blank" rel="noopener">Shop</a>
+## Build your kit (UK Amazon)
+- **Shampoo/conditioner bars:**  
+  <https://www.amazon.co.uk/s?k=shampoo+bar+conditioner+bar&tag=wildandwell0c-21>
+- **Fragrance-free body wash refills:**  
+  <https://www.amazon.co.uk/s?k=body+wash+refill+fragrance+free&tag=wildandwell0c-21>
+- **Safety razor + double-edge blades:**  
+  <https://www.amazon.co.uk/s?k=safety+razor+double+edge&tag=wildandwell0c-21>
+- **Natural loofah or sisal cloth:**  
+  <https://www.amazon.co.uk/s?k=natural+loofah+sisal&tag=wildandwell0c-21>
+- **Bar saver trays (drainage):**  
+  <https://www.amazon.co.uk/s?k=soap+dish+drain+tray&tag=wildandwell0c-21>
 
-## How to switch without the faff
-1. Finish what you have first (no need to bin half-full bottles).
-2. Try one change per week (e.g., shampoo bar → then razor).
-3. Store bars dry; they’ll last 2–3× longer.
+### Make it stick
+Let bars dry between uses, buy blades in bulk, and track what actually runs out (often less than you think).
 
-<hr>
-
-<p class="note">This content is educational and not medical advice.</p>
+*Educational only. Some links are affiliate links. As an Amazon Associate, we earn from qualifying purchases.*
