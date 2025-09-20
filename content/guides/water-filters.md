@@ -1,96 +1,45 @@
 ---
-title: "Water Filters: a simple guide (incl. fluoride)"
-excerpt: "Plain-English picks for better-tasting tap water, what to avoid, what to look for, and what to do if you want to reduce fluoride."
-date: "2025-09-20"
-cover: "/cover.jpg"
-tags: ["Home", "Kitchen", "Water"]
+title: Best Water Filters (UK) — simple choices, including fluoride options
+excerpt: Clear picks to improve taste and reduce common contaminants. Includes options that can reduce fluoride.
+cover: /cover.jpg
+date: 2025-08-31
+tags: [water, home, wellness]
+avoid:
+  - Jugs that only claim “improved taste” if you specifically want fluoride reduction.
+  - Vague marketing with no test data or standards listed.
+  - High ongoing cartridge costs that make you stop using the filter.
+lookfor:
+  - Clear statements about what the filter targets.
+  - Certifications (NSF/WRAS) or published test data where possible.
+  - If fluoride reduction matters to you: reverse osmosis or filters using activated alumina designed for fluoride.
+products:
+  - title: Under-Sink Reverse Osmosis System
+    image: https://images.unsplash.com/photo-1569060368728-7e0aa3a7e6a8?q=80&w=1200
+    href: https://www.amazon.co.uk/s?k=reverse+osmosis+system+under+sink&tag=wildandwell0c-21
+    badge: Broad reduction (incl. fluoride)
+    why: RO pushes water through a fine membrane, reducing a wide range of contaminants and can lower fluoride.
+    pros: ["Great taste", "Broad reduction", "Good for tea/coffee"]
+    cons: ["Needs space", "Sends some water to drain"]
+  - title: Countertop Gravity Filter
+    image: https://images.unsplash.com/photo-1562347810-8b2e3b0f8f6e?q=80&w=1200
+    href: https://www.amazon.co.uk/s?k=countertop+gravity+water+filter&tag=wildandwell0c-21
+    badge: No plumbing
+    why: Simple setup; some models offer specialty cartridges (check if a fluoride cartridge is available).
+    pros: ["Easy install", "Great for renters"]
+    cons: ["Slower flow", "Cartridges vary by model"]
+  - title: Filter Jug with Specialty Cartridge
+    image: https://images.unsplash.com/photo-1519669556878-63bdad8a1bfc?q=80&w=1200
+    href: https://www.amazon.co.uk/s?k=fluoride+water+filter+cartridge+uk&tag=wildandwell0c-21
+    badge: Budget start
+    why: A jug is the lowest barrier. Look for cartridges specifically designed to reduce fluoride if that’s your goal.
+    pros: ["Low cost", "No install"]
+    cons: ["Cartridges changed more often", "Capacity limits"]
+faqs:
+  - q: Does standard carbon remove fluoride?
+    a: Standard carbon is great for taste and chlorine but doesn’t reliably reduce fluoride. For fluoride, look for RO systems or cartridges that use media like activated alumina designed for fluoride.
+  - q: Is RO “wasteful”?
+    a: RO sends some water to drain during filtering; newer systems are more efficient. Many households prefer RO for the taste and broad reduction.
+  - q: Do I need mineral drops after filtering?
+    a: Some people like to add a pinch of mineral salts for taste. It’s optional—personal preference.
 ---
-
-## The 30-second take
-
-- **Want better taste?** A simple **jug/pitcher filter** is fine.
-- **Want fewer nasties (lead etc.)?** Go **under-sink carbon block** that’s **independently certified**.
-- **Want to reduce fluoride?** Choose **reverse osmosis (RO)** or a **special media** (bone char / activated alumina). Most jugs **don’t** reduce fluoride.
-- **Shower water**: a small **shower filter** can help with chlorine smell/dryness (not for fluoride).
-
-> Tip: Your local water report tells you what’s already in your tap. If unsure, basic **home test kits** are handy too.  
-> [Browse water test kits on Amazon ›](https://www.amazon.co.uk/s?k=water+test+kit&tag=wildandwell0c-21)
-
----
-
-## What to avoid (common gotchas)
-
-- **Vague claims** like “purifies everything” with no proof. Look for **independent certifications**.
-- **Never changing filters**. Old filters can make water taste worse. Put a reminder in your phone.
-- **Assuming all filters do the same thing**. Different tech tackles different issues.
-
----
-
-## What to look for (kept simple)
-
-- **Independent certification** (e.g., NSF/ANSI) = the maker’s claims were tested.  
-  *42* usually covers **taste/odor** (chlorine).  
-  *53* often covers certain **heavy metals** (e.g., lead).  
-  *58* relates to **reverse osmosis** systems.
-- **Carbon block** for taste/odor and some contaminants.
-- **RO or special media** if you specifically want to **reduce fluoride**.
-- **Reasonable ongoing costs** (replacement cartridges).
-
----
-
-## Fluoride: the short version
-
-Fluoride is added to some water supplies. If you want **less fluoride** in your drinking water:
-
-- **Reverse Osmosis (RO)** is the most common home option. It also reduces lots of other dissolved stuff.
-- **Special media** like **bone char** or **activated alumina** can reduce fluoride in some countertop/gravity systems.
-- Most **jugs/pitchers** **do not** meaningfully reduce fluoride.
-
-> RO water can taste “flat.” Many systems offer a **re-mineralization** cartridge to add a little mineral back for taste.  
-> [See remineralization cartridges ›](https://www.amazon.co.uk/s?k=ro+remineralization+filter&tag=wildandwell0c-21)
-
----
-
-## Picks by need (easy options)
-
-### 1) “Just better taste, please”
-- **Jug/Pitcher filters** improve **taste and smell** (chlorine) and are the cheapest, lowest-effort step.  
-  [Browse water filter jugs ›](https://www.amazon.co.uk/s?k=water+filter+jug&tag=wildandwell0c-21)  
-  [Tap-mounted filters (no plumbing) ›](https://www.amazon.co.uk/s?k=tap+water+filter&tag=wildandwell0c-21)
-
-### 2) “Cut the bad stuff more seriously”
-- **Under-sink carbon block** systems give fast, good-tasting water at the tap and can target more than a jug. Look for **independent certification** and an easy install kit.  
-  [Browse under-sink filter kits ›](https://www.amazon.co.uk/s?k=under+sink+water+filter+kit&tag=wildandwell0c-21)
-
-### 3) “I want to reduce fluoride”
-- **Reverse Osmosis (RO)** under-sink systems are the simple, reliable way at home. Many include a tank and dedicated faucet.  
-  [Browse reverse osmosis systems ›](https://www.amazon.co.uk/s?k=reverse+osmosis+system&tag=wildandwell0c-21)
-- Prefer countertop/gravity? Look for **fluoride media add-ons** (bone char / activated alumina).  
-  [Gravity systems with fluoride options ›](https://www.amazon.co.uk/s?k=gravity+water+filter+fluoride&tag=wildandwell0c-21)
-
-### 4) “My skin/hair hate chlorine in the shower”
-- A **shower filter** can soften the chlorine smell/feel. It won’t make the water safe to drink and won’t meaningfully reduce fluoride, but many people notice nicer showers.  
-  [Browse shower filters ›](https://www.amazon.co.uk/s?k=shower+filter&tag=wildandwell0c-21)
-
----
-
-## Upkeep (so it keeps working)
-
-- **Change filters on time.** Mark your calendar when you install one.  
-  [Find replacement cartridges ›](https://www.amazon.co.uk/s?k=water+filter+replacement+cartridge&tag=wildandwell0c-21)
-- **Taste changed suddenly?** It’s often a sign the cartridge is done.
-- **Give housings a quick clean** when you swap filters to avoid buildup.
-
----
-
-## Quick FAQ
-
-**Will a jug remove fluoride?**  
-Usually **no**. For fluoride, choose **RO** or **fluoride-specific media**.
-
-**Is RO “too pure”?**  
-RO reduces minerals along with contaminants. Some people like a **re-mineralization** stage for taste.
-
-**Whole-house vs. under-sink?**  
-Whole-house treats all water (good for chlorine smell in showers), but for **drinking**, an **under-sink** unit is often the best value.
-
+If you just want better taste and fewer odours, a good jug or countertop unit is enough. If you specifically care about fluoride reduction or broader contaminant reduction, go for reverse osmosis or check that your cartridges are designed for the job. Keep it simple and choose a setup you’ll actually maintain.
