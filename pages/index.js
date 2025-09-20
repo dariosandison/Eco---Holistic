@@ -1,12 +1,12 @@
 import Head from "next/head";
+import Link from "next/link";
 import fs from "fs";
 import path from "path";
-import Link from "next/link";
+import { useMemo, useState } from "react";
 
-// very small front-matter parser (no extra deps)
-// expects lines like: key: "value"  and tags: ["a","b"]
+// same tiny front-matter parser used elsewhere
 function parseFrontmatter(src) {
-  const fm = { title: "", excerpt: "", date: "", cover: "", tags: [] };
+  const fm = { title: "", excerpt: "", date: "", cover: "/cover.jpg", tags: [] };
   if (src.startsWith("---")) {
     const end = src.indexOf("---", 3);
     if (end !== -1) {
@@ -16,7 +16,6 @@ function parseFrontmatter(src) {
         if (!m) return;
         const key = m[1];
         let val = m[2].trim();
-        // strip quotes
         if (
           (val.startsWith('"') && val.endsWith('"')) ||
           (val.startsWith("'") && val.endsWith("'"))
@@ -58,36 +57,79 @@ export async function getStaticProps() {
     })
     .sort((a, b) => (a.date > b.date ? -1 : 1));
 
-  return {
-    props: { guides }, // JSON-serialisable only
-  };
+  // collect unique tags
+  const tagSet = new Set();
+  guides.forEach((g) => (g.tags || []).forEach((t) => tagSet.add(t)));
+  const allTags = Array.from(tagSet).sort((a, b) => a.localeCompare(b));
+
+  return { props: { guides, allTags } };
 }
 
-export default function Home({ guides }) {
+export default function GuidesIndex({ guides, allTags }) {
+  const [q, setQ] = useState("");
+  const [tag, setTag] = useState("");
+
+  const filtered = useMemo(() => {
+    const ql = q.trim().toLowerCase();
+    return guides.filter((g) => {
+      const matchesQ =
+        !ql ||
+        g.title.toLowerCase().includes(ql) ||
+        g.excerpt.toLowerCase().includes(ql) ||
+        (g.tags || []).some((t) => t.toLowerCase().includes(ql));
+      const matchesTag = !tag || (g.tags || []).includes(tag);
+      return matchesQ && matchesTag;
+    });
+  }, [guides, q, tag]);
+
   return (
     <>
       <Head>
-        <title>Wild & Well — Eco + Holistic Guides</title>
+        <title>All Guides • Wild & Well</title>
         <meta
           name="description"
-          content="Practical guides for eco-friendly living and holistic wellness: water filters, safer cleaning, low-waste body care, and simpler supplements."
+          content="Browse every Wild & Well guide: water filters, safer cleaning, low-waste body care, and supplements with simpler ingredients."
         />
       </Head>
 
       <main className="wrap">
-        <section className="hero">
-          <h1>Wild & Well</h1>
-          <p className="tagline">
-            Practical, low-tox choices for your home, body, and pantry — minus the
-            overwhelm.
+        <header className="hero">
+          <h1>All Guides</h1>
+          <p className="deck">
+            Bite-size, practical reads for eco-friendly living and holistic wellness.
           </p>
-        </section>
+
+          <div className="controls">
+            <input
+              value={q}
+              onChange={(e) => setQ(e.target.value)}
+              placeholder="Search guides (e.g., “water”, “protein”, “cleaning”)"
+              aria-label="Search guides"
+            />
+            <div className="tagrow">
+              <button
+                className={!tag ? "chip active" : "chip"}
+                onClick={() => setTag("")}
+              >
+                All
+              </button>
+              {allTags.map((t) => (
+                <button
+                  key={t}
+                  className={tag === t ? "chip active" : "chip"}
+                  onClick={() => setTag(t)}
+                >
+                  {t}
+                </button>
+              ))}
+            </div>
+          </div>
+        </header>
 
         <section className="grid">
-          {guides.map((g) => (
+          {filtered.map((g) => (
             <article key={g.slug} className="card">
               <Link href={`/guides/${g.slug}`} className="imageWrap" aria-label={g.title}>
-                {/* use <img> to avoid remote loader config */}
                 <img src={g.cover || "/cover.jpg"} alt="" />
               </Link>
               <div className="body">
@@ -112,9 +154,13 @@ export default function Home({ guides }) {
           ))}
         </section>
 
+        {filtered.length === 0 && (
+          <p className="empty">No matches. Try a different search or tag.</p>
+        )}
+
         <p className="fineprint">
-          Some links on this site are affiliate links. We may earn a small commission at no
-          extra cost to you. As an Amazon Associate, we earn from qualifying purchases.
+          Some links are affiliate links. We may earn a small commission at no extra cost to
+          you. As an Amazon Associate, we earn from qualifying purchases.
         </p>
       </main>
 
@@ -122,20 +168,51 @@ export default function Home({ guides }) {
         .wrap {
           max-width: 1100px;
           margin: 0 auto;
-          padding: 32px 16px 56px;
+          padding: 30px 16px 56px;
         }
         .hero {
           text-align: center;
-          margin: 10px 0 24px;
+          margin-bottom: 12px;
         }
         h1 {
-          font-size: 2.2rem;
+          font-size: 2rem;
           margin: 0 0 6px;
         }
-        .tagline {
+        .deck {
           color: #4b5563;
-          margin: 0;
-          font-size: 1.05rem;
+          margin: 0 0 14px;
+        }
+        .controls {
+          display: grid;
+          gap: 12px;
+          justify-items: center;
+        }
+        input {
+          width: min(680px, 100%);
+          border: 1px solid #e5e7eb;
+          border-radius: 10px;
+          padding: 10px 12px;
+          font-size: 1rem;
+        }
+        .tagrow {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 8px;
+          justify-content: center;
+        }
+        .chip {
+          border: 1px solid #d1d5db;
+          background: #fff;
+          padding: 6px 10px;
+          border-radius: 999px;
+          font-size: 0.9rem;
+          cursor: pointer;
+        }
+        .chip.active {
+          background: #eff6ff;
+          color: #1d4ed8;
+          border-color: #bfdbfe;
+          font-weight: 600;
         }
         .grid {
           display: grid;
@@ -196,6 +273,11 @@ export default function Home({ guides }) {
           margin-top: 4px;
           font-weight: 600;
           text-decoration: none;
+        }
+        .empty {
+          text-align: center;
+          color: #6b7280;
+          margin-top: 18px;
         }
         .fineprint {
           color: #6b7280;
