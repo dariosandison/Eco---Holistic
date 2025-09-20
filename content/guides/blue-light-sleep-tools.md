@@ -1,42 +1,27 @@
+<!-- /content/guides/blue-light-sleep.md -->
 ---
-title: "Tame blue light — simple tools for calmer nights"
-excerpt: "Screens aren’t going away; here’s how to make evenings easier on your brain."
+title: "Blue Light & Sleep: Calmer Evenings, Better Mornings"
+description: "Simple evening tweaks and tools that help your body wind down."
+date: "2025-09-20"
+updated: "2025-09-20"
 cover: "/cover.png"
-date: 2025-09-20
-tags: ["sleep", "wellness", "home"]
-
-avoid:
-  - "Cold 5000K+ bulbs at night."
-  - "High-brightness screens right before bed."
-  - "Glasses that don’t state wavelength range."
-
-lookfor:
-  - "Software night-shift modes on every device."
-  - "Amber/blue-blocking glasses with stated spectrum."
-  - "Warm desk lamps and indirect lighting."
-
-products:
-  - title: "Amber blue-blocking glasses (evening use)"
-    image: "https://images.unsplash.com/photo-1515378791036-0648a3ef77b2?q=80&w=1200"
-    href: "https://www.amazon.co.uk/s?k=blue+light+blocking+glasses+amber&tag=wildandwell0c-21"
-    badge: "Wear after sunset"
-    why: "Reduces alerting blue wavelengths."
-
-  - title: "Screen filters / software (laptop & phone)"
-    image: "https://images.unsplash.com/photo-1498049794561-7780e7231661?q=80&w=1200"
-    href: "https://www.amazon.co.uk/s?k=laptop+screen+filter+blue+light&tag=wildandwell0c-21"
-    badge: "Easy win"
-    why: "Combine with built-in night shift modes."
-
-  - title: "Warm, dimmable bedside lamp"
-    image: "https://images.unsplash.com/photo-1473186578172-c141e6798cf4?q=80&w=1200"
-    href: "https://www.amazon.co.uk/s?k=warm+dimmable+bedside+lamp+2000K&tag=wildandwell0c-21"
-    badge: "Wind-down light"
-    why: "Set the room, not just the screen."
-faqs:
-  - q: "Do glasses work if my room is still bright?"
-    a: "Dimming room lights multiplies the benefit—use both."
-  - q: "All day or just night?"
-    a: "Use amber lenses mainly in the evening to keep daytime alertness normal."
+readingTime: "5 min"
 ---
-Lower light, warmer tones, calmer sleep pressure.
+
+Screens and bright white bulbs at night keep your brain in “daytime” mode. The fix is easy.
+
+## What to do
+- **Dim + warm** all lights after sunset.  
+- **Night mode** on phones/laptops; drop brightness.  
+- **Glasses** with amber lenses 1–2 hours before bed if screens are unavoidable.
+
+**Quick Picks**
+- Blue-Blocking Glasses (Amber) → <https://www.amazon.co.uk/s?k=blue+light+blocking+glasses+amber&tag=wildandwell0c-21>  
+- Warm 2200K Bulbs (E14/E27) → <https://www.amazon.co.uk/s?k=2200k+led+bulb&tag=wildandwell0c-21>  
+- Red Night Light → <https://www.amazon.co.uk/s?k=red+night+light&tag=wildandwell0c-21>
+
+### Habits that help
+- Last hour: book, stretch, or quiet chat.  
+- Keep the bedroom for sleep (and intimacy), not doomscrolling.
+
+*As an Amazon Associate, we earn from qualifying purchases.*
