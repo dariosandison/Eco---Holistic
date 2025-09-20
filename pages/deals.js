@@ -1,3 +1,6 @@
+import SEO from "../components/SEO";
+<SEO title="Deals" path="/deals" />
+
 import Link from "next/link";
 import SEO from "../components/SEO";
 
