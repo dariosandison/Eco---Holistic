@@ -1,116 +1,79 @@
-import Head from "next/head";
-const TAG = "wildandwell0c-21";
-const withTag = (u) => `${u}${u.includes("?") ? "&" : "?"}tag=${TAG}`;
+---
+title: "Home Water Filters: Simple Picks That Work"
+description: "Clear, low-maintenance ways to improve tap water taste and reduce common contaminants."
+date: "2025-01-05"
+cover: "/cover.jpg"
+---
 
-export default function WaterFilters() {
-  const url = "https://www.wild-and-well.store/guides/water-filters";
-  const products = [
-    {
-      title: "Carbon Block Pitcher (Lead Reduction)",
-      href: withTag("https://www.amazon.co.uk/dp/B07CVHW4CM"),
-      img: "https://m.media-amazon.com/images/I/71b9iRkqYlL._AC_SL1500_.jpg",
-      blurb: "Great taste + certified reductions.",
-    },
-    {
-      title: "Under-Sink RO System",
-      href: withTag("https://www.amazon.co.uk/dp/B01NAUZJPE"),
-      img: "https://m.media-amazon.com/images/I/71afqkz0wWL._AC_SL1500_.jpg",
-      blurb: "Broad removal; includes faucet.",
-    },
-    {
-      title: "Whole-House Sediment Filter",
-      href: withTag("https://www.amazon.co.uk/dp/B07H5N8ZJV"),
-      img: "https://m.media-amazon.com/images/I/61e8z8U8VWL._AC_SL1500_.jpg",
-      blurb: "Protects plumbing and appliances.",
-    },
-  ];
+Cleaner water doesn’t have to be complicated. Below are straightforward options that balance **effectiveness, maintenance, and cost**.
 
-  const jsonLd = {
-    "@context": "https://schema.org",
-    "@type": "Article",
-    headline: "Choosing a Home Water Filter",
-    mainEntityOfPage: url,
-    description:
-      "Understand main filter types and pick the simplest option that meets your water needs.",
-    author: { "@type": "Organization", name: "Wild & Well" },
-  };
+> **Affiliate note:** Some links are affiliate links. As an Amazon Associate, we earn from qualifying purchases at no extra cost to you. See our [Affiliate Disclosure](/disclosure).
 
-  return (
-    <>
-      <Head>
-        <title>Choosing a Home Water Filter • Wild & Well</title>
-        <meta
-          name="description"
-          content="Understand the main filter types and pick the simplest option that meets your water quality needs."
-        />
-        <link rel="canonical" href={url} />
-        <meta property="og:title" content="Choosing a Home Water Filter • Wild & Well" />
-        <meta property="og:description" content="Quick guide to carbon block, RO, and whole-house filters." />
-        <meta property="og:type" content="article" />
-        <meta property="og:url" content={url} />
-        <meta property="og:image" content="/cover.jpg" />
-        <meta name="twitter:card" content="summary_large_image" />
-        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
-      </Head>
+## What matters (quickly)
+- **Independent testing/standards**: Look for **NSF/ANSI** claims (e.g., 42 taste/odor, 53 lead/organics, 58 RO).
+- **Filter life & cost**: Cheaper systems with short filter life often cost more over a year.
+- **Fit**: Pitcher vs. faucet vs. under-sink depends on kitchen layout and usage.
 
-      <main className="wrap">
-        <h1>Choosing a Home Water Filter</h1>
-        <p className="lead">
-          If taste/odour is your main concern, a solid carbon block pitcher is often enough. For specific contaminants,
-          look for certified reductions; for broad removal, consider reverse osmosis (RO).
-        </p>
+---
 
-        <section>
-          <h2>Filter Types (Quick)</h2>
-          <ul>
-            <li><strong>Activated carbon:</strong> Taste/odour, chlorine.</li>
-            <li><strong>Carbon block + lead reduction:</strong> Selected metals + taste.</li>
-            <li><strong>RO (reverse osmosis):</strong> Broad removal; needs install & waste line.</li>
-            <li><strong>Whole-house sediment:</strong> Protects plumbing; not a final drinking filter.</li>
-          </ul>
-        </section>
+## 1) Best easy start: **Pitcher or Dispenser**
+- Improves taste/odor (NSF/ANSI 42) and, on better models, **reduces lead & PFAS** (NSF/ANSI 53).
+- Low install effort; keep in the fridge, swap cartridges as scheduled.
 
-        <section>
-          <h2>Upkeep</h2>
-          <ul>
-            <li>Change cartridges on schedule—performance drops when overdue.</li>
-            <li>Flush new filters as instructed for best taste.</li>
-          </ul>
-        </section>
+**Look for (UK Amazon searches):**
+- [NSF 53 lead-reducing pitcher](https://www.amazon.co.uk/s?k=lead+reducing+water+filter+pitcher+NSF+53&tag=wildandwell0c-21)
+- [PFAS-reducing pitcher](https://www.amazon.co.uk/s?k=PFAS+reducing+water+filter+pitcher&tag=wildandwell0c-21)
 
-        <section>
-          <h2>Recommended Options</h2>
-          <div className="grid">
-            {products.map((p) => (
-              <a key={p.title} className="card" href={p.href} target="_blank" rel="nofollow sponsored noopener">
-                <img src={p.img} alt={p.title} />
-                <div className="info">
-                  <strong>{p.title}</strong>
-                  <p>{p.blurb}</p>
-                  <span className="cta">View on Amazon →</span>
-                </div>
-              </a>
-            ))}
-          </div>
-          <p className="disclaimer">As an Amazon Associate, we earn from qualifying purchases.</p>
-        </section>
-      </main>
+**Good if:** renters, small households, quick setup.
 
-      <style jsx>{`
-        .wrap { max-width: 900px; margin: 2rem auto; padding: 0 16px; }
-        h1 { font-size: 2rem; margin-bottom: .25rem; }
-        .lead { color: #475569; margin-bottom: 1rem; }
-        h2 { font-size: 1.25rem; margin: 1.25rem 0 .5rem; }
-        ul { margin-left: 1.25rem; }
-        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 16px; }
-        .card { border: 1px solid #e5e7eb; background: #fff; border-radius: 10px; overflow: hidden; text-decoration: none; color: inherit; display: grid; grid-template-rows: 150px auto; }
-        .card img { width: 100%; height: 150px; object-fit: cover; display: block; }
-        .info { padding: 10px 12px; }
-        .info p { margin: 6px 0 10px; color: #4b5563; font-size: .95rem; }
-        .cta { color: #0f766e; font-weight: 600; font-size: .95rem; }
-        .disclaimer { color: #6b7280; font-size: .9rem; margin-top: .75rem; }
-      `}</style>
-    </>
-  );
-}
+---
 
+## 2) Best overall filtration: **Under-sink RO (Reverse Osmosis)**
+- Multi-stage, often **NSF/ANSI 58**; strong reduction of **TDS, heavy metals, nitrates, PFAS**.
+- Needs a dedicated faucet; wastes some water but best broad reduction.
+
+**Look for:**
+- [Compact RO system (tankless)](https://www.amazon.co.uk/s?k=tankless+reverse+osmosis+system+NSF+58&tag=wildandwell0c-21)
+- [Standard RO with remineralisation](https://www.amazon.co.uk/s?k=reverse+osmosis+remineralisation+NSF+58&tag=wildandwell0c-21)
+
+**Good if:** you want maximum improvement and can install under the sink.
+
+---
+
+## 3) Low-effort upgrade: **Faucet-mounted filter**
+- Snaps onto most taps; quick switch between filtered/unfiltered.
+- Check flow rate and cartridge availability.
+
+**Look for:**
+- [NSF 42/53 faucet filter](https://www.amazon.co.uk/s?k=faucet+mounted+water+filter+NSF+53&tag=wildandwell0c-21)
+
+**Good if:** you want something between a pitcher and RO with easy install.
+
+---
+
+## 4) Bonus: **Shower filter** (for feel, not drinking)
+- Aims to reduce **chlorine** and some byproducts; nicer on skin/hair.
+- Replace cartridges on time for effect.
+
+**Look for:**
+- [Vitamin C / KDF shower filter](https://www.amazon.co.uk/s?k=vitamin+C+KDF+shower+filter&tag=wildandwell0c-21)
+
+---
+
+## Maintenance checklist
+- **Set reminders** to change cartridges (calendar or label the install date on the filter).
+- If water tastes off or flow slows, **change sooner**.
+- For RO, **sanitize annually** and replace each stage per maker guidance.
+
+---
+
+## Quick answers
+**Will RO remove minerals I want?**  
+Yes; many systems add a **remineralisation** stage for taste/alkalinity.
+
+**Do I need a water test first?**  
+If budget allows, yes—especially for older plumbing (lead risk) or private wells. Otherwise, choose a filter with **NSF/ANSI** certifications covering your likely concerns.
+
+---
+
+*Educational only; not a substitute for professional advice. If you have specific water quality concerns, consult your local water report or test results.*
