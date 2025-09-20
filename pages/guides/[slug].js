@@ -1,3 +1,4 @@
+// pages/guides/[slug].js
 import SEO from '../../components/SEO';
 import { getGuideSlugs, getGuideBySlug } from '../../lib/guides';
 
@@ -10,16 +11,24 @@ export default function GuidePage({ front, contentHtml }) {
         path={`/guides/${front.slug}`}
       />
       <main className="container">
-        <div className="hero" style={{paddingTop:24}}>
+        <div className="hero" style={{ paddingTop: 24 }}>
           <span className="kicker">Guide</span>
           <h1>{front.title}</h1>
-          {front.excerpt && <p className="muted" style={{maxWidth:720}}>{front.excerpt}</p>}
+          {front.excerpt && (
+            <p className="muted" style={{ maxWidth: 720 }}>{front.excerpt}</p>
+          )}
         </div>
 
-        <article className="prose" dangerouslySetInnerHTML={{ __html: contentHtml }} />
+        <article
+          className="prose"
+          dangerouslySetInnerHTML={{ __html: contentHtml }}
+        />
 
-        <aside style="margin-top:18px;color:#6b7280;font-size:.9rem">
-          <small>Some links may be affiliate links. As an Amazon Associate, we earn from qualifying purchases.</small>
+        <aside style={{ marginTop: 18, color: '#6b7280', fontSize: '.9rem' }}>
+          <small>
+            Some links may be affiliate links. As an Amazon Associate, we earn from
+            qualifying purchases.
+          </small>
         </aside>
       </main>
     </>
@@ -27,10 +36,10 @@ export default function GuidePage({ front, contentHtml }) {
 }
 
 export async function getStaticPaths() {
-  const slugs = getGuideSlugs().map(f => f.replace(/\.md$/,''));
+  const slugs = getGuideSlugs().map((f) => f.replace(/\.md$/, ''));
   return {
-    paths: slugs.map(slug => ({ params:{ slug } })),
-    fallback: false
+    paths: slugs.map((slug) => ({ params: { slug } })),
+    fallback: false,
   };
 }
 
