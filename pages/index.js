@@ -5,48 +5,67 @@ import Link from "next/link";
 import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
+import GuideFilters from "../components/GuideFilters";
 
 export async function getStaticProps() {
   const guidesDir = path.join(process.cwd(), "content", "guides");
   const files = fs.readdirSync(guidesDir).filter((f) => f.endsWith(".md"));
 
-  const guides = files
-    .map((filename) => {
-      const raw = fs.readFileSync(path.join(guidesDir, filename), "utf8");
-      const { data } = matter(raw);
-      const slug = filename.replace(/\.md$/, "");
+  const all = files.map((filename) => {
+    const raw = fs.readFileSync(path.join(guidesDir, filename), "utf8");
+    const { data } = matter(raw);
+    const slug = filename.replace(/\.md$/, "");
+    const dateStr = (data.date || "").toString();
+    const ts = dateStr ? new Date(dateStr).getTime() : 0;
 
-      // Always keep date as a *string* for Next serialization.
-      const dateStr = (data.date || "").toString();
-      const ts = dateStr ? new Date(dateStr).getTime() : 0; // for sorting only
-      const datePretty = dateStr
-        ? new Date(dateStr).toLocaleDateString("en-GB", {
-            year: "numeric",
-            month: "short",
-            day: "2-digit",
-          })
-        : "";
+    return {
+      slug,
+      title: data.title || slug,
+      excerpt:
+        data.excerpt ||
+        data.description ||
+        "Quick, practical take from Wild & Well.",
+      cover: data.cover || "/cover.png",
+      category: data.category || "Other",
+      date: dateStr,
+      ts,
+      readingTime: data.readingTime || "",
+    };
+  });
 
-      return {
-        slug,
-        title: data.title || slug,
-        excerpt:
-          data.excerpt ||
-          data.description ||
-          "Quick, practical take from Wild & Well.",
-        cover: data.cover || "/cover.png",
-        date: dateStr,
-        datePretty,
-        _ts: ts,
-      };
-    })
-    .sort((a, b) => b._ts - a._ts)
-    .map(({ _ts, ...rest }) => rest); // strip helper before returning
+  // Featured = data.featured === true; fallback = latest 8
+  const featured = all.filter((g) => g.featured).length
+    ? all.filter((g) => g.featured).sort((a, b) => b.ts - a.ts)
+    : all.sort((a, b) => b.ts - a.ts).slice(0, 8);
 
-  return { props: { guides } };
+  // Unique categories
+  const categories = Array.from(new Set(all.map((g) => g.category))).sort();
+
+  return { props: { allGuides: all, featured, categories } };
 }
 
-export default function Home({ guides }) {
+export default function Home({ allGuides, featured, categories }) {
+  const [active, setActive] = React.useState("All");
+  const [query, setQuery] = React.useState("");
+
+  // Filter across ALL guides for the quick search result (show top 8 results)
+  const filtered = allGuides
+    .filter((g) => (active === "All" ? true : g.category === active))
+    .filter((g) => {
+      if (!query) return true;
+      const q = query.toLowerCase();
+      return (
+        g.title.toLowerCase().includes(q) ||
+        g.excerpt.toLowerCase().includes(q) ||
+        g.category.toLowerCase().includes(q)
+      );
+    })
+    .sort((a, b) => b.ts - a.ts)
+    .slice(0, 8);
+
+  const showSearchResults = query.length > 0 || active !== "All";
+  const cards = showSearchResults ? filtered : featured;
+
   const title = "Wild & Well — Bite-size wellness & eco-living guides";
   const desc =
     "Bite-size, practical reads for eco-friendly living and holistic wellness.";
@@ -62,30 +81,45 @@ export default function Home({ guides }) {
         <meta property="og:image" content="/cover.png" />
         <meta property="og:url" content="https://www.wild-and-well.store" />
         <meta name="twitter:card" content="summary_large_image" />
+        <link rel="canonical" href="https://www.wild-and-well.store/" />
       </Head>
 
       <main className="wrap">
-        {/* Logo instead of a page title */}
+        {/* Logo */}
         <div className="logoWrap">
           <img src="/logo.png" alt="Wild & Well" className="logo" />
         </div>
 
         {/* Swapped + centered hero lines */}
         <header className="hero">
-          <p className="eyebrow">Bite-size, practical reads for eco-friendly living and holistic wellness.</p>
-          <h1 className="h1">Your guide to eco-living, holistic health, and mindful wellness.</h1>
+          <p className="eyebrow">
+            Bite-size, practical reads for eco-friendly living and holistic wellness.
+          </p>
+          <h1 className="h1">
+            Your guide to eco-living, holistic health, and mindful wellness.
+          </h1>
         </header>
 
-        {/* Guides grid */}
+        {/* Filters + Search (quick finder) */}
+        <GuideFilters
+          categories={categories}
+          active={active}
+          setActive={setActive}
+          query={query}
+          setQuery={setQuery}
+        />
+
+        {/* Grid */}
         <section className="grid">
-          {guides.map((g) => (
+          {cards.map((g) => (
             <Link href={`/guides/${g.slug}`} key={g.slug} className="card">
               <article>
                 <div className="thumb">
                   <img src={g.cover} alt={g.title} />
                 </div>
                 <div className="meta">
-                  {g.datePretty && <span className="date">{g.datePretty}</span>}
+                  <span className="pill">{g.category}</span>
+                  {g.readingTime && <span className="rt">{g.readingTime}</span>}
                 </div>
                 <h2 className="title">{g.title}</h2>
                 <p className="excerpt">{g.excerpt}</p>
@@ -95,123 +129,46 @@ export default function Home({ guides }) {
           ))}
         </section>
 
+        {/* Browse all link only when showing featured */}
+        {!showSearchResults && (
+          <p className="center">
+            <Link href="/guides" className="browse">Browse all guides →</Link>
+          </p>
+        )}
+
         <p className="fine">
           As an Amazon Associate, we earn from qualifying purchases.
         </p>
       </main>
 
       <style jsx>{`
-        .wrap {
-          max-width: 1100px;
-          margin: 24px auto 64px;
-          padding: 0 16px;
-        }
-        .logoWrap {
-          display: flex;
-          justify-content: center;
-          margin: 8px 0 10px;
-        }
-        .logo {
-          width: 120px;
-          height: auto;
-          object-fit: contain;
-        }
-        .hero {
-          text-align: center;
-          margin: 8px auto 22px;
-          max-width: 880px;
-        }
-        .eyebrow {
-          margin: 0 0 8px;
-          color: #374151;
-          font-weight: 600;
-          font-size: 1.05rem;
-          line-height: 1.45;
-        }
-        .h1 {
-          margin: 0;
-          font-size: 1.85rem;
-          line-height: 1.25;
-          letter-spacing: -0.01em;
-          color: #111827;
-        }
-        @media (min-width: 860px) {
-          .h1 { font-size: 2.1rem; }
-          .eyebrow { font-size: 1.1rem; }
-        }
+        .wrap { max-width: 1100px; margin: 24px auto 64px; padding: 0 16px; }
+        .logoWrap { display: flex; justify-content: center; margin: 8px 0 10px; }
+        .logo { width: 120px; height: auto; object-fit: contain; }
+        .hero { text-align: center; margin: 8px auto 18px; max-width: 880px; }
+        .eyebrow { margin: 0 0 8px; color: #374151; font-weight: 600; font-size: 1.05rem; line-height: 1.45; }
+        .h1 { margin: 0; font-size: 1.85rem; line-height: 1.25; letter-spacing: -0.01em; color: #111827; }
+        @media (min-width: 860px) { .h1 { font-size: 2.1rem; } .eyebrow { font-size: 1.1rem; } }
 
-        .grid {
-          display: grid;
-          grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-          gap: 16px;
-          margin-top: 18px;
-        }
-        .card {
-          text-decoration: none;
-          color: inherit;
-        }
+        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 16px; margin-top: 10px; }
+        .card { text-decoration: none; color: inherit; }
         .card article {
-          border: 1px solid #e5e7eb;
-          border-radius: 14px;
-          background: #fff;
-          overflow: hidden;
-          height: 100%;
-          display: flex;
-          flex-direction: column;
-          transition: box-shadow 0.15s ease, border-color 0.15s ease;
+          border: 1px solid #e5e7eb; border-radius: 14px; background: #fff;
+          overflow: hidden; height: 100%; display: flex; flex-direction: column;
+          transition: box-shadow .15s ease, border-color .15s ease;
         }
-        .card article:hover {
-          border-color: #d1d5db;
-          box-shadow: 0 6px 18px rgba(17, 24, 39, 0.06);
-        }
-        .thumb {
-          width: 100%;
-          aspect-ratio: 16/9;
-          background: #f3f4f6;
-          overflow: hidden;
-        }
-        .thumb img {
-          width: 100%;
-          height: 100%;
-          object-fit: cover;
-          display: block;
-        }
-        .meta {
-          padding: 10px 14px 0;
-          color: #6b7280;
-          font-size: 0.9rem;
-        }
-        .date {
-          background: #f3f4f6;
-          border: 1px solid #e5e7eb;
-          padding: 2px 8px;
-          border-radius: 999px;
-        }
-        .title {
-          font-size: 1.1rem;
-          line-height: 1.35;
-          padding: 6px 14px 0;
-          margin: 0;
-          color: #111827;
-        }
-        .excerpt {
-          padding: 8px 14px 0;
-          margin: 0;
-          color: #4b5563;
-          flex: 1;
-        }
-        .cta {
-          display: block;
-          padding: 12px 14px 14px;
-          color: #0f766e;
-          font-weight: 700;
-        }
-        .fine {
-          color: #6b7280;
-          font-size: 0.9rem;
-          text-align: center;
-          margin-top: 20px;
-        }
+        .card article:hover { border-color: #d1d5db; box-shadow: 0 6px 18px rgba(17,24,39,.06); }
+        .thumb { width: 100%; aspect-ratio: 16/9; background: #f3f4f6; overflow: hidden; }
+        .thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+        .meta { padding: 10px 14px 0; display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+        .pill { background: #ecfdf5; color: #0f766e; border: 1px solid #99f6e4; padding: 2px 8px; border-radius: 999px; font-size: .85rem; }
+        .rt { color: #6b7280; font-size: .9rem; }
+        .title { font-size: 1.1rem; line-height: 1.35; padding: 6px 14px 0; margin: 0; color: #111827; }
+        .excerpt { padding: 8px 14px 0; margin: 0; color: #4b5563; flex: 1; }
+        .cta { display: block; padding: 12px 14px 14px; color: #0f766e; font-weight: 700; }
+        .center { text-align: center; margin-top: 12px; }
+        .browse { color: #0f766e; font-weight: 700; }
+        .fine { color: #6b7280; font-size: .9rem; text-align: center; margin-top: 18px; }
       `}</style>
     </>
   );
