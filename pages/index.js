@@ -28,7 +28,7 @@ export default function Home({ guides, tags }) {
         <title>Wild & Well — Eco & Holistic Guides</title>
         <meta
           name="description"
-          content="Your guide to eco-living, holistic health, and mindful wellness. Search bite-size, practical guides and product picks."
+          content="Your guide to eco-living, holistic health, and mindful wellness. Search bite-size"
         />
       </Head>
 
@@ -55,7 +55,7 @@ export default function Home({ guides, tags }) {
           Your guide to eco-living, holistic health, and mindful wellness.
         </p>
         <p className="taglineSub">
-          Bite-size, practical reads for eco-friendly living and holistic wellness.
+          .
         </p>
       </header>
 
