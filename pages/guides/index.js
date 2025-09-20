@@ -65,14 +65,9 @@ export default function GuidesIndex({ guides, categories }) {
       </Head>
 
       <main className="wrap">
-        <div className="logoWrap">
-          <img src="/logo.png" alt="Wild & Well" className="logo" />
-        </div>
         <header className="hero">
           <h1 className="h1">Explore all guides</h1>
-          <p className="sub">
-            Filter by topic or search for what you need right now.
-          </p>
+          <p className="sub">Filter by topic or search for what you need.</p>
         </header>
 
         <GuideFilters
@@ -108,30 +103,28 @@ export default function GuidesIndex({ guides, categories }) {
       </main>
 
       <style jsx>{`
-        .wrap { max-width: 1100px; margin: 24px auto 64px; padding: 0 16px; }
-        .logoWrap { display: flex; justify-content: center; margin: 8px 0 8px; }
-        .logo { width: 100px; height: auto; object-fit: contain; }
-        .hero { text-align: center; margin: 6px auto 10px; max-width: 820px; }
-        .h1 { margin: 0 0 6px; font-size: 1.8rem; color: #111827; }
+        .wrap { max-width: 1100px; margin: 28px auto 64px; padding: 0 16px; }
+        .hero { text-align: center; margin: 4px auto 12px; max-width: 820px; }
+        .h1 { margin: 0 0 6px; font-size: 2rem; color: #111827; }
         .sub { color: #4b5563; margin: 0; }
 
-        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 16px; margin-top: 10px; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 18px; margin-top: 12px; }
         .card { text-decoration: none; color: inherit; }
         .card article {
-          border: 1px solid #e5e7eb; border-radius: 14px; background: #fff;
+          border: 1px solid #e5e7eb; border-radius: 16px; background: #fff;
           overflow: hidden; height: 100%; display: flex; flex-direction: column;
-          transition: box-shadow .15s ease, border-color .15s ease;
+          transition: box-shadow .2s ease, transform .2s ease, border-color .2s ease;
         }
-        .card article:hover { border-color: #d1d5db; box-shadow: 0 6px 18px rgba(17,24,39,.06); }
+        .card article:hover { border-color: #d1d5db; box-shadow: 0 10px 24px rgba(17,24,39,.07); transform: translateY(-1px); }
         .thumb { width: 100%; aspect-ratio: 16/9; background: #f3f4f6; overflow: hidden; }
         .thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
-        .meta { padding: 10px 14px 0; display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
-        .pill { background: #ecfdf5; color: #0f766e; border: 1px solid #99f6e4; padding: 2px 8px; border-radius: 999px; font-size: .85rem; }
+        .meta { padding: 12px 16px 0; display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+        .pill { background: #ecfdf5; color: #0f766e; border: 1px solid #99f6e4; padding: 2px 10px; border-radius: 999px; font-size: .85rem; }
         .rt { color: #6b7280; font-size: .9rem; }
-        .title { font-size: 1.1rem; line-height: 1.35; padding: 6px 14px 0; margin: 0; color: #111827; }
-        .excerpt { padding: 8px 14px 0; margin: 0; color: #4b5563; flex: 1; }
-        .cta { display: block; padding: 12px 14px 14px; color: #0f766e; font-weight: 700; }
-        .fine { color: #6b7280; font-size: .9rem; text-align: center; margin-top: 18px; }
+        .title { font-size: 1.15rem; line-height: 1.35; padding: 6px 16px 0; margin: 0; color: #111827; }
+        .excerpt { padding: 8px 16px 0; margin: 0; color: #4b5563; flex: 1; }
+        .cta { display: block; padding: 12px 16px 16px; color: #0f766e; font-weight: 700; }
+        .fine { color: #6b7280; font-size: .9rem; text-align: center; margin-top: 20px; }
       `}</style>
     </>
   );
