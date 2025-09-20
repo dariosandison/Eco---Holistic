@@ -1,7 +1,7 @@
 ---
 title: Safer Cleaning — fewer fumes, simpler ingredients
 excerpt: Easy swaps for kitchens and bathrooms that still get the job done.
-cover: /cover.jpg
+cover: /cover.png
 date: 2025-08-31
 tags: [cleaning, home, low-waste]
 avoid:
