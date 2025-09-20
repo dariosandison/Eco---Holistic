@@ -1,29 +1,36 @@
 ---
-title: "Lower-Tox Cleaning: Simple, Effective Basics"
+title: "Safer Cleaning: Fewer Fragrances, Fewer Surprises"
+excerpt: "A low-tox routine: what to avoid, the simple ingredients that actually work, and affordable swaps."
 date: "2025-09-20"
-excerpt: "Fewer bottles, fewer additives—still a clean home."
 cover: "/cover.jpg"
+tags: ["home","cleaning","air"]
 ---
 
-> *Affiliate note:* Some links are affiliate; it helps us keep this site going.
+## What to avoid — and why
+- **Undisclosed “fragrance/parfum”** — can include dozens of chemicals; common irritant.  
+- **Mixing bleach + ammonia/acid** — dangerous chloramine/chlorine gas.  
+- **Spray overload** — raises indoor VOCs and fine particles.  
+- **Quats (e.g., benzalkonium chloride)** — effective disinfectants, but overuse can irritate; reserve for true disinfection needs.
 
-## Core kit
-- **Castile Soap (concentrate):** Multi-surface when diluted.  
-  <a class="btn" href="https://www.amazon.co.uk/dp/B0006GWE1E?tag=wildandwell0c-21" target="_blank" rel="noopener">Shop</a>
-- **White Vinegar (for glass/descale):** Use where appropriate.  
-  <a class="btn" href="https://www.amazon.co.uk/dp/B00D9L6SCA?tag=wildandwell0c-21" target="_blank" rel="noopener">Shop</a>
-- **Washing Soda / Bicarbonate:** Boosts degreasing, deodorising.  
-  <a class="btn" href="https://www.amazon.co.uk/dp/B00B6U0LZ0?tag=wildandwell0c-21" target="_blank" rel="noopener">Shop</a>
-- **Microfibre or Cotton Cloths:** Reusable, no paper-towel waste.  
-  <a class="btn" href="https://www.amazon.co.uk/dp/B07C7S9Z4T?tag=wildandwell0c-21" target="_blank" rel="noopener">Shop</a>
-- **Amber Spray Bottles (labels!):** For safe storage + dilution ratios.  
-  <a class="btn" href="https://www.amazon.co.uk/dp/B07R6SLJ6L?tag=wildandwell0c-21" target="_blank" rel="noopener">Shop</a>
+## What to look for — and why
+- **Fragrance-free or clearly disclosed scents** → fewer unknowns.  
+- **Concentrates/refills** → less plastic, less storage.  
+- **Short ingredient lists** (soap, vinegar, alcohol, surfactants you can pronounce).  
+- **Microfiber** for mechanical cleaning → often replaces product.
 
-## Quick recipes (always spot-test)
-- **All-purpose:** 1 tbsp castile + 500 ml warm water.  
-- **Glass:** 1:1 water:vinegar, microfibre cloth.  
-- **Bathroom spray:** 1 tsp castile + 500 ml water; rinse surfaces.
+## Low-tox kit (UK Amazon)
+- **Unscented dish soap:**  
+  <https://www.amazon.co.uk/s?k=fragrance+free+dish+soap&tag=wildandwell0c-21>
+- **All-purpose concentrate (dilutable):**  
+  <https://www.amazon.co.uk/s?k=all+purpose+cleaner+concentrate+fragrance+free&tag=wildandwell0c-21>
+- **Microfiber cloths:**  
+  <https://www.amazon.co.uk/s?k=microfibre+cloths&tag=wildandwell0c-21>
+- **Citric acid descaler:**  
+  <https://www.amazon.co.uk/s?k=citric+acid+descaler&tag=wildandwell0c-21>
+- **Oxygen bleach (sodium percarbonate):**  
+  <https://www.amazon.co.uk/s?k=oxygen+bleach+powder&tag=wildandwell0c-21>
 
-<hr>
+### Routine that works
+Ventilate while cleaning, use the smallest effective amount, and keep a single disinfectant for actual illness/food-safety moments.
 
-<p class="note">Use products as directed. Keep out of reach of children/pets.</p>
+*Educational only. Some links are affiliate links. As an Amazon Associate, we earn from qualifying purchases.*
