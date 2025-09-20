@@ -1,7 +1,7 @@
 ---
 title: Vitamins with Minimal Additives — clean labels, simple formulas
 excerpt: How to pick vitamins with fewer fillers and clear dosing.
-cover: /cover.jpg
+cover: /cover.png
 date: 2025-08-31
 tags: [vitamins, supplements, wellness]
 avoid:
