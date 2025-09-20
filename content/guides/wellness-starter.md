@@ -1,41 +1,77 @@
 ---
-title: "7-Day Wellness Kickstart (Simple, Natural, Doable)"
-description: "A one-week plan to sleep better, eat simpler, reduce toxins and feel calmer — no overwhelm."
-date: "2025-01-05"
+title: "Wellness Starter: 5 Low-Tox Swaps with Big Upside"
+excerpt: "Quick wins for better energy and less daily exposure: water, air, light, sleep, and low-waste body care."
+date: "2025-09-20"
 cover: "/cover.jpg"
-tags: ["start here", "wellness", "sleep", "nutrition", "low-tox"]
+tags: ["starter","home","wellness"]
 ---
 
-> **Affiliate note:** Some links below are affiliate links. As an Amazon Associate, we earn from qualifying purchases. See our [Affiliate Disclosure](/disclosure).
+## Why start here
+Small, consistent changes beat total overhauls. These five swaps lower routine exposures and improve sleep/energy without turning your life upside down.
 
-Welcome! This 7-day kickstart focuses on **better sleep, calmer stress, simple nutrition, hydration**, and a few **low-tox swaps**. Keep it light, keep it doable.
+---
 
-## Daily Focus (Quick View)
-- **Day 1 — Sleep Reset:** Dark room, cooler temp, no screens 60 min before bed (+ magnesium helps some).  
-- **Day 2 — Hydration:** 2–3L water, add a pinch of sea salt or lemon for taste.  
-- **Day 3 — Simple Meals:** 1-ingredient proteins, veg, fruit, whole grains.  
-- **Day 4 — Gentle Movement:** 20–30 min walk + 5 min stretch.  
-- **Day 5 — Low-Tox Shower:** swap body wash/shampoo for low-additive or fragrance-free basics.  
-- **Day 6 — Kitchen Clean-Up:** greener dish soap + countertop spray.  
-- **Day 7 — Sustain:** plan 2 habits to keep next week.
+## 1) Better drinking water
+**Avoid & why:** vague “removes impurities” claims; filters that only reduce taste/odor (NSF 42) but not common contaminants (e.g., chlorine by-products, lead).  
+**Look for & why:** actual certification or test data. **NSF/ANSI 53** (lead/organics), **401** (emerging compounds). Reverse osmosis (RO) = broad reduction; jug or under-sink carbon = simpler.
 
-## Helpful Guides
-- 🛁 **Low-Waste Shower Kit:** fewer bottles, cleaner labels → [/guides/low-waste-shower-kit](/guides/low-waste-shower-kit)  
-- 💧 **Water Filters:** simple options from jug to under-sink → [/guides/water-filters](/guides/water-filters)  
-- 🧽 **Safer Cleaning:** fewer irritants at home → [/guides/safer-cleaning](/guides/safer-cleaning)  
-- 🥣 **Minimal-Ingredient Cereals:** short labels → [/guides/minimal-ingredient-cereals](/guides/minimal-ingredient-cereals)  
-- 💊 **Vitamins, minimal additives:** [/guides/vitamin-supplements-minimal-additives](/guides/vitamin-supplements-minimal-additives)  
-- 🥤 **Protein, natural ingredients:** [/guides/protein-powders-natural-ingredients](/guides/protein-powders-natural-ingredients)
+**Quick picks (UK Amazon):**
+- RO under-sink kits (look for NSF/ANSI 58):  
+  <https://www.amazon.co.uk/s?k=reverse+osmosis+system+nsf&tag=wildandwell0c-21>
+- Jug filters with 53/401 claims:  
+  <https://www.amazon.co.uk/s?k=water+filter+jug+nsf+53&tag=wildandwell0c-21>
 
-## Example “Clean Label” Picks
-Always check the current label before buying.
+---
 
-- **Magnesium Glycinate (gentle)** → https://www.amazon.co.uk/dp/B07MV1V6Z8?tag=wildandwell0c-21  
-- **Unflavoured Whey (short list)** → https://www.amazon.co.uk/dp/B00W2K3A8S?tag=wildandwell0c-21  
-- **Pure Pea Protein** → https://www.amazon.co.uk/dp/B00GFYB9JQ?tag=wildandwell0c-21  
-- **Vitamin D3/K2 (softgels)** → https://www.amazon.co.uk/dp/B07DHGSWW2?tag=wildandwell0c-21
+## 2) Cleaner indoor air (easy mode)
+**Avoid & why:** heavy use of sprays, strong fragrances, scented candles—raise VOCs/particles.  
+**Look for & why:** HEPA (H13) purifiers sized for your room; fragrance-free habits; regular airing.
 
-## Keep It Going
-Pick **two** habits to continue next week (e.g., phone-free bedtime + daily walk). Small > perfect.
+**Quick picks:**
+- Room HEPA air purifiers (H13 or “True HEPA”):  
+  <https://www.amazon.co.uk/s?k=hepa+air+purifier+h13&tag=wildandwell0c-21>
+- Unscented cleaning basics (see cleaning guide):  
+  <https://www.amazon.co.uk/s?k=fragrance+free+cleaning&tag=wildandwell0c-21>
 
-*Educational use only — not medical advice.*
+---
+
+## 3) Evening light hygiene
+**Avoid & why:** bright blue-heavy light after sunset → suppresses melatonin, poorer sleep.  
+**Look for & why:** warmer lamps at night, device night modes, optional blue-light glasses.
+
+**Quick picks:**
+- Warm LED bulbs (2700K or “warm white”):  
+  <https://www.amazon.co.uk/s?k=warm+white+led+bulb+2700k&tag=wildandwell0c-21>
+- Blue-light filter glasses:  
+  <https://www.amazon.co.uk/s?k=blue+light+blocking+glasses&tag=wildandwell0c-21>
+
+---
+
+## 4) Sleep environment basics
+**Avoid & why:** late caffeine/alcohol, hot bedrooms, light leaks.  
+**Look for & why:** 16–19 °C room temp, blackout curtains or a sleep mask, consistent schedule.
+
+**Quick picks:**
+- Blackout curtains:  
+  <https://www.amazon.co.uk/s?k=blackout+curtains&tag=wildandwell0c-21>
+- Breathable cotton bedding:  
+  <https://www.amazon.co.uk/s?k=cotton+percale+sheet&tag=wildandwell0c-21>
+
+---
+
+## 5) Low-waste body care
+**Avoid & why:** microplastics in scrubs, strong synthetic fragrance, harsh sulfates if you’re sensitive.  
+**Look for & why:** short ingredient lists, bar formats, refill pouches, fragrance-free options.
+
+**Quick picks:**
+- Solid shampoo/conditioner bars:  
+  <https://www.amazon.co.uk/s?k=shampoo+bar+solid&tag=wildandwell0c-21>
+- Safety razor + blades:  
+  <https://www.amazon.co.uk/s?k=safety+razor+double+edge&tag=wildandwell0c-21>
+
+---
+
+### Keep it simple
+Pick **one** swap per week. Track sleep and energy for 2–3 weeks and adjust.
+
+*This content is educational and not medical advice. Some links are affiliate links. As an Amazon Associate, we earn from qualifying purchases.*
