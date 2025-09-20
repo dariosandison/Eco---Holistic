@@ -1,34 +1,46 @@
 ---
-title: "Minimal-Ingredient Cereals: Quick Breakfast Without the Junk"
-excerpt: "Spot short ingredient lists, avoid added oils/sugars, and find simple cereals that still taste good."
-date: "2025-09-20"
-cover: "/cover.jpg"
-tags: ["food","pantry","breakfast"]
+title: Minimal-Ingredient Cereals — quick breakfast without the junk
+excerpt: Short ingredient lists, simple carbs, and options kids usually eat.
+cover: /cover.png
+date: 2025-08-31
+tags: [breakfast, food, pantry]
+avoid:
+  - Cereals with a long list of sugars and artificial colours.
+  - “Health halos” that still load in syrups and oils.
+  - Tiny boxes that drive up cost per bowl.
+lookfor:
+  - 3–6 ingredients you recognise.
+  - Whole grains where possible.
+  - Reasonable sugar per serving (check label).
+products:
+  - title: Puffed Wholegrain Cereals (Rice, Oats, or Wheat)
+    image: https://images.unsplash.com/photo-1490818387583-1baba5e638af?q=80&w=1200
+    href: https://www.amazon.co.uk/s?k=puffed+rice+cereal&tag=wildandwell0c-21
+    badge: Short lists
+    why: Often just grain + a little salt; great with fruit and yoghurt.
+    pros: ["Light", "Kid-friendly"]
+    cons: ["Lower protein—pair with yoghurt or nuts"]
+  - title: Oat Muesli (No Added Sugar)
+    image: https://images.unsplash.com/photo-1505575972945-2798f56f8b99?q=80&w=1200
+    href: https://www.amazon.co.uk/s?k=no+added+sugar+muesli&tag=wildandwell0c-21
+    badge: Heartier bowl
+    why: Oats + nuts + fruit; watch for added oils/sugars—many mixes keep it simple.
+    pros: ["Filling", "Customisable"]
+    cons: ["Some mixes still add sugar—check"]
+  - title: Simple Cornflakes or Bran Flakes
+    image: https://images.unsplash.com/photo-1604908176997-4319d4c54a07?q=80&w=1200
+    href: https://www.amazon.co.uk/s?k=simple+cornflakes+no+added+sugar&tag=wildandwell0c-21
+    badge: Easy staple
+    why: Pantry classic—compare labels and choose the shorter list.
+    pros: ["Affordable", "Widely available"]
+    cons: ["Often fortified—good for some, not for all"]
+faqs:
+  - q: How do I add protein?
+    a: Greek yoghurt, milk, nuts, or a scoop of unflavoured protein in a smoothie on the side.
+  - q: Is honey better than sugar?
+    a: It’s still sugar—use small amounts and add fruit for sweetness.
+  - q: Any quick fibre boost?
+    a: Sprinkle chia or milled flax on top.
 ---
-
-## What to avoid — and why
-- **High added sugar** (aim ≤5 g per 30 g serving) → energy crash.  
-- **Vegetable/seed oils** added to cereals → unnecessary calories/oxidation.  
-- **Artificial colours/flavours** — skip if you want simpler labels.  
-- **Over-fortification** if you already supplement — totals can creep up.
-
-## What to look for — and why
-- **Short ingredient lists** (1–5 ingredients).  
-- **Whole grains** (oats, wheat, brown rice) for fiber/satiety.  
-- **No added oils**; if sweetened, prefer honey or minimal sugar.
-
-## Easy wins (UK Amazon)
-- **Plain puffed grains (oats/wheat/rice):**  
-  <https://www.amazon.co.uk/s?k=puffed+oats+no+added+sugar&tag=wildandwell0c-21>
-- **Wheat biscuits with short ingredients (e.g., Weetabix-style):**  
-  <https://www.amazon.co.uk/s?k=whole+wheat+biscuits+cereal&tag=wildandwell0c-21>
-- **No-added-sugar muesli:**  
-  <https://www.amazon.co.uk/s?k=no+added+sugar+muesli&tag=wildandwell0c-21>
-- **Rude Health Honey Puffs (short list, light sweetness):**  
-  <https://www.amazon.co.uk/s?k=Rude+Health+Honey+Puffs&tag=wildandwell0c-21>
-
-### Tip
-Keep the cereal simple; add nutrition with **fruit, nuts, and plain yogurt**.
-
-*Educational only. Some links are affiliate links. As an Amazon Associate, we earn from qualifying purchases.*
+Breakfast doesn’t have to be complicated. Keep a puffed cereal, a muesli, and a basic flake on hand. Add fruit for sweetness and yoghurt or nuts for staying power.
 
