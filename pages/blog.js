@@ -1,3 +1,6 @@
+import SEO from "../components/SEO";
+<SEO title="Blog" path="/blog" />
+
 import Link from "next/link";
 import SEO from "../components/SEO";
 import path from "path";
