@@ -1,27 +1,34 @@
 ---
-title: "Cereals with Short Ingredient Lists"
+title: "Minimal-Ingredient Cereals: Quick Breakfast Without the Junk"
+excerpt: "Spot short ingredient lists, avoid added oils/sugars, and find simple cereals that still taste good."
 date: "2025-09-20"
-excerpt: "Simple options when you want fewer added extras."
 cover: "/cover.jpg"
+tags: ["food","pantry","breakfast"]
 ---
 
-> *Affiliate note:* Links may earn us a small commission at no extra cost.
+## What to avoid — and why
+- **High added sugar** (aim ≤5 g per 30 g serving) → energy crash.  
+- **Vegetable/seed oils** added to cereals → unnecessary calories/oxidation.  
+- **Artificial colours/flavours** — skip if you want simpler labels.  
+- **Over-fortification** if you already supplement — totals can creep up.
 
-## Ideas to look for
-- **Puffed grains** (e.g., single-ingredient or with a touch of honey/salt).
-- **Oat-based** mixes with nuts/seeds and minimal sweeteners.
-- **‘No artificial’** labels—but still read the ingredient list.
+## What to look for — and why
+- **Short ingredient lists** (1–5 ingredients).  
+- **Whole grains** (oats, wheat, brown rice) for fiber/satiety.  
+- **No added oils**; if sweetened, prefer honey or minimal sugar.
 
-## Examples
-- **Honey-Puffed Wholegrains**  
-  <a class="btn" href="https://www.amazon.co.uk/s?k=honey+puffed+cereal&tag=wildandwell0c-21" target="_blank" rel="noopener">Browse options</a>
-- **Plain Porridge Oats**  
-  <a class="btn" href="https://www.amazon.co.uk/s?k=porridge+oats&tag=wildandwell0c-21" target="_blank" rel="noopener">Browse options</a>
-- **Low-ingredient Muesli**  
-  <a class="btn" href="https://www.amazon.co.uk/s?k=muesli+no+added+sugar&tag=wildandwell0c-21" target="_blank" rel="noopener">Browse options</a>
+## Easy wins (UK Amazon)
+- **Plain puffed grains (oats/wheat/rice):**  
+  <https://www.amazon.co.uk/s?k=puffed+oats+no+added+sugar&tag=wildandwell0c-21>
+- **Wheat biscuits with short ingredients (e.g., Weetabix-style):**  
+  <https://www.amazon.co.uk/s?k=whole+wheat+biscuits+cereal&tag=wildandwell0c-21>
+- **No-added-sugar muesli:**  
+  <https://www.amazon.co.uk/s?k=no+added+sugar+muesli&tag=wildandwell0c-21>
+- **Rude Health Honey Puffs (short list, light sweetness):**  
+  <https://www.amazon.co.uk/s?k=Rude+Health+Honey+Puffs&tag=wildandwell0c-21>
 
-> Tip: compare per-100g sugars and fibre; aim higher fibre, moderate sugars.
+### Tip
+Keep the cereal simple; add nutrition with **fruit, nuts, and plain yogurt**.
 
-<hr>
+*Educational only. Some links are affiliate links. As an Amazon Associate, we earn from qualifying purchases.*
 
-<p class="note">Check labels if you have allergies or dietary needs.</p>
