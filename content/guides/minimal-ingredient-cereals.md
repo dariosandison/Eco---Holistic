@@ -1,105 +1,107 @@
-import Head from "next/head";
-const TAG = "wildandwell0c-21";
-const withTag = (u) => `${u}${u.includes("?") ? "&" : "?"}tag=${TAG}`;
+---
+title: "Minimal-Ingredient Cereals: Simple Breakfasts Without the Junk"
+description: "Short labels, lower sugar, and real grains. A quick buyer’s guide plus easy bowl ideas."
+date: "2025-01-05"
+cover: "/cover.jpg"
+---
 
-export default function MinimalIngredientCereals() {
-  const url = "https://www.wild-and-well.store/guides/minimal-ingredient-cereals";
-  const products = [
-    {
-      title: "Rude Health Honey Puffs",
-      href: withTag("https://www.amazon.co.uk/dp/B00E4E0R96"),
-      img: "https://m.media-amazon.com/images/I/81xGZ4rJrUL._AC_SL1500_.jpg",
-      blurb: "Short ingredients; simple sweetness.",
-    },
-    {
-      title: "Pure Oat Porridge (No Added Sugar)",
-      href: withTag("https://www.amazon.co.uk/dp/B07Y5J5C2J"),
-      img: "https://m.media-amazon.com/images/I/71JrF3uKQwL._AC_SL1500_.jpg",
-      blurb: "Whole oats; customise toppings.",
-    },
-    {
-      title: "Wholegrain Wheat Biscuits",
-      href: withTag("https://www.amazon.co.uk/dp/B003V8T3V6"),
-      img: "https://m.media-amazon.com/images/I/81oQm0b9BqL._AC_SL1500_.jpg",
-      blurb: "Simple base; add fruit & nuts.",
-    },
-  ];
+If your cereal reads like a chemistry set, it’s not your only option. This guide rounds up **simple, lower-ingredient cereals** (often just 1–5 ingredients), how to read labels fast, and easy ways to make breakfast more satisfying.
 
-  const jsonLd = {
-    "@context": "https://schema.org",
-    "@type": "Article",
-    headline: "Minimal-Ingredient Breakfast Cereals",
-    mainEntityOfPage: url,
-    description:
-      "Scan labels for short ingredient lists and simpler sweeteners when possible.",
-    author: { "@type": "Organization", name: "Wild & Well" },
-  };
+> **Affiliate note:** Some links are affiliate links. As an Amazon Associate, we earn from qualifying purchases at no extra cost to you. See our [Affiliate Disclosure](/disclosure).
 
-  return (
-    <>
-      <Head>
-        <title>Minimal-Ingredient Breakfast Cereals • Wild & Well</title>
-        <meta
-          name="description"
-          content="Scan labels for short ingredient lists, whole grains first, and simpler sweeteners when possible."
-        />
-        <link rel="canonical" href={url} />
-        <meta property="og:title" content="Minimal-Ingredient Breakfast Cereals • Wild & Well" />
-        <meta property="og:description" content="Short ingredients, whole grains, lower sugar—easy cereal wins." />
-        <meta property="og:type" content="article" />
-        <meta property="og:url" content={url} />
-        <meta property="og:image" content="/cover.jpg" />
-        <meta name="twitter:card" content="summary_large_image" />
-        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
-      </Head>
+---
 
-      <main className="wrap">
-        <h1>Minimal-Ingredient Breakfast Cereals</h1>
-        <p className="lead">
-          Look for whole grains first, short ingredient lists you recognize, and lower sugar per serving.
-        </p>
+## What to *avoid* (fast label scan)
+- **Sugar as a top ingredient** and multiple sweeteners (glucose-fructose syrup, invert sugar).
+- **Artificial/Intense sweeteners** (sucralose, acesulfame K) if you’re trying to retrain a sweet tooth.
+- **Unnecessary oils** (many granolas add sunflower/rapeseed oil in large amounts).
+- **Colourings & heavy flavourings** (you won’t miss them).
 
-        <section>
-          <h2>Pairing Ideas</h2>
-          <ul>
-            <li>Add nuts/seeds for protein and healthy fats.</li>
-            <li>Top with fresh fruit; consider unsweetened milk alternatives.</li>
-          </ul>
-        </section>
+## What to *look for*
+- **Whole grains first** (oats, whole wheat, rye, spelt, buckwheat).
+- **5 ingredients or fewer**, all recognisable.
+- **<10 g sugar per 100 g** for everyday choices (granola is often higher).
+- **High fibre** (aim ~6 g+ per 100 g) and **some protein** (you can add more — see below).
 
-        <section>
-          <h2>Recommended Picks</h2>
-          <div className="grid">
-            {products.map((p) => (
-              <a key={p.title} className="card" href={p.href} target="_blank" rel="nofollow sponsored noopener">
-                <img src={p.img} alt={p.title} />
-                <div className="info">
-                  <strong>{p.title}</strong>
-                  <p>{p.blurb}</p>
-                  <span className="cta">View on Amazon →</span>
-                </div>
-              </a>
-            ))}
-          </div>
-          <p className="disclaimer">As an Amazon Associate, we earn from qualifying purchases.</p>
-        </section>
-      </main>
+---
 
-      <style jsx>{`
-        .wrap { max-width: 900px; margin: 2rem auto; padding: 0 16px; }
-        h1 { font-size: 2rem; margin-bottom: .25rem; }
-        .lead { color: #475569; margin-bottom: 1rem; }
-        h2 { font-size: 1.25rem; margin: 1.25rem 0 .5rem; }
-        ul { margin-left: 1.25rem; }
-        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 16px; }
-        .card { border: 1px solid #e5e7eb; background: #fff; border-radius: 10px; overflow: hidden; text-decoration: none; color: inherit; display: grid; grid-template-rows: 150px auto; }
-        .card img { width: 100%; height: 150px; object-fit: cover; display: block; }
-        .info { padding: 10px 12px; }
-        .info p { margin: 6px 0 10px; color: #4b5563; font-size: .95rem; }
-        .cta { color: #0f766e; font-weight: 600; font-size: .95rem; }
-        .disclaimer { color: #6b7280; font-size: .9rem; margin-top: .75rem; }
-      `}</style>
-    </>
-  );
-}
+## Short-label picks (UK-friendly)
 
+> Tip: these are **search links** so you can compare brands/sizes and prices. Choose the shortest ingredient list you find.
+
+### 1) 100% Oats (one ingredient)
+- Jumbo/rolled porridge oats — usually just “**oats**”.  
+  👉 <https://www.amazon.co.uk/s?k=porridge+oats+jumbo&tag=wildandwell0c-21>
+
+### 2) Puffed Single Grains (1–3 ingredients)
+- **Puffed rice / puffed wheat / puffed spelt** — often just the grain + a touch of salt.  
+  👉 <https://www.amazon.co.uk/s?k=puffed+rice+cereal+no+added+sugar&tag=wildandwell0c-21>  
+  👉 <https://www.amazon.co.uk/s?k=puffed+wheat+cereal&tag=wildandwell0c-21>  
+  👉 <https://www.amazon.co.uk/s?k=puffed+spelt&tag=wildandwell0c-21>
+
+### 3) Whole-Wheat “Biscuit” Cereals
+- Typically **wholegrain wheat + barley malt extract + salt** — short label, high fibre.  
+  👉 <https://www.amazon.co.uk/s?k=whole+wheat+biscuits+cereal&tag=wildandwell0c-21>
+
+### 4) No-Added-Sugar Muesli
+- Look for **oats + grains + nuts/seeds + dried fruit**; skip added sugar/oils.  
+  👉 <https://www.amazon.co.uk/s?k=no+added+sugar+muesli&tag=wildandwell0c-21>
+
+### 5) Lower-Sugar Granola (use sparingly)
+- Choose **no-added-sugar** or **lightly sweetened** options; watch added oils.  
+  👉 <https://www.amazon.co.uk/s?k=low+sugar+granola&tag=wildandwell0c-21>
+
+### Add-ons that keep it simple
+- **Chia seeds** 👉 <https://www.amazon.co.uk/s?k=chia+seeds+1kg&tag=wildandwell0c-21>  
+- **Milled flaxseed** 👉 <https://www.amazon.co.uk/s?k=ground+flaxseed&tag=wildandwell0c-21>  
+- **Hemp seeds** 👉 <https://www.amazon.co.uk/s?k=hemp+seeds+hulled&tag=wildandwell0c-21>  
+- **Natural nut butter** (100% nuts) 👉 <https://www.amazon.co.uk/s?k=100%25+peanut+butter&tag=wildandwell0c-21>
+
+---
+
+## 4 fast bowl ideas (balanced & minimal)
+
+**1) Fibre-first oats (hot or cold)**
+- 50 g **jumbo oats** + 200 ml milk of choice  
+- Stir in **1 tbsp milled flax** and **½ tsp cinnamon**.  
+- Add berries for natural sweetness.
+
+**2) Wheat-biscuit crunch**
+- 2 **whole-wheat biscuits** crushed + milk or yoghurt  
+- Top with **1 tbsp peanut butter** and sliced banana.
+
+**3) Puffed grain mix (super light)**
+- 40–50 g **puffed rice/wheat/spelt**  
+- Add **2 tbsp mixed seeds** + milk; finish with a handful of fruit.
+
+**4) Yoghurt & muesli pot**
+- 150–200 g **plain yoghurt** + 40 g **no-added-sugar muesli**  
+- Drizzle **1 tsp honey** if needed; add **chia** for thickness.
+
+---
+
+## Quick buyer’s checklist
+- **Ingredients:** can you **recognise every item**? (Yes = green flag.)
+- **Sugar:** ideally **<10 g/100 g** for daily cereals; granola is a treat topper.
+- **Fibre:** the higher, the better for fullness and gut health.
+- **Allergens/diet:** check for **gluten** (oats can be GF-certified), **nuts**, **seeds**.
+
+---
+
+## FAQs
+
+**Are “honey puff” cereals okay?**  
+Some are just **grain + honey + salt**. They’re sweet, so use smaller portions or mix 50/50 with unsweetened puffs.
+
+**Gluten-free options?**  
+Choose **certified gluten-free oats** or **puffed rice/buckwheat** varieties.
+
+**How do I add protein without long labels?**  
+Use **plain Greek yoghurt**, **milk**, **soy milk**, or a **clean protein powder** (few ingredients) stirred into oats or yoghurt.
+
+**Storage tips**  
+Keep in an **airtight jar** away from heat/light to preserve freshness and crunch.
+
+---
+
+*Nutrition note: This guide is educational and not medical advice. Adjust portions and ingredients to your needs and consult a professional for personalised guidance.*
