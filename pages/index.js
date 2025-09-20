@@ -56,9 +56,9 @@ export default function Home({ guides, tags }) {
 
       <main className="wrap">
         <header className="hero">
-          <img src="/logo.svg" alt="Wild & Well" className="logo" />
-          <h1 className="strap">Your guide to eco-living, holistic health, and mindful wellness.</h1>
-          <p className="sub">Bite-size, practical reads for eco-friendly living and holistic wellness.</p>
+          <img src="/logo.png" alt="Wild & Well" className="logo" />
+                <h1 className="strap">Your guide to eco-living, holistic health, and mindful wellness.</h1>
+      
         </header>
 
         {tags?.length > 0 && (
