@@ -1,37 +1,100 @@
-function withAmazonTag(url) {
-  try {
-    const u = new URL(url);
-    if (u.hostname.includes('amazon.')) {
-      if (!u.searchParams.get('tag')) {
-        u.searchParams.set('tag', 'wildandwell0c-21');
-      }
-      return u.toString();
-    }
-    return url;
-  } catch {
-    return url;
-  }
-}
+import React from "react";
+import Image from "next/image";
 
-export default function ProductCard({ title, description, image, href, badge, price, rating = 0 }) {
-  const link = withAmazonTag(href || '#');
-
+export default function ProductCard({
+  title,
+  description,
+  image,
+  href,
+  badge,
+  why,
+  pros = [],
+  cons = [],
+}) {
   return (
     <article className="card">
-      {badge && <span className="kicker">{badge}</span>}
-      <a href={link} target="_blank" rel="noreferrer" style={{display:'block',marginTop:8}}>
-        {/* Use <img> to avoid Image domain issues if next.config isn't applied yet */}
-        <img src={image} alt={title} style={{width:'100%',height:180,objectFit:'cover',borderRadius:12,border:'1px solid #e2e8f0'}} />
-      </a>
-      <div className="title">{title}</div>
-      <div className="muted" style={{minHeight:48}}>{description}</div>
-      <div style={{display:'flex',alignItems:'center',gap:8,marginTop:8}}>
-        {rating ? <span aria-label={`Rating ${rating} / 5`}>{'★'.repeat(rating)}{'☆'.repeat(5-rating)}</span> : null}
-        {price && <span className="muted">· {price}</span>}
+      <div className="pic">
+        {image ? (
+          <Image
+            src={image}
+            alt={title}
+            width={600}
+            height={400}
+            style={{ width: "100%", height: "auto" }}
+            priority={false}
+          />
+        ) : null}
       </div>
-      <a href={link} target="_blank" rel="noreferrer" style={{display:'inline-block',marginTop:10,fontWeight:700}}>
-        View on Amazon →
-      </a>
+
+      {badge ? <span className="badge">{badge}</span> : null}
+      <h3>{title}</h3>
+      {why ? <p className="why">{why}</p> : null}
+      {description ? <p className="desc">{description}</p> : null}
+
+      {(pros.length || cons.length) ? (
+        <div className="split">
+          {pros.length ? (
+            <div>
+              <strong>Pros</strong>
+              <ul>{pros.map((p) => <li key={p}>{p}</li>)}</ul>
+            </div>
+          ) : null}
+          {cons.length ? (
+            <div>
+              <strong>Cons</strong>
+              <ul>{cons.map((c) => <li key={c}>{c}</li>)}</ul>
+            </div>
+          ) : null}
+        </div>
+      ) : null}
+
+      {href ? (
+        <a
+          className="btn"
+          href={href}
+          target="_blank"
+          rel="noopener sponsored nofollow"
+        >
+          Check price on Amazon
+        </a>
+      ) : null}
+
+      <style jsx>{`
+        .card {
+          border: 1px solid #e5e7eb;
+          border-radius: 14px;
+          padding: 14px;
+          background: #fff;
+        }
+        .badge {
+          display: inline-block;
+          font-size: 0.75rem;
+          background: #ecfdf5;
+          color: #065f46;
+          border: 1px solid #a7f3d0;
+          padding: 2px 8px;
+          border-radius: 999px;
+          margin: 8px 0;
+        }
+        h3 { margin: 4px 0 6px; }
+        .why { color: #065f46; margin: 0 0 8px; font-weight: 600; }
+        .desc { color: #4b5563; margin: 0 0 10px; }
+        .split { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+        .btn {
+          display: inline-block;
+          margin-top: 10px;
+          background: #2563eb;
+          color: #fff;
+          text-decoration: none;
+          padding: 10px 14px;
+          border-radius: 10px;
+          text-align: center;
+        }
+        .btn:hover { background: #1d4ed8; }
+        @media (max-width: 740px) {
+          .split { grid-template-columns: 1fr; }
+        }
+      `}</style>
     </article>
   );
 }
