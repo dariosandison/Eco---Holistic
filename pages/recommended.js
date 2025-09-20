@@ -113,3 +113,4 @@ export default function JsonLd({ data, id }) {
     </>
   );
 }
+<JsonLd data={itemListJsonLd(products)} id="recommended-itemlist" />
