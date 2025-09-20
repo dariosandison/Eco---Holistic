@@ -1,3 +1,6 @@
+import SEO from "../components/SEO";
+<SEO title="Cookies Policy" path="/cookies" noindex />
+
 // pages/cookies.js
 export default function Cookies() {
   return (
