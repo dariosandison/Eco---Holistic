@@ -1,135 +1,209 @@
-// pages/index.js
+import Head from "next/head";
+import fs from "fs";
+import path from "path";
 import Link from "next/link";
-import SEO from "../components/SEO";
-import { getAllGuides } from "../lib/guides";
+
+// very small front-matter parser (no extra deps)
+// expects lines like: key: "value"  and tags: ["a","b"]
+function parseFrontmatter(src) {
+  const fm = { title: "", excerpt: "", date: "", cover: "", tags: [] };
+  if (src.startsWith("---")) {
+    const end = src.indexOf("---", 3);
+    if (end !== -1) {
+      const head = src.slice(3, end).trim();
+      head.split("\n").forEach((line) => {
+        const m = line.match(/^(\w+):\s*(.*)$/);
+        if (!m) return;
+        const key = m[1];
+        let val = m[2].trim();
+        // strip quotes
+        if (
+          (val.startsWith('"') && val.endsWith('"')) ||
+          (val.startsWith("'") && val.endsWith("'"))
+        ) {
+          val = val.slice(1, -1);
+        } else if (val.startsWith("[")) {
+          try {
+            val = JSON.parse(val.replace(/'/g, '"'));
+          } catch {
+            val = [];
+          }
+        }
+        fm[key] = val;
+      });
+      const content = src.slice(end + 3).trim();
+      return { data: fm, content };
+    }
+  }
+  return { data: fm, content: src };
+}
+
+export async function getStaticProps() {
+  const guidesDir = path.join(process.cwd(), "content", "guides");
+  const files = fs.readdirSync(guidesDir).filter((f) => f.endsWith(".md"));
+
+  const guides = files
+    .map((file) => {
+      const slug = file.replace(/\.md$/, "");
+      const raw = fs.readFileSync(path.join(guidesDir, file), "utf8");
+      const { data } = parseFrontmatter(raw);
+      return {
+        slug,
+        title: data.title || slug,
+        excerpt: data.excerpt || "",
+        date: data.date || "",
+        cover: data.cover || "/cover.jpg",
+        tags: Array.isArray(data.tags) ? data.tags : [],
+      };
+    })
+    .sort((a, b) => (a.date > b.date ? -1 : 1));
+
+  return {
+    props: { guides }, // JSON-serialisable only
+  };
+}
 
 export default function Home({ guides }) {
   return (
     <>
-      <SEO
-        title="Wild & Well — Eco & Holistic Guides"
-        description="Practical, low-tox, eco-friendly guides for better sleep, calmer stress, and sustainable living."
-        path="/"
-      />
+      <Head>
+        <title>Wild & Well — Eco + Holistic Guides</title>
+        <meta
+          name="description"
+          content="Practical guides for eco-friendly living and holistic wellness: water filters, safer cleaning, low-waste body care, and simpler supplements."
+        />
+      </Head>
 
-      <main className="container">
+      <main className="wrap">
         <section className="hero">
-          <span className="kicker">Welcome</span>
-          <h1>Feel better. Live lighter.</h1>
-          <p className="lead">
-            Simple, science-aware tips and product picks to lower toxins, cut waste,
-            and boost everyday energy.
+          <h1>Wild & Well</h1>
+          <p className="tagline">
+            Practical, low-tox choices for your home, body, and pantry — minus the
+            overwhelm.
           </p>
         </section>
 
-        <section>
-          <h2 className="sectionTitle">Latest Guides</h2>
-          <div className="grid">
-            {guides.map((g) => (
-              <article key={g.slug} className="card">
-                <header>
-                  <h3 className="cardTitle">
-                    <Link href={`/guides/${g.slug}`}>{g.title}</Link>
-                  </h3>
-                  {g.date && (
-                    <time className="date" dateTime={g.date}>
-                      {new Date(g.date).toLocaleDateString()}
-                    </time>
-                  )}
-                </header>
+        <section className="grid">
+          {guides.map((g) => (
+            <article key={g.slug} className="card">
+              <Link href={`/guides/${g.slug}`} className="imageWrap" aria-label={g.title}>
+                {/* use <img> to avoid remote loader config */}
+                <img src={g.cover || "/cover.jpg"} alt="" />
+              </Link>
+              <div className="body">
+                <h2>
+                  <Link href={`/guides/${g.slug}`}>{g.title}</Link>
+                </h2>
                 {g.excerpt && <p className="excerpt">{g.excerpt}</p>}
-                <p>
-                  <Link className="more" href={`/guides/${g.slug}`}>
-                    Read guide →
-                  </Link>
-                </p>
-              </article>
-            ))}
-          </div>
+                {g.tags?.length > 0 && (
+                  <div className="tags">
+                    {g.tags.slice(0, 4).map((t) => (
+                      <span className="tag" key={t}>
+                        {t}
+                      </span>
+                    ))}
+                  </div>
+                )}
+                <Link href={`/guides/${g.slug}`} className="cta">
+                  Read guide →
+                </Link>
+              </div>
+            </article>
+          ))}
         </section>
 
-        <aside className="note">
-          <small>
-            Some links may be affiliate links. As an Amazon Associate, we earn from
-            qualifying purchases.
-          </small>
-        </aside>
+        <p className="fineprint">
+          Some links on this site are affiliate links. We may earn a small commission at no
+          extra cost to you. As an Amazon Associate, we earn from qualifying purchases.
+        </p>
       </main>
 
       <style jsx>{`
-        .container {
+        .wrap {
           max-width: 1100px;
           margin: 0 auto;
-          padding: 24px 16px 48px;
+          padding: 32px 16px 56px;
         }
-        .kicker {
-          text-transform: uppercase;
-          letter-spacing: 0.08em;
-          font-size: 0.8rem;
-          color: #6b7280;
+        .hero {
+          text-align: center;
+          margin: 10px 0 24px;
         }
-        .hero h1 {
-          margin: 6px 0 8px;
-          line-height: 1.2;
-          font-size: 2.1rem;
+        h1 {
+          font-size: 2.2rem;
+          margin: 0 0 6px;
         }
-        .lead {
+        .tagline {
           color: #4b5563;
-          max-width: 720px;
-        }
-        .sectionTitle {
-          margin: 28px 0 12px;
-          font-size: 1.3rem;
+          margin: 0;
+          font-size: 1.05rem;
         }
         .grid {
           display: grid;
-          grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+          grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
           gap: 18px;
+          margin-top: 20px;
         }
         .card {
           border: 1px solid #e5e7eb;
-          border-radius: 12px;
-          padding: 16px;
+          border-radius: 14px;
+          overflow: hidden;
           background: #fff;
+          display: flex;
+          flex-direction: column;
         }
-        .cardTitle {
-          margin: 0 0 4px;
-          font-size: 1.05rem;
-          line-height: 1.3;
+        .imageWrap {
+          display: block;
+          aspect-ratio: 16/9;
+          background: #f3f4f6;
+          overflow: hidden;
         }
-        .date {
-          color: #6b7280;
-          font-size: 0.85rem;
+        img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          display: block;
+        }
+        .body {
+          padding: 14px 14px 12px;
+          display: flex;
+          flex-direction: column;
+          gap: 8px;
+        }
+        h2 {
+          font-size: 1.1rem;
+          line-height: 1.35;
+          margin: 0;
         }
         .excerpt {
-          color: #374151;
-          margin: 8px 0 12px;
+          color: #4b5563;
+          margin: 0;
+          min-height: 44px;
         }
-        .more {
-          color: #0ea5e9;
+        .tags {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 8px;
+        }
+        .tag {
+          font-size: 0.8rem;
+          color: #2563eb;
+          background: #eff6ff;
+          border: 1px solid #bfdbfe;
+          padding: 2px 8px;
+          border-radius: 999px;
+        }
+        .cta {
+          margin-top: 4px;
+          font-weight: 600;
           text-decoration: none;
         }
-        .more:hover {
-          text-decoration: underline;
-        }
-        .note {
-          margin-top: 22px;
+        .fineprint {
           color: #6b7280;
-          font-size: 0.9rem;
+          font-size: 0.85rem;
+          text-align: center;
+          margin-top: 28px;
         }
       `}</style>
     </>
   );
-}
-
-export async function getStaticProps() {
-  // IMPORTANT: await the async helper
-  const guides = await getAllGuides();
-
-  // Send only serializable, lightweight data to the page
-  const lightGuides = guides.map(({ front }) => front);
-
-  return {
-    props: { guides: lightGuides },
-  };
 }
