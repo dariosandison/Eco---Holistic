@@ -1,118 +1,195 @@
-// pages/guides/[slug].js
-import SEO from "../../components/SEO";
-import { getGuideSlugs, getGuideBySlug } from "../../lib/guides";
+import fs from "fs";
+import path from "path";
+import Head from "next/head";
+import Link from "next/link";
+import { remark } from "remark";
+import html from "remark-html";
 
-export default function GuidePage({ front, contentHtml }) {
+// tiny front-matter parser (kept in sync with index.js)
+function parseFrontmatter(src) {
+  const fm = { title: "", excerpt: "", date: "", cover: "/cover.jpg", tags: [] };
+  if (src.startsWith("---")) {
+    const end = src.indexOf("---", 3);
+    if (end !== -1) {
+      const head = src.slice(3, end).trim();
+      head.split("\n").forEach((line) => {
+        const m = line.match(/^(\w+):\s*(.*)$/);
+        if (!m) return;
+        const key = m[1];
+        let val = m[2].trim();
+        if (
+          (val.startsWith('"') && val.endsWith('"')) ||
+          (val.startsWith("'") && val.endsWith("'"))
+        ) {
+          val = val.slice(1, -1);
+        } else if (val.startsWith("[")) {
+          try {
+            val = JSON.parse(val.replace(/'/g, '"'));
+          } catch {
+            val = [];
+          }
+        }
+        fm[key] = val;
+      });
+      const content = src.slice(end + 3).trim();
+      return { data: fm, content };
+    }
+  }
+  return { data: fm, content: src };
+}
+
+export async function getStaticPaths() {
+  const dir = path.join(process.cwd(), "content", "guides");
+  const files = fs.readdirSync(dir).filter((f) => f.endsWith(".md"));
+  const paths = files.map((file) => ({
+    params: { slug: file.replace(/\.md$/, "") },
+  }));
+  return { paths, fallback: false };
+}
+
+export async function getStaticProps({ params }) {
+  const filePath = path.join(process.cwd(), "content", "guides", `${params.slug}.md`);
+  const raw = fs.readFileSync(filePath, "utf8");
+  const { data, content } = parseFrontmatter(raw);
+
+  const processed = await remark().use(html).process(content);
+  const htmlContent = processed.toString();
+
+  return {
+    props: {
+      slug: params.slug,
+      frontmatter: {
+        title: data.title || params.slug,
+        excerpt: data.excerpt || "",
+        date: data.date || "",
+        cover: data.cover || "/cover.jpg",
+        tags: Array.isArray(data.tags) ? data.tags : [],
+      },
+      htmlContent,
+    },
+  };
+}
+
+export default function GuidePage({ slug, frontmatter, htmlContent }) {
+  const { title, excerpt, cover, tags } = frontmatter;
+
   return (
     <>
-      <SEO
-        title={`${front.title} • Wild & Well`}
-        description={front.excerpt || "A Wild & Well guide."}
-        path={`/guides/${front.slug}`}
-      />
+      <Head>
+        <title>{title} • Wild & Well</title>
+        {excerpt && <meta name="description" content={excerpt} />}
+        <meta property="og:title" content={`${title} • Wild & Well`} />
+        {excerpt && <meta property="og:description" content={excerpt} />}
+        <meta property="og:image" content={cover || "/cover.jpg"} />
+      </Head>
 
-      <main className="container">
-        <header className="hero" style={{ paddingTop: 24 }}>
-          <span className="kicker">Guide</span>
-          <h1>{front.title}</h1>
-          {front.excerpt && (
-            <p className="muted" style={{ maxWidth: 720 }}>
-              {front.excerpt}
+      <main className="wrap">
+        <nav className="crumbs">
+          <Link href="/">Home</Link> <span>›</span>{" "}
+          <Link href="/#guides">Guides</Link> <span>›</span>{" "}
+          <span className="here">{title}</span>
+        </nav>
+
+        <article className="post">
+          <header className="header">
+            <h1>{title}</h1>
+            {excerpt && <p className="deck">{excerpt}</p>}
+            {tags?.length > 0 && (
+              <div className="tags">
+                {tags.map((t) => (
+                  <span key={t} className="tag">
+                    {t}
+                  </span>
+                ))}
+              </div>
+            )}
+          </header>
+
+          <div
+            className="content"
+            dangerouslySetInnerHTML={{ __html: htmlContent }}
+          />
+
+          <footer className="note">
+            <p>
+              Some links on this page are affiliate links. We may earn a small commission at no
+              extra cost to you. As an Amazon Associate, we earn from qualifying purchases.
             </p>
-          )}
-        </header>
+          </footer>
+        </article>
 
-        <article
-          className="prose"
-          // IMPORTANT: contentHtml is a plain string (see lib/guides.js)
-          dangerouslySetInnerHTML={{ __html: contentHtml }}
-        />
-
-        <aside style={{ marginTop: 18, color: "#6b7280", fontSize: ".9rem" }}>
-          <small>
-            Some links may be affiliate links. As an Amazon Associate, we earn
-            from qualifying purchases.
-          </small>
-        </aside>
+        <Link href="/" className="back">
+          ← Back to all guides
+        </Link>
       </main>
 
       <style jsx>{`
-        .container {
-          max-width: 1100px;
+        .wrap {
+          max-width: 820px;
           margin: 0 auto;
-          padding: 24px 16px 48px;
+          padding: 28px 16px 56px;
         }
-        .kicker {
-          text-transform: uppercase;
-          letter-spacing: 0.08em;
-          font-size: 0.8rem;
+        .crumbs {
+          font-size: 0.9rem;
           color: #6b7280;
+          display: flex;
+          align-items: center;
+          gap: 8px;
+          flex-wrap: wrap;
+          margin-bottom: 8px;
         }
-        h1 {
+        .here {
+          color: #111827;
+        }
+        .header h1 {
+          font-size: 2rem;
           margin: 6px 0 6px;
           line-height: 1.2;
         }
-        .muted {
+        .deck {
           color: #4b5563;
+          margin: 0 0 10px;
         }
-        .prose :global(p) {
-          line-height: 1.75;
-          margin: 1rem 0;
+        .tags {
+          display: flex;
+          gap: 8px;
+          flex-wrap: wrap;
+          margin-bottom: 8px;
+        }
+        .tag {
+          font-size: 0.8rem;
+          color: #2563eb;
+          background: #eff6ff;
+          border: 1px solid #bfdbfe;
+          padding: 2px 8px;
+          border-radius: 999px;
+        }
+        .content :global(h2) {
+          font-size: 1.4rem;
+          margin-top: 22px;
+        }
+        .content :global(p),
+        .content :global(li) {
           color: #1f2937;
+          line-height: 1.7;
         }
-        .prose :global(h2) {
-          margin-top: 2rem;
-          margin-bottom: 0.75rem;
+        .content :global(ul) {
+          padding-left: 22px;
         }
-        .prose :global(ul),
-        .prose :global(ol) {
-          padding-left: 1.25rem;
+        .note {
+          margin-top: 18px;
+          padding-top: 14px;
+          border-top: 1px solid #e5e7eb;
+          color: #6b7280;
+          font-size: 0.9rem;
         }
-        .prose :global(li) {
-          margin: 0.375rem 0;
-        }
-        .prose :global(a) {
-          color: #0ea5e9;
+        .back {
+          display: inline-block;
+          margin-top: 20px;
           text-decoration: none;
-        }
-        .prose :global(a:hover) {
-          text-decoration: underline;
-        }
-        .prose :global(blockquote) {
-          border-left: 3px solid #e5e7eb;
-          padding-left: 12px;
-          color: #374151;
-          margin: 1rem 0;
-        }
-        .prose :global(img) {
-          max-width: 100%;
-          height: auto;
-          border-radius: 8px;
-        }
-        .prose :global(table) {
-          border-collapse: collapse;
-          width: 100%;
-        }
-        .prose :global(th),
-        .prose :global(td) {
-          border: 1px solid #e5e7eb;
-          padding: 8px 10px;
-          text-align: left;
+          font-weight: 600;
         }
       `}</style>
     </>
   );
-}
-
-export async function getStaticPaths() {
-  const slugs = getGuideSlugs();
-  return {
-    paths: slugs.map((slug) => ({ params: { slug } })),
-    fallback: false,
-  };
-}
-
-export async function getStaticProps({ params }) {
-  const { front, contentHtml } = await getGuideBySlug(params.slug);
-  return { props: { front, contentHtml } };
 }
