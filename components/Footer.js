@@ -1,60 +1,33 @@
-// /components/Footer.js
-import React from "react";
-
 export default function Footer() {
   const year = new Date().getFullYear();
   return (
-    <footer className="footer">
-      <div className="wrap">
-        <div className="brand">
-          <div className="logo">🌿 Wild & Well</div>
+    <footer className="site-footer">
+      <div className="container wrap">
+        <div>
+          <div className="logo" style={{fontWeight:800, marginBottom:8}}>🌿 Wild & Well</div>
           <p>Your guide to eco-living, holistic health, and mindful wellness.</p>
         </div>
-
-        <nav className="links">
+        <nav>
           <h4>Site</h4>
           <a href="/">Home</a>
-          <a href="/disclosure">Affiliate Disclosure</a>
-          <a href="/privacy">Privacy Policy</a>
-          <a href="/cookies">Cookies Policy</a>
-          <a href="mailto:hello@wild-and-well.store">Contact</a>
+          <a href="/guides/">Guides</a>
+          <a href="/recommended/">Recommended</a>
+          <a href="/about/">About</a>
+          <a href="/disclosure/">Affiliate Disclosure</a>
+          <a href="/privacy/">Privacy Policy</a>
+          <a href="/cookies/">Cookies Policy</a>
         </nav>
-
-        <nav className="social">
+        <nav>
           <h4>Follow</h4>
-          {/* TODO: replace with your real profiles */}
-          <a href="https://instagram.com/yourhandle" target="_blank" rel="me noopener noreferrer">Instagram</a>
-          <a href="https://pinterest.com/yourhandle" target="_blank" rel="me noopener noreferrer">Pinterest</a>
-          <a href="https://www.facebook.com/yourpage" target="_blank" rel="me noopener noreferrer">Facebook</a>
-          <a href="https://twitter.com/yourhandle" target="_blank" rel="me noopener noreferrer">X (Twitter)</a>
-          <a href="https://www.tiktok.com/@yourhandle" target="_blank" rel="me noopener noreferrer">TikTok</a>
-          <a href="https://www.youtube.com/@yourhandle" target="_blank" rel="me noopener noreferrer">YouTube</a>
+          <a href="https://instagram.com/" target="_blank" rel="noreferrer">Instagram</a>
+          <a href="https://pinterest.com/" target="_blank" rel="noreferrer">Pinterest</a>
+          <a href="https://facebook.com/" target="_blank" rel="noreferrer">Facebook</a>
         </nav>
       </div>
-
       <div className="legal">
-        <small>As an Amazon Associate, we earn from qualifying purchases.</small>
+        <small>As an Amazon Associate, we earn from qualifying purchases.</small><br/>
         <small>© {year} Wild & Well. All rights reserved.</small>
       </div>
-
-      <style jsx>{`
-        .footer { border-top: 1px solid #e5e7eb; margin-top: 48px; background: #fafafa; }
-        .wrap {
-          max-width: 1100px; margin: 0 auto; padding: 28px 16px;
-          display: grid; grid-template-columns: 1.2fr 1fr 1fr; gap: 24px;
-        }
-        .logo { font-weight: 700; font-size: 1.05rem; margin-bottom: 8px; }
-        h4 { margin: 0 0 10px; font-size: 0.95rem; color: #111827; }
-        a { display: block; color: #374151; padding: 4px 0; text-decoration: none; }
-        a:hover { text-decoration: underline; }
-        p { color: #4b5563; margin: 0; }
-        .legal {
-          border-top: 1px solid #e5e7eb; padding: 14px 16px 22px;
-          display: flex; flex-direction: column; gap: 6px; align-items: center;
-          color: #6b7280; font-size: 0.9rem;
-        }
-        @media (max-width: 800px) { .wrap { grid-template-columns: 1fr; } }
-      `}</style>
     </footer>
   );
 }
