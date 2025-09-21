@@ -1,237 +1,175 @@
 // pages/index.js
-import React, { useMemo, useState } from "react";
-import fs from "fs";
-import path from "path";
-import matter from "gray-matter";
+import React from "react";
 import Link from "next/link";
-import Head from "next/head";
-
-/** Convert a markdown body to a short plain-text excerpt */
-function mdToExcerpt(md, max = 160) {
-  if (!md) return "";
-  const text = md
-    // remove code blocks & inline code
-    .replace(/```[\s\S]*?```/g, " ")
-    .replace(/`[^`]*`/g, " ")
-    // images ![alt](src)
-    .replace(/!\[[^\]]*]\([^)]+\)/g, " ")
-    // links [text](url) -> text
-    .replace(/\[([^\]]+)\]\([^)]+\)/g, "$1")
-    // headings, emphasis, blockquotes, lists symbols
-    .replace(/[#>*_~`>-]+/g, " ")
-    // collapse whitespace
-    .replace(/\s+/g, " ")
-    .trim();
-
-  return text.length > max ? text.slice(0, max - 1) + "…" : text;
-}
-
-export default function Home({ guides, tags }) {
-  const [q, setQ] = useState("");
-  const [activeTag, setActiveTag] = useState("All");
-
-  const filtered = useMemo(() => {
-    const ql = q.trim().toLowerCase();
-    return guides.filter((g) => {
-      const tagOk = activeTag === "All" || (g.tags || []).includes(activeTag);
-      if (!tagOk) return false;
-      if (!ql) return true;
-      const hay =
-        (g.title || "") +
-        " " +
-        (g.excerpt || "") +
-        " " +
-        (g.tags || []).join(" ");
-      return hay.toLowerCase().includes(ql);
-    });
-  }, [q, activeTag, guides]);
-
-  return (
-    <>
-      <Head>
-        <title>Wild & Well — Eco-Living & Holistic Health Guides</title>
-        <meta
-          name="description"
-          content="Bite-size, practical reads for eco-friendly living and holistic wellness. Simple checklists, what-to-avoid tips, and no-nonsense product picks."
-        />
-      </Head>
-
-      {/* Hero */}
-      <section className="hero">
-        <span className="kicker">
-          Bite-size, practical reads for eco-friendly living and holistic
-          wellness
-        </span>
-        <h1>Your guide to eco-living, holistic health, and mindful wellness</h1>
-        <p>
-          Explore quick, trustworthy guides with simple checklists, what-to-avoid
-          tips, and no-nonsense product picks.
-        </p>
-      </section>
-
-      {/* Search + Filters */}
-      <div className="container" style={{ marginTop: 6 }}>
-        <div
-          style={{
-            display: "flex",
-            gap: 12,
-            flexWrap: "wrap",
-            justifyContent: "center",
-            alignItems: "center",
-            marginBottom: 8,
-          }}
-        >
-          <input
-            type="search"
-            value={q}
-            onChange={(e) => setQ(e.target.value)}
-            placeholder="Search guides…"
-            aria-label="Search guides"
-            style={{
-              width: "min(520px, 96%)",
-              border: "1px solid var(--border)",
-              borderRadius: 12,
-              padding: "10px 12px",
-              fontSize: "1rem",
-              outline: "none",
-            }}
-          />
-        </div>
-
-        <div className="filters">
-          <button
-            className={`chip ${activeTag === "All" ? "active" : ""}`}
-            onClick={() => setActiveTag("All")}
-          >
-            All
-          </button>
-          {tags.map((t) => (
-            <button
-              key={t}
-              className={`chip ${activeTag === t ? "active" : ""}`}
-              onClick={() => setActiveTag(t)}
-            >
-              {t}
-            </button>
-          ))}
-        </div>
-      </div>
-
-      {/* Guides Grid */}
-      <main className="container">
-        <section className="grid">
-          {filtered.map((g) => (
-            <Link key={g.slug} href={`/guides/${g.slug}`} className="card">
-              <div className="thumb">
-                <img
-                  src={g.cover || "/cover.png"}
-                  alt={g.title}
-                  style={{ width: "100%", height: "100%", objectFit: "cover" }}
-                  onError={(e) => {
-                    e.currentTarget.src = "/cover.png";
-                  }}
-                />
-              </div>
-              <div className="meta">
-                <div className="title">{g.title}</div>
-                {g.excerpt ? (
-                  <div className="desc">{g.excerpt}</div>
-                ) : null}
-                {g.tags?.length ? (
-                  <div style={{ display: "flex", gap: 6, flexWrap: "wrap" }}>
-                    {g.tags.slice(0, 3).map((t) => (
-                      <span
-                        key={t}
-                        style={{
-                          fontSize: ".8rem",
-                          padding: "4px 8px",
-                          borderRadius: 999,
-                          background: "var(--chip)",
-                          border: "1px solid var(--border)",
-                          color: "var(--chip-ink)",
-                        }}
-                      >
-                        {t}
-                      </span>
-                    ))}
-                  </div>
-                ) : null}
-              </div>
-            </Link>
-          ))}
-        </section>
-
-        {/* Empty state */}
-        {!filtered.length && (
-          <p
-            style={{
-              textAlign: "center",
-              color: "var(--muted)",
-              margin: "22px 0 40px",
-            }}
-          >
-            No guides match that search — try different keywords or clear the
-            tag filter.
-          </p>
-        )}
-      </main>
-    </>
-  );
-}
+import path from "path";
+import fs from "fs";
+import matter from "gray-matter";
+import SEO from "../components/SEO";
 
 export async function getStaticProps() {
-  const dir = path.join(process.cwd(), "content", "guides");
-  const files = fs.existsSync(dir)
-    ? fs.readdirSync(dir).filter((f) => f.endsWith(".md"))
-    : [];
+  const guidesDir = path.join(process.cwd(), "content", "guides");
+  const files = fs.readdirSync(guidesDir).filter((f) => f.endsWith(".md"));
 
   const guides = files
-    .map((file) => {
-      const slug = file.replace(/\.md$/, "");
-      const raw = fs.readFileSync(path.join(dir, file), "utf8");
-      const { data, content } = matter(raw);
+    .map((filename) => {
+      const slug = filename.replace(/\.md$/, "");
+      const file = fs.readFileSync(path.join(guidesDir, filename), "utf8");
+      const { data } = matter(file);
 
-      const title = (data && data.title) || slug.replace(/-/g, " ");
-      const cover = data?.cover || ""; // e.g., "/images/guide-x.jpg" or leave empty to fall back
-      const tags = Array.isArray(data?.tags)
-        ? data.tags.map((t) => String(t))
-        : [];
+      // Ensure serializable props and sensible fallbacks
+      const title = data.title || slug.replace(/-/g, " ");
+      const description =
+        data.description || "Quick, helpful read from Wild & Well.";
       const dateStr =
-        typeof data?.date === "string"
+        typeof data.date === "string"
           ? data.date
-          : data?.date
-          ? new Date(data.date).toISOString().slice(0, 10)
-          : null;
+          : data.date instanceof Date
+          ? data.date.toISOString().slice(0, 10)
+          : new Date().toISOString().slice(0, 10);
+      const tags = Array.isArray(data.tags) ? data.tags : [];
 
-      const excerpt =
-        data?.excerpt || data?.description || mdToExcerpt(content, 160);
-
-      return {
-        slug,
-        title: String(title),
-        cover: cover ? String(cover) : "",
-        tags,
-        date: dateStr, // keep as string for JSON-serializable props
-        excerpt,
-      };
+      return { slug, title, description, date: dateStr, tags };
     })
-    // newest first if ISO date is present
+    // Sort by date (newest first); fall back to title
     .sort((a, b) => {
-      const ad = a.date || "";
-      const bd = b.date || "";
-      // string compare is fine for YYYY-MM-DD format
-      return bd.localeCompare(ad);
+      const ad = Date.parse(a.date) || 0;
+      const bd = Date.parse(b.date) || 0;
+      if (ad !== bd) return bd - ad;
+      return a.title.localeCompare(b.title);
     });
 
-  // collect unique tags
-  const tagSet = new Set();
-  guides.forEach((g) => (g.tags || []).forEach((t) => tagSet.add(t)));
-  const tags = Array.from(tagSet).sort((a, b) => a.localeCompare(b));
+  return { props: { guides } };
+}
 
-  return {
-    props: {
-      guides,
-      tags,
-    },
-  };
+export default function Home({ guides }) {
+  return (
+    <>
+      <SEO title="Home" path="/" />
+
+      {/* HERO */}
+      <section className="hero">
+        <div className="hero-inner">
+          <h1 className="brand">Wild & Well</h1>
+          <p className="tagline">
+            Your guide to eco-living, holistic health, and mindful wellness.
+          </p>
+        </div>
+      </section>
+
+      {/* GUIDES GRID */}
+      <main className="wrap">
+        <div className="grid">
+          {guides.map((g) => (
+            <article key={g.slug} className="card">
+              <Link href={`/guides/${g.slug}`} className="cardLink">
+                <h2 className="cardTitle">{g.title}</h2>
+                <p className="cardDesc">{g.description}</p>
+                <div className="meta">
+                  <time dateTime={g.date}>{g.date}</time>
+                  {g.tags.length > 0 && (
+                    <ul className="tags">
+                      {g.tags.slice(0, 3).map((t) => (
+                        <li key={t}>{t}</li>
+                      ))}
+                    </ul>
+                  )}
+                </div>
+              </Link>
+            </article>
+          ))}
+        </div>
+      </main>
+
+      <style jsx>{`
+        .hero {
+          padding: 56px 16px 36px;
+          text-align: center;
+          background: #f9fafb;
+          border-bottom: 1px solid #eef0f3;
+        }
+        .brand {
+          margin: 0 0 8px;
+          font-size: 2.1rem;
+          line-height: 1.1;
+          letter-spacing: -0.02em;
+        }
+        .tagline {
+          margin: 0 auto;
+          max-width: 720px;
+          color: #4b5563;
+          font-size: 1.05rem;
+        }
+        .wrap {
+          max-width: 1100px;
+          margin: 24px auto 40px;
+          padding: 0 16px;
+        }
+        .grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+          gap: 18px;
+        }
+        .card {
+          background: #fff;
+          border: 1px solid #e5e7eb;
+          border-radius: 14px;
+          padding: 16px 16px 14px;
+          transition: transform 160ms ease, box-shadow 160ms ease,
+            border-color 160ms ease;
+        }
+        .card:hover {
+          transform: translateY(-2px);
+          border-color: #d1d5db;
+          box-shadow: 0 6px 22px rgba(0, 0, 0, 0.06);
+        }
+        .cardLink {
+          display: block;
+          color: inherit;
+          text-decoration: none;
+        }
+        .cardTitle {
+          margin: 0 0 6px;
+          font-size: 1.1rem;
+          line-height: 1.25;
+          color: #111827;
+        }
+        .cardDesc {
+          margin: 0 0 12px;
+          color: #4b5563;
+          font-size: 0.98rem;
+        }
+        .meta {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          color: #6b7280;
+          font-size: 0.86rem;
+        }
+        .tags {
+          list-style: none;
+          padding: 0;
+          margin: 0;
+          display: flex;
+          gap: 6px;
+          flex-wrap: wrap;
+        }
+        .tags li {
+          background: #f3f4f6;
+          border: 1px solid #e5e7eb;
+          border-radius: 999px;
+          padding: 2px 8px;
+          font-size: 0.78rem;
+          color: #374151;
+        }
+        @media (max-width: 640px) {
+          .brand {
+            font-size: 1.8rem;
+          }
+          .tagline {
+            font-size: 1rem;
+          }
+        }
+      `}</style>
+    </>
+  );
 }
