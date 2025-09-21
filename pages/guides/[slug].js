@@ -1,97 +1,66 @@
-import { getAllGuides, getGuideBySlug } from '../../src/lib/guides';
-import { remark } from 'remark';
-import html from 'remark-html';
+import Head from 'next/head';
 import SEO from '../../src/components/SEO';
-import AffiliateNote from '../../src/components/AffiliateNote';
+import { getAllGuides, getGuideBySlug } from '../../src/lib/guides';
 
-export default function GuidePage({ slug, meta, htmlContent }) {
-  const canonical = `https://www.wild-and-well.store/guides/${slug}`;
-  const title = meta.title;
-  const description = meta.excerpt || `Practical, non-technical tips for ${meta.title}.`;
+export default function GuidePage({ meta, html }) {
+  const site = 'https://www.wild-and-well.store';
+  const url = `${site}/guides/${meta.slug}`;
+
+  // Article JSON-LD
+  const articleLd = {
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    headline: meta.title,
+    description: meta.excerpt || '',
+    datePublished: meta.date || '',
+    author: { '@type': 'Person', name: meta.author || 'Wild & Well' },
+    mainEntityOfPage: { '@type': 'WebPage', '@id': url },
+    image: meta.cover ? (meta.cover.startsWith('http') ? meta.cover : `${site}${meta.cover}`) : `${site}/cover.png`,
+    publisher: {
+      '@type': 'Organization',
+      name: 'Wild & Well',
+      logo: { '@type': 'ImageObject', url: `${site}/logo.png` }
+    }
+  };
 
   return (
     <>
       <SEO
-        title={`${title} — Wild & Well`}
-        description={description}
-        canonical={canonical}
-        type="article"
-        article={{
-          datePublished: meta.date,
-          dateModified: meta.date,
-          author: meta.author || 'Wild & Well'
-        }}
+        title={meta.title}
+        description={meta.excerpt || 'Practical, bite-size guidance you can use today.'}
+        canonical={url}
+        image={meta.cover || '/cover.png'}
       />
+      <Head>
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleLd) }} />
+      </Head>
 
-      <main className="wrap">
-        <header className="head">
-          <h1>{title}</h1>
-          <p className="meta">
-            {formatDate(meta.date)}
-            {meta.category ? ` · ${meta.category}` : ''}
+      <main className="container">
+        <article className="card" style={{ padding: 20 }}>
+          <header>
+            <h1>{meta.title}</h1>
+            <p className="small">
+              {formatDate(meta.date)}
+              {meta.category ? ` · ${meta.category}` : ''}
+            </p>
+          </header>
+
+          {meta.cover && (
+            <div style={{ margin: '12px 0', borderRadius: 12, overflow: 'hidden' }}>
+              <img src={meta.cover} alt={meta.title} />
+            </div>
+          )}
+
+          <div dangerouslySetInnerHTML={{ __html: html }} />
+
+          <hr />
+          <p className="small">
+            As an Amazon Associate, we may earn from qualifying purchases—at no extra cost to you.
           </p>
-        </header>
-
-        {meta.cover && (
-          <div className="cover">
-            <img src={meta.cover} alt={title} />
-          </div>
-        )}
-
-        <article className="article" dangerouslySetInnerHTML={{ __html: htmlContent }} />
-
-        {/* Affiliate note at the **end**, not at the top */}
-        <AffiliateNote />
-
-        <footer className="foot">
-          <a href="/guides">← Back to all guides</a>
-        </footer>
+        </article>
       </main>
-
-      <style jsx>{`
-        .wrap { max-width: 860px; margin: 0 auto; padding: 24px; }
-        .head h1 { margin: 0 0 6px; line-height: 1.2; }
-        .meta { margin: 0; color: #666; }
-        .cover { margin: 16px 0 8px; border-radius: 10px; overflow: hidden; }
-        .cover img { width: 100%; height: auto; display: block; }
-        .article :global(h2) { margin-top: 24px; }
-        .article :global(ul) { padding-left: 20px; }
-        .article :global(a) { color: #0a7; }
-        .foot { margin-top: 28px; }
-        .foot a { color: #0a7; text-decoration: none; }
-      `}</style>
     </>
   );
-}
-
-export async function getStaticProps({ params }) {
-  const g = getGuideBySlug(params.slug);
-  const processed = await remark().use(html, { sanitize: false }).process(g.content);
-  const htmlContent = processed.toString();
-
-  return {
-    props: {
-      slug: g.slug,
-      meta: {
-        title: g.title,
-        excerpt: g.excerpt || '',
-        date: g.date || null,
-        cover: g.cover || '',
-        category: g.category || '',
-        author: g.author || 'Wild & Well',
-        featured: !!g.featured
-      },
-      htmlContent
-    }
-  };
-}
-
-export async function getStaticPaths() {
-  const guides = await getAllGuides();
-  return {
-    paths: guides.map((g) => ({ params: { slug: g.slug } })),
-    fallback: false
-  };
 }
 
 function formatDate(s) {
@@ -102,4 +71,27 @@ function formatDate(s) {
   } catch {
     return s;
   }
+}
+
+export async function getStaticPaths() {
+  const guides = await getAllGuides();
+  return {
+    paths: guides.map((g) => ({ params: { slug: g.slug } })),
+    fallback: false
+  };
+}
+
+export async function getStaticProps({ params }) {
+  const g = await getGuideBySlug(params.slug);
+  // Ensure serializable meta
+  const meta = {
+    slug: g.slug,
+    title: g.title || '',
+    excerpt: g.excerpt || '',
+    date: g.date ? String(g.date) : null,
+    cover: g.cover || '',
+    category: g.category || '',
+    author: g.author || 'Wild & Well'
+  };
+  return { props: { meta, html: g.contentHtml || '' } };
 }
