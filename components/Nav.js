@@ -1,14 +1,24 @@
-import Link from 'next/link';
+// components/Nav.js
+import Link from "next/link";
+import Image from "next/image";
 
 export default function Nav() {
   return (
-    <header style={{borderBottom:'1px solid #e2e8f0'}}>
-      <div className="container" style={{display:'flex',alignItems:'center',gap:'16px',paddingTop:'14px',paddingBottom:'14px'}}>
-        <Link href="/" className="logo" style={{fontWeight:700,textDecoration:'none',color:'#0f172a'}}>🌿 Wild & Well</Link>
-        <nav style={{marginLeft:'auto',display:'flex',gap:'14px',fontWeight:600}}>
-          <Link href="/guides">Guides</Link>
-          <Link href="/recommended">Recommended</Link>
-          <Link href="/deals">Deals</Link>
+    <header>
+      <div className="container" style={{display:"flex",alignItems:"center",gap:14,justifyContent:"space-between"}}>
+        <Link href="/" className="brand" aria-label="Wild & Well home">
+          <div style={{display:"flex",alignItems:"center",gap:10}}>
+            <Image src="/logo.png" alt="" width={28} height={28} priority />
+            <strong>Wild & Well</strong>
+          </div>
+        </Link>
+
+        <nav aria-label="Primary">
+          <ul style={{display:"flex",gap:14,margin:0,padding:0,listStyle:"none"}}>
+            <li><Link href="/guides">Guides</Link></li>
+            <li><Link href="/recommended">Recommended</Link></li>
+            <li><Link href="/blog">Blog</Link></li>
+          </ul>
         </nav>
       </div>
     </header>
