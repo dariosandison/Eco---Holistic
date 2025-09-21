@@ -46,16 +46,16 @@ export default function Home({ guides }) {
         <title>Wild & Well • Bite-size natural living & wellness</title>
         <meta
           name="description"
-          content="Bite-size, practical reads for eco-friendly living and holistic wellness."
+          content=" Your guide to eco-living, holistic health, and mindful wellness."
         />
       </Head>
 
       <main className="wrap">
         <section className="hero">
           <p className="kicker">Wild & Well</p>
-          <h1>Bite-size, practical reads for eco-friendly living and holistic wellness</h1>
+          <h1> Your guide to eco-living, holistic health, and mindful wellness</h1>
           <p className="sub">
-            Your guide to eco-living, holistic health, and mindful wellness.
+            
           </p>
         </section>
 
