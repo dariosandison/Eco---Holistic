@@ -1,24 +1,45 @@
 // components/Nav.js
-import Link from "next/link";
-import Image from "next/image";
+import Link from 'next/link';
+import Image from 'next/image';
+import { useState } from 'react';
 
 export default function Nav() {
+  const [open, setOpen] = useState(false);
+
   return (
-    <header>
-      <div className="container" style={{display:"flex",alignItems:"center",gap:14,justifyContent:"space-between"}}>
+    <header className="site-header">
+      <div className="container nav-wrap">
         <Link href="/" className="brand" aria-label="Wild & Well home">
-          <div style={{display:"flex",alignItems:"center",gap:10}}>
-            <Image src="/logo.png" alt="" width={28} height={28} priority />
-            <strong>Wild & Well</strong>
+          <div className="brand-inner">
+            <div className="brand-logo">
+              {/* If /public/logo.png exists this will render. If it doesn't, the text shows. */}
+              <Image
+                src="/logo.png"
+                alt="Wild & Well"
+                width={36}
+                height={36}
+                className="logo-img"
+                onError={(e) => { e.currentTarget.style.display = 'none'; }}
+                priority
+              />
+            </div>
+            <span className="brand-text">Wild & Well</span>
           </div>
         </Link>
 
-        <nav aria-label="Primary">
-          <ul style={{display:"flex",gap:14,margin:0,padding:0,listStyle:"none"}}>
-            <li><Link href="/guides">Guides</Link></li>
-            <li><Link href="/recommended">Recommended</Link></li>
-            <li><Link href="/blog">Blog</Link></li>
-          </ul>
+        <button
+          className="nav-toggle"
+          aria-label="Toggle menu"
+          aria-expanded={open ? 'true' : 'false'}
+          onClick={() => setOpen(!open)}
+        >
+          ☰
+        </button>
+
+        <nav className={`nav ${open ? 'open' : ''}`}>
+          <Link href="/guides">Guides</Link>
+          <Link href="/recommended">Recommended</Link>
+          <Link href="/blog">Blog</Link>
         </nav>
       </div>
     </header>
