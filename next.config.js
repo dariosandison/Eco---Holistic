@@ -1,8 +1,11 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  output: 'export',              // replaces `next export`
-  images: { unoptimized: true }, // allow images with static export
+  reactStrictMode: true,
+  swcMinify: true,
+  // If you ever switch to next/image, keep this for static export friendliness
+  images: { unoptimized: true },
+  output: 'export', // enables static export the supported way
   trailingSlash: false
 };
 
-module.exports = nextConfig;
+export default nextConfig;
