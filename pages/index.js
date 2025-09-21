@@ -1,170 +1,101 @@
 // pages/index.js
-import React from "react";
-import Head from "next/head";
-import Link from "next/link";
 import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
-import GuideFilters from "../components/GuideFilters";
+import Link from "next/link";
+import Head from "next/head";
 
-export async function getStaticProps() {
-  const guidesDir = path.join(process.cwd(), "content", "guides");
-  const files = fs.readdirSync(guidesDir).filter((f) => f.endsWith(".md"));
+const guidesDir = path.join(process.cwd(), "content", "guides");
 
-  const all = files.map((filename) => {
-    const raw = fs.readFileSync(path.join(guidesDir, filename), "utf8");
-    const { data } = matter(raw);
-    const slug = filename.replace(/\.md$/, "");
-    const dateStr = (data.date || "").toString();
-    const ts = dateStr ? new Date(dateStr).getTime() : 0;
-
-    return {
-      slug,
-      title: data.title || slug,
-      excerpt:
-        data.excerpt ||
-        data.description ||
-        "Quick, practical take from Wild & Well.",
-      cover: data.cover || "/cover.png",
-      category: data.category || "Other",
-      date: dateStr,
-      ts,
-      readingTime: data.readingTime || "",
-      featured: Boolean(data.featured),
-    };
-  });
-
-  const featured = all.filter((g) => g.featured).length
-    ? all.filter((g) => g.featured).sort((a, b) => b.ts - a.ts)
-    : all.sort((a, b) => b.ts - a.ts).slice(0, 8);
-
-  const categories = Array.from(new Set(all.map((g) => g.category))).sort();
-
-  return { props: { allGuides: all, featured, categories } };
+function normalizeDate(d) {
+  // Accept frontmatter as ISO string like "2025-09-20"
+  if (!d) return "";
+  if (typeof d === "string") return d;
+  if (d instanceof Date) return d.toISOString().slice(0, 10);
+  return "";
 }
 
-export default function Home({ allGuides, featured, categories }) {
-  const [active, setActive] = React.useState("All");
-  const [query, setQuery] = React.useState("");
+export async function getStaticProps() {
+  const files = fs.readdirSync(guidesDir).filter((f) => f.endsWith(".md"));
+  const guides = files.map((file) => {
+    const slug = file.replace(/\.md$/, "");
+    const raw = fs.readFileSync(path.join(guidesDir, file), "utf8");
+    const { data } = matter(raw);
+    const meta = {
+      title: data.title || slug,
+      excerpt: data.excerpt || "",
+      cover: data.cover || "/cover.png",
+      date: normalizeDate(data.date),
+      tags: Array.isArray(data.tags) ? data.tags : [],
+    };
+    return { slug, meta };
+  });
 
-  const filtered = allGuides
-    .filter((g) => (active === "All" ? true : g.category === active))
-    .filter((g) => {
-      if (!query) return true;
-      const q = query.toLowerCase();
-      return (
-        g.title.toLowerCase().includes(q) ||
-        g.excerpt.toLowerCase().includes(q) ||
-        g.category.toLowerCase().includes(q)
-      );
-    })
-    .sort((a, b) => b.ts - a.ts)
-    .slice(0, 8);
+  // newest first
+  guides.sort((a, b) =>
+    (b.meta.date || "").localeCompare(a.meta.date || "")
+  );
 
-  const showSearchResults = query.length > 0 || active !== "All";
-  const cards = showSearchResults ? filtered : featured;
+  return { props: { guides } };
+}
 
-  const title = "Wild & Well — Bite-size wellness & eco-living guides";
-  const desc =
-    "Bite-size, practical reads for eco-friendly living and holistic wellness.";
-
+export default function Home({ guides }) {
   return (
     <>
       <Head>
-        <title>{title}</title>
-        <meta name="description" content={desc} />
-        <meta property="og:title" content="Wild & Well" />
-        <meta property="og:description" content={desc} />
-        <meta property="og:type" content="website" />
-        <meta property="og:image" content="/cover.png" />
-        <meta property="og:url" content="https://www.wild-and-well.store" />
-        <meta name="twitter:card" content="summary_large_image" />
-        <link rel="canonical" href="https://www.wild-and-well.store/" />
+        <title>Wild & Well • Bite-size natural living & wellness</title>
+        <meta
+          name="description"
+          content="Bite-size, practical reads for eco-friendly living and holistic wellness."
+        />
       </Head>
 
       <main className="wrap">
-        <header className="hero">
-          <p className="eyebrow">
-          
-          </p>
-          <h1 className="h1">
+        <section className="hero">
+          <p className="kicker">Wild & Well</p>
+          <h1>Bite-size, practical reads for eco-friendly living and holistic wellness</h1>
+          <p className="sub">
             Your guide to eco-living, holistic health, and mindful wellness.
-          </h1>
-        </header>
-
-        <GuideFilters
-          categories={categories}
-          active={active}
-          setActive={setActive}
-          query={query}
-          setQuery={setQuery}
-        />
-
-        <section className="grid">
-          {cards.map((g) => (
-            <Link href={`/guides/${g.slug}`} key={g.slug} className="card">
-              <article>
-                <div className="thumb">
-                  <img src={g.cover} alt={g.title} />
-                </div>
-                <div className="meta">
-                  <span className="pill">{g.category}</span>
-                  {g.readingTime && <span className="rt">{g.readingTime}</span>}
-                </div>
-                <h2 className="title">{g.title}</h2>
-                <p className="excerpt">{g.excerpt}</p>
-                <span className="cta">Read guide →</span>
-              </article>
-            </Link>
-          ))}
+          </p>
         </section>
 
-        {!showSearchResults && (
-          <p className="center">
-            <Link href="/guides" className="browse">Browse all guides →</Link>
-          </p>
-        )}
-
-        <p className="fine">
-          As an Amazon Associate, we earn from qualifying purchases.
-        </p>
+        <section className="grid">
+          {guides.map(({ slug, meta }) => (
+            <article key={slug} className="card">
+              <Link href={`/guides/${slug}`} className="cardLink">
+                <div className="thumb" style={{ backgroundImage: `url(${meta.cover})` }} />
+                <div className="body">
+                  <h3>{meta.title}</h3>
+                  {meta.excerpt && <p>{meta.excerpt}</p>}
+                  <div className="meta">
+                    {meta.date && <span>{meta.date}</span>}
+                    {meta.tags?.length > 0 && (
+                      <span className="tags">{meta.tags.slice(0, 2).join(" • ")}</span>
+                    )}
+                  </div>
+                </div>
+              </Link>
+            </article>
+          ))}
+        </section>
       </main>
 
-      {/* Global soft background */}
-      <style jsx global>{`
-        body { background: #f8fafc; }
-      `}</style>
-
       <style jsx>{`
-        .wrap { max-width: 1100px; margin: 36px auto 72px; padding: 0 16px; }
-        .hero { text-align: center; margin: 14px auto 22px; max-width: 900px; }
-        .eyebrow { margin: 0 0 10px; color: #374151; font-weight: 600; font-size: 1.08rem; line-height: 1.5; }
-        .h1 { margin: 0; font-size: 2.1rem; line-height: 1.25; letter-spacing: -0.01em; color: #111827; }
-        @media (min-width: 980px) {
-          .h1 { font-size: 2.6rem; }
-          .eyebrow { font-size: 1.15rem; }
-          .wrap { margin-top: 44px; }
-        }
-
-        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 20px; margin-top: 14px; }
-        .card { text-decoration: none; color: inherit; }
-        .card article {
-          border: 1px solid #e5e7eb; border-radius: 18px; background: #fff;
-          overflow: hidden; height: 100%; display: flex; flex-direction: column;
-          transition: box-shadow .2s ease, transform .2s ease, border-color .2s ease;
-        }
-        .card article:hover { border-color: #d1d5db; box-shadow: 0 14px 28px rgba(17,24,39,.08); transform: translateY(-2px); }
-        .thumb { width: 100%; aspect-ratio: 16/9; background: #f3f4f6; overflow: hidden; }
-        .thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
-        .meta { padding: 12px 16px 0; display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
-        .pill { background: #ecfdf5; color: #0f766e; border: 1px solid #99f6e4; padding: 2px 10px; border-radius: 999px; font-size: .86rem; }
-        .rt { color: #6b7280; font-size: .9rem; }
-        .title { font-size: 1.18rem; line-height: 1.35; padding: 6px 16px 0; margin: 0; color: #111827; }
-        .excerpt { padding: 8px 16px 0; margin: 0; color: #4b5563; flex: 1; }
-        .cta { display: block; padding: 12px 16px 16px; color: #0f766e; font-weight: 700; }
-        .center { text-align: center; margin-top: 16px; }
-        .browse { color: #0f766e; font-weight: 700; }
-        .fine { color: #6b7280; font-size: .9rem; text-align: center; margin-top: 22px; }
+        .wrap { max-width: 1100px; margin: 0 auto; padding: 28px 16px 56px; }
+        .hero { text-align: center; margin: 18px 0 28px; }
+        .kicker { font-weight: 700; letter-spacing: .02em; color: #0b3d2e; margin: 0 0 6px; }
+        h1 { font-size: clamp(1.6rem, 2.5vw, 2.3rem); margin: 0 0 8px; line-height: 1.2; }
+        .sub { color: #4b5563; margin: 0; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fill,minmax(260px,1fr)); gap: 18px; margin-top: 24px; }
+        .card { border: 1px solid #e5e7eb; border-radius: 12px; background: #fff; overflow: hidden; transition: transform .1s ease, box-shadow .1s ease; }
+        .card:hover { transform: translateY(-2px); box-shadow: 0 6px 18px rgba(0,0,0,.06); }
+        .cardLink { text-decoration: none; color: inherit; display: block; }
+        .thumb { height: 160px; background-size: cover; background-position: center; }
+        .body { padding: 14px 14px 16px; }
+        h3 { margin: 0 0 6px; font-size: 1.05rem; }
+        p { margin: 0; color: #4b5563; }
+        .meta { display: flex; gap: 10px; align-items: center; margin-top: 10px; color: #6b7280; font-size: .9rem; }
+        .tags { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
       `}</style>
     </>
   );
