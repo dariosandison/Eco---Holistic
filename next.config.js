@@ -1,13 +1,14 @@
+// next.config.js
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  images: {
-    remotePatterns: [
-      { protocol: 'https', hostname: 'm.media-amazon.com' },
-      { protocol: 'https', hostname: 'images-na.ssl-images-amazon.com' },
-      { protocol: 'https', hostname: 'images.unsplash.com' }
-    ]
-  },
-  trailingSlash: true // for clean static export hosting
+  // Tell Next to output a fully static site (replaces `next export`)
+  output: 'export',
+
+  // If any page uses `next/image`, this makes images work in static export
+  images: { unoptimized: true },
+
+  reactStrictMode: true,
+  trailingSlash: false,
 };
 
 module.exports = nextConfig;
