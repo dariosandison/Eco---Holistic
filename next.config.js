@@ -2,10 +2,9 @@
 const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
-  // If you ever switch to next/image, keep this for static export friendliness
-  images: { unoptimized: true },
-  output: 'export', // enables static export the supported way
+  images: { unoptimized: true }, // fine for static export + PNGs
+  output: 'export',
   trailingSlash: false
 };
 
-export default nextConfig;
+module.exports = nextConfig;
