@@ -1,140 +1,74 @@
 // pages/guides/index.js
-import React from "react";
-import Head from "next/head";
-import Link from "next/link";
 import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
-import GuideFilters from "../../components/GuideFilters";
+import React from "react";
+import Link from "next/link";
+import Nav from "../../components/Nav";
+import SEO from "../../components/SEO";
+
+export default function Guides({ guides }) {
+  return (
+    <>
+      <SEO title="Guides • Wild & Well" path="/guides" />
+      <Nav />
+
+      <main id="main" className="container section">
+        <h1 style={{marginTop:4, marginBottom:10}}>All Guides</h1>
+        <div className="grid">
+          {guides.map((g) => (
+            <Link key={g.slug} href={`/guides/${g.slug}`} className="card">
+              <article>
+                <div className="meta">
+                  <span>{g.meta.read} min read</span>
+                  <span>•</span>
+                  <time dateTime={g.meta.dateISO}>{g.meta.dateHuman}</time>
+                </div>
+                <h3>{g.meta.title}</h3>
+                <p>{g.meta.summary}</p>
+              </article>
+            </Link>
+          ))}
+        </div>
+      </main>
+    </>
+  );
+}
 
 export async function getStaticProps() {
   const guidesDir = path.join(process.cwd(), "content", "guides");
   const files = fs.readdirSync(guidesDir).filter((f) => f.endsWith(".md"));
 
-  const guides = files.map((filename) => {
-    const raw = fs.readFileSync(path.join(guidesDir, filename), "utf8");
+  const guides = files.map((file) => {
+    const slug = file.replace(/\.md$/, "");
+    const raw = fs.readFileSync(path.join(guidesDir, file), "utf8");
     const { data } = matter(raw);
-    const slug = filename.replace(/\.md$/, "");
-    const dateStr = (data.date || "").toString();
+    const dateStr =
+      typeof data.date === "string"
+        ? data.date
+        : new Date(fs.statSync(path.join(guidesDir, file)).mtime).toISOString().slice(0, 10);
+
+    const dateISO = new Date(dateStr).toISOString();
+    const dateHuman = new Date(dateStr).toLocaleDateString("en-GB", {
+      year: "numeric",
+      month: "short",
+      day: "2-digit",
+    });
+
     return {
       slug,
-      title: data.title || slug,
-      excerpt:
-        data.excerpt ||
-        data.description ||
-        "Quick, practical take from Wild & Well.",
-      cover: data.cover || "/cover.png",
-      category: data.category || "Other",
-      readingTime: data.readingTime || "",
-      date: dateStr,
-      ts: dateStr ? new Date(dateStr).getTime() : 0,
+      meta: {
+        title: data.title || slug.replace(/-/g, " "),
+        summary: data.summary || "",
+        tags: Array.isArray(data.tags) ? data.tags : [],
+        read: Number(data.read || 5),
+        dateISO,
+        dateHuman
+      }
     };
   });
 
-  const categories = Array.from(new Set(guides.map((g) => g.category))).sort();
+  guides.sort((a, b) => (b.meta.dateISO || "").localeCompare(a.meta.dateISO || ""));
 
-  return { props: { guides, categories } };
-}
-
-export default function GuidesIndex({ guides, categories }) {
-  const [active, setActive] = React.useState("All");
-  const [query, setQuery] = React.useState("");
-
-  const filtered = guides
-    .filter((g) => (active === "All" ? true : g.category === active))
-    .filter((g) => {
-      if (!query) return true;
-      const q = query.toLowerCase();
-      return (
-        g.title.toLowerCase().includes(q) ||
-        g.excerpt.toLowerCase().includes(q) ||
-        g.category.toLowerCase().includes(q)
-      );
-    })
-    .sort((a, b) => b.ts - a.ts);
-
-  return (
-    <>
-      <Head>
-        <title>All Guides • Wild & Well</title>
-        <meta
-          name="description"
-          content="Explore all Wild & Well bite-size guides for eco-living and holistic health."
-        />
-        <link rel="canonical" href="https://www.wild-and-well.store/guides" />
-      </Head>
-
-      <main className="wrap">
-        <header className="hero">
-          <h1 className="h1">Explore all guides</h1>
-          <p className="sub">Filter by topic or search for what you need.</p>
-        </header>
-
-        <GuideFilters
-          categories={categories}
-          active={active}
-          setActive={setActive}
-          query={query}
-          setQuery={setQuery}
-        />
-
-        <section className="grid">
-          {filtered.map((g) => (
-            <Link href={`/guides/${g.slug}`} key={g.slug} className="card">
-              <article>
-                <div className="thumb">
-                  <img src={g.cover} alt={g.title} />
-                </div>
-                <div className="meta">
-                  <span className="pill">{g.category}</span>
-                  {g.readingTime && <span className="rt">{g.readingTime}</span>}
-                </div>
-                <h2 className="title">{g.title}</h2>
-                <p className="excerpt">{g.excerpt}</p>
-                <span className="cta">Read guide →</span>
-              </article>
-            </Link>
-          ))}
-        </section>
-
-        <p className="fine">
-          As an Amazon Associate, we earn from qualifying purchases.
-        </p>
-      </main>
-
-      {/* Global soft background */}
-      <style jsx global>{`
-        body { background: #f8fafc; }
-      `}</style>
-
-      <style jsx>{`
-        .wrap { max-width: 1100px; margin: 36px auto 72px; padding: 0 16px; }
-        .hero { text-align: center; margin: 10px auto 18px; max-width: 880px; }
-        .h1 { margin: 0 0 6px; font-size: 2.1rem; color: #111827; letter-spacing: -0.01em; }
-        .sub { color: #4b5563; margin: 0; }
-        @media (min-width: 980px) {
-          .h1 { font-size: 2.6rem; }
-          .wrap { margin-top: 44px; }
-        }
-
-        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 20px; margin-top: 14px; }
-        .card { text-decoration: none; color: inherit; }
-        .card article {
-          border: 1px solid #e5e7eb; border-radius: 18px; background: #fff;
-          overflow: hidden; height: 100%; display: flex; flex-direction: column;
-          transition: box-shadow .2s ease, transform .2s ease, border-color .2s ease;
-        }
-        .card article:hover { border-color: #d1d5db; box-shadow: 0 14px 28px rgba(17,24,39,.08); transform: translateY(-2px); }
-        .thumb { width: 100%; aspect-ratio: 16/9; background: #f3f4f6; overflow: hidden; }
-        .thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
-        .meta { padding: 12px 16px 0; display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
-        .pill { background: #ecfdf5; color: #0f766e; border: 1px solid #99f6e4; padding: 2px 10px; border-radius: 999px; font-size: .86rem; }
-        .rt { color: #6b7280; font-size: .9rem; }
-        .title { font-size: 1.18rem; line-height: 1.35; padding: 6px 16px 0; margin: 0; color: #111827; }
-        .excerpt { padding: 8px 16px 0; margin: 0; color: #4b5563; flex: 1; }
-        .cta { display: block; padding: 12px 16px 16px; color: #0f766e; font-weight: 700; }
-        .fine { color: #6b7280; font-size: .9rem; text-align: center; margin-top: 22px; }
-      `}</style>
-    </>
-  );
+  return { props: { guides } };
 }
