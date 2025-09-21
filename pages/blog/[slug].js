@@ -3,148 +3,115 @@ import React from "react";
 import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
-import { remark } from "remark";
-import html from "remark-html";
-import Nav from "../../components/Nav";
-import SEO from "../../components/SEO";
-import Link from "next/link";
+import Head from "next/head";
 
-const SITE = process.env.NEXT_PUBLIC_SITE_URL || "https://www.wild-and-well.store";
-const AMAZON_TAG = "wildandwell0c-21"; // your tag
-
-function appendAmazonTagToLinks(htmlStr, tag) {
-  return htmlStr.replace(
-    /href="(https?:\/\/(?:www\.)?amazon\.(?:co\.uk|com|de|fr|it|es|ca|com\.au)\/[^"]+)"/g,
-    (m, url) => {
-      if (/[?&](?:tag|ascsubtag|linkCode)=/i.test(url)) return m;
-      const sep = url.includes("?") ? "&" : "?";
-      return `href="${url}${sep}tag=${encodeURIComponent(tag)}"`;
-    }
+// Reuse same helpers as guides (duplicated here to keep this file standalone)
+function escapeHtml(str) {
+  return String(str)
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;");
+}
+function inlineMd(s) {
+  let t = s;
+  t = t.replace(
+    /!\[([^\]]*)\]\(([^)]+)\)/g,
+    (_, alt, src) =>
+      `<img src="${src}" alt="${alt}" loading="lazy" style="max-width:100%;height:auto;" />`
   );
+  t = t.replace(
+    /\[([^\]]+)\]\(([^)]+)\)/g,
+    (_, text, href) =>
+      `<a href="${href}" target="_blank" rel="nofollow sponsored noopener">${text}</a>`
+  );
+  t = t.replace(/`([^`]+)`/g, "<code>$1</code>");
+  t = t.replace(/\*\*([^*]+)\*\*/g, "<strong>$1</strong>");
+  t = t.replace(/(^|[^\*])\*([^*]+)\*/g, "$1<em>$2</em>");
+  return t;
+}
+function mdToHtml(md) {
+  const lines = escapeHtml(md).split("\n");
+  const out = [];
+  let inUl = false, inOl = false, inBlock = false;
+  const closeLists = () => {
+    if (inUl) { out.push("</ul>"); inUl = false; }
+    if (inOl) { out.push("</ol>"); inOl = false; }
+  };
+  for (let raw of lines) {
+    const line = raw.replace(/\s+$/, "");
+    if (/^\s*$/.test(line)) { closeLists(); inBlock = false; continue; }
+    if (/^[-*_]{3,}\s*$/.test(line)) { closeLists(); out.push("<hr/>"); continue; }
+    if (/^######\s+/.test(line)) { closeLists(); out.push(`<h6>${inlineMd(line.replace(/^######\s+/, ""))}</h6>`); continue; }
+    if (/^#####\s+/.test(line))  { closeLists(); out.push(`<h5>${inlineMd(line.replace(/^#####\s+/, ""))}</h5>`); continue; }
+    if (/^####\s+/.test(line))   { closeLists(); out.push(`<h4>${inlineMd(line.replace(/^####\s+/, ""))}</h4>`); continue; }
+    if (/^###\s+/.test(line))    { closeLists(); out.push(`<h3>${inlineMd(line.replace(/^###\s+/, ""))}</h3>`); continue; }
+    if (/^##\s+/.test(line))     { closeLists(); out.push(`<h2>${inlineMd(line.replace(/^##\s+/, ""))}</h2>`); continue; }
+    if (/^#\s+/.test(line))      { closeLists(); out.push(`<h1>${inlineMd(line.replace(/^#\s+/, ""))}</h1>`); continue; }
+    if (/^>\s+/.test(line))      { closeLists(); out.push(`<blockquote><p>${inlineMd(line.replace(/^>\s+/, ""))}</p></blockquote>`); continue; }
+    if (/^\s*-\s+/.test(line))   { if (!inUl) { closeLists(); out.push("<ul>"); inUl = true; } out.push(`<li>${inlineMd(line.replace(/^\s*-\s+/, ""))}</li>`); continue; }
+    if (/^\s*\d+\.\s+/.test(line)) { if (!inOl) { closeLists(); out.push("<ol>"); inOl = true; } out.push(`<li>${inlineMd(line.replace(/^\s*\d+\.\s+/, ""))}</li>`); continue; }
+    if (!inBlock) { closeLists(); out.push(`<p>${inlineMd(line)}</p>`); inBlock = true; }
+    else { const last = out.pop(); out.push(last.replace(/<\/p>$/, " " + inlineMd(line) + "</p>")); }
+  }
+  closeLists();
+  return out.join("\n");
 }
 
-function wordCount(text) {
-  return (text || "").trim().split(/\s+/).filter(Boolean).length;
-}
-
-export default function BlogPost({ slug, meta, html, prev, next }) {
-  const pageUrl = `${SITE}/blog/${slug}`;
+export default function PostPage({ slug, meta, html }) {
+  const title = meta?.title || slug.replace(/-/g, " ");
+  const desc =
+    meta?.description || meta?.excerpt || "Wild & Well — blog post.";
+  const cover = meta?.cover || "/cover.png";
 
   return (
     <>
-      <SEO
-        title={`${meta.title} • Wild & Well Blog`}
-        description={meta.summary || "Fresh, practical insights on holistic health and low-tox living."}
-        path={`/blog/${slug}`}
-      />
+      <Head>
+        <title>{title} • Wild & Well</title>
+        <meta name="description" content={desc} />
+        <meta property="og:title" content={`${title} • Wild & Well`} />
+        <meta property="og:description" content={desc} />
+        <meta property="og:type" content="article" />
+        <meta property="og:image" content={cover} />
+        <link rel="canonical" href={`https://www.wild-and-well.store/blog/${slug}`} />
+      </Head>
 
-      <Nav />
+      <header className="hero">
+        <h1>{title}</h1>
+        {meta?.subtitle && <p className="subtitle">{meta.subtitle}</p>}
+      </header>
 
-      <main id="main">
-        <header className="hero">
-          <p className="eyebrow">
-            {meta.read} min read • <time dateTime={meta.dateISO}>{meta.dateHuman}</time>
-          </p>
-          <h1 className="title">{meta.title}</h1>
-          {meta.summary && <p className="summary">{meta.summary}</p>}
-          {meta.tags?.length > 0 && (
-            <p className="tags">
-              {meta.tags.map((t) => (
-                <span className="tag" key={t}>{t}</span>
-              ))}
-            </p>
-          )}
-        </header>
+      {cover && (
+        <div className="cover">
+          <img src={cover} alt={title} onError={(e) => (e.currentTarget.style.display = "none")} />
+        </div>
+      )}
 
-        <article className="container article">
-          <div
-            className="content"
-            dangerouslySetInnerHTML={{ __html: html }}
-          />
-
-          <p className="disclaimer">
-            <small>
-              As an Amazon Associate, we earn from qualifying purchases. This supports our work at no extra cost to you.
-            </small>
-          </p>
-
-          <section className="share">
-            <span>Share:</span>
-            <a
-              href={`https://twitter.com/intent/tweet?url=${encodeURIComponent(pageUrl)}&text=${encodeURIComponent(meta.title)}`}
-              target="_blank" rel="noopener"
-            >Twitter</a>
-            <a
-              href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(pageUrl)}`}
-              target="_blank" rel="noopener"
-            >Facebook</a>
-            <a
-              href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(pageUrl)}`}
-              target="_blank" rel="noopener"
-            >LinkedIn</a>
-          </section>
-
-          <nav className="pager" aria-label="Post pagination">
-            {prev && (
-              <Link className="pill" href={`/blog/${prev.slug}`} aria-label={`Previous: ${prev.title}`}>
-                ← {prev.title}
-              </Link>
-            )}
-            <span className="spacer" />
-            {next && (
-              <Link className="pill" href={`/blog/${next.slug}`} aria-label={`Next: ${next.title}`}>
-                {next.title} →
-              </Link>
-            )}
-          </nav>
-
-          {/* JSON-LD */}
-          <script
-            type="application/ld+json"
-            dangerouslySetInnerHTML={{
-              __html: JSON.stringify({
-                "@context": "https://schema.org",
-                "@type": "Article",
-                headline: meta.title,
-                description: meta.summary || undefined,
-                datePublished: meta.dateISO,
-                dateModified: meta.dateISO,
-                author: { "@type": "Person", name: "Wild & Well Editors" },
-                publisher: {
-                  "@type": "Organization",
-                  name: "Wild & Well",
-                  logo: { "@type": "ImageObject", url: `${SITE}/logo.png` },
-                },
-                mainEntityOfPage: { "@type": "WebPage", "@id": pageUrl },
-              }),
-            }}
-          />
-        </article>
+      <main className="wrap">
+        <article
+          className="content"
+          dangerouslySetInnerHTML={{ __html: html }}
+        />
+        <p className="fine">
+          <em>
+            As an Amazon Associate, we earn from qualifying purchases. This
+            doesn’t affect the price you pay.
+          </em>
+        </p>
       </main>
 
       <style jsx>{`
-        .hero { text-align: center; padding: 26px 16px 8px; }
-        .eyebrow { color: #6b7280; margin: 0 0 4px; }
-        .title { margin: 0 0 6px; font-size: clamp(1.6rem, 2.2vw + 1rem, 2.2rem); letter-spacing: -0.015em; }
-        .summary { margin: 0; color: #4b5563; }
-        .tags { margin: 10px 0 0; }
-        .tag { display: inline-block; background: #eef6f3; color: #0b3d2e; border: 1px solid #d7ece6; border-radius: 999px; padding: 4px 10px; margin: 0 6px 6px 0; font-size: .85rem; }
-
-        .article { max-width: 820px; }
-        .content :global(p) { margin: 0 0 1rem; }
-        .content :global(h2) { margin: 1.4rem 0 .6rem; font-size: 1.35rem; }
-        .content :global(h3) { margin: 1.1rem 0 .4rem; font-size: 1.1rem; }
-        .content :global(ul), .content :global(ol) { padding-left: 1.25rem; margin: .75rem 0; }
-        .content :global(blockquote) { margin: 1rem 0; padding: .75rem 1rem; background: #f7faf9; border-left: 3px solid #cfe7df; }
-        .content :global(code) { background: #f3f4f6; padding: .1rem .35rem; border-radius: 4px; }
-
-        .share { display: flex; gap: 10px; align-items: center; margin-top: 18px; flex-wrap: wrap; color: #6b7280; }
-        .share a { color: #0b3d2e; }
-
-        .pager { display: flex; align-items: center; gap: 12px; margin-top: 22px; }
-        .pill { border: 1px solid #e7ecea; padding: 8px 12px; border-radius: 999px; background: #fff; }
-        .spacer { flex: 1; }
-        .disclaimer { color: #6b7280; margin-top: 12px; }
+        .hero { text-align: center; padding: 28px 16px 10px; }
+        h1 { margin: 0 0 6px; font-size: 2rem; }
+        .subtitle { color: #6b7280; margin: 0; }
+        .cover { max-width: 980px; margin: 10px auto 0; }
+        .cover img { width: 100%; height: auto; border-radius: 12px; }
+        .wrap { max-width: 900px; margin: 18px auto 40px; padding: 0 16px; }
+        .content :global(h2) { margin-top: 1.4rem; }
+        .content :global(h3) { margin-top: 1.1rem; }
+        .content :global(p) { line-height: 1.75; color: #374151; }
+        .content :global(a) { color: #0f766e; text-decoration: underline; }
+        .content :global(ul), .content :global(ol) { padding-left: 1.25rem; }
+        .fine { color: #6b7280; font-size: .9rem; margin-top: 20px; }
       `}</style>
     </>
   );
@@ -152,54 +119,39 @@ export default function BlogPost({ slug, meta, html, prev, next }) {
 
 export async function getStaticPaths() {
   const dir = path.join(process.cwd(), "content", "blog");
-  if (!fs.existsSync(dir)) return { paths: [], fallback: false };
-  const files = fs.readdirSync(dir).filter((f) => f.endsWith(".md"));
-  const paths = files.map((f) => ({ params: { slug: f.replace(/\.md$/, "") } }));
+  const paths = fs.existsSync(dir)
+    ? fs
+        .readdirSync(dir)
+        .filter((f) => f.endsWith(".md"))
+        .map((f) => ({ params: { slug: f.replace(/\.md$/, "") } }))
+    : [];
   return { paths, fallback: false };
 }
 
 export async function getStaticProps({ params }) {
-  const filePath = path.join(process.cwd(), "content", "blog", `${params.slug}.md`);
-  const raw = fs.readFileSync(filePath, "utf8");
+  const file = path.join(process.cwd(), "content", "blog", `${params.slug}.md`);
+  if (!fs.existsSync(file)) return { notFound: true };
+
+  const raw = fs.readFileSync(file, "utf8");
   const { data, content } = matter(raw);
 
-  const processed = await remark().use(html).process(content);
-  let htmlString = String(processed);
-  htmlString = appendAmazonTagToLinks(htmlString, AMAZON_TAG);
-
-  const statISO = new Date(fs.statSync(filePath).mtime).toISOString();
-  const dateStr = typeof data.date === "string" ? data.date : statISO.slice(0, 10);
-  const dateISO = new Date(dateStr).toISOString();
-  const dateHuman = new Date(dateStr).toLocaleDateString("en-GB", { year: "numeric", month: "short", day: "2-digit" });
-  const read = Number(data.read) || Math.max(3, Math.round(wordCount(content) / 200));
-
-  // prev/next
-  const dir = path.join(process.cwd(), "content", "blog");
-  const all = fs.readdirSync(dir).filter((f) => f.endsWith(".md")).sort();
-  const idx = all.indexOf(`${params.slug}.md`);
-  const before = idx > 0 ? all[idx - 1] : null;
-  const after = idx < all.length - 1 ? all[idx + 1] : null;
-
-  const getTitle = (slug) => {
-    const raw = fs.readFileSync(path.join(dir, slug + ".md"), "utf8");
-    const { data } = matter(raw);
-    return data.title || slug.replace(/-/g, " ");
+  const meta = {
+    ...data,
+    date:
+      typeof data?.date === "string"
+        ? data.date
+        : data?.date
+        ? new Date(data.date).toISOString().slice(0, 10)
+        : null,
   };
+
+  const html = mdToHtml(content);
 
   return {
     props: {
       slug: params.slug,
-      meta: {
-        title: data.title || params.slug.replace(/-/g, " "),
-        summary: data.summary || "",
-        tags: Array.isArray(data.tags) ? data.tags : [],
-        read,
-        dateISO,
-        dateHuman,
-      },
-      html: htmlString,
-      prev: before ? { slug: before.replace(/\.md$/, ""), title: getTitle(before.replace(/\.md$/, "")) } : null,
-      next: after ? { slug: after.replace(/\.md$/, ""), title: getTitle(after.replace(/\.md$/, "")) } : null,
+      meta,
+      html,
     },
   };
 }
