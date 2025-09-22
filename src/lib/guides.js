@@ -1,93 +1,54 @@
-import { promises as fs } from 'fs';
+import fs from 'fs';
 import path from 'path';
 import matter from 'gray-matter';
-import { remark } from 'remark';
-import html from 'remark-html';
-import slugify from 'slugify';
 
-const guidesDir = path.join(process.cwd(), 'content', 'guides');
+const GUIDES_DIR = path.join(process.cwd(), 'content', 'guides');
 
-function toDateString(v) {
-  if (!v) return '';
-  // Accept ISO string, number, or Date; always return ISO-ish string
-  try {
-    const d = new Date(v);
-    return isNaN(d.getTime()) ? String(v) : d.toISOString();
-  } catch {
-    return String(v);
-  }
+function listMarkdownFiles(dir) {
+  if (!fs.existsSync(dir)) return [];
+  return fs.readdirSync(dir).filter(f => f.toLowerCase().endsWith('.md'));
 }
 
-function sortByDateDesc(a, b) {
-  const at = new Date(a.date || 0).getTime() || 0;
-  const bt = new Date(b.date || 0).getTime() || 0;
-  return bt - at;
+export function getAllGuidesMeta() {
+  const files = listMarkdownFiles(GUIDES_DIR);
+  const guides = files.map(filename => {
+    const slug = filename.replace(/\.md$/i, '');
+    const raw = fs.readFileSync(path.join(GUIDES_DIR, filename), 'utf8');
+    const { data } = matter(raw);
+
+    const meta = {
+      slug,
+      title: String(data.title || slug),
+      summary: String(data.summary || ''),
+      date: data.date ? String(data.date) : '',
+      image: data.image ? String(data.image) : '',
+      tags: Array.isArray(data.tags) ? data.tags.map(String) : [],
+      readTime: data.readTime ? String(data.readTime) : ''
+    };
+
+    const sortKey = meta.date ? Date.parse(meta.date) || 0 : 0;
+    return { ...meta, _sort: sortKey };
+  });
+
+  guides.sort((a, b) => b._sort - a._sort);
+  return guides.map(({ _sort, ...g }) => g);
 }
 
-export async function getAllGuides() {
-  let files = [];
-  try {
-    files = await fs.readdir(guidesDir);
-  } catch {
-    return [];
-  }
-
-  const items = await Promise.all(
-    files
-      .filter((f) => f.endsWith('.md') || f.endsWith('.mdx'))
-      .map(async (file) => {
-        const raw = await fs.readFile(path.join(guidesDir, file), 'utf8');
-        const { data, content } = matter(raw);
-
-        // Derive slug from filename if not provided
-        const base = file.replace(/\.mdx?$/, '');
-        const slug = data.slug || slugify(base, { lower: true, strict: true });
-
-        return {
-          slug,
-          title: data.title || base,
-          excerpt: data.excerpt || '',
-          date: toDateString(data.date),
-          cover: data.cover || '',
-          category: data.category || '',
-          author: data.author || 'Wild & Well',
-          _content: content // keep for later if needed
-        };
-      })
-  );
-
-  // sort newest first
-  items.sort(sortByDateDesc);
-
-  // strip private fields
-  return items.map(({ _content, ...meta }) => meta);
-}
-
-export async function getGuideBySlug(slug) {
-  // Try both .md and .mdx
-  const mdPath = path.join(guidesDir, `${slug}.md`);
-  const mdxPath = path.join(guidesDir, `${slug}.mdx`);
-  let raw;
-
-  try {
-    raw = await fs.readFile(mdPath, 'utf8');
-  } catch {
-    raw = await fs.readFile(mdxPath, 'utf8');
-  }
-
+export function getGuideBySlug(slug) {
+  const fullPath = path.join(GUIDES_DIR, `${slug}.md`);
+  if (!fs.existsSync(fullPath)) return null;
+  const raw = fs.readFileSync(fullPath, 'utf8');
   const { data, content } = matter(raw);
 
-  const processed = await remark().use(html).process(content);
-  const contentHtml = processed.toString();
-
-  return {
+  const meta = {
     slug,
-    title: data.title || slug,
-    excerpt: data.excerpt || '',
-    date: toDateString(data.date),
-    cover: data.cover || '',
-    category: data.category || '',
-    author: data.author || 'Wild & Well',
-    contentHtml
+    title: String(data.title || slug),
+    summary: String(data.summary || ''),
+    date: data.date ? String(data.date) : '',
+    image: data.image ? String(data.image) : '',
+    tags: Array.isArray(data.tags) ? data.tags.map(String) : [],
+    readTime: data.readTime ? String(data.readTime) : ''
   };
+
+  return { meta, content };
 }
