@@ -40,7 +40,7 @@ function slugFromFilename(filename) {
   return filename.replace(/\.mdx?$/i, "");
 }
 
-// Very small Markdown → HTML (good enough for our content)
+// Minimal Markdown → HTML (good enough for our content)
 function toHtml(md) {
   if (!md) return "";
 
@@ -105,14 +105,13 @@ function toHtml(md) {
 
 function toDateString(val) {
   if (!val) return null;
-  // Accept Date, ISO strings, or "YYYY-MM-DD"
   const d =
     val instanceof Date
       ? val
       : typeof val === "string"
       ? new Date(val)
       : new Date(String(val));
-  if (Number.isNaN(d.getTime())) return String(val); // fallback to raw string
+  if (Number.isNaN(d.getTime())) return String(val);
   return d.toISOString().slice(0, 10); // YYYY-MM-DD
 }
 
@@ -133,5 +132,44 @@ function normalizeMeta(slug, data, content) {
   };
 }
 
-export async function getAllGuides
-::contentReference[oaicite:0]{index=0}
+export async function getAllGuides() {
+  const files = listGuideFiles();
+  return files.map((file) => {
+    const slug = slugFromFilename(file);
+    const raw = fs.readFileSync(path.join(GUIDES_DIR, file), "utf-8");
+    const { data, content } = matter(raw);
+    const meta = normalizeMeta(slug, data, content);
+    const html = toHtml(content || "");
+    return { slug, meta, content: content || "", html };
+  });
+}
+
+export async function getAllGuidesMeta() {
+  const guides = await getAllGuides();
+  return guides.map(({ slug, meta }) => ({ slug, meta }));
+}
+
+export async function getAllGuidesSlugs() {
+  const files = listGuideFiles();
+  return files.map(slugFromFilename);
+}
+
+export async function getGuideBySlug(slug) {
+  const fileMd = path.join(GUIDES_DIR, `${slug}.md`);
+  const fileMdx = path.join(GUIDES_DIR, `${slug}.mdx`);
+  const file = fs.existsSync(fileMd) ? fileMd : fs.existsSync(fileMdx) ? fileMdx : null;
+
+  if (!file) {
+    return {
+      slug,
+      meta: { title: slug.replace(/-/g, " "), draft: true },
+      content: "",
+      html: "<p>Guide not found.</p>",
+    };
+    }
+  const raw = fs.readFileSync(file, "utf-8");
+  const { data, content } = matter(raw);
+  const meta = normalizeMeta(slug, data, content);
+  const html = toHtml(content || "");
+  return { slug, meta, content: content || "", html };
+}
