@@ -1,89 +1,121 @@
-// pages/guides/[slug].js
-import Head from 'next/head';
-import { getAllGuidesMeta, getGuideBySlug } from '../../src/lib/guides';
+import fs from 'fs';
+import path from 'path';
+import matter from 'gray-matter';
+import { marked } from 'marked';
+import Image from 'next/image';
+import Link from 'next/link';
 
-// Lightweight MD -> HTML (no separate util file needed)
-async function mdToHtml(markdown) {
-  const { remark } = await import('remark');
-  const html = (await import('remark-html')).default;
-  const file = await remark().use(html).process(markdown || '');
-  return String(file);
-}
+import SEO from '@/components/SEO';
+import ShareBar from '@/components/ShareBar';
+import EmailSignup from '@/components/EmailSignup';
+import RelatedGuides from '@/components/RelatedGuides';
+import { articleJsonLd } from '@/src/lib/jsonld';
 
-export default function Guide({ meta, html }) {
-  if (!meta) return <main className="article"><p>Not found.</p></main>;
+const SITE = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.wild-and-well.store';
+const GUIDES_DIR = path.join(process.cwd(), 'content', 'guides');
+
+export default function GuidePage({ slug, meta, html, allGuides }) {
+  const canonical = `${SITE}/guides/${slug}`;
+  const jsonLd = articleJsonLd({
+    url: canonical,
+    title: meta.title,
+    description: meta.description || '',
+    datePublished: meta.date || new Date().toISOString(),
+    dateModified: meta.updated || meta.date,
+    image: meta.ogImage || meta.cover
+  });
 
   return (
-    <main className="article">
-      <Head>
-        <title>{meta.title} – Wild &amp; Well</title>
-        {meta.summary ? <meta name="description" content={meta.summary} /> : null}
-        {meta.image ? <meta property="og:image" content={meta.image} /> : null}
-      </Head>
+    <main className="max-w-3xl mx-auto px-4 py-10">
+      <SEO
+        title={meta.title}
+        description={meta.description || ''}
+        canonical={canonical}
+        image={meta.ogImage || meta.cover}
+      />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
 
-      <header style={{ marginBottom: 14 }}>
-        <h1 style={{ margin: 0 }}>{meta.title}</h1>
-        <p style={{ color: 'var(--muted)', margin: '6px 0 0' }}>
-          {meta.date ? <>Updated {meta.date}</> : null}
-          {meta.readTime ? <>{meta.date ? ' • ' : ''}{meta.readTime}</> : null}
+      <article>
+        <header className="mb-6">
+          <h1 className="text-3xl font-bold">{meta.title}</h1>
+          {meta.description && <p className="text-gray-600 mt-2">{meta.description}</p>}
+          {meta.cover && (
+            <div className="relative w-full h-64 mt-4 rounded-xl overflow-hidden">
+              <Image src={meta.cover} alt={meta.title} fill className="object-cover" />
+            </div>
+          )}
+        </header>
+
+        <div className="prose max-w-none" dangerouslySetInnerHTML={{ __html: html }} />
+
+        <div className="mt-8">
+          <ShareBar url={canonical} title={meta.title} />
+        </div>
+
+        <div className="mt-10">
+          <EmailSignup />
+        </div>
+
+        <RelatedGuides currentSlug={slug} tags={meta.tags || []} allGuides={allGuides} />
+      </article>
+
+      <footer className="mt-12 text-xs text-gray-500">
+        <p>
+          We may earn from qualifying purchases (affiliate links). We only recommend products we genuinely like.
         </p>
-        {meta.image ? (
-          <img
-            src={meta.image}
-            alt=""
-            style={{ width: '100%', height: 'auto', borderRadius: 12, marginTop: 10 }}
-          />
-        ) : null}
-      </header>
-
-      {/* Simple affiliate note so there is no missing component import */}
-      <div
-        style={{
-          fontSize: '0.95rem',
-          lineHeight: 1.5,
-          background: 'var(--card)',
-          border: '1px solid var(--border)',
-          padding: '12px 14px',
-          borderRadius: 10,
-          margin: '10px 0 18px'
-        }}
-      >
-        Heads up: some links are affiliate links. If you buy through them, we may earn a small commission at no extra cost to you.
-      </div>
-
-      <article className="prose" dangerouslySetInnerHTML={{ __html: html }} />
-
-      <hr style={{ margin: '28px 0', border: 'none', borderTop: '1px solid var(--border)' }} />
-
-      <p>
-        <strong>More:</strong> <a href="/guides">Explore all guides</a>
-      </p>
-
-      <style jsx>{`
-        .article {
-          max-width: 760px;
-          margin: 0 auto;
-          padding: 22px 16px 40px;
-        }
-        .prose :global(h2) { margin-top: 1.6em; }
-        .prose :global(img) { border-radius: 10px; }
-        .prose :global(a) { text-decoration: underline; }
-      `}</style>
+        <p className="mt-1">
+          <Link href="/disclosure" className="underline">Read our full disclosure</Link>.
+        </p>
+      </footer>
     </main>
   );
 }
 
 export async function getStaticPaths() {
-  const guides = getAllGuidesMeta();
-  return {
-    paths: guides.map(g => ({ params: { slug: g.slug } })),
-    fallback: false
-  };
+  const files = fs.existsSync(GUIDES_DIR) ? fs.readdirSync(GUIDES_DIR) : [];
+  const paths = files.filter(f => f.endsWith('.md')).map(name => ({
+    params: { slug: name.replace(/\.md$/, '') }
+  }));
+  return { paths, fallback: false };
 }
 
 export async function getStaticProps({ params }) {
-  const data = getGuideBySlug(params.slug);
-  if (!data) return { props: { meta: null, html: '' } };
-  const html = await mdToHtml(data.content);
-  return { props: { meta: data.meta, html } };
+  const filePath = path.join(GUIDES_DIR, `${params.slug}.md`);
+  const file = fs.readFileSync(filePath, 'utf8');
+  const { content, data } = matter(file);
+
+  // markdown -> HTML
+  const html = marked.parse(content);
+
+  // Collect all guides (for Related)
+  const files = fs.existsSync(GUIDES_DIR) ? fs.readdirSync(GUIDES_DIR) : [];
+  const allGuides = files
+    .filter(f => f.endsWith('.md'))
+    .map(name => {
+      const raw = fs.readFileSync(path.join(GUIDES_DIR, name), 'utf8');
+      const { data: fm } = matter(raw);
+      return {
+        slug: name.replace(/\.md$/, ''),
+        title: fm.title || name,
+        description: fm.description || '',
+        tags: fm.tags || []
+      };
+    });
+
+  return {
+    props: {
+      slug: params.slug,
+      meta: {
+        title: data.title || params.slug,
+        description: data.description || '',
+        cover: data.cover || '',
+        ogImage: data.ogImage || data.cover || '',
+        date: data.date || null,
+        updated: data.updated || null,
+        tags: data.tags || []
+      },
+      html,
+      allGuides
+    }
+  };
 }
