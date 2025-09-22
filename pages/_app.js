@@ -4,6 +4,7 @@ import { useEffect } from 'react';
 import { useRouter } from 'next/router';
 import Script from 'next/script';
 import ConsentBanner from '../components/ConsentBanner';
+import StickyNewsletter from '../components/StickyNewsletter';
 import * as gtag from '../src/lib/gtag';
 
 function MyApp({ Component, pageProps }) {
@@ -123,7 +124,7 @@ function MyApp({ Component, pageProps }) {
         `}
       </Script>
 
-      {/* GA4 loader + config (page_view is sent manually on route change) */}
+      {/* GA4 loader + config */}
       <Script
         src={`https://www.googletagmanager.com/gtag/js?id=${gtag.GA_MEASUREMENT_ID}`}
         strategy="afterInteractive"
@@ -136,6 +137,7 @@ function MyApp({ Component, pageProps }) {
       </Script>
 
       <ConsentBanner />
+      <StickyNewsletter />
       <Component {...pageProps} />
     </>
   );
