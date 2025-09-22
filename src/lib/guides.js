@@ -4,54 +4,28 @@ import path from "path";
 import matter from "gray-matter";
 import slugify from "slugify";
 
-const GUIDES_DIR = path.join(process.cwd(), "content", "guides");
-
-const isMD = (f) => /\.mdx?$/.test(f);
+const guidesDir = path.join(process.cwd(), "content", "guides");
 
 export function getAllGuideSlugs() {
-  if (!fs.existsSync(GUIDES_DIR)) return [];
-  return fs.readdirSync(GUIDES_DIR).filter(isMD).map((f) => f.replace(/\.mdx?$/, ""));
+  return fs
+    .readdirSync(guidesDir)
+    .filter((f) => f.endsWith(".md") || f.endsWith(".mdx"))
+    .map((f) => f.replace(/\.mdx?$/, ""));
 }
 
-function fileFor(slug) {
-  const md = path.join(GUIDES_DIR, `${slug}.md`);
-  const mdx = path.join(GUIDES_DIR, `${slug}.mdx`);
-  return fs.existsSync(md) ? md : mdx;
-}
+export function getGuideBySlug(slug) {
+  const mdPath = path.join(guidesDir, `${slug}.md`);
+  const mdxPath = path.join(guidesDir, `${slug}.mdx`);
+  const filePath = fs.existsSync(mdPath) ? mdPath : mdxPath;
 
-export function readGuide(slug) {
-  const p = fileFor(slug);
-  const raw = fs.readFileSync(p, "utf8");
-  const { data, content } = matter(raw);
-
-  // Normalize/serialize date
-  const rawDate = data.date ?? data.published ?? null;
-  const isoDate =
-    typeof rawDate === "string"
-      ? new Date(rawDate).toISOString()
-      : rawDate && typeof rawDate.toISOString === "function"
-      ? rawDate.toISOString()
-      : null;
+  const file = fs.readFileSync(filePath, "utf8");
+  const { content, data } = matter(file);
 
   const meta = {
-    title: data.title || slug,
-    description: data.description || data.excerpt || "",
-    coverImage: data.coverImage || data.image || null,
-    tags: Array.isArray(data.tags)
-      ? data.tags
-      : data.tags
-      ? String(data.tags).split(",").map((t) => t.trim()).filter(Boolean)
-      : [],
-    slug: slugify(slug, { lower: true, strict: true }),
-    date: isoDate, // <- JSON-serializable
-    author: data.author || null,
+    ...data,
+    slug: data.slug || slugify(data.title || slug, { lower: true, strict: true }),
+    // leave date as-is here; we serialize it in getStaticProps
   };
 
-  return { meta, content };
-}
-
-export function getAllGuidesMeta() {
-  return getAllGuideSlugs()
-    .map((s) => readGuide(s).meta)
-    .sort((a, b) => (b.date || "").localeCompare(a.date || ""));
+  return { content, meta };
 }
