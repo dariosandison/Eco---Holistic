@@ -1,10 +1,9 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
-  swcMinify: true,
-  images: { unoptimized: true }, // fine for static export + PNGs
-  output: 'export',
-  trailingSlash: false
+  images: {
+    unoptimized: true
+  },
+  output: 'export' // replaces next export
 };
-
-module.exports = nextConfig;
+export default nextConfig;
