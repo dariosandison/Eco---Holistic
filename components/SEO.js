@@ -2,34 +2,40 @@
 import Head from "next/head";
 
 export default function SEO({
-  title = "Wild & Well",
-  description = "Your guide to eco-living, holistic health, and mindful wellness.",
-  path = "/",
-  image = "/cover.png"
+  title,
+  description,
+  canonical,
+  ogImage,
+  jsonLd, // plain JS object
+  noIndex = false,
+  siteName = "Eco & Holistic",
 }) {
-  const site = process.env.NEXT_PUBLIC_SITE_URL || "https://www.wild-and-well.store";
-  const url = `${site}${path}`;
-  const img = image.startsWith("http") ? image : `${site}${image}`;
+  const fullTitle = title ? `${title} | ${siteName}` : siteName;
+  const ldString = jsonLd ? JSON.stringify(jsonLd) : null;
 
   return (
     <Head>
-      <title>{title}</title>
-      <meta name="description" content={description} />
-      <link rel="canonical" href={url} />
+      <title>{fullTitle}</title>
+      {description && <meta name="description" content={description} />}
+      {canonical && <link rel="canonical" href={canonical} />}
 
       {/* Open Graph */}
-      <meta property="og:type" content="website" />
-      <meta property="og:site_name" content="Wild & Well" />
-      <meta property="og:title" content={title} />
-      <meta property="og:description" content={description} />
-      <meta property="og:url" content={url} />
-      <meta property="og:image" content={img} />
+      <meta property="og:site_name" content={siteName} />
+      <meta property="og:type" content="article" />
+      {title && <meta property="og:title" content={title} />}
+      {description && <meta property="og:description" content={description} />}
+      {ogImage && <meta property="og:image" content={ogImage} />}
 
-      {/* Twitter */}
-      <meta name="twitter:card" content="summary_large_image" />
-      <meta name="twitter:title" content={title} />
-      <meta name="twitter:description" content={description} />
-      <meta name="twitter:image" content={img} />
+      {/* Robots */}
+      {noIndex && <meta name="robots" content="noindex,nofollow" />}
+
+      {/* ✅ Correct JSON-LD injection */}
+      {ldString && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: ldString }}
+        />
+      )}
     </Head>
   );
 }
