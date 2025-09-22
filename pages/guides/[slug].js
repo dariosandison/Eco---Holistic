@@ -1,7 +1,7 @@
 // pages/guides/[slug].js
 import { useRouter } from "next/router";
-import { markdownToHtml } from "@/src/lib/markdown";
-import { getAllGuideSlugs, getGuideBySlug } from "@/src/lib/guides";
+import { markdownToHtml } from "../../src/lib/markdown";
+import { getAllGuideSlugs, getGuideBySlug } from "../../src/lib/guides";
 
 const formatDate = (iso) =>
   iso
@@ -20,30 +20,34 @@ export default function GuidePage({ html, meta }) {
     <main className="container mx-auto max-w-3xl px-4 py-10">
       <article className="prose prose-zinc lg:prose-lg">
         <h1>{meta.title}</h1>
-        {meta.date && <time dateTime={meta.date}>{formatDate(meta.date)}</time>}
+        {meta.date && (
+          <p className="text-sm opacity-70">
+            <time dateTime={meta.date}>{formatDate(meta.date)}</time>
+          </p>
+        )}
         {meta.author && <p className="text-sm opacity-70">By {meta.author}</p>}
-        <div dangerouslySetInnerHTML={{ __html: html }} />
+        {meta.description && <p className="mt-2">{meta.description}</p>}
+        <div className="mt-6" dangerouslySetInnerHTML={{ __html: html }} />
       </article>
     </main>
   );
 }
 
 export async function getStaticPaths() {
-  const slugs = await getAllGuideSlugs(); // e.g. ['water-filters', ...]
-  return { paths: slugs.map((slug) => ({ params: { slug } })), fallback: false };
+  const slugs = getAllGuideSlugs(); // e.g. ['water-filters', ...]
+  return {
+    paths: slugs.map((slug) => ({ params: { slug } })),
+    fallback: false,
+  };
 }
 
 export async function getStaticProps({ params }) {
-  const { content, meta } = await getGuideBySlug(params.slug);
-
-  // MD -> HTML
+  const { content, meta } = getGuideBySlug(params.slug);
   const html = await markdownToHtml(content || "");
-
-  // Make meta fully JSON-serializable (fixes Next export)
-  const safeMeta = {
-    ...meta,
-    date: meta?.date ? new Date(meta.date).toISOString() : null,
+  return {
+    props: {
+      html,
+      meta, // already serializable from lib
+    },
   };
-
-  return { props: { html, meta: safeMeta } };
 }
