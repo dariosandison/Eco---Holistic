@@ -1,15 +1,7 @@
 // src/lib/gtag.js
-export const GA_ID = process.env.NEXT_PUBLIC_GA_ID || '';
+export const GA_MEASUREMENT_ID = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID || "G-0G3ER4B1RE";
 
-export const pageview = (url) => {
-  if (!GA_ID || typeof window === 'undefined' || !window.gtag) return;
-  window.gtag('config', GA_ID, {
-    page_path: url,
-    anonymize_ip: true,
-  });
-};
-
-export const event = (action, params = {}) => {
-  if (!GA_ID || typeof window === 'undefined' || !window.gtag) return;
-  window.gtag('event', action, params);
-};
+export function gtag(event, params = {}) {
+  if (typeof window === "undefined") return;
+  window.gtag?.("event", event, params);
+}
