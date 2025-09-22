@@ -1,67 +1,38 @@
 import { promises as fs } from 'fs';
 import path from 'path';
 
-const site = process.env.SITE_URL || 'https://www.wild-and-well.store';
-
-const routes = [
-  '/',
-  '/about',
-  '/guides',
-  '/blog',
-  '/recommended',
-  '/deals',
-  '/contact',
-  '/privacy',
-  '/terms',
-  '/cookies',
-  '/disclosure',
-  '/search'
+const SITE = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.wild-and-well.store';
+const staticRoutes = [
+  '/', '/guides', '/about', '/contact',
+  '/disclosure', '/privacy', '/terms', '/recommended', '/search', '/cookies', '/deals'
 ];
 
 async function getGuideSlugs() {
-  const contentDir = path.join(process.cwd(), 'content', 'guides');
   try {
-    const files = await fs.readdir(contentDir);
-    return files
-      .filter(f => f.endsWith('.md') || f.endsWith('.mdx'))
-      .map(f => f.replace(/\.mdx?$/, ''));
+    const dir = path.join(process.cwd(), 'content', 'guides');
+    const entries = await fs.readdir(dir);
+    return entries.filter(f => f.endsWith('.md')).map(f => f.replace(/\.md$/, ''));
   } catch {
     return [];
   }
 }
 
-function xmlUrl(loc, priority = '0.80') {
-  return `<url><loc>${loc}</loc><changefreq>weekly</changefreq><priority>${priority}</priority></url>`;
-}
-
 async function run() {
-  const guideSlugs = await getGuideSlugs();
-  const guideUrls = guideSlugs.map(s => `${site}/guides/${s}`);
-
+  const slugs = await getGuideSlugs();
   const urls = [
-    ...routes.map(r => `${site}${r}`),
-    ...guideUrls
+    ...staticRoutes.map(r => `${SITE}${r}`),
+    ...slugs.map(s => `${SITE}/guides/${s}`)
   ];
+  const now = new Date().toISOString();
+  const xml =
+    `<?xml version="1.0" encoding="UTF-8"?>\n` +
+    `<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n` +
+    urls.map(u => `  <url><loc>${u}</loc><lastmod>${now}</lastmod><changefreq>weekly</changefreq></url>`).join('\n') +
+    `\n</urlset>`;
 
-  const body = urls.map(u => xmlUrl(u)).join('');
-  const xml = `<?xml version="1.0" encoding="UTF-8"?>
-  <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  ${body}
-  </urlset>`;
-
-  const pub = path.join(process.cwd(), 'public');
-  await fs.mkdir(pub, { recursive: true });
-  await fs.writeFile(path.join(pub, 'sitemap.xml'), xml, 'utf8');
-
-  // robots.txt
-  const robots = `User-agent: *
-Allow: /
-
-Sitemap: ${site}/sitemap.xml
-`;
-  await fs.writeFile(path.join(pub, 'robots.txt'), robots, 'utf8');
-
-  console.log('✓ sitemap.xml and robots.txt generated');
+  await fs.mkdir('public', { recursive: true });
+  await fs.writeFile('public/sitemap.xml', xml, 'utf8');
+  await fs.writeFile('public/robots.txt', `User-agent: *\nAllow: /\nSitemap: ${SITE}/sitemap.xml\n`, 'utf8');
+  console.log('Sitemap and robots.txt generated.');
 }
-
 run();
