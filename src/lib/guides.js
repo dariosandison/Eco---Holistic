@@ -1,10 +1,10 @@
 // /src/lib/guides.js
-// ESM-friendly utilities to load Markdown guides at build time
+// Utilities to load Markdown guides at build time (ESM-safe)
+
 import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
 
-// Try a few common folders; use the first that exists
 const CANDIDATE_DIRS = [
   "content/guides",
   "src/content/guides",
@@ -22,7 +22,7 @@ function findGuidesDir() {
     const full = rootPath(p);
     if (fs.existsSync(full) && fs.statSync(full).isDirectory()) return full;
   }
-  // Default (ok if empty)
+  // default (ok if empty)
   return rootPath("content/guides");
 }
 
@@ -40,19 +40,19 @@ function slugFromFilename(filename) {
   return filename.replace(/\.mdx?$/i, "");
 }
 
-// Tiny Markdown → HTML (covers common basics; no extra deps)
+// Very small Markdown → HTML (good enough for our content)
 function toHtml(md) {
   if (!md) return "";
 
-  // Escape HTML
+  // escape basic HTML
   let html = md.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
 
-  // Fences
+  // code fences
   html = html.replace(/```([\s\S]*?)```/g, (_m, code) => `<pre><code>${code.trim()}</code></pre>`);
-  // Inline code
+  // inline code
   html = html.replace(/`([^`]+)`/g, "<code>$1</code>");
 
-  // Headings
+  // headings
   html = html.replace(/^######\s?(.*)$/gm, "<h6>$1</h6>");
   html = html.replace(/^#####\s?(.*)$/gm, "<h5>$1</h5>");
   html = html.replace(/^####\s?(.*)$/gm, "<h4>$1</h4>");
@@ -60,17 +60,17 @@ function toHtml(md) {
   html = html.replace(/^##\s?(.*)$/gm, "<h2>$1</h2>");
   html = html.replace(/^#\s?(.*)$/gm, "<h1>$1</h1>");
 
-  // Bold / italic
+  // emphasis
   html = html.replace(/\*\*([^*]+)\*\*/g, "<strong>$1</strong>");
   html = html.replace(/__([^_]+)__/g, "<strong>$1</strong>");
   html = html.replace(/\*([^*]+)\*/g, "<em>$1</em>");
   html = html.replace(/_([^_]+)_/g, "<em>$1</em>");
 
-  // Links + images
+  // images and links
   html = html.replace(/!\[([^\]]*)\]\(([^)]+)\)/g, '<img alt="$1" src="$2" />');
   html = html.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2">$1</a>');
 
-  // Unordered lists
+  // unordered lists
   html = html.replace(/^(?:-|\*) (.*(?:\n(?:-|\*) .*)*)/gm, (m) => {
     const items = m
       .split("\n")
@@ -80,7 +80,7 @@ function toHtml(md) {
     return `<ul>${items}</ul>`;
   });
 
-  // Ordered lists
+  // ordered lists
   html = html.replace(/^(?:\d+)\. (.*(?:\n(?:\d+)\. .*)*)/gm, (m) => {
     const items = m
       .split("\n")
@@ -90,7 +90,7 @@ function toHtml(md) {
     return `<ol>${items}</ol>`;
   });
 
-  // Paragraphs
+  // paragraph wrap remaining blocks
   html = html
     .split(/\n{2,}/)
     .map((block) =>
@@ -103,17 +103,35 @@ function toHtml(md) {
   return html;
 }
 
+function toDateString(val) {
+  if (!val) return null;
+  // Accept Date, ISO strings, or "YYYY-MM-DD"
+  const d =
+    val instanceof Date
+      ? val
+      : typeof val === "string"
+      ? new Date(val)
+      : new Date(String(val));
+  if (Number.isNaN(d.getTime())) return String(val); // fallback to raw string
+  return d.toISOString().slice(0, 10); // YYYY-MM-DD
+}
+
 function normalizeMeta(slug, data, content) {
-  const title = data.title || slug.replace(/-/g, " ").replace(/\b\w/g, (c) => c.toUpperCase());
-  const description = data.description || (content || "").replace(/\s+/g, " ").trim().slice(0, 160);
-  const date = data.date ? String(data.date) : null;
-  const updated = data.updated ? String(data.updated) : null;
+  const title =
+    data.title || slug.replace(/-/g, " ").replace(/\b\w/g, (c) => c.toUpperCase());
+  const description =
+    data.description || (content || "").replace(/\s+/g, " ").trim().slice(0, 160);
 
   return {
     ...data,
     title,
     description,
-    date,
-    updated,
-    draft: data.draft === true || data.status === "draft" ? true :
+    date: toDateString(data.date),
+    updated: toDateString(data.updated),
+    draft: data.draft === true || data.status === "draft",
+    status: data.status || (data.draft ? "draft" : "published"),
+  };
+}
+
+export async function getAllGuides
 ::contentReference[oaicite:0]{index=0}
