@@ -1,40 +1,43 @@
 // pages/_app.js
-import '../styles/globals.css';
-import { useEffect } from 'react';
-import { useRouter } from 'next/router';
-import Script from 'next/script';
-import * as gtag from '../src/lib/gtag';
+import { useEffect } from "react";
+import Script from "next/script";
+import { GA_MEASUREMENT_ID, gtag } from "../src/lib/gtag";
+import "../styles/globals.css";
 
 export default function App({ Component, pageProps }) {
-  const router = useRouter();
-
   useEffect(() => {
-    const handleRouteChange = (url) => gtag.pageview(url);
-    router.events.on('routeChangeComplete', handleRouteChange);
-    return () => router.events.off('routeChangeComplete', handleRouteChange);
-  }, [router.events]);
+    // Delegate clicks for links marked as affiliate
+    function onClick(e) {
+      const a = e.target.closest("a");
+      if (!a) return;
+      const isAffiliate = a.dataset?.affiliate === "true";
+      if (!isAffiliate) return;
+      gtag("select_promotion", {
+        promotion_name: "affiliate_link",
+        creative_name: a.textContent?.trim() || "",
+        destination: a.href,
+        page_path: window.location.pathname,
+      });
+    }
+    document.addEventListener("click", onClick);
+    return () => document.removeEventListener("click", onClick);
+  }, []);
 
   return (
     <>
-      {/* GA4 loader */}
-      {gtag.GA_ID && (
-        <>
-          <Script
-            id="ga4-src"
-            src={`https://www.googletagmanager.com/gtag/js?id=${gtag.GA_ID}`}
-            strategy="afterInteractive"
-          />
-          <Script id="ga4-init" strategy="afterInteractive">{`
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-            gtag('config', '${gtag.GA_ID}', {
-              anonymize_ip: true,
-              page_path: window.location.pathname
-            });
-          `}</Script>
-        </>
-      )}
+      {/* GA4 core */}
+      <Script
+        src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`}
+        strategy="afterInteractive"
+      />
+      <Script id="ga4-init" strategy="afterInteractive">
+        {`
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', '${GA_MEASUREMENT_ID}', { anonymize_ip: true });
+        `}
+      </Script>
       <Component {...pageProps} />
     </>
   );
