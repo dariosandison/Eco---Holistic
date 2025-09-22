@@ -1,6 +1,12 @@
+/* Tailwind hooks (safe even if you don't use Tailwind yet) */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* Basic prose styling for markdown-rendered content */
-.prose img { margin: 0; }
+/* Minimal sensible defaults */
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
+.prose img { margin: 0; max-width: 100%; height: auto; }
