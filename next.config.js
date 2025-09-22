@@ -1,9 +1,14 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {
+const config = {
   reactStrictMode: true,
+  output: 'export',
   images: {
-    unoptimized: true
+    // for static export
+    unoptimized: true,
+    remotePatterns: [{ protocol: 'https', hostname: '**' }]
   },
-  output: 'export' // replaces next export
+  compiler: {
+    removeConsole: process.env.NODE_ENV === 'production'
+  }
 };
-export default nextConfig;
+export default config;
