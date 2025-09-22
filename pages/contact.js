@@ -1,45 +1,30 @@
+// /pages/contact.js
 import Head from 'next/head';
+import ContactForm from '../components/ContactForm';
 
-export default function Contact() {
+export default function ContactPage() {
   return (
     <>
       <Head>
-        <title>Contact — Wild & Well</title>
-        <meta name="description" content="Get in touch with Wild & Well." />
-        <link rel="canonical" href="https://www.wild-and-well.store/contact" />
+        <title>Contact | Eco & Holistic</title>
+        <meta name="description" content="Questions, partnerships, feedback — contact Eco & Holistic." />
       </Head>
 
-      <main className="wrap">
-        <h1>Contact</h1>
-        <p>Questions, feedback, or partnership ideas? I’d love to hear from you.</p>
+      <main style={main}>
+        <section style={hero}>
+          <h1 style={h1}>Contact us</h1>
+          <p style={sub}>Questions, partnerships, or feedback — we’d love to hear from you.</p>
+        </section>
 
-        <div className="card">
-          <h2>Email</h2>
-          <p>
-            <a href="mailto:hello@wild-and-well.store">hello@wild-and-well.store</a>
-          </p>
-          <p className="hint">
-            Prefer a form? Your email client will open — this site runs as a static export for speed/privacy.
-          </p>
-        </div>
-
-        <div className="card">
-          <h2>Social</h2>
-          <ul>
-            <li><a href="https://instagram.com/" target="_blank" rel="noreferrer">Instagram</a></li>
-            <li><a href="https://pinterest.com/" target="_blank" rel="noreferrer">Pinterest</a></li>
-            <li><a href="https://facebook.com/" target="_blank" rel="noreferrer">Facebook</a></li>
-          </ul>
-        </div>
+        <section>
+          <ContactForm />
+        </section>
       </main>
-
-      <style jsx>{`
-        .wrap { max-width: 820px; margin: 0 auto; padding: 24px; }
-        h1 { margin-bottom: 8px; }
-        .card { border: 1px solid #eee; border-radius: 10px; padding: 16px; margin: 16px 0; background: #fff; }
-        .hint { color: #666; font-size: 14px; }
-        a { color: #0a7; }
-      `}</style>
     </>
   );
 }
+
+const main = { maxWidth: 960, margin: '0 auto', padding: '32px 16px', fontFamily: 'system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial' };
+const hero = { marginBottom: 24 };
+const h1 = { margin: '0 0 8px', fontSize: 34, lineHeight: 1.1 };
+const sub = { margin: 0, color: '#475569' };
