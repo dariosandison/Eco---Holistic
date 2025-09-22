@@ -1,38 +1,55 @@
-import { promises as fs } from 'fs';
-import path from 'path';
+// /scripts/generate-sitemap.mjs
+import { writeFileSync, existsSync, mkdirSync } from "fs";
+import { SITE } from "../src/site.config.js";
 
-const SITE = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.wild-and-well.store';
-const staticRoutes = [
-  '/', '/guides', '/about', '/contact',
-  '/disclosure', '/privacy', '/terms', '/recommended', '/search', '/cookies', '/deals'
+// We import dynamically to avoid any Node/Next bundling quirks
+const guidesLib = await import("../src/lib/guides.js").catch(() => null);
+
+const BASE_URL = SITE.url.replace(/\/+$/, "");
+const STATIC_ROUTES = [
+  "/", "/guides", "/deals", "/about", "/privacy",
+  "/terms", "/contact", "/recommended", "/cookies", "/disclosure"
 ];
 
-async function getGuideSlugs() {
-  try {
-    const dir = path.join(process.cwd(), 'content', 'guides');
-    const entries = await fs.readdir(dir);
-    return entries.filter(f => f.endsWith('.md')).map(f => f.replace(/\.md$/, ''));
-  } catch {
-    return [];
-  }
+async function getGuideUrls() {
+  if (!guidesLib) return [];
+  const all = (await guidesLib.getAllGuides?.()) || [];
+  const clean = all
+    .filter(g => g?.meta && g.meta.draft !== true && (g.meta.status ? g.meta.status === "published" : true))
+    .map(g => ({
+      loc: `${BASE_URL}/guides/${g.slug}`,
+      lastmod: (g.meta?.updated || g.meta?.date) ? new Date(g.meta.updated || g.meta.date).toISOString() : undefined,
+    }));
+  return clean;
 }
 
-async function run() {
-  const slugs = await getGuideSlugs();
-  const urls = [
-    ...staticRoutes.map(r => `${SITE}${r}`),
-    ...slugs.map(s => `${SITE}/guides/${s}`)
-  ];
-  const now = new Date().toISOString();
-  const xml =
-    `<?xml version="1.0" encoding="UTF-8"?>\n` +
-    `<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n` +
-    urls.map(u => `  <url><loc>${u}</loc><lastmod>${now}</lastmod><changefreq>weekly</changefreq></url>`).join('\n') +
-    `\n</urlset>`;
-
-  await fs.mkdir('public', { recursive: true });
-  await fs.writeFile('public/sitemap.xml', xml, 'utf8');
-  await fs.writeFile('public/robots.txt', `User-agent: *\nAllow: /\nSitemap: ${SITE}/sitemap.xml\n`, 'utf8');
-  console.log('Sitemap and robots.txt generated.');
+function urlTag({ loc, lastmod, changefreq = "weekly", priority = "0.7" }) {
+  return `
+  <url>
+    <loc>${loc}</loc>
+    ${lastmod ? `<lastmod>${lastmod}</lastmod>` : ""}
+    <changefreq>${changefreq}</changefreq>
+    <priority>${priority}</priority>
+  </url>`;
 }
-run();
+
+async function main() {
+  const staticUrls = STATIC_ROUTES.map((p) => ({
+    loc: `${BASE_URL}${p}`,
+    changefreq: "weekly",
+    priority: p === "/" ? "1.0" : "0.8",
+  }));
+
+  const guideUrls = await getGuideUrls();
+
+  const xml = `<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+${[...staticUrls, ...guideUrls].map(urlTag).join("\n")}
+</urlset>`.trim();
+
+  if (!existsSync("public")) mkdirSync("public");
+  writeFileSync("public/sitemap.xml", xml, { encoding: "utf-8" });
+  console.log("✓ sitemap.xml generated");
+}
+
+await main();
