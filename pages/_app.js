@@ -23,4 +23,18 @@ export default function App({ Component, pageProps }) {
             strategy="afterInteractive"
           />
           <Script id="gtag-init" strategy="afterInteractive">
-            {
+            {`
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              window.gtag = gtag;
+              gtag('js', new Date());
+              gtag('config', '${gtag.GA_ID}', { page_path: window.location.pathname });
+            `}
+          </Script>
+        </>
+      )}
+      <Component {...pageProps} />
+    </>
+  );
+}
+
