@@ -1,67 +1,49 @@
 // pages/guides/[slug].js
-import { getAllGuideSlugs, readGuide } from "@/src/lib/guides";
+import { useRouter } from "next/router";
 import { markdownToHtml } from "@/src/lib/markdown";
-import SEO from "@/components/SEO";
+import { getAllGuideSlugs, getGuideBySlug } from "@/src/lib/guides";
 
-export default function GuidePage({ meta, html }) {
-  const published = meta.date || null;
+const formatDate = (iso) =>
+  iso
+    ? new Date(iso).toLocaleDateString("en-US", {
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+      })
+    : null;
 
-  const jsonLd =
-    meta && {
-      "@context": "https://schema.org",
-      "@type": "Article",
-      headline: meta.title,
-      description: meta.description,
-      datePublished: published,
-      image: meta.coverImage ? [meta.coverImage] : undefined,
-    };
+export default function GuidePage({ html, meta }) {
+  const router = useRouter();
+  if (router.isFallback) return <main className="px-4 py-10">Loading…</main>;
 
   return (
-    <>
-      <SEO
-        title={meta.title}
-        description={meta.description}
-        canonical={`https://www.ecoandholistic.com/guides/${meta.slug}`}
-        ogImage={meta.coverImage}
-        jsonLd={jsonLd}
-      />
-      <main className="container mx-auto px-4 max-w-3xl py-8">
-        <article>
-          <h1 className="text-3xl font-semibold mb-3">{meta.title}</h1>
-          {published && (
-            <p className="text-sm text-neutral-500 mb-6">
-              Updated {new Date(published).toLocaleDateString()}
-            </p>
-          )}
-          <div
-            className="prose prose-neutral max-w-none"
-            dangerouslySetInnerHTML={{ __html: html }}
-          />
-        </article>
-      </main>
-    </>
+    <main className="container mx-auto max-w-3xl px-4 py-10">
+      <article className="prose prose-zinc lg:prose-lg">
+        <h1>{meta.title}</h1>
+        {meta.date && <time dateTime={meta.date}>{formatDate(meta.date)}</time>}
+        {meta.author && <p className="text-sm opacity-70">By {meta.author}</p>}
+        <div dangerouslySetInnerHTML={{ __html: html }} />
+      </article>
+    </main>
   );
 }
 
 export async function getStaticPaths() {
-  const slugs = getAllGuideSlugs();
-  return {
-    paths: slugs.map((slug) => ({ params: { slug } })),
-    fallback: false,
-  };
+  const slugs = await getAllGuideSlugs(); // e.g. ['water-filters', ...]
+  return { paths: slugs.map((slug) => ({ params: { slug } })), fallback: false };
 }
 
 export async function getStaticProps({ params }) {
-  const { meta, content } = readGuide(params.slug);
-  const html = await markdownToHtml(content);
+  const { content, meta } = await getGuideBySlug(params.slug);
 
-  // ✅ Ensure everything is serializable
+  // MD -> HTML
+  const html = await markdownToHtml(content || "");
+
+  // Make meta fully JSON-serializable (fixes Next export)
   const safeMeta = {
     ...meta,
-    date: meta.date || null,
+    date: meta?.date ? new Date(meta.date).toISOString() : null,
   };
 
-  return {
-    props: { meta: safeMeta, html },
-  };
+  return { props: { html, meta: safeMeta } };
 }
