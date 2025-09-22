@@ -1,13 +1,13 @@
-import Head from 'next/head';
+import Head from "next/head";
 
 export default function SEO({
-  title = 'Wild & Well',
-  description = 'Guides for eco-living, holistic health, and mindful wellness.',
+  title = "Wild & Well",
+  description = "Guides for eco-living, holistic health, and mindful wellness.",
   canonical,
   image,
-  noindex = false
+  noindex = false,
 }) {
-  const siteName = 'Wild & Well';
+  const siteName = "Wild & Well";
   const fullTitle = title ? `${title} | ${siteName}` : siteName;
 
   return (
