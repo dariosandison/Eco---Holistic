@@ -23,15 +23,10 @@ export default function Guide({ meta, html }) {
         ) : null}
       </header>
 
-      {/* Short, clear affiliate note near the top */}
       <AffiliateNote />
 
-      <div
-        className="prose"
-        dangerouslySetInnerHTML={{ __html: html }}
-      />
+      <div className="prose" dangerouslySetInnerHTML={{ __html: html }} />
 
-      {/* Related links */}
       <hr style={{margin:'28px 0',border:'none',borderTop:'1px solid var(--border)'}}/>
       <div>
         <strong>Related:</strong>{' '}
