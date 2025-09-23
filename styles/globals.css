@@ -39,10 +39,8 @@ a:hover { color: var(--brand-600); }
   @apply max-w-5xl mx-auto px-4;
 }
 
-/* Prose (markdown content) */
-.prose {
-  @apply prose prose-slate;
-}
+/* REMOVE the .prose @apply block — it causes the build error */
+/* Use className="prose prose-slate" directly in JSX instead. */
 
 /* Header & footer quick polish */
 .site-header {
