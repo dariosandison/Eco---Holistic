@@ -1,55 +1,74 @@
 // /scripts/generate-sitemap.mjs
-import { writeFileSync, existsSync, mkdirSync } from "fs";
-import { SITE } from "../src/site.config.js";
+import fs from "fs/promises";
+import path from "path";
+import { fileURLToPath } from "url";
 
-// We import dynamically to avoid any Node/Next bundling quirks
-const guidesLib = await import("../src/lib/guides.js").catch(() => null);
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
-const BASE_URL = SITE.url.replace(/\/+$/, "");
-const STATIC_ROUTES = [
-  "/", "/guides", "/deals", "/about", "/privacy",
-  "/terms", "/contact", "/recommended", "/cookies", "/disclosure"
+// Helpers
+async function readJsonSafe(relative) {
+  try {
+    const p = path.join(__dirname, "..", relative);
+    const raw = await fs.readFile(p, "utf8");
+    return JSON.parse(raw);
+  } catch {
+    return null;
+  }
+}
+
+const SITE = process.env.NEXT_PUBLIC_SITE_URL || "https://www.wild-and-well.store";
+const today = new Date().toISOString().slice(0, 10);
+
+// Static pages
+const staticPaths = [
+  "/", "/about", "/contact", "/blog", "/guides",
+  "/recommended", "/deals", "/privacy", "/terms",
+  "/cookies", "/disclosure"
 ];
 
-async function getGuideUrls() {
-  if (!guidesLib) return [];
-  const all = (await guidesLib.getAllGuides?.()) || [];
-  const clean = all
-    .filter(g => g?.meta && g.meta.draft !== true && (g.meta.status ? g.meta.status === "published" : true))
-    .map(g => ({
-      loc: `${BASE_URL}/guides/${g.slug}`,
-      lastmod: (g.meta?.updated || g.meta?.date) ? new Date(g.meta.updated || g.meta.date).toISOString() : undefined,
-    }));
-  return clean;
+const urls = new Map();
+staticPaths.forEach((p) => urls.set(p, { loc: `${SITE}${p}`, lastmod: today, changefreq: "weekly" }));
+
+// Blog posts from JSON
+const blog = await readJsonSafe("src/data/blog.json");
+if (blog?.posts?.length) {
+  blog.posts.forEach((p) => {
+    urls.set(`/blog/${p.slug}`, {
+      loc: `${SITE}/blog/${p.slug}`,
+      lastmod: (p.updated || p.date || today),
+      changefreq: "monthly"
+    });
+  });
 }
 
-function urlTag({ loc, lastmod, changefreq = "weekly", priority = "0.7" }) {
-  return `
-  <url>
-    <loc>${loc}</loc>
-    ${lastmod ? `<lastmod>${lastmod}</lastmod>` : ""}
-    <changefreq>${changefreq}</changefreq>
-    <priority>${priority}</priority>
-  </url>`;
+// (Optional) Guides from JSON if present
+const guides = await readJsonSafe("src/data/guides.json");
+if (guides?.items?.length) {
+  guides.items.forEach((g) => {
+    urls.set(`/guides/${g.slug}`, {
+      loc: `${SITE}/guides/${g.slug}`,
+      lastmod: (g.updated || g.date || today),
+      changefreq: "monthly"
+    });
+  });
 }
 
-async function main() {
-  const staticUrls = STATIC_ROUTES.map((p) => ({
-    loc: `${BASE_URL}${p}`,
-    changefreq: "weekly",
-    priority: p === "/" ? "1.0" : "0.8",
-  }));
-
-  const guideUrls = await getGuideUrls();
-
-  const xml = `<?xml version="1.0" encoding="UTF-8"?>
+const xml = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-${[...staticUrls, ...guideUrls].map(urlTag).join("\n")}
-</urlset>`.trim();
+${[...urls.values()]
+  .map(
+    (u) => `  <url>
+    <loc>${u.loc}</loc>
+    <lastmod>${u.lastmod}</lastmod>
+    <changefreq>${u.changefreq}</changefreq>
+  </url>`
+  )
+  .join("\n")}
+</urlset>`;
 
-  if (!existsSync("public")) mkdirSync("public");
-  writeFileSync("public/sitemap.xml", xml, { encoding: "utf-8" });
-  console.log("✓ sitemap.xml generated");
-}
+const outDir = path.join(__dirname, "..", "public");
+await fs.mkdir(outDir, { recursive: true });
+await fs.writeFile(path.join(outDir, "sitemap.xml"), xml, "utf8");
 
-await main();
+console.log(`Sitemap written: ${path.join(outDir, "sitemap.xml")}`);
