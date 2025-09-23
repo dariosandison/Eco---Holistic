@@ -1,4 +1,8 @@
 User-agent: *
 Allow: /
 
+# Block API routes (optional)
+Disallow: /api/
+
 Sitemap: https://www.wild-and-well.store/sitemap.xml
+Host: www.wild-and-well.store
