@@ -1,62 +1,104 @@
-// /pages/index.js
+// pages/index.js
+import Head from "next/head";
 import Link from "next/link";
-import SEO from "../components/SEO";
 import { getAllGuidesMeta } from "../src/lib/guides";
-import { getAllPostsMeta } from "../src/lib/blog";
 
-export async function getStaticProps() {
-  const guides = getAllGuidesMeta().sort((a,b)=> (a.updated < b.updated ? 1 : -1)).slice(0,6);
-  const posts = getAllPostsMeta().sort((a,b)=> (a.updated < b.updated ? 1 : -1)).slice(0,3);
-  return { props: { guides, posts } };
+function toArray(maybe) {
+  if (Array.isArray(maybe)) return maybe;
+  if (!maybe || typeof maybe !== "object") return [];
+  if (Array.isArray(maybe.items)) return maybe.items;
+  if (Array.isArray(maybe.guides)) return maybe.guides;
+  if (Array.isArray(maybe.data)) return maybe.data;
+  const vals = Object.values(maybe);
+  return Array.isArray(vals) ? vals : [];
 }
 
-export default function Home({ guides, posts }) {
+export default function Home({ latest }) {
   return (
     <>
-      <SEO
-        title="Feel better. Live cleaner."
-        description="Actionable guides, low-tox picks, and no-BS wellness tips."
-        path="/"
-      />
-      <div className="container">
-        <section className="hero">
-          <h1>Feel better. Live cleaner.</h1>
-          <p>Practical guides, curated picks, and simple habits that actually help.</p>
-          <div style={{marginTop:16}}>
-            <Link href="/guides" className="btn">Browse Guides</Link>
-          </div>
+      <Head>
+        <title>Wild & Well</title>
+        <meta
+          name="description"
+          content="Simple, evidence-guided tips for low-tox living and better health."
+        />
+        <link rel="canonical" href="https://www.wild-and-well.store/" />
+      </Head>
+
+      <main className="mx-auto max-w-5xl px-4 py-10">
+        <section className="mb-10">
+          <h1 className="text-3xl font-semibold tracking-tight">
+            Wild & Well
+          </h1>
+          <p className="mt-2 text-slate-600">
+            Practical, low-tox guides. No fluff, just what works.
+          </p>
         </section>
 
-        <section className="section">
-          <h2 style={{margin:"0 0 12px", color:"var(--brand-dark)"}}>Featured Guides</h2>
-          <div className="cards">
-            {guides.map(g => (
-              <article className="card" key={g.slug}>
-                <h3>
-                  <Link href={`/guides/${g.slug}`}>{g.title}</Link>
-                </h3>
-                <p className="muted" style={{margin:"0 0 12px"}}>{g.excerpt}</p>
-                <Link href={`/guides/${g.slug}`}>Read guide →</Link>
-              </article>
-            ))}
+        <section>
+          <div className="mb-4 flex items-baseline justify-between">
+            <h2 className="text-xl font-medium">Latest guides</h2>
+            <Link className="text-sm underline" href="/guides">
+              View all →
+            </Link>
           </div>
-        </section>
 
-        <section className="section">
-          <h2 style={{margin:"0 0 12px", color:"var(--brand-dark)"}}>Latest from the Blog</h2>
-          <div className="cards">
-            {posts.map(p => (
-              <article className="card" key={p.slug}>
-                <h3>
-                  <Link href={`/blog/${p.slug}`}>{p.title}</Link>
-                </h3>
-                <p className="muted" style={{margin:"0 0 12px"}}>{p.excerpt}</p>
-                <Link href={`/blog/${p.slug}`}>Read post →</Link>
-              </article>
-            ))}
-          </div>
+          {latest.length === 0 ? (
+            <p>No guides yet.</p>
+          ) : (
+            <ul className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+              {latest.map((g) => (
+                <li key={g.slug} className="rounded-lg border p-4">
+                  <h3 className="text-lg font-medium">
+                    <Link className="underline" href={`/guides/${g.slug}`}>
+                      {g.title}
+                    </Link>
+                  </h3>
+                  {g.description ? (
+                    <p className="mt-2 text-sm text-slate-600">
+                      {g.description}
+                    </p>
+                  ) : null}
+                  <p className="mt-2 text-xs text-slate-500">
+                    {g.updated || g.date ? (
+                      <>Updated: {g.updated || g.date}</>
+                    ) : (
+                      <> </>
+                    )}
+                  </p>
+                </li>
+              ))}
+            </ul>
+          )}
         </section>
-      </div>
+      </main>
     </>
   );
+}
+
+export async function getStaticProps() {
+  try {
+    const raw = await getAllGuidesMeta();
+    const list = toArray(raw)
+      .filter(Boolean)
+      .map((g) => ({
+        slug: g.slug ?? "",
+        title: g.title ?? "Untitled",
+        description: g.description ?? g.excerpt ?? null,
+        image: g.image ?? null,
+        date: g.date ?? null,
+        updated: g.updated ?? null,
+        tags: Array.isArray(g.tags) ? g.tags : [],
+        draft: !!g.draft,
+      }))
+      .filter((g) => !g.draft)
+      .sort((a, b) =>
+        (b.updated ?? b.date ?? "").localeCompare(a.updated ?? a.date ?? "")
+      )
+      .slice(0, 6);
+
+    return { props: { latest: list }, revalidate: 86400 };
+  } catch {
+    return { props: { latest: [] }, revalidate: 3600 };
+  }
 }
