@@ -1,47 +1,27 @@
 // pages/_document.js
 import { Html, Head, Main, NextScript } from "next/document";
 
-const ORG_JSONLD = {
-  "@context": "https://schema.org",
-  "@type": "Organization",
-  "name": "Wild & Well",
-  "url": "https://www.wild-and-well.store",
-  "logo": "https://www.wild-and-well.store/favicon.ico",
-  "sameAs": []
-};
-
-const WEBSITE_JSONLD = {
-  "@context": "https://schema.org",
-  "@type": "WebSite",
-  "name": "Wild & Well",
-  "url": "https://www.wild-and-well.store"
-};
-
 export default function Document() {
+  const siteName = "Wild & Well";
   return (
     <Html lang="en">
       <Head>
-        {/* Sensible defaults for every page */}
-        <meta name="theme-color" content="#0f172a" />
+        {/* Google Search Console verification */}
         <meta
-          name="description"
-          content="Wild & Well — practical, low-tox tips and vetted product picks."
+          name="google-site-verification"
+          content="Av_pqZlbZTPcXOAjnUZ826c433VlzcKUcyODsNRicOU"
         />
-        <meta property="og:type" content="website" />
-        <meta property="og:site_name" content="Wild & Well" />
-        <meta name="twitter:card" content="summary_large_image" />
 
-        {/* Organization + Website JSON-LD */}
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(ORG_JSONLD) }}
-        />
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(WEBSITE_JSONLD) }}
-        />
+        {/* PWA + Icons (safe if files don’t exist yet) */}
+        <link rel="icon" href="/favicon.ico" />
+        <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+        <link rel="manifest" href="/site.webmanifest" />
+
+        {/* Brand color for address bar on mobile */}
+        <meta name="theme-color" content="#0b3d2e" />
+        <meta name="application-name" content={siteName} />
       </Head>
-      <body className="bg-white text-slate-900">
+      <body>
         <Main />
         <NextScript />
       </body>
