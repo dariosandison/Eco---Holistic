@@ -1,80 +1,85 @@
-// /pages/guides/index.js
+// pages/guides/index.js
+import Head from "next/head";
 import Link from "next/link";
-import SEO from "../../components/SEO";
 import { getAllGuidesMeta } from "../../src/lib/guides";
 
-export async function getStaticProps() {
-  const guides = getAllGuidesMeta();
-  // sort newest first
-  guides.sort((a, b) => (a.updated < b.updated ? 1 : -1));
-  return { props: { guides } };
+function toArray(maybe) {
+  if (Array.isArray(maybe)) return maybe;
+  if (!maybe || typeof maybe !== "object") return [];
+  if (Array.isArray(maybe.items)) return maybe.items;
+  if (Array.isArray(maybe.guides)) return maybe.guides;
+  if (Array.isArray(maybe.data)) return maybe.data;
+  const vals = Object.values(maybe);
+  return Array.isArray(vals) ? vals : [];
 }
 
-export default function GuidesIndex({ guides }) {
-  const tokens = {
-    brand: "#6b8e23",
-    brandDark: "#556b2f",
-    text: "#0f1a10",
-    muted: "#4b5563",
-    bg: "#fafaf7",
-    card: "#ffffff",
-    border: "#e5eadf"
-  };
-
+export default function GuidesPage({ guides }) {
   return (
-    <div
-      style={{
-        ["--brand"]: tokens.brand,
-        ["--brand-dark"]: tokens.brandDark,
-        ["--text"]: tokens.text,
-        ["--muted"]: tokens.muted,
-        ["--bg"]: tokens.bg,
-        ["--card"]: tokens.card,
-        ["--border"]: tokens.border,
-        background: "var(--bg)",
-        minHeight: "100vh",
-        color: "var(--text)"
-      }}
-    >
-      <SEO
-        title="Guides"
-        description="Actionable, low-BS guides to help you feel better and live cleaner."
-        path="/guides"
-      />
-      <main style={{ maxWidth: 1100, margin: "0 auto", padding: 24 }}>
-        <h1 style={{ color: "var(--brand-dark)", letterSpacing: "-0.02em" }}>Guides</h1>
+    <>
+      <Head>
+        <title>Guides | Wild & Well</title>
+        <meta
+          name="description"
+          content="Practical, low-tox guides for a healthier, happier life."
+        />
+        <link rel="canonical" href="https://www.wild-and-well.store/guides" />
+      </Head>
 
-        <section
-          style={{
-            marginTop: 16,
-            display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))",
-            gap: 16
-          }}
-        >
-          {guides.map((g) => (
-            <article
-              key={g.slug}
-              style={{
-                border: "1px solid var(--border)",
-                borderRadius: 16,
-                padding: 18,
-                background: "var(--card)"
-              }}
-            >
-              <h3 style={{ margin: "0 0 8px", color: "var(--brand-dark)" }}>
-                <Link href={`/guides/${g.slug}`} style={{ textDecoration: "none", color: "inherit" }}>
-                  {g.title}
-                </Link>
-              </h3>
-              <p style={{ margin: "0 0 12px", color: "var(--muted)" }}>{g.excerpt}</p>
-              <Link href={`/guides/${g.slug}`} style={{ color: "var(--brand)", fontWeight: 600, textDecoration: "none" }}>
-                Read guide →
-              </Link>
-            </article>
-          ))}
-        </section>
+      <main className="mx-auto max-w-5xl px-4 py-10">
+        <h1 className="mb-6 text-3xl font-semibold tracking-tight">Guides</h1>
+
+        {guides.length === 0 ? (
+          <p>No guides yet.</p>
+        ) : (
+          <ul className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {guides.map((g) => (
+              <li key={g.slug} className="rounded-lg border p-4">
+                <h2 className="text-lg font-medium">
+                  <Link className="underline" href={`/guides/${g.slug}`}>
+                    {g.title}
+                  </Link>
+                </h2>
+                {g.description ? (
+                  <p className="mt-2 text-sm text-slate-600">{g.description}</p>
+                ) : null}
+                <p className="mt-2 text-xs text-slate-500">
+                  {g.updated || g.date ? (
+                    <>Updated: {g.updated || g.date}</>
+                  ) : (
+                    <> </>
+                  )}
+                </p>
+              </li>
+            ))}
+          </ul>
+        )}
       </main>
-    </div>
+    </>
   );
+}
+
+export async function getStaticProps() {
+  try {
+    const raw = await getAllGuidesMeta();
+    const list = toArray(raw)
+      .filter(Boolean)
+      .map((g) => ({
+        slug: g.slug ?? "",
+        title: g.title ?? "Untitled",
+        description: g.description ?? g.excerpt ?? null,
+        image: g.image ?? null,
+        date: g.date ?? null,
+        updated: g.updated ?? null,
+        tags: Array.isArray(g.tags) ? g.tags : [],
+        draft: !!g.draft,
+      }))
+      .filter((g) => !g.draft)
+      .sort((a, b) =>
+        (b.updated ?? b.date ?? "").localeCompare(a.updated ?? a.date ?? "")
+      );
+
+    return { props: { guides: list }, revalidate: 86400 };
+  } catch {
+    return { props: { guides: [] }, revalidate: 3600 };
+  }
 }
