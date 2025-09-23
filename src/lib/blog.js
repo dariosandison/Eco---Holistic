@@ -1,31 +1,50 @@
-// /src/lib/blog.js
-import data from "../data/blog.json";
+// src/lib/blog.js
+import fs from "fs";
+import path from "path";
+import matter from "gray-matter";
 
-function sortByDateDesc(a, b) {
-  return (b.updated || b.date).localeCompare(a.updated || a.date);
+const CANDIDATES = ["content/blog", "src/content/blog", "blog", "data/blog"];
+
+function blogDir() {
+  const cwd = process.cwd();
+  for (const rel of CANDIDATES) {
+    const p = path.join(cwd, rel);
+    if (fs.existsSync(p)) return p;
+  }
+  return null;
 }
 
-export function getAllPosts() {
-  return [...(data.posts || [])].sort(sortByDateDesc);
+function toISODate(val) {
+  if (!val) return undefined;
+  const d = new Date(val);
+  if (Number.isNaN(d.getTime())) return undefined;
+  return d.toISOString().slice(0, 10);
 }
 
-export function getAllPostSlugs() {
-  return getAllPosts().map((p) => p.slug);
-}
+export function getAllPostsMeta() {
+  const dir = blogDir();
+  if (!dir) return [];
+  const files = fs
+    .readdirSync(dir)
+    .filter((f) => f.endsWith(".md") || f.endsWith(".mdx"));
 
-export function getPostBySlug(slug) {
-  const post = getAllPosts().find((p) => p.slug === slug);
-  if (!post) return null;
-  // Ensure JSON-serializable props only (strings/arrays)
-  return {
-    slug: post.slug,
-    title: post.title,
-    excerpt: post.excerpt || "",
-    date: post.date,
-    updated: post.updated || post.date,
-    authorName: post.authorName || "Wild & Well",
-    tags: post.tags || [],
-    coverImage: post.coverImage || "",
-    contentHtml: post.contentHtml || ""
-  };
+  const items = files.map((f) => {
+    const slug = f.replace(/\.mdx?$/, "");
+    const raw = fs.readFileSync(path.join(dir, f), "utf8");
+    const { data } = matter(raw);
+    return {
+      slug,
+      title: data.title || slug.replace(/-/g, " "),
+      description: data.description || data.excerpt || "",
+      date: toISODate(data.date),
+      updated: toISODate(data.updated),
+      draft: data.draft === true || data.status === "draft" ? true : false,
+      image: data.image || undefined,
+      tags: Array.isArray(data.tags) ? data.tags : [],
+    };
+  });
+
+  return items
+    .filter((i) => !i.draft)
+    .sort((a, b) => String(b.date || "").localeCompare(String(a.date || "")));
 }
