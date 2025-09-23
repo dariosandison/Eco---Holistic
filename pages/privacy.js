@@ -2,127 +2,87 @@
 import Head from "next/head";
 
 export default function Privacy() {
-  const canonical = "https://www.wild-and-well.store/privacy";
+  const title = "Privacy Policy | Wild & Well";
+  const desc =
+    "How Wild & Well collects, uses, and protects your information, including cookies, analytics, and affiliate links.";
+  const url = "https://www.wild-and-well.store/privacy";
 
   return (
     <>
       <Head>
-        <title>Privacy Policy • Wild & Well</title>
-        <meta
-          name="description"
-          content="How Wild & Well handles data, analytics, cookies, and your choices."
-        />
-        <link rel="canonical" href={canonical} />
-        <meta property="og:title" content="Privacy Policy • Wild & Well" />
-        <meta property="og:description" content="How we handle data and your choices." />
-        <meta property="og:url" content={canonical} />
+        <title>{title}</title>
+        <meta name="description" content={desc} />
+        <link rel="canonical" href={url} />
+        <meta property="og:title" content={title} />
+        <meta property="og:description" content={desc} />
       </Head>
 
-      <main className="container page">
-        <h1>Privacy Policy</h1>
-        <p className="muted">Last updated: {new Date().toLocaleDateString()}</p>
+      <main className="mx-auto max-w-3xl px-4 py-10">
+        <h1 className="text-3xl font-semibold tracking-tight">Privacy Policy</h1>
+        <p className="mt-2 text-sm text-slate-500">Last updated: {new Date().toISOString().slice(0, 10)}</p>
 
-        <section className="card">
-          <h3>Overview</h3>
+        <div className="prose prose-slate mt-6 max-w-none">
           <p>
-            Wild & Well respects your privacy. We collect minimal data to run our website,
-            improve content, and understand what resonates with readers. We do not sell your data.
+            Wild & Well (“we”, “us”, “our”) respects your privacy. This Policy explains what data we collect,
+            how we use it, and your choices.
           </p>
-        </section>
 
-        <section className="card">
-          <h3>What We Collect</h3>
+          <h2>Information We Collect</h2>
           <ul>
-            <li>
-              <strong>Analytics:</strong> We use Google Analytics 4 to measure traffic and page performance.
-              Data is aggregated and anonymized where possible (e.g., IP anonymization).
-            </li>
-            <li>
-              <strong>Server logs:</strong> Our hosting provider may log requests for security and maintenance.
-            </li>
-            <li>
-              <strong>Affiliate clicks:</strong> When you click an affiliate link (e.g., to Amazon),
-              the retailer may track the referral to attribute any purchases.
-            </li>
+            <li><strong>Usage data:</strong> pages visited, clicks, and general engagement (via Google Analytics 4).</li>
+            <li><strong>Cookies:</strong> small files used to remember preferences and measure performance.</li>
+            <li><strong>Voluntary info:</strong> if you email us, we receive your email address and message.</li>
           </ul>
-        </section>
 
-        <section className="card">
-          <h3>Cookies</h3>
-          <p>
-            We use essential cookies to operate the site and analytics/affiliate cookies to understand usage
-            and attribute referrals. See our <a href="/cookies">Cookies Policy</a> for details and controls.
-          </p>
-        </section>
-
-        <section className="card">
-          <h3>How We Use Data</h3>
+          <h2>How We Use Information</h2>
           <ul>
-            <li>Operate, secure, and maintain the website.</li>
-            <li>Analyze usage to improve articles and product guides.</li>
-            <li>Attribute affiliate referrals where applicable.</li>
+            <li>Improve site content, usability, and performance.</li>
+            <li>Measure traffic and understand what content is most helpful.</li>
+            <li>Comply with legal obligations and prevent abuse.</li>
           </ul>
-        </section>
 
-        <section className="card">
-          <h3>Your Choices</h3>
+          <h2>Analytics (GA4)</h2>
+          <p>
+            We use Google Analytics 4 with IP anonymization enabled. You can opt out by using Google’s opt-out
+            tools or your browser’s privacy controls.
+          </p>
+
+          <h2>Affiliate Links</h2>
+          <p>
+            Some links are affiliate links. If you purchase through them, we may earn a commission at no extra
+            cost to you. These links help support our work.
+          </p>
+
+          <h2>Data Sharing</h2>
+          <p>
+            We do not sell personal data. We share limited data with service providers (e.g., analytics) to
+            operate the site.
+          </p>
+
+          <h2>Data Retention</h2>
+          <p>
+            We retain data only as long as necessary for the purposes above or as required by law.
+          </p>
+
+          <h2>Your Choices</h2>
           <ul>
-            <li>
-              <strong>Analytics opt-out:</strong> You can use the{" "}
-              <a
-                href="https://tools.google.com/dlpage/gaoptout"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Google Analytics Opt-out Add-on
-              </a>{" "}
-              or adjust your browser privacy settings.
-            </li>
-            <li>
-              <strong>Cookies:</strong> You can clear, block, or control cookies via your browser.
-              See <a href="/cookies">Cookies Policy</a> for guidance.
-            </li>
+            <li>Use your browser to block cookies.</li>
+            <li>Use analytics opt-out tools.</li>
+            <li>Email us to request deletion of messages you’ve sent us.</li>
           </ul>
-        </section>
 
-        <section className="card">
-          <h3>Third-Party Links</h3>
+          <h2>Children’s Privacy</h2>
           <p>
-            We link to other websites (e.g., Amazon). Their privacy practices are their own—please review
-            their policies.
+            Our content is for general audiences and not directed to children under 13. We do not knowingly collect
+            personal information from children.
           </p>
-        </section>
 
-        <section className="card">
-          <h3>Contact</h3>
+          <h2>Contact</h2>
           <p>
-            Email: <a href="mailto:hello@wild-and-well.store">hello@wild-and-well.store</a>
+            Questions? Email <a href="mailto:hello@wild-and-well.store">hello@wild-and-well.store</a>.
           </p>
-        </section>
-
-        <section className="card">
-          <h3>Changes</h3>
-          <p>
-            We may update this policy to reflect changes to our practices or legal requirements. We will
-            update the “Last updated” date above when we do.
-          </p>
-        </section>
+        </div>
       </main>
-
-      <style jsx>{`
-        .page { margin: 2.5rem auto; }
-        .muted { color: #6b7280; margin: 6px 0 12px; }
-        .card {
-          border: 1px solid var(--border);
-          border-radius: 12px;
-          padding: 16px;
-          background: #fff;
-          margin: 14px 0;
-        }
-        ul { margin: 8px 0 0 18px; }
-        li { margin: 6px 0; }
-      `}</style>
     </>
   );
 }
-
