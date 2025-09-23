@@ -1,55 +1,58 @@
-import SEO from '../components/SEO';
-import ProductCard from '../components/ProductCard';
+// /pages/recommended.js
+import SEO from "../components/SEO";
+import AffiliateLink from "../components/AffiliateLink";
+import data from "../src/data/recommended.json";
 
-export default function Recommended() {
-  const items = [
-    {
-      title: "Organic Herbal Tea Sampler",
-      description: "Caffeine-free blends for sleep, digestion, and calm evenings.",
-      image: "https://m.media-amazon.com/images/I/61s0O5o3zQL._AC_SL1000_.jpg",
-      href: "https://www.amazon.co.uk/dp/B07S44J4Y3",
-      badge: "Editor’s Pick",
-      price: "From £14–£22",
-      rating: 5
-    },
-    {
-      title: "Ceramic Essential Oil Diffuser",
-      description: "Minimal diffuser for cozy, plant-friendly rooms.",
-      image: "https://m.media-amazon.com/images/I/61Qxq6N3v3L._AC_SL1500_.jpg",
-      href: "https://www.amazon.co.uk/dp/B07L5GDTYY",
-      badge: "Aromatherapy",
-      price: "£25–£40",
-      rating: 4
-    },
-    {
-      title: "Insulated Stainless Steel Water Bottle",
-      description: "Ditch plastic—keeps drinks cold 24h, hot 12h.",
-      image: "https://m.media-amazon.com/images/I/61Yp-6b6S2L._AC_SL1500_.jpg",
-      href: "https://www.amazon.co.uk/dp/B07KQX3H8R",
-      badge: "Sustainable",
-      price: "£18–£30",
-      rating: 5
-    }
-  ];
+export async function getStaticProps() {
+  // Ensure we only return serializable data
+  return { props: { categories: data.categories } };
+}
 
+export default function Recommended({ categories }) {
   return (
     <>
-      <SEO title="Recommended • Wild & Well" path="/recommended" />
-      <main className="container">
-        <div className="hero">
-          <span className="kicker">Curated Picks</span>
-          <h1>Recommended Products</h1>
-          <p className="muted">Practical, low-additive, lower-waste items we like for daily living.</p>
-        </div>
-
-        <section className="grid-cards">
-          {items.map(it => <ProductCard key={it.title} {...it} />)}
+      <SEO
+        title="Recommended Picks"
+        description="Curated low-tox, wellness, and eco-friendly products that we genuinely like."
+        path="/recommended"
+      />
+      <div className="container">
+        <section className="hero">
+          <h1>Recommended</h1>
+          <p className="muted">
+            Hand-picked items that support healthier living. Some links are affiliate (at no extra cost).
+          </p>
         </section>
 
-        <p style={{color:'#6b7280',fontSize:'.9rem',marginTop:'1rem'}}>
-          <small>Some links may be affiliate links. As an Amazon Associate, we earn from qualifying purchases.</small>
-        </p>
-      </main>
+        {categories.map((cat) => (
+          <section className="section" key={cat.slug}>
+            <h2 style={{ margin: "0 0 12px", color: "var(--brand-dark)" }}>
+              {cat.title}
+            </h2>
+            <div className="cards">
+              {cat.items.map((item) => (
+                <article className="card" key={item.title + item.url}>
+                  <h3 style={{ marginTop: 0 }}>
+                    {item.brand ? `${item.brand} — ` : ""}
+                    {item.title}
+                  </h3>
+                  {item.note ? (
+                    <p className="muted" style={{ marginTop: 8 }}>{item.note}</p>
+                  ) : null}
+                  <div style={{ display: "flex", gap: 10, marginTop: 12, alignItems: "center" }}>
+                    <AffiliateLink className="btn" href={item.url}>
+                      View
+                    </AffiliateLink>
+                    {item.badge ? (
+                      <span className="muted" style={{ fontSize: 13 }}>{item.badge}</span>
+                    ) : null}
+                  </div>
+                </article>
+              ))}
+            </div>
+          </section>
+        ))}
+      </div>
     </>
   );
 }
