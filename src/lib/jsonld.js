@@ -1,58 +1,42 @@
-// Helpers to generate JSON-LD for articles and breadcrumbs
+// src/lib/jsonld.js
+const SITE_URL = "https://www.wild-and-well.store";
+const SITE_NAME = "Wild & Well";
 
-const asArray = (x) => (Array.isArray(x) ? x : x ? [x] : []);
-
-export const breadcrumbsJsonLd = ({ baseUrl, items = [] }) => ({
-  "@context": "https://schema.org",
-  "@type": "BreadcrumbList",
-  itemListElement: items.map((item, i) => ({
-    "@type": "ListItem",
-    position: i + 1,
-    name: item.name,
-    item: `${baseUrl}${item.path || ""}`,
-  })),
-});
-
-export const articleJsonLd = ({
-  baseUrl = "",
-  url = "",
-  title = "",
-  description = "",
+export function article({
+  title,
+  description,
+  url,
   image,
   datePublished,
   dateModified,
-  authorName = "Wild & Well",
-  publisherName = "Wild & Well",
-  publisherLogo, // absolute URL recommended
-  keywords = [],
-}) => ({
-  "@context": "https://schema.org",
-  "@type": "Article",
-  mainEntityOfPage: {
-    "@type": "WebPage",
-    "@id": url || baseUrl,
-  },
-  headline: title?.slice(0, 110) || "",
-  description: description || "",
-  image: asArray(image),
-  datePublished: datePublished || undefined,
-  dateModified: dateModified || datePublished || undefined,
-  author: asArray(authorName).map((n) => ({ "@type": "Person", name: n })),
-  publisher: {
-    "@type": "Organization",
-    name: publisherName,
-    logo: publisherLogo
-      ? { "@type": "ImageObject", url: publisherLogo }
-      : undefined,
-  },
-  keywords: asArray(keywords).join(", "),
-});
+}) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    headline: title,
+    description,
+    mainEntityOfPage: url,
+    image: image ? [image] : [`${SITE_URL}/favicon.ico`],
+    datePublished: datePublished || undefined,
+    dateModified: dateModified || datePublished || undefined,
+    author: { "@type": "Organization", name: SITE_NAME },
+    publisher: {
+      "@type": "Organization",
+      name: SITE_NAME,
+      logo: { "@type": "ImageObject", url: `${SITE_URL}/favicon.ico` },
+    },
+  };
+}
 
-// A tiny helper if you prefer to inline safely:
-export const toJson = (obj) => JSON.stringify(obj);
-
-// Aliases some pages might import:
-export const guideJsonLd = articleJsonLd;
-
-// Default export with all helpers (covers default-import usage)
-export default { articleJsonLd, breadcrumbsJsonLd, guideJsonLd, toJson };
+export function breadcrumbs(list = []) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: list.map((item, i) => ({
+      "@type": "ListItem",
+      position: i + 1,
+      name: item.name,
+      item: item.item,
+    })),
+  };
+}
