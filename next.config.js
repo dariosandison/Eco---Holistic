@@ -2,47 +2,44 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
-  compiler: {
-    // Hide console.* in production to reduce JS size
-    removeConsole: process.env.NODE_ENV === "production",
-  },
-  images: {
-    formats: ["image/avif", "image/webp"],
-    remotePatterns: [
-      { protocol: "https", hostname: "**" }, // safe default for affiliate images
-    ],
-  },
+
+  // Useful if you like URLs ending with a slash; OK to keep.
+  trailingSlash: true,
+
   async headers() {
     return [
-      // Long-cache static assets
       {
-        source:
-          "/:all*(css|js|json|ico|svg|jpg|jpeg|png|webp|avif|gif|woff|woff2)",
+        source: "/:path*",
         headers: [
-          {
-            key: "Cache-Control",
-            value: "public, max-age=31536000, immutable",
-          },
-        ],
-      },
-      // Security headers for all pages
-      {
-        source: "/(.*)",
-        headers: [
-          { key: "X-Content-Type-Options", value: "nosniff" },
+          // Security hardening (safe defaults)
           { key: "X-Frame-Options", value: "SAMEORIGIN" },
+          { key: "X-Content-Type-Options", value: "nosniff" },
           { key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },
           {
             key: "Permissions-Policy",
             value:
-              "geolocation=(), microphone=(), camera=(), payment=(), interest-cohort=()",
+              "camera=(), microphone=(), geolocation=(), interest-cohort=()",
+          },
+          // Long HSTS for HTTPS (Vercel serves HTTPS)
+          {
+            key: "Strict-Transport-Security",
+            value: "max-age=63072000; includeSubDomains; preload",
           },
         ],
       },
     ];
   },
-  // Use static export if you ever switch to static-only:
-  // output: 'export',
+
+  // Example redirect (does nothing harmful if path doesn’t exist)
+  async redirects() {
+    return [
+      {
+        source: "/index.html",
+        destination: "/",
+        permanent: true,
+      },
+    ];
+  },
 };
 
 export default nextConfig;
