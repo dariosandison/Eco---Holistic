@@ -1,22 +1,29 @@
 // /components/AffiliateLink.js
-import React from "react";
-
-export default function AffiliateLink({ href, children, ...rest }) {
+export default function AffiliateLink({ href, children, className, ...rest }) {
   const onClick = () => {
-    if (typeof window !== "undefined" && window.gtag) {
-      window.gtag("event", "select_content", {
-        content_type: "affiliate_link",
-        item_id: href
-      });
-    }
+    try {
+      if (typeof window !== "undefined" && window.gtag) {
+        window.gtag("event", "affiliate_click", {
+          event_category: "engagement",
+          event_label: href,
+        });
+      }
+    } catch {}
   };
+
+  // Always ensure sponsored + nofollow + opener protection
+  const rel = ["sponsored", "nofollow", "noopener", "noreferrer"]
+    .concat((rest.rel || "").split(" ").filter(Boolean))
+    .filter((v, i, a) => a.indexOf(v) === i) // dedupe
+    .join(" ");
+
   return (
     <a
       href={href}
       target="_blank"
-      rel="nofollow sponsored noopener noreferrer"
+      rel={rel}
       onClick={onClick}
-      style={{ textDecoration: "none", fontWeight: 600 }}
+      className={className}
       {...rest}
     >
       {children}
