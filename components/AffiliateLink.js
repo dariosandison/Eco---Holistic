@@ -1,30 +1,9 @@
-// components/AffiliateLink.js
-export default function AffiliateLink({ href, children, className = "" }) {
-  if (!href) return children ?? null;
-  const isExternal = /^https?:\/\//i.test(href);
+export default function AffiliateLink({ href, children, ...props }) {
+  // Always mark affiliate/sponsored links
+  const rel = ['nofollow', 'sponsored', 'noopener', 'noreferrer'].join(' ');
   return (
-    <a
-      href={href}
-      target={isExternal ? "_blank" : undefined}
-      rel={isExternal ? "noopener nofollow sponsored" : undefined}
-      className={className}
-      style={{ textDecoration: "underline" }}
-    >
-      {children}
-      <span
-        style={{
-          marginLeft: 6,
-          fontSize: 11,
-          padding: "1px 6px",
-          borderRadius: 999,
-          border: "1px solid #ccc",
-          verticalAlign: "middle",
-        }}
-        aria-label="Affiliate link"
-        title="Affiliate link"
-      >
-        ad
-      </span>
+    <a href={href} rel={rel} target="_blank" {...props}>
+      {children} <span className="affix">(affiliate)</span>
     </a>
   );
 }
