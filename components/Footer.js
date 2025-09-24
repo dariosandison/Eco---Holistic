@@ -4,9 +4,11 @@ export default function Footer() {
       <div className="container footer-inner">
         <p>© {new Date().getFullYear()} Wild & Well</p>
         <p>
-          As an Amazon Associate, we may earn from qualifying purchases. Links marked “(affiliate)” help support this site.
+          As an Amazon Associate, we may earn from qualifying purchases.
+          Links marked “(affiliate)” help support this site.
         </p>
       </div>
     </footer>
   );
 }
+
