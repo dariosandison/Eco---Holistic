@@ -1,65 +1,69 @@
-/* styles/globals.css */
-
-/* Tailwind directives */
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-/* Olive brand theme */
-:root{
-  --brand: #6f8550;    /* olive-500 */
-  --brand-600:#5a6b40; /* olive-600 */
-  --text: #0f172a;     /* slate-900 */
-  --muted:#475569;     /* slate-600 */
-  --bg:#ffffff;
+:root {
+  --bg: #0e0f10;
+  --card: #151718;
+  --text: #f3f5f7;
+  --muted: #a8b0b9;
+  --brand: #c6f6c6; /* soft olive-mint */
+  --accent: #89a36a; /* olive */
+  --border: #26292b;
 }
 
-html, body {
-  padding: 0;
-  margin: 0;
+* { box-sizing: border-box; }
+html, body { padding: 0; margin: 0; }
+body {
   background: var(--bg);
   color: var(--text);
-  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, "Helvetica Neue", Arial, "Apple Color Emoji","Segoe UI Emoji";
+  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, Apple Color Emoji, Segoe UI Emoji;
+  line-height: 1.6;
 }
 
-/* Links */
-a { color: var(--brand); }
-a:hover { color: var(--brand-600); }
+a { color: var(--brand); text-decoration: none; }
+a:hover { text-decoration: underline; }
 
-/* Buttons (utility) */
-.btn {
-  @apply inline-flex items-center gap-2 rounded-lg px-4 py-2 font-medium transition;
-  background: var(--brand);
-  color: #fff;
-}
-.btn:hover { background: var(--brand-600); }
+.container { max-width: 1100px; margin: 0 auto; padding: 24px; }
 
-/* Containers */
-.container {
-  @apply max-w-5xl mx-auto px-4;
-}
-
-/* REMOVE the .prose @apply block — it causes the build error */
-/* Use className="prose prose-slate" directly in JSX instead. */
-
-/* Header & footer quick polish */
 .site-header {
-  @apply border-b;
-  border-color: rgba(0,0,0,0.06);
-  background: #fff;
+  border-bottom: 1px solid var(--border);
+  position: sticky; top: 0; backdrop-filter: blur(8px);
 }
-.site-footer {
-  @apply border-t text-sm;
-  border-color: rgba(0,0,0,0.06);
-  color: var(--muted);
+.header-inner { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+.brand { font-weight: 700; letter-spacing: .3px; color: var(--brand); }
+
+.nav a { margin-left: 18px; color: var(--text); opacity: .9; }
+.nav a:hover { opacity: 1; }
+
+.site-footer { border-top: 1px solid var(--border); margin-top: 64px; }
+.footer-inner { padding: 24px 0; color: var(--muted); font-size: 14px; }
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 16px;
+  margin-top: 16px;
 }
 
-/* Images */
-img { max-width: 100%; height: auto; }
-
-/* Cookie banner nudge */
-#cookie-consent {
-  @apply fixed bottom-4 left-1/2 -translate-x-1/2 rounded-xl shadow-lg p-4;
-  background: #fff;
-  border: 1px solid rgba(0,0,0,0.08);
+.card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 16px;
 }
+
+.btn {
+  display: inline-block;
+  background: var(--accent);
+  color: #0b0c0d;
+  padding: 8px 12px;
+  border-radius: 10px;
+  margin-top: 8px;
+}
+
+.muted { color: var(--muted); font-size: 14px; }
+.affix { color: var(--muted); font-size: 12px; margin-left: 4px; }
+
+/* basic article typography */
+.prose h1, .prose h2, .prose h3 { line-height: 1.25; }
+.prose h1 { font-size: 32px; margin: 0 0 12px; }
+.prose h2 { font-size: 24px; margin-top: 24px; }
+.prose p { margin: 12px 0; }
+.prose ul { padding-left: 20px; }
