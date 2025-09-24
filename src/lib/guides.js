@@ -1,150 +1,105 @@
 // src/lib/guides.js
-// ESM-safe, JSON-serializable helpers for Guides
+// Reads markdown guides from /content/guides and returns safe, JSON-serializable data.
 
+import fs from "fs";
 import path from "path";
+import matter from "gray-matter";
+import { remark } from "remark";
+import html from "remark-html";
 
-// Helpers
-const GUIDE_DIR = path.join(process.cwd(), "content", "guides");
+const GUIDES_DIR = path.join(process.cwd(), "content", "guides");
 
-const toISODate = (val) => {
-  if (!val) return null;
-  const d = val instanceof Date ? val : new Date(val);
+function fileForSlug(slug) {
+  const candidates = [
+    path.join(GUIDES_DIR, `${slug}.md`),
+    path.join(GUIDES_DIR, `${slug}.mdx`),
+  ];
+  for (const f of candidates) {
+    if (fs.existsSync(f)) return f;
+  }
+  return null;
+}
+
+function toISO(value) {
+  if (!value) return null;
+  const d = new Date(value);
   if (Number.isNaN(d.getTime())) return null;
-  // return "YYYY-MM-DD"
-  return d.toISOString().slice(0, 10);
-};
-
-const cleanString = (v) =>
-  typeof v === "string" && v.trim().length ? v.trim() : null;
-
-const cleanArray = (v) => (Array.isArray(v) ? v.filter(Boolean) : []);
-
-const slugFromFilename = (name) =>
-  name
-    .replace(/\.mdx?$/i, "")
-    .replace(/[^a-z0-9-]+/gi, "-")
-    .replace(/-+/g, "-")
-    .replace(/^-|-$/g, "")
-    .toLowerCase();
-
-const excerptFrom = (content) => {
-  if (!content) return null;
-  const s = content.replace(/\r?\n+/g, " ").trim();
-  return s.length > 180 ? s.slice(0, 177) + "..." : s || null;
-};
-
-const readTime = (text) => {
-  if (!text) return 0;
-  const words = text.trim().split(/\s+/).length;
-  return Math.max(1, Math.round(words / 200)); // ~200 wpm
-};
-
-// ---- Core readers (fs is imported dynamically to avoid bundling on client) ----
-async function listGuideFiles() {
-  const { readdir } = await import("node:fs/promises");
-  const files = await readdir(GUIDE_DIR).catch(() => []);
-  return files.filter((f) => /\.mdx?$/i.test(f));
+  return d.toISOString().slice(0, 10); // YYYY-MM-DD
 }
 
-async function readFile(fullPath) {
-  const { readFile } = await import("node:fs/promises");
-  return readFile(fullPath, "utf8");
+export function getAllGuidesSlugs() {
+  if (!fs.existsSync(GUIDES_DIR)) return [];
+  return fs
+    .readdirSync(GUIDES_DIR)
+    .filter((f) => f.endsWith(".md") || f.endsWith(".mdx"))
+    .map((f) => f.replace(/\.mdx?$/, ""));
 }
 
-// ---- Public API ----
+export function getAllGuidesMeta() {
+  const slugs = getAllGuidesSlugs();
+  const metas = slugs.map((slug) => {
+    const filepath = fileForSlug(slug);
+    const raw = fs.readFileSync(filepath, "utf8");
+    const { data } = matter(raw);
 
-// Lightweight list of metadata for all guides (JSON-safe)
-export async function getAllGuidesMeta() {
-  const files = await listGuideFiles();
+    const title = data.title ?? slug.replace(/-/g, " ");
+    const description =
+      data.description ??
+      data.summary ??
+      "";
+    const date = toISO(data.date);
+    const updated = toISO(data.updated);
+    const image = data.image ?? null;
+    const draft = data.draft === true || data.status === "draft";
 
-  // gray-matter loaded only on server at build time
-  const matter = (await import("gray-matter")).default;
+    return {
+      slug,
+      title,
+      description,
+      date,
+      updated,
+      image,
+      draft,
+      // keep anything else in front-matter if needed (but JSON-safe)
+      tags: Array.isArray(data.tags) ? data.tags : [],
+      category: data.category ?? null,
+      readingTime: data.readingTime ?? null,
+    };
+  });
 
-  const items = await Promise.all(
-    files.map(async (file) => {
-      const slug = slugFromFilename(file);
-      const fullPath = path.join(GUIDE_DIR, file);
-      const raw = await readFile(fullPath);
-      const parsed = matter(raw);
-      const data = parsed.data || {};
+  // sort newest first; safely handle null dates
+  metas.sort((a, b) => {
+    const da = a.date ? new Date(a.date).getTime() : 0;
+    const db = b.date ? new Date(b.date).getTime() : 0;
+    return db - da;
+  });
 
-      const meta = {
-        slug,
-        title: cleanString(data.title) || slug.replace(/-/g, " "),
-        description: cleanString(data.description) || excerptFrom(parsed.content),
-        excerpt: cleanString(data.excerpt) || excerptFrom(parsed.content),
-        image: cleanString(data.image),
-        tags: cleanArray(data.tags),
-        // JSON-safe dates
-        date: toISODate(data.date),
-        updated: toISODate(data.updated),
-        draft: data.draft === true || data.status === "draft" ? true : false,
-        readTime: readTime(parsed.content),
-      };
-
-      // Ensure no undefined values sneak in
-      Object.keys(meta).forEach((k) => {
-        if (typeof meta[k] === "undefined") meta[k] = null;
-      });
-
-      return meta;
-    })
-  );
-
-  // Sort by updated desc, then date desc
-  return items
-    .sort((a, b) => {
-      const aKey = a.updated || a.date || "1970-01-01";
-      const bKey = b.updated || b.date || "1970-01-01";
-      return aKey < bKey ? 1 : aKey > bKey ? -1 : 0;
-    })
-    .filter((g) => !g.draft); // hide drafts by default
+  return metas;
 }
 
-// Compat alias some pages may still import
-export async function getAllGuides() {
-  return getAllGuidesMeta();
-}
-
-export async function getAllGuidesSlugs() {
-  const metas = await getAllGuidesMeta();
-  return metas.map((m) => m.slug);
-}
-
-// Full guide (HTML + meta), all JSON-safe
 export async function getGuideBySlug(slug) {
-  const files = await listGuideFiles();
-  const file = files.find((f) => slugFromFilename(f) === slug);
-  if (!file) return null;
+  const filepath = fileForSlug(slug);
+  if (!filepath) return null;
 
-  const fullPath = path.join(GUIDE_DIR, file);
-  const raw = await readFile(fullPath);
+  const raw = fs.readFileSync(filepath, "utf8");
+  const { data, content } = matter(raw);
 
-  const matter = (await import("gray-matter")).default;
-  const parsed = matter(raw);
-  const data = parsed.data || {};
-
-  // Convert MD/MDX -> HTML (remark works fine for .md too)
-  const { remark } = await import("remark");
-  const html = (await import("remark-html")).default;
-  const processed = await remark().use(html).process(parsed.content || "");
+  // Convert markdown -> HTML (server-side)
+  const processed = await remark().use(html).process(content || "");
   const contentHtml = String(processed);
 
   const meta = {
     slug,
-    title: cleanString(data.title) || slug.replace(/-/g, " "),
-    description: cleanString(data.description) || excerptFrom(parsed.content),
-    excerpt: cleanString(data.excerpt) || excerptFrom(parsed.content),
-    image: cleanString(data.image),
-    tags: cleanArray(data.tags),
-    date: toISODate(data.date),
-    updated: toISODate(data.updated),
-    draft: data.draft === true || data.status === "draft" ? true : false,
-    readTime: readTime(parsed.content),
+    title: data.title ?? slug.replace(/-/g, " "),
+    description: data.description ?? data.summary ?? "",
+    date: toISO(data.date),
+    updated: toISO(data.updated),
+    image: data.image ?? null,
+    draft: data.draft === true || data.status === "draft",
+    tags: Array.isArray(data.tags) ? data.tags : [],
+    category: data.category ?? null,
+    readingTime: data.readingTime ?? null,
   };
-  Object.keys(meta).forEach((k) => {
-    if (typeof meta[k] === "undefined") meta[k] = null;
-  });
 
-  return { meta, html: contentHtml };
+  return { meta, contentHtml };
 }
