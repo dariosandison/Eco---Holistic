@@ -1,56 +1,124 @@
+// pages/guides/[slug].js
 import Head from "next/head";
+import Layout from "../../components/Layout";
 import { getAllGuidesSlugs, getGuideBySlug } from "../../lib/guides";
-import { article, breadcrumbs } from "../../lib/jsonld";
 
-function SimpleMarkdown({ text = "" }) {
-  // ultra-light rendering: paragraphs + links
-  const withLinks = text.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" rel="nofollow noopener noreferrer" class="underline">$1</a>');
-  const html = withLinks
-    .split(/\n{2,}/)
-    .map((p) => `<p>${p.replace(/\n/g, "<br/>")}</p>`)
-    .join("");
-  return <div className="prose" dangerouslySetInnerHTML={{ __html: html }} />;
+// Inline replacements for the missing ../../lib/jsonld import
+function jsonLdArticle({ title = "", description = "", url = "" } = {}) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    headline: title,
+    description,
+    mainEntityOfPage: url,
+  };
 }
 
-export default function GuidePage({ meta, content }) {
-  const url = `https://www.wild-and-well.store/guides/${meta.slug}`;
-  const jsonArticle = article({ title: meta.title, description: meta.description, url });
-  const jsonCrumbs = breadcrumbs([
+function jsonLdBreadcrumbs(items = []) {
+  const list = Array.isArray(items) ? items : [];
+  return {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: list.map((it, i) => ({
+      "@type": "ListItem",
+      position: i + 1,
+      name: it?.name || "",
+      item: it?.item || "",
+    })),
+  };
+}
+
+export default function GuidePage({ guide }) {
+  if (!guide) return null;
+
+  const {
+    slug,
+    title,
+    description,
+    html,
+    contentHtml,
+    date,
+    updated,
+  } = guide;
+
+  const pageUrl = `https://www.wild-and-well.store/guides/${slug}`;
+  const articleLd = jsonLdArticle({
+    title: title || "Guide",
+    description: description || "",
+    url: pageUrl,
+  });
+  const crumbsLd = jsonLdBreadcrumbs([
     { name: "Home", item: "https://www.wild-and-well.store/" },
     { name: "Guides", item: "https://www.wild-and-well.store/guides" },
-    { name: meta.title, item: url },
+    { name: title || "Guide", item: pageUrl },
   ]);
 
   return (
-    <>
+    <Layout>
       <Head>
-        <title>{meta.title} – Wild & Well</title>
-        {meta.description && <meta name="description" content={meta.description} />}
-        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonArticle) }} />
-        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonCrumbs) }} />
+        <title>
+          {title ? `${title} | Wild & Well` : "Guide | Wild & Well"}
+        </title>
+        {description && <meta name="description" content={description} />}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(articleLd) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(crumbsLd) }}
+        />
       </Head>
-      <article className="prose max-w-none">
-        <h1>{meta.title}</h1>
-        {meta.updated ? (
-          <p className="text-sm text-gray-500">Updated {new Date(meta.updated).toLocaleDateString()}</p>
-        ) : meta.date ? (
-          <p className="text-sm text-gray-500">Published {new Date(meta.date).toLocaleDateString()}</p>
-        ) : null}
-        <SimpleMarkdown text={content} />
+
+      <article className="prose mx-auto px-4">
+        <h1>{title || "Guide"}</h1>
+        {(date || updated) && (
+          <p className="text-sm text-gray-500">
+            {date ? <>Published: {date}</> : null}
+            {updated ? <>{date ? " • " : ""}Updated: {updated}</> : null}
+          </p>
+        )}
+        <div dangerouslySetInnerHTML={{ __html: html || contentHtml || "" }} />
       </article>
-    </>
+    </Layout>
   );
 }
 
 export async function getStaticPaths() {
-  const slugs = getAllGuidesSlugs();
-  return {
-    paths: slugs.map((slug) => ({ params: { slug } })),
-    fallback: false,
-  };
+  try {
+    const slugs = await getAllGuidesSlugs();
+    const arr = Array.isArray(slugs) ? slugs : [];
+    return {
+      paths: arr
+        .map((s) => {
+          const v = typeof s === "string" ? s : s?.slug || s?.params?.slug;
+          return v ? { params: { slug: String(v) } } : null;
+        })
+        .filter(Boolean),
+      fallback: false,
+    };
+  } catch {
+    return { paths: [], fallback: false };
+  }
 }
 
 export async function getStaticProps({ params }) {
-  const { meta, content } = getGuideBySlug(params.slug);
-  return { props: { meta, content } };
+  try {
+    const guide = await getGuideBySlug(params.slug);
+    if (!guide) return { notFound: true };
+
+    // Ensure everything is JSON-serializable
+    const safeGuide = {
+      ...guide,
+      slug: guide.slug || params.slug,
+      html: guide.html ?? guide.contentHtml ?? "",
+      description: guide.description ?? null,
+      date: guide.date ?? null,
+      updated: guide.updated ?? null,
+    };
+
+    return { props: { guide: safeGuide }, revalidate: 60 };
+  } catch {
+    return { notFound: true };
+  }
 }
