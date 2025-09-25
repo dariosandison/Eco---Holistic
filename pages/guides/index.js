@@ -1,29 +1,29 @@
-// pages/guides/index.js
 import Link from "next/link";
-import { getAllGuides } from "../../lib/guides";
+import { getAllGuidesMeta } from "../../lib/guides";
 
-export async function getStaticProps() {
-  const guides = getAllGuides();
-  return { props: { guides } };
-}
-
-export default function GuidesIndex({ guides }) {
+export default function Guides({ guides }) {
   return (
-    <div className="mx-auto max-w-5xl px-4 py-10">
-      <h1 className="text-3xl font-semibold mb-6">Guides</h1>
-      {(!guides || guides.length === 0) && (
-        <p className="text-gray-600">No guides yet. Check back soon.</p>
+    <div>
+      <h1 className="mb-4 text-2xl font-semibold">Guides</h1>
+      {guides.length === 0 ? (
+        <p>No guides yet.</p>
+      ) : (
+        <ul className="grid gap-3 sm:grid-cols-2">
+          {guides.map((g) => (
+            <li key={g.slug} className="rounded-md border p-4">
+              <Link href={`/guides/${g.slug}`} className="font-medium underline">
+                {g.title}
+              </Link>
+              {g.description && <p className="mt-1 text-sm text-gray-600">{g.description}</p>}
+            </li>
+          ))}
+        </ul>
       )}
-      <ul className="grid gap-6 md:grid-cols-2">
-        {guides.map(g => (
-          <li key={g.slug} className="border rounded p-4">
-            <Link href={`/guides/${g.slug}`} className="text-lg font-medium underline">
-              {g.title}
-            </Link>
-            {g.excerpt && <p className="mt-2 text-sm text-gray-700">{g.excerpt}…</p>}
-          </li>
-        ))}
-      </ul>
     </div>
   );
+}
+
+export async function getStaticProps() {
+  const guides = getAllGuidesMeta();
+  return { props: { guides } };
 }
