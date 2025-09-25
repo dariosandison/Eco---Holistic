@@ -1,46 +1,31 @@
-// components/Nav.js
 import Link from 'next/link';
 import Image from 'next/image';
-import { useState } from 'react';
+import site from '@/lib/site';
 
 export default function Nav() {
-  const [open, setOpen] = useState(false);
-
   return (
-    <header className="site-header">
-      <div className="container nav-wrap">
-        <Link href="/" className="brand" aria-label="Wild & Well home">
-          <div className="brand-inner">
-            <div className="brand-logo">
-              {/* If /public/logo.png exists this will render. If it doesn't, the text shows. */}
-              <Image
-                src="/logo.png"
-                alt="Wild & Well"
-                width={36}
-                height={36}
-                className="logo-img"
-                onError={(e) => { e.currentTarget.style.display = 'none'; }}
-                priority
-              />
-            </div>
-            <span className="brand-text">Wild & Well</span>
-          </div>
-        </Link>
+    <header className="sticky top-0 z-40 bg-white/90 backdrop-blur border-b border-slate-200">
+      <div className="mx-auto max-w-6xl px-4 sm:px-6">
+        <div className="flex h-14 items-center justify-between">
+          <Link href="/" className="flex items-center gap-3">
+            <Image
+              src={site.logo}
+              alt="Wild & Well logo"
+              width={28}
+              height={28}
+              priority
+            />
+            <span className="font-semibold tracking-tight">Wild &amp; Well</span>
+          </Link>
 
-        <button
-          className="nav-toggle"
-          aria-label="Toggle menu"
-          aria-expanded={open ? 'true' : 'false'}
-          onClick={() => setOpen(!open)}
-        >
-          ☰
-        </button>
-
-        <nav className={`nav ${open ? 'open' : ''}`}>
-          <Link href="/guides">Guides</Link>
-          <Link href="/recommended">Recommended</Link>
-          <Link href="/blog">Blog</Link>
-        </nav>
+          <nav className="hidden md:flex items-center gap-6 text-sm">
+            {site.nav.map((item) => (
+              <Link key={item.href} href={item.href} className="hover:text-slate-900 text-slate-600">
+                {item.label}
+              </Link>
+            ))}
+          </nav>
+        </div>
       </div>
     </header>
   );
