@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import Image from 'next/image';
-import site from '@/lib/site';
+import site from '../lib/site';
 
 export default function Nav() {
   return (
