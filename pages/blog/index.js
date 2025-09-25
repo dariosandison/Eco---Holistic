@@ -1,28 +1,30 @@
-// pages/blog/index.js
 import Link from "next/link";
 import { getAllPostsMeta } from "../../lib/blog";
+
+export default function Blog({ posts }) {
+  return (
+    <div>
+      <h1 className="mb-4 text-2xl font-semibold">Blog</h1>
+      {posts.length === 0 ? (
+        <p>No posts yet.</p>
+      ) : (
+        <ul className="space-y-3">
+          {posts.map((p) => (
+            <li key={p.slug} className="rounded-md border p-4">
+              <Link href={`/blog/${p.slug}`} className="font-medium underline">
+                {p.title}
+              </Link>
+              {p.date && <div className="text-xs text-gray-500">{new Date(p.date).toLocaleDateString()}</div>}
+              {p.description && <p className="mt-1 text-sm text-gray-600">{p.description}</p>}
+            </li>
+          ))}
+        </ul>
+      )}
+    </div>
+  );
+}
 
 export async function getStaticProps() {
   const posts = getAllPostsMeta();
   return { props: { posts } };
-}
-
-export default function BlogIndex({ posts }) {
-  return (
-    <div className="mx-auto max-w-3xl px-4 py-10">
-      <h1 className="text-3xl font-semibold mb-6">Blog</h1>
-      {(!posts || posts.length === 0) && (
-        <p className="text-gray-600">No posts yet. Check back soon.</p>
-      )}
-      <ul className="space-y-4">
-        {posts.map(p => (
-          <li key={p.slug} className="border-b pb-4">
-            <Link href={`/blog/${p.slug}`} className="text-lg font-medium underline">
-              {p.title}
-            </Link>
-          </li>
-        ))}
-      </ul>
-    </div>
-  );
 }
