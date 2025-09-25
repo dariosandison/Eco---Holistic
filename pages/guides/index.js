@@ -1,25 +1,34 @@
-import Link from "next/link";
-import { getAllGuidesMeta } from "../../lib/guides";
+import Link from 'next/link';
+import { getAllGuidesMeta } from '../../lib/guides';
+
+function cleanSnippet(str = '') {
+  return String(str)
+    .replace(/<!--[\s\S]*?-->/g, '')
+    .replace(/^-{3}[\s\S]*?-{3}/, '')
+    .replace(/\s+/g, ' ')
+    .trim()
+    .slice(0, 160);
+}
 
 export default function Guides({ guides }) {
   return (
-    <div>
-      <h1 className="mb-4 text-2xl font-semibold">Guides</h1>
-      {guides.length === 0 ? (
-        <p>No guides yet.</p>
-      ) : (
-        <ul className="grid gap-3 sm:grid-cols-2">
-          {guides.map((g) => (
-            <li key={g.slug} className="rounded-md border p-4">
-              <Link href={`/guides/${g.slug}`} className="font-medium underline">
-                {g.title}
-              </Link>
-              {g.description && <p className="mt-1 text-sm text-gray-600">{g.description}</p>}
-            </li>
-          ))}
-        </ul>
-      )}
-    </div>
+    <>
+      <h1>Guides</h1>
+      <ul className="grid gap-4 sm:grid-cols-2">
+        {guides.map((g) => (
+          <li key={g.slug} className="rounded-lg border border-olive-200 bg-white p-4">
+            <Link href={`/guides/${g.slug}`} className="font-medium no-underline hover:underline">
+              {g.title}
+            </Link>
+            { (g.description || g.excerpt) && (
+              <p className="mt-2 text-sm text-olive-900/80">
+                {cleanSnippet(g.description || g.excerpt)}
+              </p>
+            )}
+          </li>
+        ))}
+      </ul>
+    </>
   );
 }
 
