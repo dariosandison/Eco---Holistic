@@ -7,21 +7,16 @@ export default function Header() {
     <header className="border-b bg-white">
       <div className="mx-auto max-w-6xl px-4 py-3 flex items-center justify-between gap-4">
         <Link href="/" className="flex items-center gap-2">
-          {/* If your logo files are at /public/brand/... this will show them.
-             If not, you'll still get the text brand. */}
-          <div className="flex items-center gap-2">
-            <Image
-              src="/brand/wild-and-well-wordmark.svg"
-              alt="Wild & Well"
-              width={140}
-              height={28}
-              priority
-              onError={(e)=>{ e.currentTarget.style.display='none'; }}
-            />
-            <span className="font-semibold tracking-wide">Wild & Well</span>
-          </div>
+          <Image
+            src="/brand/wild-and-well-wordmark.svg"
+            alt="Wild & Well"
+            width={140}
+            height={28}
+            priority
+            onError={(e)=>{ e.currentTarget.style.display='none'; }}
+          />
+          <span className="font-semibold tracking-wide">Wild & Well</span>
         </Link>
-
         <nav className="flex items-center gap-6 text-sm">
           <Link href="/" className="hover:underline">Home</Link>
           <Link href="/guides" className="hover:underline">Guides</Link>
