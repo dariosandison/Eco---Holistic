@@ -1,78 +1,10 @@
-:root {
-  --bg: #0e0f10;
-  --card: #151718;
-  --text: #f3f5f7;
-  --muted: #a8b0b9;
-  --brand: #c6f6c6; /* soft olive-mint */
-  --accent: #89a36a; /* olive */
-  --border: #26292b;
-}
-
-* { box-sizing: border-box; }
-html, body { padding: 0; margin: 0; }
-body {
-  background: var(--bg);
-  color: var(--text);
-  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, Apple Color Emoji, Segoe UI Emoji;
-  line-height: 1.6;
-}
-
-a { color: var(--brand); text-decoration: none; }
-a:hover { text-decoration: underline; }
-
-.container { max-width: 1100px; margin: 0 auto; padding: 24px; }
-
-.site-header {
-  border-bottom: 1px solid var(--border);
-  position: sticky; top: 0; backdrop-filter: blur(8px);
-}
-.header-inner { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
-.brand { font-weight: 700; letter-spacing: .3px; color: var(--brand); }
-
-.nav a { margin-left: 18px; color: var(--text); opacity: .9; }
-.nav a:hover { opacity: 1; }
-
-.site-footer { border-top: 1px solid var(--border); margin-top: 64px; }
-.footer-inner { padding: 24px 0; color: var(--muted); font-size: 14px; }
-
-.grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 16px;
-  margin-top: 16px;
-}
-
-.card {
-  background: var(--card);
-  border: 1px solid var(--border);
-  border-radius: 14px;
-  padding: 16px;
-}
-
-.btn {
-  display: inline-block;
-  background: var(--accent);
-  color: #0b0c0d;
-  padding: 8px 12px;
-  border-radius: 10px;
-  margin-top: 8px;
-}
-
-.muted { color: var(--muted); font-size: 14px; }
-.affix { color: var(--muted); font-size: 12px; margin-left: 4px; }
-
-/* basic article typography */
-.prose h1, .prose h2, .prose h3 { line-height: 1.25; }
-.prose h1 { font-size: 32px; margin: 0 0 12px; }
-.prose h2 { font-size: 24px; margin-top: 24px; }
-.prose p { margin: 12px 0; }
-.prose ul { padding-left: 20px; }
+/* styles/globals.css */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* Site basics */
-html, body { height: 100%; }
-body { background: #ffffff; color: #0f172a; } /* slate-900 */
-a { text-underline-offset: 2px; }
-
+/* Basic site tweaks */
+html, body {
+  @apply bg-white text-gray-900;
+}
+a { @apply underline-offset-2; }
