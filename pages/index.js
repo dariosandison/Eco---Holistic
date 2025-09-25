@@ -1,33 +1,36 @@
-// pages/index.js
 import Link from "next/link";
-import { getAllGuides } from "../lib/guides";
-
-export async function getStaticProps() {
-  const guides = getAllGuides().slice(0, 6);
-  return { props: { guides } };
-}
+import { getAllGuidesMeta } from "../lib/guides";
 
 export default function Home({ guides }) {
   return (
-    <div className="mx-auto max-w-5xl px-4 py-10">
-      <h1 className="text-3xl font-semibold">Wild & Well</h1>
-      <p className="mt-2 text-gray-700">Practical wellness & low-tox living.</p>
+    <div className="space-y-10">
+      <section>
+        <h1 className="mb-2 text-2xl font-semibold">Wild &amp; Well</h1>
+        <p className="text-gray-700">Simple, cleaner living guides and deals.</p>
+      </section>
 
-      <h2 className="text-2xl font-semibold mt-10 mb-4">Latest Guides</h2>
-      {(!guides || guides.length === 0) ? (
-        <p className="text-gray-600">Guides coming soon.</p>
-      ) : (
-        <ul className="grid gap-6 md:grid-cols-2">
-          {guides.map(g => (
-            <li key={g.slug} className="border rounded p-4">
-              <Link href={`/guides/${g.slug}`} className="text-lg font-medium underline">
-                {g.title}
-              </Link>
-              {g.excerpt && <p className="mt-2 text-sm text-gray-700">{g.excerpt}…</p>}
-            </li>
-          ))}
-        </ul>
-      )}
+      <section>
+        <h2 className="mb-3 text-xl font-semibold">Latest Guides</h2>
+        {guides.length === 0 ? (
+          <p>No guides yet.</p>
+        ) : (
+          <ul className="grid gap-3 sm:grid-cols-2">
+            {guides.slice(0, 6).map((g) => (
+              <li key={g.slug} className="rounded-md border p-4">
+                <Link href={`/guides/${g.slug}`} className="font-medium underline">
+                  {g.title}
+                </Link>
+                {g.description && <p className="mt-1 text-sm text-gray-600">{g.description}</p>}
+              </li>
+            ))}
+          </ul>
+        )}
+      </section>
     </div>
   );
+}
+
+export async function getStaticProps() {
+  const guides = getAllGuidesMeta();
+  return { props: { guides } };
 }
