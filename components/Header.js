@@ -1,29 +1,17 @@
-// components/Header.js
 import Link from "next/link";
-import Image from "next/image";
 
 export default function Header() {
   return (
-    <header className="border-b bg-white">
-      <div className="mx-auto max-w-6xl px-4 py-3 flex items-center justify-between gap-4">
-        <Link href="/" className="flex items-center gap-2">
-          <Image
-            src="/brand/wild-and-well-wordmark.svg"
-            alt="Wild & Well"
-            width={140}
-            height={28}
-            priority
-            onError={(e)=>{ e.currentTarget.style.display='none'; }}
-          />
-          <span className="font-semibold tracking-wide">Wild & Well</span>
+    <header className="border-b">
+      <div className="mx-auto flex max-w-5xl items-center justify-between p-4">
+        <Link href="/" className="text-lg font-semibold">
+          Wild &amp; Well
         </Link>
-        <nav className="flex items-center gap-6 text-sm">
-          <Link href="/" className="hover:underline">Home</Link>
-          <Link href="/guides" className="hover:underline">Guides</Link>
-          <Link href="/blog" className="hover:underline">Blog</Link>
-          <Link href="/deals" className="hover:underline">Deals</Link>
-          <Link href="/about" className="hover:underline">About</Link>
-          <Link href="/contact" className="hover:underline">Contact</Link>
+        <nav className="flex gap-4 text-sm">
+          <Link href="/guides">Guides</Link>
+          <Link href="/blog">Blog</Link>
+          <Link href="/deals">Deals</Link>
+          <Link href="/contact">Contact</Link>
         </nav>
       </div>
     </header>
