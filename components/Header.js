@@ -1,20 +1,19 @@
 import Link from 'next/link';
-import Logo from './Logo';
+import Image from 'next/image';
 
 export default function Header() {
   return (
-    <header className="sticky top-0 z-40 border-b border-olive-300 bg-olive-50/80 backdrop-blur">
-      <div className="mx-auto max-w-5xl px-4 py-3 flex items-center justify-between">
-        <Logo />
-        <nav className="flex items-center gap-5 text-sm">
-          <Link href="/guides" className="hover:text-olive-800">Guides</Link>
-          <Link href="/blog" className="hover:text-olive-800">Blog</Link>
-          <Link href="/deals" className="hover:text-olive-800">Deals</Link>
-          <Link href="/contact" className="rounded-md border border-olive-300 px-3 py-1 hover:bg-olive-100">
-            Contact
-          </Link>
-        </nav>
-      </div>
+    <header className="mx-auto flex max-w-6xl items-center justify-between px-4 py-4">
+      <Link href="/" className="flex items-center gap-2">
+        <Image src="/logo.svg" alt="Wild & Well" width={140} height={28} priority />
+      </Link>
+
+      <nav className="flex gap-6 text-sm">
+        <Link href="/guides">Guides</Link>
+        <Link href="/blog">Blog</Link>
+        <Link href="/deals">Deals</Link>
+        <Link href="/contact">Contact</Link>
+      </nav>
     </header>
   );
 }
