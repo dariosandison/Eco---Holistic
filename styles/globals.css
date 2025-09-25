@@ -67,3 +67,12 @@ a:hover { text-decoration: underline; }
 .prose h2 { font-size: 24px; margin-top: 24px; }
 .prose p { margin: 12px 0; }
 .prose ul { padding-left: 20px; }
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Site basics */
+html, body { height: 100%; }
+body { background: #ffffff; color: #0f172a; } /* slate-900 */
+a { text-underline-offset: 2px; }
+
