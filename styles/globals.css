@@ -1,10 +1,38 @@
-/* styles/globals.css */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* Basic site tweaks */
-html, body {
-  @apply bg-white text-gray-900;
+/* Color tokens */
+:root{
+  --olive-25:#f6f8f2;
+  --olive-50:#eef4e6;
+  --olive-100:#e3edd4;
+  --olive-200:#d2e1b6;
+  --olive-300:#c1d699;
+  --olive-800:#344b27;
+  --olive-900:#27381e;
+  --olive-950:#1c2715;
 }
-a { @apply underline-offset-2; }
+
+@layer base{
+  html { scroll-behavior: smooth; }
+  body { @apply bg-[var(--olive-25)] text-[var(--olive-950)] antialiased; }
+  a { @apply text-olive-800 underline-offset-2 hover:underline; }
+  h1 { @apply text-3xl font-semibold tracking-tight mb-3; }
+  h2 { @apply text-xl font-semibold tracking-tight mt-8 mb-2; }
+  ul { @apply list-disc pl-6; }
+}
+
+/* Tailwind color shortcuts */
+@layer utilities{
+  .bg-olive-25{ background-color: var(--olive-25); }
+  .bg-olive-50{ background-color: var(--olive-50); }
+  .text-olive-950{ color: var(--olive-950); }
+  .text-olive-900\/80{ color: color-mix(in oklab, var(--olive-900) 80%, transparent); }
+  .text-olive-800{ color: var(--olive-800); }
+  .border-olive-200{ border-color: var(--olive-200); }
+  .border-olive-300{ border-color: var(--olive-300); }
+  .hover\:bg-olive-100:hover{ background-color: #eaf1dd; }
+  .hover\:text-olive-800:hover{ color: var(--olive-800); }
+}
+
