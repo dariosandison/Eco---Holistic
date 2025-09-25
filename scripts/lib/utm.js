@@ -1,27 +1,22 @@
-export function withUtm(url, source = 'site', medium = 'affiliate', campaign = 'guide') {
+// lib/utm.js
+export function parseUtmFromUrl(search = "") {
+  const params = new URLSearchParams(search);
+  const keys = ["utm_source", "utm_medium", "utm_campaign", "utm_term", "utm_content"];
+  const out = {};
+  for (const k of keys) if (params.get(k)) out[k] = params.get(k);
+  return out;
+}
+
+export function appendUtm(url, utm = {}) {
   try {
-    const u = new URL(url);
-    if (!u.searchParams.has('utm_source')) {
-      u.searchParams.set('utm_source', source);
-      u.searchParams.set('utm_medium', medium);
-      u.searchParams.set('utm_campaign', campaign);
-    }
-    return u.toString();
+    const u = new URL(url, "https://dummy.base");
+    Object.entries(utm).forEach(([k, v]) => {
+      if (v) u.searchParams.set(k, v);
+    });
+    // strip dummy base if relative
+    return url.startsWith("http") ? u.toString() : u.pathname + u.search + u.hash;
   } catch {
     return url;
   }
 }
 
-export function withAmazonTag(url) {
-  const tag = process.env.NEXT_PUBLIC_AMAZON_TAG;
-  if (!tag) return url;
-  try {
-    const u = new URL(url);
-    if (!u.searchParams.has('tag')) {
-      u.searchParams.set('tag', tag);
-    }
-    return u.toString();
-  } catch {
-    return url;
-  }
-}
