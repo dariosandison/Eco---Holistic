@@ -1,30 +1,32 @@
-// pages/_document.js
-import { Html, Head, Main, NextScript } from "next/document";
+import { Html, Head, Main, NextScript } from 'next/document';
 
 export default function Document() {
-  const siteName = "Wild & Well";
+  const siteName = 'Wild & Well';
+  const theme = '#0f1a0d';
+
   return (
     <Html lang="en">
       <Head>
-        {/* Google Search Console verification */}
-        <meta
-          name="google-site-verification"
-          content="Av_pqZlbZTPcXOAjnUZ826c433VlzcKUcyODsNRicOU"
-        />
-
-        {/* PWA + Icons (safe if files don’t exist yet) */}
-        <link rel="icon" href="/favicon.ico" />
-        <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+        {/* PWA / icons */}
         <link rel="manifest" href="/site.webmanifest" />
+        <meta name="theme-color" content={theme} />
+        <link rel="icon" href="/logo.svg" type="image/svg+xml" />
+        <link rel="icon" href="/icon-192.png" sizes="192x192" />
+        <link rel="icon" href="/icon-512.png" sizes="512x512" />
+        <link rel="apple-touch-icon" href="/icon-192.png" />
 
-        {/* Brand color for address bar on mobile */}
-        <meta name="theme-color" content="#0b3d2e" />
+        {/* Preload brand font(s) here if you add any later */}
+
+        {/* Basic meta fallback */}
         <meta name="application-name" content={siteName} />
+        <meta name="apple-mobile-web-app-title" content={siteName} />
+        <meta name="color-scheme" content="light dark" />
       </Head>
-      <body>
+      <body className="bg-white text-slate-900 antialiased">
         <Main />
         <NextScript />
       </body>
     </Html>
   );
 }
+
