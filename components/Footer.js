@@ -1,25 +1,29 @@
 // components/Footer.js
-import Link from 'next/link';
+import Link from "next/link";
 
 export default function Footer() {
   const year = new Date().getFullYear();
   return (
-    <footer className="border-t mt-12 py-8 text-sm">
-      <div className="mx-auto max-w-6xl px-4 flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
-        <div className="flex items-center gap-3">
-          <img src="/logo.svg" alt="Wild & Well" className="h-6 w-6" />
-          <span className="font-medium">Wild &amp; Well</span>
-          <span>© {year}</span>
+    <footer className="mt-12 border-t bg-white">
+      <div className="mx-auto max-w-6xl px-4 py-8 grid gap-6 md:grid-cols-2">
+        <div>
+          <div className="text-lg font-semibold">Wild & Well</div>
+          <div className="text-sm text-gray-600">
+            Practical wellness & low-tox living.
+          </div>
+          <div className="mt-2 text-sm">
+            Contact: <a className="underline" href="mailto:hello@wild-and-well.store">hello@wild-and-well.store</a>
+          </div>
         </div>
 
-        <nav className="flex flex-wrap gap-x-6 gap-y-2">
-          <Link href="/about">About</Link>
-          <Link href="/disclosure">Disclosure</Link>
-          <Link href="/affiliate-disclosure">Affiliate</Link>
-          <Link href="/privacy">Privacy</Link>
-          <Link href="/terms">Terms</Link>
-          <Link href="/contact">Contact</Link>
-        </nav>
+        <div className="flex gap-6 text-sm justify-start md:justify-end">
+          <Link href="/privacy" className="hover:underline">Privacy</Link>
+          <Link href="/terms" className="hover:underline">Terms</Link>
+          <Link href="/disclosures" className="hover:underline">Disclosures</Link>
+        </div>
+      </div>
+      <div className="text-center text-xs text-gray-500 pb-6">
+        © {year} Wild & Well. All rights reserved.
       </div>
     </footer>
   );
