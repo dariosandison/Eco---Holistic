@@ -1,23 +1,37 @@
-// pages/blog/[slug].js
+import Head from "next/head";
 import { getAllPostSlugs, getPostBySlug } from "../../lib/blog";
+
+function SimpleMarkdown({ text = "" }) {
+  const withLinks = text.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" rel="nofollow noopener noreferrer" class="underline">$1</a>');
+  const html = withLinks
+    .split(/\n{2,}/)
+    .map((p) => `<p>${p.replace(/\n/g, "<br/>")}</p>`)
+    .join("");
+  return <div className="prose" dangerouslySetInnerHTML={{ __html: html }} />;
+}
+
+export default function PostPage({ meta, content }) {
+  return (
+    <>
+      <Head>
+        <title>{meta.title} – Wild & Well</title>
+        {meta.description && <meta name="description" content={meta.description} />}
+      </Head>
+      <article className="prose max-w-none">
+        <h1>{meta.title}</h1>
+        {meta.date && <p className="text-sm text-gray-500">{new Date(meta.date).toLocaleDateString()}</p>}
+        <SimpleMarkdown text={content} />
+      </article>
+    </>
+  );
+}
 
 export async function getStaticPaths() {
   const slugs = getAllPostSlugs();
-  return { paths: slugs.map(slug => ({ params: { slug } })), fallback: false };
+  return { paths: slugs.map((slug) => ({ params: { slug } })), fallback: false };
 }
 
 export async function getStaticProps({ params }) {
-  const post = getPostBySlug(params.slug);
-  if (!post) return { notFound: true };
-  return { props: { post } };
-}
-
-export default function BlogPost({ post }) {
-  return (
-    <article className="mx-auto max-w-3xl px-4 py-10 prose">
-      <h1>{post.title}</h1>
-      {/* Basic render; if you add MD/MDX rendering later we can upgrade this */}
-      <pre className="whitespace-pre-wrap">{post.content}</pre>
-    </article>
-  );
+  const { meta, content } = getPostBySlug(params.slug);
+  return { props: { meta, content } };
 }
