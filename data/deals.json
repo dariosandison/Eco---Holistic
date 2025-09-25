@@ -1,0 +1,9 @@
+[
+  {
+    "title": "Example Deal",
+    "url": "https://example.com/product",
+    "description": "A placeholder product. Replace with your real deals.",
+    "price": null,
+    "image": "/brand/wild-and-well-icon.svg"
+  }
+]
