@@ -1,15 +1,14 @@
-// components/AffiliateLink.js
 export default function AffiliateLink({ href, children, className = "", ...props }) {
+  const safeHref = href || "#";
   return (
     <a
-      href={href}
+      href={safeHref}
       target="_blank"
       rel="nofollow sponsored noopener noreferrer"
-      className={`underline decoration-dotted hover:decoration-solid ${className}`}
+      className={`underline ${className}`}
       {...props}
     >
       {children}
-      <span className="sr-only"> (affiliate link)</span>
     </a>
   );
 }
