@@ -1,18 +1,18 @@
-import Head from "next/head";
-import Header from "./Header";
-import Footer from "./Footer";
+import Head from 'next/head';
+import Header from './Header';
+import Footer from './Footer';
 
-export default function Layout({ children, title = "Wild & Well" }) {
+export default function Layout({ children }) {
   return (
     <>
       <Head>
-        <meta charSet="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <title>{title}</title>
+        <meta name="theme-color" content="#C9D8B6" />
       </Head>
-      <Header />
-      <main className="mx-auto max-w-5xl p-4">{children}</main>
-      <Footer />
+      <div className="min-h-screen bg-olive-25 text-olive-950">
+        <Header />
+        <main className="mx-auto max-w-5xl px-4 py-8">{children}</main>
+        <Footer />
+      </div>
     </>
   );
 }
