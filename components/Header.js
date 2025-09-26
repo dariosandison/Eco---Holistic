@@ -22,3 +22,13 @@ export default function Header() {
     </header>
   );
 }
+// inside your Header component's JSX nav area
+<button
+  className="rounded-lg border px-3 py-1 text-sm"
+  onClick={() => {
+    const ev = new CustomEvent('open-search');
+    window.dispatchEvent(ev);
+  }}
+>
+  Search
+</button>
