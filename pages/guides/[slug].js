@@ -1,52 +1,33 @@
-// pages/guides/[slug].js
-import Layout from '@/components/Layout';
-import SEO from '@/components/SEO';
-import Image from 'next/image';
-import { getAllDocs, getDoc, listSlugs } from '@/lib/content';
+export default function GuidePage({ slug, html }) {
+  // If you're not converting MD to HTML yet, this will render raw text safely.
+  // When you add a proper MD/MDX renderer, switch to dangerouslySetInnerHTML with sanitized HTML.
+  return (
+    <main className="mx-auto max-w-3xl px-4 py-10 prose prose-invert">
+      <h1 className="mb-6 text-3xl font-bold">{slug.replace(/-/g, " ")}</h1>
+      <article style={{ whiteSpace: "pre-wrap" }}>{html}</article>
+    </main>
+  );
+}
 
 export async function getStaticPaths() {
-  const slugs = listSlugs('guides');
+  const { getAllGuideSlugs } = await import("../../lib/content.js");
+  const slugs = await getAllGuideSlugs();
   return {
     paths: slugs.map((slug) => ({ params: { slug } })),
-    fallback: 'blocking',
+    fallback: false,
   };
 }
 
 export async function getStaticProps({ params }) {
-  const guide = await getDoc('guides', params.slug);
-  if (!guide) return { notFound: true };
-  return { props: { guide }, revalidate: 60 };
-}
+  const { readGuideFile } = await import("../../lib/content.js");
+  const { content } = await readGuideFile(params.slug);
 
-export default function GuidePage({ guide }) {
-  const { frontmatter } = guide;
-  return (
-    <Layout>
-      <SEO title={frontmatter.title} description={frontmatter.description} />
-      <article className="mx-auto max-w-3xl px-4 py-10">
-        <header className="mb-6">
-          <h1 className="text-3xl font-bold">{frontmatter.title}</h1>
-          {frontmatter.description && (
-            <p className="mt-2 text-lg opacity-80">{frontmatter.description}</p>
-          )}
-          {frontmatter.coverImage && (
-            <div className="mt-4 overflow-hidden rounded-xl">
-              <Image
-                src={frontmatter.coverImage}
-                alt={frontmatter.title}
-                width={1200}
-                height={630}
-                style={{ width: '100%', height: 'auto' }}
-                priority
-              />
-            </div>
-          )}
-        </header>
-        <div
-          className="prose prose-neutral max-w-none"
-          dangerouslySetInnerHTML={{ __html: guide.html }}
-        />
-      </article>
-    </Layout>
-  );
+  // Minimal pass-through; keep as plain text for now.
+  // (You can swap in your MD/MDX renderer later.)
+  return {
+    props: {
+      slug: params.slug,
+      html: content,
+    },
+  };
 }
