@@ -1,93 +1,63 @@
-// pages/cookies.js
-import Head from "next/head";
+export const seo = {
+  title: 'Cookie Policy',
+  description:
+    'How Wild & Well uses cookies and similar technologies, and how you can control them.',
+};
 
 export default function Cookies() {
-  const canonical = "https://www.wild-and-well.store/cookies";
-
+  const updated = '2025-01-01';
   return (
-    <>
-      <Head>
-        <title>Cookies Policy • Wild & Well</title>
-        <meta
-          name="description"
-          content="Details on the cookies used by Wild & Well, how we use them, and how you can control them."
-        />
-        <link rel="canonical" href={canonical} />
-        <meta property="og:title" content="Cookies Policy • Wild & Well" />
-        <meta property="og:description" content="What cookies we use and your options." />
-        <meta property="og:url" content={canonical} />
-      </Head>
+    <div className="prose">
+      <h1>Cookie Policy</h1>
+      <p><strong>Last updated:</strong> {updated}</p>
 
-      <main className="container page">
-        <h1>Cookies Policy</h1>
-        <p className="muted">Last updated: {new Date().toLocaleDateString()}</p>
+      <h2>What Are Cookies?</h2>
+      <p>
+        Cookies are small text files stored on your device to help websites work and to
+        collect information about how you use them. We also use similar technologies,
+        such as local storage and pixels.
+      </p>
 
-        <section className="card">
-          <h3>What Are Cookies?</h3>
-          <p>
-            Cookies are small text files stored on your device to help websites work properly,
-            remember preferences, and understand how people use them.
-          </p>
-        </section>
+      <h2>How We Use Cookies</h2>
+      <ul>
+        <li><strong>Strictly Necessary:</strong> Required for core functionality, security, and fraud prevention.</li>
+        <li><strong>Performance/Analytics:</strong> To understand website usage and improve the Site (e.g., page views, popular content).</li>
+        <li><strong>Functionality:</strong> To remember your preferences.</li>
+        <li><strong>Advertising &amp; Affiliate:</strong> To attribute purchases to our links and manage commissions.</li>
+      </ul>
 
-        <section className="card">
-          <h3>Types We Use</h3>
-          <ul>
-            <li>
-              <strong>Essential:</strong> Required for core functionality (security, performance, basic UX).
-            </li>
-            <li>
-              <strong>Analytics (GA4):</strong> Helps us understand page views, traffic sources, and general usage.
-            </li>
-            <li>
-              <strong>Affiliate:</strong> Retailers (e.g., Amazon) may set cookies to attribute referrals.
-            </li>
-          </ul>
-        </section>
+      <h2>Third-Party Cookies</h2>
+      <p>
+        Some cookies are set by third parties (e.g., analytics providers, affiliate
+        networks). These third parties may process your data according to their own
+        policies.
+      </p>
 
-        <section className="card">
-          <h3>Managing Cookies</h3>
-          <ul>
-            <li>Use your browser settings to block or delete cookies.</li>
-            <li>
-              Install the{" "}
-              <a
-                href="https://tools.google.com/dlpage/gaoptout"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Google Analytics Opt-out Add-on
-              </a>{" "}
-              to opt out of GA4 measurement.
-            </li>
-            <li>
-              Private/Incognito browsing modes can reduce cookie persistence between sessions.
-            </li>
-          </ul>
-        </section>
+      <h2>Managing Cookies</h2>
+      <ul>
+        <li>Most browsers let you block or delete cookies in settings or preferences.</li>
+        <li>
+          You can typically disable third-party cookies and clear existing cookies at any
+          time. Doing so may affect certain features of the Site.
+        </li>
+      </ul>
 
-        <section className="card">
-          <h3>More Info</h3>
-          <p>
-            If you have questions about our use of cookies, email{" "}
-            <a href="mailto:hello@wild-and-well.store">hello@wild-and-well.store</a>.
-          </p>
-        </section>
-      </main>
+      <h2>Do Not Track</h2>
+      <p>
+        Because industry standards are evolving, we do not currently respond to DNT
+        signals.
+      </p>
 
-      <style jsx>{`
-        .page { margin: 2.5rem auto; }
-        .muted { color: #6b7280; margin: 6px 0 12px; }
-        .card {
-          border: 1px solid var(--border);
-          border-radius: 12px;
-          padding: 16px;
-          background: #fff;
-          margin: 14px 0;
-        }
-        ul { margin: 8px 0 0 18px; }
-        li { margin: 6px 0; }
-      `}</style>
-    </>
+      <h2>Changes</h2>
+      <p>
+        We may update this policy to reflect changes in technology, law, or our services.
+        Updates will be posted here.
+      </p>
+
+      <h2>Contact</h2>
+      <p>
+        Questions? Email <a href="mailto:hello@yourdomain.com">hello@yourdomain.com</a>.
+      </p>
+    </div>
   );
 }
