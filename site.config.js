@@ -1,14 +1,33 @@
 // site.config.js
-const domain = 'https://wildandwell.example'; // ← set your real domain
-module.exports = {
+const site = {
   name: 'Wild & Well',
-  shortName: 'Wild & Well',
-  domain,
-  twitter: '@wildandwell', // optional
-  defaultTitle: 'Wild & Well — Holistic Guides, Clean Products & Deals',
-  defaultDescription:
-    'Actionable wellness guides, low-tox picks, and vetted deals to live wild & well.',
-  defaultImage: `${domain}/og-default.jpg`, // put a 1200x630 in /public
-  color: '#C9D8B6',
+  url: 'https://example.com', // <- set your canonical domain
+  locale: 'en_US',
+  themeColor: '#C9D8B6',
+  twitter: '@wildandwell',     // optional
+  author: 'Wild & Well',
+
+  brand: {
+    logo: '/logo.svg',
+    favicon: '/favicon.ico',
+  },
+
+  nav: [
+    { href: '/guides', label: 'Guides' },
+    { href: '/blog', label: 'Blog' },
+    { href: '/deals', label: 'Deals' },
+    { href: '/contact', label: 'Contact' },
+  ],
+
+  footer: {
+    disclaimer: 'Affiliate links may earn us a commission at no extra cost to you.',
+  },
+
+  seoDefaults: {
+    title: 'Wild & Well',
+    description: 'Evidence-guided guides, reviews, and wellness picks.',
+    image: '/og/default-og.png', // add this file when you can
+  },
 };
 
+export default site;
