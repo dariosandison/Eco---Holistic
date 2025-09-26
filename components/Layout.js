@@ -13,6 +13,11 @@ export default function Layout({ children }) {
       <div className="min-h-screen bg-olive-25 text-olive-950">
         <Header />
         <main className="mx-auto max-w-5xl px-4 py-8">{children}</main>
+  // in components/Layout.js, inside the root component JSX
+{/* ...rest of layout */}
+{/* Mount search modal once */}
+{typeof window !== 'undefined' && require('@/components/SearchModal').default && <></>}
+
         <Footer />
       </div>
     </>
