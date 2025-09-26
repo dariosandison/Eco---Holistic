@@ -1,11 +1,13 @@
 // pages/_app.js
-import '@/styles/globals.css'; // keep your Tailwind/global
+import '@/styles/globals.css';
 import Layout from '@/components/Layout';
+import SEO from '@/components/SEO';
 
 export default function App({ Component, pageProps }) {
-  const pageSEO = Component.seo || {};
+  const seoProps = pageProps?.seo || {};
   return (
-    <Layout seo={pageSEO}>
+    <Layout>
+      <SEO {...seoProps} />
       <Component {...pageProps} />
     </Layout>
   );
