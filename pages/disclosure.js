@@ -1,50 +1,46 @@
 export const seo = {
-  title: 'Disclaimer',
+  title: 'Editorial & Product Testing Disclosure',
   description:
-    'Important information about health, fitness, and product guidance on Wild & Well.',
+    'How we research, evaluate, and recommend products, plus how we handle samples, sponsorships, and corrections.',
 };
 
-export default function Disclaimer() {
-  const updated = '2025-01-01';
+export default function EditorialDisclosure() {
   return (
     <div className="prose">
-      <h1>Disclaimer</h1>
-      <p><strong>Last updated:</strong> {updated}</p>
+      <h1>Editorial &amp; Product Testing Disclosure</h1>
 
-      <h2>No Medical or Professional Advice</h2>
+      <h2>Our Process</h2>
+      <ul>
+        <li>We start with evidence-guided criteria (materials, safety, durability, value).</li>
+        <li>We compare competing products and specifications.</li>
+        <li>Where possible, we perform hands-on evaluation and long-term use checks.</li>
+        <li>When hands-on testing isn’t feasible, we rely on reputable data, expert input, and transparent methodology.</li>
+      </ul>
+
+      <h2>How We Make Money</h2>
       <p>
-        The content on this Site is for educational and informational purposes only and
-        is not a substitute for professional medical advice, diagnosis, or treatment.
-        Always seek the advice of your physician or other qualified health provider with
-        any questions you may have regarding a medical condition. Never disregard
-        professional advice or delay seeking it because of something you have read here.
-        If you are experiencing an emergency, call your local emergency number
-        immediately.
+        We use affiliate links and may receive samples or briefings from brands. Our
+        editorial team decides what to cover and recommend. See also our{' '}
+        <a href="/affiliate-disclosure">Affiliate Disclosure</a>.
       </p>
 
-      <h2>Fitness, Nutrition &amp; Supplementation</h2>
+      <h2>Samples &amp; Gifts</h2>
+      <ul>
+        <li>We do not accept compensation for positive reviews.</li>
+        <li>Samples do not guarantee coverage and may be returned, donated, or recycled.</li>
+        <li>Sponsored content, when present, is clearly labeled.</li>
+      </ul>
+
+      <h2>Corrections &amp; Updates</h2>
       <p>
-        Exercise, diet, and supplements involve risks and may not be appropriate for all
-        individuals. Evaluate product labels for allergens and consult a professional
-        before starting any program.
+        We update articles as products change or new information emerges. If you spot an
+        error, email <a href="mailto:hello@yourdomain.com">hello@yourdomain.com</a>.
       </p>
 
-      <h2>Environmental &amp; Product Safety</h2>
+      <h2>Conflicts of Interest</h2>
       <p>
-        We aim to present accurate information, but product formulations and regulations
-        can change. Confirm details with the manufacturer before use.
-      </p>
-
-      <h2>Results Vary</h2>
-      <p>
-        Individual results depend on many factors. We make no guarantees of results or
-        outcomes.
-      </p>
-
-      <h2>External Links</h2>
-      <p>
-        We are not responsible for the content, policies, or practices of third-party
-        websites we link to.
+        Contributors must disclose relevant financial interests. We avoid assignments
+        where a conflict cannot be mitigated.
       </p>
     </div>
   );
