@@ -31,20 +31,17 @@ export default function Home({ docs }) {
           Wild & Well
         </h1>
 
-        {/* WIDE LOGO */}
+        {/* FULL-WIDTH LOGO (fills the container width) */}
         <img
-          src="/logo-dark.svg"          // use your larger SVG (crisp at any size)
+          src="/logo-dark.svg"
           alt="Wild & Well"
           style={{
             display:'block',
             margin:'0 auto 16px',
-            width:'min(100%, 900px)',   // << wider across the page
-            height:'auto'
+            width:'100%',     // span container width
+            height:'auto'     // keep aspect ratio
           }}
-          onError={(e)=>{               // fallback if that asset isn't found
-            e.currentTarget.src='/logo.svg';
-            e.currentTarget.onerror = null;
-          }}
+          onError={(e)=>{ e.currentTarget.src='/logo.svg'; e.currentTarget.onerror = null; }}
         />
 
         <p>Actionable guides and clean product picks to help you sleep better, stress less, and move more.</p>
@@ -53,3 +50,22 @@ export default function Home({ docs }) {
           <Link className="btn" href="/guides">Explore Guides</Link>
           <Link className="btn btn--ghost" href="/deals">Today&apos;s Deals</Link>
         </div>
+
+        <div className="value-props">
+          <span>Independent • Reader-supported</span>
+          <span>Evidence-informed picks</span>
+          <span>No sponsored posts</span>
+        </div>
+      </section>
+
+      <h2 className="section-title">Latest Guides</h2>
+      {latest.length === 0 ? (
+        <p style={{ color:'#f6f1e3' }}>No guides published yet.</p>
+      ) : (
+        <div className="grid">
+          {latest.map((p) => <Card key={p.slug} {...p} />)}
+        </div>
+      )}
+    </>
+  );
+}
