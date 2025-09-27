@@ -3,25 +3,23 @@ import { getAllDocs } from '../../lib/content';
 
 export default function handler(req, res) {
   try {
-    const url = new URL(req.url, 'http://x');
-    const q = (url.searchParams.get('q') || '').toLowerCase().trim();
-    if (!q) return res.status(200).json({ results: [] });
-
-    // Read from filesystem on the server (safe)
-    const all = getAllDocs({
+    const q = String(req.query.q || '').toLowerCase();
+    const guides = getAllDocs({
       dir: 'content/guides',
-      fields: ['slug','title','excerpt','category']
-    }) || [];
+      fields: ['slug','title','excerpt','date','image']
+    });
+    const blog = getAllDocs({
+      dir: 'content/blog',
+      fields: ['slug','title','excerpt','date','image']
+    });
 
-    const results = all.filter(p =>
-      (p.title || '').toLowerCase().includes(q) ||
-      (p.excerpt || '').toLowerCase().includes(q) ||
-      (p.category || '').toLowerCase().includes(q)
-    ).slice(0, 10);
+    const hay = (t='') => t.toLowerCase();
+    const results = [...guides.map(x=>({ ...x, type:'guide' })), ...blog.map(x=>({ ...x, type:'blog' }))]
+      .filter(x => !q || hay(x.title).includes(q) || hay(x.excerpt).includes(q))
+      .slice(0, 20);
 
-    res.setHeader('Cache-Control', 's-maxage=300, stale-while-revalidate=600');
-    res.status(200).json({ results });
+    res.status(200).json({ ok:true, results });
   } catch (e) {
-    res.status(200).json({ results: [] });
+    res.status(200).json({ ok:true, results:[] }); // never break the page
   }
 }
