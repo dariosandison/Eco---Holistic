@@ -13,11 +13,13 @@ export async function getStaticProps() {
   return { props: { doc, html } };
 }
 
-export default function ProductDisclosure({ doc, html }) {
-  return (
-    <div>
-      <h1>{doc.title || 'Product Disclosure'}</h1>
-      <article className="prose" dangerouslySetInnerHTML={{ __html: html }} />
-    </div>
-  );
+export default function ProductDisclosure() { return null; }
+
+export async function getStaticProps() {
+  return {
+    redirect: {
+      destination: '/legal/product-disclosure',
+      permanent: true,
+    },
+  };
 }
