@@ -1,10 +1,16 @@
-export default function ProductDisclosure() { return null; }
+import { useEffect } from 'react';
+import Head from 'next/head';
+import { useRouter } from 'next/router';
 
-export async function getStaticProps() {
-  return {
-    redirect: {
-      destination: '/legal/product-disclosure',
-      permanent: true,
-    },
-  };
+export default function ProductDisclosureRedirect() {
+  const router = useRouter();
+  useEffect(() => { router.replace('/legal/product-disclosure'); }, [router]);
+  return (
+    <>
+      <Head>
+        <meta httpEquiv="refresh" content="0; url=/legal/product-disclosure" />
+      </Head>
+      <p>Redirecting to <a href="/legal/product-disclosure">/legal/product-disclosure</a>…</p>
+    </>
+  );
 }
