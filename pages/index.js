@@ -25,20 +25,15 @@ export default function Home({ docs }) {
         type="website"
       />
 
+      {/* HERO with a real background layer */}
       <section className="hero">
-        {/* OFFSCREEN H1 for SEO */}
+        {/* Background layer (behind content) */}
+        <div className="hero-bg" aria-hidden="true" />
+
+        {/* Offscreen H1 for SEO */}
         <h1 style={{position:'absolute',left:'-9999px',top:'auto',width:1,height:1,overflow:'hidden'}}>
           Wild & Well
         </h1>
-
-        {/* WATERMARK LOGO (actual element, not pseudo) */}
-        <img
-          className="hero-watermark"
-          src="/logo.svg"
-          alt=""
-          aria-hidden="true"
-          onError={(e)=>{ e.currentTarget.src='/cover.png'; }}
-        />
 
         <p>Actionable guides and clean product picks to help you sleep better, stress less, and move more.</p>
 
