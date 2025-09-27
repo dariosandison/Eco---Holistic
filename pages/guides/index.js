@@ -12,28 +12,26 @@ export async function getStaticProps() {
 
 export default function GuidesIndex({ guides }) {
   return (
-    <div>
+    <>
       <h1>Guides</h1>
       {guides.length === 0 ? (
         <p>No guides published yet.</p>
       ) : (
-        <ul style={{ listStyle: 'none', padding: 0 }}>
+        <div className="grid">
           {guides.map((g) => (
-            <li key={g.slug} style={{ padding: '16px 0', borderBottom: '1px solid #eee' }}>
+            <article key={g.slug} className="card">
               <h3 style={{ margin: 0 }}>
                 <Link href={`/guides/${g.slug}`}>{g.title || g.slug}</Link>
               </h3>
-              {g.date && (
-                <small style={{ color: '#888' }}>
-                  {new Date(g.date).toLocaleDateString()}
-                </small>
-              )}
-              {g.excerpt && <p style={{ marginTop: 8 }}>{g.excerpt}</p>}
-              <div><Link href={`/guides/${g.slug}`}>Read guide →</Link></div>
-            </li>
+              {g.date && <small>{new Date(g.date).toLocaleDateString()}</small>}
+              {g.excerpt && <p>{g.excerpt}</p>}
+              <div style={{ marginTop: 8 }}>
+                <Link href={`/guides/${g.slug}`}>Read guide →</Link>
+              </div>
+            </article>
           ))}
-        </ul>
+        </div>
       )}
-    </div>
+    </>
   );
 }
