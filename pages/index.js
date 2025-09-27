@@ -48,7 +48,7 @@ export default function Home({ docs }) {
             display: 'block',
             margin: '0 auto 16px',
             width: 'auto',
-            maxHeight: 'clamp(72px, 12vw, 140px)', // phones ~72–90px, laptops ~110–130px, cap at 140px
+            maxHeight: 'clamp(72px, 12vw, 140px)',
           }}
           onError={(e) => {
             e.currentTarget.src = '/logo-dark.svg';
@@ -64,3 +64,29 @@ export default function Home({ docs }) {
         <div className="hero-links">
           <Link className="btn" href="/guides">
             Explore Guides
+          </Link>
+          <Link className="btn btn--ghost" href="/deals">
+            Today&apos;s Deals
+          </Link>
+        </div>
+
+        <div className="value-props">
+          <span>Independent • Reader-supported</span>
+          <span>Evidence-informed picks</span>
+          <span>No sponsored posts</span>
+        </div>
+      </section>
+
+      <h2 className="section-title">Latest Guides</h2>
+      {latest.length === 0 ? (
+        <p style={{ color: '#f6f1e3' }}>No guides published yet.</p>
+      ) : (
+        <div className="grid">
+          {latest.map((p) => (
+            <Card key={p.slug} {...p} />
+          ))}
+        </div>
+      )}
+    </>
+  );
+}
