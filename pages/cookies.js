@@ -13,11 +13,13 @@ export async function getStaticProps() {
   return { props: { doc, html } };
 }
 
-export default function Cookies({ doc, html }) {
-  return (
-    <div>
-      <h1>{doc.title || 'Cookies Policy'}</h1>
-      <article className="prose" dangerouslySetInnerHTML={{ __html: html }} />
-    </div>
-  );
+export default function Cookies() { return null; }
+
+export async function getStaticProps() {
+  return {
+    redirect: {
+      destination: '/legal/cookies',
+      permanent: true,
+    },
+  };
 }
