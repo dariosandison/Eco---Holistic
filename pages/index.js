@@ -25,15 +25,24 @@ export default function Home({ docs }) {
         type="website"
       />
 
-      {/* HERO with a real background layer */}
       <section className="hero">
-        {/* Background layer (behind content) */}
-        <div className="hero-bg" aria-hidden="true" />
-
-        {/* Offscreen H1 for SEO */}
+        {/* Keep a semantic H1 for SEO/accessibility */}
         <h1 style={{position:'absolute',left:'-9999px',top:'auto',width:1,height:1,overflow:'hidden'}}>
           Wild & Well
         </h1>
+
+        {/* HERO LOGO — spans the cream box width, responsive */}
+        <img
+          src="/logo.svg"              // or '/logo-dark.svg' if that's your preferred mark
+          alt="Wild & Well"
+          style={{
+            display:'block',
+            margin:'0 auto 16px',
+            width:'min(100%, 980px)',  // fills the hero box, caps for big screens
+            height:'auto'
+          }}
+          onError={(e)=>{ e.currentTarget.src='/logo-dark.svg'; e.currentTarget.onerror=null; }}
+        />
 
         <p>Actionable guides and clean product picks to help you sleep better, stress less, and move more.</p>
 
