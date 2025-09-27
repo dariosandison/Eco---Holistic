@@ -2,17 +2,26 @@
 import { getAllDocs } from '../../lib/content';
 
 export default function handler(req, res) {
-  const q = (req.query.q || '').toString().trim().toLowerCase();
-  const all = getAllDocs({ dir: 'content/guides', fields: ['slug', 'title', 'excerpt'] });
+  try {
+    const url = new URL(req.url, 'http://x');
+    const q = (url.searchParams.get('q') || '').toLowerCase().trim();
+    if (!q) return res.status(200).json({ results: [] });
 
-  if (!q) return res.status(200).json({ items: [] });
+    // Read from filesystem on the server (safe)
+    const all = getAllDocs({
+      dir: 'content/guides',
+      fields: ['slug','title','excerpt','category']
+    }) || [];
 
-  const items = all
-    .filter((x) => {
-      const hay = `${x.title || ''} ${x.excerpt || ''} ${x.slug}`.toLowerCase();
-      return hay.includes(q);
-    })
-    .slice(0, 12);
+    const results = all.filter(p =>
+      (p.title || '').toLowerCase().includes(q) ||
+      (p.excerpt || '').toLowerCase().includes(q) ||
+      (p.category || '').toLowerCase().includes(q)
+    ).slice(0, 10);
 
-  res.status(200).json({ items });
+    res.setHeader('Cache-Control', 's-maxage=300, stale-while-revalidate=600');
+    res.status(200).json({ results });
+  } catch (e) {
+    res.status(200).json({ results: [] });
+  }
 }
