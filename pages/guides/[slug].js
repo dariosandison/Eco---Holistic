@@ -4,6 +4,7 @@ import SeoHead from '../../components/SeoHead';
 import PickCard from '../../components/PickCard';
 import CompareTable from '../../components/CompareTable';
 import Card from '../../components/Card';
+import AuthorCard from '../../components/AuthorCard';
 import { getAllSlugs, getDocBySlug, getAllDocs } from '../../lib/content';
 import { renderMarkdown, stripLeadingH1 } from '../../lib/markdown';
 
@@ -15,7 +16,10 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({ params }) {
-  const fields = ['slug','title','date','content','excerpt','badge','deal','category','author','updated','picks','compare'];
+  const fields = [
+    'slug','title','date','content','excerpt','badge','deal','category',
+    'author','authorTitle','authorBio','authorAvatar','updated','picks','compare'
+  ];
   const doc = getDocBySlug({ dir: 'content/guides', slug: params.slug, fields });
   if (!doc) return { notFound: true };
 
@@ -62,16 +66,28 @@ export default function GuidePage({ doc, html, readMins, related, url, og }) {
       </small>
       {doc.excerpt && <p style={{ marginTop: 8, color: 'var(--muted)' }}>{doc.excerpt}</p>}
 
-      {/* Optional picks */}
+      {/* Optional Top Pick above the fold */}
       {doc.picks?.top && <PickCard variant="top" {...doc.picks.top} />}
 
+      {/* Author trust card (auto-hides if no data) */}
+      <AuthorCard
+        name={doc.author}
+        title={doc.authorTitle}
+        bio={doc.authorBio}
+        avatar={doc.authorAvatar}
+      />
+
+      {/* Main content */}
       <article className="prose" style={{ marginTop: 24 }} dangerouslySetInnerHTML={{ __html: html }} />
 
+      {/* More picks */}
       {doc.picks?.budget && <PickCard variant="budget" {...doc.picks.budget} />}
       {doc.picks?.upgrade && <PickCard variant="upgrade" {...doc.picks.upgrade} />}
 
+      {/* Comparison table */}
       {Array.isArray(doc.compare) && doc.compare.length > 0 && <CompareTable items={doc.compare} />}
 
+      {/* Related guides */}
       {related?.length ? (
         <>
           <h2 className="section-title">Related Guides</h2>
