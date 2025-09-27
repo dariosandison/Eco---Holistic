@@ -40,16 +40,11 @@ export default function Home({ docs }) {
           Wild & Well
         </h1>
 
-        {/* HERO LOGO — professional sizing (responsive, no distortion) */}
+        {/* HERO LOGO — matches a single card column width at each breakpoint */}
         <img
+          className="hero-logo"
           src="/logo.svg"
           alt="Wild & Well"
-          style={{
-            display: 'block',
-            margin: '0 auto 16px',
-            width: 'auto',
-            maxHeight: 'clamp(72px, 12vw, 140px)',
-          }}
           onError={(e) => {
             e.currentTarget.src = '/logo-dark.svg';
             e.currentTarget.onerror = null;
@@ -87,6 +82,37 @@ export default function Home({ docs }) {
           ))}
         </div>
       )}
+
+      {/* Scoped sizing so the logo exactly matches card width at each grid layout */}
+      <style jsx>{`
+        /* Container math mirrors your .container padding (20px each side)
+           and .grid gaps (18px). We compute one column's width for each breakpoint. */
+
+        /* Desktop: 3 columns -> subtract two 18px gaps, divide by 3 */
+        .hero-logo {
+          display: block;
+          margin: 0 auto 16px;
+          width: calc((min(1120px, 100vw - 40px) - 36px) / 3);
+          max-width: 380px; /* gentle cap so it never feels oversized */
+          height: auto;
+        }
+
+        /* Tablet: 2 columns -> subtract a single 18px gap, divide by 2 */
+        @media (max-width: 900px) {
+          .hero-logo {
+            width: calc((min(1120px, 100vw - 40px) - 18px) / 2);
+            max-width: 520px;
+          }
+        }
+
+        /* Mobile: 1 column -> full container width */
+        @media (max-width: 600px) {
+          .hero-logo {
+            width: calc(min(1120px, 100vw - 40px));
+            max-width: 680px;
+          }
+        }
+      `}</style>
     </>
   );
 }
