@@ -1,6 +1,5 @@
 // pages/index.js
 import Link from 'next/link';
-import Newsletter from '../components/Newsletter';
 import Card from '../components/Card';
 import { getAllDocs } from '../lib/content';
 
@@ -26,11 +25,9 @@ export default function Home({ docs }) {
         </div>
       </section>
 
-      <Newsletter />
-
       <h2 className="section-title">Latest Guides</h2>
       {latest.length === 0 ? (
-        <p>No guides published yet.</p>
+        <p style={{ color:'#f6f1e3' }}>No guides published yet.</p>
       ) : (
         <div className="grid">
           {latest.map((p) => (
