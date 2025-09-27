@@ -1,5 +1,6 @@
 // pages/index.js
 import Link from 'next/link';
+import Newsletter from '../components/Newsletter';
 import { getAllDocs } from '../lib/content';
 
 export async function getStaticProps() {
@@ -13,15 +14,19 @@ export async function getStaticProps() {
 export default function Home({ docs }) {
   return (
     <div>
-      <h1 style={{ marginBottom: 8 }}>Wild & Well</h1>
-      <p style={{ marginTop: 0, color: '#667085' }}>
-        Actionable guides and clean product picks.
-      </p>
-      <ul style={{ marginTop: 12 }}>
-        <li><Link href="/guides">Explore Guides</Link></li>
-        <li><Link href="/blog">Read the Blog</Link></li>
-        <li><Link href="/deals">Today&apos;s Deals</Link></li>
-      </ul>
+      <section style={{ padding: '18px 16px', borderRadius: 12, background: '#f6fbf6', border: '1px solid #e5e7eb' }}>
+        <h1 style={{ margin: '0 0 6px' }}>Wild & Well</h1>
+        <p style={{ margin: 0, color: '#667085' }}>
+          Actionable guides and clean product picks.
+        </p>
+        <ul style={{ marginTop: 12 }}>
+          <li><Link href="/guides">Explore Guides</Link></li>
+          <li><Link href="/blog">Read the Blog</Link></li>
+          <li><Link href="/deals">Today&apos;s Deals</Link></li>
+        </ul>
+      </section>
+
+      <Newsletter />
 
       <h2 style={{ marginTop: 24 }}>Latest Guides</h2>
       {docs.length === 0 ? (
