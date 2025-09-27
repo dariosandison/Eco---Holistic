@@ -1,4 +1,4 @@
-/* styles/globals.css — clean, pro aesthetic */
+/* styles/globals.css — clean, pro aesthetic with badges & deal tags */
 
 :root{
   --brand:#0f766e;       /* teal accent */
@@ -8,6 +8,9 @@
   --soft:#f8fafc;        /* slate-50 */
   --card:#ffffff;
   --shadow:0 6px 24px rgba(2,6,23,.06);
+  --green:#059669;
+  --orange:#ea580c;
+  --blue:#2563eb;
 }
 
 *{box-sizing:border-box}
@@ -62,7 +65,8 @@ a:hover{text-decoration:underline}
 @media (max-width:600px){ .grid{grid-template-columns:1fr} }
 
 .card{
-  background:var(--card); border:1px solid var(--line); border-radius:16px; overflow:hidden; box-shadow:var(--shadow)
+  background:var(--card); border:1px solid var(--line); border-radius:16px; overflow:hidden; box-shadow:var(--shadow);
+  position:relative;
 }
 .card-img{display:block; width:100%; aspect-ratio: 16/9; object-fit:cover; background:#eef2f7}
 .card-body{padding:14px 16px}
@@ -70,28 +74,18 @@ a:hover{text-decoration:underline}
 .card small{color:var(--muted)}
 .card p{margin:8px 0 0}
 
+/* Pills / badges */
+.pills{position:absolute; top:10px; left:10px; display:flex; gap:6px; z-index:2}
+.pill{
+  display:inline-flex; align-items:center; gap:6px;
+  height:26px; padding:0 10px; border-radius:999px; color:#fff; font-weight:600; font-size:12px; letter-spacing:.1px;
+  text-transform:capitalize; box-shadow:var(--shadow)
+}
+.pill--top{background:var(--blue)}
+.pill--budget{background:var(--green)}
+.pill--upgrade{background:var(--orange)}
+.pill--deal{background:#111827} /* dark for contrast */
+.pill .pct{font-weight:700}
+
 /* Newsletter */
-.newsletter{margin-top:22px; padding:16px; border:1px solid var(--line); border-radius:16px; background:#f6faff}
-.newsletter.compact{padding:12px}
-.news-input{height:38px; border:1px solid var(--line); border-radius:10px; padding:0 10px; width:260px}
-.news-actions{display:flex; gap:8px; flex-wrap:wrap}
-.note{margin-top:8px; font-size:12px; color:var(--muted)}
-
-/* Article */
-.prose{font-size:18px}
-.prose h1,.prose h2,.prose h3{line-height:1.28; margin:22px 0 10px}
-.prose p{margin:12px 0}
-.prose ul,.prose ol{margin:12px 0; padding-left:22px}
-.prose pre{background:#0b1020; color:#e6e8f2; padding:12px; border-radius:10px; overflow:auto}
-
-/* Footer */
-.site-footer{margin-top:32px; border-top:1px solid var(--line); background:#fff}
-.footer{padding:16px 0}
-.footer-top{display:flex; flex-wrap:wrap; gap:14px; justify-content:flex-end; margin-bottom:6px}
-.footer-top a{color:var(--text)}
-.footer-top a:hover{color:var(--brand)}
-.footer-bottom{display:flex; align-items:center; justify-content:space-between; gap:12px}
-.meta{color:var(--muted); font-size:13px}
-.icons{display:flex; gap:10px}
-.icon{width:16px; height:16px; color:var(--muted)}
-.icon:hover{color:var(--text)}
+.news
