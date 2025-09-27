@@ -10,7 +10,7 @@ export async function getStaticProps() {
 
   if (!doc) return { notFound: true };
   const html = renderMarkdown(doc.content || '');
-  return { props: { doc, html } };
+  return { props: { doc, html} };
 }
 
 export default function Privacy({ doc, html }) {
