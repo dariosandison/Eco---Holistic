@@ -26,20 +26,22 @@ export default function Home({ docs }) {
       />
 
       <section className="hero">
-        {/* Keep a semantic H1 for SEO/accessibility */}
+        {/* Semantic H1 for SEO */}
         <h1 style={{position:'absolute',left:'-9999px',top:'auto',width:1,height:1,overflow:'hidden'}}>
           Wild & Well
         </h1>
 
-        {/* HERO LOGO — spans the cream box width, responsive */}
+        {/* HERO LOGO — same width, reduced height (rectangular) */}
         <img
-          src="/logo.svg"              // or '/logo-dark.svg' if that's your preferred mark
+          src="/logo.svg"
           alt="Wild & Well"
           style={{
             display:'block',
-            margin:'0 auto 16px',
-            width:'min(100%, 980px)',  // fills the hero box, caps for big screens
-            height:'auto'
+            margin:'0 auto 10px',
+            width:'min(100%, 980px)',  // keep the wide look
+            height:'auto',
+            transform:'scaleY(0.72)',  // ↓ shorten height (tweak: 0.65–0.85)
+            transformOrigin:'center center'
           }}
           onError={(e)=>{ e.currentTarget.src='/logo-dark.svg'; e.currentTarget.onerror=null; }}
         />
