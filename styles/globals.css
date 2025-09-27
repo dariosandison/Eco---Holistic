@@ -28,3 +28,26 @@
   from{ background-position:50% 14%; }
   to  { background-position:50% 32%; }
 }
+/* --- Hero watermark logo (real element) --- */
+.hero{ position:relative; overflow:hidden; }
+.hero > *{ position:relative; z-index:1; }
+
+/* Centered, subtle, gently moving */
+.hero-watermark{
+  position:absolute;
+  left:50%; top:50%;
+  transform:translate(-50%,-50%);
+  width:min(80%, 820px);  /* scales with container, caps at 820px */
+  height:auto;
+  opacity:.08;            /* subtle watermark */
+  z-index:0;
+  pointer-events:none;
+  animation:heroDrift 22s ease-in-out infinite alternate;
+  /* keep it neutral against cream: desaturate/soften if your SVG is dark */
+  filter: grayscale(1) opacity(0.9);
+}
+
+@keyframes heroDrift {
+  from { transform:translate(-50%,-52%); }
+  to   { transform:translate(-50%,-46%); }
+}
