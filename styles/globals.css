@@ -1,4 +1,4 @@
-/* Olive theme + cream cards (validated) */
+/* Olive theme + cream cards (validated) — floating footer + slimmer sticky bar */
 
 :root{
   --olive:#3f4d2b; --olive-600:#344223;           /* page background */
@@ -14,6 +14,8 @@ body{
   font-family:Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
   background:var(--olive); color:var(--ink); line-height:1.65;
   -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale;
+  /* Reserve room so fixed footer never covers content */
+  padding-bottom: 96px;
 }
 
 a{color:var(--brand);text-decoration:none;}
@@ -105,10 +107,15 @@ a:hover{text-decoration:underline;}
 .prose ul,.prose ol{margin:12px 0;padding-left:22px;}
 .prose pre{background:#0b1020;color:#e6e8f2;padding:12px;border-radius:10px;overflow:auto;}
 
-/* Footer (olive) */
-.site-footer{margin-top:32px;border-top:1px solid rgba(232,222,195,.35);background:var(--olive);color:#f6f1e3;}
-.footer{padding:16px 0;}
-.footer-top{display:flex;flex-wrap:wrap;gap:14px;justify-content:flex-end;margin-bottom:6px;}
+/* ===== Floating footer (fixed) ===== */
+.site-footer{
+  position:fixed; left:0; right:0; bottom:0; z-index:40;
+  border-top:1px solid rgba(232,222,195,.35);
+  background:var(--olive); color:#f6f1e3;
+  backdrop-filter:saturate(120%) blur(6px);
+}
+.footer{padding:12px 0;}
+.footer-top{display:flex;flex-wrap:wrap;gap:14px;justify-content:flex-end;margin-bottom:4px;}
 .footer-top a{color:#f6f1e3;}
 .footer-top a:hover{color:#fff;}
 .footer-bottom{display:flex;align-items:center;justify-content:space-between;gap:12px;}
@@ -117,11 +124,16 @@ a:hover{text-decoration:underline;}
 .icon{width:14px;height:14px;color:#e7e0cf;display:inline-flex;align-items:center;justify-content:center;}
 .icon:hover{color:#fff;}
 
-/* Sticky newsletter bar (unchanged) */
-.stickybar{position:fixed;left:0;right:0;bottom:12px;z-index:60;}
+/* ===== Slim, centered sticky newsletter bar ===== */
+.stickybar{
+  position:fixed; left:0; right:0; bottom:88px; z-index:60;   /* lifted above floating footer */
+  pointer-events:none;                                        /* allow clicks only on inner */
+}
 .sticky-inner{
-  background:#0b0f19;color:#fff;border-radius:14px;box-shadow:0 12px 30px rgba(0,0,0,.25);
-  display:flex;align-items:center;gap:14px;padding:10px 12px;
+  background:#0b0f19; color:#fff; border-radius:14px; box-shadow:0 12px 30px rgba(0,0,0,.25);
+  display:flex; align-items:center; gap:12px; padding:10px 12px;
+  width:min(560px, 50vw); margin:0 auto;                      /* half-width and centered */
+  pointer-events:auto;                                        /* clickable content */
 }
 .sticky-left{display:flex;flex-direction:column;gap:2px;}
 .sticky-left strong{font-size:14px;line-height:1;}
@@ -140,7 +152,9 @@ a:hover{text-decoration:underline;}
 .sticky-close{margin-left:6px;background:transparent;border:0;color:#fff;opacity:.7;cursor:pointer;font-size:18px;line-height:1;}
 .sticky-close:hover{opacity:1;}
 .sticky-done{margin-left:auto;font-weight:700;}
+
 @media (max-width:700px){
+  .sticky-inner{ width:calc(100% - 24px); }        /* full width on small screens with margin */
   .sticky-form{flex:1;}
   .sticky-input{width:100%;}
   .sticky-left{display:none;}
