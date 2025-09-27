@@ -6,7 +6,7 @@ export default function SearchBox() {
   const [q, setQ] = useState('');
   const [open, setOpen] = useState(false);
   const [results, setResults] = useState([]);
-  const inputRef = useRef(null);
+  const ref = useRef(null);
 
   useEffect(() => {
     if (!q) { setResults([]); return; }
@@ -25,9 +25,9 @@ export default function SearchBox() {
   return (
     <div className="searchbox" onFocus={()=>setOpen(true)} onBlur={()=>setTimeout(()=>setOpen(false),150)}>
       <input
-        ref={inputRef}
+        ref={ref}
         className="search-input"
-        placeholder="Search guides & blog…"
+        placeholder="Search…"
         value={q}
         onChange={(e)=>setQ(e.target.value)}
       />
@@ -36,9 +36,7 @@ export default function SearchBox() {
           <ul>
             {results.map((r) => (
               <li key={`${r.type}-${r.slug}`}>
-                <Link href={`/${r.type === 'blog' ? 'blog' : 'guides'}/${r.slug}`} onClick={()=>setOpen(false)}>
-                  {r.title}
-                </Link>
+                <Link href={`/${r.type === 'blog' ? 'blog' : 'guides'}/${r.slug}`}>{r.title}</Link>
                 {r.excerpt ? <div style={{fontSize:12,opacity:.8}}>{r.excerpt}</div> : null}
               </li>
             ))}
