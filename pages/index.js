@@ -26,12 +26,31 @@ export default function Home({ docs }) {
       />
 
       <section className="hero">
-        <h1>Wild & Well</h1>
+        {/* Keep an offscreen H1 for SEO/accessibility */}
+        <h1 style={{position:'absolute',left:'-9999px',top:'auto',width:1,height:1,overflow:'hidden'}}>
+          Wild & Well
+        </h1>
+
+        {/* LOGO replaces visible title */}
+        <img
+          src="/logo-dark.svg"
+          alt="Wild & Well"
+          style={{
+            display:'block',
+            margin:'0 auto 12px',
+            height:96,           // adjust if you want smaller/larger
+            width:'auto'
+          }}
+          onError={(e)=>{ e.currentTarget.src='/logo.png'; }}
+        />
+
         <p>Actionable guides and clean product picks to help you sleep better, stress less, and move more.</p>
+
         <div className="hero-links">
           <Link className="btn" href="/guides">Explore Guides</Link>
           <Link className="btn btn--ghost" href="/deals">Today&apos;s Deals</Link>
         </div>
+
         <div className="value-props">
           <span>Independent • Reader-supported</span>
           <span>Evidence-informed picks</span>
