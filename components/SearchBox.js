@@ -46,4 +46,32 @@ export default function SearchBox() {
   return (
     <div className="searchbox">
       <input
-        ref={inputRe
+        ref={inputRef}
+        className="search-input"
+        type="search"
+        placeholder="Search ( / )"
+        value={q}
+        onFocus={() => setOpen(true)}
+        onBlur={() => setTimeout(() => setOpen(false), 150)}
+        onChange={(e)=>setQ(e.target.value)}
+        aria-label="Search Wild & Well"
+      />
+      {open && (loading || results.length > 0) && (
+        <div className="search-results" role="listbox">
+          <ul>
+            {loading && <li>Searching…</li>}
+            {!loading && results.map(r=>(
+              <li key={r.slug} onMouseDown={(e)=>e.preventDefault()}>
+                <Link href={`/guides/${r.slug}`}>
+                  <strong>{r.title}</strong>
+                  <span style={{color:'var(--muted)'}}> — {r.category || 'Guide'}</span>
+                </Link>
+              </li>
+            ))}
+            {!loading && results.length === 0 && q && <li>No matches</li>}
+          </ul>
+        </div>
+      )}
+    </div>
+  );
+}
