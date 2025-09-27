@@ -21,6 +21,8 @@ body{
 /* Links */
 a{color:var(--brand);text-decoration:none;}
 a:hover{text-decoration:underline;}
+/* Make email links extra-legible */
+.prose a[href^="mailto:"], a[href^="mailto:"]{ color:#0d332a; font-weight:700; text-decoration:underline; }
 
 .container{max-width:1120px;margin:0 auto;padding:0 20px;}
 
@@ -132,7 +134,8 @@ a:hover{text-decoration:underline;}
 .footer-bottom{display:flex;align-items:center;justify-content:space-between;gap:12px;}
 .meta{color:#e7e0cf;font-size:13px;}
 .icons{display:flex;gap:10px;}
-.icon{width:14px;height:14px;color:#e7e0cf;display:inline-flex;align-items:center;justify-content:center;}
+/* Bump social icons to the next size up */
+.icon{width:18px;height:18px;color:#e7e0cf;display:inline-flex;align-items:center;justify-content:center;}
 .icon:hover{color:#fff;}
 
 /* Slim, centered sticky newsletter bar */
