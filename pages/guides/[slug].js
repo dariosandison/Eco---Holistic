@@ -22,18 +22,15 @@ export async function getStaticProps({ params }) {
 
 export default function GuidePage({ doc, html }) {
   return (
-    <div>
+    <>
       <p style={{ margin: 0 }}><Link href="/guides">← All guides</Link></p>
       <h1 style={{ marginTop: 8 }}>{doc.title || doc.slug}</h1>
-      {doc.date && <small style={{ color: '#888' }}>{new Date(doc.date).toLocaleDateString()}</small>}
-      {doc.excerpt && <p style={{ marginTop: 8 }}>{doc.excerpt}</p>}
+      {doc.date && <small style={{ color: 'var(--muted)' }}>{new Date(doc.date).toLocaleDateString()}</small>}
+      {doc.excerpt && <p style={{ marginTop: 8, color: 'var(--muted)' }}>{doc.excerpt}</p>}
 
       <Newsletter compact />
 
-      <article
-        style={{ marginTop: 24, lineHeight: 1.7, fontSize: 18 }}
-        dangerouslySetInnerHTML={{ __html: html }}
-      />
-    </div>
+      <article className="prose" style={{ marginTop: 24 }} dangerouslySetInnerHTML={{ __html: html }} />
+    </>
   );
 }
