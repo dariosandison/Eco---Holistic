@@ -36,56 +36,13 @@ a:hover{text-decoration:underline}
 .nav{display:flex; align-items:center; gap:18px; margin-left:auto}
 .nav a{color:var(--text)}
 .nav a:hover{color:var(--brand)}
+
+/* Search */
 .searchbox{position:relative}
-.search-input{height:34px; border:1px solid var(--line); border-radius:10px; padding:0 12px; width:220px; font-size:14px; outline:none}
+.search-input{
+  height:34px; border:1px solid var(--line); border-radius:10px;
+  padding:0 12px; width:220px; font-size:14px; outline:none
+}
 .search-results{
-  position:absolute; top:40px; right:0; width:320px; background:#fff; border:1px solid var(--line);
-  border-radius:12px; box-shadow:var(--shadow); z-index:40; max-height:340px; overflow:auto
-}
-.search-results ul{list-style:none; margin:0; padding:8px}
-.search-results li{padding:8px; border-radius:8px}
-.search-results li:hover{background:#f1f5f9}
+  position:absolute
 
-/* Hero */
-.hero{margin-top:20px; padding:24px; border:1px solid var(--line); border-radius:16px; background:var(--soft)}
-.hero h1{margin:0 0 8px; letter-spacing:.2px}
-.hero p{margin:0; color:var(--muted)}
-.hero-links{display:flex; gap:14px; margin-top:12px; flex-wrap:wrap}
-.btn{
-  display:inline-flex; align-items:center; gap:8px; height:36px; padding:0 14px;
-  border-radius:10px; background:var(--brand); color:#fff; border:1px solid var(--brand)
-}
-.btn:hover{filter:brightness(.95); text-decoration:none}
-.btn--ghost{background:#fff; color:var(--brand)}
-
-/* Grid of cards */
-.section-title{margin:26px 0 10px}
-.grid{display:grid; grid-template-columns:repeat(3,1fr); gap:18px}
-@media (max-width:900px){ .grid{grid-template-columns:repeat(2,1fr)} }
-@media (max-width:600px){ .grid{grid-template-columns:1fr} }
-
-.card{
-  background:var(--card); border:1px solid var(--line); border-radius:16px; overflow:hidden; box-shadow:var(--shadow);
-  position:relative;
-}
-.card-img{display:block; width:100%; aspect-ratio: 16/9; object-fit:cover; background:#eef2f7}
-.card-body{padding:14px 16px}
-.card h3{margin:0 0 6px; line-height:1.35}
-.card small{color:var(--muted)}
-.card p{margin:8px 0 0}
-
-/* Pills / badges */
-.pills{position:absolute; top:10px; left:10px; display:flex; gap:6px; z-index:2}
-.pill{
-  display:inline-flex; align-items:center; gap:6px;
-  height:26px; padding:0 10px; border-radius:999px; color:#fff; font-weight:600; font-size:12px; letter-spacing:.1px;
-  text-transform:capitalize; box-shadow:var(--shadow)
-}
-.pill--top{background:var(--blue)}
-.pill--budget{background:var(--green)}
-.pill--upgrade{background:var(--orange)}
-.pill--deal{background:#111827} /* dark for contrast */
-.pill .pct{font-weight:700}
-
-/* Newsletter */
-.news
