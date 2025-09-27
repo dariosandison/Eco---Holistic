@@ -1,33 +1,52 @@
-export default function GuidePage({ slug, html }) {
-  // If you're not converting MD to HTML yet, this will render raw text safely.
-  // When you add a proper MD/MDX renderer, switch to dangerouslySetInnerHTML with sanitized HTML.
-  return (
-    <main className="mx-auto max-w-3xl px-4 py-10 prose prose-invert">
-      <h1 className="mb-6 text-3xl font-bold">{slug.replace(/-/g, " ")}</h1>
-      <article style={{ whiteSpace: "pre-wrap" }}>{html}</article>
-    </main>
-  );
-}
+// pages/guides/[slug].js
+import Link from 'next/link';
+import { getAllSlugs, getDocBySlug } from '../../lib/content';
 
 export async function getStaticPaths() {
-  const { getAllGuideSlugs } = await import("../../lib/content.js");
-  const slugs = await getAllGuideSlugs();
+  const slugs = getAllSlugs({ dir: 'content/guides' });
   return {
     paths: slugs.map((slug) => ({ params: { slug } })),
-    fallback: false,
+    fallback: false, // change to 'blocking' if you plan to add files after build
   };
 }
 
 export async function getStaticProps({ params }) {
-  const { readGuideFile } = await import("../../lib/content.js");
-  const { content } = await readGuideFile(params.slug);
+  const doc = getDocBySlug({
+    dir: 'content/guides',
+    slug: params.slug,
+    fields: ['slug', 'title', 'date', 'content', 'excerpt'],
+  });
 
-  // Minimal pass-through; keep as plain text for now.
-  // (You can swap in your MD/MDX renderer later.)
-  return {
-    props: {
-      slug: params.slug,
-      html: content,
-    },
-  };
+  if (!doc) {
+    return { notFound: true };
+  }
+
+  return { props: { doc } };
+}
+
+export default function GuidePage({ doc }) {
+  return (
+    <main style={{ maxWidth: 840, margin: '40px auto', padding: 20 }}>
+      <p style={{ margin: 0 }}>
+        <Link href="/guides">← All guides</Link>
+      </p>
+      <h1 style={{ marginTop: 8 }}>{doc.title || doc.slug}</h1>
+      {doc.date && (
+        <small style={{ color: '#888' }}>
+          {new Date(doc.date).toLocaleDateString()}
+        </small>
+      )}
+      {doc.excerpt && <p style={{ marginTop: 8 }}>{doc.excerpt}</p>}
+      <article
+        style={{
+          marginTop: 24,
+          whiteSpace: 'pre-wrap',
+          lineHeight: 1.7,
+          fontSize: 18,
+        }}
+      >
+        {doc.content || 'No content yet.'}
+      </article>
+    </main>
+  );
 }
