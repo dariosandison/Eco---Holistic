@@ -2,7 +2,7 @@
 import Link from 'next/link';
 import Newsletter from '../../components/Newsletter';
 import { getAllSlugs, getDocBySlug } from '../../lib/content';
-import { renderMarkdown } from '../../lib/markdown';
+import { renderMarkdown, stripLeadingH1 } from '../../lib/markdown';
 
 export async function getStaticPaths() {
   const slugs = getAllSlugs({ dir: 'content/guides' });
@@ -16,7 +16,7 @@ export async function getStaticProps({ params }) {
     fields: ['slug', 'title', 'date', 'content', 'excerpt'],
   });
   if (!doc) return { notFound: true };
-  const html = renderMarkdown(doc.content || '');
+  const html = renderMarkdown(stripLeadingH1(doc.content || ''));
   return { props: { doc, html } };
 }
 
