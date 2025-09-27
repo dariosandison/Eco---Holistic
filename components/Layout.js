@@ -44,6 +44,9 @@ export default function Layout({ children }) {
       <footer className="site-footer">
         <div className="container footer">
           <div className="footer-top">
+            <Link href="/about">About</Link>
+            <Link href="/editorial-policy">Editorial Policy</Link>
+            <Link href="/how-we-test">How We Test</Link>
             <Link href="/privacy">Privacy</Link>
             <Link href="/cookies">Cookies</Link>
             <Link href="/terms">Terms</Link>
@@ -52,7 +55,7 @@ export default function Layout({ children }) {
             <Link href="/product-disclosure">Product Disclosure</Link>
           </div>
           <div className="footer-bottom">
-            <div className="meta">© {year} Wild & Well</div>
+            <div className="meta">© {year} Wild & Well · Independent · Reader-supported</div>
             <div className="icons">
               <Icon type="ig" href="https://instagram.com/wildandwell_uk" label="Instagram" />
               <Icon type="pin" href="https://pinterest.com/wildandwell_uk/" label="Pinterest" />
@@ -61,7 +64,6 @@ export default function Layout({ children }) {
         </div>
       </footer>
 
-      {/* Floating sticky newsletter + socials */}
       <StickyBar />
     </>
   );
