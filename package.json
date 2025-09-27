@@ -2,7 +2,7 @@
   "name": "wild-and-well",
   "version": "1.0.0",
   "private": true,
-  "engines": { "node": "18.x" },
+  "engines": { "node": "22.x" },
   "scripts": {
     "dev": "next dev",
     "build": "next build && node scripts/generate-sitemap.mjs",
@@ -19,4 +19,3 @@
     "remark-html": "^15.0.1"
   }
 }
-
