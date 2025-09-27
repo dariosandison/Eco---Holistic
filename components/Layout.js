@@ -50,6 +50,7 @@ export default function Layout({ children }) {
       <footer className="site-footer">
         <div className="container footer-wrap">
           <div className="footer-links">
+            {/* point to ROOT legal pages (not /legal/...) */}
             <Link href="/privacy">Privacy</Link>
             <Link href="/cookies">Cookies</Link>
             <Link href="/terms">Terms</Link>
