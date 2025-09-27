@@ -13,11 +13,13 @@ export async function getStaticProps() {
   return { props: { doc, html } };
 }
 
-export default function Disclaimer({ doc, html }) {
-  return (
-    <div>
-      <h1>{doc.title || 'Disclaimer'}</h1>
-      <article className="prose" dangerouslySetInnerHTML={{ __html: html }} />
-    </div>
-  );
+export default function Disclaimer() { return null; }
+
+export async function getStaticProps() {
+  return {
+    redirect: {
+      destination: '/legal/disclaimer',
+      permanent: true,
+    },
+  };
 }
