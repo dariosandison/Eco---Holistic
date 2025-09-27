@@ -7,7 +7,7 @@ import { getAllDocs } from '../lib/content';
 export async function getStaticProps() {
   const docs = getAllDocs({
     dir: 'content/guides',
-    fields: ['slug','title','excerpt','date','badge','deal','category','image'],
+    fields: ['slug', 'title', 'excerpt', 'date', 'badge', 'deal', 'category', 'image'],
   });
   return { props: { docs } };
 }
@@ -26,48 +26,41 @@ export default function Home({ docs }) {
       />
 
       <section className="hero">
-        {/* Semantic H1 for SEO */}
-        <h1 style={{position:'absolute',left:'-9999px',top:'auto',width:1,height:1,overflow:'hidden'}}>
+        {/* Offscreen semantic H1 for SEO */}
+        <h1
+          style={{
+            position: 'absolute',
+            left: '-9999px',
+            top: 'auto',
+            width: 1,
+            height: 1,
+            overflow: 'hidden',
+          }}
+        >
           Wild & Well
         </h1>
 
-        {/* HERO LOGO — same width, reduced height (rectangular) */}
+        {/* HERO LOGO — professional sizing (responsive, no distortion) */}
         <img
           src="/logo.svg"
           alt="Wild & Well"
           style={{
-            display:'block',
-            margin:'0 auto 10px',
-            width:'min(100%, 980px)',  // keep the wide look
-            height:'auto',
-            transform:'scaleY(0.72)',  // ↓ shorten height (tweak: 0.65–0.85)
-            transformOrigin:'center center'
+            display: 'block',
+            margin: '0 auto 16px',
+            width: 'auto',
+            maxHeight: 'clamp(72px, 12vw, 140px)', // phones ~72–90px, laptops ~110–130px, cap at 140px
           }}
-          onError={(e)=>{ e.currentTarget.src='/logo-dark.svg'; e.currentTarget.onerror=null; }}
+          onError={(e) => {
+            e.currentTarget.src = '/logo-dark.svg';
+            e.currentTarget.onerror = null;
+          }}
         />
 
-        <p>Actionable guides and clean product picks to help you sleep better, stress less, and move more.</p>
+        <p>
+          Actionable guides and clean product picks to help you sleep better, stress less, and move
+          more.
+        </p>
 
         <div className="hero-links">
-          <Link className="btn" href="/guides">Explore Guides</Link>
-          <Link className="btn btn--ghost" href="/deals">Today&apos;s Deals</Link>
-        </div>
-
-        <div className="value-props">
-          <span>Independent • Reader-supported</span>
-          <span>Evidence-informed picks</span>
-          <span>No sponsored posts</span>
-        </div>
-      </section>
-
-      <h2 className="section-title">Latest Guides</h2>
-      {latest.length === 0 ? (
-        <p style={{ color:'#f6f1e3' }}>No guides published yet.</p>
-      ) : (
-        <div className="grid">
-          {latest.map((p) => <Card key={p.slug} {...p} />)}
-        </div>
-      )}
-    </>
-  );
-}
+          <Link className="btn" href="/guides">
+            Explore Guides
