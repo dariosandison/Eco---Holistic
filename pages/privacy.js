@@ -1,23 +1,16 @@
 // pages/privacy.js
-import { getDocBySlug } from '../lib/content';
-import { renderMarkdown } from '../lib/markdown';
+import SeoHead from '../components/SeoHead';
 
-export async function getStaticProps() {
-  const fields = ['slug', 'title', 'date', 'content', 'excerpt'];
-  const doc =
-    getDocBySlug({ dir: 'content/legal', slug: 'privacy', fields }) ||
-    getDocBySlug({ dir: '.', slug: 'privacy', fields });
-
-  if (!doc) return { notFound: true };
-  const html = renderMarkdown(doc.content || '');
-  return { props: { doc, html} };
-}
-
-export default function Privacy({ doc, html }) {
+export default function Privacy() {
+  const SITE = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.wild-and-well.store';
   return (
-    <div>
-      <h1>{doc.title || 'Privacy Policy'}</h1>
-      <article className="prose" dangerouslySetInnerHTML={{ __html: html }} />
-    </div>
+    <>
+      <SeoHead title="Privacy Policy — Wild & Well" description="How we handle your data." url={`${SITE}/privacy`} />
+      <article className="container card prose" style={{marginTop:20}}>
+        <h1>Privacy Policy</h1>
+        <p>We respect your privacy. We only collect the data needed to run the site and improve content.</p>
+        <p>If you have any questions, contact us at: <a href="mailto:hello@wild-and-well.store">hello@wild-and-well.store</a>.</p>
+      </article>
+    </>
   );
 }
