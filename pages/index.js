@@ -1,27 +1,41 @@
 // pages/index.js
 import Link from 'next/link';
 import Card from '../components/Card';
+import SeoHead from '../components/SeoHead';
 import { getAllDocs } from '../lib/content';
 
 export async function getStaticProps() {
   const docs = getAllDocs({
     dir: 'content/guides',
-    fields: ['slug', 'title', 'excerpt', 'date', 'badge', 'deal'],
+    fields: ['slug','title','excerpt','date','badge','deal','category'],
   });
   return { props: { docs } };
 }
 
 export default function Home({ docs }) {
   const latest = docs.slice(0, 6);
+  const SITE = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.wild-and-well.store';
 
   return (
     <>
+      <SeoHead
+        title="Wild & Well — Actionable wellness guides & clean product picks"
+        description="Practical, no-sponsor guides on sleep, stress, movement, and low-tox living."
+        url={SITE}
+        type="website"
+      />
+
       <section className="hero">
         <h1>Wild & Well</h1>
         <p>Actionable guides and clean product picks to help you sleep better, stress less, and move more.</p>
         <div className="hero-links">
           <Link className="btn" href="/guides">Explore Guides</Link>
           <Link className="btn btn--ghost" href="/deals">Today&apos;s Deals</Link>
+        </div>
+        <div style="margin-top:14px; display:flex; gap:12px; justify-content:center; flex-wrap:wrap; color:var(--muted);">
+          <span>Independent • Reader-supported</span>
+          <span>Evidence-informed picks</span>
+          <span>No sponsored posts</span>
         </div>
       </section>
 
@@ -30,9 +44,7 @@ export default function Home({ docs }) {
         <p style={{ color:'#f6f1e3' }}>No guides published yet.</p>
       ) : (
         <div className="grid">
-          {latest.map((p) => (
-            <Card key={p.slug} {...p} />
-          ))}
+          {latest.map((p) => <Card key={p.slug} {...p} />)}
         </div>
       )}
     </>
