@@ -1,6 +1,7 @@
 // pages/index.js
 import Link from 'next/link';
 import Newsletter from '../components/Newsletter';
+import Card from '../components/Card';
 import { getAllDocs } from '../lib/content';
 
 export async function getStaticProps() {
@@ -17,15 +18,12 @@ export default function Home({ docs }) {
   return (
     <>
       <section className="hero">
-        <h1 style={{ margin: '0 0 6px' }}>Wild & Well</h1>
-        <p style={{ margin: 0, color: 'var(--muted)' }}>
-          Actionable guides and clean product picks to help you sleep better, stress less, and move more.
-        </p>
-        <ul style={{ marginTop: 12 }}>
-          <li><Link href="/guides">Explore Guides</Link></li>
-          <li><Link href="/deals">Today&apos;s Deals</Link></li>
-          <li><Link href="/blog">Read the Blog</Link></li>
-        </ul>
+        <h1>Wild & Well</h1>
+        <p>Actionable guides and clean product picks to help you sleep better, stress less, and move more.</p>
+        <div className="hero-links">
+          <Link className="btn" href="/guides">Explore Guides</Link>
+          <Link className="btn btn--ghost" href="/deals">Today&apos;s Deals</Link>
+        </div>
       </section>
 
       <Newsletter />
@@ -35,17 +33,8 @@ export default function Home({ docs }) {
         <p>No guides published yet.</p>
       ) : (
         <div className="grid">
-          {latest.map((post) => (
-            <article key={post.slug} className="card">
-              <h3 style={{ margin: 0 }}>
-                <Link href={`/guides/${post.slug}`}>{post.title || post.slug}</Link>
-              </h3>
-              {post.date && <small>{new Date(post.date).toLocaleDateString()}</small>}
-              {post.excerpt && <p>{post.excerpt}</p>}
-              <div style={{ marginTop: 8 }}>
-                <Link href={`/guides/${post.slug}`}>Read guide →</Link>
-              </div>
-            </article>
+          {latest.map((p) => (
+            <Card key={p.slug} {...p} />
           ))}
         </div>
       )}
