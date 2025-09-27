@@ -7,7 +7,7 @@ import { getAllDocs } from '../lib/content';
 export async function getStaticProps() {
   const docs = getAllDocs({
     dir: 'content/guides',
-    fields: ['slug', 'title', 'excerpt', 'date'],
+    fields: ['slug', 'title', 'excerpt', 'date', 'badge', 'deal'],
   });
   return { props: { docs } };
 }
