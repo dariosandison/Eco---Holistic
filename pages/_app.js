@@ -1,5 +1,6 @@
 // pages/_app.js
 import Head from 'next/head';
+import '../styles/globals.css';          // <— MUST be here (and only here)
 import Layout from '../components/Layout';
 
 export default function MyApp({ Component, pageProps }) {
