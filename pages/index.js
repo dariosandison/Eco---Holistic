@@ -7,7 +7,7 @@ import { getAllDocs } from '../lib/content';
 export async function getStaticProps() {
   const docs = getAllDocs({
     dir: 'content/guides',
-    fields: ['slug','title','excerpt','date','badge','deal','category'],
+    fields: ['slug','title','excerpt','date','badge','deal','category','image'],
   });
   return { props: { docs } };
 }
@@ -32,18 +32,7 @@ export default function Home({ docs }) {
           <Link className="btn" href="/guides">Explore Guides</Link>
           <Link className="btn btn--ghost" href="/deals">Today&apos;s Deals</Link>
         </div>
-
-        {/* FIX: style prop must be an object, not a string */}
-        <div
-          style={{
-            marginTop: 14,
-            display: 'flex',
-            gap: 12,
-            justifyContent: 'center',
-            flexWrap: 'wrap',
-            color: 'var(--muted)',
-          }}
-        >
+        <div className="value-props">
           <span>Independent • Reader-supported</span>
           <span>Evidence-informed picks</span>
           <span>No sponsored posts</span>
