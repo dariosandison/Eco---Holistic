@@ -12,44 +12,43 @@ export async function getStaticProps() {
 }
 
 export default function Home({ docs }) {
+  const latest = docs.slice(0, 6);
+
   return (
-    <div>
-      <section style={{ padding: '18px 16px', borderRadius: 12, background: '#f6fbf6', border: '1px solid #e5e7eb' }}>
+    <>
+      <section className="hero">
         <h1 style={{ margin: '0 0 6px' }}>Wild & Well</h1>
-        <p style={{ margin: 0, color: '#667085' }}>
-          Actionable guides and clean product picks.
+        <p style={{ margin: 0, color: 'var(--muted)' }}>
+          Actionable guides and clean product picks to help you sleep better, stress less, and move more.
         </p>
         <ul style={{ marginTop: 12 }}>
           <li><Link href="/guides">Explore Guides</Link></li>
-          <li><Link href="/blog">Read the Blog</Link></li>
           <li><Link href="/deals">Today&apos;s Deals</Link></li>
+          <li><Link href="/blog">Read the Blog</Link></li>
         </ul>
       </section>
 
       <Newsletter />
 
-      <h2 style={{ marginTop: 24 }}>Latest Guides</h2>
-      {docs.length === 0 ? (
+      <h2 className="section-title">Latest Guides</h2>
+      {latest.length === 0 ? (
         <p>No guides published yet.</p>
       ) : (
-        <ul style={{ listStyle: 'none', padding: 0 }}>
-          {docs.map((post) => (
-            <li key={post.slug} style={{ padding: '16px 0', borderBottom: '1px solid #eee' }}>
+        <div className="grid">
+          {latest.map((post) => (
+            <article key={post.slug} className="card">
               <h3 style={{ margin: 0 }}>
-                <Link href={`/guides/${post.slug}`} style={{ textDecoration: 'none' }}>
-                  {post.title || post.slug}
-                </Link>
+                <Link href={`/guides/${post.slug}`}>{post.title || post.slug}</Link>
               </h3>
-              {post.date && (
-                <small style={{ color: '#888' }}>
-                  {new Date(post.date).toLocaleDateString()}
-                </small>
-              )}
-              {post.excerpt && <p style={{ marginTop: 8 }}>{post.excerpt}</p>}
-            </li>
+              {post.date && <small>{new Date(post.date).toLocaleDateString()}</small>}
+              {post.excerpt && <p>{post.excerpt}</p>}
+              <div style={{ marginTop: 8 }}>
+                <Link href={`/guides/${post.slug}`}>Read guide →</Link>
+              </div>
+            </article>
           ))}
-        </ul>
+        </div>
       )}
-    </div>
+    </>
   );
 }
