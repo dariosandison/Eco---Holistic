@@ -1,23 +1,15 @@
 // pages/terms.js
-import { getDocBySlug } from '../lib/content';
-import { renderMarkdown } from '../lib/markdown';
+import SeoHead from '../components/SeoHead';
 
-export async function getStaticProps() {
-  const fields = ['slug', 'title', 'date', 'content', 'excerpt'];
-  const doc =
-    getDocBySlug({ dir: 'content/legal', slug: 'terms', fields }) ||
-    getDocBySlug({ dir: '.', slug: 'terms', fields });
-
-  if (!doc) return { notFound: true };
-  const html = renderMarkdown(doc.content || '');
-  return { props: { doc, html } };
-}
-
-export default function Terms({ doc, html }) {
+export default function Terms() {
+  const SITE = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.wild-and-well.store';
   return (
-    <div>
-      <h1>{doc.title || 'Terms of Service'}</h1>
-      <article className="prose" dangerouslySetInnerHTML={{ __html: html }} />
-    </div>
+    <>
+      <SeoHead title="Terms — Wild & Well" description="Website terms of use." url={`${SITE}/terms`} />
+      <article className="container card prose" style={{marginTop:20}}>
+        <h1>Terms of Use</h1>
+        <p>By using this website, you agree to our terms and conditions.</p>
+      </article>
+    </>
   );
 }
