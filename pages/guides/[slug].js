@@ -1,7 +1,6 @@
 // pages/guides/[slug].js
 import Link from 'next/link';
 import SeoHead from '../../components/SeoHead';
-import Newsletter from '../../components/Newsletter';
 import PickCard from '../../components/PickCard';
 import CompareTable from '../../components/CompareTable';
 import Card from '../../components/Card';
@@ -24,7 +23,6 @@ export async function getStaticProps({ params }) {
   const words = (doc.content || '').trim().split(/\s+/).length;
   const readMins = Math.max(2, Math.round(words / 200));
 
-  // Related: same category, different slug
   const all = getAllDocs({ dir: 'content/guides', fields: ['slug','title','excerpt','date','category','badge','deal'] });
   const related = all.filter(p => p.slug !== doc.slug && (!!doc.category && p.category === doc.category)).slice(0,3);
 
@@ -64,21 +62,16 @@ export default function GuidePage({ doc, html, readMins, related, url, og }) {
       </small>
       {doc.excerpt && <p style={{ marginTop: 8, color: 'var(--muted)' }}>{doc.excerpt}</p>}
 
-      {/* Top pick above the fold, if provided */}
+      {/* Optional picks */}
       {doc.picks?.top && <PickCard variant="top" {...doc.picks.top} />}
-
-      <Newsletter compact />
 
       <article className="prose" style={{ marginTop: 24 }} dangerouslySetInnerHTML={{ __html: html }} />
 
-      {/* More picks (Budget/Upgrade) */}
       {doc.picks?.budget && <PickCard variant="budget" {...doc.picks.budget} />}
       {doc.picks?.upgrade && <PickCard variant="upgrade" {...doc.picks.upgrade} />}
 
-      {/* Comparison table */}
       {Array.isArray(doc.compare) && doc.compare.length > 0 && <CompareTable items={doc.compare} />}
 
-      {/* Related guides */}
       {related?.length ? (
         <>
           <h2 className="section-title">Related Guides</h2>
