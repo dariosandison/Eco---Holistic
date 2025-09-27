@@ -25,7 +25,7 @@ export default function Home({ docs }) {
         type="website"
       />
 
-      {/* NOTE: extra class hero--bg adds moving logo background */}
+      {/* Moving-logo hero (requires the .hero--bg styles you added) */}
       <section className="hero hero--bg">
         {/* Offscreen H1 for SEO/accessibility */}
         <h1 style={{position:'absolute',left:'-9999px',top:'auto',width:1,height:1,overflow:'hidden'}}>
@@ -47,3 +47,13 @@ export default function Home({ docs }) {
       </section>
 
       <h2 className="section-title">Latest Guides</h2>
+      {latest.length === 0 ? (
+        <p style={{ color:'#f6f1e3' }}>No guides published yet.</p>
+      ) : (
+        <div className="grid">
+          {latest.map((p) => <Card key={p.slug} {...p} />)}
+        </div>
+      )}
+    </>
+  );
+}
