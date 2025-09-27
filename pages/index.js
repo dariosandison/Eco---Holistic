@@ -1,8 +1,4 @@
-- import { getAllDocs } from '@/lib/content';
-+ // TEMP: unblock build while content lib is fixed
-+ const getAllDocs = () => [];
+- // TEMP: unblock build while content lib is fixed
+- const getAllDocs = () => [];
++ import { getAllDocs } from '@/lib/content';
 
-export async function getStaticProps() {
-  const docs = getAllDocs({ fields: ['title','excerpt','date','slug'] });
-  return { props: { docs } };
-}
