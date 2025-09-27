@@ -1,11 +1,11 @@
 // pages/guides/index.js
-import Link from 'next/link';
+import Card from '../../components/Card';
 import { getAllDocs } from '../../lib/content';
 
 export async function getStaticProps() {
   const guides = getAllDocs({
     dir: 'content/guides',
-    fields: ['slug', 'title', 'excerpt', 'date'],
+    fields: ['slug', 'title', 'excerpt', 'date', 'badge', 'deal'],
   });
   return { props: { guides } };
 }
@@ -18,18 +18,7 @@ export default function GuidesIndex({ guides }) {
         <p>No guides published yet.</p>
       ) : (
         <div className="grid">
-          {guides.map((g) => (
-            <article key={g.slug} className="card">
-              <h3 style={{ margin: 0 }}>
-                <Link href={`/guides/${g.slug}`}>{g.title || g.slug}</Link>
-              </h3>
-              {g.date && <small>{new Date(g.date).toLocaleDateString()}</small>}
-              {g.excerpt && <p>{g.excerpt}</p>}
-              <div style={{ marginTop: 8 }}>
-                <Link href={`/guides/${g.slug}`}>Read guide →</Link>
-              </div>
-            </article>
-          ))}
+          {guides.map((g) => <Card key={g.slug} {...g} />)}
         </div>
       )}
     </>
