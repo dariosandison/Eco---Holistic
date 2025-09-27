@@ -1,10 +1,16 @@
-export default function Disclaimer() { return null; }
+import { useEffect } from 'react';
+import Head from 'next/head';
+import { useRouter } from 'next/router';
 
-export async function getStaticProps() {
-  return {
-    redirect: {
-      destination: '/legal/disclaimer',
-      permanent: true,
-    },
-  };
+export default function DisclaimerRedirect() {
+  const router = useRouter();
+  useEffect(() => { router.replace('/legal/disclaimer'); }, [router]);
+  return (
+    <>
+      <Head>
+        <meta httpEquiv="refresh" content="0; url=/legal/disclaimer" />
+      </Head>
+      <p>Redirecting to <a href="/legal/disclaimer">/legal/disclaimer</a>…</p>
+    </>
+  );
 }
