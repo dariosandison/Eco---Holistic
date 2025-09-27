@@ -25,7 +25,7 @@ export default function Home({ docs }) {
         type="website"
       />
 
-      {/* Moving-logo hero (requires the .hero--bg styles you added) */}
+      {/* Moving-logo hero */}
       <section className="hero hero--bg">
         {/* Offscreen H1 for SEO/accessibility */}
         <h1 style={{position:'absolute',left:'-9999px',top:'auto',width:1,height:1,overflow:'hidden'}}>
