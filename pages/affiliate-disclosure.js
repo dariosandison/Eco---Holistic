@@ -1,23 +1,34 @@
 // pages/affiliate-disclosure.js
-import { getDocBySlug } from '../lib/content';
-import { renderMarkdown } from '../lib/markdown';
+import SeoHead from '../components/SeoHead';
+import { getDocWithHtml } from '../lib/content';
 
 export async function getStaticProps() {
-  const fields = ['slug', 'title', 'date', 'content', 'excerpt'];
-  const doc =
-    getDocBySlug({ dir: 'content/legal', slug: 'affiliate-disclosure', fields }) ||
-    getDocBySlug({ dir: '.', slug: 'affiliate-disclosure', fields });
-
-  if (!doc) return { notFound: true };
-  const html = renderMarkdown(doc.content || '');
-  return { props: { doc, html } };
+  const post = await getDocWithHtml({
+    dir: 'content/legal',
+    slug: 'affiliate-disclosure',
+    fields: ['title', 'excerpt', 'date']
+  });
+  return { props: { post } };
 }
 
-export default function AffiliateDisclosure({ doc, html }) {
+export default function AffiliateDisclosure({ post }) {
+  const SITE = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.wild-and-well.store';
+  const url = `${SITE}/affiliate-disclosure`;
+
   return (
-    <div>
-      <h1>{doc.title || 'Affiliate Disclosure'}</h1>
-      <article className="prose" dangerouslySetInnerHTML={{ __html: html }} />
-    </div>
+    <>
+      <SeoHead
+        title={post?.title ? `${post.title} — Wild & Well` : 'Affiliate Disclosure — Wild & Well'}
+        description={post?.excerpt || 'Our affiliate policy and disclosures.'}
+        url={url}
+        type="article"
+      />
+      <article className="prose card" style={{ marginTop: 20, padding: 16 }}>
+        <h1 style={{ marginTop: 0 }}>{post?.title || 'Affiliate Disclosure'}</h1>
+        {post?.date && <div style={{ color: '#4b553d' }}>{new Date(post.date).toLocaleDateString()}</div>}
+        <div dangerouslySetInnerHTML={{ __html: post?.contentHtml || '' }} />
+      </article>
+    </>
   );
 }
+
