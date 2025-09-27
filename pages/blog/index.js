@@ -1,9 +1,9 @@
-export const seo = { title: 'Blog' };
+// pages/blog/index.js
 export default function BlogIndex() {
   return (
-    <div className="prose">
+    <div>
       <h1>Blog</h1>
-      <p>Posts will appear here.</p>
+      <p>Coming soon.</p>
     </div>
   );
 }
