@@ -1,7 +1,11 @@
 // components/Card.js
 import Link from 'next/link';
 
-export default function Card({ slug, title, excerpt, badge, deal }) {
+export default function Card({ slug, title, excerpt, badge, deal, image }) {
+  // Prefer front-matter image; else try /images/guides/<slug>.jpg; else /cover.png
+  const src = image || `/images/guides/${slug}.jpg`;
+  const fallback = '/cover.png';
+
   return (
     <article className="card">
       <Link href={`/guides/${slug}`} aria-label={title}>
@@ -11,10 +15,10 @@ export default function Card({ slug, title, excerpt, badge, deal }) {
         </div>
         <img
           className="card-img"
-          src={`/images/guides/${slug}.jpg`}
+          src={src}
           alt=""
           loading="lazy"
-          onError={(e)=>{ e.currentTarget.src='/images/placeholder-16x9.jpg'; }}
+          onError={(e) => { e.currentTarget.src = fallback; }}
         />
       </Link>
       <div className="card-body">
