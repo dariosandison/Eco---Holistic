@@ -3,72 +3,45 @@ import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 
 export default function SearchBox() {
-  const inputRef = useRef(null);
-  const [open, setOpen] = useState(false);
   const [q, setQ] = useState('');
+  const [open, setOpen] = useState(false);
   const [results, setResults] = useState([]);
-  const [loading, setLoading] = useState(false);
+  const inputRef = useRef(null);
 
-  // Keyboard: '/' focuses, 'Esc' closes
-  useEffect(() => {
-    const onKey = (e) => {
-      if (e.key === '/' && document.activeElement !== inputRef.current) {
-        e.preventDefault();
-        inputRef.current?.focus();
-        setOpen(true);
-      } else if (e.key === 'Escape') {
-        setOpen(false);
-        inputRef.current?.blur();
-      }
-    };
-    window.addEventListener('keydown', onKey);
-    return () => window.removeEventListener('keydown', onKey);
-  }, []);
-
-  // Debounced fetch to server API (keeps fs on the server only)
   useEffect(() => {
     if (!q) { setResults([]); return; }
+    const ctrl = new AbortController();
     const t = setTimeout(async () => {
       try {
-        setLoading(true);
-        const res = await fetch(`/api/search?q=${encodeURIComponent(q)}`);
-        const data = await res.json();
-        setResults(Array.isArray(data?.results) ? data.results.slice(0,5) : []);
-      } catch {
-        setResults([]);
-      } finally {
-        setLoading(false);
-      }
-    }, 150);
-    return () => clearTimeout(t);
+        const r = await fetch(`/api/search?q=${encodeURIComponent(q)}`, { signal: ctrl.signal });
+        const j = await r.json();
+        setResults(j.results || []);
+        setOpen(true);
+      } catch {}
+    }, 180);
+    return () => { clearTimeout(t); ctrl.abort(); };
   }, [q]);
 
   return (
-    <div className="searchbox">
+    <div className="searchbox" onFocus={()=>setOpen(true)} onBlur={()=>setTimeout(()=>setOpen(false),150)}>
       <input
         ref={inputRef}
         className="search-input"
-        type="search"
-        placeholder="Search ( / )"
+        placeholder="Search guides & blog…"
         value={q}
-        onFocus={() => setOpen(true)}
-        onBlur={() => setTimeout(() => setOpen(false), 150)}
         onChange={(e)=>setQ(e.target.value)}
-        aria-label="Search Wild & Well"
       />
-      {open && (loading || results.length > 0) && (
-        <div className="search-results" role="listbox">
+      {open && results.length > 0 && (
+        <div className="search-results">
           <ul>
-            {loading && <li>Searching…</li>}
-            {!loading && results.map(r=>(
-              <li key={r.slug} onMouseDown={(e)=>e.preventDefault()}>
-                <Link href={`/guides/${r.slug}`}>
-                  <strong>{r.title}</strong>
-                  <span style={{color:'var(--muted)'}}> — {r.category || 'Guide'}</span>
+            {results.map((r) => (
+              <li key={`${r.type}-${r.slug}`}>
+                <Link href={`/${r.type === 'blog' ? 'blog' : 'guides'}/${r.slug}`} onClick={()=>setOpen(false)}>
+                  {r.title}
                 </Link>
+                {r.excerpt ? <div style={{fontSize:12,opacity:.8}}>{r.excerpt}</div> : null}
               </li>
             ))}
-            {!loading && results.length === 0 && q && <li>No matches</li>}
           </ul>
         </div>
       )}
