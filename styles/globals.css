@@ -1,53 +1,41 @@
-/* Moving logo background for hero */
-.hero--bg{ position:relative; overflow:hidden; }
-.hero--bg > *{ position:relative; z-index:1; }
-.hero--bg::before{
-  content:"";
-  position:absolute; inset:0; z-index:0;
-  background: url('/logo-dark.svg') no-repeat center;
-  background-size: clamp(280px, 55vw, 720px);
-  opacity:.08;                               /* subtle watermark */
-  animation: heroFloat 22s ease-in-out infinite alternate;
-}
-@keyframes heroFloat{
-  from{ background-position:50% 14%; }
-  to  { background-position:50% 32%; }
-}
-/* Moving logo background for hero */
-.hero--bg{ position:relative; overflow:hidden; }
-.hero--bg > *{ position:relative; z-index:1; }
-.hero--bg::before{
-  content:"";
-  position:absolute; inset:0; z-index:0;
-  background: url('/logo.svg') no-repeat center; /* use logo.svg (confirmed present) */
-  background-size: clamp(280px, 55vw, 720px);
-  opacity:.08; /* subtle watermark */
-  animation: heroFloat 22s ease-in-out infinite alternate;
-}
-@keyframes heroFloat{
-  from{ background-position:50% 14%; }
-  to  { background-position:50% 32%; }
-}
-/* --- Hero watermark logo (real element) --- */
-.hero{ position:relative; overflow:hidden; }
-.hero > *{ position:relative; z-index:1; }
+/* ===== Wild & Well — Global Styles (Olive/Cream) ===== */
 
-/* Centered, subtle, gently moving */
-.hero-watermark{
-  position:absolute;
-  left:50%; top:50%;
-  transform:translate(-50%,-50%);
-  width:min(80%, 820px);  /* scales with container, caps at 820px */
-  height:auto;
-  opacity:.08;            /* subtle watermark */
-  z-index:0;
-  pointer-events:none;
-  animation:heroDrift 22s ease-in-out infinite alternate;
-  /* keep it neutral against cream: desaturate/soften if your SVG is dark */
-  filter: grayscale(1) opacity(0.9);
+:root{
+  --olive:#3f4d2b; --olive-600:#344223;
+  --cream:#fff8e6; --cream-line:#e8dec3;
+  --ink:#1b2114; --muted:#4b553d;
+  --brand:#226c5a; --brand-600:#195346;
+  --shadow:0 8px 26px rgba(0,0,0,.12);
+  --radius:16px;
 }
 
-@keyframes heroDrift {
-  from { transform:translate(-50%,-52%); }
-  to   { transform:translate(-50%,-46%); }
+*{box-sizing:border-box;}
+html,body{margin:0;padding:0;}
+body{
+  font-family:Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  background:var(--olive); color:var(--ink); line-height:1.65;
+  -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale;
+  padding-bottom:96px; /* reserve space for fixed footer */
 }
+
+/* Links */
+a{color:var(--brand);text-decoration:none;}
+a:hover{text-decoration:underline;}
+/* Make email links extra-legible */
+.prose a[href^="mailto:"], a[href^="mailto:"]{ color:#0d332a; font-weight:700; text-decoration:underline; }
+
+.container{max-width:1120px;margin:0 auto;padding:0 20px;}
+
+/* ===== Header ===== */
+.site-header{position:sticky;top:0;z-index:50;background:var(--olive);border-bottom:1px solid rgba(232,222,195,.35);}
+.navbar{display:flex;align-items:center;gap:18px;padding:12px 0;}
+.logo{display:flex;align-items:center;gap:10px;font-weight:700;color:#f6f1e3;}
+.logo img{height:22px;display:block;}
+.nav{display:flex;align-items:center;gap:18px;margin-left:auto;}
+.nav a{color:#f6f1e3;}
+.nav a:hover{color:#fff;}
+
+/* ===== Search ===== */
+.searchbox{position:relative;}
+.search-input{
+  height:32px;border:1px solid rgba(25
