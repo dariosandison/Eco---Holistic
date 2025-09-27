@@ -2,6 +2,6 @@
   "framework": "nextjs",
   "buildCommand": "npm run build",
   "functions": {
-    "api/**/*": { "runtime": "nodejs18.x" }
+    "api/**/*": { "runtime": "nodejs22.x" }
   }
 }
