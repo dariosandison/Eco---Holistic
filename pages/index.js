@@ -25,24 +25,12 @@ export default function Home({ docs }) {
         type="website"
       />
 
-      <section className="hero">
+      {/* NOTE: extra class hero--bg adds moving logo background */}
+      <section className="hero hero--bg">
         {/* Offscreen H1 for SEO/accessibility */}
         <h1 style={{position:'absolute',left:'-9999px',top:'auto',width:1,height:1,overflow:'hidden'}}>
           Wild & Well
         </h1>
-
-        {/* FULL-WIDTH LOGO (fills the container width) */}
-        <img
-          src="/logo-dark.svg"
-          alt="Wild & Well"
-          style={{
-            display:'block',
-            margin:'0 auto 16px',
-            width:'100%',     // span container width
-            height:'auto'     // keep aspect ratio
-          }}
-          onError={(e)=>{ e.currentTarget.src='/logo.svg'; e.currentTarget.onerror = null; }}
-        />
 
         <p>Actionable guides and clean product picks to help you sleep better, stress less, and move more.</p>
 
@@ -59,13 +47,3 @@ export default function Home({ docs }) {
       </section>
 
       <h2 className="section-title">Latest Guides</h2>
-      {latest.length === 0 ? (
-        <p style={{ color:'#f6f1e3' }}>No guides published yet.</p>
-      ) : (
-        <div className="grid">
-          {latest.map((p) => <Card key={p.slug} {...p} />)}
-        </div>
-      )}
-    </>
-  );
-}
