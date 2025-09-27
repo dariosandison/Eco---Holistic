@@ -26,22 +26,25 @@ export default function Home({ docs }) {
       />
 
       <section className="hero">
-        {/* Keep an offscreen H1 for SEO/accessibility */}
+        {/* Offscreen H1 for SEO/accessibility */}
         <h1 style={{position:'absolute',left:'-9999px',top:'auto',width:1,height:1,overflow:'hidden'}}>
           Wild & Well
         </h1>
 
-        {/* LOGO replaces visible title */}
+        {/* WIDE LOGO */}
         <img
-          src="/logo-dark.svg"
+          src="/logo-dark.svg"          // use your larger SVG (crisp at any size)
           alt="Wild & Well"
           style={{
             display:'block',
-            margin:'0 auto 12px',
-            height:96,           // adjust if you want smaller/larger
-            width:'auto'
+            margin:'0 auto 16px',
+            width:'min(100%, 900px)',   // << wider across the page
+            height:'auto'
           }}
-          onError={(e)=>{ e.currentTarget.src='/logo.png'; }}
+          onError={(e)=>{               // fallback if that asset isn't found
+            e.currentTarget.src='/logo.svg';
+            e.currentTarget.onerror = null;
+          }}
         />
 
         <p>Actionable guides and clean product picks to help you sleep better, stress less, and move more.</p>
@@ -50,22 +53,3 @@ export default function Home({ docs }) {
           <Link className="btn" href="/guides">Explore Guides</Link>
           <Link className="btn btn--ghost" href="/deals">Today&apos;s Deals</Link>
         </div>
-
-        <div className="value-props">
-          <span>Independent • Reader-supported</span>
-          <span>Evidence-informed picks</span>
-          <span>No sponsored posts</span>
-        </div>
-      </section>
-
-      <h2 className="section-title">Latest Guides</h2>
-      {latest.length === 0 ? (
-        <p style={{ color:'#f6f1e3' }}>No guides published yet.</p>
-      ) : (
-        <div className="grid">
-          {latest.map((p) => <Card key={p.slug} {...p} />)}
-        </div>
-      )}
-    </>
-  );
-}
