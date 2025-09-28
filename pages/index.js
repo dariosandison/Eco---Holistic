@@ -1,11 +1,6 @@
 // pages/index.js
 import Head from 'next/head';
 import Hero from '../components/Hero';
-// If you already have a grid/list component for guides, keep using it.
-// Otherwise the page will still render the hero and the rest of your existing sections.
-import dynamic from 'next/dynamic';
-
-const GuidesGrid = dynamic(() => import('../components/GuidesGrid').catch(() => () => null), { ssr: true });
 
 export default function Home() {
   return (
@@ -21,9 +16,25 @@ export default function Home() {
       <Hero />
 
       <main className="mx-auto mb-12 max-w-6xl px-4">
-        <h2 className="mb-4 text-2xl font-bold" style={{ color: '#fff' }}>Latest Guides</h2>
-        {GuidesGrid ? <GuidesGrid /> : null}
+        <div className="flex items-baseline justify-between">
+          <h2 className="mb-4 text-2xl font-bold" style={{ color: '#fff' }}>
+            Latest Guides
+          </h2>
+          <a
+            href="/guides"
+            className="text-sm font-semibold"
+            style={{ color: 'rgba(255,255,255,0.9)', textDecoration: 'none' }}
+          >
+            View all →
+          </a>
+        </div>
+        {/* If you later add a guides grid component, render it here. */}
       </main>
     </>
   );
+}
+
+// keep SSG happy even without data fetching
+export async function getStaticProps() {
+  return { props: {} };
 }
