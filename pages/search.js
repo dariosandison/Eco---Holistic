@@ -20,12 +20,11 @@ function parseFrontmatter(raw) {
   return meta;
 }
 
-function readGuides() {
-  const dir = path.join(process.cwd(), 'content/guides');
-  const files = fs.existsSync(dir) ? fs.readdirSync(dir).filter(f => f.endsWith('.md')) : [];
+function readSection(dirPath, basePath) {
+  const files = fs.existsSync(dirPath) ? fs.readdirSync(dirPath).filter(f => f.endsWith('.md') || f.endsWith('.mdx')) : [];
   return files.map(filename => {
-    const slug = filename.replace(/\.md$/, '');
-    const raw = fs.readFileSync(path.join(dir, filename), 'utf8');
+    const slug = filename.replace(/\.(md|mdx)$/, '');
+    const raw = fs.readFileSync(path.join(dirPath, filename), 'utf8');
     const meta = parseFrontmatter(raw);
     const body = raw.replace(/^---[\s\S]*?\n---\n?/, '').trim();
     return {
@@ -33,20 +32,25 @@ function readGuides() {
       title: meta.title || slug.replace(/-/g,' '),
       description: meta.description || '',
       date: meta.date || '',
-      body
+      body,
+      url: `${basePath}/${slug}`
     };
   });
 }
 
 export async function getServerSideProps({ query }) {
   const q = (query.q || '').toString().trim();
-  const guides = readGuides();
+  const guides = readSection(path.join(process.cwd(), 'content/guides'), '/guides');
+  const reviews = readSection(path.join(process.cwd(), 'content/reviews'), '/reviews');
+  const haystack = [...guides, ...reviews];
+
   const results = q
-    ? guides.filter(g => {
-        const hay = (g.title + ' ' + g.description + ' ' + g.body).toLowerCase();
+    ? haystack.filter(item => {
+        const hay = (item.title + ' ' + item.description + ' ' + item.body).toLowerCase();
         return hay.includes(q.toLowerCase());
       })
     : [];
+
   return { props: { q, results } };
 }
 
@@ -63,17 +67,17 @@ export default function SearchPage({ q, results }) {
           <div className="hero-inner">
             <h1 className="post-title" style={{ marginBottom: 8 }}>Search</h1>
             <form action="/search" role="search" className="search" style={{ width: '100%', maxWidth: 560 }}>
-              <input type="search" name="q" defaultValue={q} placeholder="Search guides…" aria-label="Search guides" />
+              <input type="search" name="q" defaultValue={q} placeholder="Search guides and reviews…" aria-label="Search" />
             </form>
           </div>
         </section>
 
-        <h2 className="section-title">{q ? `Results for “${q}”` : 'Type to search guides'}</h2>
+        <h2 className="section-title">{q ? `Results for “${q}”` : 'Type to search'}</h2>
 
         <div className="grid">
-          {results.map(r => (
-            <article className="card" key={r.slug}>
-              <h3><Link href={`/guides/${r.slug}`}>{r.title}</Link></h3>
+          {results.map((r, i) => (
+            <article className="card" key={i}>
+              <h3><Link href={r.url}>{r.title}</Link></h3>
               {r.description ? <p style={{ margin: 0 }}>{r.description}</p> : null}
             </article>
           ))}
