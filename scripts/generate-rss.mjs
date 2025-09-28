@@ -23,6 +23,14 @@ function toISO(d) {
   return t ? new Date(t).toISOString() : new Date().toISOString();
 }
 
+function rssEscape(s) {
+  if (s == null) return '';
+  return String(s)
+    .replace(/&/g,'&amp;')
+    .replace(/</g,'&lt;')
+    .replace(/>/g,'&gt;');
+}
+
 function collect(dir, basePath) {
   const full = path.join(process.cwd(), dir);
   if (!fs.existsSync(full)) return [];
@@ -31,11 +39,13 @@ function collect(dir, basePath) {
   const list = files.map(f => {
     const slug = f.replace(/\.(md|mdx)$/,'');
     const raw = fs.readFileSync(path.join(full, f), 'utf8');
-    const { data, content } = matter(raw);
+    const parsed = matter(raw);
+    const data = parsed.data || {};
+    const content = parsed.content || '';
 
-    const url = `${siteUrl}${basePath}/${slug}`;
+    const url = siteUrl + basePath + '/' + slug;
     const title = data.title || slug.replace(/-/g,' ');
-    const description = data.description || ((content || '').trim().slice(0,180) + '…');
+    const description = data.description || (content.trim().slice(0,180) + '...');
     const dateISO = toISO(data.updated || data.date || new Date());
 
     return { url, title, description, dateISO };
@@ -46,41 +56,34 @@ function collect(dir, basePath) {
   return list;
 }
 
-function rssEscape(s='') {
-  return s
-    .replace(/&/g,'&amp;')
-    .replace(/</g,'&lt;')
-    .replace(/>/g,'&gt;');
-}
-
 function buildItemXML(item) {
-  return [
-    '  <item>',
-    `    <title>${rssEscape(item.title)}</title>`,
-    `    <link>${item.url}</link>`,
-    `    <guid>${item.url}</guid>`,
-    `    <pubDate>${new Date(item.dateISO).toUTCString()}</pubDate>`,
-    `    <description>${rssEscape(item.description)}</description>`,
-    '  </item>'
-  ].join('\n');
+  const lines = [];
+  lines.push('  <item>');
+  lines.push('    <title>' + rssEscape(item.title) + '</title>');
+  lines.push('    <link>' + item.url + '</link>');
+  lines.push('    <guid>' + item.url + '</guid>');
+  lines.push('    <pubDate>' + new Date(item.dateISO).toUTCString() + '</pubDate>');
+  lines.push('    <description>' + rssEscape(item.description) + '</description>');
+  lines.push('  </item>');
+  return lines.join('\n');
 }
 
 function generate() {
-  const items = [
-    ...collect('content/guides','/guides'),
-    ...collect('content/reviews','/reviews'),
-    ...collect('content/blog','/blog')
-  ].slice(0, 25);
+  const items = []
+    .concat(collect('content/guides','/guides'))
+    .concat(collect('content/reviews','/reviews'))
+    .concat(collect('content/blog','/blog'))
+    .slice(0, 25);
 
   const parts = [];
   parts.push('<?xml version="1.0" encoding="UTF-8"?>');
   parts.push('<rss version="2.0">');
   parts.push('<channel>');
-  parts.push(`  <title>${rssEscape(siteTitle)}</title>`);
-  parts.push(`  <link>${siteUrl}</link>`);
-  parts.push(`  <description>${rssEscape(siteDesc)}</description>`);
+  parts.push('  <title>' + rssEscape(siteTitle) + '</title>');
+  parts.push('  <link>' + siteUrl + '</link>');
+  parts.push('  <description>' + rssEscape(siteDesc) + '</description>');
   parts.push('  <language>en</language>');
-  items.forEach(i => parts.push(buildItemXML(i)));
+  for (const i of items) parts.push(buildItemXML(i));
   parts.push('</channel>');
   parts.push('</rss>');
 
@@ -88,7 +91,7 @@ function generate() {
 
   if (!fs.existsSync(publicDir)) fs.mkdirSync(publicDir, { recursive: true });
   fs.writeFileSync(path.join(publicDir, 'feed.xml'), rss, 'utf8');
-  console.log(`✓ feed.xml generated (${items.length} items)`);
+  console.log('✓ feed.xml generated (' + items.length + ' items)');
 }
 
 generate();
