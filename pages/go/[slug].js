@@ -1,34 +1,37 @@
 // pages/go/[slug].js
+import Head from 'next/head';
 import affiliates from '../../data/affiliates';
 
-function withUtm(url) {
-  try {
-    const u = new URL(url);
-    if (!u.searchParams.has('utm_source')) u.searchParams.set('utm_source', 'wildandwell');
-    if (!u.searchParams.has('utm_medium')) u.searchParams.set('utm_medium', 'affiliate');
-    if (!u.searchParams.has('utm_campaign')) u.searchParams.set('utm_campaign', 'go');
-    return u.toString();
-  } catch {
-    return url;
-  }
-}
-
-export async function getServerSideProps({ params, res }) {
+export async function getServerSideProps({ params, res, query }) {
   const slug = params?.slug || '';
-  const dest = affiliates[slug];
+  const dest = affiliates?.[slug];
 
-  // Never index /go routes
-  res.setHeader('X-Robots-Tag', 'noindex, nofollow');
+  // Cache short, respect changes
+  res.setHeader('Cache-Control', 'public, max-age=300, s-maxage=300, stale-while-revalidate=600');
 
   if (!dest) {
+    // If missing, go home
     return {
       redirect: { destination: '/', permanent: false }
     };
   }
+  // Optional: append subId or query passthrough, e.g. ?ref=...
+  // const url = new URL(dest);
+  // if (query.subId) url.searchParams.set('subId', query.subId);
 
   return {
-    redirect: { destination: withUtm(dest), permanent: false }
+    redirect: {
+      destination: dest, // or url.toString()
+      permanent: false
+    }
   };
 }
 
-export default function Go() { return null; }
+export default function GoPage() {
+  // For a split second on dev we render this; add noindex just in case
+  return (
+    <Head>
+      <meta name="robots" content="noindex,nofollow" />
+    </Head>
+  );
+}
