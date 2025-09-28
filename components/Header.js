@@ -1,3 +1,4 @@
+// components/Header.js
 import Link from 'next/link';
 import Image from 'next/image';
 
@@ -8,7 +9,7 @@ export default function Header() {
         <div className="flex flex-col items-center justify-center gap-3">
           <Link href="/" aria-label="Wild & Well Home" className="inline-flex">
             <Image
-              src="/logo.svg"
+              src="/logo.svg"   // put your logo in /public/logo.svg (or change this path)
               alt="Wild & Well"
               width={160}
               height={160}
@@ -20,3 +21,4 @@ export default function Header() {
     </header>
   );
 }
+
