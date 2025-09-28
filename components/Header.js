@@ -1,26 +1,20 @@
-// components/Header.js
 import Link from 'next/link';
-import SearchBox from './SearchBox';
+import Image from 'next/image';
 
 export default function Header() {
   return (
-    <header className="site-header">
-      <div className="container navbar">
-        <div className="logo">
-          {/* If /public/logo.svg exists it will show; else falls back to text */}
-          <img src="/logo.svg" alt="Wild & Well" onError={(e)=>{ e.currentTarget.style.display='none'; }} />
-          <Link href="/">Wild &amp; Well</Link>
-        </div>
-
-        <nav className="nav">
-          <Link href="/guides">Guides</Link>
-          <Link href="/blog">Blog</Link>
-          <Link href="/about">About</Link>
-          <Link href="/contact">Contact</Link>
-        </nav>
-
-        <div className="nav-right">
-          <SearchBox />
+    <header className="w-full border-b border-neutral-200">
+      <div className="mx-auto max-w-6xl px-4 py-6">
+        <div className="flex flex-col items-center justify-center gap-3">
+          <Link href="/" aria-label="Wild & Well Home" className="inline-flex">
+            <Image
+              src="/logo.svg"
+              alt="Wild & Well"
+              width={160}
+              height={160}
+              priority
+            />
+          </Link>
         </div>
       </div>
     </header>
