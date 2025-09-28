@@ -66,4 +66,43 @@ export default function Home({ guides }) {
       <Head>
         <title>Wild &amp; Well — Your guide to holistic health and eco friendly living</title>
         <meta
-          name="description
+          name="description"
+          content="Your guide to holistic health and eco friendly living"
+        />
+      </Head>
+
+      {/* Logo centered at top */}
+      <section className="hero">
+        <div className="container hero-inner">
+          <img src="/logo.svg" alt="Wild & Well" className="hero-logo" />
+          <p className="hero-slogan">
+            Your guide to holistic health and eco friendly living
+          </p>
+        </div>
+      </section>
+
+      {/* Guides grid */}
+      <section className="guides">
+        <div className="container">
+          <h2 className="section-title">Latest Guides</h2>
+          <div className="grid">
+            {guides.map((g) => (
+              <Link key={g.slug} href={`/guides/${g.slug}`} className="card">
+                <h3>{g.title}</h3>
+                {g.date && <p className="date">{g.date}</p>}
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+    </>
+  );
+}
+
+export async function getStaticProps() {
+  const guidesDir = path.join(process.cwd(), 'content/guides');
+  const guides = readGuides(guidesDir);
+  return {
+    props: { guides }
+  };
+}
