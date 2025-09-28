@@ -1,29 +1,21 @@
+// pages/disclaimer.js
 import Head from 'next/head';
-import { getDocBySlug } from '../lib/content';
-import { renderMarkdown } from '../lib/markdown';
 
-export default function Disclaimer({ doc, html }) {
+export default function Disclaimer() {
   return (
     <>
       <Head>
-        <title>{doc?.title ? `${doc.title} | Wild & Well` : 'Disclaimer | Wild & Well'}</title>
-        {doc?.description ? <meta name="description" content={doc.description} /> : null}
+        <title>Disclaimer — Wild &amp; Well</title>
+        <meta name="robots" content="noindex,follow" />
       </Head>
-      <main className="container">
-        <h1>{doc?.title || 'Disclaimer'}</h1>
-        <article dangerouslySetInnerHTML={{ __html: html || '' }} />
-      </main>
+      <div className="container" style={{ marginTop: 22 }}>
+        <article className="post">
+          <h1 className="post-title">Disclaimer</h1>
+          <p>The content on Wild &amp; Well is for informational purposes only and is not a substitute for professional medical advice. Always consult a qualified healthcare provider regarding any health questions.</p>
+          <p>We strive for accuracy, but information may change and individual results vary.</p>
+        </article>
+      </div>
     </>
   );
 }
 
-export async function getStaticProps() {
-  const fields = ['slug', 'title', 'date', 'content', 'excerpt', 'description'];
-  // IMPORTANT: positional args (dir, slug, fields)
-  const doc = getDocBySlug('content/legal', 'disclaimer', fields);
-
-  if (!doc) return { notFound: true };
-
-  const html = renderMarkdown(doc.content || '');
-  return { props: { doc, html } };
-}
