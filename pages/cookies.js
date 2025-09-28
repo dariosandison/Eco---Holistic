@@ -1,17 +1,25 @@
-import { useEffect } from 'react';
-import Head from 'next/head';
-import { useRouter } from 'next/router';
+// pages/cookies.js
+import { getDocBySlug } from '../lib/content';
+import { renderMarkdown } from '../lib/markdown';
 
-export default function CookiesRedirect() {
-  const router = useRouter();
-  useEffect(() => { router.replace('/legal/cookies'); }, [router]);
-  return (
-    <>
-      <Head>
-        <meta httpEquiv="refresh" content="0; url=/legal/cookies" />
-      </Head>
-      <p>Redirecting to <a href="/legal/cookies">/legal/cookies</a>…</p>
-    </>
-  );
+export async function getStaticProps() {
+  const fields = ['slug', 'title', 'date', 'content', 'excerpt'];
+  const doc = getDocBySlug({ dir: 'content/legal', slug: 'cookies', fields });
+
+  if (!doc) return { notFound: true };
+
+  const html = renderMarkdown(doc.content || '');
+  return { props: { doc: { ...doc, content: null }, html } };
 }
 
+export default function Cookies({ doc, html }) {
+  return (
+    <main className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8 py-10">
+      <h1 className="text-3xl font-semibold mb-6">{doc.title || 'Cookies'}</h1>
+      <article
+        className="prose prose-lg max-w-none"
+        dangerouslySetInnerHTML={{ __html: html }}
+      />
+    </main>
+  );
+}
