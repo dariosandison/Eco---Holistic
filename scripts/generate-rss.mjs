@@ -5,25 +5,25 @@ import matter from 'gray-matter';
 
 const siteUrl = 'https://www.wild-and-well.store';
 const publicDir = path.join(process.cwd(), 'public');
-const guidesDir = path.join(process.cwd(), 'content/guides');
-const siteTitle = 'Wild & Well — Guides';
-const siteDesc  = 'Actionable, low-tox guides and product picks.';
+const siteTitle = 'Wild & Well — New Guides & Reviews';
+const siteDesc  = 'Actionable, low-tox guides and hands-on product reviews.';
 
-function getGuides() {
-  if (!fs.existsSync(guidesDir)) return [];
-  const files = fs.readdirSync(guidesDir).filter(f => f.endsWith('.md') || f.endsWith('.mdx'));
+function collect(dir, basePath) {
+  const full = path.join(process.cwd(), dir);
+  if (!fs.existsSync(full)) return [];
+  const files = fs.readdirSync(full).filter(f => f.endsWith('.md') || f.endsWith('.mdx'));
   const list = files.map(f => {
     const slug = f.replace(/\.(md|mdx)$/,'');
-    const raw = fs.readFileSync(path.join(guidesDir, f), 'utf8');
+    const raw = fs.readFileSync(path.join(full, f), 'utf8');
     const { data, content } = matter(raw);
-    const url = `${siteUrl}/guides/${slug}`;
+    const url = `${siteUrl}${basePath}/${slug}`;
     const title = data.title || slug.replace(/-/g,' ');
     const description = data.description || (content.trim().slice(0,180) + '…');
     const date = data.updated || data.date || new Date().toISOString();
     return { url, title, description, date };
   });
   list.sort((a,b) => (b.date || '').localeCompare(a.date || ''));
-  return list.slice(0, 25);
+  return list;
 }
 
 function rssEscape(s='') {
@@ -31,7 +31,7 @@ function rssEscape(s='') {
 }
 
 function generate() {
-  const items = getGuides();
+  const items = [...collect('content/guides','/guides'), ...collect('content/reviews','/reviews')].slice(0, 25);
   const rss = `<?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0">
 <channel>
