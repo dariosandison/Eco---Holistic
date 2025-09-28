@@ -53,7 +53,7 @@ export default function Home({ guides }) {
         <title>Wild &amp; Well — Actionable guides + clean product picks</title>
         <meta
           name="description"
-          content="Actionable guides and clean product picks to help you sleep better, stress less, and move more."
+          content="Your guide to holistic health, eco friendly living and natural wellness."
         />
       </Head>
 
@@ -61,8 +61,8 @@ export default function Home({ guides }) {
         <div className="container">
           <section className="hero">
             <div className="hero-inner">
-              <img src="/cover.png" alt="Wild & Well" className="hero-logo" />
-              <p className="hero-slogan">Actionable guides and clean product picks to help you sleep better, stress less, and move more.</p>
+              <img src="/logo.svg" alt="Wild & Well" className="hero-logo" />
+              <p className="hero-slogan">Your guide to holistic health, eco friendly living and natural wellness.</p>
               <div className="cta-row">
                 <Link className="btn btn-primary" href="/guides">Explore Guides</Link>
                 <Link className="btn btn-outline" href="/deals">Today&apos;s Deals</Link>
