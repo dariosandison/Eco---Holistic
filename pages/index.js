@@ -4,105 +4,91 @@ import path from 'path';
 import Head from 'next/head';
 import Link from 'next/link';
 
-// --- Minimal frontmatter/heading parser (no extra deps) ---
 function parseFrontmatter(raw) {
-  let title = null;
-  let date = null;
-
+  let meta = {};
   if (raw.startsWith('---')) {
     const end = raw.indexOf('\n---', 3);
     if (end !== -1) {
       const fm = raw.slice(3, end).trim();
-      const lines = fm.split(/\r?\n/);
-      for (const line of lines) {
-        const m = line.match(/^\s*([\w-]+)\s*:\s*(.+)\s*$/);
+      fm.split(/\r?\n/).forEach(line => {
+        const m = line.match(/^(\w+):\s*(.*)$/);
         if (m) {
-          const key = m[1].toLowerCase();
-          const val = m[2].replace(/^['"]|['"]$/g, '').trim();
-          if (key === 'title') title = val;
-          if (key === 'date') date = val; // keep as string
+          const key = m[1];
+          let val = m[2].trim();
+          val = val.replace(/^"(.+)"$/, '$1').replace(/^'(.+)'$/, '$1');
+          meta[key] = val;
         }
-      }
+      });
     }
   }
-  if (!title) {
-    const m = raw.match(/^\s*#\s+(.+)\s*$/m);
-    if (m) title = m[1].trim();
-  }
-  return { title, date };
+  return meta;
 }
 
 function readGuides(dir) {
-  let files = [];
-  try {
-    files = fs.readdirSync(dir);
-  } catch (_) {
-    return [];
-  }
+  const files = fs.readdirSync(dir).filter(f => f.endsWith('.md'));
+  const guides = files.map(filename => {
+    const slug = filename.replace(/\.md$/, '');
+    const raw = fs.readFileSync(path.join(dir, filename), 'utf8');
+    const meta = parseFrontmatter(raw);
+    return {
+      slug,
+      title: meta.title || slug.replace(/-/g, ' '),
+      date: meta.date || null,
+    };
+  });
+  guides.sort((a, b) => (b.date || '').localeCompare(a.date || ''));
+  return guides.slice(0, 9);
+}
 
-  const entries = [];
-  for (const file of files) {
-    if (!/\.(md|mdx)$/i.test(file)) continue;
-    const full = path.join(dir, file);
-    try {
-      const raw = fs.readFileSync(full, 'utf8');
-      const { title, date } = parseFrontmatter(raw);
-      const slug = file.replace(/\.(md|mdx)$/i, '');
-      entries.push({
-        slug,
-        title: title || slug.replace(/[-_]/g, ' ').replace(/\b\w/g, c => c.toUpperCase()),
-        date: date || null
-      });
-    } catch {
-      // ignore unreadable files
-    }
-  }
-  return entries;
+export async function getStaticProps() {
+  const guidesDir = path.join(process.cwd(), 'content/guides');
+  const guides = readGuides(guidesDir);
+  return { props: { guides } };
 }
 
 export default function Home({ guides }) {
   return (
     <>
       <Head>
-        <title>Wild &amp; Well — Your guide to holistic health and eco friendly living</title>
+        <title>Wild &amp; Well — Actionable guides + clean product picks</title>
         <meta
           name="description"
-          content="Your guide to holistic health and eco friendly living"
+          content="Actionable guides and clean product picks to help you sleep better, stress less, and move more."
         />
       </Head>
 
-      {/* Logo centered at top */}
-      <section className="hero">
-        <div className="container hero-inner">
-          <img src="/logo.svg" alt="Wild & Well" className="hero-logo" />
-          <p className="hero-slogan">
-            Your guide to holistic health and eco friendly living
-          </p>
-        </div>
-      </section>
-
-      {/* Guides grid */}
-      <section className="guides">
+      <div className="hero-wrap">
         <div className="container">
-          <h2 className="section-title">Latest Guides</h2>
-          <div className="grid">
-            {guides.map((g) => (
-              <Link key={g.slug} href={`/guides/${g.slug}`} className="card">
-                <h3>{g.title}</h3>
-                {g.date && <p className="date">{g.date}</p>}
-              </Link>
-            ))}
-          </div>
+          <section className="hero">
+            <div className="hero-inner">
+              <img src="/cover.png" alt="Wild & Well" className="hero-logo" />
+              <p className="hero-slogan">Actionable guides and clean product picks to help you sleep better, stress less, and move more.</p>
+              <div className="cta-row">
+                <Link className="btn btn-primary" href="/guides">Explore Guides</Link>
+                <Link className="btn btn-outline" href="/deals">Today&apos;s Deals</Link>
+              </div>
+              <p className="meta">
+                <span>Independent</span><span>•</span>
+                <span>Reader-supported</span><span>•</span>
+                <span>Evidence-informed picks</span><span>•</span>
+                <span>No sponsored posts</span>
+              </p>
+            </div>
+          </section>
         </div>
-      </section>
+      </div>
+
+      <div className="container">
+        <h2 className="section-title">Latest Guides</h2>
+        <div className="grid">
+          {guides.map((g) => (
+            <article className="card" key={g.slug}>
+              <h3><Link href={`/guides/${g.slug}`}>{g.title}</Link></h3>
+              {g.date ? <p className="date">{new Date(g.date).toLocaleDateString()}</p> : null}
+            </article>
+          ))}
+        </div>
+      </div>
     </>
   );
-}
-
-export async function getStaticProps() {
-  const guidesDir = path.join(process.cwd(), 'content/guides');
-  const guides = readGuides(guidesDir);
-  return {
-    props: { guides }
-  };
 }
