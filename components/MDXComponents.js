@@ -4,6 +4,7 @@ import AffiliateLink from './AffiliateLink';
 import ProsCons from './ProsCons';
 import ComparisonTable from './ComparisonTable';
 import Disclosure from './Disclosure';
+import BuyBox from './BuyBox';
 
 const A = (props) => {
   const href = props.href || '';
@@ -24,9 +25,12 @@ export const mdxComponents = {
   h3: H3,
   p: P,
 
-  // Custom components you can embed directly inside content
+  // Custom MDX components
   AffiliateLink,
   ProsCons,
   ComparisonTable,
-  Disclosure
+  Disclosure,
+  BuyBox
 };
+
+export default mdxComponents;
