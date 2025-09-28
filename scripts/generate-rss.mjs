@@ -8,26 +8,50 @@ const publicDir = path.join(process.cwd(), 'public');
 const siteTitle = 'Wild & Well — New Guides, Reviews & Blog';
 const siteDesc  = 'Actionable guides, hands-on reviews, and honest notes from the team.';
 
+// Convert various date shapes to a numeric timestamp (ms since epoch)
+function toTs(d) {
+  if (!d) return 0;
+  if (d instanceof Date) return d.getTime();
+  const t = Date.parse(d);
+  return Number.isNaN(t) ? 0 : t;
+}
+
+// Normalize to ISO string for feed output
+function toISO(d) {
+  if (d instanceof Date) return d.toISOString();
+  const t = toTs(d);
+  return t ? new Date(t).toISOString() : new Date().toISOString();
+}
+
 function collect(dir, basePath) {
   const full = path.join(process.cwd(), dir);
   if (!fs.existsSync(full)) return [];
   const files = fs.readdirSync(full).filter(f => f.endsWith('.md') || f.endsWith('.mdx'));
+
   const list = files.map(f => {
     const slug = f.replace(/\.(md|mdx)$/,'');
     const raw = fs.readFileSync(path.join(full, f), 'utf8');
     const { data, content } = matter(raw);
+
     const url = `${siteUrl}${basePath}/${slug}`;
     const title = data.title || slug.replace(/-/g,' ');
-    const description = data.description || (content.trim().slice(0,180) + '…');
-    const date = data.updated || data.date || new Date().toISOString();
-    return { url, title, description, date };
+    const description = data.description || ((content || '').trim().slice(0,180) + '…');
+    // Prefer updated → date → now; always store as ISO string
+    const dateISO = toISO(data.updated || data.date || new Date());
+
+    return { url, title, description, dateISO };
   });
-  list.sort((a,b) => (b.date || '').localeCompare(a.date || ''));
+
+  // Sort newest first using timestamps
+  list.sort((a,b) => toTs(b.dateISO) - toTs(a.dateISO));
   return list;
 }
 
 function rssEscape(s='') {
-  return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+  return s
+    .replace(/&/g,'&amp;')
+    .replace(/</g,'&lt;')
+    .replace(/>/g,'&gt;');
 }
 
 function generate() {
@@ -46,17 +70,4 @@ function generate() {
   <language>en</language>
   ${items.map(i => `
   <item>
-    <title>${rssEscape(i.title)}</title>
-    <link>${i.url}</link>
-    <guid>${i.url}</guid>
-    <pubDate>${new Date(i.date).toUTCString()}</pubDate>
-    <description>${rssEscape(i.description)}</description>
-  </item>`).join('')}
-</channel>
-</rss>`;
-  if (!fs.existsSync(publicDir)) fs.mkdirSync(publicDir, { recursive: true });
-  fs.writeFileSync(path.join(publicDir, 'feed.xml'), rss, 'utf8');
-  console.log('✓ feed.xml generated');
-}
-
-generate();
+    <title>${rssEscape(i.title)}</t
