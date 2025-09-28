@@ -59,7 +59,7 @@ export default function Hero() {
         <div style={frame}>
           {/* Optional hero logo; will hide if missing */}
           <img
-            src="/hero-logo.png"
+            src="/logo.svg"
             alt="Wild & Well"
             onError={(e) => {
               e.currentTarget.style.display = 'none';
