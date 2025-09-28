@@ -25,28 +25,32 @@ function xmlEscape(s) {
 }
 
 function generate() {
+  const today = new Date().toISOString().slice(0,10);
   const urls = [
-    { loc: `${siteUrl}/`, lastmod: new Date().toISOString().slice(0,10), priority: '1.0' },
-    { loc: `${siteUrl}/guides`, lastmod: new Date().toISOString().slice(0,10), priority: '0.9' },
-    { loc: `${siteUrl}/deals`, lastmod: new Date().toISOString().slice(0,10), priority: '0.6' },
-    { loc: `${siteUrl}/search`, lastmod: new Date().toISOString().slice(0,10), priority: '0.3' },
-    { loc: `${siteUrl}/affiliate-disclosure`, lastmod: new Date().toISOString().slice(0,10), priority: '0.2' },
-    { loc: `${siteUrl}/product-disclosure`, lastmod: new Date().toISOString().slice(0,10), priority: '0.2' },
-    { loc: `${siteUrl}/cookies`, lastmod: new Date().toISOString().slice(0,10), priority: '0.2' },
-    { loc: `${siteUrl}/disclaimer`, lastmod: new Date().toISOString().slice(0,10), priority: '0.2' },
-    ...hubs.map(h => ({ loc: `${siteUrl}/hubs/${h.slug}`, lastmod: new Date().toISOString().slice(0,10), priority: '0.7' })),
+    { loc: `${siteUrl}/`, lastmod: today, priority: '1.0' },
+    { loc: `${siteUrl}/guides`, lastmod: today, priority: '0.9' },
+    { loc: `${siteUrl}/deals`, lastmod: today, priority: '0.6' },
+    { loc: `${siteUrl}/search`, lastmod: today, priority: '0.3' },
+    // Legal
+    { loc: `${siteUrl}/legal/affiliate-disclosure`, lastmod: today, priority: '0.2' },
+    { loc: `${siteUrl}/legal/product-disclosure`, lastmod: today, priority: '0.2' },
+    { loc: `${siteUrl}/legal/cookies`, lastmod: today, priority: '0.2' },
+    { loc: `${siteUrl}/legal/disclaimer`, lastmod: today, priority: '0.2' },
+    // Hubs
+    ...hubs.map(h => ({ loc: `${siteUrl}/hubs/${h.slug}`, lastmod: today, priority: '0.7' })),
+    // Guides
     ...getGuides().map(g => ({ ...g, priority: '0.8' }))
   ];
 
   const xml = `<?xml version="1.0" encoding="UTF-8"?>\n` +
-    `<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n` +
-    urls.map(u => `  <url>
+  `<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n` +
+  urls.map(u => `  <url>
     <loc>${xmlEscape(u.loc)}</loc>
     <lastmod>${u.lastmod}</lastmod>
     <changefreq>weekly</changefreq>
     <priority>${u.priority}</priority>
   </url>`).join('\n') +
-    `\n</urlset>\n`;
+  `\n</urlset>\n`;
 
   if (!fs.existsSync(publicDir)) fs.mkdirSync(publicDir, { recursive: true });
   fs.writeFileSync(path.join(publicDir, 'sitemap.xml'), xml, 'utf8');
