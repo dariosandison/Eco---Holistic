@@ -1,8 +1,8 @@
 // pages/index.js
 import fs from 'fs';
 import path from 'path';
-import Head from 'next/head';
 import Link from 'next/link';
+import SEO from '../components/SEO';
 
 function parseFrontmatter(raw) {
   let meta = {};
@@ -25,58 +25,58 @@ function parseFrontmatter(raw) {
 }
 
 function readGuides(dir) {
-  try {
-    const files = fs.readdirSync(dir).filter(f => f.endsWith('.md'));
-    const guides = files.map(filename => {
-      const slug = filename.replace(/\.md$/, '');
-      const raw = fs.readFileSync(path.join(dir, filename), 'utf8');
-      const meta = parseFrontmatter(raw);
-      return {
-        slug,
-        title: meta.title || slug.replace(/-/g, ' '),
-        date: meta.date || null,
-      };
-    });
-    guides.sort((a, b) => (b.date || '').localeCompare(a.date || ''));
-    return guides.slice(0, 9);
-  } catch {
-    return [];
-  }
+  const files = fs.existsSync(dir) ? fs.readdirSync(dir).filter(f => f.endsWith('.md') || f.endsWith('.mdx')) : [];
+  const guides = files.map(filename => {
+    const slug = filename.replace(/\.(md|mdx)$/, '');
+    const raw = fs.readFileSync(path.join(dir, filename), 'utf8');
+    const meta = parseFrontmatter(raw);
+    return {
+      slug,
+      title: meta.title || slug.replace(/-/g, ' '),
+      date: meta.date || null,
+      description: meta.description || ''
+    };
+  });
+  guides.sort((a, b) => (b.date || '').localeCompare(a.date || ''));
+  return guides.slice(0, 9);
 }
 
 export async function getStaticProps() {
   const guidesDir = path.join(process.cwd(), 'content/guides');
   const guides = readGuides(guidesDir);
-  return { props: { guides } };
+  return {
+    props: { guides },
+    revalidate: 60 * 60 * 6 // revalidate every 6 hours
+  };
 }
 
 export default function Home({ guides }) {
+  const seo = {
+    title: 'Wild & Well — Holistic Health & Eco Friendly Living',
+    description: 'Your guide to holistic health, eco friendly living and natural wellness.',
+    url: 'https://www.wild-and-well.store/',
+    type: 'website',
+    breadcrumbs: [
+      { name: 'Home', item: 'https://www.wild-and-well.store/' }
+    ]
+  };
+
   return (
     <>
-      <Head>
-        <title>Wild &amp; Well — Holistic Health &amp; Eco Friendly Living</title>
-        <meta
-          name="description"
-          content="Your guide to holistic health, eco friendly living and natural wellness."
-        />
-      </Head>
+      <SEO {...seo} />
 
       <div className="hero-wrap">
         <div className="container">
           <section className="hero">
             <div className="hero-inner">
-              {/* SMALL SVG LOGO (replaces cover.png) */}
               <img src="/logo.svg" alt="Wild & Well" className="hero-logo hero-logo--svg" />
-
               <p className="hero-slogan">
                 Your guide to holistic health, eco friendly living and natural wellness
               </p>
-
               <div className="cta-row">
                 <Link className="btn btn-primary" href="/guides">Explore Guides</Link>
                 <Link className="btn btn-outline" href="/deals">Today&apos;s Deals</Link>
               </div>
-
               <p className="meta">
                 <span>Independent</span><span>•</span>
                 <span>Reader-supported</span><span>•</span>
@@ -94,7 +94,7 @@ export default function Home({ guides }) {
           {guides.map((g) => (
             <article className="card" key={g.slug}>
               <h3><Link href={`/guides/${g.slug}`}>{g.title}</Link></h3>
-              {g.date ? <p className="date">{new Date(g.date).toLocaleDateString()}</p> : null}
+              {g.description ? <p style={{ margin: 0 }}>{g.description}</p> : null}
             </article>
           ))}
         </div>
@@ -102,4 +102,3 @@ export default function Home({ guides }) {
     </>
   );
 }
-
