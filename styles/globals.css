@@ -151,6 +151,19 @@ a:hover{text-decoration:underline}
 .comp-table thead th{ background:#fdf6e5; position:sticky; top:0 }
 .sticky-col{ position:sticky; left:0; background:#fff; z-index:1 }
 
+/* Stars + BuyBox */
+.stars{ display:inline-flex; align-items:center; gap:3px }
+.stars svg{ display:block }
+.stars-text{ margin-left:6px; font-size:13px; color:#475569 }
+.buybox{
+  background:#fff; border:1px solid rgba(0,0,0,.08); border-radius:14px; padding:12px; margin:14px 0;
+  box-shadow:0 6px 16px rgba(0,0,0,.08);
+}
+.buybox-top{ display:flex; align-items:center; justify-content:space-between; gap:12px; margin-bottom:8px }
+.buybox-name{ font-size:16px }
+.buybox-list{ margin:8px 0; padding-left:18px }
+.buybox-cta{ margin-top:10px }
+
 /* Footer — floating bar fixed to bottom */
 .site-footer{
   position: fixed; left: 0; right: 0; bottom: 0; z-index: 50;
