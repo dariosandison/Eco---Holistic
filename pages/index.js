@@ -2,6 +2,7 @@
 import fs from 'fs';
 import path from 'path';
 import Link from 'next/link';
+import Image from 'next/image';
 import SEO from '../components/SEO';
 
 function parseFrontmatter(raw) {
@@ -46,7 +47,7 @@ export async function getStaticProps() {
   const guides = readGuides(guidesDir);
   return {
     props: { guides },
-    revalidate: 60 * 60 * 6 // revalidate every 6 hours
+    revalidate: 60 * 60 * 6
   };
 }
 
@@ -56,9 +57,7 @@ export default function Home({ guides }) {
     description: 'Your guide to holistic health, eco friendly living and natural wellness.',
     url: 'https://www.wild-and-well.store/',
     type: 'website',
-    breadcrumbs: [
-      { name: 'Home', item: 'https://www.wild-and-well.store/' }
-    ]
+    breadcrumbs: [{ name: 'Home', item: 'https://www.wild-and-well.store/' }]
   };
 
   return (
@@ -69,7 +68,15 @@ export default function Home({ guides }) {
         <div className="container">
           <section className="hero">
             <div className="hero-inner">
-              <img src="/logo.svg" alt="Wild & Well" className="hero-logo hero-logo--svg" />
+              <Image
+                src="/logo.svg"
+                alt="Wild & Well"
+                width={520}
+                height={140}
+                className="hero-logo hero-logo--svg"
+                priority
+                fetchPriority="high"
+              />
               <p className="hero-slogan">
                 Your guide to holistic health, eco friendly living and natural wellness
               </p>
