@@ -1,33 +1,21 @@
 // components/Footer.js
 export default function Footer() {
-  const bar = {
-    background: 'rgba(0,0,0,0.2)',
-    marginTop: '24px',
-  };
+  const bar = { background: 'rgba(0,0,0,0.25)' };
   const wrap = {
     maxWidth: '1100px',
     margin: '0 auto',
     padding: '16px',
     color: '#e8e6df',
     display: 'grid',
-    gap: '12px',
+    gap: 12,
   };
-  const row = {
-    display: 'flex',
-    flexWrap: 'wrap',
-    gap: '18px',
-    alignItems: 'center',
-  };
-  const link = {
-    color: '#e8e6df',
-    textDecoration: 'none',
-    opacity: 0.95,
-  };
+  const row = { display: 'flex', flexWrap: 'wrap', gap: 18, alignItems: 'center' };
+  const link = { color: '#e8e6df', textDecoration: 'none', opacity: 0.95 };
 
   return (
-    <footer style={bar}>
+    <footer role="contentinfo" style={bar} id="site-footer">
       <div style={wrap}>
-        <nav style={row}>
+        <nav style={row} aria-label="Footer">
           <a href="/about" style={link}>About</a>
           <a href="/editorial-policy" style={link}>Editorial Policy</a>
           <a href="/how-we-test" style={link}>How We Test</a>
@@ -38,8 +26,7 @@ export default function Footer() {
           <a href="/legal/disclaimer" style={link}>Disclaimer</a>
           <a href="/legal/product-disclosure" style={link}>Product Disclosure</a>
         </nav>
-
-        <div style={{ fontSize: '13px', opacity: 0.9 }}>
+        <div style={{ fontSize: 13, opacity: 0.9 }}>
           © {new Date().getFullYear()} Wild &amp; Well • Independent • Reader-supported
         </div>
       </div>
