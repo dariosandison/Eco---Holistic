@@ -36,7 +36,6 @@ function collect(dir, basePath) {
     const url = `${siteUrl}${basePath}/${slug}`;
     const title = data.title || slug.replace(/-/g,' ');
     const description = data.description || ((content || '').trim().slice(0,180) + '…');
-    // Prefer updated → date → now; always store as ISO string
     const dateISO = toISO(data.updated || data.date || new Date());
 
     return { url, title, description, dateISO };
@@ -54,6 +53,18 @@ function rssEscape(s='') {
     .replace(/>/g,'&gt;');
 }
 
+function buildItemXML(item) {
+  return [
+    '  <item>',
+    `    <title>${rssEscape(item.title)}</title>`,
+    `    <link>${item.url}</link>`,
+    `    <guid>${item.url}</guid>`,
+    `    <pubDate>${new Date(item.dateISO).toUTCString()}</pubDate>`,
+    `    <description>${rssEscape(item.description)}</description>`,
+    '  </item>'
+  ].join('\n');
+}
+
 function generate() {
   const items = [
     ...collect('content/guides','/guides'),
@@ -61,13 +72,23 @@ function generate() {
     ...collect('content/blog','/blog')
   ].slice(0, 25);
 
-  const rss = `<?xml version="1.0" encoding="UTF-8"?>
-<rss version="2.0">
-<channel>
-  <title>${rssEscape(siteTitle)}</title>
-  <link>${siteUrl}</link>
-  <description>${rssEscape(siteDesc)}</description>
-  <language>en</language>
-  ${items.map(i => `
-  <item>
-    <title>${rssEscape(i.title)}</t
+  const parts = [];
+  parts.push('<?xml version="1.0" encoding="UTF-8"?>');
+  parts.push('<rss version="2.0">');
+  parts.push('<channel>');
+  parts.push(`  <title>${rssEscape(siteTitle)}</title>`);
+  parts.push(`  <link>${siteUrl}</link>`);
+  parts.push(`  <description>${rssEscape(siteDesc)}</description>`);
+  parts.push('  <language>en</language>');
+  items.forEach(i => parts.push(buildItemXML(i)));
+  parts.push('</channel>');
+  parts.push('</rss>');
+
+  const rss = parts.join('\n');
+
+  if (!fs.existsSync(publicDir)) fs.mkdirSync(publicDir, { recursive: true });
+  fs.writeFileSync(path.join(publicDir, 'feed.xml'), rss, 'utf8');
+  console.log(`✓ feed.xml generated (${items.length} items)`);
+}
+
+generate();
