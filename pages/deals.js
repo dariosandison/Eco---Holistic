@@ -1,17 +1,33 @@
 // pages/deals.js
-import Head from 'next/head';
-import deals from '../data/deals';
+import SEO from '../components/SEO';
+import dealsData from '../data/deals';
 
-export default function DealsPage() {
+export async function getStaticProps() {
+  // sort by soonest expiry and revalidate frequently
   const now = new Date();
-  const sorted = [...deals].sort((a,b)=> (a.expires||'').localeCompare(b.expires||''));
+  const deals = [...dealsData].sort((a,b)=> (a.expires||'').localeCompare(b.expires||''));
+  return {
+    props: { deals, now: now.toISOString() },
+    revalidate: 60 * 60 * 6 // 6 hours
+  };
+}
+
+export default function DealsPage({ deals, now }) {
+  const nowDate = new Date(now);
+  const seo = {
+    title: 'Today’s Deals — Wild & Well',
+    description: 'Live deals and promo codes on our top picks. Updated with expiration dates and notes.',
+    url: 'https://www.wild-and-well.store/deals',
+    type: 'website',
+    breadcrumbs: [
+      { name: 'Home', item: 'https://www.wild-and-well.store/' },
+      { name: 'Deals', item: 'https://www.wild-and-well.store/deals' }
+    ]
+  };
+
   return (
     <>
-      <Head>
-        <title>Today’s Deals — Wild &amp; Well</title>
-        <meta name="description" content="Live deals and promo codes on our top picks. Updated with expiration dates and notes." />
-      </Head>
-
+      <SEO {...seo} />
       <div className="container" style={{ marginTop: 22 }}>
         <section className="hero">
           <div className="hero-inner">
@@ -22,8 +38,8 @@ export default function DealsPage() {
 
         <h2 className="section-title">Live offers</h2>
         <div className="grid">
-          {sorted.map((d, i) => {
-            const expired = d.expires ? new Date(d.expires) < now : false;
+          {deals.map((d, i) => {
+            const expired = d.expires ? new Date(d.expires) < nowDate : false;
             return (
               <article className="card" key={i} style={{ opacity: expired ? .5 : 1 }}>
                 <h3 style={{ marginTop: 0 }}>{d.title}</h3>
