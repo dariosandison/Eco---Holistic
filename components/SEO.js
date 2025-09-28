@@ -60,6 +60,7 @@ export default function SEO({
     <Head>
       <title>{title}</title>
       {description ? <meta name="description" content={description} /> : null}
+      <link rel="canonical" href={url} />
 
       {/* Open Graph */}
       <meta property="og:title" content={title} />
