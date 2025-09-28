@@ -11,6 +11,7 @@ export default function Footer() {
           <li><Link href="/legal/affiliate-disclosure">Affiliate Disclosure</Link></li>
           <li><Link href="/legal/product-disclosure">Product Disclosure</Link></li>
           <li><Link href="/legal/cookies">Cookies</Link></li>
+          <li><Link href="/legal/privacy">Privacy</Link></li>
           <li><Link href="/legal/disclaimer">Disclaimer</Link></li>
         </ul>
       </div>
