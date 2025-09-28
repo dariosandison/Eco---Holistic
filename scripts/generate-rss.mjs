@@ -5,8 +5,8 @@ import matter from 'gray-matter';
 
 const siteUrl = 'https://www.wild-and-well.store';
 const publicDir = path.join(process.cwd(), 'public');
-const siteTitle = 'Wild & Well — New Guides & Reviews';
-const siteDesc  = 'Actionable, low-tox guides and hands-on product reviews.';
+const siteTitle = 'Wild & Well — New Guides, Reviews & Blog';
+const siteDesc  = 'Actionable guides, hands-on reviews, and honest notes from the team.';
 
 function collect(dir, basePath) {
   const full = path.join(process.cwd(), dir);
@@ -31,7 +31,12 @@ function rssEscape(s='') {
 }
 
 function generate() {
-  const items = [...collect('content/guides','/guides'), ...collect('content/reviews','/reviews')].slice(0, 25);
+  const items = [
+    ...collect('content/guides','/guides'),
+    ...collect('content/reviews','/reviews'),
+    ...collect('content/blog','/blog')
+  ].slice(0, 25);
+
   const rss = `<?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0">
 <channel>
