@@ -1,58 +1,111 @@
 // pages/index.js
-import fs from 'fs';
-import path from 'path';
-import matter from 'gray-matter';
 import Head from 'next/head';
-import Header from '../components/Header';
-import Hero from '../components/Hero';
-import GuidesGrid from '../components/GuidesGrid';
-import Footer from '../components/Footer';
+import Link from 'next/link';
 
+// If you already have helpers in lib/content, we’ll use them.
+// They were referenced in earlier builds, so this should match your project.
+import { getDocs } from '../lib/content'; // getDocs({ dir, fields })
+
+// ---------- Utilities ----------
+// Deep-serialize any Date instances (and nested arrays/objects) to ISO strings
+function serializeDates(value) {
+  if (value instanceof Date) return value.toISOString();
+  if (Array.isArray(value)) return value.map(serializeDates);
+  if (value && typeof value === 'object') {
+    const out = {};
+    for (const k of Object.keys(value)) out[k] = serializeDates(value[k]);
+    return out;
+  }
+  return value;
+}
+
+// ---------- Page ----------
 export default function Home({ guides }) {
   return (
-    <div className="page-wrap">
+    <>
       <Head>
-        <title>Wild & Well – Holistic Health & Eco Living</title>
-        <meta name="description" content="Your guide to holistic health, eco living and natural wellness." />
+        <title>Wild &amp; Well — Your guide to holistic health and eco friendly living</title>
+        <meta
+          name="description"
+          content="Your guide to holistic health and eco friendly living"
+        />
       </Head>
 
-      <Header />
-      <Hero />
+      <div className="page-wrap">
+        {/* Header is handled by your layout/_app if present */}
 
-      <main className="page-main">
-        <section className="container">
-          <h2 className="section-title">Latest Guides</h2>
-          <GuidesGrid guides={guides} />
-        </section>
-      </main>
+        <main className="page-main">
+          {/* Hero */}
+          <section className="hero">
+            <div className="hero__card">
+              <div className="hero__frame">
+                <h1 style={{ color: '#f4eedb', margin: 0, textAlign: 'center' }}>
+                  Your guide to holistic health and eco friendly living
+                </h1>
+              </div>
+              <p className="hero__tagline">
+                Curated guides, simple steps, and products that cut the fluff.
+              </p>
+              <div style={{ textAlign: 'center' }}>
+                <Link href="/guides" className="btn">Explore Guides</Link>
+                <Link href="/blog" className="btn btn--ghost">Read the Blog</Link>
+              </div>
+            </div>
+          </section>
 
-      {/* Spacer so a fixed newsletter bar never covers the footer */}
-      <div id="newsletter-spacer" />
+          {/* Guides grid (cards) */}
+          <section className="container" style={{ marginTop: 28 }}>
+            <h2 className="section-title">Popular Guides</h2>
+            <div className="guides-grid">
+              {guides.map((g) => (
+                <Link key={g.slug} href={`/guides/${g.slug}`} className="card">
+                  <div className="card__banner">
+                    {/* Simple letter avatar if you don’t have images */}
+                    <div style={{ fontSize: 32, fontWeight: 800, color: '#F4EEDB' }}>
+                      {String(g.title || g.slug).charAt(0).toUpperCase()}
+                    </div>
+                  </div>
+                  <div className="card__title">{g.title || g.slug}</div>
+                </Link>
+              ))}
+            </div>
+          </section>
+        </main>
 
-      <Footer />
-    </div>
+        {/* Footer is handled by your layout/_app if present */}
+      </div>
+    </>
   );
 }
 
+// ---------- Data ----------
 export async function getStaticProps() {
-  const dir = path.join(process.cwd(), 'content', 'guides');
-  let guides = [];
-  try {
-    const files = fs.readdirSync(dir).filter(f => f.endsWith('.md') || f.endsWith('.mdx'));
-    guides = files.map((file) => {
-      const slug = file.replace(/\.mdx?$/, '');
-      const raw = fs.readFileSync(path.join(dir, file), 'utf8');
-      const { data } = matter(raw);
-      return {
-        slug,
-        title: data.title || slug.replace(/-/g, ' '),
-        date: data.date || '1970-01-01',
-      };
-    })
-    .sort((a, b) => (a.date < b.date ? 1 : -1))
-    .slice(0, 12);
-  } catch (_) {
-    guides = [];
-  }
-  return { props: { guides } };
+  // Pull a small set of fields for the home page cards
+  // (Adjust fields to match what your lib/content supports)
+  const fields = ['slug', 'title', 'date', 'excerpt'];
+
+  // Read guides from your content directory
+  // If your project keeps guides somewhere else, change 'content/guides'
+  const rawGuides =
+    (await getDocs({ dir: 'content/guides', fields })) ||
+    [];
+
+  // Sort (optional) – newest first if dates exist
+  const sorted = [...rawGuides].sort((a, b) => {
+    const ad = a.date ? new Date(a.date).getTime() : 0;
+    const bd = b.date ? new Date(b.date).getTime() : 0;
+    return bd - ad;
+  });
+
+  // Limit for homepage
+  const guides = sorted.slice(0, 9);
+
+  // 🔧 IMPORTANT: make all props JSON-serializable (convert Date objects)
+  const props = serializeDates({ guides });
+
+  return {
+    props,
+    // Revalidate to keep SSG fast but allow content updates
+    revalidate: 60
+  };
 }
