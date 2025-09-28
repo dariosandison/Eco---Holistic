@@ -1,64 +1,113 @@
 // components/Hero.js
-import Image from 'next/image';
-
 export default function Hero() {
+  const card = {
+    background: '#F4EEDB', // warm cream
+    borderRadius: '16px',
+    padding: '28px 24px',
+    border: '1px solid rgba(0,0,0,0.12)',
+    boxShadow: '0 2px 0 rgba(0,0,0,0.25) inset',
+  };
+
+  const frame = {
+    background: '#182613', // deep green like the banner in your screenshot
+    borderRadius: '8px',
+    height: '360px',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    overflow: 'hidden',
+  };
+
+  const container = {
+    maxWidth: '1100px',
+    margin: '0 auto',
+    padding: '0 16px',
+  };
+
+  const btn = {
+    display: 'inline-block',
+    fontWeight: 700,
+    padding: '12px 16px',
+    borderRadius: '8px',
+    border: '1px solid rgba(0,0,0,0.12)',
+    background: '#2e6f50', // button green
+    color: '#fff',
+    textDecoration: 'none',
+    marginRight: '12px',
+  };
+
+  const btnGhost = {
+    ...btn,
+    background: '#f7f2e6',
+    color: '#2e6f50',
+    border: '1px solid rgba(0,0,0,0.2)',
+  };
+
+  const badgeRow = {
+    marginTop: '14px',
+    fontSize: '13px',
+    color: '#4b4b4b',
+    display: 'flex',
+    gap: '18px',
+    flexWrap: 'wrap',
+    justifyContent: 'center',
+  };
+
   return (
-    <section
-      aria-label="Site hero"
-      className="mx-auto mt-6 mb-10 max-w-6xl rounded-2xl bg-cream p-6 md:p-8 shadow-[0_6px_0_rgba(0,0,0,0.15)]"
-      style={{ background: 'var(--paper, #F5EEDC)' }}
-    >
-      <div className="relative w-full overflow-hidden rounded-xl border border-[rgba(0,0,0,0.08)]">
-        <div
-          className="flex items-center justify-center"
-          style={{ background: '#10210f' }}
-        >
-          <Image
-            src="/logo-wide.png"
+    <section style={container}>
+      <div style={card}>
+        <div style={frame}>
+          {/* Optional hero logo; will hide if missing */}
+          <img
+            src="/hero-logo.png"
             alt="Wild & Well"
-            width={1600}
-            height={600}
-            priority
-            style={{ width: '100%', height: 'auto', display: 'block' }}
+            onError={(e) => {
+              e.currentTarget.style.display = 'none';
+            }}
+            style={{
+              maxWidth: '80%',
+              height: 'auto',
+              display: 'block',
+            }}
           />
         </div>
-      </div>
 
-      <p className="mx-auto mt-6 max-w-3xl text-center text-lg md:text-xl"
-         style={{ color: 'var(--ink, #2c3a2e)' }}>
-        <strong>Your guide to holistic health, eco living and natural wellness.</strong>
-      </p>
-
-      <div className="mt-5 flex items-center justify-center gap-4">
-        <a
-          href="/guides"
-          className="inline-flex items-center rounded-full px-5 py-3 text-base font-semibold"
+        {/* Slogan */}
+        <p
           style={{
-            background: 'var(--brand-600, #2E6B4E)',
-            color: 'white',
-            boxShadow: '0 4px 0 rgba(0,0,0,0.15)'
+            textAlign: 'center',
+            marginTop: '18px',
+            marginBottom: '10px',
+            color: '#3a3a3a',
+            fontSize: '18px',
           }}
         >
-          Explore Guides
-        </a>
-        <a
-          href="/deals"
-          className="inline-flex items-center rounded-full border px-5 py-3 text-base font-semibold"
-          style={{
-            background: 'var(--paper, #F5EEDC)',
-            borderColor: 'rgba(0,0,0,0.15)',
-            color: 'var(--ink, #2c3a2e)',
-            boxShadow: '0 4px 0 rgba(0,0,0,0.06)'
-          }}
-        >
-          Today&apos;s Deals
-        </a>
-      </div>
+          <strong>
+            Your guide to holistic health, eco living and natural wellness
+          </strong>
+        </p>
 
-      <p className="mx-auto mt-5 max-w-4xl text-center text-sm opacity-80"
-         style={{ color: 'var(--ink, #2c3a2e)' }}>
-        Independent • Reader-supported • Evidence-informed picks • No sponsored posts
-      </p>
+        {/* CTA buttons */}
+        <div style={{ textAlign: 'center', marginTop: '10px' }}>
+          <a href="/guides" style={btn}>
+            Explore Guides
+          </a>
+          <a href="/deals" style={btnGhost}>
+            Today&apos;s Deals
+          </a>
+        </div>
+
+        {/* Badges line */}
+        <div style={badgeRow}>
+          <span>Independent</span>
+          <span>•</span>
+          <span>Reader-supported</span>
+          <span>•</span>
+          <span>Evidence-informed picks</span>
+          <span>•</span>
+          <span>No sponsored posts</span>
+        </div>
+      </div>
     </section>
   );
 }
