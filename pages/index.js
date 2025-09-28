@@ -1,6 +1,7 @@
 // pages/index.js
 import Head from 'next/head';
 import Hero from '../components/Hero';
+import Footer from '../components/Footer';
 
 export default function Home() {
   return (
@@ -13,28 +14,26 @@ export default function Home() {
         />
       </Head>
 
-      <Hero />
+      {/* Top padding to breathe like in your screenshot */}
+      <div style={{ paddingTop: '24px' }}>
+        <Hero />
+      </div>
 
       <main className="mx-auto mb-12 max-w-6xl px-4">
-        <div className="flex items-baseline justify-between">
-          <h2 className="mb-4 text-2xl font-bold" style={{ color: '#fff' }}>
-            Latest Guides
-          </h2>
-          <a
-            href="/guides"
-            className="text-sm font-semibold"
-            style={{ color: 'rgba(255,255,255,0.9)', textDecoration: 'none' }}
-          >
-            View all →
-          </a>
-        </div>
-        {/* If you later add a guides grid component, render it here. */}
+        <h2
+          className="mb-4 text-2xl font-bold"
+          style={{ color: '#fff', marginTop: '8px' }}
+        >
+          Latest Guides
+        </h2>
+        {/* (Optional) If/when you add a grid, render it here. Kept empty on purpose to match screenshot. */}
       </main>
+
+      <Footer />
     </>
   );
 }
 
-// keep SSG happy even without data fetching
 export async function getStaticProps() {
   return { props: {} };
 }
