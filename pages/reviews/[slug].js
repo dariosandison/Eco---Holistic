@@ -3,7 +3,7 @@ import fs from 'fs';
 import path from 'path';
 import matter from 'gray-matter';
 import { MDXRemote } from 'next-mdx-remote';
-import { serializeMdx } from '../../lib/mdx';
+import { serializeMdx, jsonSafeMeta } from '../../lib/mdx';
 import SEO from '../../components/SEO';
 import AuthorBox from '../../components/AuthorBox';
 import { mdxComponents } from '../../components/MDXComponents';
@@ -30,14 +30,16 @@ export async function getStaticProps({ params }) {
   const raw = fs.readFileSync(file, 'utf8');
   const { data, content } = matter(raw);
 
+  // normalize arrays and make meta JSON-safe
   const normalizeList = (v) => Array.isArray(v) ? v : (typeof v === 'string' ? v.split('|').map(s=>s.trim()).filter(Boolean) : []);
-  const meta = {
+  const baseMeta = {
     ...data,
-    pros: normalizeList(data.pros),
-    cons: normalizeList(data.cons),
-    images: normalizeList(data.images),
-    bullets: normalizeList(data.bullets)
+    pros: normalizeList(data?.pros),
+    cons: normalizeList(data?.cons),
+    images: normalizeList(data?.images),
+    bullets: normalizeList(data?.bullets)
   };
+  const meta = jsonSafeMeta(baseMeta);
   const mdxSource = await serializeMdx(content);
 
   const title = meta.title || params.slug.replace(/-/g,' ');
