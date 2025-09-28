@@ -1,75 +1,76 @@
 // pages/blog/index.js
+import fs from 'fs';
+import path from 'path';
 import Link from 'next/link';
-import Card from '../../components/Card';
-import SeoHead from '../../components/SeoHead';
-import { getAllDocs } from '../../lib/content';
+import SEO from '../../components/SEO';
+
+function parseFrontmatter(raw) {
+  if (!raw.startsWith('---')) return {};
+  const end = raw.indexOf('\n---', 3);
+  if (end === -1) return {};
+  const fm = raw.slice(3, end).trim();
+  const meta = {};
+  fm.split(/\r?\n/).forEach(line => {
+    const m = line.match(/^([A-Za-z0-9_-]+):\s*(.*)$/);
+    if (!m) return;
+    const key = m[1];
+    let val = m[2].trim().replace(/^"(.*)"$/, '$1').replace(/^'(.*)'$/, '$1');
+    meta[key] = val;
+  });
+  return meta;
+}
 
 export async function getStaticProps() {
-  const posts = getAllDocs({
-    dir: 'content/blog',
-    fields: ['slug', 'title', 'excerpt', 'date', 'image', 'badge', 'deal', 'category'],
-  });
-  return { props: { posts } };
+  const dir = path.join(process.cwd(), 'content/blog');
+  const files = fs.existsSync(dir) ? fs.readdirSync(dir).filter(f => f.endsWith('.md') || f.endsWith('.mdx')) : [];
+  const posts = files.map(filename => {
+    const slug = filename.replace(/\.(md|mdx)$/, '');
+    const raw = fs.readFileSync(path.join(dir, filename), 'utf8');
+    const meta = parseFrontmatter(raw);
+    return {
+      slug,
+      title: meta.title || slug.replace(/-/g,' '),
+      description: meta.description || '',
+      date: meta.date || ''
+    };
+  }).sort((a,b)=> (b.date||'').localeCompare(a.date||''));
+  return { props: { posts }, revalidate: 60 * 60 * 6 };
 }
 
 export default function BlogIndex({ posts }) {
-  const SITE = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.wild-and-well.store';
+  const seo = {
+    title: 'Blog — Wild & Well',
+    description: 'Notes, experiments, and ideas from the Wild & Well team.',
+    url: 'https://www.wild-and-well.store/blog',
+    type: 'website',
+    breadcrumbs: [
+      { name: 'Home', item: 'https://www.wild-and-well.store/' },
+      { name: 'Blog', item: 'https://www.wild-and-well.store/blog' }
+    ]
+  };
 
   return (
     <>
-      <SeoHead
-        title="Blog — Wild & Well"
-        description="News, ideas, and notes on sleep, stress, movement, and low-tox living."
-        url={`${SITE}/blog`}
-        type="website"
-      />
+      <SEO {...seo} />
+      <div className="container" style={{ marginTop: 22 }}>
+        <section className="hero">
+          <div className="hero-inner">
+            <h1 className="post-title">Blog</h1>
+            <p className="hero-slogan">Notes, experiments, and ideas from the Wild &amp; Well team.</p>
+          </div>
+        </section>
 
-      <section className="hero">
-        <h1
-          style={{
-            position: 'absolute',
-            left: '-9999px',
-            top: 'auto',
-            width: 1,
-            height: 1,
-            overflow: 'hidden',
-          }}
-        >
-          Wild & Well Blog
-        </h1>
-
-        <img
-          src="/logo.svg"
-          alt="Wild & Well"
-          style={{
-            display: 'block',
-            margin: '0 auto 16px',
-            width: 'auto',
-            maxHeight: 'clamp(72px, 12vw, 140px)',
-          }}
-          onError={(e) => {
-            e.currentTarget.src = '/logo-dark.svg';
-            e.currentTarget.onerror = null;
-          }}
-        />
-
-        <p>Latest thoughts, updates, and roundups from the Wild & Well team.</p>
-        <div className="hero-links">
-          <Link className="btn" href="/guides">Explore Guides</Link>
-          <Link className="btn btn--ghost" href="/deals">Today&apos;s Deals</Link>
-        </div>
-      </section>
-
-      <h2 className="section-title">Latest Posts</h2>
-      {posts.length === 0 ? (
-        <p style={{ color: '#f6f1e3' }}>No posts yet.</p>
-      ) : (
+        <h2 className="section-title">Latest posts</h2>
         <div className="grid">
-          {posts.map((p) => (
-            <Card key={p.slug} {...p} />
+          {posts.map(p => (
+            <article className="card" key={p.slug}>
+              <h3><Link href={`/blog/${p.slug}`}>{p.title}</Link></h3>
+              {p.description ? <p style={{ margin: 0 }}>{p.description}</p> : null}
+            </article>
           ))}
+          {posts.length === 0 ? <article className="card"><p>No posts yet.</p></article> : null}
         </div>
-      )}
+      </div>
     </>
   );
 }
