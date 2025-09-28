@@ -3,7 +3,7 @@ import fs from 'fs';
 import path from 'path';
 import matter from 'gray-matter';
 import { MDXRemote } from 'next-mdx-remote';
-import { serializeMdx } from '../../lib/mdx';
+import { serializeMdx, jsonSafeMeta } from '../../lib/mdx';
 import SEO from '../../components/SEO';
 import AuthorBox from '../../components/AuthorBox';
 import { mdxComponents } from '../../components/MDXComponents';
@@ -29,19 +29,20 @@ export async function getStaticProps({ params }) {
   if (!file) return { notFound: true };
   const raw = fs.readFileSync(file, 'utf8');
   const { data, content } = matter(raw);
+  const meta = jsonSafeMeta(data || {});
   const mdxSource = await serializeMdx(content);
 
-  const title = data.title || params.slug.replace(/-/g,' ');
-  const description = data.description || '';
+  const title = meta.title || params.slug.replace(/-/g,' ');
+  const description = meta.description || '';
   const url = `https://www.wild-and-well.store/blog/${params.slug}`;
-  const datePublished = data.date || null;
-  const dateModified = data.updated || data.date || null;
-  const author = data.author || 'Wild & Well Editorial';
+  const datePublished = meta.date || null;
+  const dateModified = meta.updated || meta.date || null;
+  const author = meta.author || 'Wild & Well Editorial';
 
   return {
     props: {
       slug: params.slug,
-      meta: data,
+      meta,
       mdxSource,
       seo: {
         title: `${title} — Wild & Well`,
@@ -72,11 +73,9 @@ export default function BlogPost({ slug, meta, mdxSource, seo }) {
             {meta.date ? <>Published {new Date(meta.date).toLocaleDateString()}</> : null}
             {meta.date && updated ? <> · </> : null}
             {updated ? <>Updated {new Date(updated).toLocaleDateString()}</> : null}
-            {meta.tags?.length ? <> · {Array.isArray(meta.tags) ? meta.tags.join(', ') : meta.tags}</> : null}
+            {meta.tags ? <> · {Array.isArray(meta.tags) ? meta.tags.join(', ') : meta.tags}</> : null}
           </p>
-
           <MDXRemote {...mdxSource} components={mdxComponents} />
-
           <AuthorBox
             name={meta.author || "Wild & Well Editorial"}
             title={meta.author_title || "Editor"}
