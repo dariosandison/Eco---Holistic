@@ -1,4 +1,4 @@
-/* styles/globals.css — FULL SWAP */
+/* styles/globals.css — FULL SWAP (footer now fixed/floating + horizontal legal list) */
 
 /* Reset / base */
 *,*::before,*::after{box-sizing:border-box}
@@ -17,6 +17,9 @@ body{
   --olive-800:#404d2e;
   --sage-400:#b9bdab;
   --cream:#fdf6e5;
+
+  /* layout sizes */
+  --footer-h: 64px; /* update if you change footer padding/line-height */
 }
 
 /* Links */
@@ -33,9 +36,9 @@ a:hover{text-decoration:underline}
   padding-right:20px;
 }
 
-/* Sticky-footer layout */
+/* Sticky-footer layout shell + bottom padding so fixed footer never overlaps content */
 .page-shell{ min-height:100vh; display:flex; flex-direction:column }
-.page-main{ flex:1 0 auto }
+.page-main{ flex:1 0 auto; padding-bottom: calc(var(--footer-h) + 12px); }
 
 /* Header */
 .site-header{
@@ -103,24 +106,30 @@ a:hover{text-decoration:underline}
 .card h3{margin:0 0 6px;font-size:18px;line-height:1.25}
 .card-img{width:100%;height:auto;border-radius:12px;margin-bottom:10px}
 
-/* Footer — clean, no images; sticks to bottom on short pages */
+/* ===== Floating footer (fixed to viewport bottom) ===== */
 .site-footer{
+  position: fixed; left: 0; right: 0; bottom: 0; z-index: 50;
+  height: var(--footer-h);
   background: var(--cream);
   background-image: none !important; /* hard stop for any bg image */
-  margin-top: 22px;
-  border-top: 1px solid rgba(0,0,0,.06);
-  position: static; /* not fixed overlay */
+  border-top: 1px solid rgba(0,0,0,.08);
+  box-shadow: 0 -6px 16px rgba(0,0,0,.12);
 }
-.footer-inner{
-  display:flex; gap:20px; justify-content:space-between; flex-wrap:wrap;
-  padding:22px 0;
+.footer-bar{
+  height: var(--footer-h);
+  display:flex; align-items:center; justify-content:center;
+  gap: 18px; flex-wrap: wrap;
 }
-.footer-columns{ display:flex; gap:28px; flex-wrap:wrap }
-.footer-columns h4{ margin:0 0 8px; font-weight:700 }
-.footer-columns ul{ margin:0; padding-left:18px }
-.footer-bottom{
-  border-top:1px solid rgba(0,0,0,.06);
-  padding:12px 0; color:#334155;
+.footer-copy{ color:#334155; white-space:nowrap }
+
+/* Horizontal legal list (no "Explore" section) */
+.legal-list{
+  display:flex; align-items:center; gap:14px; flex-wrap:wrap;
+  list-style:none; margin:0; padding:0;
+}
+.legal-list li{ white-space:nowrap }
+.legal-list li+li::before{
+  content:"•"; margin-right:10px; opacity:.55;
 }
 
 /* Kill any stray bottom images/pseudo elements from old styles */
@@ -135,4 +144,9 @@ body, main, footer { background-image: none !important; }
   width: auto !important;
   max-width: none !important;
   box-shadow: none !important;
+}
+
+/* Mobile niceties */
+@media (max-width:480px){
+  :root{ --footer-h: 72px; } /* give a bit more height when items wrap */
 }
