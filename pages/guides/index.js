@@ -1,8 +1,8 @@
 // pages/guides/index.js
 import fs from 'fs';
 import path from 'path';
-import Head from 'next/head';
 import Link from 'next/link';
+import SEO from '../../components/SEO';
 
 function parseFrontmatter(raw) {
   const meta = {};
@@ -22,9 +22,9 @@ function parseFrontmatter(raw) {
 
 export async function getStaticProps() {
   const dir = path.join(process.cwd(), 'content/guides');
-  const files = fs.existsSync(dir) ? fs.readdirSync(dir).filter(f => f.endsWith('.md')) : [];
+  const files = fs.existsSync(dir) ? fs.readdirSync(dir).filter(f => f.endsWith('.md') || f.endsWith('.mdx')) : [];
   const guides = files.map(filename => {
-    const slug = filename.replace(/\.md$/, '');
+    const slug = filename.replace(/\.(md|mdx)$/, '');
     const raw = fs.readFileSync(path.join(dir, filename), 'utf8');
     const meta = parseFrontmatter(raw);
     return {
@@ -34,17 +34,27 @@ export async function getStaticProps() {
       date: meta.date || ''
     };
   }).sort((a,b) => (b.date || '').localeCompare(a.date || ''));
-  return { props: { guides } };
+  return {
+    props: { guides },
+    revalidate: 60 * 60 * 6
+  };
 }
 
 export default function GuidesIndex({ guides }) {
+  const seo = {
+    title: 'All Guides — Wild & Well',
+    description: 'Browse all Wild & Well guides across sleep, stress, movement, and clean living.',
+    url: 'https://www.wild-and-well.store/guides',
+    type: 'website',
+    breadcrumbs: [
+      { name: 'Home', item: 'https://www.wild-and-well.store/' },
+      { name: 'Guides', item: 'https://www.wild-and-well.store/guides' }
+    ]
+  };
+
   return (
     <>
-      <Head>
-        <title>All Guides — Wild &amp; Well</title>
-        <meta name="description" content="Browse all Wild & Well guides across sleep, stress, movement, and clean living." />
-      </Head>
-
+      <SEO {...seo} />
       <div className="container" style={{ marginTop: 22 }}>
         <section className="hero">
           <div className="hero-inner">
@@ -57,7 +67,7 @@ export default function GuidesIndex({ guides }) {
         <div className="grid">
           {guides.map(g => (
             <article className="card" key={g.slug}>
-              <h3><Link href={`/guides/${g.slug}`}>{g.title}</Link></h3>
+              <h3><a href={`/guides/${g.slug}`}>{g.title}</a></h3>
               {g.description ? <p style={{ margin: 0 }}>{g.description}</p> : null}
             </article>
           ))}
