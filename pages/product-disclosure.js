@@ -1,31 +1,29 @@
-// pages/product-disclosure.js
+import Head from 'next/head';
 import { getDocBySlug } from '../lib/content';
 import { renderMarkdown } from '../lib/markdown';
 
+export default function ProductDisclosure({ doc, html }) {
+  return (
+    <>
+      <Head>
+        <title>{doc?.title ? `${doc.title} | Wild & Well` : 'Product Disclosure | Wild & Well'}</title>
+        {doc?.description ? <meta name="description" content={doc.description} /> : null}
+      </Head>
+      <main className="container">
+        <h1>{doc?.title || 'Product Disclosure'}</h1>
+        <article dangerouslySetInnerHTML={{ __html: html || '' }} />
+      </main>
+    </>
+  );
+}
+
 export async function getStaticProps() {
-  const fields = ['slug', 'title', 'date', 'content', 'excerpt'];
-  const doc = getDocBySlug({
-    dir: 'content/legal',
-    slug: 'product-disclosure',
-    fields,
-  });
+  const fields = ['slug', 'title', 'date', 'content', 'excerpt', 'description'];
+  // IMPORTANT: positional args (dir, slug, fields)
+  const doc = getDocBySlug('content/legal', 'product-disclosure', fields);
 
   if (!doc) return { notFound: true };
 
   const html = renderMarkdown(doc.content || '');
-  return { props: { doc: { ...doc, content: null }, html } };
-}
-
-export default function ProductDisclosure({ doc, html }) {
-  return (
-    <main className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8 py-10">
-      <h1 className="text-3xl font-semibold mb-6">
-        {doc.title || 'Product Disclosure'}
-      </h1>
-      <article
-        className="prose prose-lg max-w-none"
-        dangerouslySetInnerHTML={{ __html: html }}
-      />
-    </main>
-  );
+  return { props: { doc, html } };
 }
