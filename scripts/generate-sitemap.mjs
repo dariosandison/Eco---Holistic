@@ -38,6 +38,7 @@ function generate() {
     { loc: `${siteUrl}/legal/affiliate-disclosure`, lastmod: today, priority: '0.2' },
     { loc: `${siteUrl}/legal/product-disclosure`, lastmod: today, priority: '0.2' },
     { loc: `${siteUrl}/legal/cookies`, lastmod: today, priority: '0.2' },
+    { loc: `${siteUrl}/legal/privacy`, lastmod: today, priority: '0.2' },
     { loc: `${siteUrl}/legal/disclaimer`, lastmod: today, priority: '0.2' },
     // Hubs
     ...hubs.map(h => ({ loc: `${siteUrl}/hubs/${h.slug}`, lastmod: today, priority: '0.7' })),
