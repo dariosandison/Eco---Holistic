@@ -12,6 +12,7 @@ export default function Nav() {
 
         <nav className="nav" aria-label="Primary">
           <Link href="/guides">Guides</Link>
+          <Link href="/reviews">Reviews</Link>
           <Link href="/deals">Deals</Link>
           <Link href="/blog">Blog</Link>
           <Link href="/contact">Contact</Link>
