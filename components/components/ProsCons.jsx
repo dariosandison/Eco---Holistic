@@ -1,6 +1,8 @@
+// components/ProsCons.jsx
 export default function ProsCons({ pros = [], cons = [] }) {
+  if (!pros.length && !cons.length) return null;
   return (
-    <div className="grid gap-4 sm:grid-cols-2 my-4">
+    <div className="proscons">
       <div>
         <h4>Pros</h4>
         <ul>{pros.map((p,i)=><li key={i}>✓ {p}</li>)}</ul>
