@@ -7,7 +7,7 @@ import { serializeMdx } from '../../lib/mdx';
 import SEO from '../../components/SEO';
 import { mdxComponents } from '../../components/MDXComponents';
 
-const LEGAL_SLUGS = ['affiliate-disclosure','product-disclosure','cookies','disclaimer'];
+const LEGAL_SLUGS = ['affiliate-disclosure','product-disclosure','cookies','disclaimer','privacy'];
 
 export async function getStaticPaths() {
   return { paths: LEGAL_SLUGS.map(s => ({ params: { slug: s } })), fallback: false };
@@ -39,7 +39,7 @@ export async function getStaticProps({ params }) {
         ]
       }
     },
-    revalidate: 60 * 60 * 24 // daily
+    revalidate: 60 * 60 * 24
   };
 }
 
@@ -47,7 +47,6 @@ export default function LegalPage({ slug, mdxSource, seo }) {
   return (
     <>
       <SEO {...seo} />
-      {/* Ensure noindex on legal pages */}
       <meta name="robots" content="noindex,follow" />
       <div className="container" style={{ marginTop: 22 }}>
         <article className="post">
