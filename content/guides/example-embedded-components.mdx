@@ -1,0 +1,43 @@
+---
+title: Example — Embedded Components in MDX
+description: This page shows AffiliateLink, ProsCons, and ComparisonTable directly inside content.
+date: 2025-09-28
+updated: 2025-09-28
+author: Wild & Well Editorial
+author_title: Editor
+author_avatar: /avatars/editorial.png
+brand: Multi-Brand
+product: Demo Product Group
+rating: 4.5
+pros: Easy to use | Compact | Good value
+cons: Limited colors | Short cable
+images: /img/demo-1.jpg | /img/demo-2.jpg
+---
+
+<Disclosure />
+
+## Quick Picks (with tracked affiliate links)
+
+<AffiliateLink href="https://merchant.example.com/product-a?aff=wildandwell">Shop Product A →</AffiliateLink>
+
+<AffiliateLink href="https://merchant.example.com/product-b?aff=wildandwell">Shop Product B →</AffiliateLink>
+
+## Pros & Cons (rendered from component)
+
+<ProsCons
+  pros={['Solid build', 'Quiet', 'Affordable']}
+  cons={['No USB-C', 'Occasional stockouts']}
+/>
+
+## Comparison Table
+
+<ComparisonTable
+  items={[
+    { name:'Product A', why:'Best overall', specs:'Size S · 22 dBA', url:'https://merchant.example.com/product-a?aff=wildandwell' },
+    { name:'Product B', why:'Budget pick', specs:'Size S · 24 dBA', url:'https://merchant.example.com/product-b?aff=wildandwell' }
+  ]}
+/>
+
+## Internal links
+
+See our <a href="/guides/best-blue-light-tools">Blue-Light Tools</a> guide.
