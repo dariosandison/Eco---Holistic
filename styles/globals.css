@@ -1,4 +1,4 @@
-/* styles/globals.css — REPLACE file with this version */
+/* styles/globals.css — FULL SWAP */
 
 /* Reset / base */
 *,*::before,*::after{box-sizing:border-box}
@@ -23,7 +23,7 @@ body{
 a{color:var(--olive-950);text-decoration:none}
 a:hover{text-decoration:underline}
 
-/* Container */
+/* Layout container */
 .container{
   width:100%;
   max-width:1100px;
@@ -32,6 +32,10 @@ a:hover{text-decoration:underline}
   padding-left:20px;
   padding-right:20px;
 }
+
+/* Sticky-footer layout */
+.page-shell{ min-height:100vh; display:flex; flex-direction:column }
+.page-main{ flex:1 0 auto }
 
 /* Header */
 .site-header{
@@ -71,6 +75,7 @@ a:hover{text-decoration:underline}
 }
 .hero-inner{display:flex;flex-direction:column;align-items:center;text-align:center}
 .hero-logo{width:100%;max-width:920px;border-radius:12px;display:block}
+.hero-logo--svg{max-width:520px;width:clamp(220px,50vw,520px);height:auto} /* compact SVG */
 .hero-slogan{margin:12px 0 0;font-size:18px;color:var(--olive-900)}
 .cta-row{display:flex;gap:10px;justify-content:center;margin-top:12px}
 .btn{display:inline-flex;align-items:center;justify-content:center;padding:10px 16px;border-radius:14px;font-weight:600;border:1px solid transparent}
@@ -98,7 +103,36 @@ a:hover{text-decoration:underline}
 .card h3{margin:0 0 6px;font-size:18px;line-height:1.25}
 .card-img{width:100%;height:auto;border-radius:12px;margin-bottom:10px}
 
-/* Footer */
-.site-footer{background:var(--cream);margin-top:22px;border-top:1px solid rgba(0,0,0,.06)}
-.footer-inner{display:flex;gap:20px;justify-content:space-between;flex-wrap:wrap;padding:22px 0}
-.footer-bottom{border-top:1px solid rgba(0,0,0,.06);padding:12px 0;color:#334155}
+/* Footer — clean, no images; sticks to bottom on short pages */
+.site-footer{
+  background: var(--cream);
+  background-image: none !important; /* hard stop for any bg image */
+  margin-top: 22px;
+  border-top: 1px solid rgba(0,0,0,.06);
+  position: static; /* not fixed overlay */
+}
+.footer-inner{
+  display:flex; gap:20px; justify-content:space-between; flex-wrap:wrap;
+  padding:22px 0;
+}
+.footer-columns{ display:flex; gap:28px; flex-wrap:wrap }
+.footer-columns h4{ margin:0 0 8px; font-weight:700 }
+.footer-columns ul{ margin:0; padding-left:18px }
+.footer-bottom{
+  border-top:1px solid rgba(0,0,0,.06);
+  padding:12px 0; color:#334155;
+}
+
+/* Kill any stray bottom images/pseudo elements from old styles */
+body, main, footer { background-image: none !important; }
+.site-footer::before, .site-footer::after { content: none !important; }
+
+/* Ensure no newsletter bar blocks the footer */
+.newsletter-bar, .newsletter, [data-newsletter-bar]{
+  position: static !important;
+  bottom: auto !important;
+  inset: auto !important;
+  width: auto !important;
+  max-width: none !important;
+  box-shadow: none !important;
+}
