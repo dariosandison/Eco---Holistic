@@ -1,33 +1,38 @@
 // components/Footer.js
-export default function Footer() {
-  const bar = { background: 'rgba(0,0,0,0.25)' };
-  const wrap = {
-    maxWidth: '1100px',
-    margin: '0 auto',
-    padding: '16px',
-    color: '#e8e6df',
-    display: 'grid',
-    gap: 12,
-  };
-  const row = { display: 'flex', flexWrap: 'wrap', gap: 18, alignItems: 'center' };
-  const link = { color: '#e8e6df', textDecoration: 'none', opacity: 0.95 };
+import Link from 'next/link';
 
+export default function Footer() {
   return (
-    <footer role="contentinfo" style={bar} id="site-footer">
-      <div style={wrap}>
-        <nav style={row} aria-label="Footer">
-          <a href="/about" style={link}>About</a>
-          <a href="/editorial-policy" style={link}>Editorial Policy</a>
-          <a href="/how-we-test" style={link}>How We Test</a>
-          <a href="/legal/privacy" style={link}>Privacy</a>
-          <a href="/legal/cookies" style={link}>Cookies</a>
-          <a href="/legal/terms" style={link}>Terms</a>
-          <a href="/legal/affiliate-disclosure" style={link}>Affiliate Disclosure</a>
-          <a href="/legal/disclaimer" style={link}>Disclaimer</a>
-          <a href="/legal/product-disclosure" style={link}>Product Disclosure</a>
+    <footer className="site-footer">
+      <div className="container footer-inner">
+        <div className="footer-brand">
+          <img src="/logo.svg" alt="Wild & Well" className="footer-logo" />
+          <p className="footer-tagline">Your guide to holistic health and eco friendly living</p>
+        </div>
+
+        <nav className="footer-nav">
+          <div className="footer-col">
+            <h4>Explore</h4>
+            <ul>
+              <li><Link href="/guides">Guides</Link></li>
+              <li><Link href="/blog">Blog</Link></li>
+            </ul>
+          </div>
+          <div className="footer-col">
+            <h4>Legal</h4>
+            <ul>
+              <li><Link href="/legal/affiliate-disclosure">Affiliate Disclosure</Link></li>
+              <li><Link href="/legal/product-disclosure">Product Disclosure</Link></li>
+              <li><Link href="/legal/cookies">Cookies</Link></li>
+              <li><Link href="/legal/disclaimer">Disclaimer</Link></li>
+            </ul>
+          </div>
         </nav>
-        <div style={{ fontSize: 13, opacity: 0.9 }}>
-          © {new Date().getFullYear()} Wild &amp; Well • Independent • Reader-supported
+      </div>
+
+      <div className="footer-bottom">
+        <div className="container footer-bottom-inner">
+          <span>© {new Date().getFullYear()} Wild &amp; Well</span>
         </div>
       </div>
     </footer>
