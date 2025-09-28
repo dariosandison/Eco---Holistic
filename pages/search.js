@@ -10,7 +10,7 @@ function parseFrontmatter(raw) {
   const end = raw.indexOf('\n---', 3);
   if (end === -1) return meta;
   const fm = raw.slice(3, end).trim();
-  fm.split(/\r?\n/).forEach(line => {
+  fm.split(/\r?\\n/).forEach(line => {
     const m = line.match(/^([A-Za-z0-9_-]+):\s*(.*)$/);
     if (!m) return;
     const key = m[1];
@@ -40,9 +40,10 @@ function readSection(dirPath, basePath) {
 
 export async function getServerSideProps({ query }) {
   const q = (query.q || '').toString().trim();
-  const guides = readSection(path.join(process.cwd(), 'content/guides'), '/guides');
+  const guides  = readSection(path.join(process.cwd(), 'content/guides'),  '/guides');
   const reviews = readSection(path.join(process.cwd(), 'content/reviews'), '/reviews');
-  const haystack = [...guides, ...reviews];
+  const blog    = readSection(path.join(process.cwd(), 'content/blog'),    '/blog');
+  const haystack = [...guides, ...reviews, ...blog];
 
   const results = q
     ? haystack.filter(item => {
@@ -67,7 +68,7 @@ export default function SearchPage({ q, results }) {
           <div className="hero-inner">
             <h1 className="post-title" style={{ marginBottom: 8 }}>Search</h1>
             <form action="/search" role="search" className="search" style={{ width: '100%', maxWidth: 560 }}>
-              <input type="search" name="q" defaultValue={q} placeholder="Search guides and reviews…" aria-label="Search" />
+              <input type="search" name="q" defaultValue={q} placeholder="Search guides, reviews, and blog…" aria-label="Search" />
             </form>
           </div>
         </section>
