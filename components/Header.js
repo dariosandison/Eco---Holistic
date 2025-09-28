@@ -1,72 +1,48 @@
 // components/Header.js
 import Link from 'next/link';
-import Image from 'next/image';
-import { useRouter } from 'next/router';
 
 export default function Header() {
-  const { pathname } = useRouter();
+  const wrap = {
+    position: 'sticky',
+    top: 0,
+    zIndex: 40,
+    background: '#3e4b36',
+    borderBottom: '1px solid rgba(0,0,0,0.25)',
+  };
+  const inner = {
+    maxWidth: '1100px',
+    margin: '0 auto',
+    padding: '10px 16px',
+    display: 'grid',
+    gridTemplateColumns: '1fr auto 1fr',
+    alignItems: 'center',
+    gap: '12px',
+  };
+  const logo = { display: 'flex', justifyContent: 'center', alignItems: 'center' };
+  const nav = {
+    display: 'flex',
+    gap: '18px',
+    alignItems: 'center',
+  };
+  const link = { color: '#f5f3ea', textDecoration: 'none', fontWeight: 600, opacity: 0.95 };
 
   return (
-    <header
-      className="sticky top-0 z-40 border-b"
-      style={{
-        background: 'var(--leaf-800, #3f4f38)',
-        borderColor: 'rgba(0,0,0,0.15)'
-      }}
-    >
-      <div className="mx-auto flex h-14 max-w-6xl items-center justify-between gap-4 px-4">
-        <Link href="/" className="flex items-center gap-3">
-          <Image
-            src="/logo-mark.png"
-            alt="Wild & Well"
-            width={28}
-            height={28}
-            priority
-          />
-          <span
-            className="text-base font-semibold"
-            style={{ color: '#fff' }}
-          >
-            Wild & Well
-          </span>
-        </Link>
-
-        <nav className="hidden items-center gap-6 md:flex">
-          <NavLink href="/guides" active={pathname.startsWith('/guides')}>Guides</NavLink>
-          <NavLink href="/deals" active={pathname.startsWith('/deals')}>Deals</NavLink>
-          <NavLink href="/blog" active={pathname.startsWith('/blog')}>Blog</NavLink>
-          <NavLink href="/contact" active={pathname.startsWith('/contact')}>Contact</NavLink>
+    <header style={wrap}>
+      <div style={inner}>
+        <div /> {/* left spacer */}
+        <div style={logo}>
+          <Link href="/" style={{ ...link, display: 'flex', alignItems: 'center', gap: 8 }}>
+            <img src="/logo.png" alt="Wild & Well" style={{ width: 28, height: 28 }} onError={(e)=>{e.currentTarget.style.display='none';}} />
+            <span>Wild &amp; Well</span>
+          </Link>
+        </div>
+        <nav style={{ ...nav, justifyContent: 'flex-end' }}>
+          <Link href="/guides" style={link}>Guides</Link>
+          <Link href="/deals" style={link}>Deals</Link>
+          <Link href="/blog" style={link}>Blog</Link>
+          <Link href="/contact" style={link}>Contact</Link>
         </nav>
-
-        <form action="/search" className="hidden md:block">
-          <input
-            type="search"
-            name="q"
-            placeholder="Search (/)"
-            className="h-8 w-48 rounded-full border px-3 text-sm"
-            style={{
-              background: 'rgba(255,255,255,0.08)',
-              borderColor: 'rgba(255,255,255,0.25)',
-              color: '#fff'
-            }}
-          />
-        </form>
       </div>
     </header>
-  );
-}
-
-function NavLink({ href, children, active }) {
-  return (
-    <Link
-      href={href}
-      className="text-sm font-medium"
-      style={{
-        color: active ? '#fff' : 'rgba(255,255,255,0.85)',
-        textDecoration: 'none'
-      }}
-    >
-      {children}
-    </Link>
   );
 }
