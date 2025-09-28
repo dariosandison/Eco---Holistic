@@ -5,10 +5,12 @@ import Footer from '../components/Footer';
 
 export default function MyApp({ Component, pageProps }) {
   return (
-    <>
+    <div className="page-shell">
       <Nav />
-      <Component {...pageProps} />
+      <main className="page-main">
+        <Component {...pageProps} />
+      </main>
       <Footer />
-    </>
+    </div>
   );
 }
