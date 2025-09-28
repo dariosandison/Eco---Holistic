@@ -31,6 +31,7 @@ function generate() {
     { loc: `${siteUrl}/`, lastmod: today, priority: '1.0' },
     { loc: `${siteUrl}/guides`, lastmod: today, priority: '0.9' },
     { loc: `${siteUrl}/reviews`, lastmod: today, priority: '0.9' },
+    { loc: `${siteUrl}/blog`, lastmod: today, priority: '0.8' },
     { loc: `${siteUrl}/deals`, lastmod: today, priority: '0.6' },
     { loc: `${siteUrl}/search`, lastmod: today, priority: '0.3' },
     // Legal
@@ -45,7 +46,9 @@ function generate() {
     // Reviews
     ...collect('content/reviews','/reviews').map(g => ({ ...g, priority: '0.85' })),
     // Compare
-    ...collect('content/compare','/compare').map(g => ({ ...g, priority: '0.7' }))
+    ...collect('content/compare','/compare').map(g => ({ ...g, priority: '0.7' })),
+    // Blog
+    ...collect('content/blog','/blog').map(g => ({ ...g, priority: '0.75' }))
   ];
 
   const xml = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n` +
