@@ -1,11 +1,9 @@
 // components/mdx/Disclosure.jsx
-import React from 'react';
-
-export default function Disclosure({ title = 'Details', defaultOpen = false, children }) {
+export default function Disclosure({ title = 'Details', children, open = false, className = '' }) {
   return (
-    <details className="rounded-2xl border p-4" open={defaultOpen}>
-      <summary className="cursor-pointer list-none font-semibold">{title}</summary>
-      <div className="mt-3">{children}</div>
+    <details className={`rounded-2xl border p-4 [&_summary]:cursor-pointer ${className}`} open={open}>
+      <summary className="font-medium">{title}</summary>
+      <div className="mt-2 text-sm">{children}</div>
     </details>
   );
 }
