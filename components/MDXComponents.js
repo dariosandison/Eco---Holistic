@@ -64,4 +64,12 @@ function MdxImage(props) {
 const mdxComponents = {
   a: SmartLink,
   img: (props) => <MdxImage {...props} />,
-  Ima
+  Image: (props) => <MdxImage {...props} />,
+  Callout,
+  CompareInline,
+  CompareTable,
+  FAQ,
+};
+
+export default mdxComponents;
+export { mdxComponents };
