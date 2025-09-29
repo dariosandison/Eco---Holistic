@@ -1,4 +1,4 @@
-// components/StickyCTA.jsx
+// components/mdx/StickyCTA.jsx
 import { useEffect, useState } from 'react';
 
 export default function StickyCTA({
