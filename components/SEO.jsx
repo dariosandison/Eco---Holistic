@@ -1,109 +1,119 @@
 // components/SEO.jsx
 import Head from 'next/head';
 
-function jsonLd(obj) {
-  try { return JSON.stringify(obj); } catch { return ''; }
-}
+export default function SEO({
+  title,
+  description,
+  url,
+  type = 'website',
+  noindex = false,
+  image = '/images/og-default.jpg',
+  article,
+  product,
+  breadcrumbs = [],
+  tags = []
+}) {
+  const t = title || 'Wild & Well';
+  const d = description || 'Holistic health, eco-friendly living, and natural wellness.';
+  const u = url || 'https://www.wild-and-well.store/';
+  const img = image || '/images/og-default.jpg';
 
-export default function SEO(props) {
-  const {
-    title = 'Wild & Well',
-    description = 'Your guide to holistic health, eco friendly living and natural wellness.',
-    url = 'https://www.wild-and-well.store/',
-    type = 'website',
-    image = '/og-default.jpg', // put an image in /public if you have one
-    noindex = false,
+  const ldBreadcrumbs = breadcrumbs?.length
+    ? {
+        '@context': 'https://schema.org',
+        '@type': 'BreadcrumbList',
+        itemListElement: breadcrumbs.map((b, i) => ({
+          '@type': 'ListItem',
+          position: i + 1,
+          name: b.name,
+          item: b.item,
+        })),
+      }
+    : null;
 
-    // Optional extras
-    article,          // { datePublished, dateModified, author }
-    product,          // { name, brand, images[], reviewBody, rating, pros[], cons[] }
-    breadcrumbs = [], // [{ name, item }]
-    siteName = 'Wild & Well'
-  } = props || {};
+  const ldArticle =
+    type === 'article' && article
+      ? {
+          '@context': 'https://schema.org',
+          '@type': 'Article',
+          headline: t,
+          description: d,
+          mainEntityOfPage: u,
+          author: [{ '@type': 'Person', name: article.author || 'Wild & Well Editorial' }],
+          datePublished: article.datePublished || undefined,
+          dateModified: article.dateModified || article.datePublished || undefined,
+        }
+      : null;
 
-  // Canonical must be absolute
-  const canonical = url.startsWith('http') ? url : `https://www.wild-and-well.store${url}`;
-
-  const ld = [];
-
-  if (breadcrumbs?.length) {
-    ld.push({
-      '@context': 'https://schema.org',
-      '@type': 'BreadcrumbList',
-      itemListElement: breadcrumbs.map((b, i) => ({
-        '@type': 'ListItem',
-        position: i + 1,
-        name: b.name,
-        item: b.item
-      }))
-    });
-  }
-
-  if (type === 'article' && article) {
-    ld.push({
-      '@context': 'https://schema.org',
-      '@type': 'Article',
-      headline: title,
-      description,
-      mainEntityOfPage: canonical,
-      image: Array.isArray(image) ? image : [image],
-      datePublished: article.datePublished || undefined,
-      dateModified:  article.dateModified  || article.datePublished || undefined,
-      author: article.author ? { '@type':'Person', name: article.author } : undefined,
-      publisher: { '@type': 'Organization', name: siteName, url: 'https://www.wild-and-well.store' }
-    });
-  }
-
-  if (type === 'product' && product) {
-    const images = product.images && product.images.length ? product.images : (Array.isArray(image) ? image : [image]);
-    const schema = {
-      '@context': 'https://schema.org',
-      '@type': 'Product',
-      name: product.name || title,
-      brand: product.brand ? { '@type': 'Brand', name: product.brand } : undefined,
-      image: images,
-      description: product.reviewBody || description || title
-    };
-    if (product.rating) {
-      schema.aggregateRating = {
-        '@type': 'AggregateRating',
-        ratingValue: Number(product.rating),
-        reviewCount: 1
-      };
-    }
-    ld.push(schema);
-  }
+  const ldProduct = product
+    ? {
+        '@context': 'https://schema.org',
+        '@type': 'Product',
+        name: product.name,
+        brand: product.brand ? { '@type': 'Brand', name: product.brand } : undefined,
+        image: product.images || undefined,
+        description: product.reviewBody || d,
+        review: product.rating
+          ? {
+              '@type': 'Review',
+              reviewBody: product.reviewBody || d,
+              reviewRating: {
+                '@type': 'Rating',
+                ratingValue: product.rating,
+                bestRating: 5,
+                worstRating: 1,
+              },
+              author: { '@type': 'Organization', name: 'Wild & Well' },
+            }
+          : undefined,
+      }
+    : null;
 
   return (
     <Head>
-      {/* Primary */}
-      <title>{title}</title>
-      <meta name="description" content={description} />
-      <link rel="canonical" href={canonical} />
+      <title>{t}</title>
+      <meta name="description" content={d} />
       {noindex ? <meta name="robots" content="noindex,nofollow" /> : null}
 
       {/* Open Graph */}
-      <meta property="og:site_name" content={siteName} />
-      <meta property="og:type" content={type === 'article' ? 'article' : 'website'} />
-      <meta property="og:title" content={title} />
-      <meta property="og:description" content={description} />
-      {Array.isArray(image)
-        ? image.map((img, i) => <meta key={i} property="og:image" content={img} />)
-        : <meta property="og:image" content={image} />}
-      <meta property="og:url" content={canonical} />
+      <meta property="og:title" content={t} />
+      <meta property="og:description" content={d} />
+      <meta property="og:type" content={type} />
+      <meta property="og:url" content={u} />
+      <meta property="og:image" content={img} />
+      <meta property="og:site_name" content="Wild & Well" />
 
       {/* Twitter */}
       <meta name="twitter:card" content="summary_large_image" />
-      <meta name="twitter:title" content={title} />
-      <meta name="twitter:description" content={description} />
-      {Array.isArray(image)
-        ? image.map((img, i) => <meta key={i} name="twitter:image" content={img} />)
-        : <meta name="twitter:image" content={image} />}
+      <meta name="twitter:title" content={t} />
+      <meta name="twitter:description" content={d} />
+      <meta name="twitter:image" content={img} />
+
+      {/* Canonical */}
+      <link rel="canonical" href={u} />
+
+      {/* Tags (fallback as keywords) */}
+      {tags?.length ? <meta name="keywords" content={tags.join(', ')} /> : null}
 
       {/* JSON-LD */}
-      {ld.map((obj, i) => (
-        <script key={i} type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLd(obj) }} />
-      ))}
+      {ldBreadcrumbs ? (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(ldBreadcrumbs) }}
+        />
+      ) : null}
+      {ldArticle ? (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(ldArticle) }}
+        />
+      ) : null}
+      {ldProduct ? (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(ldProduct) }}
+        />
+      ) : null}
     </Head>
   );
 }
