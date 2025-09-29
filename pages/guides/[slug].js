@@ -2,138 +2,80 @@
 import fs from 'fs';
 import path from 'path';
 import matter from 'gray-matter';
-import Link from 'next/link';
 import { MDXRemote } from 'next-mdx-remote';
-import SEO from '../../components/SEO';
 import { serializeMdx, jsonSafeMeta } from '../../lib/mdx';
-import Callout from '../../components/Callout';
-import CompareInline from '../../components/CompareInline';
+import SEO from '../../components/SEO';
+import StickyCTA from '../../components/StickyCTA';
+import { mdxComponents } from '../../components/MDXComponents';
 
-const ROOT = process.cwd();
+const GUIDES_DIR = path.join(process.cwd(), 'content/guides');
 
-function fileFor(dir, slug) {
-  const base = path.join(ROOT, 'content', dir, slug);
-  if (fs.existsSync(`${base}.mdx`)) return `${base}.mdx`;
-  if (fs.existsSync(`${base}.md`)) return `${base}.md`;
-  return null;
+function getAllGuideSlugs() {
+  if (!fs.existsSync(GUIDES_DIR)) return [];
+  return fs
+    .readdirSync(GUIDES_DIR)
+    .filter((f) => /\.mdx?$/i.test(f))
+    .map((f) => f.replace(/\.mdx?$/i, ''));
 }
 
-function listSlugs(dir) {
-  const full = path.join(ROOT, 'content', dir);
-  if (!fs.existsSync(full)) return [];
-  return fs.readdirSync(full)
-    .filter(f => f.endsWith('.md') || f.endsWith('.mdx'))
-    .map(f => f.replace(/\.(md|mdx)$/,''));
-}
-
-function toArr(v) {
-  if (!v) return [];
-  if (Array.isArray(v)) return v;
-  if (typeof v === 'string') return v.split('|').join(',').split(',').map(s => s.trim()).filter(Boolean);
-  return [];
-}
-
-function readDoc(pathish) {
-  if (!pathish) return null;
-  let type = '', slug = '';
-  if (pathish.includes('/')) {
-    const [t, ...rest] = pathish.split('/');
-    type = t; slug = rest.join('/');
-  } else slug = pathish;
-
-  const dirs = type ? [type] : ['guides','reviews','blog'];
-  for (const d of dirs) {
-    const f = fileFor(d, slug);
-    if (f) {
-      const raw = fs.readFileSync(f, 'utf8');
-      const { data } = matter(raw);
-      return {
-        type: d,
-        slug,
-        title: data?.title || slug.replace(/-/g,' '),
-        description: data?.description || ''
-      };
-    }
-  }
-  return null;
-}
-
-function loadAuthor(authorSlugOrName) {
-  if (!authorSlugOrName) return null;
-  const guess = String(authorSlugOrName).toLowerCase().replace(/\s+/g,'-');
-  const base = path.join(ROOT, 'content', 'authors', guess);
-  const file = fs.existsSync(`${base}.mdx`) ? `${base}.mdx` : (fs.existsSync(`${base}.md`) ? `${base}.md` : null);
-  if (!file) return { name: authorSlugOrName };
+function readGuide(slug) {
+  const mdx = path.join(GUIDES_DIR, `${slug}.mdx`);
+  const md = path.join(GUIDES_DIR, `${slug}.md`);
+  const file = fs.existsSync(mdx) ? mdx : fs.existsSync(md) ? md : null;
+  if (!file) return null;
   const raw = fs.readFileSync(file, 'utf8');
-  const { data, content } = matter(raw);
-  return {
-    slug: guess,
-    name: data?.name || authorSlugOrName,
-    title: data?.title || data?.role || '',
-    avatar: data?.avatar || '',
-    bio: content?.trim() || ''
-  };
+  return matter(raw);
 }
 
 export async function getStaticPaths() {
-  return {
-    paths: listSlugs('guides').map(slug => ({ params: { slug } })),
-    fallback: false
-  };
+  const paths = getAllGuideSlugs().map((slug) => ({ params: { slug } }));
+  return { paths, fallback: false };
 }
 
 export async function getStaticProps({ params }) {
-  const file = fileFor('guides', params.slug);
-  const raw = fs.readFileSync(file, 'utf8');
-  const { data, content } = matter(raw);
+  const parsed = readGuide(params.slug);
+  if (!parsed) return { notFound: true };
 
-  const related = toArr(data?.related).map(readDoc).filter(Boolean).slice(0, 8);
-  const tags    = toArr(data?.tags);
-  const author  = loadAuthor(data?.author);
+  const { data, content } = parsed;
+  const mdxSource = await serializeMdx(content);
+  const meta = jsonSafeMeta(data);
 
-  const mdxSource = await serializeMdx(content || '');
+  const title = meta.title || params.slug.replace(/-/g, ' ');
+  const description = meta.description || '';
+  const author =
+    meta.author
+      ? { name: meta.author, title: meta.author_title, avatar: meta.author_avatar, bio: meta.author_bio }
+      : null;
 
-  const meta = jsonSafeMeta({
-    ...data,
-    related,
-    author,
-    tags
-  });
-
-  const title = meta.title || params.slug.replace(/-/g,' ');
-  const description = meta.description || 'Practical, low-tox guide.';
-  const url = `https://www.wild-and-well.store/guides/${params.slug}`;
-  const datePublished = meta.date || null;
-  const dateModified  = meta.updated || meta.date || null;
-
-  const breadcrumbs = [
-    { name: 'Home', item: 'https://www.wild-and-well.store/' },
-    { name: 'Guides', item: 'https://www.wild-and-well.store/guides' },
-    { name: title, item: url }
-  ];
+  // Optional CTA fields in front-matter; if not provided, CTA won’t render
+  const ctaHref = meta.ctaHref || meta.cta || null;
+  const ctaLabel = meta.ctaLabel || 'View price';
+  const ctaSublabel = meta.ctaSublabel || 'Top pick';
 
   return {
     props: {
       slug: params.slug,
       meta,
+      author,
       mdxSource,
+      cta: { href: ctaHref, label: ctaLabel, sublabel: ctaSublabel },
       seo: {
-        title: `${title} — Guide — Wild & Well`,
+        title: `${title} — Wild & Well`,
         description,
-        url,
-        type: 'article',
-        article: { datePublished, dateModified, author: meta.author?.name || meta.author || 'Wild & Well Editorial' },
-        breadcrumbs,
-        tags
+        url: `https://www.wild-and-well.store/guides/${params.slug}`,
+        breadcrumbs: [
+          { name: 'Home', item: 'https://www.wild-and-well.store/' },
+          { name: 'Guides', item: 'https://www.wild-and-well.store/guides' },
+          { name: title, item: `https://www.wild-and-well.store/guides/${params.slug}` }
+        ],
+        type: 'article'
       }
     },
-    revalidate: 60 * 60 * 12
+    revalidate: 60 * 60 * 24
   };
 }
 
-export default function GuidePage({ slug, meta, mdxSource, seo }) {
-  const author = meta.author || null;
-
+export default function GuidePage({ slug, meta, author, mdxSource, cta, seo }) {
   return (
     <>
       <SEO {...seo} />
@@ -147,48 +89,14 @@ export default function GuidePage({ slug, meta, mdxSource, seo }) {
             {author?.name ? <> · By {author.name}</> : null}
           </p>
 
-          {/* MDX body with safe components */}
-          {mdxSource ? (
-            <MDXRemote
-              {...mdxSource}
-              components={{
-                Callout,
-                CompareInline,
-                a: (props) => <a {...props} rel="nofollow noopener noreferrer" />
-              }}
-            />
-          ) : null}
+          <MDXRemote {...mdxSource} components={mdxComponents} />
 
-          {/* Related links */}
-          {meta.related?.length ? (
-            <div className="relbox">
-              <div className="relbox-title">Keep exploring</div>
-              <ul className="relbox-grid">
-                {meta.related.map((r, i) => (
-                  <li key={`${r.type}-${r.slug}-${i}`}>
-                    <Link href={`/${r.type}/${r.slug}`} className="relbox-card">
-                      <span className="relbox-name">{r.title}</span>
-                      {r.description ? <span className="relbox-desc">{r.description}</span> : null}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ) : null}
-
-          {/* Author bio */}
-          {author?.name || author?.bio ? (
-            <div className="authorbox">
-              {author?.avatar ? <img src={author.avatar} alt={author.name} className="authorbox-avatar" /> : null}
+          {author?.name ? (
+            <div className="authorbox" style={{ marginTop: 28 }}>
+              {author?.avatar ? (
+                <img src={author.avatar} alt={author.name} style={{ width: 56, height: 56, borderRadius: '50%', marginRight: 12 }} />
+              ) : null}
               <div>
-                <div className="authorbox-name">{author?.name}</div>
-                {author?.title ? <div className="authorbox-title">{author.title}</div> : null}
-                {author?.bio ? <p className="authorbox-bio">{author.bio}</p> : null}
-              </div>
-            </div>
-          ) : null}
-        </article>
-      </div>
-    </>
-  );
-}
+                <div className="authorbox-name" style={{ fontWeight: 700 }}>{author?.name}</div>
+                {author?.title ? <div className="authorbox-title" style={{ opacity: 0.8 }}>{author.title}</div> : null}
+                {author?.bio ? <p className="authorbox-bio" style={{ marginTop: 4 }}>{author.bio}</p> : null}
