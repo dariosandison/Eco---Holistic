@@ -1,12 +1,12 @@
 {
   "name": "wild-and-well",
-  "version": "1.2.1",
+  "version": "1.2.2",
   "private": true,
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "prebuild": "node scripts/generate-sitemap.mjs && node scripts/generate-rss.mjs"
+    "prebuild": "node scripts/validate-mdx.mjs && node scripts/generate-sitemap.mjs && node scripts/generate-rss.mjs"
   },
   "dependencies": {
     "@mdx-js/react": "^3.0.1",
@@ -24,4 +24,3 @@
     "node": ">=18.18 <23"
   }
 }
-
