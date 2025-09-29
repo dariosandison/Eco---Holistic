@@ -1,144 +1,89 @@
 // pages/guides/[slug].js
+// Robust guides page: safe frontmatter, no undefined in props, MDX without risky plugins.
+
 import fs from 'fs';
 import path from 'path';
 import matter from 'gray-matter';
+import Link from 'next/link';
+import { serialize } from 'next-mdx-remote/serialize';
 import { MDXRemote } from 'next-mdx-remote';
-import { serializeMdx, jsonSafeMeta } from '../../lib/mdx.js';
 import SEO from '../../components/SEO';
-import MDXComponents, { mdxComponents } from '../../components/MDXComponents';
 
-const CONTENT_DIR = path.join(process.cwd(), 'content', 'guides');
+const GUIDES_DIR = path.join(process.cwd(), 'content', 'guides');
 
-function listSlugs(dir = CONTENT_DIR) {
-  if (!fs.existsSync(dir)) return [];
-  return fs
-    .readdirSync(dir)
-    .filter((f) => f.endsWith('.md') || f.endsWith('.mdx'))
-    .map((f) => f.replace(/\.mdx?$/, ''));
-}
-
-function readBySlug(slug) {
-  const mdPath = path.join(CONTENT_DIR, `${slug}.md`);
-  const mdxPath = path.join(CONTENT_DIR, `${slug}.mdx`);
-  const filePath = fs.existsSync(mdxPath) ? mdxPath : fs.existsSync(mdPath) ? mdPath : null;
-  if (!filePath) return null;
-  const raw = fs.readFileSync(filePath, 'utf8');
-  return { filePath, ...matter(raw) }; // => { content, data }
-}
-
-function pruneUndefined(obj) {
-  if (!obj || typeof obj !== 'object') return obj;
+function withoutUndefined(obj) {
+  if (!obj || typeof obj !== 'object') return {};
   const out = {};
-  for (const k of Object.keys(obj)) {
-    const v = obj[k];
+  for (const [k, v] of Object.entries(obj)) {
     if (v === undefined) continue;
-    if (Array.isArray(v)) out[k] = v.map((x) => pruneUndefined(x));
-    else if (v && typeof v === 'object') out[k] = pruneUndefined(v);
-    else out[k] = v;
+    if (v && typeof v === 'object' && !Array.isArray(v)) {
+      out[k] = withoutUndefined(v);
+    } else {
+      out[k] = v;
+    }
   }
   return out;
 }
 
+function cleanText(v, fallback = null) {
+  if (typeof v === 'string' && v.trim()) return v.trim();
+  return fallback;
+}
+
+function firstDefined(...vals) {
+  for (const v of vals) {
+    if (v !== undefined && v !== null) return v;
+  }
+  return null;
+}
+
+function preprocessMdx(src) {
+  // 1) Convert HTML comments to JSX comments outside code fences
+  const lines = src.split('\n');
+  let inFence = false;
+  const out = [];
+  for (const line of lines) {
+    const fence = line.trim().match(/^```/);
+    if (fence) inFence = !inFence;
+    if (!inFence) {
+      out.push(line.replace(/<!--/g, '{/*').replace(/-->/g, '*/}'));
+    } else {
+      out.push(line);
+    }
+  }
+  // 2) Replace angle-bracket autolinks <https://…> → https://…
+  const joined = out.join('\n').replace(/<((?:https?:\/\/|mailto:)[^>\s]+)>/g, '$1');
+  return joined;
+}
+
+function readSlugs() {
+  if (!fs.existsSync(GUIDES_DIR)) return [];
+  return fs
+    .readdirSync(GUIDES_DIR)
+    .filter((f) => f.endsWith('.md') || f.endsWith('.mdx'))
+    .map((f) => f.replace(/\.mdx?$/, ''));
+}
+
+function loadGuide(slug) {
+  const mdxPath = path.join(GUIDES_DIR, `${slug}.mdx`);
+  const mdPath = path.join(GUIDES_DIR, `${slug}.md`);
+  const filePath = fs.existsSync(mdxPath) ? mdxPath : mdPath;
+  const raw = fs.readFileSync(filePath, 'utf8');
+  const { content, data } = matter(raw);
+  return { content, data: data || {} };
+}
+
 export async function getStaticPaths() {
-  const slugs = listSlugs();
+  const slugs = readSlugs();
   return {
     paths: slugs.map((slug) => ({ params: { slug } })),
-    fallback: false
+    fallback: false,
   };
 }
 
 export async function getStaticProps({ params }) {
   const { slug } = params;
-  const file = readBySlug(slug);
-  if (!file) return { notFound: true };
+  const { content, data } = loadGuide(slug);
 
-  const { content, data } = file;
-  const mdxSource = await serializeMdx(content);
-
-  const meta = jsonSafeMeta({
-    ...data,
-    title: data.title || data?.seo?.title || '',
-    description: data.description || data?.seo?.description || '',
-    image: data.image || (Array.isArray(data.images) ? data.images[0] : undefined),
-    updated: data.updated || data.lastUpdated || null,
-    author:
-      data.author || {
-        name: data.authorName || '',
-        title: data.authorTitle || '',
-        bio: data.authorBio || ''
-      }
-  });
-
-  // Build seo and prune undefined (Next static export cannot serialize undefined)
-  const seo = pruneUndefined({
-    title: meta.title || null,
-    description: meta.description || null,
-    image: meta.image || null,
-    url: `/guides/${slug}`,
-    breadcrumbs: [
-      { name: 'Home', item: '/' },
-      { name: 'Guides', item: '/guides' },
-      { name: meta.title || slug, item: `/guides/${slug}` }
-    ]
-  });
-
-  return {
-    props: {
-      slug,
-      meta,
-      mdxSource,
-      seo
-    }
-  };
-}
-
-export default function GuidePage({ slug, meta, mdxSource, seo }) {
-  const author =
-    typeof meta.author === 'object' && meta.author
-      ? meta.author
-      : { name: '', title: '', bio: '' };
-
-  return (
-    <>
-      <SEO {...seo} />
-      <div className="container" style={{ marginTop: 24 }}>
-        <header className="hero">
-          <h1 className="h1" style={{ marginBottom: 8 }}>{meta.title}</h1>
-          {meta.description ? <p className="lead">{meta.description}</p> : null}
-          {meta.updated ? (
-            <p style={{ opacity: 0.7, marginTop: 8, fontSize: 14 }}>
-              Last updated: {new Date(meta.updated).toLocaleDateString()}
-            </p>
-          ) : null}
-        </header>
-
-        <article className="content">
-          <MDXRemote {...mdxSource} components={MDXComponents || mdxComponents} />
-        </article>
-
-        {(author?.name || author?.bio || author?.title) ? (
-          <aside
-            className="authorbox"
-            style={{
-              marginTop: 40,
-              padding: 16,
-              border: '1px solid rgba(0,0,0,.08)',
-              borderRadius: 12,
-              background: '#fafafa'
-            }}
-          >
-            <div className="authorbox-name" style={{ fontWeight: 700 }}>
-              {author?.name}
-            </div>
-            {author?.title ? (
-              <div className="authorbox-title" style={{ opacity: 0.8 }}>
-                {author.title}
-              </div>
-            ) : null}
-            {author?.bio ? <p className="authorbox-bio" style={{ marginTop: 4 }}>{author.bio}</p> : null}
-          </aside>
-        ) : null}
-      </div>
-    </>
-  );
-}
+  // Compile MDX with minimal options (avoid plugins that inject raw HTML nodes)
+  const mdxSource = await serialize(preprocessMdx(content),
