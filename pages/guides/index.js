@@ -55,5 +55,17 @@ export async function getStaticProps() {
       groups,
       seo: {
         title: 'Guides — Wild & Well',
-        description:
-          'Actionable guides to help you sleep better, stress less, and m
+        description: 'Actionable guides to help you sleep better, stress less, and move more.',
+        url: 'https://www.wild-and-well.store/guides',
+        breadcrumbs: [
+          { name: 'Home', item: 'https://www.wild-and-well.store/' },
+          { name: 'Guides', item: 'https://www.wild-and-well.store/guides' },
+        ],
+      },
+    },
+  };
+}
+
+export default function GuidesIndex({ groups, seo }) {
+  return (
+    <>
