@@ -4,8 +4,13 @@ import AffiliateLink from './mdx/AffiliateLink';
 import BuyBox from './mdx/BuyBox';
 import ProsCons from './mdx/ProsCons';
 import Disclosure from './mdx/Disclosure';
-import ComparisonTable from './mdx/ComparisonTable';
+// FIX: ComparisonTable lives in components/ComparisonTable.jsx (not in components/mdx)
+import ComparisonTable from './ComparisonTable';
 
+/**
+ * Smart anchor: external links open in a new tab with sponsored/nofollow;
+ * internal links use Next <Link> for client-side navigation.
+ */
 const A = ({ href = '', children, className = '', ...rest }) => {
   const isExternal = /^https?:\/\//i.test(href);
   if (isExternal) {
@@ -13,8 +18,8 @@ const A = ({ href = '', children, className = '', ...rest }) => {
       <a
         href={href}
         target="_blank"
-        rel="nofollow noopener noreferrer"
-        className={`underline underline-offset-2 ${className}`}
+        rel="nofollow sponsored noopener noreferrer"
+        className={className}
         {...rest}
       >
         {children}
@@ -22,7 +27,7 @@ const A = ({ href = '', children, className = '', ...rest }) => {
     );
   }
   return (
-    <Link href={href} className={`underline underline-offset-2 ${className}`} {...rest}>
+    <Link href={href} className={className} {...rest}>
       {children}
     </Link>
   );
