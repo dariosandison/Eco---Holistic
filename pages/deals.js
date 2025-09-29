@@ -1,94 +1,72 @@
 // pages/deals.js
 import fs from 'fs';
 import path from 'path';
-import matter from 'gray-matter';
-import { MDXRemote } from 'next-mdx-remote';
-import { serializeMdx } from '../lib/mdx';
 import SEO from '../components/SEO';
-import { mdxComponents } from '../components/MDXComponents';
-
-function ensureArray(v) { return Array.isArray(v) ? v : (v ? [v] : []); }
 
 export async function getStaticProps() {
-  const file = path.join(process.cwd(), 'content/deals', 'today.mdx');
-  let mdxSource = null;
-  let front = { title: "Today’s Deals", description: "Verified promos on products we actually recommend.", deals: [] };
-
-  if (fs.existsSync(file)) {
-    const raw = fs.readFileSync(file, 'utf8');
-    const { data, content } = matter(raw);
-    front = {
-      title: data.title || front.title,
-      description: data.description || front.description,
-      deals: ensureArray(data.deals)
-    };
-    mdxSource = await serializeMdx(content || '');
+  const p = path.join(process.cwd(), 'data', 'deals.json');
+  let deals = [];
+  if (fs.existsSync(p)) {
+    try { deals = JSON.parse(fs.readFileSync(p, 'utf8')); } catch {}
   }
-
-  // sort by soonest expiry
-  const sorted = [...front.deals].sort((a,b)=> (a.expires||'').localeCompare(b.expires||''));
   return {
     props: {
+      deals,
       seo: {
-        title: `${front.title} — Wild & Well`,
-        description: front.description,
+        title: 'Today’s Deals — Wild & Well',
+        description: 'Live wellness deals we actually recommend: cleaner ingredients, better sleep, and simple upgrades.',
         url: 'https://www.wild-and-well.store/deals',
-        type: 'website',
         breadcrumbs: [
           { name: 'Home', item: 'https://www.wild-and-well.store/' },
           { name: 'Deals', item: 'https://www.wild-and-well.store/deals' }
         ]
-      },
-      mdxSource,
-      deals: sorted,
-      nowISO: new Date().toISOString(),
-      heading: front.title
+      }
     },
-    revalidate: 60 * 60 * 6 // 6 hours
+    revalidate: 60 * 15
   };
 }
 
-export default function DealsPage({ seo, mdxSource, deals, nowISO, heading }) {
-  const now = new Date(nowISO);
+export default function DealsPage({ deals, seo }) {
   return (
     <>
       <SEO {...seo} />
       <div className="container" style={{ marginTop: 22 }}>
-        <section className="hero">
-          <div className="hero-inner">
-            <h1 className="post-title">{heading}</h1>
-            <p className="hero-slogan">{seo.description}</p>
+        <section className="hero-wrap">
+          <div className="hero">
+            <h1 className="h1">Today’s Deals</h1>
+            <p className="lead">Quick, high-value picks. We only list products we’d use ourselves.</p>
           </div>
         </section>
 
-        {mdxSource ? (
-          <>
-            <h2 className="section-title">Editor’s notes</h2>
-            <article className="post">
-              <MDXRemote {...mdxSource} components={mdxComponents} />
-            </article>
-          </>
-        ) : null}
-
-        <h2 className="section-title">Live offers</h2>
-        <div className="grid">
-          {deals.map((d, i) => {
-            const expired = d.expires ? new Date(d.expires) < now : false;
-            return (
-              <article className="card" key={i} style={{ opacity: expired ? .5 : 1 }}>
-                <h3 style={{ marginTop: 0 }}>{d.title}</h3>
-                {d.note ? <p style={{ margin: '6px 0' }}>{d.note}</p> : null}
-                <p style={{ margin: '6px 0' }}>
-                  {d.code ? <>Code: <strong>{d.code}</strong></> : 'Auto-applied at checkout'}
-                  {d.expires ? <> · Expires {new Date(d.expires).toLocaleDateString()}</> : null}
-                </p>
-                <p style={{ margin: 0 }}>
-                  <a href={d.url} target="_blank" rel="nofollow sponsored noopener" className="btn btn-primary">Shop deal</a>
-                </p>
-              </article>
-            );
-          })}
-          {deals.length === 0 ? <article className="card"><p>No deals at the moment.</p></article> : null}
+        <div className="grid" style={{ gap: 16 }}>
+          {deals?.length ? deals.map((d, i) => (
+            <a
+              key={i}
+              href={d.href}
+              rel="nofollow sponsored noopener noreferrer"
+              className="card"
+              target="_blank"
+            >
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                <h2 className="h3" style={{ margin: 0 }}>{d.title}</h2>
+                {d.badge ? (
+                  <span style={{
+                    fontSize: 12,
+                    background: '#e7efdd',
+                    color: '#274512',
+                    borderRadius: 999,
+                    padding: '4px 8px',
+                    border: '1px solid rgba(0,0,0,.08)'
+                  }}>{d.badge}</span>
+                ) : null}
+              </div>
+              {d.blurb ? <p style={{ marginTop: 8 }}>{d.blurb}</p> : null}
+            </a>
+          )) : (
+            <div className="card">
+              <p>No deals live right now. Check back tomorrow!</p>
+            </div>
+          )}
         </div>
       </div>
     </>
