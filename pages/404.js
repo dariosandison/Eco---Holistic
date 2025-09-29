@@ -1,12 +1,12 @@
-// pages/500.js
+// pages/404.js
 import SEO from '../components/SEO';
 import Link from 'next/link';
 
-export default function ServerError() {
+export default function NotFound() {
   const seo = {
-    title: 'Error — Wild & Well',
-    description: 'Something went wrong.',
-    url: 'https://www.wild-and-well.store/500',
+    title: 'Page Not Found — Wild & Well',
+    description: 'Sorry, we couldn’t find that page.',
+    url: 'https://www.wild-and-well.store/404',
     noindex: true
   };
 
@@ -15,8 +15,8 @@ export default function ServerError() {
       <SEO {...seo} />
       <div className="container">
         <article className="post">
-          <h1 className="post-title">We hit a snag</h1>
-          <p>Please try again in a moment, or go back to the <Link href="/">homepage</Link>.</p>
+          <h1 className="post-title">Page not found</h1>
+          <p>Try heading back to the <Link href="/">homepage</Link> or browsing our <Link href="/guides">guides</Link>.</p>
         </article>
       </div>
     </>
