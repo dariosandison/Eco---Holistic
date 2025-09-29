@@ -3,10 +3,9 @@ import fs from 'fs';
 import path from 'path';
 import matter from 'gray-matter';
 import Link from 'next/link';
-import Head from 'next/head';
 import { MDXRemote } from 'next-mdx-remote';
-import { serializeMdx, jsonSafeMeta } from '../../lib/mdx';
 import SEO from '../../components/SEO';
+import { serializeMdx, jsonSafeMeta } from '../../lib/mdx';
 import { event as gaEvent } from '../../lib/gtag';
 
 const ROOT = process.cwd();
@@ -36,9 +35,7 @@ export async function getStaticPaths() {
 function arr(v) {
   if (!v) return [];
   if (Array.isArray(v)) return v;
-  if (typeof v === 'string') {
-    return v.split('|').join(',').split(',').map(s => s.trim()).filter(Boolean);
-  }
+  if (typeof v === 'string') return v.split('|').join(',').split(',').map(s => s.trim()).filter(Boolean);
   return [];
 }
 
@@ -46,12 +43,19 @@ function normalizeProduct(p = {}) {
   const pros = arr(p.pros);
   const cons = arr(p.cons);
   const images = Array.isArray(p.images) ? p.images : (p.image ? [p.image] : []);
+  const price = p.price != null ? Number(p.price) : null;
+  const priceCurrency = p.priceCurrency || p.currency || 'GBP';
+  const availability = p.availability || (price != null ? 'https://schema.org/InStock' : undefined);
+  const reviewCount = p.reviewCount != null ? Number(p.reviewCount) : undefined;
   return {
     name: p.name || '',
     brand: p.brand || '',
     images,
     rating: p.rating != null ? Number(p.rating) : null,
-    price: p.price != null ? Number(p.price) : null,
+    reviewCount,
+    price,
+    priceCurrency,
+    availability,
     link: p.link || '',
     pros,
     cons,
@@ -60,10 +64,35 @@ function normalizeProduct(p = {}) {
   };
 }
 
+function readDocByPathish(pathish) {
+  if (!pathish) return null;
+  let type = '', slug = '';
+  if (pathish.includes('/')) {
+    const [t, ...rest] = pathish.split('/');
+    type = t; slug = rest.join('/');
+  } else slug = pathish;
+  const dirs = type ? [type] : ['guides', 'reviews', 'blog'];
+  for (const d of dirs) {
+    const f = fileFor(d, slug);
+    if (f) {
+      const raw = fs.readFileSync(f, 'utf8');
+      const { data } = matter(raw);
+      return {
+        type: d,
+        slug,
+        title: data?.title || slug.replace(/-/g,' '),
+        description: data?.description || ''
+      };
+    }
+  }
+  return null;
+}
+
 function loadAuthor(authorSlugOrName) {
   if (!authorSlugOrName) return null;
   const guess = String(authorSlugOrName).toLowerCase().replace(/\s+/g,'-');
-  const file = fileFor('authors', guess);
+  const base = path.join(ROOT, 'content', 'authors', guess);
+  const file = fs.existsSync(`${base}.mdx`) ? `${base}.mdx` : (fs.existsSync(`${base}.md`) ? `${base}.md` : null);
   if (!file) return { name: authorSlugOrName };
   const raw = fs.readFileSync(file, 'utf8');
   const { data, content } = matter(raw);
@@ -76,47 +105,13 @@ function loadAuthor(authorSlugOrName) {
   };
 }
 
-function readDocByPathish(pathish) {
-  // Accept "guides/slug", "reviews/slug", "blog/slug", or just "slug" (we’ll search)
-  if (!pathish) return null;
-  let type = '';
-  let slug = '';
-  if (pathish.includes('/')) {
-    const [t, ...rest] = pathish.split('/');
-    type = t;
-    slug = rest.join('/');
-  } else {
-    slug = pathish;
-  }
-  const candidates = type ? [type] : ['guides', 'reviews', 'blog'];
-  for (const dir of candidates) {
-    const f = fileFor(dir, slug);
-    if (f) {
-      const raw = fs.readFileSync(f, 'utf8');
-      const { data } = matter(raw);
-      return {
-        type: dir,
-        slug,
-        title: data?.title || slug.replace(/-/g,' '),
-        description: data?.description || ''
-      };
-    }
-  }
-  return null;
-}
-
 export async function getStaticProps({ params }) {
   const file = fileFor('reviews', params.slug);
   const raw = fs.readFileSync(file, 'utf8');
   const { data, content } = matter(raw);
 
   const product = data?.product ? normalizeProduct(data.product) : null;
-
-  const related = arr(data?.related)
-    .map(readDocByPathish)
-    .filter(Boolean)
-    .slice(0, 8);
-
+  const related = arr(data?.related).map(readDocByPathish).filter(Boolean).slice(0, 8);
   const author = loadAuthor(data?.author);
 
   const mdxSource = await serializeMdx(content || '');
@@ -150,15 +145,22 @@ export async function getStaticProps({ params }) {
         url,
         type: 'article',
         article: { datePublished, dateModified, author: meta.author?.name || meta.author || 'Wild & Well Editorial' },
-        product: product ? {
-          name: product.name,
-          brand: product.brand,
-          images: product.images,
-          reviewBody: description,
-          rating: product.rating,
-          pros: product.pros,
-          cons: product.cons
-        } : undefined,
+        product: product
+          ? {
+              name: product.name,
+              brand: product.brand,
+              images: product.images,
+              reviewBody: description,
+              rating: product.rating,
+              reviewCount: product.reviewCount,
+              link: product.link,
+              price: product.price,
+              priceCurrency: product.priceCurrency,
+              availability: product.availability,
+              pros: product.pros,
+              cons: product.cons
+            }
+          : undefined,
         breadcrumbs
       }
     },
@@ -177,7 +179,6 @@ export default function ReviewPage({ slug, meta, mdxSource, seo }) {
   return (
     <>
       <SEO {...seo} />
-
       <div className="container">
         <article className="post">
           <h1 className="post-title">{meta.title || slug.replace(/-/g, ' ')}</h1>
@@ -188,7 +189,6 @@ export default function ReviewPage({ slug, meta, mdxSource, seo }) {
             {author?.name ? <> · By {author.name}</> : null}
           </p>
 
-          {/* Product summary card */}
           {p ? (
             <div className="rev-card">
               <div className="rev-head">
@@ -206,10 +206,9 @@ export default function ReviewPage({ slug, meta, mdxSource, seo }) {
                 {p.link ? (
                   <a
                     className="btn btn-primary"
-                    href={p.link}
-                    target="_blank"
-                    rel="nofollow sponsored noopener noreferrer"
+                    href={`/go/${encodeURIComponent((p.linkSlug || p.name || 'buy').toLowerCase().replace(/\s+/g,'-'))}`}
                     onClick={() => click(`review_cta_${p.name}`, p.link)}
+                    rel="nofollow sponsored noopener noreferrer"
                   >
                     Check price
                   </a>
@@ -234,10 +233,8 @@ export default function ReviewPage({ slug, meta, mdxSource, seo }) {
             </div>
           ) : null}
 
-          {/* Body */}
           {mdxSource ? <MDXRemote {...mdxSource} /> : null}
 
-          {/* Related box */}
           {meta.related?.length ? (
             <div className="relbox">
               <div className="relbox-title">You might also like</div>
@@ -257,7 +254,6 @@ export default function ReviewPage({ slug, meta, mdxSource, seo }) {
             </div>
           ) : null}
 
-          {/* Author bio */}
           {author?.name || author?.bio ? (
             <div className="authorbox">
               {author?.avatar ? <img src={author.avatar} alt={author.name} className="authorbox-avatar" /> : null}
