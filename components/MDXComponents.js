@@ -1,87 +1,100 @@
 // components/MDXComponents.js
-import React from 'react';
-import Link from 'next/link';
-import NextImage from 'next/image';
+// Central mapping of shortcodes/components available inside MDX.
 
+import React from 'react';
+
+// Existing site components (keep these as-is so current MDX keeps working)
+import SmartLink from './SmartLink';
+import MdxImage from './MdxImage';
 import Callout from './Callout';
 import CompareInline from './CompareInline';
 import CompareTable from './CompareTable';
 import FAQ from './FAQ';
 
-/**
- * Smart anchor: internal links use <Link>, external open in new tab.
- */
-function SmartLink(props) {
-  const { href = '', children, ...rest } = props;
+// Safe, minimal fallbacks for MDX-only components that appeared in content.
+// If you already have “real” versions elsewhere, you can swap these imports later.
+// These ensure prerendering doesn’t fail if the MDX references them.
 
-  const isAnchor = href.startsWith('#');
-  const isExternal =
-    /^https?:\/\//i.test(href) ||
-    href.startsWith('mailto:') ||
-    href.startsWith('tel:');
+const Disclosure = ({ summary, title, children, open, ...props }) => (
+  <details open={open} {...props}>
+    <summary>{summary ?? title ?? 'Details'}</summary>
+    <div>{children}</div>
+  </details>
+);
 
-  if (!href) {
-    return <a {...rest}>{children}</a>;
-  }
+const AffiliateLink = ({ href, children, ...props }) => (
+  <a
+    href={href}
+    target="_blank"
+    rel="sponsored nofollow noopener noreferrer"
+    {...props}
+  >
+    {children}
+  </a>
+);
 
-  if (isAnchor) {
-    // Hash links stay as <a>
-    return <a href={href} {...rest}>{children}</a>;
-  }
+const BuyBox = ({
+  title,
+  price,
+  href,
+  cta = 'Buy now',
+  note,
+  children,
+  ...props
+}) => (
+  <div
+    {...props}
+    style={{
+      border: '1px solid #e5e7eb',
+      borderRadius: 12,
+      padding: 16,
+      margin: '16px 0',
+    }}
+  >
+    {title && <h3 style={{ margin: '0 0 8px' }}>{title}</h3>}
+    {children && <div style={{ marginBottom: 8 }}>{children}</div>}
+    <div style={{ display: 'flex', gap: 12, alignItems: 'center', flexWrap: 'wrap' }}>
+      {typeof price !== 'undefined' && (
+        <strong>{String(price)}</strong>
+      )}
+      {href && (
+        <a
+          href={href}
+          target="_blank"
+          rel="sponsored nofollow noopener noreferrer"
+          style={{
+            padding: '8px 12px',
+            borderRadius: 8,
+            border: '1px solid #111827',
+            textDecoration: 'none',
+            display: 'inline-block',
+          }}
+        >
+          {cta}
+        </a>
+      )}
+    </div>
+    {note && <p style={{ marginTop: 8, fontSize: 14, opacity: 0.8 }}>{note}</p>}
+  </div>
+);
 
-  if (isExternal) {
-    return (
-      <a href={href} target="_blank" rel="noopener noreferrer" {...rest}>
-        {children}
-      </a>
-    );
-  }
-
-  // Internal links
-  return (
-    <Link href={href} {...rest}>
-      {children}
-    </Link>
-  );
-}
-
-/**
- * MDX <img /> wrapper that uses next/image when possible.
- */
-function MdxImage({ src = '', alt = '', width, height, ...rest }) {
-  // Allow plain <img> for unknown dimensions/SVGs/data URLs.
-  const usePlainImg =
-    !width ||
-    !height ||
-    src.endsWith('.svg') ||
-    src.startsWith('data:');
-
-  if (usePlainImg) {
-    return <img src={src} alt={alt} {...rest} />;
-  }
-
-  return (
-    <NextImage
-      src={src}
-      alt={alt}
-      width={Number(width)}
-      height={Number(height)}
-      {...rest}
-    />
-  );
-}
-
-/**
- * Exported as both default and named `mdxComponents` to satisfy all imports.
- */
+// Final mapping provided to <MDXRemote components={...} />
 const mdxComponents = {
+  // HTML element overrides
   a: SmartLink,
   img: (props) => <MdxImage {...props} />,
   Image: (props) => <MdxImage {...props} />,
+
+  // Site components
   Callout,
   CompareInline,
   CompareTable,
   FAQ,
+
+  // MDX-only/fallback components referenced in content
+  Disclosure,
+  AffiliateLink,
+  BuyBox,
 };
 
 export default mdxComponents;
