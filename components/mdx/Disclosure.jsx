@@ -7,3 +7,4 @@ export default function Disclosure({ title = 'Details', children, open = false, 
     </details>
   );
 }
+
