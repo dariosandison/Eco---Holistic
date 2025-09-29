@@ -1,4 +1,3 @@
-// postcss.config.js — minimal, no Tailwind (prevents missing-plugin errors)
-module.exports = {
-  plugins: {}
-};
+// postcss.config.js
+import cfg from './postcss.config.cjs';
+export default cfg;
