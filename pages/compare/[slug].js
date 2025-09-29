@@ -3,36 +3,26 @@ import fs from 'fs';
 import path from 'path';
 import matter from 'gray-matter';
 import Link from 'next/link';
+import { MDXRemote } from 'next-mdx-remote';
 import SEO from '../../components/SEO';
-import { jsonSafeMeta } from '../../lib/mdx';
+import { serializeMdx, jsonSafeMeta } from '../../lib/mdx';
+import Callout from '../../components/Callout';
+import CompareInline from '../../components/CompareInline';
+import CompareTable from '../../components/CompareTable';
 
-function listCompareSlugs() {
-  const dir = path.join(process.cwd(), 'content/compare');
-  if (!fs.existsSync(dir)) return [];
-  return fs.readdirSync(dir)
-    .filter(f => f.endsWith('.md') || f.endsWith('.mdx'))
-    .map(f => f.replace(/\.(md|mdx)$/,''));
+const ROOT = process.cwd();
+
+function fileFor(dir, slug) {
+  const base = path.join(ROOT, 'content', dir, slug);
+  if (fs.existsSync(`${base}.mdx`)) return `${base}.mdx`;
+  if (fs.existsSync(`${base}.md`)) return `${base}.md`;
+  return null;
 }
 
-export async function getStaticPaths() {
-  return {
-    paths: listCompareSlugs().map(slug => ({ params: { slug } })),
-    fallback: false
-  };
-}
-
-function toArray(v) {
-  if (!v) return [];
-  if (Array.isArray(v)) return v.filter(Boolean);
-  if (typeof v === 'string') return v.split('|').map(s => s.trim()).filter(Boolean);
-  return [];
-}
-
-function pick(...candidates) {
-  for (const c of candidates) if (c !== undefined && c !== null && c !== '') return c;
-  return undefined;
-}
-
-function normalizeProducts(meta = {}) {
-  // Shape 1: meta.products = [{ name, url, image, price, rating, pros, cons }]
-  if (Array.isArray(meta.products)
+function listSlugs(dir) {
+  const full = path.join(ROOT, 'content', dir);
+  if (!fs.existsSync(full)) return [];
+  return fs
+    .readdirSync(full)
+    .filter((f) => f.endsWith('.md') || f.endsWith('.mdx'))
+    .map((f) => f.replace(/\.(md|mdx)$/i,
