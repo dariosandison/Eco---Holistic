@@ -1,25 +1,28 @@
-// pages/_document.jsx
-import { Html, Head, Main, NextScript } from 'next/document';
+// pages/_document.js
+import Document, { Html, Head, Main, NextScript } from 'next/document';
+import site from '../site.config';
 
-export default function Document() {
-  return (
-    <Html lang="en">
-      <Head>
-        {/* App identity */}
-        <link rel="icon" href="/favicon.ico" />
-        <link rel="manifest" href="/manifest.webmanifest" />
-
-        {/* Performance: hint the browser we’ll load images & styles */}
-        <meta name="theme-color" content="#ffffff" />
-        <meta name="color-scheme" content="light" />
-
-        {/* Ensure images don’t cause layout shift when dimensions are set */}
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-      </Head>
-      <body>
-        <Main />
-        <NextScript />
-      </body>
-    </Html>
-  );
+export default class MyDocument extends Document {
+  render() {
+    const plausibleDomain = process.env.NEXT_PUBLIC_PLAUSIBLE_DOMAIN; // e.g. wild-and-well.store
+    return (
+      <Html lang="en">
+        <Head>
+          <meta name="theme-color" content={site?.themeColor || '#ffffff'} />
+          {plausibleDomain ? (
+            <script
+              defer
+              data-domain={plausibleDomain}
+              src="https://plausible.io/js/script.js"
+            />
+          ) : null}
+          <link rel="icon" href={site?.brand?.favicon || '/favicon.ico'} />
+        </Head>
+        <body>
+          <Main />
+          <NextScript />
+        </body>
+      </Html>
+    );
+  }
 }
