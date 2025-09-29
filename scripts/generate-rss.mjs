@@ -1,97 +1,79 @@
 // scripts/generate-rss.mjs
+// Build-time RSS (no Date objects; strings only; HTML stripped)
 import fs from 'fs';
 import path from 'path';
 import matter from 'gray-matter';
 
-const siteUrl = 'https://www.wild-and-well.store';
-const publicDir = path.join(process.cwd(), 'public');
-const siteTitle = 'Wild & Well — New Guides, Reviews & Blog';
-const siteDesc  = 'Actionable guides, hands-on reviews, and honest notes from the team.';
+const SITE = 'https://www.wild-and-well.store';
+const OUT = path.join(process.cwd(), 'public', 'feed.xml');
 
-// Convert various date shapes to a numeric timestamp (ms since epoch)
-function toTs(d) {
-  if (!d) return 0;
-  if (d instanceof Date) return d.getTime();
-  const t = Date.parse(d);
-  return Number.isNaN(t) ? 0 : t;
-}
-
-// Normalize to ISO string for feed output
-function toISO(d) {
-  if (d instanceof Date) return d.toISOString();
-  const t = toTs(d);
-  return t ? new Date(t).toISOString() : new Date().toISOString();
-}
-
-function rssEscape(s) {
-  if (s == null) return '';
+function strip(s = '') {
   return String(s)
-    .replace(/&/g,'&amp;')
-    .replace(/</g,'&lt;')
-    .replace(/>/g,'&gt;');
+    .replace(/<\s*\/?\s*[a-z][\w:-]*(?:\s[^>]*?)?>/gi, '')
+    .replace(/\s+/g, ' ')
+    .trim();
 }
 
-function collect(dir, basePath) {
-  const full = path.join(process.cwd(), dir);
-  if (!fs.existsSync(full)) return [];
-  const files = fs.readdirSync(full).filter(f => f.endsWith('.md') || f.endsWith('.mdx'));
-
-  const list = files.map(f => {
-    const slug = f.replace(/\.(md|mdx)$/,'');
-    const raw = fs.readFileSync(path.join(full, f), 'utf8');
-    const parsed = matter(raw);
-    const data = parsed.data || {};
-    const content = parsed.content || '';
-
-    const url = siteUrl + basePath + '/' + slug;
-    const title = data.title || slug.replace(/-/g,' ');
-    const description = data.description || (content.trim().slice(0,180) + '...');
-    const dateISO = toISO(data.updated || data.date || new Date());
-
-    return { url, title, description, dateISO };
-  });
-
-  // Sort newest first using timestamps
-  list.sort((a,b) => toTs(b.dateISO) - toTs(a.dateISO));
-  return list;
+function toISO(v) {
+  if (!v) return null;
+  const d = new Date(v);
+  if (Number.isNaN(+d)) return null;
+  return d.toISOString();
 }
 
-function buildItemXML(item) {
-  const lines = [];
-  lines.push('  <item>');
-  lines.push('    <title>' + rssEscape(item.title) + '</title>');
-  lines.push('    <link>' + item.url + '</link>');
-  lines.push('    <guid>' + item.url + '</guid>');
-  lines.push('    <pubDate>' + new Date(item.dateISO).toUTCString() + '</pubDate>');
-  lines.push('    <description>' + rssEscape(item.description) + '</description>');
-  lines.push('  </item>');
-  return lines.join('\n');
+function list(dir) {
+  const root = path.join(process.cwd(), 'content', dir);
+  if (!fs.existsSync(root)) return [];
+  return fs.readdirSync(root)
+    .filter(f => /\.mdx?$/.test(f))
+    .map(f => {
+      const slug = f.replace(/\.(md|mdx)$/,'');
+      const raw = fs.readFileSync(path.join(root, f), 'utf8');
+      const { data, content } = matter(raw);
+      const url = `${SITE}/${dir}/${slug}`;
+      const updated = toISO(data?.updated) || toISO(data?.date) || null;
+      return {
+        title: data?.title || slug.replace(/-/g,' '),
+        url,
+        date: updated,
+        description: strip(data?.description || content.slice(0, 240))
+      };
+    })
+    .sort((a,b) => (b.date || '').localeCompare(a.date || ''));
+}
+
+function rss() {
+  const items = [...list('guides'), ...list('reviews'), ...list('blog')].slice(0, 50);
+  const lastBuild = items[0]?.date || new Date().toISOString();
+
+  const head = `<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0">
+<channel>
+<title>Wild & Well</title>
+<link>${SITE}</link>
+<description>Holistic health, eco-friendly living and natural wellness.</description>
+<lastBuildDate>${lastBuild}</lastBuildDate>
+<ttl>180</ttl>`;
+
+  const body = items.map(it => `
+  <item>
+    <title>${it.title}</title>
+    <link>${it.url}</link>
+    <guid>${it.url}</guid>
+    ${it.date ? `<pubDate>${it.date}</pubDate>` : ''}
+    <description><![CDATA[${it.description}]]></description>
+  </item>`).join('\n');
+
+  const tail = `\n</channel>\n</rss>\n`;
+  return head + '\n' + body + tail;
 }
 
 function generate() {
-  const items = []
-    .concat(collect('content/guides','/guides'))
-    .concat(collect('content/reviews','/reviews'))
-    .concat(collect('content/blog','/blog'))
-    .slice(0, 25);
-
-  const parts = [];
-  parts.push('<?xml version="1.0" encoding="UTF-8"?>');
-  parts.push('<rss version="2.0">');
-  parts.push('<channel>');
-  parts.push('  <title>' + rssEscape(siteTitle) + '</title>');
-  parts.push('  <link>' + siteUrl + '</link>');
-  parts.push('  <description>' + rssEscape(siteDesc) + '</description>');
-  parts.push('  <language>en</language>');
-  for (const i of items) parts.push(buildItemXML(i));
-  parts.push('</channel>');
-  parts.push('</rss>');
-
-  const rss = parts.join('\n');
-
-  if (!fs.existsSync(publicDir)) fs.mkdirSync(publicDir, { recursive: true });
-  fs.writeFileSync(path.join(publicDir, 'feed.xml'), rss, 'utf8');
-  console.log('✓ feed.xml generated (' + items.length + ' items)');
+  const xml = rss();
+  const pubDir = path.join(process.cwd(), 'public');
+  if (!fs.existsSync(pubDir)) fs.mkdirSync(pubDir, { recursive: true });
+  fs.writeFileSync(OUT, xml, 'utf8');
+  console.log('✓ feed.xml generated (', (xml.match(/<item>/g)||[]).length, 'items )');
 }
 
 generate();
