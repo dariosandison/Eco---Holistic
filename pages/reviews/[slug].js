@@ -8,6 +8,7 @@ import Link from 'next/link';
 import { serialize } from 'next-mdx-remote/serialize';
 import { MDXRemote } from 'next-mdx-remote';
 import SEO from '../../components/SEO';
+import { jsonSafe } from '../../lib/jsonSafe';
 
 const REVIEWS_DIR = path.join(process.cwd(), 'content', 'reviews');
 
@@ -59,9 +60,17 @@ export async function getStaticPaths() {
   };
 }
 
-export async function getStaticProps({ params }) {
-  const { slug } = params;
-  const { content, data } = loadReview(slug);
+export async function getStaticProps(ctx) {
+  // ...your existing code that builds `props`...
+  const props = {
+    // existing props you already return
+    // make sure anything like product.image you *don’t* have becomes null or gets omitted
+  };
+
+  // Final pass: strip all `undefined` so Next can serialize it
+  return { props: jsonSafe(props) };
+}
+
 
   const mdxSource = await serialize(preprocessMdx(content), {
     mdxOptions: { format: 'mdx' },
