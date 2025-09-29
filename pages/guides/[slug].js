@@ -86,4 +86,65 @@ export async function getStaticProps({ params }) {
   const { content, data } = loadGuide(slug);
 
   // Compile MDX with minimal options (avoid plugins that inject raw HTML nodes)
-  const mdxSource = await serialize(preprocessMdx(content),
+  const mdxSource = await serialize(preprocessMdx(content), {
+    mdxOptions: { format: 'mdx' },
+    parseFrontmatter: false,
+  });
+
+  // Build safe SEO/meta object (no undefined values)
+  const seo = {
+    title: cleanText(firstDefined(data.seo?.title, data.title), ''),
+    description: cleanText(firstDefined(data.seo?.description, data.description), null),
+    image: cleanText(firstDefined(data.seo?.image, data.image, Array.isArray(data.images) ? data.images[0] : null), null),
+    url: `/guides/${slug}`,
+  };
+
+  const meta = withoutUndefined({
+    ...data,
+    title: cleanText(firstDefined(data.title, data.seo?.title), ''),
+    description: cleanText(firstDefined(data.description, data.seo?.description), null),
+    image: cleanText(firstDefined(data.image, Array.isArray(data.images) ? data.images[0] : null), null),
+    slug,
+  });
+
+  return {
+    props: {
+      slug,
+      mdxSource,
+      meta,
+      seo,
+    },
+  };
+}
+
+export default function GuidePage({ slug, mdxSource, meta, seo }) {
+  return (
+    <>
+      <SEO
+        title={seo.title || meta.title}
+        description={seo.description || meta.description || undefined}
+        image={seo.image || undefined}
+        url={seo.url}
+        breadcrumbs={[
+          { name: 'Home', item: '/' },
+          { name: 'Guides', item: '/guides' },
+          { name: meta.title || 'Guide', item: `/guides/${slug}` },
+        ]}
+      />
+      <main style={{ padding: '48px 20px', maxWidth: 820, margin: '0 auto' }}>
+        <p style={{ marginBottom: 12 }}>
+          <Link href="/guides">← All Guides</Link>
+        </p>
+        <h1 style={{ fontSize: 34, lineHeight: 1.2, fontWeight: 800 }}>{meta.title}</h1>
+        {meta.description ? (
+          <p style={{ marginTop: 8, opacity: 0.85, fontSize: 18 }}>{meta.description}</p>
+        ) : null}
+
+        <article style={{ marginTop: 28 }}>
+          <MDXRemote {...mdxSource} components={{}} />
+        </article>
+      </main>
+    </>
+  );
+}
+
