@@ -1,4 +1,5 @@
 // pages/_app.js
+import '../styles/ui.css';
 import { useEffect } from 'react';
 import { useRouter } from 'next/router';
 import Script from 'next/script';
@@ -16,7 +17,6 @@ export default function App({ Component, pageProps }) {
 
   return (
     <>
-      {/* GA script (only if ID provided) */}
       {GA_ID ? (
         <>
           <Script
