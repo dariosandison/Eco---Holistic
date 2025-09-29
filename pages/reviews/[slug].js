@@ -26,6 +26,19 @@ function readBySlug(slug) {
   return { filePath, ...matter(raw) }; // => { content, data }
 }
 
+function pruneUndefined(obj) {
+  if (!obj || typeof obj !== 'object') return obj;
+  const out = {};
+  for (const k of Object.keys(obj)) {
+    const v = obj[k];
+    if (v === undefined) continue;
+    if (Array.isArray(v)) out[k] = v.map((x) => pruneUndefined(x));
+    else if (v && typeof v === 'object') out[k] = pruneUndefined(v);
+    else out[k] = v;
+  }
+  return out;
+}
+
 export async function getStaticPaths() {
   const slugs = listSlugs();
   return {
@@ -42,11 +55,10 @@ export async function getStaticProps({ params }) {
   const { content, data } = file;
   const mdxSource = await serializeMdx(content);
 
-  // Normalize meta
   const meta = jsonSafeMeta({
     ...data,
-    title: data.title || (data.seo && data.seo.title) || '',
-    description: data.description || (data.seo && data.seo.description) || '',
+    title: data.title || data?.seo?.title || '',
+    description: data.description || data?.seo?.description || '',
     image: data.image || (Array.isArray(data.images) ? data.images[0] : undefined),
     updated: data.updated || data.lastUpdated || null,
     author: data.author || {
@@ -54,7 +66,6 @@ export async function getStaticProps({ params }) {
       title: data.authorTitle || '',
       bio: data.authorBio || ''
     },
-    // product-ish fields from frontmatter
     productName: data.productName || data.title || '',
     brand: data.brand || '',
     sku: data.sku || '',
@@ -67,10 +78,9 @@ export async function getStaticProps({ params }) {
     productUrl: data.productUrl || data.ctaHref || ''
   });
 
-  // Schema.org Product
   const product =
     meta.productName || meta.price || meta.rating
-      ? {
+      ? pruneUndefined({
           name: meta.productName || meta.title,
           brand: meta.brand || undefined,
           image: meta.image || undefined,
@@ -82,13 +92,13 @@ export async function getStaticProps({ params }) {
           availability: meta.availability || undefined,
           rating: meta.rating,
           reviewCount: meta.reviewCount
-        }
+        })
       : undefined;
 
-  const seo = {
-    title: meta.title || undefined,
-    description: meta.description || undefined,
-    image: meta.image || undefined,
+  const seo = pruneUndefined({
+    title: meta.title || null,
+    description: meta.description || null,
+    image: meta.image || null,
     url: `/reviews/${slug}`,
     breadcrumbs: [
       { name: 'Home', item: '/' },
@@ -96,7 +106,7 @@ export async function getStaticProps({ params }) {
       { name: meta.title || slug, item: `/reviews/${slug}` }
     ],
     product
-  };
+  });
 
   return {
     props: {
@@ -151,11 +161,7 @@ export default function ReviewPage({ slug, meta, mdxSource, seo }) {
                 {author.title}
               </div>
             ) : null}
-            {author?.bio ? (
-              <p className="authorbox-bio" style={{ marginTop: 4 }}>
-                {author.bio}
-              </p>
-            ) : null}
+            {author?.bio ? <p className="authorbox-bio" style={{ marginTop: 4 }}>{author.bio}</p> : null}
           </aside>
         ) : null}
       </div>
