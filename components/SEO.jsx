@@ -26,8 +26,8 @@ export default function SEO({
           '@type': 'ListItem',
           position: i + 1,
           name: b.name,
-          item: b.item,
-        })),
+          item: b.item
+        }))
       }
     : null;
 
@@ -41,10 +41,11 @@ export default function SEO({
           mainEntityOfPage: u,
           author: [{ '@type': 'Person', name: article.author || 'Wild & Well Editorial' }],
           datePublished: article.datePublished || undefined,
-          dateModified: article.dateModified || article.datePublished || undefined,
+          dateModified: article.dateModified || article.datePublished || undefined
         }
       : null;
 
+  // Accepts: { name, brand, images, reviewBody, rating, reviewCount, link, price, priceCurrency, availability }
   const ldProduct = product
     ? {
         '@context': 'https://schema.org',
@@ -53,19 +54,39 @@ export default function SEO({
         brand: product.brand ? { '@type': 'Brand', name: product.brand } : undefined,
         image: product.images || undefined,
         description: product.reviewBody || d,
-        review: product.rating
-          ? {
-              '@type': 'Review',
-              reviewBody: product.reviewBody || d,
-              reviewRating: {
-                '@type': 'Rating',
+        aggregateRating:
+          product.rating != null
+            ? {
+                '@type': 'AggregateRating',
                 ratingValue: product.rating,
-                bestRating: 5,
-                worstRating: 1,
-              },
-              author: { '@type': 'Organization', name: 'Wild & Well' },
-            }
-          : undefined,
+                reviewCount: product.reviewCount || 1
+              }
+            : undefined,
+        review:
+          product.rating != null
+            ? {
+                '@type': 'Review',
+                reviewBody: product.reviewBody || d,
+                reviewRating: {
+                  '@type': 'Rating',
+                  ratingValue: product.rating,
+                  bestRating: 5,
+                  worstRating: 1
+                },
+                author: { '@type': 'Organization', name: 'Wild & Well' }
+              }
+            : undefined,
+        offers:
+          product.link || product.price
+            ? {
+                '@type': 'Offer',
+                url: product.link || u,
+                price: product.price != null ? Number(product.price) : undefined,
+                priceCurrency: product.priceCurrency || 'GBP',
+                availability:
+                  product.availability || (product.price != null ? 'https://schema.org/InStock' : undefined)
+              }
+            : undefined
       }
     : null;
 
@@ -97,22 +118,13 @@ export default function SEO({
 
       {/* JSON-LD */}
       {ldBreadcrumbs ? (
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(ldBreadcrumbs) }}
-        />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(ldBreadcrumbs) }} />
       ) : null}
       {ldArticle ? (
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(ldArticle) }}
-        />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(ldArticle) }} />
       ) : null}
       {ldProduct ? (
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(ldProduct) }}
-        />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(ldProduct) }} />
       ) : null}
     </Head>
   );
