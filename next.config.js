@@ -2,8 +2,9 @@
 const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
-  // Keep this if you’re using external images without a loader/domains setup
-  images: { unoptimized: true }
+  // ❌ remove: output: 'export'
+  // If you previously had images.unoptimized: true, remove it to re-enable Image Optimization.
+  // images: { unoptimized: false },
 };
 
 module.exports = nextConfig;
