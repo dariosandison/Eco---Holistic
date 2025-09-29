@@ -26,11 +26,24 @@ function readBySlug(slug) {
   return { filePath, ...matter(raw) }; // => { content, data }
 }
 
+function pruneUndefined(obj) {
+  if (!obj || typeof obj !== 'object') return obj;
+  const out = {};
+  for (const k of Object.keys(obj)) {
+    const v = obj[k];
+    if (v === undefined) continue;
+    if (Array.isArray(v)) out[k] = v.map((x) => pruneUndefined(x));
+    else if (v && typeof v === 'object') out[k] = pruneUndefined(v);
+    else out[k] = v;
+  }
+  return out;
+}
+
 export async function getStaticPaths() {
   const slugs = listSlugs();
   return {
     paths: slugs.map((slug) => ({ params: { slug } })),
-    fallback: false,
+    fallback: false
   };
 }
 
@@ -42,39 +55,40 @@ export async function getStaticProps({ params }) {
   const { content, data } = file;
   const mdxSource = await serializeMdx(content);
 
-  // Normalize and make meta JSON-safe
   const meta = jsonSafeMeta({
     ...data,
-    title: data.title || (data.seo && data.seo.title) || '',
-    description: data.description || (data.seo && data.seo.description) || '',
+    title: data.title || data?.seo?.title || '',
+    description: data.description || data?.seo?.description || '',
     image: data.image || (Array.isArray(data.images) ? data.images[0] : undefined),
     updated: data.updated || data.lastUpdated || null,
-    author: data.author || {
-      name: data.authorName || '',
-      title: data.authorTitle || '',
-      bio: data.authorBio || '',
-    },
+    author:
+      data.author || {
+        name: data.authorName || '',
+        title: data.authorTitle || '',
+        bio: data.authorBio || ''
+      }
   });
 
-  const seo = {
-    title: meta.title || undefined,
-    description: meta.description || undefined,
-    image: meta.image || undefined,
+  // Build seo and prune undefined (Next static export cannot serialize undefined)
+  const seo = pruneUndefined({
+    title: meta.title || null,
+    description: meta.description || null,
+    image: meta.image || null,
     url: `/guides/${slug}`,
     breadcrumbs: [
       { name: 'Home', item: '/' },
       { name: 'Guides', item: '/guides' },
-      { name: meta.title || slug, item: `/guides/${slug}` },
-    ],
-  };
+      { name: meta.title || slug, item: `/guides/${slug}` }
+    ]
+  });
 
   return {
     props: {
       slug,
       meta,
       mdxSource,
-      seo,
-    },
+      seo
+    }
   };
 }
 
@@ -110,7 +124,7 @@ export default function GuidePage({ slug, meta, mdxSource, seo }) {
               padding: 16,
               border: '1px solid rgba(0,0,0,.08)',
               borderRadius: 12,
-              background: '#fafafa',
+              background: '#fafafa'
             }}
           >
             <div className="authorbox-name" style={{ fontWeight: 700 }}>
@@ -121,11 +135,7 @@ export default function GuidePage({ slug, meta, mdxSource, seo }) {
                 {author.title}
               </div>
             ) : null}
-            {author?.bio ? (
-              <p className="authorbox-bio" style={{ marginTop: 4 }}>
-                {author.bio}
-              </p>
-            ) : null}
+            {author?.bio ? <p className="authorbox-bio" style={{ marginTop: 4 }}>{author.bio}</p> : null}
           </aside>
         ) : null}
       </div>
