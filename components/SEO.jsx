@@ -1,131 +1,130 @@
 // components/SEO.jsx
 import Head from 'next/head';
 
+function clean(obj) {
+  if (!obj || typeof obj !== 'object') return obj;
+  const out = Array.isArray(obj) ? [] : {};
+  Object.entries(obj).forEach(([k, v]) => {
+    if (v === undefined || v === null) return;
+    if (typeof v === 'object') {
+      const c = clean(v);
+      if (Array.isArray(c) && c.length === 0) return;
+      if (!Array.isArray(c) && Object.keys(c).length === 0) return;
+      out[k] = c;
+    } else if (v !== '') {
+      out[k] = v;
+    }
+  });
+  return out;
+}
+
 export default function SEO({
-  title,
-  description,
-  url,
+  title = 'Wild & Well',
+  description = 'Holistic health, eco-friendly living, and natural wellness guides.',
+  url = 'https://www.wild-and-well.store/',
+  image,
   type = 'website',
+  siteName = 'Wild & Well',
   noindex = false,
-  image = '/images/og-default.jpg',
-  article,
-  product,
-  breadcrumbs = [],
-  tags = []
+  breadcrumbs, // [{name, item}]
+  product,     // optional: normalized product object if you add it
 }) {
-  const t = title || 'Wild & Well';
-  const d = description || 'Holistic health, eco-friendly living, and natural wellness.';
-  const u = url || 'https://www.wild-and-well.store/';
-  const img = image || '/images/og-default.jpg';
+  const ld = [];
 
-  const ldBreadcrumbs = breadcrumbs?.length
-    ? {
-        '@context': 'https://schema.org',
-        '@type': 'BreadcrumbList',
-        itemListElement: breadcrumbs.map((b, i) => ({
-          '@type': 'ListItem',
-          position: i + 1,
-          name: b.name,
-          item: b.item
-        }))
-      }
-    : null;
+  // Site-wide WebSite + SearchAction (helps sitelinks)
+  ld.push(clean({
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    name: siteName,
+    url: 'https://www.wild-and-well.store/',
+    potentialAction: {
+      '@type': 'SearchAction',
+      target: 'https://www.wild-and-well.store/search?q={query}',
+      'query-input': 'required name=query'
+    }
+  }));
 
-  const ldArticle =
-    type === 'article' && article
-      ? {
-          '@context': 'https://schema.org',
-          '@type': 'Article',
-          headline: t,
-          description: d,
-          mainEntityOfPage: u,
-          author: [{ '@type': 'Person', name: article.author || 'Wild & Well Editorial' }],
-          datePublished: article.datePublished || undefined,
-          dateModified: article.dateModified || article.datePublished || undefined
-        }
-      : null;
+  // Organization
+  ld.push(clean({
+    '@context': 'https://schema.org',
+    '@type': 'Organization',
+    name: siteName,
+    url: 'https://www.wild-and-well.store/',
+    logo: image || 'https://www.wild-and-well.store/logo.svg'
+  }));
 
-  // Accepts: { name, brand, images, reviewBody, rating, reviewCount, link, price, priceCurrency, availability }
-  const ldProduct = product
-    ? {
-        '@context': 'https://schema.org',
-        '@type': 'Product',
-        name: product.name,
-        brand: product.brand ? { '@type': 'Brand', name: product.brand } : undefined,
-        image: product.images || undefined,
-        description: product.reviewBody || d,
-        aggregateRating:
-          product.rating != null
-            ? {
-                '@type': 'AggregateRating',
-                ratingValue: product.rating,
-                reviewCount: product.reviewCount || 1
-              }
-            : undefined,
-        review:
-          product.rating != null
-            ? {
-                '@type': 'Review',
-                reviewBody: product.reviewBody || d,
-                reviewRating: {
-                  '@type': 'Rating',
-                  ratingValue: product.rating,
-                  bestRating: 5,
-                  worstRating: 1
-                },
-                author: { '@type': 'Organization', name: 'Wild & Well' }
-              }
-            : undefined,
-        offers:
-          product.link || product.price
-            ? {
-                '@type': 'Offer',
-                url: product.link || u,
-                price: product.price != null ? Number(product.price) : undefined,
-                priceCurrency: product.priceCurrency || 'GBP',
-                availability:
-                  product.availability || (product.price != null ? 'https://schema.org/InStock' : undefined)
-              }
-            : undefined
-      }
-    : null;
+  // Breadcrumbs (if provided)
+  if (Array.isArray(breadcrumbs) && breadcrumbs.length > 0) {
+    ld.push(clean({
+      '@context': 'https://schema.org',
+      '@type': 'BreadcrumbList',
+      itemListElement: breadcrumbs.map((b, i) => ({
+        '@type': 'ListItem',
+        position: i + 1,
+        name: b.name,
+        item: b.item
+      }))
+    }));
+  }
+
+  // Article markup if this is an article-like page
+  if (type === 'article') {
+    ld.push(clean({
+      '@context': 'https://schema.org',
+      '@type': 'Article',
+      headline: title,
+      description,
+      mainEntityOfPage: url,
+      image
+    }));
+  }
+
+  // Optional product block (only if you pass it)
+  if (product && Object.keys(clean(product)).length > 0) {
+    const p = clean(product);
+    const productLd = {
+      '@context': 'https://schema.org',
+      '@type': 'Product',
+      name: p.name,
+      brand: p.brand ? { '@type': 'Brand', name: p.brand } : undefined,
+      image: p.image,
+      sku: p.sku,
+      gtin13: p.gtin,
+      offers: (p.price && p.currency) ? {
+        '@type': 'Offer',
+        priceCurrency: p.currency,
+        price: String(p.price),
+        url: p.url || url,
+        availability: p.availability || undefined,
+      } : undefined,
+      aggregateRating: (p.rating != null && p.reviewCount != null) ? {
+        '@type': 'AggregateRating',
+        ratingValue: String(p.rating),
+        reviewCount: String(p.reviewCount)
+      } : undefined
+    };
+    ld.push(clean(productLd));
+  }
+
+  const ldJson = JSON.stringify(ld.filter(Boolean));
 
   return (
     <Head>
-      <title>{t}</title>
-      <meta name="description" content={d} />
-      {noindex ? <meta name="robots" content="noindex,nofollow" /> : null}
-
-      {/* Open Graph */}
-      <meta property="og:title" content={t} />
-      <meta property="og:description" content={d} />
-      <meta property="og:type" content={type} />
-      <meta property="og:url" content={u} />
-      <meta property="og:image" content={img} />
-      <meta property="og:site_name" content="Wild & Well" />
-
-      {/* Twitter */}
+      <title>{title}</title>
+      <meta name="description" content={description} />
+      <link rel="canonical" href={url} />
+      <meta property="og:type" content={type === 'article' ? 'article' : 'website'} />
+      <meta property="og:title" content={title} />
+      <meta property="og:description" content={description} />
+      {image ? <meta property="og:image" content={image} /> : null}
+      <meta property="og:url" content={url} />
+      <meta property="og:site_name" content={siteName} />
       <meta name="twitter:card" content="summary_large_image" />
-      <meta name="twitter:title" content={t} />
-      <meta name="twitter:description" content={d} />
-      <meta name="twitter:image" content={img} />
-
-      {/* Canonical */}
-      <link rel="canonical" href={u} />
-
-      {/* Tags (fallback as keywords) */}
-      {tags?.length ? <meta name="keywords" content={tags.join(', ')} /> : null}
-
-      {/* JSON-LD */}
-      {ldBreadcrumbs ? (
-        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(ldBreadcrumbs) }} />
-      ) : null}
-      {ldArticle ? (
-        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(ldArticle) }} />
-      ) : null}
-      {ldProduct ? (
-        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(ldProduct) }} />
-      ) : null}
+      <meta name="twitter:title" content={title} />
+      <meta name="twitter:description" content={description} />
+      {image ? <meta name="twitter:image" content={image} /> : null}
+      {noindex ? <meta name="robots" content="noindex,nofollow" /> : null}
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: ldJson }} />
     </Head>
   );
 }
