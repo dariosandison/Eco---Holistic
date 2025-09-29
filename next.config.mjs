@@ -13,20 +13,23 @@ const nextConfig = {
   },
   async headers() {
     return [
+      // Site-wide security/metadata
       {
         source: '/(.*)',
         headers: [
           { key: 'Referrer-Policy', value: 'strict-origin-when-cross-origin' }
         ]
       },
+      // Next.js static assets
       {
-        source: '/_next/static/(.*)',
+        source: '/_next/static/:path*',
         headers: [
           { key: 'Cache-Control', value: 'public, max-age=31536000, immutable' }
         ]
       },
+      // Public assets by extension (use a capturing group, not a non-capturing group)
       {
-        source: '/(.*)\\.(?:js|css|png|jpg|jpeg|gif|svg|webp|ico|woff2)$',
+        source: '/:all*\\.(js|css|png|jpg|jpeg|gif|svg|webp|ico|woff2)',
         headers: [
           { key: 'Cache-Control', value: 'public, max-age=31536000, immutable' }
         ]
@@ -34,4 +37,5 @@ const nextConfig = {
     ];
   }
 };
+
 export default nextConfig;
