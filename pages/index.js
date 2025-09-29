@@ -1,111 +1,122 @@
 // pages/index.js
-import fs from 'fs';
-import path from 'path';
+// Minimal, safe home page to fix React error #130 during prerender.
+// Avoids importing any object-as-component and passes only defined SEO props.
+
 import Link from 'next/link';
-import Image from 'next/image';
 import SEO from '../components/SEO';
 
-function parseFrontmatter(raw) {
-  let meta = {};
-  if (raw.startsWith('---')) {
-    const end = raw.indexOf('\n---', 3);
-    if (end !== -1) {
-      const fm = raw.slice(3, end).trim();
-      fm.split(/\r?\n/).forEach(line => {
-        const m = line.match(/^(\w+):\s*(.*)$/);
-        if (m) {
-          const key = m[1];
-          let val = m[2].trim();
-          val = val.replace(/^"(.+)"$/, '$1').replace(/^'(.+)'$/, '$1');
-          meta[key] = val;
-        }
-      });
-    }
-  }
-  return meta;
-}
+const SITE_NAME = process.env.NEXT_PUBLIC_SITE_NAME || 'Wild & Well';
 
-function readGuides(dir) {
-  const files = fs.existsSync(dir) ? fs.readdirSync(dir).filter(f => f.endsWith('.md') || f.endsWith('.mdx')) : [];
-  const guides = files.map(filename => {
-    const slug = filename.replace(/\.(md|mdx)$/, '');
-    const raw = fs.readFileSync(path.join(dir, filename), 'utf8');
-    const meta = parseFrontmatter(raw);
-    return {
-      slug,
-      title: meta.title || slug.replace(/-/g, ' '),
-      date: meta.date || null,
-      description: meta.description || ''
-    };
-  });
-  guides.sort((a, b) => (b.date || '').localeCompare(a.date || ''));
-  return guides.slice(0, 9);
-}
-
-export async function getStaticProps() {
-  const guidesDir = path.join(process.cwd(), 'content/guides');
-  const guides = readGuides(guidesDir);
-  return {
-    props: { guides },
-    revalidate: 60 * 60 * 6
-  };
-}
-
-export default function Home({ guides }) {
-  const seo = {
-    title: 'Wild & Well — Holistic Health & Eco Friendly Living',
-    description: 'Your guide to holistic health, eco friendly living and natural wellness.',
-    url: 'https://www.wild-and-well.store/',
-    type: 'website',
-    breadcrumbs: [{ name: 'Home', item: 'https://www.wild-and-well.store/' }]
-  };
+export default function Home() {
+  const title = `${SITE_NAME} — Practical Guides, Reviews & Low-Toxin Living`;
+  const description =
+    'Actionable wellness guides, honest product reviews, and low-additive picks. No fluff. Just practical steps to feel better and live cleaner.';
+  const ogImage = '/images/og-default.jpg'; // keep or replace with an existing asset; remove if you don’t have it
 
   return (
     <>
-      <SEO {...seo} />
+      <SEO
+        title={title}
+        description={description}
+        image={ogImage || undefined}
+        url="/"
+        breadcrumbs={[
+          { name: 'Home', item: '/' },
+        ]}
+      />
 
-      <div className="hero-wrap">
-        <div className="container">
-          <section className="hero">
-            <div className="hero-inner">
-              <Image
-                src="/logo.svg"
-                alt="Wild & Well"
-                width={520}
-                height={140}
-                className="hero-logo hero-logo--svg"
-                priority
-                fetchPriority="high"
-              />
-              <p className="hero-slogan">
-                Your guide to holistic health, eco friendly living and natural wellness
-              </p>
-              <div className="cta-row">
-                <Link className="btn btn-primary" href="/guides">Explore Guides</Link>
-                <Link className="btn btn-outline" href="/deals">Today&apos;s Deals</Link>
-              </div>
-              <p className="meta">
-                <span>Independent</span><span>•</span>
-                <span>Reader-supported</span><span>•</span>
-                <span>Evidence-informed picks</span><span>•</span>
-                <span>No sponsored posts</span>
-              </p>
-            </div>
-          </section>
-        </div>
-      </div>
+      <main style={{ padding: '48px 20px', maxWidth: 960, margin: '0 auto' }}>
+        <header style={{ marginBottom: 24 }}>
+          <h1 style={{ fontSize: 36, lineHeight: 1.2, fontWeight: 800 }}>
+            Practical wellness, minus the noise
+          </h1>
+          <p style={{ marginTop: 12, fontSize: 18, opacity: 0.85 }}>
+            Clear, research-literate guides and reviews to help you choose
+            cleaner products, build simple habits, and feel better day to day.
+          </p>
+        </header>
 
-      <div className="container">
-        <h2 className="section-title">Latest Guides</h2>
-        <div className="grid">
-          {guides.map((g) => (
-            <article className="card" key={g.slug}>
-              <h3><Link href={`/guides/${g.slug}`}>{g.title}</Link></h3>
-              {g.description ? <p style={{ margin: 0 }}>{g.description}</p> : null}
-            </article>
-          ))}
-        </div>
-      </div>
+        <nav
+          aria-label="Primary"
+          style={{
+            display: 'grid',
+            gap: 12,
+            gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))',
+            marginTop: 24,
+          }}
+        >
+          <Card href="/guides/wellness-starter" title="Start Here">
+            A 7-day primer: sleep, movement, food, and environment.
+          </Card>
+          <Card href="/guides/safer-cleaning" title="Safer Cleaning">
+            Cut harsh residues. See our low-tox kit & quick wins.
+          </Card>
+          <Card
+            href="/guides/protein-powders-natural-ingredients"
+            title="Cleaner Supplements"
+          >
+            Minimal-additive protein & vitamin picks we trust.
+          </Card>
+          <Card href="/guides/water-filters" title="Water Filters">
+            Apartment-friendly options that actually improve taste.
+          </Card>
+          <Card href="/reviews" title="Reviews">
+            Evidence-aware, affiliate-supported—always honest.
+          </Card>
+          <Card href="/about" title="About">
+            Who we are, how we test, and how we’re funded.
+          </Card>
+        </nav>
+
+        <section style={{ marginTop: 40 }}>
+          <h2 style={{ fontSize: 24, fontWeight: 700, marginBottom: 10 }}>
+            New & trending
+          </h2>
+          <ul style={{ listStyle: 'disc', paddingLeft: 20, lineHeight: 1.7 }}>
+            <li>
+              <Link href="/guides/clean-electrolytes-hydration">
+                Clean electrolytes & hydration basics
+              </Link>
+            </li>
+            <li>
+              <Link href="/guides/best-blue-light-tools">
+                Blue-light tools that aren’t snake oil
+              </Link>
+            </li>
+            <li>
+              <Link href="/guides/sauna-basics">Sauna basics & heat therapy</Link>
+            </li>
+          </ul>
+        </section>
+
+        <footer style={{ marginTop: 56, opacity: 0.7, fontSize: 14 }}>
+          <p>
+            As an affiliate site, we may earn from qualifying purchases at no
+            extra cost to you. We only recommend products that meet our
+            ingredient, safety, and performance criteria.
+          </p>
+        </footer>
+      </main>
     </>
+  );
+}
+
+function Card({ href, title, children }) {
+  return (
+    <Link
+      href={href}
+      style={{
+        display: 'block',
+        border: '1px solid rgba(0,0,0,0.08)',
+        borderRadius: 12,
+        padding: 16,
+        textDecoration: 'none',
+        background: 'white',
+        boxShadow: '0 1px 2px rgba(0,0,0,0.04)',
+      }}
+    >
+      <div style={{ fontWeight: 700, marginBottom: 6 }}>{title}</div>
+      <div style={{ opacity: 0.8 }}>{children}</div>
+    </Link>
   );
 }
