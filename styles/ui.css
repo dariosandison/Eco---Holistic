@@ -54,8 +54,12 @@
 .authorbox-title { color:#6b7280; margin-bottom:6px; }
 .authorbox-bio { margin: 6px 0 0; }
 
-/* Basic post layout helpers (kept minimal to avoid collision) */
+/* ===== Layout helpers ===== */
 .container { max-width: 860px; margin: 0 auto; padding: 0 16px; }
 .post { padding: 12px 0 32px; }
 .post-title { font-size: 2rem; line-height: 1.2; margin: 12px 0; }
 .post-meta { color:#6b7280; margin: 6px 0 14px; }
+
+/* ===== A11y focus ring (visible but subtle) ===== */
+:focus { outline: 2px solid transparent; outline-offset: 2px; }
+:focus-visible { outline: 3px solid #111827; outline-offset: 2px; border-radius: 4px; }
