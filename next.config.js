@@ -2,9 +2,17 @@
 const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
-  // ❌ remove: output: 'export'
-  // If you previously had images.unoptimized: true, remove it to re-enable Image Optimization.
-  // images: { unoptimized: false },
+
+  // IMPORTANT: Do NOT set `output: 'export'`. This keeps ISR working on Vercel.
+  // If you previously had it, this replacement removes it.
+
+  // Safe, permissive image config so external images continue working.
+  images: {
+    remotePatterns: [
+      { protocol: 'https', hostname: '**' },
+      { protocol: 'http', hostname: '**' },
+    ],
+  },
 };
 
 module.exports = nextConfig;
