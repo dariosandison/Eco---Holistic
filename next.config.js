@@ -1,18 +1,17 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
-  swcMinify: true,
 
-  // IMPORTANT: Do NOT set `output: 'export'`. This keeps ISR working on Vercel.
-  // If you previously had it, this replacement removes it.
+  // IMPORTANT: allow ISR/SSR on Vercel (remove static export)
+  // output: 'export', // ← delete the export mode
 
-  // Safe, permissive image config so external images continue working.
+  // Keep images simple and safe regardless of remote domains
   images: {
-    remotePatterns: [
-      { protocol: 'https', hostname: '**' },
-      { protocol: 'http', hostname: '**' },
-    ],
+    unoptimized: true,
   },
+
+  // If you have .md or .mdx in /pages, keep these; harmless if unused
+  pageExtensions: ['js', 'jsx', 'md', 'mdx'],
 };
 
 module.exports = nextConfig;
