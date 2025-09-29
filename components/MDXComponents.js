@@ -47,3 +47,12 @@ const mdxComponents = {
 
 export default mdxComponents;   // default import support
 export { mdxComponents };       // named import support
+import FAQ from './FAQ';
+
+const mdxComponents = {
+  // ...existing mappings
+  FAQ,
+};
+
+export default mdxComponents;
+export { mdxComponents };
