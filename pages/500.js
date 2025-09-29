@@ -1,10 +1,24 @@
-export const seo = { title: 'Server Error', noindex: true };
+// pages/500.js
+import SEO from '../components/SEO';
+import Link from 'next/link';
 
-export default function FiveHundred() {
+export default function ServerError() {
+  const seo = {
+    title: 'Error — Wild & Well',
+    description: 'Something went wrong.',
+    url: 'https://www.wild-and-well.store/500',
+    noindex: true
+  };
+
   return (
-    <div className="prose">
-      <h1>Something went wrong</h1>
-      <p>We’ve logged the error and will fix it ASAP.</p>
-    </div>
+    <>
+      <SEO {...seo} />
+      <div className="container">
+        <article className="post">
+          <h1 className="post-title">We hit a snag</h1>
+          <p>Please try again in a moment, or go back to the <Link href="/">homepage</Link>.</p>
+        </article>
+      </div>
+    </>
   );
 }
