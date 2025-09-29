@@ -1,18 +1,15 @@
 /** @type {import('next').NextConfig} */
-
-const securityHeaders = [
-  { key: 'X-DNS-Prefetch-Control', value: 'on' },
-  { key: 'Strict-Transport-Security', value: 'max-age=15552000; includeSubDomains; preload' },
-  { key: 'X-Content-Type-Options', value: 'nosniff' },
-  { key: 'Referrer-Policy', value: 'strict-origin-when-cross-origin' },
-  { key: 'Permissions-Policy', value: 'camera=(), microphone=(), geolocation=()' }
-];
-
-module.exports = {
+const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
-  trailingSlash: false,
-  async headers() {
-    return [{ source: '/(.*)', headers: securityHeaders }];
+
+  // We’re shipping a fully static site (compatible with your export flow)
+  output: 'export',
+
+  // Use the raw <img> output for next/image so we don’t need remote loaders/domains
+  images: {
+    unoptimized: true
   }
 };
+
+module.exports = nextConfig;
