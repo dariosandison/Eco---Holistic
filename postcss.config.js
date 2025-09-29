@@ -1,5 +1,4 @@
-// postcss.config.js
-// Minimal PostCSS with no Tailwind. This prevents Next from trying to load 'tailwindcss'.
+// postcss.config.js — minimal, no Tailwind (prevents missing-plugin errors)
 module.exports = {
   plugins: {}
 };
