@@ -1,0 +1,106 @@
+/* Simple, unobtrusive UI polish for tables/CTAs/comparison blocks */
+
+.table-scroll {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.comp-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+}
+
+.comp-table th,
+.comp-table td {
+  border: 1px solid #e5e7eb;
+  padding: 10px 12px;
+  vertical-align: top;
+}
+
+.comp-table thead th {
+  background: #f8fafc;
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  text-align: left;
+}
+
+.comp-table td.crit {
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.btn {
+  display: inline-block;
+  padding: 10px 14px;
+  border-radius: 10px;
+  text-decoration: none;
+  border: 1px solid #e5e7eb;
+  background: #ffffff;
+}
+
+.btn:hover {
+  background: #f8fafc;
+}
+
+.btn-primary {
+  border-color: #111827;
+  background: #111827;
+  color: #ffffff;
+}
+
+.btn-primary:hover {
+  filter: brightness(1.05);
+}
+
+.cmp-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 16px;
+  margin: 12px 0 18px;
+}
+
+.cmp-card {
+  border: 1px solid #e5e7eb;
+  border-radius: 16px;
+  padding: 14px;
+  background: #fff;
+}
+
+.cmp-card-head { margin-bottom: 8px; }
+.cmp-card-title { font-weight: 700; font-size: 1.1rem; }
+.cmp-card-sub { color: #6b7280; font-size: 0.9rem; }
+
+.cmp-card-img {
+  width: 100%;
+  height: auto;
+  border-radius: 12px;
+  margin: 8px 0;
+}
+
+.cmp-badge {
+  display: inline-block;
+  font-weight: 700;
+  padding: 4px 8px;
+  border-radius: 9999px;
+  background: #eef2ff;
+  margin: 6px 0;
+}
+
+.cmp-price { font-weight: 700; margin: 6px 0 10px; }
+
+.cmp-actions { display: flex; gap: 8px; flex-wrap: wrap; }
+
+.cmp-procon { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 10px; }
+.cmp-label { font-weight: 700; margin-bottom: 6px; }
+.cmp-label.good { color: #065f46; }
+.cmp-label.bad { color: #7f1d1d; }
+
+.cmp-verdict {
+  border-left: 4px solid #111827;
+  background: #f9fafb;
+  padding: 12px 14px;
+  border-radius: 8px;
+  margin: 12px 0 18px;
+}
