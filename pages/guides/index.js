@@ -43,10 +43,7 @@ export async function getStaticProps() {
 
   const groups = Array.from(groupsMap.entries()).map(([key, items]) => ({
     key,
-    title:
-      key === 'General'
-        ? 'All Guides'
-        : key.replace(/-/g, ' ').replace(/\b\w/g, (c) => c.toUpperCase()),
+    title: key === 'General' ? 'All Guides' : key.replace(/-/g, ' ').replace(/\b\w/g, (c) => c.toUpperCase()),
     items,
   }));
 
@@ -69,3 +66,32 @@ export async function getStaticProps() {
 export default function GuidesIndex({ groups, seo }) {
   return (
     <>
+      <SEO {...seo} />
+      <div className="container">
+        <article className="post">
+          <h1 className="post-title">Guides</h1>
+
+          {groups.map((group) => (
+            <section key={group.key} style={{ marginBottom: 24 }}>
+              <h2 style={{ marginTop: 12 }}>{group.title}</h2>
+              <ul className="relbox-grid" style={{ listStyle: 'none', padding: 0, margin: 0 }}>
+                {group.items.map((g) => (
+                  <li key={g.slug}>
+                    <Link href={`/guides/${g.slug}`} className="relbox-card">
+                      <span className="relbox-name">{g.title}</span>
+                      {g.description ? <span className="relbox-desc">{g.description}</span> : null}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </section>
+          ))}
+
+          <p className="post-meta">
+            Looking for product comparisons? See our <Link href="/compare">Comparisons</Link>.
+          </p>
+        </article>
+      </div>
+    </>
+  );
+}
