@@ -2,7 +2,6 @@
 import Link from 'next/link';
 import Image from 'next/image';
 
-// Keep your existing components
 import Callout from './Callout';
 import CompareInline from './CompareInline';
 import CompareTable from './CompareTable';
@@ -40,7 +39,6 @@ function MdxImage({ src = '', alt = '', width, height, ...rest }) {
   const isExternal =
     src.startsWith('http://') || src.startsWith('https://') || src.startsWith('//');
 
-  // If we don't have dims or it's external, fall back to plain <img>
   if (!width || !height || isExternal) {
     return <img src={src} alt={alt} {...rest} />;
   }
@@ -56,11 +54,7 @@ function MdxImage({ src = '', alt = '', width, height, ...rest }) {
   );
 }
 
-/**
- * <Disclosure title="...">content</Disclosure>
- * Simple SSR-safe details/summary. If your MDX used a single tag `Disclosure`,
- * this will work without pulling in headlessui.
- */
+// Simple <Disclosure title="...">…</Disclosure>
 function Disclosure({ title, children, open, ...rest }) {
   return (
     <details open={open} {...rest}>
@@ -70,10 +64,7 @@ function Disclosure({ title, children, open, ...rest }) {
   );
 }
 
-/**
- * <AffiliateLink href="...">Label</AffiliateLink>
- * Keeps rel attributes for compliance.
- */
+// <AffiliateLink href="...">Label</AffiliateLink>
 function AffiliateLink({ href = '', children, ...props }) {
   return (
     <a
@@ -87,11 +78,7 @@ function AffiliateLink({ href = '', children, ...props }) {
   );
 }
 
-/**
- * <BuyBox title="..." href="..." price="$..." note="...">…</BuyBox>
- * Minimal, SSR-safe fallback so reviews render during export.
- * It will gracefully render whatever props your MDX provides.
- */
+// <BuyBox title href price note>…</BuyBox>
 function BuyBox({ title, href, price, note, children }) {
   return (
     <div className="not-prose my-6 rounded-lg border p-4">
@@ -116,20 +103,51 @@ function BuyBox({ title, href, price, note, children }) {
   );
 }
 
+// <ProsCons pros={['...']} cons={['...']} />
+function ProsCons({ pros = [], cons = [] }) {
+  const toArray = (v) =>
+    Array.isArray(v) ? v : v ? String(v).split('\n').filter(Boolean) : [];
+  const prosArr = toArray(pros);
+  const consArr = toArray(cons);
+
+  return (
+    <div className="not-prose my-6 grid gap-4 md:grid-cols-2">
+      <div className="rounded-lg border p-4">
+        <h4 className="m-0">Pros</h4>
+        <ul>
+          {prosArr.map((p, i) => (
+            <li key={`pro-${i}`}>{p}</li>
+          ))}
+        </ul>
+      </div>
+      <div className="rounded-lg border p-4">
+        <h4 className="m-0">Cons</h4>
+        <ul>
+          {consArr.map((c, i) => (
+            <li key={`con-${i}`}>{c}</li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  );
+}
+
 const mdxComponents = {
   a: SmartLink,
   img: (props) => <MdxImage {...props} />,
   Image: (props) => <MdxImage {...props} />,
+
   Callout,
   CompareInline,
   CompareTable,
   FAQ,
 
-  // Newly mapped components seen in your MDX
+  // MDX-only components used in content
   Disclosure,
   AffiliateLink,
   BuyBox,
+  ProsCons,
 };
 
-export default mdxComponents;   // default import support
-export { mdxComponents };       // named import support
+export default mdxComponents;
+export { mdxComponents };
