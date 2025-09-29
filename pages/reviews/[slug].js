@@ -1,192 +1,213 @@
 // pages/reviews/[slug].js
-// Robust reviews page: safe frontmatter, optional Product JSON-LD via <SEO product={...} />
-
+import React from 'react';
 import fs from 'fs';
 import path from 'path';
 import matter from 'gray-matter';
-import Link from 'next/link';
-import { serialize } from 'next-mdx-remote/serialize';
+import Head from 'next/head';
 import { MDXRemote } from 'next-mdx-remote';
-import SEO from '../../components/SEO';
-import { jsonSafe } from '../../lib/jsonSafe';
+import { serialize } from 'next-mdx-remote/serialize';
 
+/**
+ * Helpers
+ */
 const REVIEWS_DIR = path.join(process.cwd(), 'content', 'reviews');
 
-function readSlugs() {
-  if (!fs.existsSync(REVIEWS_DIR)) return [];
-  return fs
-    .readdirSync(REVIEWS_DIR)
-    .filter((f) => f.endsWith('.md') || f.endsWith('.mdx'))
-    .map((f) => f.replace(/\.mdx?$/, ''));
+function safeString(v) {
+  return typeof v === 'string' && v.trim().length > 0 ? v.trim() : null;
 }
-
-function loadReview(slug) {
-  const mdxPath = path.join(REVIEWS_DIR, `${slug}.mdx`);
-  const mdPath = path.join(REVIEWS_DIR, `${slug}.md`);
-  const filePath = fs.existsSync(mdxPath) ? mdxPath : mdPath;
-  const raw = fs.readFileSync(filePath, 'utf8');
-  const { content, data } = matter(raw);
-  return { content, data: data || {} };
+function safeNumber(v) {
+  return typeof v === 'number' && Number.isFinite(v) ? v : null;
 }
-
-function cleanText(v, fallback = null) {
-  if (typeof v === 'string' && v.trim()) return v.trim();
-  return fallback;
-}
-
-function preprocessMdx(src) {
-  // Comments → JSX (outside fences)
-  const lines = src.split('\n');
-  let inFence = false;
-  const out = [];
-  for (const line of lines) {
-    const fence = line.trim().match(/^```/);
-    if (fence) inFence = !inFence;
-    if (!inFence) {
-      out.push(line.replace(/<!--/g, '{/*').replace(/-->/g, '*/}'));
-    } else {
-      out.push(line);
-    }
+function firstString(arr) {
+  if (!Array.isArray(arr)) return null;
+  for (const v of arr) {
+    const s = safeString(v);
+    if (s) return s;
   }
-  // Angle-bracket links
-  return out.join('\n').replace(/<((?:https?:\/\/|mailto:)[^>\s]+)>/g, '$1');
+  return null;
+}
+/**
+ * Recursively converts undefined → null and strips non-serializable values.
+ */
+function jsonSafe(value) {
+  return JSON.parse(
+    JSON.stringify(
+      value,
+      (_key, val) => (val === undefined ? null : val)
+    )
+  );
 }
 
-export async function getStaticPaths() {
-  const slugs = readSlugs();
-  return {
-    paths: slugs.map((slug) => ({ params: { slug } })),
-    fallback: false,
-  };
-}
+/**
+ * Build SEO and Product objects from front matter, guarding undefineds.
+ */
+function buildSeo(front) {
+  const seoTitle =
+    safeString(front?.seo?.title) ||
+    safeString(front?.title) ||
+    null;
 
-export async function getStaticProps(ctx) {
-  // ...your existing code that builds `props`...
-  const props = {
-    // existing props you already return
-    // make sure anything like product.image you *don’t* have becomes null or gets omitted
-  };
+  const seoDesc =
+    safeString(front?.seo?.description) ||
+    safeString(front?.description) ||
+    null;
 
-  // Final pass: strip all `undefined` so Next can serialize it
-  return { props: jsonSafe(props) };
-}
-
-
-  const mdxSource = await serialize(preprocessMdx(content), {
-    mdxOptions: { format: 'mdx' },
-    parseFrontmatter: false,
-  });
-
-  // Product fields for JSON-LD (all optional, sanitized)
-  const product = {
-    name: cleanText(data.product?.name || data.title || data.seo?.title || null, null),
-    image:
-      cleanText(
-        data.product?.image || data.image || (Array.isArray(data.images) ? data.images[0] : null),
-        null
-      ) || undefined,
-    description: cleanText(data.product?.description || data.description || data.seo?.description || null, null) || undefined,
-    brand: cleanText(data.product?.brand || null, null) || undefined,
-    sku: cleanText(data.product?.sku || null, null) || undefined,
-    gtin: cleanText(data.product?.gtin || null, null) || undefined,
-    url: cleanText(data.product?.url || data.ctaHref || null, null) || undefined,
-    price: data.product?.price ?? undefined,
-    priceCurrency: cleanText(data.product?.priceCurrency || null, null) || undefined,
-    aggregateRating: data.product?.aggregateRating
-      ? {
-          ratingValue: data.product.aggregateRating.ratingValue ?? undefined,
-          ratingCount: data.product.aggregateRating.ratingCount ?? undefined,
-        }
-      : undefined,
-    offers: Array.isArray(data.product?.offers) ? data.product.offers : undefined,
-  };
-
-  const seo = {
-    title: cleanText(data.seo?.title || data.title || '', ''),
-    description: cleanText(data.seo?.description || data.description || null, null),
-    image:
-      cleanText(
-        data.seo?.image || data.image || (Array.isArray(data.images) ? data.images[0] : null),
-        null
-      ) || null,
-    url: `/reviews/${slug}`,
-  };
-
-  const meta = {
-    title: cleanText(data.title || data.seo?.title || '', ''),
-    description: cleanText(data.description || data.seo?.description || null, null),
-    image:
-      cleanText(
-        data.image || (Array.isArray(data.images) ? data.images[0] : null),
-        null
-      ) || null,
-    brand: cleanText(data.brand || product.brand || null, null),
-    price: data.price ?? product.price ?? null,
-    priceCurrency: cleanText(data.priceCurrency || product.priceCurrency || null, null),
-    ctaLabel: cleanText(data.ctaLabel || 'Check price', 'Check price'),
-    ctaHref: cleanText(data.ctaHref || product.url || null, null),
-    slug,
-  };
+  const seoImage =
+    safeString(front?.seo?.image) ||
+    safeString(front?.image) ||
+    firstString(front?.images) ||
+    null;
 
   return {
-    props: {
-      slug,
-      mdxSource,
-      meta,
-      seo,
-      // Only pass product if it has a name (prevents empty JSON-LD)
-      product: product.name ? product : null,
-    },
+    title: seoTitle,
+    description: seoDesc,
+    image: seoImage,
   };
 }
 
+function buildProduct(front) {
+  const name =
+    safeString(front?.productName) ||
+    safeString(front?.name) ||
+    null;
+
+  if (!name) return null;
+
+  const image =
+    safeString(front?.productImage) ||
+    safeString(front?.image) ||
+    firstString(front?.images) ||
+    null;
+
+  const url =
+    safeString(front?.productUrl) ||
+    safeString(front?.ctaHref) ||
+    null;
+
+  const price = safeNumber(front?.price);
+  const currency = safeString(front?.currency);
+
+  return {
+    name,
+    image,
+    url,
+    price,
+    currency,
+  };
+}
+
+/**
+ * Page component
+ */
 export default function ReviewPage({ slug, mdxSource, meta, seo, product }) {
   return (
     <>
-      <SEO
-        title={seo.title || meta.title}
-        description={seo.description || undefined}
-        image={seo.image || undefined}
-        url={seo.url}
-        product={product || undefined}
-        breadcrumbs={[
-          { name: 'Home', item: '/' },
-          { name: 'Reviews', item: '/reviews' },
-          { name: meta.title || 'Review', item: `/reviews/${slug}` },
-        ]}
-      />
-      <main style={{ padding: '48px 20px', maxWidth: 820, margin: '0 auto' }}>
-        <p style={{ marginBottom: 12 }}>
-          <Link href="/reviews">← All Reviews</Link>
-        </p>
-        <h1 style={{ fontSize: 34, lineHeight: 1.2, fontWeight: 800 }}>{meta.title}</h1>
-        {meta.description ? (
-          <p style={{ marginTop: 8, opacity: 0.85, fontSize: 18 }}>{meta.description}</p>
+      <Head>
+        <title>{seo?.title ?? meta?.title ?? 'Review'}</title>
+        {seo?.description ? (
+          <meta name="description" content={seo.description} />
         ) : null}
+        {seo?.image ? <meta property="og:image" content={seo.image} /> : null}
+      </Head>
 
-        {meta.ctaHref ? (
-          <p style={{ marginTop: 16 }}>
-            <a
-              href={meta.ctaHref}
-              target="_blank"
-              rel="nofollow sponsored noopener"
-              style={{
-                display: 'inline-block',
-                padding: '10px 14px',
-                borderRadius: 10,
-                border: '1px solid rgba(0,0,0,0.1)',
-                textDecoration: 'none',
-              }}
-            >
-              {meta.ctaLabel}
-            </a>
-          </p>
-        ) : null}
+      <main className="container mx-auto px-4 py-8 prose prose-neutral">
+        <article>
+          <header>
+            <h1>{meta?.title ?? slug}</h1>
+            {meta?.subtitle ? <p>{meta.subtitle}</p> : null}
+          </header>
 
-        <article style={{ marginTop: 28 }}>
-          <MDXRemote {...mdxSource} components={{}} />
+          {/* MDX content */}
+          {mdxSource ? <MDXRemote {...mdxSource} /> : <p>No content.</p>}
+
+          {/* Simple product info block if present */}
+          {product ? (
+            <section style={{ marginTop: '2rem' }}>
+              <h2>Product</h2>
+              <ul>
+                <li><strong>Name:</strong> {product.name}</li>
+                {product.url ? (
+                  <li>
+                    <strong>Link:</strong>{' '}
+                    <a href={product.url} rel="nofollow sponsored">
+                      {product.url}
+                    </a>
+                  </li>
+                ) : null}
+                {product.price != null && product.currency ? (
+                  <li>
+                    <strong>Price:</strong> {product.price} {product.currency}
+                  </li>
+                ) : null}
+              </ul>
+            </section>
+          ) : null}
         </article>
       </main>
     </>
   );
+}
+
+/**
+ * SSG
+ */
+export async function getStaticPaths() {
+  let paths = [];
+  try {
+    if (fs.existsSync(REVIEWS_DIR)) {
+      const files = fs.readdirSync(REVIEWS_DIR);
+      paths = files
+        .filter((f) => f.endsWith('.md') || f.endsWith('.mdx'))
+        .map((f) => ({
+          params: { slug: f.replace(/\.mdx?$/, '') },
+        }));
+    }
+  } catch {
+    // noop – return empty paths
+  }
+  return { paths, fallback: false };
+}
+
+export async function getStaticProps({ params }) {
+  const slug = params?.slug;
+
+  // Try .mdx first, then .md
+  const mdxPath = path.join(REVIEWS_DIR, `${slug}.mdx`);
+  const mdPath = path.join(REVIEWS_DIR, `${slug}.md`);
+  const filePath = fs.existsSync(mdxPath) ? mdxPath : mdPath;
+
+  if (!fs.existsSync(filePath)) {
+    return { notFound: true };
+  }
+
+  const raw = fs.readFileSync(filePath, 'utf8');
+  const { data: front, content } = matter(raw);
+
+  // MDX compile – keep options minimal to avoid AST incompatibilities
+  const mdxSource = await serialize(content || '', {
+    mdxOptions: { format: 'mdx' },
+  });
+
+  // Meta/SEO/Product
+  const meta = {
+    ...front,
+    title: safeString(front?.title) ?? null,
+    description: safeString(front?.description) ?? null,
+    subtitle: safeString(front?.subtitle) ?? null,
+    slug,
+  };
+
+  const seo = buildSeo(front);
+  const product = buildProduct(front);
+
+  // JSON-safe props (no undefined)
+  const props = jsonSafe({
+    slug,
+    mdxSource,
+    meta,
+    seo,
+    product, // null if not present
+  });
+
+  return { props };
 }
