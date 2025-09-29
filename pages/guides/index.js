@@ -4,78 +4,68 @@ import path from 'path';
 import matter from 'gray-matter';
 import Link from 'next/link';
 import SEO from '../../components/SEO';
-import hubsData from '../../data/hubs';
 
-function normHubs() {
-  if (Array.isArray(hubsData)) return hubsData;
-  if (hubsData && typeof hubsData === 'object') {
-    if (Array.isArray(hubsData.hubs)) return hubsData.hubs;
-    return Object.entries(hubsData).map(([slug, v]) => ({ slug, ...(v || {}) }));
-  }
-  return [];
-}
-const hubs = normHubs();
-
-function toArr(v) {
-  if (!v) return [];
-  if (Array.isArray(v)) return v;
-  if (typeof v === 'string') return v.split('|').join(',').split(',').map(s => s.trim()).filter(Boolean);
-  return [];
-}
-
-function listGuides() {
+function readGuides() {
   const dir = path.join(process.cwd(), 'content', 'guides');
   if (!fs.existsSync(dir)) return [];
-  return fs.readdirSync(dir)
-    .filter(f => f.endsWith('.md') || f.endsWith('.mdx'))
-    .map(f => {
-      const slug = f.replace(/\.(md|mdx)$/,'');
+
+  const items = fs
+    .readdirSync(dir)
+    .filter((f) => /\.mdx?$/.test(f))
+    .map((f) => {
+      const slug = f.replace(/\.(md|mdx)$/i, '');
       const raw = fs.readFileSync(path.join(dir, f), 'utf8');
       const { data } = matter(raw);
-      const updated = data?.updated || data?.date || null;
-      const tags = toArr(data?.tags).map(t => t.toLowerCase());
-      const isBest = /^(best|top)\b/i.test(data?.title || '');
+      const date = data?.updated || data?.date || null;
       return {
         slug,
-        title: data?.title || slug.replace(/-/g,' '),
+        title: data?.title || slug.replace(/-/g, ' '),
         description: data?.description || '',
-        date: updated ? new Date(updated).toISOString() : null,
-        tags,
-        isBest
+        hub: data?.hub || null,
+        tags: Array.isArray(data?.tags) ? data.tags : [],
+        dateISO: date ? new Date(date).toISOString() : null
       };
-    })
-    .sort((a,b) => (b.date || '').localeCompare(a.date || ''));
-}
+    });
 
-function groupByHub(items) {
-  const out = [];
-  for (const h of hubs) {
-    const key = (h.slug || '').toLowerCase();
-    const aliases = toArr(h.aliases).map(a => a.toLowerCase());
-    const bucket = items.filter(it => it.tags.some(t => t === key || aliases.includes(t)));
-    if (bucket.length) out.push({ hub: h, items: bucket });
-  }
-  return out;
+  // Sort newest first
+  items.sort((a, b) => (b.dateISO || '').localeCompare(a.dateISO || ''));
+  return items;
 }
 
 export async function getStaticProps() {
-  const items = listGuides();
-  const best = items.filter(x => x.isBest).slice(0, 12);
-  const grouped = groupByHub(items);
+  const guides = readGuides();
 
-  const seo = {
-    title: 'Guides — Wild & Well',
-    description: 'Actionable guides for sleep, stress, movement, clean living, and more.',
-    url: 'https://www.wild-and-well.store/guides',
-    breadcrumbs: [
-      { name: 'Home', item: 'https://www.wild-and-well.store/' },
-      { name: 'Guides', item: 'https://www.wild-and-well.store/guides' }
-    ]
+  // Group by hub (fallback to "General")
+  const groupsMap = new Map();
+  for (const g of guides) {
+    const key = g.hub || 'General';
+    if (!groupsMap.has(key)) groupsMap.set(key, []);
+    groupsMap.get(key).push(g);
+  }
+
+  const groups = Array.from(groupsMap.entries()).map(([key, items]) => ({
+    key,
+    title: key === 'General' ? 'All Guides' : key.replace(/-/g, ' ').replace(/\b\w/g, (c) => c.toUpperCase()),
+    items
+  }));
+
+  return {
+    props: {
+      groups,
+      seo: {
+        title: 'Guides — Wild & Well',
+        description: 'Actionable guides to help you sleep better, stress less, and move more.',
+        url: 'https://www.wild-and-well.store/guides',
+        breadcrumbs: [
+          { name: 'Home', item: 'https://www.wild-and-well.store/' },
+          { name: 'Guides', item: 'https://www.wild-and-well.store/guides' }
+        ]
+      }
+    }
   };
-  return { props: { best, grouped, seo }, revalidate: 60 * 60 * 6 };
 }
 
-export default function GuidesIndex({ best, grouped, seo }) {
+export default function GuidesIndex({ groups, seo }) {
   return (
     <>
       <SEO {...seo} />
@@ -83,30 +73,10 @@ export default function GuidesIndex({ best, grouped, seo }) {
         <article className="post">
           <h1 className="post-title">Guides</h1>
 
-          {best.length ? (
-            <>
-              <h2>Best Picks & Roundups</h2>
-              <ul>
-                {best.map(x => (
-                  <li key={x.slug}>
-                    <Link href={`/guides/${x.slug}`}>{x.title}</Link>
-                    {x.description ? <> — {x.description}</> : null}
-                  </li>
-                ))}
-              </ul>
-            </>
-          ) : null}
-
-          {grouped.map(group => (
-            <div key={group.hub.slug} style={{marginTop: 16}}>
-              <h2>{group.hub.title || group.hub.slug.replace(/-/g,' ')}</h2>
-              <ul>
-                {group.items.slice(0, 12).map(x => (
-                  <li key={x.slug}>
-                    <Link href={`/guides/${x.slug}`}>{x.title}</Link>
-                    {x.description ? <> — {x.description}</> : null}
-                  </li>
-                ))}
-              </ul>
-              <p className="post-meta">
-                See the <Link href={`/hubs/${group.hub.slug}`}>{group.hub.title ||
+          {groups.map((group) => (
+            <section key={group.key} style={{ marginBottom: 24 }}>
+              <h2 style={{ marginTop: 12 }}>{group.title}</h2>
+              <ul className="relbox-grid" style={{ listStyle: 'none', padding: 0, margin: 0 }}>
+                {group.items.map((g) => (
+                  <li key={g.slug}>
+                    <Link href={`/guides/${g.slug}`} className="relbox-card">
