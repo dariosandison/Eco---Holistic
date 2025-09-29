@@ -13,3 +13,4 @@ export default function AffiliateLink({ href, children, className = '', ...rest 
     </a>
   );
 }
+
