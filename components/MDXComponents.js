@@ -1,101 +1,135 @@
 // components/MDXComponents.js
-// Central mapping of shortcodes/components available inside MDX.
+import Link from 'next/link';
+import Image from 'next/image';
 
-import React from 'react';
-
-// Existing site components (keep these as-is so current MDX keeps working)
-import SmartLink from './SmartLink';
-import MdxImage from './MdxImage';
+// Keep your existing components
 import Callout from './Callout';
 import CompareInline from './CompareInline';
 import CompareTable from './CompareTable';
 import FAQ from './FAQ';
 
-// Safe, minimal fallbacks for MDX-only components that appeared in content.
-// If you already have “real” versions elsewhere, you can swap these imports later.
-// These ensure prerendering doesn’t fail if the MDX references them.
+// Smart internal/external link
+function SmartLink({ href = '', children, ...props }) {
+  const isInternal =
+    href &&
+    (href.startsWith('/') || href.startsWith('#')) &&
+    !href.startsWith('//');
 
-const Disclosure = ({ summary, title, children, open, ...props }) => (
-  <details open={open} {...props}>
-    <summary>{summary ?? title ?? 'Details'}</summary>
-    <div>{children}</div>
-  </details>
-);
+  if (isInternal) {
+    return (
+      <Link href={href} {...props}>
+        {children}
+      </Link>
+    );
+  }
 
-const AffiliateLink = ({ href, children, ...props }) => (
-  <a
-    href={href}
-    target="_blank"
-    rel="sponsored nofollow noopener noreferrer"
-    {...props}
-  >
-    {children}
-  </a>
-);
+  return (
+    <a
+      href={href}
+      target="_blank"
+      rel="noopener noreferrer nofollow"
+      {...props}
+    >
+      {children}
+    </a>
+  );
+}
 
-const BuyBox = ({
-  title,
-  price,
-  href,
-  cta = 'Buy now',
-  note,
-  children,
-  ...props
-}) => (
-  <div
-    {...props}
-    style={{
-      border: '1px solid #e5e7eb',
-      borderRadius: 12,
-      padding: 16,
-      margin: '16px 0',
-    }}
-  >
-    {title && <h3 style={{ margin: '0 0 8px' }}>{title}</h3>}
-    {children && <div style={{ marginBottom: 8 }}>{children}</div>}
-    <div style={{ display: 'flex', gap: 12, alignItems: 'center', flexWrap: 'wrap' }}>
-      {typeof price !== 'undefined' && (
-        <strong>{String(price)}</strong>
-      )}
-      {href && (
-        <a
-          href={href}
-          target="_blank"
-          rel="sponsored nofollow noopener noreferrer"
-          style={{
-            padding: '8px 12px',
-            borderRadius: 8,
-            border: '1px solid #111827',
-            textDecoration: 'none',
-            display: 'inline-block',
-          }}
-        >
-          {cta}
-        </a>
-      )}
+// MDX <img> mapper -> Next/Image where possible
+function MdxImage({ src = '', alt = '', width, height, ...rest }) {
+  const isExternal =
+    src.startsWith('http://') || src.startsWith('https://') || src.startsWith('//');
+
+  // If we don't have dims or it's external, fall back to plain <img>
+  if (!width || !height || isExternal) {
+    return <img src={src} alt={alt} {...rest} />;
+  }
+
+  return (
+    <Image
+      src={src}
+      alt={alt}
+      width={Number(width)}
+      height={Number(height)}
+      {...rest}
+    />
+  );
+}
+
+/**
+ * <Disclosure title="...">content</Disclosure>
+ * Simple SSR-safe details/summary. If your MDX used a single tag `Disclosure`,
+ * this will work without pulling in headlessui.
+ */
+function Disclosure({ title, children, open, ...rest }) {
+  return (
+    <details open={open} {...rest}>
+      {title ? <summary>{title}</summary> : null}
+      <div>{children}</div>
+    </details>
+  );
+}
+
+/**
+ * <AffiliateLink href="...">Label</AffiliateLink>
+ * Keeps rel attributes for compliance.
+ */
+function AffiliateLink({ href = '', children, ...props }) {
+  return (
+    <a
+      href={href}
+      target="_blank"
+      rel="noopener noreferrer nofollow sponsored"
+      {...props}
+    >
+      {children || href}
+    </a>
+  );
+}
+
+/**
+ * <BuyBox title="..." href="..." price="$..." note="...">…</BuyBox>
+ * Minimal, SSR-safe fallback so reviews render during export.
+ * It will gracefully render whatever props your MDX provides.
+ */
+function BuyBox({ title, href, price, note, children }) {
+  return (
+    <div className="not-prose my-6 rounded-lg border p-4">
+      {title ? <h4 className="m-0">{title}</h4> : null}
+      {price ? <div style={{ opacity: 0.8 }}>{price}</div> : null}
+      {children ? <div className="mt-2">{children}</div> : null}
+      <div className="mt-3">
+        {href ? (
+          <a
+            href={href}
+            target="_blank"
+            rel="noopener noreferrer nofollow sponsored"
+            className="inline-block rounded-md px-3 py-2"
+            style={{ border: '1px solid currentColor' }}
+          >
+            Buy
+          </a>
+        ) : null}
+        {note ? <div style={{ opacity: 0.7, marginTop: 8 }}>{note}</div> : null}
+      </div>
     </div>
-    {note && <p style={{ marginTop: 8, fontSize: 14, opacity: 0.8 }}>{note}</p>}
-  </div>
-);
+  );
+}
 
-// Final mapping provided to <MDXRemote components={...} />
 const mdxComponents = {
-  // HTML element overrides
   a: SmartLink,
   img: (props) => <MdxImage {...props} />,
   Image: (props) => <MdxImage {...props} />,
-
-  // Site components
   Callout,
   CompareInline,
   CompareTable,
   FAQ,
 
-  // MDX-only/fallback components referenced in content
+  // Newly mapped components seen in your MDX
   Disclosure,
   AffiliateLink,
   BuyBox,
 };
 
-export default mdxComponents;
-export { mdxComponents };
+export default mdxComponents;   // default import support
+export { mdxComponents };       // named import support
