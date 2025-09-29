@@ -5,8 +5,8 @@ import matter from 'gray-matter';
 import Link from 'next/link';
 import { MDXRemote } from 'next-mdx-remote';
 import SEO from '../../components/SEO';
+import MDXComponents from '../../components/MDXComponents';
 import { serializeMdx, jsonSafeMeta } from '../../lib/mdx';
-import { event as gaEvent } from '../../lib/gtag';
 
 const ROOT = process.cwd();
 
@@ -20,89 +20,53 @@ function fileFor(dir, slug) {
 function listSlugs(dir) {
   const full = path.join(ROOT, 'content', dir);
   if (!fs.existsSync(full)) return [];
-  return fs.readdirSync(full)
-    .filter(f => f.endsWith('.md') || f.endsWith('.mdx'))
-    .map(f => f.replace(/\.(md|mdx)$/,''));
+  return fs
+    .readdirSync(full)
+    .filter((f) => f.endsWith('.md') || f.endsWith('.mdx'))
+    .map((f) => f.replace(/\.(md|mdx)$/i, ''));
 }
 
 export async function getStaticPaths() {
   return {
-    paths: listSlugs('reviews').map(slug => ({ params: { slug } })),
-    fallback: false
+    paths: listSlugs('reviews').map((slug) => ({ params: { slug } })),
+    fallback: false,
   };
 }
 
-function arr(v) {
-  if (!v) return [];
-  if (Array.isArray(v)) return v;
-  if (typeof v === 'string') return v.split('|').join(',').split(',').map(s => s.trim()).filter(Boolean);
-  return [];
+function numOrNull(v) {
+  if (v === null || v === undefined || v === '') return null;
+  const n = Number(v);
+  return Number.isFinite(n) ? n : null;
 }
 
-function normalizeProduct(p = {}) {
-  const pros = arr(p.pros);
-  const cons = arr(p.cons);
-  const images = Array.isArray(p.images) ? p.images : (p.image ? [p.image] : []);
-  const price = p.price != null ? Number(p.price) : null;
-  const priceCurrency = p.priceCurrency || p.currency || 'GBP';
-  const availability = p.availability || (price != null ? 'https://schema.org/InStock' : undefined);
-  const reviewCount = p.reviewCount != null ? Number(p.reviewCount) : undefined;
-  return {
-    name: p.name || '',
-    brand: p.brand || '',
-    images,
-    rating: p.rating != null ? Number(p.rating) : null,
-    reviewCount,
-    price,
-    priceCurrency,
-    availability,
-    link: p.link || '',
-    pros,
-    cons,
-    sku: p.sku || '',
-    gtin: p.gtin || ''
+function strOrNull(v) {
+  if (v === null || v === undefined) return null;
+  const s = String(v).trim();
+  return s.length ? s : null;
+}
+
+function buildProductSEO(meta = {}) {
+  // Accept either a nested `product` object in frontmatter
+  // or flattened fields on meta.
+  const p = meta.product || {};
+
+  const product = {
+    name: strOrNull(p.name || meta.productName || meta.title),
+    brand: strOrNull(p.brand || meta.brand),
+    image: strOrNull(p.image || meta.image),
+    url: strOrNull(p.url || meta.url || (meta.affiliate && meta.affiliate.link)),
+    sku: strOrNull(p.sku || meta.sku),
+    gtin: strOrNull(p.gtin || meta.gtin),
+    price: numOrNull(p.price || meta.price),
+    currency: strOrNull(p.currency || meta.currency || 'GBP'),
+    rating: numOrNull(p.rating || meta.rating),
+    reviewCount: numOrNull(p.reviewCount || meta.reviewCount),
+    availability: strOrNull(p.availability || meta.availability),
   };
-}
 
-function readDocByPathish(pathish) {
-  if (!pathish) return null;
-  let type = '', slug = '';
-  if (pathish.includes('/')) {
-    const [t, ...rest] = pathish.split('/');
-    type = t; slug = rest.join('/');
-  } else slug = pathish;
-  const dirs = type ? [type] : ['guides', 'reviews', 'blog'];
-  for (const d of dirs) {
-    const f = fileFor(d, slug);
-    if (f) {
-      const raw = fs.readFileSync(f, 'utf8');
-      const { data } = matter(raw);
-      return {
-        type: d,
-        slug,
-        title: data?.title || slug.replace(/-/g,' '),
-        description: data?.description || ''
-      };
-    }
-  }
-  return null;
-}
-
-function loadAuthor(authorSlugOrName) {
-  if (!authorSlugOrName) return null;
-  const guess = String(authorSlugOrName).toLowerCase().replace(/\s+/g,'-');
-  const base = path.join(ROOT, 'content', 'authors', guess);
-  const file = fs.existsSync(`${base}.mdx`) ? `${base}.mdx` : (fs.existsSync(`${base}.md`) ? `${base}.md` : null);
-  if (!file) return { name: authorSlugOrName };
-  const raw = fs.readFileSync(file, 'utf8');
-  const { data, content } = matter(raw);
-  return {
-    slug: guess,
-    name: data?.name || authorSlugOrName,
-    title: data?.title || data?.role || '',
-    avatar: data?.avatar || '',
-    bio: content?.trim() || ''
-  };
+  // Remove keys that are all null to avoid sending an empty product block.
+  const hasAnyValue = Object.values(product).some((v) => v !== null);
+  return hasAnyValue ? product : null;
 }
 
 export async function getStaticProps({ params }) {
@@ -110,71 +74,51 @@ export async function getStaticProps({ params }) {
   const raw = fs.readFileSync(file, 'utf8');
   const { data, content } = matter(raw);
 
-  const product = data?.product ? normalizeProduct(data.product) : null;
-  const related = arr(data?.related).map(readDocByPathish).filter(Boolean).slice(0, 8);
-  const author = loadAuthor(data?.author);
+  // Normalize meta (dates to ISO strings, arrays safe, etc.)
+  const normalizedMeta = jsonSafeMeta({ ...data });
 
+  // Prepare MDX
   const mdxSource = await serializeMdx(content || '');
-  const meta = jsonSafeMeta({
-    ...data,
-    product,
-    related,
-    author
-  });
 
-  const title = meta.title || params.slug.replace(/-/g,' ');
-  const description = meta.description || (product?.name ? `Hands-on review: ${product.name}` : 'Independent review.');
+  // Build SEO object with safe values only
+  const title = normalizedMeta.title || params.slug.replace(/-/g, ' ');
+  const description =
+    normalizedMeta.description ||
+    'Independent, hands-on product review from Wild & Well.';
   const url = `https://www.wild-and-well.store/reviews/${params.slug}`;
-  const datePublished = meta.date || null;
-  const dateModified  = meta.updated || meta.date || null;
 
-  const breadcrumbs = [
-    { name: 'Home', item: 'https://www.wild-and-well.store/' },
-    { name: 'Reviews', item: 'https://www.wild-and-well.store/reviews' },
-    { name: title, item: url }
-  ];
+  const seo = {
+    title: `${title} — Review — Wild & Well`,
+    description,
+    url,
+    type: 'article',
+    breadcrumbs: [
+      { name: 'Home', item: 'https://www.wild-and-well.store/' },
+      { name: 'Reviews', item: 'https://www.wild-and-well.store/reviews' },
+      { name: title, item: url },
+    ],
+  };
+
+  const productSEO = buildProductSEO(normalizedMeta);
+  if (productSEO) {
+    // Only attach when at least one key has a non-null value.
+    seo.product = productSEO;
+  }
 
   return {
     props: {
       slug: params.slug,
-      meta,
+      meta: normalizedMeta,
       mdxSource,
-      seo: {
-        title: `${title} — Review — Wild & Well`,
-        description,
-        url,
-        type: 'article',
-        article: { datePublished, dateModified, author: meta.author?.name || meta.author || 'Wild & Well Editorial' },
-        product: product
-          ? {
-              name: product.name,
-              brand: product.brand,
-              images: product.images,
-              reviewBody: description,
-              rating: product.rating,
-              reviewCount: product.reviewCount,
-              link: product.link,
-              price: product.price,
-              priceCurrency: product.priceCurrency,
-              availability: product.availability,
-              pros: product.pros,
-              cons: product.cons
-            }
-          : undefined,
-        breadcrumbs
-      }
+      seo,
     },
-    revalidate: 60 * 60 * 12
+    revalidate: 60 * 60 * 12,
   };
 }
 
 export default function ReviewPage({ slug, meta, mdxSource, seo }) {
-  const p = meta.product || null;
-  const author = meta.author || null;
-
-  const click = (label, link) => {
-    try { gaEvent({ action: 'affiliate_click', category: 'affiliate', label, value: 1 }); } catch {}
-  };
+  const published = meta.date ? new Date(meta.date).toLocaleDateString() : null;
+  const updated = meta.updated ? new Date(meta.updated).toLocaleDateString() : null;
 
   return (
     <>
@@ -182,87 +126,40 @@ export default function ReviewPage({ slug, meta, mdxSource, seo }) {
       <div className="container">
         <article className="post">
           <h1 className="post-title">{meta.title || slug.replace(/-/g, ' ')}</h1>
-          <p className="post-meta">
-            {meta.date ? <>Published {new Date(meta.date).toLocaleDateString()}</> : null}
-            {meta.date && meta.updated ? <> · </> : null}
-            {meta.updated ? <>Updated {new Date(meta.updated).toLocaleDateString()}</> : null}
-            {author?.name ? <> · By {author.name}</> : null}
-          </p>
+          {(published || updated) && (
+            <p className="post-meta">
+              {published ? <>Published {published}</> : null}
+              {published && updated ? <> · </> : null}
+              {updated ? <>Updated {updated}</> : null}
+            </p>
+          )}
 
-          {p ? (
-            <div className="rev-card">
-              <div className="rev-head">
-                <div>
-                  <div className="rev-title">{p.name}</div>
-                  {p.brand ? <div className="rev-sub">{p.brand}</div> : null}
-                </div>
-                {p.rating ? <div className="rev-badge">{Number(p.rating).toFixed(1)}★</div> : null}
-              </div>
-              {p.images?.[0] ? (
-                <img className="rev-img" src={p.images[0]} alt={p.name} loading="lazy" />
+          {meta.hero && (
+            <figure style={{ margin: '16px 0' }}>
+              <img src={meta.hero} alt={meta.title || 'Product image'} />
+              {meta.heroCaption ? (
+                <figcaption className="post-meta">{meta.heroCaption}</figcaption>
               ) : null}
-              {p.price != null ? <div className="rev-price">£{p.price}</div> : null}
-              <div className="rev-actions">
-                {p.link ? (
-                  <a
-                    className="btn btn-primary"
-                    href={`/go/${encodeURIComponent((p.linkSlug || p.name || 'buy').toLowerCase().replace(/\s+/g,'-'))}`}
-                    onClick={() => click(`review_cta_${p.name}`, p.link)}
-                    rel="nofollow sponsored noopener noreferrer"
-                  >
-                    Check price
-                  </a>
-                ) : null}
-              </div>
-              {(p.pros?.length || p.cons?.length) ? (
-                <div className="cmp-procon" style={{marginTop: 12}}>
-                  {p.pros?.length ? (
-                    <div>
-                      <div className="cmp-label good">Pros</div>
-                      <ul>{p.pros.map((x,i)=><li key={i}>{x}</li>)}</ul>
-                    </div>
-                  ) : null}
-                  {p.cons?.length ? (
-                    <div>
-                      <div className="cmp-label bad">Cons</div>
-                      <ul>{p.cons.map((x,i)=><li key={i}>{x}</li>)}</ul>
-                    </div>
-                  ) : null}
-                </div>
-              ) : null}
-            </div>
-          ) : null}
+            </figure>
+          )}
 
-          {mdxSource ? <MDXRemote {...mdxSource} /> : null}
+          <MDXRemote {...mdxSource} components={MDXComponents} />
 
-          {meta.related?.length ? (
-            <div className="relbox">
-              <div className="relbox-title">You might also like</div>
+          {Array.isArray(meta.related) && meta.related.length > 0 ? (
+            <div className="relbox" style={{ marginTop: 24 }}>
+              <div className="relbox-title">Related</div>
               <ul className="relbox-grid">
-                {meta.related.map((r, i) => {
-                  const href = `/${r.type}/${r.slug}`;
-                  return (
-                    <li key={`${r.type}-${r.slug}-${i}`}>
-                      <Link href={href} className="relbox-card">
-                        <span className="relbox-name">{r.title}</span>
-                        {r.description ? <span className="relbox-desc">{r.description}</span> : null}
-                      </Link>
-                    </li>
-                  );
-                })}
+                {meta.related.map((r, i) => (
+                  <li key={`${r.type}-${r.slug}-${i}`}>
+                    <Link href={`/${r.type}/${r.slug}`} className="relbox-card">
+                      <span className="relbox-name">{r.title || r.slug}</span>
+                      {r.description ? (
+                        <span className="relbox-desc">{r.description}</span>
+                      ) : null}
+                    </Link>
+                  </li>
+                ))}
               </ul>
-            </div>
-          ) : null}
-
-          {author?.name || author?.bio ? (
-            <div className="authorbox">
-              {author?.avatar ? <img src={author.avatar} alt={author.name} className="authorbox-avatar" /> : null}
-              <div>
-                <div className="authorbox-name">{author?.name}</div>
-                {author?.title ? <div className="authorbox-title">{author.title}</div> : null}
-                {author?.bio ? <p className="authorbox-bio">{author.bio}</p> : null}
-                <p><Link href={`/authors/${(author.slug || author.name || '').toLowerCase().replace(/\s+/g,'-')}`}>More from this author →</Link></p>
-              </div>
             </div>
           ) : null}
         </article>
