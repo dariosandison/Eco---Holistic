@@ -1,9 +1,9 @@
 // pages/_app.js
-import React from 'react';
+import '../styles/globals.css';
 import { MDXProvider } from '@mdx-js/react';
 import MDXComponents from '../components/MDXComponents';
 
-export default function MyApp({ Component, pageProps }) {
+function App({ Component, pageProps }) {
   const getLayout = Component.getLayout || ((page) => page);
   return (
     <MDXProvider components={MDXComponents}>
@@ -11,3 +11,5 @@ export default function MyApp({ Component, pageProps }) {
     </MDXProvider>
   );
 }
+
+export default App;
