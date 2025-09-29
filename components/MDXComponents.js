@@ -1,53 +1,88 @@
 // components/MDXComponents.js
 import React from 'react';
 import Link from 'next/link';
+import NextImage from 'next/image';
 
-// Local MDX-friendly components
 import Callout from './Callout';
 import CompareInline from './CompareInline';
 import CompareTable from './CompareTable';
 import FAQ from './FAQ';
-import SmartLink from './SmartLink.jsx';
 
 /**
- * MDX-safe image that works during SSG/ISR without extra config.
- * (We avoid next/image here because MDX often brings arbitrary external URLs.)
+ * Smart anchor: internal links use <Link>, external open in new tab.
  */
-function MdxImage(props) {
-  const { alt = '', title, width, height, ...rest } = props;
+function SmartLink(props) {
+  const { href = '', children, ...rest } = props;
+
+  const isAnchor = href.startsWith('#');
+  const isExternal =
+    /^https?:\/\//i.test(href) ||
+    href.startsWith('mailto:') ||
+    href.startsWith('tel:');
+
+  if (!href) {
+    return <a {...rest}>{children}</a>;
+  }
+
+  if (isAnchor) {
+    // Hash links stay as <a>
+    return <a href={href} {...rest}>{children}</a>;
+  }
+
+  if (isExternal) {
+    return (
+      <a href={href} target="_blank" rel="noopener noreferrer" {...rest}>
+        {children}
+      </a>
+    );
+  }
+
+  // Internal links
   return (
-    <img
+    <Link href={href} {...rest}>
+      {children}
+    </Link>
+  );
+}
+
+/**
+ * MDX <img /> wrapper that uses next/image when possible.
+ */
+function MdxImage({ src = '', alt = '', width, height, ...rest }) {
+  // Allow plain <img> for unknown dimensions/SVGs/data URLs.
+  const usePlainImg =
+    !width ||
+    !height ||
+    src.endsWith('.svg') ||
+    src.startsWith('data:');
+
+  if (usePlainImg) {
+    return <img src={src} alt={alt} {...rest} />;
+  }
+
+  return (
+    <NextImage
+      src={src}
       alt={alt}
-      title={title || alt}
-      loading="lazy"
-      decoding="async"
+      width={Number(width)}
+      height={Number(height)}
       {...rest}
-      style={{
-        maxWidth: '100%',
-        height: 'auto',
-        display: 'block',
-        margin: '1rem auto',
-      }}
     />
   );
 }
 
 /**
- * Map of elements/components exposed to MDXRemote.
- * - HTML anchors -> SmartLink (adds target/rel for external links).
- * - img/Image -> MdxImage
- * - Custom blocks available to MDX content.
+ * Exported as both default and named `mdxComponents` to satisfy all imports.
  */
 const mdxComponents = {
   a: SmartLink,
-  img: (p) => <MdxImage {...p} />,
-  Image: (p) => <MdxImage {...p} />,
+  img: (props) => <MdxImage {...props} />,
+  Image: (props) => <MdxImage {...props} />,
   Callout,
   CompareInline,
   CompareTable,
   FAQ,
-  // You can add more MDX components here as needed
 };
 
-export default mdxComponents;   // default import support
-export { mdxComponents };       // named import support
+export default mdxComponents;
+export { mdxComponents };
