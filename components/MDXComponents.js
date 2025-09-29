@@ -4,15 +4,25 @@ import AffiliateLink from './mdx/AffiliateLink';
 import BuyBox from './mdx/BuyBox';
 import ProsCons from './mdx/ProsCons';
 import Disclosure from './mdx/Disclosure';
-// FIX: ComparisonTable lives in components/ComparisonTable.jsx (not in components/mdx)
 import ComparisonTable from './ComparisonTable';
+import StickyCTA from './mdx/StickyCTA';
 
-/**
- * Smart anchor: external links open in a new tab with sponsored/nofollow;
- * internal links use Next <Link> for client-side navigation.
- */
-const A = ({ href = '', children, className = '', ...rest }) => {
+const A = ({ href = '', children, className = '', onClick, ...rest }) => {
   const isExternal = /^https?:\/\//i.test(href);
+  const handleClick = (e) => {
+    try {
+      if (isExternal && typeof window !== 'undefined' && window.plausible) {
+        window.plausible('Outbound Click', {
+          props: {
+            href,
+            page: typeof location !== 'undefined' ? location.pathname : '',
+          },
+        });
+      }
+    } catch {}
+    if (typeof onClick === 'function') onClick(e);
+  };
+
   if (isExternal) {
     return (
       <a
@@ -20,6 +30,7 @@ const A = ({ href = '', children, className = '', ...rest }) => {
         target="_blank"
         rel="nofollow sponsored noopener noreferrer"
         className={className}
+        onClick={handleClick}
         {...rest}
       >
         {children}
@@ -27,7 +38,7 @@ const A = ({ href = '', children, className = '', ...rest }) => {
     );
   }
   return (
-    <Link href={href} className={className} {...rest}>
+    <Link href={href} className={className} onClick={handleClick} {...rest}>
       {children}
     </Link>
   );
@@ -40,8 +51,8 @@ const MDXComponents = {
   ProsCons,
   Disclosure,
   ComparisonTable,
+  StickyCTA,
 };
 
-// Support both default export and named `mdxComponents` for existing imports.
 export const mdxComponents = MDXComponents;
 export default MDXComponents;
