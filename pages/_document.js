@@ -1,26 +1,25 @@
-// pages/_document.js
-import Document, { Html, Head, Main, NextScript } from 'next/document';
+// pages/_document.jsx
+import { Html, Head, Main, NextScript } from 'next/document';
 
-export default class MyDocument extends Document {
-  render() {
-    return (
-      <Html lang="en-GB">
-        <Head>
-          {/* Performance hints */}
-          <link rel="preconnect" href="https://www.googletagmanager.com" />
-          <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
-          <link rel="preconnect" href="https://www.google-analytics.com" />
-          <link rel="dns-prefetch" href="https://www.google-analytics.com" />
+export default function Document() {
+  return (
+    <Html lang="en">
+      <Head>
+        {/* App identity */}
+        <link rel="icon" href="/favicon.ico" />
+        <link rel="manifest" href="/manifest.webmanifest" />
 
-          {/* UX */}
-          <meta name="theme-color" content="#ffffff" />
-          <meta name="color-scheme" content="light dark" />
-        </Head>
-        <body>
-          <Main />
-          <NextScript />
-        </body>
-      </Html>
-    );
-  }
+        {/* Performance: hint the browser we’ll load images & styles */}
+        <meta name="theme-color" content="#ffffff" />
+        <meta name="color-scheme" content="light" />
+
+        {/* Ensure images don’t cause layout shift when dimensions are set */}
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+      </Head>
+      <body>
+        <Main />
+        <NextScript />
+      </body>
+    </Html>
+  );
 }
