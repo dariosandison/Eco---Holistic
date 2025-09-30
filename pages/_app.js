@@ -57,6 +57,13 @@ function MyApp({ Component, pageProps }) {
   return (
     <>
       <Head>
+    // inside MyApp return, after <Head>...</Head>
+import dynamic from 'next/dynamic';
+const SiteStructuredData = dynamic(() => import('../components/SiteStructuredData'), { ssr: true });
+
+// then in JSX, right under <Head>…</Head>:
+<SiteStructuredData />
+
         <meta name="viewport" content="width=device-width,initial-scale=1" />
       </Head>
 
