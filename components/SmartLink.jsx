@@ -1,11 +1,11 @@
 // components/SmartLink.jsx
-import Link from 'next/link';
+import Link from "next/link";
 
-export default function SmartLink({ href = '', children, ...rest }) {
-  const isInternal = href && (href.startsWith('/') || href.startsWith('#'));
+export default function SmartLink({ href = "", children, ...rest }) {
+  const isInternal = href?.startsWith("/") || href?.startsWith("#");
+  const isGoLink = href?.startsWith("/go/");
 
   if (isInternal) {
-    // Internal links use Next.js <Link> for client-side navigation
     return (
       <Link href={href} {...rest}>
         {children}
@@ -13,12 +13,15 @@ export default function SmartLink({ href = '', children, ...rest }) {
     );
   }
 
-  // External/affiliate links are always nofollow+sponsored
+  // External
+  const rel = ["nofollow", "noopener", "noreferrer"];
+  if (isGoLink) rel.unshift("sponsored");
+
   return (
     <a
       href={href}
       target="_blank"
-      rel="nofollow sponsored noopener noreferrer"
+      rel={rel.join(" ")}
       {...rest}
     >
       {children}
