@@ -1,205 +1,90 @@
 // components/SEO.js
 import React from 'react';
 import Head from 'next/head';
+import StructuredDataAuto from './StructuredDataAuto';
+import { toAbsolute } from '../lib/urls';
 
-const siteUrl =
-  process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/+$/, '') ||
-  'https://example.com';
+function isStr(v) { return typeof v === 'string' && v.trim().length > 0; }
 
-function isNonEmptyString(v) {
-  return typeof v === 'string' && v.trim().length > 0;
-}
-function toAbs(url) {
-  if (!isNonEmptyString(url)) return undefined;
-  try {
-    return new URL(url, siteUrl).toString();
-  } catch {
-    return undefined;
-  }
-}
-function clean(obj) {
-  if (Array.isArray(obj)) return obj.map(clean).filter((v) => v != null);
-  if (obj && typeof obj === 'object') {
-    const out = {};
-    for (const [k, v] of Object.entries(obj)) {
-      const cv = clean(v);
-      if (cv !== undefined && cv !== null && cv !== '') out[k] = cv;
-    }
-    return Object.keys(out).length ? out : undefined;
-  }
-  return obj === undefined ? undefined : obj;
-}
-function JsonLd({ data }) {
-  const content = JSON.stringify(clean(data));
-  if (!content || content === '{}' || content === '[]') return null;
-  return (
-    <script
-      type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: content }}
-    />
-  );
-}
-
-/**
- * SEO component
- *
- * Props:
- * - title, description, image, canonical, noindex
- * - type: 'website' | 'article' | 'product' | 'review'
- * - breadcrumbs: [{ name, url }]
- * - article: { authorName, publishedTime, modifiedTime, tags?: string[] }
- * - product: { name, image, brand, sku, gtin, price, currency, url, rating, ratingCount }
- * - faq: [{ question, answer }]
- * - organization: { name, logo, url }
- */
 export default function SEO({
   title,
   description,
   image,
+  url,
   canonical,
   noindex = false,
-  type = 'website',
-  breadcrumbs = [],
-  article,
-  product,
-  faq = [],
-  organization = { name: 'Wild & Well', logo: undefined, url: siteUrl },
-  siteName = 'Wild & Well',
+  openGraph = {},
+  twitter = {},
+  // Structured data friendly props
+  seo,          // optional: { title, description, image, author, datePublished, dateModified, url }
+  product,      // optional: see StructuredDataAuto
+  review,       // optional
+  items,        // optional
+  faq,          // optional
+  breadcrumbs,  // optional
 }) {
-  const finalTitle = isNonEmptyString(title) ? title : siteName;
-  const finalDesc = isNonEmptyString(description)
-    ? description
-    : 'Evidence-guided guides, reviews, and how-tos.';
-  const finalImage =
-    toAbs(image) ||
-    `${siteUrl}/og-default.jpg`; // ensure you have a default OG image
-  const finalCanonical = toAbs(canonical) || undefined;
+  const siteName = process.env.NEXT_PUBLIC_SITE_NAME || 'Site';
+  const pageTitle = isStr(title) ? title : isStr(seo?.title) ? seo.title : siteName;
+  const desc = isStr(description) ? description : isStr(seo?.description) ? seo.description : undefined;
+  const ogImage = isStr(image) ? image : isStr(seo?.image) ? seo.image : undefined;
+  const pageUrl = isStr(url) ? url : isStr(seo?.url) ? seo.url : undefined;
+  const canon = isStr(canonical) ? canonical : isStr(pageUrl) ? pageUrl : undefined;
 
-  // Open Graph type
-  const ogType =
-    type === 'article' || article ? 'article' : type === 'product' ? 'product' : 'website';
+  const og = {
+    title: pageTitle,
+    description: desc,
+    type: openGraph?.type || (product ? 'product' : 'article'),
+    url: pageUrl,
+    site_name: siteName,
+    images: ogImage ? [toAbsolute(ogImage)] : undefined,
+    ...openGraph,
+  };
 
-  // JSON-LD: Organization (site-wide)
-  const orgLd = clean({
-    '@context': 'https://schema.org',
-    '@type': 'Organization',
-    name: organization?.name || siteName,
-    url: organization?.url || siteUrl,
-    logo: toAbs(organization?.logo),
-  });
+  const tw = {
+    card: twitter?.card || (ogImage ? 'summary_large_image' : 'summary'),
+    title: twitter?.title || pageTitle,
+    description: twitter?.description || desc,
+    image: twitter?.image || ogImage,
+  };
 
-  // JSON-LD: Breadcrumbs
-  const breadcrumbLd =
-    breadcrumbs?.length > 0
-      ? clean({
-          '@context': 'https://schema.org',
-          '@type': 'BreadcrumbList',
-          itemListElement: breadcrumbs.map((b, i) => ({
-            '@type': 'ListItem',
-            position: i + 1,
-            name: b.name,
-            item: toAbs(b.url),
-          })),
-        })
-      : null;
+  const robots = noindex ? 'noindex, nofollow' : 'index, follow';
 
-  // JSON-LD: Article
-  const articleLd =
-    ogType === 'article'
-      ? clean({
-          '@context': 'https://schema.org',
-          '@type': 'Article',
-          headline: finalTitle,
-          description: finalDesc,
-          image: finalImage,
-          author: article?.authorName
-            ? { '@type': 'Person', name: article.authorName }
-            : { '@type': 'Organization', name: siteName },
-          datePublished: article?.publishedTime,
-          dateModified: article?.modifiedTime || article?.publishedTime,
-          mainEntityOfPage: finalCanonical || siteUrl,
-          keywords: article?.tags,
-        })
-      : null;
-
-  // JSON-LD: Product (for product pages or pages with a primary product)
-  const productLd =
-    type === 'product' || product
-      ? clean({
-          '@context': 'https://schema.org',
-          '@type': 'Product',
-          name: product?.name,
-          image: toAbs(product?.image) || finalImage,
-          brand: product?.brand,
-          sku: product?.sku,
-          gtin13: product?.gtin,
-          url: toAbs(product?.url) || finalCanonical,
-          aggregateRating:
-            product?.rating && product?.ratingCount
-              ? {
-                  '@type': 'AggregateRating',
-                  ratingValue: product.rating,
-                  reviewCount: product.ratingCount,
-                }
-              : undefined,
-          offers:
-            product?.price && (product?.url || finalCanonical)
-              ? {
-                  '@type': 'Offer',
-                  price: String(product.price),
-                  priceCurrency: product.currency || 'USD',
-                  url: toAbs(product.url) || finalCanonical,
-                  availability: 'https://schema.org/InStock',
-                }
-              : undefined,
-        })
-      : null;
-
-  // JSON-LD: FAQ
-  const faqLd =
-    Array.isArray(faq) && faq.length
-      ? clean({
-          '@context': 'https://schema.org',
-          '@type': 'FAQPage',
-          mainEntity: faq.map((q) => ({
-            '@type': 'Question',
-            name: q.question,
-            acceptedAnswer: {
-              '@type': 'Answer',
-              text: q.answer,
-            },
-          })),
-        })
-      : null;
+  // Feed SEO props into StructuredDataAuto
+  const sdSeo = seo || { title: pageTitle, description: desc, image: ogImage, url: pageUrl };
 
   return (
-    <Head>
-      {/* Basic */}
-      {finalTitle ? <title>{finalTitle}</title> : null}
-      {finalDesc ? <meta name="description" content={finalDesc} /> : null}
-      {noindex ? <meta name="robots" content="noindex,nofollow" /> : null}
-      {finalCanonical ? <link rel="canonical" href={finalCanonical} /> : null}
+    <>
+      <Head>
+        <title>{pageTitle}</title>
+        {desc ? <meta name="description" content={desc} /> : null}
+        <meta name="robots" content={robots} />
+        {canon ? <link rel="canonical" href={canon} /> : null}
 
-      {/* Open Graph */}
-      <meta property="og:type" content={ogType} />
-      {finalTitle ? <meta property="og:title" content={finalTitle} /> : null}
-      {finalDesc ? <meta property="og:description" content={finalDesc} /> : null}
-      {finalImage ? <meta property="og:image" content={finalImage} /> : null}
-      <meta property="og:site_name" content={siteName} />
-      {finalCanonical ? <meta property="og:url" content={finalCanonical} /> : null}
+        {/* Open Graph */}
+        {og.title ? <meta property="og:title" content={og.title} /> : null}
+        {og.description ? <meta property="og:description" content={og.description} /> : null}
+        {og.type ? <meta property="og:type" content={og.type} /> : null}
+        {og.url ? <meta property="og:url" content={og.url} /> : null}
+        {og.site_name ? <meta property="og:site_name" content={og.site_name} /> : null}
+        {Array.isArray(og.images) ? og.images.map((img, i) => (
+          <meta key={i} property="og:image" content={img} />
+        )) : null}
 
-      {/* Twitter */}
-      <meta name="twitter:card" content="summary_large_image" />
-      {finalTitle ? <meta name="twitter:title" content={finalTitle} /> : null}
-      {finalDesc ? <meta name="twitter:description" content={finalDesc} /> : null}
-      {finalImage ? <meta name="twitter:image" content={finalImage} /> : null}
+        {/* Twitter */}
+        {tw.card ? <meta name="twitter:card" content={tw.card} /> : null}
+        {tw.title ? <meta name="twitter:title" content={tw.title} /> : null}
+        {tw.description ? <meta name="twitter:description" content={tw.description} /> : null}
+        {tw.image ? <meta name="twitter:image" content={tw.image} /> : null}
+      </Head>
 
-      {/* JSON-LD blocks */}
-      <JsonLd data={orgLd} />
-      <JsonLd data={breadcrumbLd} />
-      <JsonLd data={articleLd} />
-      <JsonLd data={productLd} />
-      <JsonLd data={faqLd} />
-    </Head>
+      <StructuredDataAuto
+        seo={sdSeo}
+        product={product}
+        review={review}
+        items={items}
+        faq={faq}
+        breadcrumbs={breadcrumbs}
+      />
+    </>
   );
 }
