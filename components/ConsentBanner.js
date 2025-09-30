@@ -1,107 +1,99 @@
-// /components/ConsentBanner.js
-import { useEffect, useState } from 'react';
-import * as gtag from '../src/lib/gtag';
-
-const STORAGE_KEY = 'eh_consent_choice_v1';
-
-function applyConsent(state) {
-  if (typeof window === 'undefined' || !window.gtag) return;
-  window.gtag('consent', 'update', {
-    ad_storage: state,
-    analytics_storage: state,
-    ad_user_data: state,
-    ad_personalization: state,
-  });
-}
+// components/ConsentBanner.js
+import { useEffect, useState } from "react";
 
 export default function ConsentBanner() {
   const [show, setShow] = useState(false);
 
   useEffect(() => {
-    if (typeof window === 'undefined') return;
-    const saved = localStorage.getItem(STORAGE_KEY); // 'granted' | 'denied' | null
-    if (saved === 'granted' || saved === 'denied') {
-      // Ensure GA gets the persisted choice on load
-      applyConsent(saved);
-      setShow(false);
-    } else {
-      // No choice yet — show banner (defaults are set to "denied" in _app.js)
+    try {
+      const v = localStorage.getItem("consent.choice");
+      setShow(v !== "granted");
+    } catch {
       setShow(true);
     }
   }, []);
 
   const accept = () => {
     try {
-      localStorage.setItem(STORAGE_KEY, 'granted');
+      localStorage.setItem("consent.choice", "granted");
     } catch {}
-    applyConsent('granted');
-    gtag.event('consent_accept', { page_path: typeof window !== 'undefined' ? window.location.pathname : undefined });
+    if (typeof window !== "undefined" && window.gtag) {
+      // Opt into analytics only; keep ad_storage denied unless you manage ads.
+      window.gtag("consent", "update", {
+        analytics_storage: "granted",
+        ad_storage: "denied",
+      });
+    }
     setShow(false);
   };
 
-  const decline = () => {
+  const dismiss = () => {
     try {
-      localStorage.setItem(STORAGE_KEY, 'denied');
+      localStorage.setItem("consent.choice", "dismissed");
     } catch {}
-    applyConsent('denied');
-    gtag.event('consent_decline', { page_path: typeof window !== 'undefined' ? window.location.pathname : undefined });
     setShow(false);
   };
 
   if (!show) return null;
 
   return (
-    <div style={barStyle} role="dialog" aria-live="polite" aria-label="Cookie consent">
-      <div style={innerStyle}>
-        <p style={textStyle}>
-          We use cookies to analyze traffic and improve your experience. You can accept or decline. See our{' '}
-          <a href="/privacy" style={linkStyle}>Privacy Policy</a>.
-        </p>
-        <div style={btnWrap}>
-          <button onClick={decline} style={{ ...btnBase, ...btnGhost }} aria-label="Decline analytics cookies">
-            Decline
+    <div
+      style={{
+        position: "fixed",
+        left: 12,
+        right: 12,
+        bottom: 12,
+        zIndex: 50,
+        border: "1px solid #e5e7eb",
+        borderRadius: 12,
+        background: "#ffffff",
+        boxShadow: "0 8px 24px rgba(0,0,0,.12)",
+        padding: 16,
+        maxWidth: 800,
+        margin: "0 auto",
+      }}
+      role="dialog"
+      aria-live="polite"
+      aria-label="Cookie and analytics consent"
+    >
+      <div style={{ display: "flex", gap: 12, alignItems: "flex-start" }}>
+        <div style={{ flex: 1 }}>
+          <strong>Analytics cookies</strong>
+          <p style={{ margin: "6px 0 0", opacity: 0.85 }}>
+            We use privacy-friendly analytics to understand traffic. No ads are
+            personalized. You can opt in to analytics below.
+          </p>
+        </div>
+        <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
+          <button
+            onClick={accept}
+            style={{
+              padding: "10px 14px",
+              borderRadius: 10,
+              border: "1px solid #15803d",
+              background: "#16a34a",
+              color: "#fff",
+              fontWeight: 600,
+              cursor: "pointer",
+            }}
+          >
+            Accept analytics
           </button>
-          <button onClick={accept} style={{ ...btnBase, ...btnPrimary }} aria-label="Accept analytics cookies">
-            Accept
+          <button
+            onClick={dismiss}
+            style={{
+              padding: "10px 14px",
+              borderRadius: 10,
+              border: "1px solid #d1d5db",
+              background: "#fff",
+              color: "#111",
+              cursor: "pointer",
+            }}
+          >
+            Maybe later
           </button>
         </div>
       </div>
     </div>
   );
 }
-
-const barStyle = {
-  position: 'fixed',
-  left: 0,
-  right: 0,
-  bottom: 0,
-  zIndex: 1000,
-  background: 'rgba(18,18,18,0.98)',
-  backdropFilter: 'saturate(180%) blur(8px)',
-  color: '#fff',
-  padding: '16px',
-};
-
-const innerStyle = {
-  maxWidth: '960px',
-  margin: '0 auto',
-  display: 'flex',
-  gap: '12px',
-  alignItems: 'center',
-  justifyContent: 'space-between',
-  flexWrap: 'wrap',
-};
-
-const textStyle = { margin: 0, lineHeight: 1.4, fontSize: '14px' };
-const linkStyle = { color: '#8dd3ff', textDecoration: 'underline' };
-
-const btnWrap = { display: 'flex', gap: '8px' };
-const btnBase = {
-  borderRadius: '8px',
-  padding: '10px 14px',
-  fontSize: '14px',
-  cursor: 'pointer',
-  border: '1px solid transparent',
-};
-const btnPrimary = { background: '#34c759', color: '#0b270f' };
-const btnGhost = { background: 'transparent', color: '#fff', borderColor: 'rgba(255,255,255,0.3)' };
