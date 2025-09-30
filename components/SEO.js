@@ -1,131 +1,205 @@
 // components/SEO.js
-// Safe, minimal SEO + optional JSON-LD helpers.
-
+import React from 'react';
 import Head from 'next/head';
 
-const siteName = process.env.NEXT_PUBLIC_SITE_NAME || 'Wild & Well';
-const siteUrl = (process.env.NEXT_PUBLIC_SITE_URL || 'https://example.com').replace(/\/+$/, '');
+const siteUrl =
+  process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/+$/, '') ||
+  'https://example.com';
 
-const isNonEmptyString = (v) => typeof v === 'string' && v.trim().length > 0;
-
-const clean = (obj) => {
-  if (!obj || typeof obj !== 'object') return undefined;
-  if (Array.isArray(obj)) {
-    const arr = obj.map(clean).filter((x) => x !== undefined);
-    return arr.length ? arr : undefined;
+function isNonEmptyString(v) {
+  return typeof v === 'string' && v.trim().length > 0;
+}
+function toAbs(url) {
+  if (!isNonEmptyString(url)) return undefined;
+  try {
+    return new URL(url, siteUrl).toString();
+  } catch {
+    return undefined;
   }
-  const out = {};
-  for (const [k, v] of Object.entries(obj)) {
-    if (v === undefined) continue;
-    if (v === null) {
-      out[k] = null;
-    } else if (typeof v === 'object') {
-      const c = clean(v);
-      if (c !== undefined) out[k] = c;
-    } else {
-      out[k] = v;
+}
+function clean(obj) {
+  if (Array.isArray(obj)) return obj.map(clean).filter((v) => v != null);
+  if (obj && typeof obj === 'object') {
+    const out = {};
+    for (const [k, v] of Object.entries(obj)) {
+      const cv = clean(v);
+      if (cv !== undefined && cv !== null && cv !== '') out[k] = cv;
     }
+    return Object.keys(out).length ? out : undefined;
   }
-  return Object.keys(out).length ? out : undefined;
-};
+  return obj === undefined ? undefined : obj;
+}
+function JsonLd({ data }) {
+  const content = JSON.stringify(clean(data));
+  if (!content || content === '{}' || content === '[]') return null;
+  return (
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: content }}
+    />
+  );
+}
 
-const jsonLd = (obj) => {
-  const c = clean(obj);
-  return c ? JSON.stringify(c) : null;
-};
-
+/**
+ * SEO component
+ *
+ * Props:
+ * - title, description, image, canonical, noindex
+ * - type: 'website' | 'article' | 'product' | 'review'
+ * - breadcrumbs: [{ name, url }]
+ * - article: { authorName, publishedTime, modifiedTime, tags?: string[] }
+ * - product: { name, image, brand, sku, gtin, price, currency, url, rating, ratingCount }
+ * - faq: [{ question, answer }]
+ * - organization: { name, logo, url }
+ */
 export default function SEO({
   title,
   description,
   image,
-  url,
-  breadcrumbs,
-  product,
+  canonical,
+  noindex = false,
   type = 'website',
+  breadcrumbs = [],
+  article,
+  product,
+  faq = [],
+  organization = { name: 'Wild & Well', logo: undefined, url: siteUrl },
+  siteName = 'Wild & Well',
 }) {
-  const pageTitle = isNonEmptyString(title) ? title : siteName;
-  const pageDesc = isNonEmptyString(description)
+  const finalTitle = isNonEmptyString(title) ? title : siteName;
+  const finalDesc = isNonEmptyString(description)
     ? description
-    : 'Practical guides, honest reviews, and low-additive picks.';
-  const canonical = isNonEmptyString(url)
-    ? (url.startsWith('http') ? url : `${siteUrl}${url.startsWith('/') ? '' : '/'}${url}`)
-    : undefined;
-  const ogImage = isNonEmptyString(image) ? image : undefined;
+    : 'Evidence-guided guides, reviews, and how-tos.';
+  const finalImage =
+    toAbs(image) ||
+    `${siteUrl}/og-default.jpg`; // ensure you have a default OG image
+  const finalCanonical = toAbs(canonical) || undefined;
 
+  // Open Graph type
+  const ogType =
+    type === 'article' || article ? 'article' : type === 'product' ? 'product' : 'website';
+
+  // JSON-LD: Organization (site-wide)
+  const orgLd = clean({
+    '@context': 'https://schema.org',
+    '@type': 'Organization',
+    name: organization?.name || siteName,
+    url: organization?.url || siteUrl,
+    logo: toAbs(organization?.logo),
+  });
+
+  // JSON-LD: Breadcrumbs
   const breadcrumbLd =
-    Array.isArray(breadcrumbs) && breadcrumbs.length > 0
-      ? {
+    breadcrumbs?.length > 0
+      ? clean({
           '@context': 'https://schema.org',
           '@type': 'BreadcrumbList',
-          itemListElement: breadcrumbs.map((b, i) =>
-            clean({
-              '@type': 'ListItem',
-              position: i + 1,
-              name: b?.name || '',
-              item:
-                isNonEmptyString(b?.item) && !b.item.startsWith('http')
-                  ? `${siteUrl}${b.item.startsWith('/') ? '' : '/'}${b.item}`
-                  : b?.item || undefined,
-            })
-          ),
-        }
+          itemListElement: breadcrumbs.map((b, i) => ({
+            '@type': 'ListItem',
+            position: i + 1,
+            name: b.name,
+            item: toAbs(b.url),
+          })),
+        })
       : null;
 
+  // JSON-LD: Article
+  const articleLd =
+    ogType === 'article'
+      ? clean({
+          '@context': 'https://schema.org',
+          '@type': 'Article',
+          headline: finalTitle,
+          description: finalDesc,
+          image: finalImage,
+          author: article?.authorName
+            ? { '@type': 'Person', name: article.authorName }
+            : { '@type': 'Organization', name: siteName },
+          datePublished: article?.publishedTime,
+          dateModified: article?.modifiedTime || article?.publishedTime,
+          mainEntityOfPage: finalCanonical || siteUrl,
+          keywords: article?.tags,
+        })
+      : null;
+
+  // JSON-LD: Product (for product pages or pages with a primary product)
   const productLd =
-    product && isNonEmptyString(product.name)
+    type === 'product' || product
       ? clean({
           '@context': 'https://schema.org',
           '@type': 'Product',
-          name: product.name,
-          image: product.image,
-          description: product.description,
-          brand: product.brand ? { '@type': 'Brand', name: product.brand } : undefined,
-          sku: product.sku,
-          gtin13: product.gtin,
-          url:
-            isNonEmptyString(product.url) && !product.url.startsWith('http')
-              ? `${siteUrl}${product.url.startsWith('/') ? '' : '/'}${product.url}`
-              : product.url,
-          offers: Array.isArray(product.offers)
-            ? product.offers.map((o) =>
-                clean({
+          name: product?.name,
+          image: toAbs(product?.image) || finalImage,
+          brand: product?.brand,
+          sku: product?.sku,
+          gtin13: product?.gtin,
+          url: toAbs(product?.url) || finalCanonical,
+          aggregateRating:
+            product?.rating && product?.ratingCount
+              ? {
+                  '@type': 'AggregateRating',
+                  ratingValue: product.rating,
+                  reviewCount: product.ratingCount,
+                }
+              : undefined,
+          offers:
+            product?.price && (product?.url || finalCanonical)
+              ? {
                   '@type': 'Offer',
-                  url:
-                    isNonEmptyString(o?.url) && !o.url.startsWith('http')
-                      ? `${siteUrl}${o.url.startsWith('/') ? '' : '/'}${o.url}`
-                      : o?.url,
-                  priceCurrency: o?.priceCurrency,
-                  price: o?.price,
-                  availability: o?.availability,
-                })
-              )
-            : undefined,
-          aggregateRating: product.aggregateRating
-            ? clean({
-                '@type': 'AggregateRating',
-                ratingValue: product.aggregateRating.ratingValue,
-                ratingCount: product.aggregateRating.ratingCount,
-              })
-            : undefined,
+                  price: String(product.price),
+                  priceCurrency: product.currency || 'USD',
+                  url: toAbs(product.url) || finalCanonical,
+                  availability: 'https://schema.org/InStock',
+                }
+              : undefined,
+        })
+      : null;
+
+  // JSON-LD: FAQ
+  const faqLd =
+    Array.isArray(faq) && faq.length
+      ? clean({
+          '@context': 'https://schema.org',
+          '@type': 'FAQPage',
+          mainEntity: faq.map((q) => ({
+            '@type': 'Question',
+            name: q.question,
+            acceptedAnswer: {
+              '@type': 'Answer',
+              text: q.answer,
+            },
+          })),
         })
       : null;
 
   return (
     <Head>
-      <title>{pageTitle}</title>
-      {isNonEmptyString(pageDesc) ? <meta name="description" content={pageDesc} /> : null}
-      <meta property="og:type" content={type} />
+      {/* Basic */}
+      {finalTitle ? <title>{finalTitle}</title> : null}
+      {finalDesc ? <meta name="description" content={finalDesc} /> : null}
+      {noindex ? <meta name="robots" content="noindex,nofollow" /> : null}
+      {finalCanonical ? <link rel="canonical" href={finalCanonical} /> : null}
+
+      {/* Open Graph */}
+      <meta property="og:type" content={ogType} />
+      {finalTitle ? <meta property="og:title" content={finalTitle} /> : null}
+      {finalDesc ? <meta property="og:description" content={finalDesc} /> : null}
+      {finalImage ? <meta property="og:image" content={finalImage} /> : null}
       <meta property="og:site_name" content={siteName} />
-      <meta property="og:title" content={pageTitle} />
-      {isNonEmptyString(pageDesc) ? <meta property="og:description" content={pageDesc} /> : null}
-      {isNonEmptyString(ogImage) ? <meta property="og:image" content={ogImage} /> : null}
-      {isNonEmptyString(canonical) ? <link rel="canonical" href={canonical} /> : null}
-      {breadcrumbLd ? (
-        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLd(breadcrumbLd) }} />
-      ) : null}
-      {productLd ? (
-        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLd(productLd) }} />
-      ) : null}
+      {finalCanonical ? <meta property="og:url" content={finalCanonical} /> : null}
+
+      {/* Twitter */}
+      <meta name="twitter:card" content="summary_large_image" />
+      {finalTitle ? <meta name="twitter:title" content={finalTitle} /> : null}
+      {finalDesc ? <meta name="twitter:description" content={finalDesc} /> : null}
+      {finalImage ? <meta name="twitter:image" content={finalImage} /> : null}
+
+      {/* JSON-LD blocks */}
+      <JsonLd data={orgLd} />
+      <JsonLd data={breadcrumbLd} />
+      <JsonLd data={articleLd} />
+      <JsonLd data={productLd} />
+      <JsonLd data={faqLd} />
     </Head>
   );
 }
