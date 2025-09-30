@@ -1,36 +1,34 @@
-import React from 'react';
+// components/FAQ.jsx
+import { useMemo } from "react";
 
-function stripTags(html = '') {
-  try { return html.replace(/<[^>]*>/g, '').trim(); } catch { return html || ''; }
-}
+export default function FAQ({ items = [], title = "FAQ" }) {
+  if (!Array.isArray(items) || !items.length) return null;
 
-export default function FAQ({ items = [] }) {
-  const jsonLd = {
-    '@context': 'https://schema.org',
-    '@type': 'FAQPage',
-    mainEntity: items.map(({ question, answer }) => ({
-      '@type': 'Question',
-      name: stripTags(question),
-      acceptedAnswer: {
-        '@type': 'Answer',
-        text: stripTags(answer),
-      },
-    })),
-  };
+  const jsonLd = useMemo(() => {
+    const data = {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      mainEntity: items.map(({ q, a }) => ({
+        "@type": "Question",
+        name: q,
+        acceptedAnswer: { "@type": "Answer", text: a },
+      })),
+    };
+    return JSON.stringify(data);
+  }, [items]);
 
   return (
-    <section className="faq">
-      <h2>FAQs</h2>
+    <section style={{ borderTop: "1px solid #eee", paddingTop: 12 }}>
+      <h3 style={{ margin: "0 0 8px" }}>{title}</h3>
       <div>
-        {items.map(({ question, answer }, idx) => (
-          <details key={idx} style={{ margin: '0.5rem 0', background: '#fafafa', padding: '0.75rem 1rem', borderRadius: 12 }}>
-            <summary style={{ cursor: 'pointer', fontWeight: 600 }}>{question}</summary>
-            <div style={{ marginTop: '0.5rem' }}
-                 dangerouslySetInnerHTML={{ __html: answer }} />
+        {items.map(({ q, a }, i) => (
+          <details key={i} style={{ margin: "8px 0", background: "#fafafa", border: "1px solid #eee", borderRadius: 8, padding: "8px 12px" }}>
+            <summary style={{ cursor: "pointer", fontWeight: 600 }}>{q}</summary>
+            <div style={{ marginTop: 8 }}>{a}</div>
           </details>
         ))}
       </div>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLd }} />
     </section>
   );
 }
