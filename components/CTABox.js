@@ -1,6 +1,8 @@
 // components/CTABox.js
 import React from 'react';
 import AffLink from './AffLink';
+import PriceTag from './PriceTag';
+import { coerceCurrency } from '../lib/price';
 
 function isNonEmptyString(v) {
   return typeof v === 'string' && v.trim().length > 0;
@@ -17,28 +19,23 @@ function clean(obj) {
   }
   return obj === undefined ? undefined : obj;
 }
-
 function JsonLd({ data }) {
   const content = JSON.stringify(clean(data));
   if (!content || content === '{}' || content === '[]') return null;
-  return (
-    <script
-      type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: content }}
-    />
-  );
+  return <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: content }} />;
 }
 
 /**
- * CTABox – single product callout with optional JSON-LD.
+ * CTABox – single product callout with optional JSON-LD and deal badge.
  * Props:
- * - title, subtitle
- * - image (url), alt
- * - url* (affiliate), label? (button text)
- * - price, currency (USD default), badge
- * - bullets?: string[]
- * - emitJsonLd?: boolean (default false)
- * - brand, rating, ratingCount
+ *  - title, subtitle
+ *  - image, alt
+ *  - url*, label? (button)
+ *  - price, msrp?, currency? (USD default)
+ *  - bullets?: string[]
+ *  - badge (free-form tag)
+ *  - emitJsonLd?: boolean
+ *  - brand, rating, ratingCount
  */
 export default function CTABox({
   title,
@@ -48,14 +45,18 @@ export default function CTABox({
   url,
   label = 'Check price',
   price,
+  msrp,
   currency = 'USD',
-  badge,
   bullets = [],
+  badge,
   emitJsonLd = false,
   brand,
   rating,
   ratingCount,
+  locale,
 }) {
+  const cur = coerceCurrency(currency);
+
   const productLd = emitJsonLd
     ? {
         '@context': 'https://schema.org',
@@ -76,7 +77,7 @@ export default function CTABox({
             ? {
                 '@type': 'Offer',
                 price: String(price),
-                priceCurrency: currency || 'USD',
+                priceCurrency: cur,
                 url,
                 availability: 'https://schema.org/InStock',
               }
@@ -93,11 +94,9 @@ export default function CTABox({
         {badge ? <div className="badge">{badge}</div> : null}
         {title ? <h3 className="title">{title}</h3> : null}
         {subtitle ? <p className="sub">{subtitle}</p> : null}
-        {price ? (
-          <div className="price">
-            {currency} {price}
-          </div>
-        ) : null}
+
+        <PriceTag price={price} msrp={msrp} currency={cur} locale={locale} />
+
         {Array.isArray(bullets) && bullets.length ? (
           <ul className="bullets">
             {bullets.map((b, i) => (
@@ -105,6 +104,7 @@ export default function CTABox({
             ))}
           </ul>
         ) : null}
+
         {isNonEmptyString(url) ? (
           <AffLink href={url} className="btn" aria-label={`Go to ${title}`}>
             {label}
@@ -147,10 +147,6 @@ export default function CTABox({
         .sub {
           margin: 0 0 6px;
           opacity: 0.85;
-        }
-        .price {
-          font-weight: 700;
-          margin: 0 0 8px;
         }
         .bullets {
           margin: 0 0 10px;
