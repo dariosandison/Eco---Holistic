@@ -1,16 +1,14 @@
 {
   "siteName": "Wild and Well",
-  "baseUrl": "https://www.wildandwell.com",
+  "baseUrl": "https://www.wild-and-well.store",
   "ga4Id": "G-0G3ER4B1RE",
   "gtmId": "",
   "affiliateTagDefault": "wildandwell-21",
   "contactEmail": "hello@wild-and-well.store",
-  "company": {
-    "name": "Wild and Well"
-  },
+  "company": { "name": "Wild and Well" },
   "social": {
-    "instagram": "wildandwell_uk",
-    "pinterest": "wildandwell_uk"
+    "instagram": "https://instagram.com/wildandwell_uk",
+    "pinterest": "https://pinterest.com/wildandwell_uk"
   },
   "newsletter": {
     "provider": "beehiiv_magic",
