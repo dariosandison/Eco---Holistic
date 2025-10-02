@@ -2,43 +2,57 @@
 :root{
   --bg-0:#394a38;         /* header/footer bar */
   --bg-1:#3f513c;         /* page background */
-  --surface:#f6efde;      /* cards / hero panels */
+  --surface:#f6efde;      /* cards / hero panels (cream) */
   --surface-2:#efe5cf;    /* lighter panel */
-  --text:#1f2b22;         /* body text */
-  --text-inverse:#ffffff; /* text on dark bars */
+  --text:#1f2b22;         /* body text (dark) */
+  --text-inverse:#ffffff; /* quick white */
   --brand:#2e6b57;        /* primary buttons/links */
   --border:#c9bfa9;       /* card borders */
   --radius:14px;
+  --brand-font: "DM Serif Display", serif;
+  --body-font: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
 }
 
 /* Layout + room for fixed footer */
 html, body, #__next { height: 100%; }
 body{
   margin:0; background:var(--bg-1); color:var(--text);
-  font-family: system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+  font-family: var(--body-font);
   display:flex; flex-direction:column; min-height:100vh;
   padding-bottom:72px;
 }
 main{ flex:1 0 auto; }
 .container{ width:min(1200px,92%); margin:0 auto; }
 
-/* Header */
+/* Header (cream text on dark) */
 .header{ position:sticky; top:0; z-index:50; background:var(--bg-0); border-bottom:1px solid rgba(0,0,0,.15) }
-.logo{ display:flex; align-items:center; gap:12px; color:var(--text-inverse); text-decoration:none; font-weight:700; font-size:18px }
-.logo img{ height:48px; width:auto } /* bigger header logo */
+.logo{ display:flex; align-items:center; gap:12px; color:var(--surface); text-decoration:none; font-weight:700; font-size:18px }
+.logo img{ height:48px; width:auto }
 .nav{ display:flex; gap:20px; align-items:center }
-.nav a{ color:var(--text-inverse); text-decoration:none; padding:8px 12px; border-radius:10px; background:rgba(255,255,255,.06) }
+.nav a{ color:var(--surface); text-decoration:none; padding:8px 12px; border-radius:10px; background:rgba(255,255,255,.06) }
 .nav a:hover{ background:rgba(255,255,255,.12) }
 
+/* Sections that sit on dark backgrounds should use cream */
+.header, .hero, footer.footer-fixed { color: var(--surface); }
+
 /* Cards / hero */
-.card{ background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); box-shadow:0 1px 0 rgba(0,0,0,.06) }
-.hero{ background:#1e2b1f; color:#fff; border-radius:22px; padding:28px; border:1px solid rgba(0,0,0,.2) }
+.card{
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  box-shadow:0 1px 0 rgba(0,0,0,.06);
+}
+.hero{
+  background:#1e2b1f; color:var(--surface);
+  border-radius:22px; padding:28px;
+  border:1px solid rgba(0,0,0,.2);
+}
 .hero-inner{ background:#0f1a12; border-radius:12px; padding:24px }
 .hero-logo{ display:flex; justify-content:center; align-items:center }
-.hero-logo img{ max-width:100%; height:260px } /* visibly larger */
-@media (max-width:640px){ .hero-logo img{ height:180px } }
+.hero-logo img{ max-width:100%; height:280px } /* bigger hero logo */
+@media (max-width:640px){ .hero-logo img{ height:200px } }
 
-/* Buttons (ensure Links styled too) */
+/* Buttons */
 .btn, a.btn{
   display:inline-flex; align-items:center; justify-content:center;
   background:var(--brand); color:#fff; text-decoration:none;
@@ -47,6 +61,9 @@ main{ flex:1 0 auto; }
 }
 .btn:hover, a.btn:hover{ filter:brightness(.95) }
 .btn.alt{ background:#6f7f6e }
+
+/* Make the HOME hero CTA match logo font */
+.hero .btn{ font-family: var(--brand-font); font-size: 17px; }
 
 /* Floating footer */
 footer.footer-fixed{
@@ -58,7 +75,7 @@ footer.footer-fixed{
 .footer-links a:hover{ opacity:1; text-decoration:underline }
 .footer-meta{ text-align:center; color:rgba(255,255,255,.75); padding:0 0 10px }
 
-/* Guides grid — smaller, like your screenshot */
+/* Guides grid — compact, professional cards */
 .grid-guides{
   display:grid; gap:16px; margin-top:16px;
   grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
@@ -71,8 +88,8 @@ footer.footer-fixed{
 }
 .guide-card__media img{ max-width:74%; max-height:80px }
 .guide-card__body{ padding:12px 14px 14px }
-.guide-card__title{ font-size:16px; line-height:1.25; margin:4px 0 6px }
-.guide-card__title a{ color:var(--text); text-decoration:none }
+.guide-card__title{ font-size:16px; line-height:1.25; margin:4px 0 6px; color:var(--text) }
+.guide-card__title a{ color:inherit; text-decoration:none }
 .guide-card__title a:hover{ text-decoration:underline }
 .guide-card__excerpt{ font-size:14px; color:#2a352b }
 
@@ -81,12 +98,12 @@ footer.footer-fixed{
 
 /* Floating newsletter — lifted above footer */
 .newsletter-float{
-  position:fixed; right:16px; bottom:120px; z-index:100; /* over footer */
+  position:fixed; right:16px; bottom:120px; z-index:100;
   background:var(--surface); border:1px solid var(--border);
   border-radius:14px; box-shadow:0 3px 14px rgba(0,0,0,.18);
   padding:12px; width:min(360px, 92vw);
 }
-.newsletter-float h4{ margin:0 0 8px; font-size:16px }
+.newsletter-float h4{ margin:0 0 8px; font-size:16px; color:#1f2b22 }
 .newsletter-float form{ display:flex; gap:8px }
 .newsletter-float input[type="email"]{ flex:1; border:1px solid #d6ccb7; border-radius:10px; padding:10px 12px }
 .newsletter-float button{ white-space:nowrap }
