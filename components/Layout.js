@@ -1,15 +1,14 @@
-// components/Layout.js
-import Header from './Header';
-import Footer from './Footer';
-import NewsletterBar from './NewsletterBar';
+import SiteHeader from "./SiteHeader";
+import SiteFooter from "./SiteFooter";
 
-export default function Layout({ children }) {
+export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <>
-      <Header />
-      <main className="page">{children}</main>
-      <Footer />
-      <NewsletterBar />
+      <SiteHeader />
+      <main className="container" style={{paddingTop:24, paddingBottom:96}}>
+        {children}
+      </main>
+      <SiteFooter />
     </>
   );
 }
