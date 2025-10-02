@@ -1,25 +1,35 @@
 // components/Analytics.jsx
-import Script from 'next/script';
+import { useEffect } from "react";
+import site from "@/data/site.config.json";
 
 export default function Analytics() {
-  const id = process.env.NEXT_PUBLIC_GA_ID;
-  if (!id) return null;
+  useEffect(() => {
+    const id = site.ga4Id || process.env.NEXT_PUBLIC_GA_ID;
+    if (!id) return;
 
-  return (
-    <>
-      <Script
-        id="ga-src"
-        src={`https://www.googletagmanager.com/gtag/js?id=${id}`}
-        strategy="afterInteractive"
-      />
-      <Script id="ga-init" strategy="afterInteractive">
-        {`
-          window.dataLayer = window.dataLayer || [];
-          function gtag(){dataLayer.push(arguments);}
-          gtag('js', new Date());
-          gtag('config', '${id}', { send_page_view: false });
-        `}
-      </Script>
-    </>
-  );
+    // Only run analytics if consent granted
+    const ok =
+      typeof window !== "undefined" &&
+      window.__siteconsent &&
+      typeof window.__siteconsent.hasConsent === "function" &&
+      window.__siteconsent.hasConsent();
+
+    if (!ok) return;
+
+    // Load GA4
+    const s = document.createElement("script");
+    s.async = true;
+    s.src = `https://www.googletagmanager.com/gtag/js?id=${id}`;
+    document.head.appendChild(s);
+
+    window.dataLayer = window.dataLayer || [];
+    function gtag() {
+      window.dataLayer.push(arguments);
+    }
+    window.gtag = gtag;
+    gtag("js", new Date());
+    gtag("config", id, { anonymize_ip: true });
+  }, []);
+
+  return null;
 }
