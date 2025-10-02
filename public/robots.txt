@@ -1,4 +1,0 @@
-User-agent: *
-Disallow: /go/
-
-Sitemap: https://www.wild-and-well.store/sitemap.xml
