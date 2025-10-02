@@ -25,3 +25,9 @@
     "node": ">=18.18 <23"
   }
 }
+{
+  "scripts": {
+    "prebuild": "node scripts/fix-content.mjs && node scripts/validate-mdx.mjs && node scripts/generate-sitemap.mjs && node scripts/generate-rss.mjs",
+    "build": "next build"
+  }
+}
