@@ -1,0 +1,101 @@
+[
+  {
+    "slug": "alcohol-free-social-starters",
+    "title": "Alcohol-Free Social Starters",
+    "excerpt": "Simple scripts, drinks, and habits to enjoy nights out—minus the hangover.",
+    "date": "2024-05-20",
+    "updated": "2024-06-11",
+    "tags": ["habits", "wellbeing"],
+    "contentHtml": "<p>Going alcohol-free doesn’t mean staying home. Start with a simple script (e.g., “I’m taking a break—it feels great”), pick 1–2 go-to alcohol-free drinks, and pre-plan your exit time.</p><h3>Quick Wins</h3><ul><li>Prep your line: <em>“Sparkling water for me, thanks.”</em></li><li>Find 2 AF drinks you enjoy.</li><li>Set a leave time before you go out.</li></ul>",
+    "products": [
+      { "name": "Seedlip (AF Spirit)", "url": "https://example.com/seedlip?aff=wildandwell", "affiliate": true },
+      { "name": "Athletic Brewing (AF Beer)", "url": "https://example.com/athletic?aff=wildandwell", "affiliate": true }
+    ]
+  },
+  {
+    "slug": "creatine-minimal-ingredients",
+    "title": "Creatine: Minimal-Ingredients Guide",
+    "excerpt": "How to choose a clean creatine monohydrate and use it safely.",
+    "date": "2024-04-10",
+    "updated": "2024-05-01",
+    "tags": ["supplements"],
+    "contentHtml": "<p>Look for <strong>creatine monohydrate</strong> only, no flavors or sweeteners. Typical dose: 3–5g daily with water or a meal.</p>",
+    "products": [
+      { "name": "Bulk Creatine (Unflavoured)", "url": "https://example.com/clean-creatine?aff=wildandwell", "affiliate": true }
+    ]
+  },
+  {
+    "slug": "gut-health-starters",
+    "title": "Gut Health Starters",
+    "excerpt": "Easy daily habits that support digestion without expensive stacks.",
+    "date": "2024-03-22",
+    "updated": "2024-06-01",
+    "tags": ["nutrition"],
+    "contentHtml": "<p>Focus on fiber (25–35g/day), hydration, slow eating, and consistent sleep. Add fermented foods 3–4x/week.</p>",
+    "products": []
+  },
+  {
+    "slug": "low-waste-shower-kit",
+    "title": "Low-Waste Shower Kit",
+    "excerpt": "Minimal, recyclable, and refillable picks for your daily routine.",
+    "date": "2024-02-15",
+    "updated": "2024-05-19",
+    "tags": ["low-tox", "home"],
+    "contentHtml": "<p>Swap plastic bottles for bar soap and refillable containers. Choose fragrance-free if you’re sensitive.</p>",
+    "products": [
+      { "name": "Refillable Pump Bottle", "url": "https://example.com/refill?aff=wildandwell", "affiliate": true }
+    ]
+  },
+  {
+    "slug": "non-toxic-cookware-basics",
+    "title": "Non-Toxic Cookware Basics",
+    "excerpt": "Understand stainless, cast iron, and ceramic—what to use and when.",
+    "date": "2024-02-01",
+    "updated": "2024-04-12",
+    "tags": ["kitchen"],
+    "contentHtml": "<p>Stick with stainless steel, cast iron, and high-quality ceramic. Avoid damaged non-stick coatings.</p>",
+    "products": []
+  },
+  {
+    "slug": "omega-3-fish-oil-guide",
+    "title": "Omega-3 Fish Oil Guide",
+    "excerpt": "How to pick a clean oil (or algae) and dose it correctly.",
+    "date": "2024-01-18",
+    "updated": "2024-05-05",
+    "tags": ["supplements"],
+    "contentHtml": "<p>Look for IFOS-tested oils with clear EPA/DHA amounts. Many people do well with 1–2g/day combined EPA+DHA.</p>",
+    "products": []
+  },
+  {
+    "slug": "posture-setup-healthy-desk",
+    "title": "Healthy Desk: Posture Setup",
+    "excerpt": "Chair height, screen distance, and easy movement breaks.",
+    "date": "2024-03-10",
+    "updated": "2024-05-25",
+    "tags": ["ergonomics"],
+    "contentHtml": "<p>Wrists straight, elbows ~90°, top of monitor at eye level, and a 3–5 minute movement break every 30–45 minutes.</p>",
+    "products": []
+  },
+  {
+    "slug": "sleep-better-evening-routine",
+    "title": "Sleep Better: Evening Routine",
+    "excerpt": "A 60-minute wind-down that really works.",
+    "date": "2024-02-27",
+    "updated": "2024-04-08",
+    "tags": ["sleep"],
+    "contentHtml": "<p>Dim lights, screens off or blue-light filters, warm shower, and a short stretch. Keep the room cool and dark.</p>",
+    "products": []
+  },
+  {
+    "slug": "water-filters",
+    "title": "Water Filters",
+    "excerpt": "Pitcher vs. under-sink vs. whole-home—what’s right for you?",
+    "date": "2024-01-05",
+    "updated": "2024-06-03",
+    "tags": ["home"],
+    "contentHtml": "<p>Check your local water report first, then match contaminants to a certified filter. Replace filters on schedule.</p>",
+    "products": [
+      { "name": "Under-Sink Filter", "url": "https://example.com/filter?aff=wildandwell", "affiliate": true }
+    ]
+  }
+]
