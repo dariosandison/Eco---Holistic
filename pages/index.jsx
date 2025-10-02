@@ -1,7 +1,9 @@
 // pages/index.jsx
 import Link from "next/link";
+import GuideCard from "../components/GuideCard";
+import { getAllGuides } from "../lib/content";
 
-export default function Home() {
+export default function Home({ latest = [] }) {
   return (
     <>
       {/* Hero with logo */}
@@ -25,6 +27,24 @@ export default function Home() {
           <Link className="btn" href="/deals" style={{ background: "#6f7f6e" }}>Today’s Deals</Link>
         </div>
       </section>
+
+      {/* Latest Guides */}
+      <section style={{ marginTop: 28 }}>
+        <h2 style={{ color: "var(--surface)", margin: "0 0 12px" }}>Latest Guides</h2>
+        <div className="grid-guides">
+          {latest.map(g => <GuideCard key={g.slug} guide={g} />)}
+        </div>
+      </section>
     </>
   );
 }
+
+export async function getStaticProps(){
+  const all = getAllGuides();
+  return {
+    props: {
+      latest: all.slice(0, 6),
+    },
+  };
+}
+
