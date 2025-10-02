@@ -1,4 +1,4 @@
-import "../styles/brand.css";
+import "../styles/globals.css";
 import "../styles/ui.css"; // delete this line if you don't have ui.css
 import { MDXProvider } from "@mdx-js/react";
 import mdxComponents from "../components/mdx";
