@@ -1,5 +1,5 @@
 import Link from "next/link";
-import site from "@/data/site.config.json";
+import site from "../data/site.config.json";
 
 export default function SiteFooter(){
   return (
