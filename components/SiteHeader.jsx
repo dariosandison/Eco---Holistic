@@ -1,12 +1,17 @@
 import Link from "next/link";
+import site from "../data/site.config.json";
 
 export default function SiteHeader() {
   return (
     <header className="header">
       <div className="container" style={{display:"flex",alignItems:"center",justifyContent:"space-between",padding:"10px 0"}}>
         <Link href="/" className="logo">
-          <img src="/logo.svg" alt="Wild & Well" onError={(e)=>{(e.target as HTMLImageElement).src="/logo.png"}} />
-          <span>Wild & Well</span>
+          <img
+            src="/logo.svg"
+            alt={site.siteName}
+            onError={(e)=>{ e.currentTarget.src = "/logo.png"; }}
+          />
+          <span>{site.siteName}</span>
         </Link>
 
         <nav className="nav">
