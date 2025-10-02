@@ -1,8 +1,0 @@
-node_modules
-.next
-out
-.DS_Store
-# --- keep our app's lib folder in the repo ---
-!lib/
-!lib/**/*
-
