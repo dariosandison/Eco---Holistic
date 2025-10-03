@@ -1,13 +1,22 @@
 {
+ {
   "name": "wild-and-well",
   "version": "1.2.3",
   "private": true,
-  "type": "module",
+
+  "engines": {
+    "node": "20.x",
+    "npm": ">=10"
+  },
+
   "scripts": {
-    "dev": "next dev",
+    "prebuild": "node scripts/fix-content.mjs && node scripts/validate-mdx.mjs && node scripts/generate-sitemap.mjs && node scripts/generate-rss.mjs",
     "build": "next build",
     "start": "next start",
-    "prebuild": "node scripts/validate-mdx.mjs && node scripts/generate-sitemap.mjs && node scripts/generate-rss.mjs"
+    "dev": "next dev"
+  }
+}
+
   },
   "dependencies": {
     "@mdx-js/react": "^3.0.1",
