@@ -38,8 +38,12 @@ function escapeHtml(s = "") {
 // Replace unknown placeholders/components that may appear in legacy MDX
 function sanitiseUnknownPlaceholders(src = "") {
   return src
-    .replace(/<\s*Thing\b/gi, "<span")
-    .replace(/<\s*\/\s*Thing\s*>/gi, "</span>");
+    // <Thing .../> and <Thing>...</Thing>
+    .replace(/<\s*Thing(\s+[^>]*)?\/>/g, "<span$1 />")
+    .replace(/<\s*Thing(\s+[^>]*)?>/g, "<span$1>")
+    .replace(/<\s*\/\s*Thing\s*>/g, "</span>")
+    // {Thing} expressions
+    .replace(/\{\s*Thing\s*\}/g, "");
 }
 
 export async function getStaticProps({ params }) {
