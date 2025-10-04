@@ -5,7 +5,7 @@ import Head from "next/head";
 import { MDXRemote } from "next-mdx-remote";
 import { serialize } from "next-mdx-remote/serialize";
 
-const GUIDES_DIR = path.join(process.cwd(), "content", "guides");
+const LEGAL_DIR = path.join(process.cwd(), "content", "legal");
 
 /* ------------------------------ Helpers ------------------------------ */
 
@@ -34,7 +34,6 @@ function titleFromSlug(slug) {
     .replace(/\b\w/g, (m) => m.toUpperCase());
 }
 
-// Make front-matter JSON-serializable (e.g., convert Date -> ISO string)
 function jsonSafeMeta(meta) {
   const out = {};
   for (const [k, v] of Object.entries(meta || {})) {
@@ -44,11 +43,9 @@ function jsonSafeMeta(meta) {
   return out;
 }
 
-// Strip/neutralize patterns that break MDX compile
 function sanitizeMDX(src) {
   if (!src) return src;
 
-  // 1) Lift fenced + inline code so we don't mutate inside them
   const codeBlocks = [];
   let lifted = src.replace(/```[\s\S]*?```/g, (m) => {
     const i = codeBlocks.push(m) - 1;
@@ -59,17 +56,16 @@ function sanitizeMDX(src) {
     return `@@CODEBLOCK_${i}@@`;
   });
 
-  // 2) Remove HTML comments and any <! ... >
+  // Remove HTML comments and any <! ... >
   let cleaned = lifted
     .replace(/<!--[\s\S]*?-->/g, "")
     .replace(/<![\s\S]*?>/g, "");
 
-  // 3) Remove bare {UppercaseIdentifier} expressions
+  // Remove bare {UppercaseIdentifier}
   cleaned = cleaned.replace(/\{[ \t]*[A-Z][A-Za-z0-9_]*[ \t]*\}/g, "");
 
-  // 4) Replace specific unknown JSX components with <div>
-  const unknownTags = ["Thing", "Audience"];
-  unknownTags.forEach((name) => {
+  // Guard against specific unknown components seen in logs
+  ["Thing", "Audience"].forEach((name) => {
     const reSelf = new RegExp(`<${name}\\b([^>]*)\\s*/>`, "g");
     cleaned = cleaned.replace(reSelf, `<div$1 />`);
     const reOpen = new RegExp(`<${name}\\b([^>]*)>`, "g");
@@ -78,19 +74,17 @@ function sanitizeMDX(src) {
     cleaned = cleaned.replace(reClose, `</div>`);
   });
 
-  // 5) Restore code blocks
+  // Restore code blocks
   cleaned = cleaned.replace(/@@CODEBLOCK_(\d+)@@/g, (_, i) => codeBlocks[Number(i)]);
 
   return cleaned;
 }
 
-// Return a components map that never crashes for unknown MDX tags
 function withFallback(base = {}) {
   return new Proxy(base, {
     get(target, prop) {
       if (prop in target) return target[prop];
       if (typeof prop === "string" && /^[A-Z]/.test(prop)) {
-        // Unknown capitalized component -> harmless <div>
         // eslint-disable-next-line react/display-name
         return (props) => <div {...props} />;
       }
@@ -101,9 +95,8 @@ function withFallback(base = {}) {
 
 /* -------------------------------- Page -------------------------------- */
 
-export default function GuidePage({ slug, meta, mdxSource }) {
+export default function LegalPage({ slug, meta, mdxSource }) {
   const components = withFallback({
-    // Extra guard for names seen in logs
     Thing: (props) => <div {...props} />,
     Audience: (props) => <div {...props} />,
   });
@@ -116,33 +109,12 @@ export default function GuidePage({ slug, meta, mdxSource }) {
       <Head>
         <title>{pageTitle} | Wild &amp; Well</title>
         {pageDesc ? <meta name="description" content={pageDesc} /> : null}
-
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              "@context": "https://schema.org",
-              "@type": "Article",
-              headline: pageTitle,
-              description: pageDesc || undefined,
-              datePublished: meta?.date || undefined,
-              dateModified: meta?.updated || meta?.date || undefined,
-              author: [{ "@type": "Person", name: "Wild & Well Editorial Team" }],
-            }),
-          }}
-        />
       </Head>
 
       <div className="container">
         <article className="post">
           <header className="post-header">
             <h1>{pageTitle}</h1>
-            {meta?.updated || meta?.date ? (
-              <p className="post-meta">
-                {meta?.updated ? "Updated " : "Published "}
-                {new Date(meta?.updated || meta?.date).toLocaleDateString()}
-              </p>
-            ) : null}
           </header>
 
           <div className="post-content">
@@ -157,7 +129,7 @@ export default function GuidePage({ slug, meta, mdxSource }) {
 /* -------------------------------- Data -------------------------------- */
 
 export async function getStaticPaths() {
-  const slugs = getAllSlugs(GUIDES_DIR);
+  const slugs = getAllSlugs(LEGAL_DIR);
   return {
     paths: slugs.map((slug) => ({ params: { slug } })),
     fallback: false,
@@ -165,7 +137,7 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({ params }) {
-  const loaded = loadBySlug(GUIDES_DIR, params.slug);
+  const loaded = loadBySlug(LEGAL_DIR, params.slug);
   if (!loaded) return { notFound: true };
 
   const safeMeta = jsonSafeMeta(loaded.meta);
