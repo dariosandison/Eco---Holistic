@@ -1,7 +1,7 @@
 import Link from "next/link";
 import site from "../data/site.config.json";
 
-export default function SiteFooter(){
+export default function SiteFooter() {
   return (
     <footer className="footer-fixed">
       <div className="container">
@@ -15,17 +15,25 @@ export default function SiteFooter(){
           <Link href="/disclaimer">Disclaimer</Link>
           <Link href="/disclosure">Affiliate Disclosure</Link>
           <Link href="/product-disclosure">Product Disclosure</Link>
-          {site.social?.instagram && <a href={site.social.instagram} target="_blank" rel="noopener">Instagram</a>}
-          {site.social?.pinterest && <a href={site.social.pinterest} target="_blank" rel="noopener">Pinterest</a>}
-        - <p className=\"text-sm opacity-75 mt-2\">As an Amazon Associate, we earn from qualifying purchases.</p>
-+ <p className="text-sm opacity-75 mt-2">As an Amazon Associate, we earn from qualifying purchases.</p>
-
-</div>
+          {site.social?.instagram && (
+            <a href={site.social.instagram} target="_blank" rel="noopener">
+              Instagram
+            </a>
+          )}
+          {site.social?.pinterest && (
+            <a href={site.social.pinterest} target="_blank" rel="noopener">
+              Pinterest
+            </a>
+          )}
+          <p className="text-sm opacity-75 mt-2">
+            As an Amazon Associate, we earn from qualifying purchases.
+          </p>
+        </div>
         <div className="footer-meta">
-          © {new Date().getFullYear()} {site.siteName} • Independent • Reader-supported
+          © {new Date().getFullYear()} {site.siteName} • Independent •
+          Reader-supported
         </div>
       </div>
     </footer>
   );
 }
-
