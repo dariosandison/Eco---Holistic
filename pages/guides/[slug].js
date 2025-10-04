@@ -7,7 +7,7 @@ import { serialize } from "next-mdx-remote/serialize";
 
 const GUIDES_DIR = path.join(process.cwd(), "content", "guides");
 
-/* ------------------------------ Helpers ------------------------------ */
+/* -------------------------------- Utils -------------------------------- */
 
 function getAllSlugs(dir) {
   if (!fs.existsSync(dir)) return [];
@@ -18,95 +18,104 @@ function getAllSlugs(dir) {
 }
 
 function loadBySlug(dir, slug) {
-  const filePathMDX = path.join(dir, `${slug}.mdx`);
-  const filePathMD = path.join(dir, `${slug}.md`);
-  const filePath = fs.existsSync(filePathMDX) ? filePathMDX : filePathMD;
+  const pMdx = path.join(dir, `${slug}.mdx`);
+  const pMd = path.join(dir, `${slug}.md`);
+  const filePath = fs.existsSync(pMdx) ? pMdx : pMd;
   if (!fs.existsSync(filePath)) return null;
-
   const raw = fs.readFileSync(filePath, "utf8");
   const { content, data } = matter(raw);
   return { content, meta: data || {} };
 }
 
 function titleFromSlug(slug) {
-  return slug
-    .replace(/-/g, " ")
-    .replace(/\b\w/g, (m) => m.toUpperCase());
+  return slug.replace(/-/g, " ").replace(/\b\w/g, (m) => m.toUpperCase());
 }
 
-// Make front-matter JSON-serializable (Date -> ISO string)
-function jsonSafeMeta(meta) {
-  const out = {};
-  for (const [k, v] of Object.entries(meta || {})) {
-    if (v instanceof Date) out[k] = v.toISOString();
-    else out[k] = v;
+function deepJsonSafe(value) {
+  if (value instanceof Date) return value.toISOString();
+  if (Array.isArray(value)) return value.map(deepJsonSafe);
+  if (value && typeof value === "object") {
+    const out = {};
+    for (const [k, v] of Object.entries(value)) out[k] = deepJsonSafe(v);
+    return out;
   }
-  return out;
+  return value;
+}
+
+function escapeHtml(s) {
+  return s
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;");
+}
+
+/** very small “better than nothing” markdown-ish to HTML for fallback */
+function toFallbackHtml(text) {
+  let t = text;
+
+  // Bold/italic (very naive)
+  t = t.replace(/\*\*([^*]+)\*\*/g, "<strong>$1</strong>");
+  t = t.replace(/\*([^*]+)\*/g, "<em>$1</em>");
+
+  // Links: [text](url)
+  t = t.replace(/\[([^\]]+)\]\((https?:\/\/[^\s)]+)\)/g, '<a href="$2" rel="nofollow noopener" target="_blank">$1</a>');
+
+  // Bare urls
+  t = t.replace(/(?<!\()(?<!")\bhttps?:\/\/[^\s<)]+/g, (m) => `<a href="${m}" rel="nofollow noopener" target="_blank">${m}</a>`);
+
+  // Paragraphs
+  t = t.split(/\n{2,}/).map(p => `<p>${p.replace(/\n/g, "<br/>")}</p>`).join("\n");
+  return t;
 }
 
 /**
- * Sanitize author MDX so next-mdx-remote won't choke.
- * - Lifts code blocks so we never touch code samples
- * - Removes HTML comments and <! … >
- * - Converts angle-bracket autolinks (<https://...>) to markdown links
- * - Removes bare {UppercaseIdentifier} expressions
- * - Replaces unknown JSX tags (Thing, Audience, etc.) with <div>
+ * Sanitize MDX so MDX compiler won’t choke.
+ * - Lift code (inline + fenced) so we don't touch it
+ * - Remove HTML comments / <! ... >
+ * - Turn <https://...> into proper markdown links
+ * - Drop bare {UppercaseIdentifier}
+ * - Replace unknown JSX tags (Thing, Audience) with <div>
  */
 function sanitizeMDX(src) {
   if (!src) return src;
 
-  // 1) Lift fenced + inline code so we don't mutate their contents.
-  const codeBlocks = [];
-  let lifted = src.replace(/```[\s\S]*?```/g, (m) => {
-    const i = codeBlocks.push(m) - 1;
-    return `@@CODEBLOCK_${i}@@`;
-  });
-  lifted = lifted.replace(/`[^`\n]+`/g, (m) => {
-    const i = codeBlocks.push(m) - 1;
-    return `@@CODEBLOCK_${i}@@`;
-  });
+  // Lift code blocks and inline code
+  const code = [];
+  let lifted = src.replace(/```[\s\S]*?```/g, (m) => `@@CODE_${code.push(m) - 1}@@`);
+  lifted = lifted.replace(/`[^`\n]+`/g, (m) => `@@CODE_${code.push(m) - 1}@@`);
 
-  // 2) Remove HTML comments and any <! ... >
-  let cleaned = lifted
-    .replace(/<!--[\s\S]*?-->/g, "")
-    .replace(/<![\s\S]*?>/g, "");
+  // Strip HTML comments + <! ... >
+  let cleaned = lifted.replace(/<!--[\s\S]*?-->/g, "").replace(/<![\s\S]*?>/g, "");
 
-  // 3) Convert <https://example.com> or <http://...> to markdown links
+  // Convert <http(s)://...> to [url](url)
   cleaned = cleaned.replace(/<https?:\/\/[^>\s]+>/g, (m) => {
     const url = m.slice(1, -1);
     return `[${url}](${url})`;
   });
 
-  // 4) Remove bare {UppercaseIdentifier} expressions
+  // Remove bare {UppercaseIdentifier}
   cleaned = cleaned.replace(/\{[ \t]*[A-Z][A-Za-z0-9_]*[ \t]*\}/g, "");
 
-  // 5) Replace specific unknown JSX components with <div>
+  // Replace unknown JSX tags with <div>
   const unknownTags = ["Thing", "Audience"];
   unknownTags.forEach((name) => {
-    // Self-closing: <Thing ... />
-    const reSelf = new RegExp(`<${name}\\b([^>]*)\\s*/>`, "g");
-    cleaned = cleaned.replace(reSelf, `<div$1 />`);
-    // Opening: <Thing ...>
-    const reOpen = new RegExp(`<${name}\\b([^>]*)>`, "g");
-    cleaned = cleaned.replace(reOpen, `<div$1>`);
-    // Closing: </Thing>
-    const reClose = new RegExp(`</${name}>`, "g");
-    cleaned = cleaned.replace(reClose, `</div>`);
+    cleaned = cleaned.replace(new RegExp(`<${name}\\b([^>]*)\\s*/>`, "g"), `<div$1 />`);
+    cleaned = cleaned.replace(new RegExp(`<${name}\\b([^>]*)>`, "g"), `<div$1>`);
+    cleaned = cleaned.replace(new RegExp(`</${name}>`, "g"), `</div>`);
   });
 
-  // 6) Restore code blocks
-  cleaned = cleaned.replace(/@@CODEBLOCK_(\d+)@@/g, (_, i) => codeBlocks[Number(i)]);
+  // Restore code
+  cleaned = cleaned.replace(/@@CODE_(\d+)@@/g, (_, i) => code[Number(i)]);
 
   return cleaned;
 }
 
-// Components map that never crashes for unknown MDX tags
 function withFallback(base = {}) {
   return new Proxy(base, {
     get(target, prop) {
       if (prop in target) return target[prop];
       if (typeof prop === "string" && /^[A-Z]/.test(prop)) {
-        return function FallbackComponent(props) {
+        return function Fallback(props) {
           return <div {...props} />;
         };
       }
@@ -117,10 +126,10 @@ function withFallback(base = {}) {
 
 /* -------------------------------- Page -------------------------------- */
 
-export default function GuidePage({ slug, meta, mdxSource }) {
+export default function GuidePage({ slug, meta, mdxSource, fallbackHtml }) {
   const components = withFallback({
-    Thing: (props) => <div {...props} />,
-    Audience: (props) => <div {...props} />,
+    Thing: (p) => <div {...p} />,
+    Audience: (p) => <div {...p} />,
   });
 
   const pageTitle = meta?.title || titleFromSlug(slug);
@@ -131,10 +140,8 @@ export default function GuidePage({ slug, meta, mdxSource }) {
       <Head>
         <title>{pageTitle} | Wild &amp; Well</title>
         {pageDesc ? <meta name="description" content={pageDesc} /> : null}
-
         <script
           type="application/ld+json"
-          // JSON-LD must be a pure JSON string
           dangerouslySetInnerHTML={{
             __html: JSON.stringify({
               "@context": "https://schema.org",
@@ -162,7 +169,11 @@ export default function GuidePage({ slug, meta, mdxSource }) {
           </header>
 
           <div className="post-content">
-            <MDXRemote {...mdxSource} components={components} />
+            {mdxSource ? (
+              <MDXRemote {...mdxSource} components={components} />
+            ) : (
+              <div dangerouslySetInnerHTML={{ __html: fallbackHtml }} />
+            )}
           </div>
         </article>
       </div>
@@ -174,29 +185,27 @@ export default function GuidePage({ slug, meta, mdxSource }) {
 
 export async function getStaticPaths() {
   const slugs = getAllSlugs(GUIDES_DIR);
-  return {
-    paths: slugs.map((slug) => ({ params: { slug } })),
-    fallback: false,
-  };
+  return { paths: slugs.map((slug) => ({ params: { slug } })), fallback: false };
 }
 
 export async function getStaticProps({ params }) {
   const loaded = loadBySlug(GUIDES_DIR, params.slug);
   if (!loaded) return { notFound: true };
 
-  const safeMeta = jsonSafeMeta(loaded.meta);
+  const safeMeta = deepJsonSafe(loaded.meta);
   const cleaned = sanitizeMDX(loaded.content);
 
-  const mdxSource = await serialize(cleaned, {
-    scope: safeMeta,
-    parseFrontmatter: false,
-  });
+  let mdxSource = null;
+  let fallbackHtml = null;
+
+  try {
+    mdxSource = await serialize(cleaned, { scope: safeMeta, parseFrontmatter: false });
+  } catch (err) {
+    // Last-resort fallback so builds never fail on bad MDX
+    fallbackHtml = toFallbackHtml(escapeHtml(cleaned));
+  }
 
   return {
-    props: {
-      slug: params.slug,
-      meta: safeMeta,
-      mdxSource,
-    },
+    props: { slug: params.slug, meta: safeMeta, mdxSource, fallbackHtml },
   };
 }
