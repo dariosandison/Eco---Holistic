@@ -7,7 +7,7 @@ import { serialize } from "next-mdx-remote/serialize";
 
 const LEGAL_DIR = path.join(process.cwd(), "content", "legal");
 
-/* ------------------------------ Helpers ------------------------------ */
+/* -------------------------------- Utils -------------------------------- */
 
 function getAllSlugs(dir) {
   if (!fs.existsSync(dir)) return [];
@@ -18,77 +18,69 @@ function getAllSlugs(dir) {
 }
 
 function loadBySlug(dir, slug) {
-  const filePathMDX = path.join(dir, `${slug}.mdx`);
-  const filePathMD = path.join(dir, `${slug}.md`);
-  const filePath = fs.existsSync(filePathMDX) ? filePathMDX : filePathMD;
+  const pMdx = path.join(dir, `${slug}.mdx`);
+  const pMd = path.join(dir, `${slug}.md`);
+  const filePath = fs.existsSync(pMdx) ? pMdx : pMd;
   if (!fs.existsSync(filePath)) return null;
-
   const raw = fs.readFileSync(filePath, "utf8");
   const { content, data } = matter(raw);
   return { content, meta: data || {} };
 }
 
 function titleFromSlug(slug) {
-  return slug
-    .replace(/-/g, " ")
-    .replace(/\b\w/g, (m) => m.toUpperCase());
+  return slug.replace(/-/g, " ").replace(/\b\w/g, (m) => m.toUpperCase());
 }
 
-function jsonSafeMeta(meta) {
-  const out = {};
-  for (const [k, v] of Object.entries(meta || {})) {
-    if (v instanceof Date) out[k] = v.toISOString();
-    else out[k] = v;
+function deepJsonSafe(value) {
+  if (value instanceof Date) return value.toISOString();
+  if (Array.isArray(value)) return value.map(deepJsonSafe);
+  if (value && typeof value === "object") {
+    const out = {};
+    for (const [k, v] of Object.entries(value)) out[k] = deepJsonSafe(v);
+    return out;
   }
-  return out;
+  return value;
 }
 
-/**
- * Legal pages can also include angle-bracket links or comments coming from CMS.
- * Normalize them the same way as guides.
- */
+function escapeHtml(s) {
+  return s
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;");
+}
+
+function toFallbackHtml(text) {
+  let t = text;
+  t = t.replace(/\*\*([^*]+)\*\*/g, "<strong>$1</strong>");
+  t = t.replace(/\*([^*]+)\*/g, "<em>$1</em>");
+  t = t.replace(/\[([^\]]+)\]\((https?:\/\/[^\s)]+)\)/g, '<a href="$2" rel="nofollow noopener" target="_blank">$1</a>');
+  t = t.replace(/(?<!\()(?<!")\bhttps?:\/\/[^\s<)]+/g, (m) => `<a href="${m}" rel="nofollow noopener" target="_blank">${m}</a>`);
+  t = t.split(/\n{2,}/).map(p => `<p>${p.replace(/\n/g, "<br/>")}</p>`).join("\n");
+  return t;
+}
+
 function sanitizeMDX(src) {
   if (!src) return src;
 
-  // Lift code blocks and inline code
-  const codeBlocks = [];
-  let lifted = src.replace(/```[\s\S]*?```/g, (m) => {
-    const i = codeBlocks.push(m) - 1;
-    return `@@CODEBLOCK_${i}@@`;
-  });
-  lifted = lifted.replace(/`[^`\n]+`/g, (m) => {
-    const i = codeBlocks.push(m) - 1;
-    return `@@CODEBLOCK_${i}@@`;
-  });
+  const code = [];
+  let lifted = src.replace(/```[\s\S]*?```/g, (m) => `@@CODE_${code.push(m) - 1}@@`);
+  lifted = lifted.replace(/`[^`\n]+`/g, (m) => `@@CODE_${code.push(m) - 1}@@`);
 
-  // Remove HTML comments and <! ... >
-  let cleaned = lifted
-    .replace(/<!--[\s\S]*?-->/g, "")
-    .replace(/<![\s\S]*?>/g, "");
-
-  // Convert <https://...> to markdown link
+  let cleaned = lifted.replace(/<!--[\s\S]*?-->/g, "").replace(/<![\s\S]*?>/g, "");
   cleaned = cleaned.replace(/<https?:\/\/[^>\s]+>/g, (m) => {
     const url = m.slice(1, -1);
     return `[${url}](${url})`;
   });
-
-  // Remove bare {UppercaseIdentifier}
   cleaned = cleaned.replace(/\{[ \t]*[A-Z][A-Za-z0-9_]*[ \t]*\}/g, "");
 
-  // Replace unknown JSX tags with div (defensive)
   const unknownTags = ["Thing", "Audience"];
   unknownTags.forEach((name) => {
-    const reSelf = new RegExp(`<${name}\\b([^>]*)\\s*/>`, "g");
-    cleaned = cleaned.replace(reSelf, `<div$1 />`);
-    const reOpen = new RegExp(`<${name}\\b([^>]*)>`, "g");
-    cleaned = cleaned.replace(reOpen, `<div$1>`);
-    const reClose = new RegExp(`</${name}>`, "g");
-    cleaned = cleaned.replace(reClose, `</div>`);
+    cleaned = cleaned.replace(new RegExp(`<${name}\\b([^>]*)\\s*/>`, "g"), `<div$1 />`);
+    cleaned = cleaned.replace(new RegExp(`<${name}\\b([^>]*)>`, "g"), `<div$1>`);
+    cleaned = cleaned.replace(new RegExp(`</${name}>`, "g"), `</div>`);
   });
 
-  // Restore code
-  cleaned = cleaned.replace(/@@CODEBLOCK_(\d+)@@/g, (_, i) => codeBlocks[Number(i)]);
-
+  cleaned = cleaned.replace(/@@CODE_(\d+)@@/g, (_, i) => code[Number(i)]);
   return cleaned;
 }
 
@@ -97,7 +89,7 @@ function withFallback(base = {}) {
     get(target, prop) {
       if (prop in target) return target[prop];
       if (typeof prop === "string" && /^[A-Z]/.test(prop)) {
-        return function FallbackComponent(props) {
+        return function Fallback(props) {
           return <div {...props} />;
         };
       }
@@ -108,10 +100,10 @@ function withFallback(base = {}) {
 
 /* -------------------------------- Page -------------------------------- */
 
-export default function LegalPage({ slug, meta, mdxSource }) {
+export default function LegalPage({ slug, meta, mdxSource, fallbackHtml }) {
   const components = withFallback({
-    Thing: (props) => <div {...props} />,
-    Audience: (props) => <div {...props} />,
+    Thing: (p) => <div {...p} />,
+    Audience: (p) => <div {...p} />,
   });
 
   const pageTitle = meta?.title || titleFromSlug(slug);
@@ -137,7 +129,11 @@ export default function LegalPage({ slug, meta, mdxSource }) {
           </header>
 
           <div className="post-content">
-            <MDXRemote {...mdxSource} components={components} />
+            {mdxSource ? (
+              <MDXRemote {...mdxSource} components={components} />
+            ) : (
+              <div dangerouslySetInnerHTML={{ __html: fallbackHtml }} />
+            )}
           </div>
         </article>
       </div>
@@ -149,29 +145,26 @@ export default function LegalPage({ slug, meta, mdxSource }) {
 
 export async function getStaticPaths() {
   const slugs = getAllSlugs(LEGAL_DIR);
-  return {
-    paths: slugs.map((slug) => ({ params: { slug } })),
-    fallback: false,
-  };
+  return { paths: slugs.map((slug) => ({ params: { slug } })), fallback: false };
 }
 
 export async function getStaticProps({ params }) {
   const loaded = loadBySlug(LEGAL_DIR, params.slug);
   if (!loaded) return { notFound: true };
 
-  const safeMeta = jsonSafeMeta(loaded.meta);
+  const safeMeta = deepJsonSafe(loaded.meta);
   const cleaned = sanitizeMDX(loaded.content);
 
-  const mdxSource = await serialize(cleaned, {
-    scope: safeMeta,
-    parseFrontmatter: false,
-  });
+  let mdxSource = null;
+  let fallbackHtml = null;
+
+  try {
+    mdxSource = await serialize(cleaned, { scope: safeMeta, parseFrontmatter: false });
+  } catch (err) {
+    fallbackHtml = toFallbackHtml(escapeHtml(cleaned));
+  }
 
   return {
-    props: {
-      slug: params.slug,
-      meta: safeMeta,
-      mdxSource,
-    },
+    props: { slug: params.slug, meta: safeMeta, mdxSource, fallbackHtml },
   };
 }
