@@ -57,5 +57,72 @@ function sanitizeMDX(src) {
     return `@@CODEBLOCK_${i}@@`;
   });
 
-  let cleaned = lifted.replace(/<!--[\s\S]*?-->/g, "");
-  cleaned =
+  // Remove HTML comments and any <! ... > declarations
+  let cleaned = lifted
+    .replace(/<!--[\s\S]*?-->/g, "")
+    .replace(/<![\s\S]*?>/g, "");
+
+  // Remove bare {UppercaseIdentifier}
+  cleaned = cleaned.replace(/\{[ \t]*[A-Z][A-Za-z0-9_]*[ \t]*\}/g, "");
+
+  // Guard against specific unknown components seen in logs
+  ["Thing", "Audience"].forEach((name) => {
+    const reSelf = new RegExp(`<${name}\\b([^>]*)\\/\\>`, "g");
+    cleaned = cleaned.replace(reSelf, `<div$1 />`);
+    const reOpen = new RegExp(`<${name}\\b([^>]*)>`, "g");
+    cleaned = cleaned.replace(reOpen, `<div$1>`);
+    const reClose = new RegExp(`</${name}>`, "g");
+    cleaned = cleaned.replace(reClose, `</div>`);
+  });
+
+  // Restore code blocks
+  cleaned = cleaned.replace(/@@CODEBLOCK_(\d+)@@/g, (_, i) => codeBlocks[Number(i)]);
+
+  return cleaned;
+}
+
+function withFallback(base = {}) {
+  return new Proxy(base, {
+    get(target, prop) {
+      if (prop in target) return target[prop];
+      if (typeof prop === "string" && /^[A-Z]/.test(prop)) {
+        return (props) => <div {...props} />;
+      }
+      return undefined;
+    },
+  });
+}
+
+// ------------------------------- Page --------------------------------------
+
+export default function LegalPage({ slug, meta, mdxSource }) {
+  const components = withFallback({});
+
+  const pageTitle = meta?.title || titleFromSlug(slug);
+  const pageDesc = meta?.description || "";
+
+  return (
+    <>
+      <Head>
+        <title>{pageTitle} | Wild &amp; Well</title>
+        {pageDesc ? <meta name="description" content={pageDesc} /> : null}
+      </Head>
+
+      <div className="container">
+        <article className="post">
+          <header className="post-header">
+            <h1>{pageTitle}</h1>
+          </header>
+
+          <div className="post-content">
+            <MDXRemote {...mdxSource} components={components} />
+          </div>
+        </article>
+      </div>
+    </>
+  );
+}
+
+// ------------------------------ Data ---------------------------------------
+
+export async
