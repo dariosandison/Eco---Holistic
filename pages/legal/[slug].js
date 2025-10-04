@@ -27,8 +27,15 @@ function fileFor(slug) {
   return null;
 }
 
-export async function getStaticPaths() {
-  return { paths: listSlugs().map((s) => ({ params: { slug: s } })), fallback: false };
+function sanitiseUnknownPlaceholders(src = "") {
+  return src
+    // Turn <Thing .../> or <Thing>...</Thing> into harmless spans (already safe)
+    .replace(/<\s*Thing(\s+[^>]*)?\/>/g, "<span$1 />")
+    .replace(/<\s*Thing(\s+[^>]*)?>/g, "<span$1>")
+    .replace(/<\s*\/\s*Thing\s*>/g, "</span>")
+    // NEW: remove bare {Capitalized} placeholders like {Audience}, {Thing}, etc.
+    // (only when it's *just* the identifier – no dots, calls, math, etc.)
+    .replace(/\{\s*[A-Z][A-Za-z0-9_]*\s*\}/g, "");
 }
 
 function escapeHtml(s = "") {
