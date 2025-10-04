@@ -1,5 +1,7 @@
 import Link from "next/link";
 
+
+import Image from 'next/image';
 export default function GuideCard({ guide }){
   const img = guide.cover || "/logo.png";
   const tag = guide.tags && guide.tags.length ? guide.tags[0] : null;
@@ -7,7 +9,7 @@ export default function GuideCard({ guide }){
   return (
     <article className="card guide-card">
       <div className="guide-card__media">
-        <img src={img} alt="" onError={(e)=>{ e.currentTarget.src="/logo.png"; }} />
+        <Imagesrc={img} alt="" onError={(e)= width={800} height={600} />{ e.currentTarget.src="/logo.png"; }} />
       </div>
       <div className="guide-card__body">
         {tag && <span className="tag">{tag}</span>}

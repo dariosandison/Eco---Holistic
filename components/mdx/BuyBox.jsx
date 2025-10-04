@@ -1,5 +1,7 @@
 import React from 'react';
 
+
+import Image from 'next/image';
 /**
  * Simple "buy box" product card for MDX.
  *
@@ -48,12 +50,11 @@ export default function BuyBox({
       {image ? (
         <div style={{ width: 96, height: 96, overflow: 'hidden', borderRadius: 10, background: '#f3f4f6' }}>
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src={image}
+          <Imagesrc={image}
             alt={imageAlt || title || 'Product image'}
             style={{ width: '100%', height: '100%', objectFit: 'cover' }}
             loading="lazy"
-          />
+          / width={800} height={600} />
         </div>
       ) : null}
 

@@ -1,6 +1,8 @@
 // components/GuidesGrid.js
 import Link from 'next/link';
 
+
+import Image from 'next/image';
 export default function GuidesGrid({ guides }) {
   const grid = {
     display: 'grid',
@@ -34,7 +36,7 @@ export default function GuidesGrid({ guides }) {
         <Link key={g.slug} href={`/guides/${g.slug}`} style={{ textDecoration: 'none' }}>
           <article style={card}>
             <div style={banner}>
-              <img src="/card-logo.png" alt="" onError={(e)=>{e.currentTarget.style.display='none';}} style={{ width: 220, maxWidth: '80%' }} />
+              <Imagesrc="/card-logo.png" alt="" onError={(e)= width={800} height={600} />{e.currentTarget.style.display='none';}} style={{ width: 220, maxWidth: '80%' }} />
             </div>
             <h3 style={title}>{g.title}</h3>
           </article>

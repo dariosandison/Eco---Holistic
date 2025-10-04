@@ -1,3 +1,4 @@
+import CompareTable from '../../components/CompareTable';
 // pages/reviews/[slug].js
 import React from 'react';
 import fs from 'fs';
@@ -100,7 +101,25 @@ function buildProduct(front) {
  * Page component
  */
 export default function ReviewPage({ slug, mdxSource, meta, seo, product }) {
-  return (
+  return (<>
+        <Head>
+          <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Product",
+            "name": (post?.product?.name || post?.title || "Product"),
+            "review": {
+              "@type": "Review",
+              "reviewRating": {
+                "@type": "Rating",
+                "ratingValue": post?.rating?.toString?.() || "5",
+                "bestRating": "5",
+                "worstRating": "1"
+              },
+              "author": {"@type":"Person","name":"Wild & Well Editorial Team"}
+            }
+          }) }} />
+        </Head>
+        
     <>
       <Head>
         <title>{seo?.title ?? meta?.title ?? 'Review'}</title>
@@ -112,6 +131,7 @@ export default function ReviewPage({ slug, mdxSource, meta, seo, product }) {
 
       <main className="container mx-auto px-4 py-8 prose prose-neutral">
         <article>
+<CompareTable items={Array.isArray(meta?.products) ? meta.products : []} />
           <header>
             <h1>{meta?.title ?? slug}</h1>
             {meta?.subtitle ? <p>{meta.subtitle}</p> : null}
@@ -143,7 +163,7 @@ export default function ReviewPage({ slug, mdxSource, meta, seo, product }) {
             </section>
           ) : null}
         </article>
-      </main>
+      </main></>
     </>
   );
 }

@@ -1,5 +1,7 @@
 // pages/authors/[slug].js
 import fs from 'fs';
+
+import Image from 'next/image';
 import path from 'path';
 import matter from 'gray-matter';
 import Link from 'next/link';
@@ -90,7 +92,7 @@ export default function AuthorPage({ author, posts, seo }) {
       <div className="container">
         <article className="post">
           <div className="authorbox">
-            {author.avatar ? <img src={author.avatar} alt={author.name} className="authorbox-avatar" /> : null}
+            {author.avatar ? <Imagesrc={author.avatar} alt={author.name} className="authorbox-avatar" / width={800} height={600} /> : null}
             <div>
               <h1 className="authorbox-name">{author.name}</h1>
               {author.title ? <div className="authorbox-title">{author.title}</div> : null}

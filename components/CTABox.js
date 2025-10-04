@@ -1,5 +1,7 @@
 // components/CTABox.js
 import React from 'react';
+
+import Image from 'next/image';
 import AffLink from './AffLink';
 import PriceTag from './PriceTag';
 import { coerceCurrency } from '../lib/price';
@@ -88,7 +90,7 @@ export default function CTABox({
   return (
     <aside className="cta">
       <div className="media">
-        {image ? <img src={image} alt={alt || title || ''} loading="lazy" /> : null}
+        {image ? <Imagesrc={image} alt={alt || title || ''} loading="lazy" / width={800} height={600} /> : null}
       </div>
       <div className="copy">
         {badge ? <div className="badge">{badge}</div> : null}

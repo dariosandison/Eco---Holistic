@@ -1,5 +1,7 @@
 import Link from "next/link";
 
+
+import Image from 'next/image';
 export default function BlogCard({ post }){
   const img = post.cover || "/logo.png";
   const d = post.date ? new Date(post.date) : null;
@@ -8,7 +10,7 @@ export default function BlogCard({ post }){
   return (
     <article className="card guide-card">
       <div className="guide-card__media">
-        <img src={img} alt="" onError={(e)=>{ e.currentTarget.src="/logo.png"; }} />
+        <Imagesrc={img} alt="" onError={(e)= width={800} height={600} />{ e.currentTarget.src="/logo.png"; }} />
       </div>
       <div className="guide-card__body">
         <span className="tag">Latest</span>

@@ -1,19 +1,22 @@
+import SEO from '../components/SEO'
+import Image from 'next/image'
 // pages/index.jsx
 import Link from "next/link";
 import GuideCard from "../components/GuideCard";
 import { getAllGuides } from "../lib/content";
 
 export default function Home({ latest = [] }) {
-  return (
+  return (<>
+      <SEO title="Wild & Well — Holistic health, natural healing & eco living" />
     <>
       {/* Hero with logo */}
       <section className="hero" style={{ marginTop: 16 }}>
         <div className="hero-inner">
           <div className="hero-logo">
-            <img
+            <Image
               src="/logo.svg"
               alt="Wild & Well logo"
-              onError={(e) => { e.currentTarget.src = "/logo.png"; }}
+              onError={(e) = width={320} height={140} priority /> { e.currentTarget.src = "/logo.png"; }}
             />
           </div>
         </div>

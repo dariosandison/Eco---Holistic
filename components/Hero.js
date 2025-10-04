@@ -1,3 +1,4 @@
+import Image from 'next/image';
 // components/Hero.js
 export default function Hero() {
   const container = { maxWidth: '1100px', margin: '20px auto 0', padding: '0 16px' };
@@ -39,10 +40,9 @@ export default function Hero() {
     <section style={container}>
       <div style={card}>
         <div style={frame}>
-          <img
-            src="/hero-logo.png"
+          <Imagesrc="/hero-logo.png"
             alt="Wild & Well"
-            onError={(e) => { e.currentTarget.style.display = 'none'; }}
+            onError={(e) = width={800} height={600} /> { e.currentTarget.style.display = 'none'; }}
             style={{ maxWidth: '80%', height: 'auto', display: 'block' }}
           />
         </div>

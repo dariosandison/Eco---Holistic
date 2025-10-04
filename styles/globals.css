@@ -1,3 +1,8 @@
+/* Tailwind layers */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 /* === Wild & Well brand === */
 :root{
   --bg-0:#394a38;         /* header/footer bar */

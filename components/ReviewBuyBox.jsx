@@ -1,5 +1,7 @@
 // components/ReviewBuyBox.jsx
 import Link from "next/link";
+
+import Image from 'next/image';
 import { useMemo } from "react";
 
 function prune(value) {
@@ -100,7 +102,7 @@ export default function ReviewBuyBox({
       {image ? (
         <div style={{ width: 100, height: 100, borderRadius: 12, overflow: "hidden", background: "#fff", border: "1px solid #eee" }}>
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src={image} alt={productName} style={{ width: "100%", height: "100%", objectFit: "contain" }} />
+          <Imagesrc={image} alt={productName} style={{ width: "100%", height: "100%", objectFit: "contain" }} / width={800} height={600} />
         </div>
       ) : null}
 

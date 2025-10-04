@@ -17,7 +17,8 @@ export default function SiteFooter(){
           <Link href="/product-disclosure">Product Disclosure</Link>
           {site.social?.instagram && <a href={site.social.instagram} target="_blank" rel="noopener">Instagram</a>}
           {site.social?.pinterest && <a href={site.social.pinterest} target="_blank" rel="noopener">Pinterest</a>}
-        </div>
+        <p className=\"text-sm opacity-75 mt-2\">As an Amazon Associate, we earn from qualifying purchases.</p>
+</div>
         <div className="footer-meta">
           © {new Date().getFullYear()} {site.siteName} • Independent • Reader-supported
         </div>

@@ -1,9 +1,10 @@
+import Image from 'next/image';
 // components/AuthorCard.js
 export default function AuthorCard({ name, title, bio, avatar }) {
   if (!name && !bio) return null;
   return (
     <aside className="author" aria-label="About the author">
-      {avatar ? <img src={avatar} alt="" loading="lazy" /> : <div style={{width:48,height:48,borderRadius:999,background:'#efe7d4'}} />}
+      {avatar ? <Imagesrc={avatar} alt="" loading="lazy" / width={800} height={600} /> : <div style={{width:48,height:48,borderRadius:999,background:'#efe7d4'}} />}
       <div>
         {name && <strong>{name}</strong>}
         {title && <small>{title}</small>}

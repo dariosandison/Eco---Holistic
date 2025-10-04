@@ -1,5 +1,7 @@
 // pages/compare/[slug].js
 import fs from 'fs';
+
+import Image from 'next/image';
 import path from 'path';
 import matter from 'gray-matter';
 import Link from 'next/link';
@@ -112,7 +114,7 @@ export default function ComparePage({ slug, meta, mdxSource, seo }) {
                     <div className="cmp-card" key={i}>
                       <div className="cmp-card-title">{it.name}</div>
                       {it.brand ? <div className="cmp-card-sub">{it.brand}</div> : null}
-                      {it.image ? <img className="cmp-card-img" src={it.image} alt={it.name} /> : null}
+                      {it.image ? <ImageclassName="cmp-card-img" src={it.image} alt={it.name} / width={800} height={600} /> : null}
                       {it.price != null ? <div className="cmp-price">£{Number(it.price)}</div> : null}
                       {it.rating != null ? <div className="cmp-badge">{Number(it.rating).toFixed(1)}★</div> : null}
                       {Array.isArray(it.highlights) && it.highlights.length > 0 ? (

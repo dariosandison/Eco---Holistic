@@ -1,3 +1,4 @@
+import Head from 'next/head';
 // pages/blog/[slug].js
 import fs from 'fs';
 import path from 'path';
@@ -63,7 +64,50 @@ export async function getStaticProps({ params }) {
 
 export default function BlogPost({ slug, meta, mdxSource, seo }) {
   const updated = meta.updated || meta.date;
-  return (
+  return (<>
+        <Head>
+          <script
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{ __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Article",
+              "headline": meta?.title || "Wild & Well Article",
+              "description": meta?.description || undefined,
+              "datePublished": meta?.date || undefined,
+              "dateModified": meta?.updated || meta?.date || undefined,
+              "author": [{"@type":"Person","name":"Wild & Well Editorial Team"}],
+              "publisher": {"@type":"Organization","name":"Wild & Well"}
+            }) }}
+          />
+          {Array.isArray(meta?.faqs) && meta.faqs.length ? (
+            <script
+              type="application/ld+json"
+              dangerouslySetInnerHTML={{ __html: JSON.stringify({
+                "@context": "https://schema.org",
+                "@type": "FAQPage",
+                "mainEntity": meta.faqs.map(q => ({
+                  "@type": "Question",
+                  "name": q.question,
+                  "acceptedAnswer": {"@type":"Answer","text": q.answer}
+                }))
+              }) }}
+            />
+          ) : null}
+        </Head>
+        <>
+        <Head>
+          <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Article",
+            "headline": (post?.title || title) ?? "Wild & Well Article",
+            "description": (post?.description || description) ?? undefined,
+            "datePublished": post?.date || null,
+            "dateModified": post?.updated || post?.date || null,
+            "author": [{"@type":"Person","name":"Wild & Well Editorial Team"}],
+            "publisher": {"@type":"Organization","name":"Wild & Well"}
+          }) }} />
+        </Head>
+        
     <>
       <SEO {...seo} />
       <div className="container">

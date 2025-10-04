@@ -63,3 +63,11 @@
 /* ===== A11y focus ring (visible but subtle) ===== */
 :focus { outline: 2px solid transparent; outline-offset: 2px; }
 :focus-visible { outline: 3px solid #111827; outline-offset: 2px; border-radius: 4px; }
+
+/* Card media consistency */
+.card-thumb {
+  aspect-ratio: 4 / 3;
+  width: 100%;
+  object-fit: cover;
+  display: block;
+}

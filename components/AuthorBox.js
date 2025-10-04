@@ -1,3 +1,4 @@
+import Image from 'next/image';
 // components/AuthorBox.js
 export default function AuthorBox({
   name = "Wild & Well Editorial",
@@ -8,7 +9,7 @@ export default function AuthorBox({
 }) {
   return (
     <aside className="authorbox">
-      <img src={avatar} alt="" className="authorbox-avatar" />
+      <Imagesrc={avatar} alt="" className="authorbox-avatar" / width={800} height={600} />
       <div className="authorbox-meta">
         <p className="authorbox-name">{name} <span className="authorbox-title">— {title}</span></p>
         {updated ? <p className="authorbox-updated">Updated {new Date(updated).toLocaleDateString()}</p> : null}

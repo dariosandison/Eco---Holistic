@@ -1,6 +1,8 @@
 // components/Card.js
 import Link from 'next/link';
 
+
+import Image from 'next/image';
 export default function Card({ slug, title, excerpt, badge, deal, image }) {
   // Prefer front-matter image; else try /images/guides/<slug>.jpg; else /cover.png
   const src = image || `/images/guides/${slug}.jpg`;
@@ -13,12 +15,11 @@ export default function Card({ slug, title, excerpt, badge, deal, image }) {
           {badge && <span className="pill pill--top">{badge}</span>}
           {deal && <span className="pill pill--deal">Deal</span>}
         </div>
-        <img
-          className="card-img"
+        <ImageclassName="card-img"
           src={src}
           alt=""
           loading="lazy"
-          onError={(e) => { e.currentTarget.src = fallback; }}
+          onError={(e) = width={800} height={600} /> { e.currentTarget.src = fallback; }}
         />
       </Link>
       <div className="card-body">
