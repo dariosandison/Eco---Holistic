@@ -1,38 +1,56 @@
 import Link from "next/link";
-import site from "../data/site.config.json";
 
-export default function SiteFooter() {
+const legal = [
+  { href:"/about", label:"About" },
+  { href:"/editorial-policy", label:"Editorial Policy" },
+  { href:"/how-we-test", label:"How We Test" },
+  { href:"/privacy", label:"Privacy" },
+  { href:"/cookies", label:"Cookies" },
+  { href:"/terms", label:"Terms" },
+  { href:"/disclaimer", label:"Disclaimer" },
+  { href:"/affiliate-disclosure", label:"Affiliate Disclosure" },
+  { href:"/product-disclosure", label:"Product Disclosure" },
+];
+
+export default function Footer(){
   return (
-    <footer className="footer-fixed">
-      <div className="container">
-        <div className="footer-links">
-          <Link href="/about">About</Link>
-          <Link href="/editorial-policy">Editorial Policy</Link>
-          <Link href="/how-we-test">How We Test</Link>
-          <Link href="/privacy">Privacy</Link>
-          <Link href="/cookies">Cookies</Link>
-          <Link href="/terms">Terms</Link>
-          <Link href="/disclaimer">Disclaimer</Link>
-          <Link href="/disclosure">Affiliate Disclosure</Link>
-          <Link href="/product-disclosure">Product Disclosure</Link>
-          {site.social?.instagram && (
-            <a href={site.social.instagram} target="_blank" rel="noopener">
-              Instagram
-            </a>
-          )}
-          {site.social?.pinterest && (
-            <a href={site.social.pinterest} target="_blank" rel="noopener">
-              Pinterest
-            </a>
-          )}
-          <p className="text-sm opacity-75 mt-2">
-            As an Amazon Associate, we earn from qualifying purchases.
-          </p>
+    <footer className="site-footer" style={{marginTop:"2rem"}}>
+      <div className="container" style={{padding:"1.25rem 1rem"}}>
+        <div className="footer-grid">
+          <div className="footer-col">
+            <h4>Wild & Well</h4>
+            <p className="muted">Independent • Reader-supported</p>
+            <p className="muted" style={{marginTop:8}}>
+              As an Amazon Associate, we earn from qualifying purchases.
+            </p>
+          </div>
+          <div className="footer-col">
+            <h4>Explore</h4>
+            <ul>
+              <li><Link href="/guides">Guides</Link></li>
+              <li><Link href="/deals">Deals</Link></li>
+              <li><Link href="/blog">Blog</Link></li>
+              <li><Link href="/contact">Contact</Link></li>
+            </ul>
+          </div>
+          <div className="footer-col">
+            <h4>Legal</h4>
+            <ul>
+              {legal.map(l => (
+                <li key={l.href}><Link href={l.href}>{l.label}</Link></li>
+              ))}
+            </ul>
+          </div>
+          <div className="footer-col">
+            <h4>Follow</h4>
+            <ul>
+              <li><a href="https://instagram.com" target="_blank" rel="noopener noreferrer">Instagram</a></li>
+              <li><a href="https://pinterest.com" target="_blank" rel="noopener noreferrer">Pinterest</a></li>
+            </ul>
+          </div>
         </div>
-        <div className="footer-meta">
-          © {new Date().getFullYear()} {site.siteName} • Independent •
-          Reader-supported
-        </div>
+        <hr style={{margin:"1rem 0"}} />
+        <small className="muted">© {new Date().getFullYear()} Wild and Well</small>
       </div>
     </footer>
   );
