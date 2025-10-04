@@ -60,8 +60,10 @@ function sanitizeMDX(src) {
     return `@@CODEBLOCK_${i}@@`;
   });
 
-  // 2) Remove HTML comments <!-- ... -->
-  let cleaned = lifted.replace(/<!--[\s\S]*?-->/g, "");
+  // 2) Remove HTML comments and any <! ... > declarations
+  let cleaned = lifted
+    .replace(/<!--[\s\S]*?-->/g, "")
+    .replace(/<![\s\S]*?>/g, "");
 
   // 3) Remove bare {UppercaseIdentifier} expressions that cause ReferenceError
   cleaned = cleaned.replace(/\{[ \t]*[A-Z][A-Za-z0-9_]*[ \t]*\}/g, "");
@@ -70,4 +72,27 @@ function sanitizeMDX(src) {
   //    (targeting names seen in errors; expand if needed)
   const unknownTags = ["Thing", "Audience"];
   unknownTags.forEach((name) => {
-    // Self-clos
+    // Self-closing <Name ... />
+    const reSelf = new RegExp(`<${name}\\b([^>]*)\\/\\>`, "g");
+    cleaned = cleaned.replace(reSelf, `<div$1 />`);
+    // Opening <Name ...>
+    const reOpen = new RegExp(`<${name}\\b([^>]*)>`, "g");
+    cleaned = cleaned.replace(reOpen, `<div$1>`);
+    // Closing </Name>
+    const reClose = new RegExp(`</${name}>`, "g");
+    cleaned = cleaned.replace(reClose, `</div>`);
+  });
+
+  // 5) Restore code blocks
+  cleaned = cleaned.replace(/@@CODEBLOCK_(\d+)@@/g, (_, i) => codeBlocks[Number(i)]);
+
+  return cleaned;
+}
+
+// Return a components map that never crashes for unknown MDX tags
+function withFallback(base = {}) {
+  return new Proxy(base, {
+    get(target, prop) {
+      if (prop in target) return target[prop];
+      if (typeof prop === "string" && /^[A-Z]/.test(prop)) {
+        return (pro
