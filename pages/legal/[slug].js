@@ -43,9 +43,14 @@ function jsonSafeMeta(meta) {
   return out;
 }
 
+/**
+ * Legal pages can also include angle-bracket links or comments coming from CMS.
+ * Normalize them the same way as guides.
+ */
 function sanitizeMDX(src) {
   if (!src) return src;
 
+  // Lift code blocks and inline code
   const codeBlocks = [];
   let lifted = src.replace(/```[\s\S]*?```/g, (m) => {
     const i = codeBlocks.push(m) - 1;
@@ -56,16 +61,23 @@ function sanitizeMDX(src) {
     return `@@CODEBLOCK_${i}@@`;
   });
 
-  // Remove HTML comments and any <! ... >
+  // Remove HTML comments and <! ... >
   let cleaned = lifted
     .replace(/<!--[\s\S]*?-->/g, "")
     .replace(/<![\s\S]*?>/g, "");
 
+  // Convert <https://...> to markdown link
+  cleaned = cleaned.replace(/<https?:\/\/[^>\s]+>/g, (m) => {
+    const url = m.slice(1, -1);
+    return `[${url}](${url})`;
+  });
+
   // Remove bare {UppercaseIdentifier}
   cleaned = cleaned.replace(/\{[ \t]*[A-Z][A-Za-z0-9_]*[ \t]*\}/g, "");
 
-  // Guard against specific unknown components seen in logs
-  ["Thing", "Audience"].forEach((name) => {
+  // Replace unknown JSX tags with div (defensive)
+  const unknownTags = ["Thing", "Audience"];
+  unknownTags.forEach((name) => {
     const reSelf = new RegExp(`<${name}\\b([^>]*)\\s*/>`, "g");
     cleaned = cleaned.replace(reSelf, `<div$1 />`);
     const reOpen = new RegExp(`<${name}\\b([^>]*)>`, "g");
@@ -74,7 +86,7 @@ function sanitizeMDX(src) {
     cleaned = cleaned.replace(reClose, `</div>`);
   });
 
-  // Restore code blocks
+  // Restore code
   cleaned = cleaned.replace(/@@CODEBLOCK_(\d+)@@/g, (_, i) => codeBlocks[Number(i)]);
 
   return cleaned;
@@ -85,8 +97,9 @@ function withFallback(base = {}) {
     get(target, prop) {
       if (prop in target) return target[prop];
       if (typeof prop === "string" && /^[A-Z]/.test(prop)) {
-        // eslint-disable-next-line react/display-name
-        return (props) => <div {...props} />;
+        return function FallbackComponent(props) {
+          return <div {...props} />;
+        };
       }
       return undefined;
     },
@@ -115,6 +128,12 @@ export default function LegalPage({ slug, meta, mdxSource }) {
         <article className="post">
           <header className="post-header">
             <h1>{pageTitle}</h1>
+            {(meta?.updated || meta?.date) && (
+              <p className="post-meta">
+                {meta?.updated ? "Updated " : "Published "}
+                {new Date(meta?.updated || meta?.date).toLocaleDateString()}
+              </p>
+            )}
           </header>
 
           <div className="post-content">
