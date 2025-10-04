@@ -8,7 +8,7 @@ import SEO from "../../components/SEO";
 import { mdxComponents } from "../../components/MDXComponents";
 
 const ROOT = process.cwd();
-const DIR = path.join(ROOT, "content/guides");
+const DIR = path.join(ROOT, "content", "guides");
 
 function listSlugs() {
   if (!fs.existsSync(DIR)) return [];
@@ -34,11 +34,12 @@ function escapeHtml(s = "") {
   return s.replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;");
 }
 
-// Replace specific unknown placeholders with safe HTML elements before MDX compilation.
+// Some legacy MDX had placeholder components like <Thing />.
+// Replace them with safe elements before compiling.
 function sanitiseUnknownPlaceholders(src = "") {
   return src
-    .replace(/<\s*Thing\b/g, "<span")
-    .replace(/<\s*\/\s*Thing\b/g, "</span");
+    .replace(/<\s*Thing\b/gi, "<span")
+    .replace(/<\s*\/\s*Thing\s*>/gi, "</span>");
 }
 
 export async function getStaticProps({ params }) {
@@ -68,3 +69,74 @@ export async function getStaticProps({ params }) {
       slug: params.slug,
       meta,
       mdxSource,
+      fallbackHtml,
+      seo: {
+        title: `${title} — Guides — Wild & Well`,
+        description,
+        url,
+        type: "article",
+        breadcrumbs: [
+          { name: "Home", item: "https://www.wild-and-well.store/" },
+          { name: "Guides", item: "https://www.wild-and-well.store/guides" },
+          { name: title, item: url },
+        ],
+      },
+    },
+    revalidate: 60 * 60 * 12,
+  };
+}
+
+export default function GuidePage({ slug, meta, mdxSource, fallbackHtml, seo }) {
+  const updated = meta.updated || meta.date;
+
+  // Map unknown MDX components safely.
+  const components = {
+    ...mdxComponents,
+    Thing: (props) => <div {...props} />,
+  };
+
+  return (
+    <>
+      <Head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Article",
+              headline: meta?.title || "Wild & Well Guide",
+              description: meta?.description || undefined,
+              datePublished: meta?.date || undefined,
+              dateModified: meta?.updated || meta?.date || undefined,
+              author: [{ "@type": "Person", name: "Wild & Well Editorial Team" }],
+              publisher: { "@type": "Organization", name: "Wild & Well" },
+            }),
+          }}
+        />
+      </Head>
+
+      <SEO {...seo} />
+      <div className="container">
+        <article className="post">
+          <h1 className="post-title">{meta.title || slug.replace(/-/g, " ")}</h1>
+          {(meta.date || updated || meta.tags) ? (
+            <p className="post-meta">
+              {meta.date ? <>Published {new Date(meta.date).toLocaleDateString()}</> : null}
+              {meta.date && updated ? <> · </> : null}
+              {updated ? <>Updated {new Date(updated).toLocaleDateString()}</> : null}
+              {meta.tags ? (
+                <> · {Array.isArray(meta.tags) ? meta.tags.join(", ") : meta.tags}</>
+              ) : null}
+            </p>
+          ) : null}
+
+          {mdxSource ? (
+            <MDXRemote {...mdxSource} components={components} />
+          ) : (
+            <div dangerouslySetInnerHTML={{ __html: fallbackHtml || "" }} />
+          )}
+        </article>
+      </div>
+    </>
+  );
+}
