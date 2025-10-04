@@ -50,11 +50,15 @@ export default function BuyBox({
       {image ? (
         <div style={{ width: 96, height: 96, overflow: 'hidden', borderRadius: 10, background: '#f3f4f6' }}>
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <Imagesrc={image}
-            alt={imageAlt || title || 'Product image'}
-            style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-            loading="lazy"
-          / width={800} height={600} />
+          <Image
+  src={image}
+  alt={imageAlt || title || 'Product image'}
+  width={96}
+  height={96}
+  style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+  loading="lazy"
+/>
+
         </div>
       ) : null}
 
