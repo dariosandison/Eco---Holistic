@@ -9,7 +9,14 @@ export default function GuideCard({ guide }){
   return (
     <article className="card guide-card">
       <div className="guide-card__media">
-        <Imagesrc={img} alt="" onError={(e)= width={800} height={600} />{ e.currentTarget.src="/logo.png"; }} />
+        <Image
+  src={img}
+  alt=""
+  width={800}
+  height={600}
+  onError={(e)=>{ e.currentTarget.src="/logo.png"; }}
+/>
+
       </div>
       <div className="guide-card__body">
         {tag && <span className="tag">{tag}</span>}
