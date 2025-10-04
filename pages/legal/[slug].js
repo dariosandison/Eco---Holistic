@@ -1,3 +1,5 @@
+// pages/legal/[slug].js
+import Head from "next/head";
 import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
@@ -7,29 +9,7 @@ import SEO from "../../components/SEO";
 import { mdxComponents } from "../../components/MDXComponents";
 
 const ROOT = process.cwd();
-const DIR = path.join(ROOT, "content/legal");
-
-// Replace placeholder MDX component <Thing .../> with harmless <span .../>
-function sanitiseUnknownPlaceholders(src = "") {
-  return src
-    .replace(/<\s*Thing\b/g, "<span")
-    .replace(/<\s*\/\s*Thing\b/g, "</span");
-}
-
-// Generic safe fallback for any unknown Capitalized MDX component
-const Fallback = () => (props) => {
-  const { children, ...rest } = props || {};
-  return <div {...rest}>{children}</div>;
-};
-const withFallback = (base = {}) =>
-  new Proxy(base, {
-    get(target, prop) {
-      if (prop in target) return target[prop];
-      const key = String(prop);
-      if (/^[A-Z]/.test(key)) return Fallback();
-      return undefined;
-    },
-  });
+const DIR = path.join(ROOT, "content", "legal");
 
 function listSlugs() {
   if (!fs.existsSync(DIR)) return [];
@@ -55,6 +35,13 @@ function escapeHtml(s = "") {
   return s.replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;");
 }
 
+// Replace unknown placeholders/components that may appear in legacy MDX
+function sanitiseUnknownPlaceholders(src = "") {
+  return src
+    .replace(/<\s*Thing\b/gi, "<span")
+    .replace(/<\s*\/\s*Thing\s*>/gi, "</span>");
+}
+
 export async function getStaticProps({ params }) {
   const filepath = fileFor(params.slug);
   if (!filepath) return { notFound: true };
@@ -65,10 +52,12 @@ export async function getStaticProps({ params }) {
 
   let mdxSource = null;
   let fallbackHtml = null;
+
   try {
     const cleaned = sanitiseUnknownPlaceholders(content || "");
     mdxSource = await serializeMdx(cleaned);
   } catch {
+    // As a last resort, render as escaped HTML so build doesn’t fail
     fallbackHtml = `<pre style="white-space:pre-wrap">${escapeHtml(content || "")}</pre>`;
   }
 
@@ -86,7 +75,7 @@ export async function getStaticProps({ params }) {
         title: `${title} — Wild & Well`,
         description,
         url,
-        type: "webpage",
+        type: "article",
         breadcrumbs: [
           { name: "Home", item: "https://www.wild-and-well.store/" },
           { name: "Legal", item: "https://www.wild-and-well.store/legal" },
@@ -99,21 +88,32 @@ export async function getStaticProps({ params }) {
 }
 
 export default function LegalPage({ slug, meta, mdxSource, fallbackHtml, seo }) {
-  const components = withFallback(mdxComponents);
+  const components = {
+    ...mdxComponents,
+    // Ensure <Thing /> never crashes render if it sneaks through
+    Thing: (props) => <div {...props} />,
+  };
 
   return (
     <>
+      <Head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Article",
+              headline: meta?.title || "Wild & Well — Legal",
+              description: meta?.description || undefined,
+              datePublished: meta?.date || undefined,
+              dateModified: meta?.updated || meta?.date || undefined,
+              author: [{ "@type": "Person", name: "Wild & Well Editorial Team" }],
+              publisher: { "@type": "Organization", name: "Wild & Well" },
+            }),
+          }}
+        />
+      </Head>
+
       <SEO {...seo} />
       <div className="container">
         <article className="post">
-          <h1 className="post-title">{meta.title || slug.replace(/-/g, " ")}</h1>
-          {mdxSource ? (
-            <MDXRemote {...mdxSource} components={components} />
-          ) : (
-            <div dangerouslySetInnerHTML={{ __html: fallbackHtml || "" }} />
-          )}
-        </article>
-      </div>
-    </>
-  );
-}
