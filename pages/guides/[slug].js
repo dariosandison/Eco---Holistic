@@ -34,7 +34,7 @@ function titleFromSlug(slug) {
     .replace(/\b\w/g, (m) => m.toUpperCase());
 }
 
-// Make front-matter JSON-serializable (e.g., convert Date -> ISO string)
+// Make front-matter JSON-serializable (Date -> ISO string)
 function jsonSafeMeta(meta) {
   const out = {};
   for (const [k, v] of Object.entries(meta || {})) {
@@ -44,11 +44,18 @@ function jsonSafeMeta(meta) {
   return out;
 }
 
-// Strip/neutralize patterns that break MDX compile
+/**
+ * Sanitize author MDX so next-mdx-remote won't choke.
+ * - Lifts code blocks so we never touch code samples
+ * - Removes HTML comments and <! … >
+ * - Converts angle-bracket autolinks (<https://...>) to markdown links
+ * - Removes bare {UppercaseIdentifier} expressions
+ * - Replaces unknown JSX tags (Thing, Audience, etc.) with <div>
+ */
 function sanitizeMDX(src) {
   if (!src) return src;
 
-  // 1) Lift fenced + inline code so we don't mutate inside them
+  // 1) Lift fenced + inline code so we don't mutate their contents.
   const codeBlocks = [];
   let lifted = src.replace(/```[\s\S]*?```/g, (m) => {
     const i = codeBlocks.push(m) - 1;
@@ -64,33 +71,41 @@ function sanitizeMDX(src) {
     .replace(/<!--[\s\S]*?-->/g, "")
     .replace(/<![\s\S]*?>/g, "");
 
-  // 3) Remove bare {UppercaseIdentifier} expressions
+  // 3) Convert <https://example.com> or <http://...> to markdown links
+  cleaned = cleaned.replace(/<https?:\/\/[^>\s]+>/g, (m) => {
+    const url = m.slice(1, -1);
+    return `[${url}](${url})`;
+  });
+
+  // 4) Remove bare {UppercaseIdentifier} expressions
   cleaned = cleaned.replace(/\{[ \t]*[A-Z][A-Za-z0-9_]*[ \t]*\}/g, "");
 
-  // 4) Replace specific unknown JSX components with <div>
+  // 5) Replace specific unknown JSX components with <div>
   const unknownTags = ["Thing", "Audience"];
   unknownTags.forEach((name) => {
+    // Self-closing: <Thing ... />
     const reSelf = new RegExp(`<${name}\\b([^>]*)\\s*/>`, "g");
     cleaned = cleaned.replace(reSelf, `<div$1 />`);
+    // Opening: <Thing ...>
     const reOpen = new RegExp(`<${name}\\b([^>]*)>`, "g");
     cleaned = cleaned.replace(reOpen, `<div$1>`);
+    // Closing: </Thing>
     const reClose = new RegExp(`</${name}>`, "g");
     cleaned = cleaned.replace(reClose, `</div>`);
   });
 
-  // 5) Restore code blocks
+  // 6) Restore code blocks
   cleaned = cleaned.replace(/@@CODEBLOCK_(\d+)@@/g, (_, i) => codeBlocks[Number(i)]);
 
   return cleaned;
 }
 
-// Return a components map that never crashes for unknown MDX tags
+// Components map that never crashes for unknown MDX tags
 function withFallback(base = {}) {
   return new Proxy(base, {
     get(target, prop) {
       if (prop in target) return target[prop];
       if (typeof prop === "string" && /^[A-Z]/.test(prop)) {
-        // Unknown capitalized component -> harmless <div>
         return function FallbackComponent(props) {
           return <div {...props} />;
         };
@@ -104,7 +119,6 @@ function withFallback(base = {}) {
 
 export default function GuidePage({ slug, meta, mdxSource }) {
   const components = withFallback({
-    // Extra guard for names seen in logs
     Thing: (props) => <div {...props} />,
     Audience: (props) => <div {...props} />,
   });
@@ -120,6 +134,7 @@ export default function GuidePage({ slug, meta, mdxSource }) {
 
         <script
           type="application/ld+json"
+          // JSON-LD must be a pure JSON string
           dangerouslySetInnerHTML={{
             __html: JSON.stringify({
               "@context": "https://schema.org",
