@@ -34,19 +34,37 @@ function escapeHtml(s = "") {
   return s.replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;");
 }
 
-// Replace placeholder MDX component <Thing .../> with harmless <span .../>
+// Replace specific unknown placeholders with safe HTML elements before MDX compilation.
 function sanitiseUnknownPlaceholders(src = "") {
   return src
     .replace(/<\s*Thing\b/g, "<span")
     .replace(/<\s*\/\s*Thing\b/g, "</span");
 }
 
-// Generic safe fallback for any unknown Capitalized MDX component
-const Fallback = () => (props) => {
-  const { children, ...rest } = props || {};
-  return <div {...rest}>{children}</div>;
-};
-const withFallback = (base = {}) =>
-  new Proxy(base, {
-    get(target, prop) {
-      if (prop in target) return target[prop];
+export async function getStaticProps({ params }) {
+  const filepath = fileFor(params.slug);
+  if (!filepath) return { notFound: true };
+
+  const raw = fs.readFileSync(filepath, "utf8");
+  const { data, content } = matter(raw);
+  const meta = jsonSafeMeta(data || {});
+
+  let mdxSource = null;
+  let fallbackHtml = null;
+
+  try {
+    const cleaned = sanitiseUnknownPlaceholders(content || "");
+    mdxSource = await serializeMdx(cleaned);
+  } catch {
+    fallbackHtml = `<pre style="white-space:pre-wrap">${escapeHtml(content || "")}</pre>`;
+  }
+
+  const title = meta.title || params.slug.replace(/-/g, " ");
+  const description = meta.description || "";
+  const url = `https://www.wild-and-well.store/guides/${params.slug}`;
+
+  return {
+    props: {
+      slug: params.slug,
+      meta,
+      mdxSource,
