@@ -98,8 +98,17 @@ export async function getStaticProps({ params }) {
   };
 }
 
-export default function LegalPage({ slug, meta, mdxSource, fallbackHtml, seo }) {
-  const components = {
+const Fallback = (props) => <div {...props} />;
+
+const components = new Proxy({ ...mdxComponents, Thing: Fallback }, {
+  get(target, prop) {
+    if (prop in target) return target[prop];
+    // If a Capitalized component name isn't provided, fall back safely:
+    if (typeof prop === "string" && /^[A-Z]/.test(prop)) return Fallback;
+    return target[prop];
+  },
+});
+
     ...mdxComponents,
     // Ensure <Thing /> never crashes render if it sneaks through
     Thing: (props) => <div {...props} />,
