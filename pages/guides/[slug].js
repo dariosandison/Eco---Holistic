@@ -5,10 +5,9 @@ import Head from "next/head";
 import { MDXRemote } from "next-mdx-remote";
 import { serialize } from "next-mdx-remote/serialize";
 
-// Where the MDX/MD files live for guides
 const GUIDES_DIR = path.join(process.cwd(), "content", "guides");
 
-// --- Helpers ---------------------------------------------------------------
+// ----------------------------- Helpers -------------------------------------
 
 function getAllSlugs(dir) {
   if (!fs.existsSync(dir)) return [];
@@ -50,7 +49,25 @@ function jsonSafeMeta(meta) {
 function sanitizeMDX(src) {
   if (!src) return src;
 
-  // 1) Temporarily lift fenced code blocks so we don't touch their contents
+  // 1) Temporarily lift fenced code blocks and inline code so we don't touch their contents
   const codeBlocks = [];
-  const lifted = src.replace(/```[\s\S]*?```/g, (m) => {
-    const i = codeBlocks.
+  let lifted = src.replace(/```[\s\S]*?```/g, (m) => {
+    const i = codeBlocks.push(m) - 1;
+    return `@@CODEBLOCK_${i}@@`;
+  });
+  lifted = lifted.replace(/`[^`\n]+`/g, (m) => {
+    const i = codeBlocks.push(m) - 1;
+    return `@@CODEBLOCK_${i}@@`;
+  });
+
+  // 2) Remove HTML comments <!-- ... -->
+  let cleaned = lifted.replace(/<!--[\s\S]*?-->/g, "");
+
+  // 3) Remove bare {UppercaseIdentifier} expressions that cause ReferenceError
+  cleaned = cleaned.replace(/\{[ \t]*[A-Z][A-Za-z0-9_]*[ \t]*\}/g, "");
+
+  // 4) Replace specific unknown JSX components with <div> to avoid "X is not defined"
+  //    (targeting names seen in errors; expand if needed)
+  const unknownTags = ["Thing", "Audience"];
+  unknownTags.forEach((name) => {
+    // Self-clos
