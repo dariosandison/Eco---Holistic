@@ -57,13 +57,17 @@ export async function getStaticProps({ params }) {
   let mdxSource = null;
   let fallbackHtml = null;
 
-  try {
-    const cleaned = sanitiseUnknownPlaceholders(content || "");
-    mdxSource = await serializeMdx(cleaned);
-  } catch {
-    // As a last resort, render as escaped HTML so build doesn’t fail
-    fallbackHtml = `<pre style="white-space:pre-wrap">${escapeHtml(content || "")}</pre>`;
-  }
+  function sanitiseUnknownPlaceholders(src = "") {
+  return src
+    // Turn <Thing .../> or <Thing>...</Thing> into harmless spans (already safe)
+    .replace(/<\s*Thing(\s+[^>]*)?\/>/g, "<span$1 />")
+    .replace(/<\s*Thing(\s+[^>]*)?>/g, "<span$1>")
+    .replace(/<\s*\/\s*Thing\s*>/g, "</span>")
+    // NEW: remove bare {Capitalized} placeholders like {Audience}, {Thing}, etc.
+    // (only when it's *just* the identifier – no dots, calls, math, etc.)
+    .replace(/\{\s*[A-Z][A-Za-z0-9_]*\s*\}/g, "");
+}
+
 
   const title = meta.title || params.slug.replace(/-/g, " ");
   const description = meta.description || "";
