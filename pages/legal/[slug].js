@@ -1,158 +1,111 @@
-// pages/legal/[slug].js
-import Head from "next/head";
 import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
+import Head from "next/head";
 import { MDXRemote } from "next-mdx-remote";
-import { serializeMdx, jsonSafeMeta } from "../../lib/mdx";
-import SEO from "../../components/SEO";
-import { mdxComponents } from "../../components/MDXComponents";
+import { serialize } from "next-mdx-remote/serialize";
 
-const ROOT = process.cwd();
-const DIR = path.join(ROOT, "content", "legal");
+// Where the MDX/MD files live for legal pages
+const LEGAL_DIR = path.join(process.cwd(), "content", "legal");
 
-function listSlugs() {
-  if (!fs.existsSync(DIR)) return [];
+// --- Helpers ---------------------------------------------------------------
+
+function getAllSlugs(dir) {
+  if (!fs.existsSync(dir)) return [];
   return fs
-    .readdirSync(DIR)
-    .filter((f) => f.endsWith(".md") || f.endsWith(".mdx"))
-    .map((f) => f.replace(/\.(md|mdx)$/i, ""));
+    .readdirSync(dir)
+    .filter((f) => f.endsWith(".mdx") || f.endsWith(".md"))
+    .map((f) => f.replace(/\.mdx?$/, ""));
 }
 
-function fileFor(slug) {
-  const mdx = path.join(DIR, `${slug}.mdx`);
-  const md = path.join(DIR, `${slug}.md`);
-  if (fs.existsSync(mdx)) return mdx;
-  if (fs.existsSync(md)) return md;
-  return null;
+function loadBySlug(dir, slug) {
+  const filePathMDX = path.join(dir, `${slug}.mdx`);
+  const filePathMD = path.join(dir, `${slug}.md`);
+  const filePath = fs.existsSync(filePathMDX) ? filePathMDX : filePathMD;
+
+  if (!fs.existsSync(filePath)) return null;
+
+  const raw = fs.readFileSync(filePath, "utf8");
+  const { content, data } = matter(raw);
+  return { content, meta: data || {} };
 }
 
-function sanitiseUnknownPlaceholders(src = "") {
-  return src
-    // Turn <Thing .../> or <Thing>...</Thing> into harmless spans (already safe)
-    .replace(/<\s*Thing(\s+[^>]*)?\/>/g, "<span$1 />")
-    .replace(/<\s*Thing(\s+[^>]*)?>/g, "<span$1>")
-    .replace(/<\s*\/\s*Thing\s*>/g, "</span>")
-    // NEW: remove bare {Capitalized} placeholders like {Audience}, {Thing}, etc.
-    // (only when it's *just* the identifier – no dots, calls, math, etc.)
-    .replace(/\{\s*[A-Z][A-Za-z0-9_]*\s*\}/g, "");
+function titleFromSlug(slug) {
+  return slug
+    .replace(/-/g, " ")
+    .replace(/\b\w/g, (m) => m.toUpperCase());
 }
 
-function escapeHtml(s = "") {
-  return s.replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;");
-}
-
-// Replace unknown placeholders/components that may appear in legacy MDX
-function sanitiseUnknownPlaceholders(src = "") {
-  return src
-    // <Thing .../> and <Thing>...</Thing>
-    .replace(/<\s*Thing(\s+[^>]*)?\/>/g, "<span$1 />")
-    .replace(/<\s*Thing(\s+[^>]*)?>/g, "<span$1>")
-    .replace(/<\s*\/\s*Thing\s*>/g, "</span>")
-    // {Thing} expressions
-    .replace(/\{\s*Thing\s*\}/g, "");
-}
-
-export async function getStaticProps({ params }) {
-  const filepath = fileFor(params.slug);
-  if (!filepath) return { notFound: true };
-
-  const raw = fs.readFileSync(filepath, "utf8");
-  const { data, content } = matter(raw);
-  const meta = jsonSafeMeta(data || {});
-
-  let mdxSource = null;
-  let fallbackHtml = null;
-
-  try {
-    const cleaned = sanitiseUnknownPlaceholders(content || "");
-    mdxSource = await serializeMdx(cleaned);
-  } catch {
-    // As a last resort, render as escaped HTML so build doesn’t fail
-    fallbackHtml = `<pre style="white-space:pre-wrap">${escapeHtml(content || "")}</pre>`;
-  }
-
-  const title = meta.title || params.slug.replace(/-/g, " ");
-  const description = meta.description || "";
-  const url = `https://www.wild-and-well.store/legal/${params.slug}`;
-
-  return {
-    props: {
-      slug: params.slug,
-      meta,
-      mdxSource,
-      fallbackHtml,
-      seo: {
-        title: `${title} — Wild & Well`,
-        description,
-        url,
-        type: "article",
-        breadcrumbs: [
-          { name: "Home", item: "https://www.wild-and-well.store/" },
-          { name: "Legal", item: "https://www.wild-and-well.store/legal" },
-          { name: title, item: url },
-        ],
-      },
+// Return a components map that never crashes for unknown MDX tags
+function withFallback(base = {}) {
+  return new Proxy(base, {
+    get(target, prop) {
+      if (prop in target) return target[prop];
+      if (typeof prop === "string" && /^[A-Z]/.test(prop)) {
+        return (props) => <div {...props} />;
+      }
+      return undefined;
     },
-    revalidate: 60 * 60 * 12,
-  };
+  });
 }
 
-const Fallback = (props) => <div {...props} />;
+// --- Page ------------------------------------------------------------------
 
-const components = new Proxy({ ...mdxComponents, Thing: Fallback }, {
-  get(target, prop) {
-    if (prop in target) return target[prop];
-    // If a Capitalized component name isn't provided, fall back safely:
-    if (typeof prop === "string" && /^[A-Z]/.test(prop)) return Fallback;
-    return target[prop];
-  },
-});
+export default function LegalPage({ slug, meta, mdxSource }) {
+  const components = withFallback({});
 
-    ...mdxComponents,
-    // Ensure <Thing /> never crashes render if it sneaks through
-    Thing: (props) => <div {...props} />,
-  };
+  const pageTitle = meta?.title || titleFromSlug(slug);
+  const pageDesc = meta?.description || "";
 
   return (
     <>
       <Head>
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              "@context": "https://schema.org",
-              "@type": "Article",
-              headline: meta?.title || "Wild & Well — Legal",
-              description: meta?.description || undefined,
-              datePublished: meta?.date || undefined,
-              dateModified: meta?.updated || meta?.date || undefined,
-              author: [{ "@type": "Person", name: "Wild & Well Editorial Team" }],
-              publisher: { "@type": "Organization", name: "Wild & Well" },
-            }),
-          }}
-        />
+        <title>{pageTitle} | Wild &amp; Well</title>
+        {pageDesc ? <meta name="description" content={pageDesc} /> : null}
       </Head>
 
-      <SEO {...seo} />
       <div className="container">
         <article className="post">
-          <h1 className="post-title">{meta.title || slug.replace(/-/g, " ")}</h1>
-          {(meta.date || meta.updated) ? (
-            <p className="post-meta">
-              {meta.date ? <>Published {new Date(meta.date).toLocaleDateString()}</> : null}
-              {meta.date && meta.updated ? <> · </> : null}
-              {meta.updated ? <>Updated {new Date(meta.updated).toLocaleDateString()}</> : null}
-            </p>
-          ) : null}
+          <header className="post-header">
+            <h1>{pageTitle}</h1>
+          </header>
 
-          {mdxSource ? (
+          <div className="post-content">
             <MDXRemote {...mdxSource} components={components} />
-          ) : (
-            <div dangerouslySetInnerHTML={{ __html: fallbackHtml || "" }} />
-          )}
+          </div>
         </article>
       </div>
     </>
   );
+}
+
+// --- Data ------------------------------------------------------------------
+
+export async function getStaticPaths() {
+  const slugs = getAllSlugs(LEGAL_DIR);
+  return {
+    paths: slugs.map((slug) => ({ params: { slug } })),
+    fallback: false,
+  };
+}
+
+export async function getStaticProps({ params }) {
+  const loaded = loadBySlug(LEGAL_DIR, params.slug);
+  if (!loaded) {
+    return { notFound: true };
+  }
+
+  // Compile MDX
+  const mdxSource = await serialize(loaded.content, {
+    scope: loaded.meta || {},
+    parseFrontmatter: false,
+  });
+
+  return {
+    props: {
+      slug: params.slug,
+      meta: loaded.meta || {},
+      mdxSource,
+    },
+  };
 }
