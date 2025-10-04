@@ -36,101 +36,21 @@ function titleFromSlug(slug) {
     .replace(/\b\w/g, (m) => m.toUpperCase());
 }
 
-// Return a components map that never crashes for unknown MDX tags
-function withFallback(base = {}) {
-  return new Proxy(base, {
-    get(target, prop) {
-      if (prop in target) return target[prop];
-      // Any Capitalized MDX component that isn't provided -> harmless <div>
-      if (typeof prop === "string" && /^[A-Z]/.test(prop)) {
-        return (props) => <div {...props} />;
-      }
-      return undefined;
-    },
-  });
-}
-
-// --- Page ------------------------------------------------------------------
-
-export default function GuidePage({ slug, meta, mdxSource }) {
-  const components = withFallback({
-    // You can add/override real components here later, e.g. Callout, YouTube, etc.
-  });
-
-  const pageTitle = meta?.title || titleFromSlug(slug);
-  const pageDesc = meta?.description || "";
-
-  return (
-    <>
-      <Head>
-        <title>{pageTitle} | Wild &amp; Well</title>
-        {pageDesc ? <meta name="description" content={pageDesc} /> : null}
-
-        {/* Minimal JSON-LD for articles */}
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              "@context": "https://schema.org",
-              "@type": "Article",
-              headline: pageTitle,
-              description: pageDesc || undefined,
-              datePublished: meta?.date || undefined,
-              dateModified: meta?.updated || meta?.date || undefined,
-              author: [{ "@type": "Person", name: "Wild & Well Editorial Team" }],
-            }),
-          }}
-        />
-      </Head>
-
-      <div className="container">
-        <article className="post">
-          <header className="post-header">
-            <h1>{pageTitle}</h1>
-            {meta?.updated || meta?.date ? (
-              <p className="post-meta">
-                {meta?.updated ? "Updated " : "Published "}
-                {new Date(meta?.updated || meta?.date).toLocaleDateString()}
-              </p>
-            ) : null}
-          </header>
-
-          <div className="post-content">
-            <MDXRemote {...mdxSource} components={components} />
-          </div>
-        </article>
-      </div>
-    </>
-  );
-}
-
-// --- Data ------------------------------------------------------------------
-
-export async function getStaticPaths() {
-  const slugs = getAllSlugs(GUIDES_DIR);
-  return {
-    paths: slugs.map((slug) => ({ params: { slug } })),
-    fallback: false,
-  };
-}
-
-export async function getStaticProps({ params }) {
-  const loaded = loadBySlug(GUIDES_DIR, params.slug);
-  if (!loaded) {
-    return { notFound: true };
+// Make front-matter JSON-serializable (e.g., convert Date -> ISO string)
+function jsonSafeMeta(meta) {
+  const out = {};
+  for (const [k, v] of Object.entries(meta || {})) {
+    if (v instanceof Date) out[k] = v.toISOString();
+    else out[k] = v;
   }
-
-  // Compile MDX
-  const mdxSource = await serialize(loaded.content, {
-    scope: loaded.meta || {},
-    parseFrontmatter: false,
-  });
-
-  return {
-    props: {
-      slug: params.slug,
-      meta: loaded.meta || {},
-      mdxSource,
-    },
-  };
+  return out;
 }
+
+// Strip/neutralize patterns that break MDX compile
+function sanitizeMDX(src) {
+  if (!src) return src;
+
+  // 1) Temporarily lift fenced code blocks so we don't touch their contents
+  const codeBlocks = [];
+  const lifted = src.replace(/```[\s\S]*?```/g, (m) => {
+    const i = codeBlocks.
