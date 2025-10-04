@@ -31,11 +31,25 @@ export async function getStaticPaths() {
 }
 
 function escapeHtml(s = "") {
-  return s
-    .replaceAll("&", "&amp;")
-    .replaceAll("<", "&lt;")
-    .replaceAll(">", "&gt;");
+  return s.replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;");
 }
+
+// Generic safe fallback for any unknown Capitalized MDX component
+const Fallback = (tagName) => (props) => {
+  const { children, ...rest } = props || {};
+  const Tag = "div";
+  return <Tag {...rest}>{children}</Tag>;
+};
+const withFallback = (base = {}) =>
+  new Proxy(base, {
+    get(target, prop) {
+      if (prop in target) return target[prop];
+      const key = String(prop);
+      // Only fallback for Capitalized names (i.e., MDX component identifiers)
+      if (/^[A-Z]/.test(key)) return Fallback(key);
+      return undefined;
+    },
+  });
 
 export async function getStaticProps({ params }) {
   const filepath = fileFor(params.slug);
@@ -50,8 +64,7 @@ export async function getStaticProps({ params }) {
   try {
     mdxSource = await serializeMdx(content || "");
   } catch (err) {
-    // If MDX fails to compile (bad expression, unknown component, etc),
-    // render a safe plaintext fallback so the build still succeeds.
+    // If MDX fails to compile, render a safe plaintext fallback so the build still succeeds.
     fallbackHtml = `<pre style="white-space:pre-wrap">${escapeHtml(content || "")}</pre>`;
   }
 
@@ -83,6 +96,8 @@ export async function getStaticProps({ params }) {
 
 export default function GuidePage({ slug, meta, mdxSource, fallbackHtml, seo }) {
   const updated = meta.updated || meta.date;
+  const components = withFallback(mdxComponents);
+
   return (
     <>
       <Head>
@@ -119,9 +134,8 @@ export default function GuidePage({ slug, meta, mdxSource, fallbackHtml, seo }) 
           ) : null}
 
           {mdxSource ? (
-            <MDXRemote {...mdxSource} components={mdxComponents} />
+            <MDXRemote {...mdxSource} components={components} />
           ) : (
-            // Safe fallback if MDX failed to compile
             <div dangerouslySetInnerHTML={{ __html: fallbackHtml || "" }} />
           )}
         </article>
@@ -129,4 +143,3 @@ export default function GuidePage({ slug, meta, mdxSource, fallbackHtml, seo }) 
     </>
   );
 }
-
