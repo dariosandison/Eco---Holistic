@@ -1,3 +1,4 @@
+// pages/guides/[slug].js
 import Head from "next/head";
 import fs from "fs";
 import path from "path";
@@ -34,12 +35,15 @@ function escapeHtml(s = "") {
   return s.replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;");
 }
 
-// Some legacy MDX had placeholder components like <Thing />.
-// Replace them with safe elements before compiling.
+// Replace unknown placeholders/components that may appear in legacy MDX
 function sanitiseUnknownPlaceholders(src = "") {
   return src
-    .replace(/<\s*Thing\b/gi, "<span")
-    .replace(/<\s*\/\s*Thing\s*>/gi, "</span>");
+    // <Thing .../> and <Thing>...</Thing>
+    .replace(/<\s*Thing(\s+[^>]*)?\/>/g, "<span$1 />")
+    .replace(/<\s*Thing(\s+[^>]*)?>/g, "<span$1>")
+    .replace(/<\s*\/\s*Thing\s*>/g, "</span>")
+    // {Thing} expressions
+    .replace(/\{\s*Thing\s*\}/g, "");
 }
 
 export async function getStaticProps({ params }) {
@@ -57,6 +61,7 @@ export async function getStaticProps({ params }) {
     const cleaned = sanitiseUnknownPlaceholders(content || "");
     mdxSource = await serializeMdx(cleaned);
   } catch {
+    // As a last resort, render as escaped HTML so build doesn’t fail
     fallbackHtml = `<pre style="white-space:pre-wrap">${escapeHtml(content || "")}</pre>`;
   }
 
@@ -89,9 +94,9 @@ export async function getStaticProps({ params }) {
 export default function GuidePage({ slug, meta, mdxSource, fallbackHtml, seo }) {
   const updated = meta.updated || meta.date;
 
-  // Map unknown MDX components safely.
   const components = {
     ...mdxComponents,
+    // Ensure <Thing /> never crashes render if it sneaks through
     Thing: (props) => <div {...props} />,
   };
 
@@ -119,14 +124,12 @@ export default function GuidePage({ slug, meta, mdxSource, fallbackHtml, seo }) 
       <div className="container">
         <article className="post">
           <h1 className="post-title">{meta.title || slug.replace(/-/g, " ")}</h1>
-          {(meta.date || updated || meta.tags) ? (
+          {(meta.date || updated) ? (
             <p className="post-meta">
               {meta.date ? <>Published {new Date(meta.date).toLocaleDateString()}</> : null}
               {meta.date && updated ? <> · </> : null}
               {updated ? <>Updated {new Date(updated).toLocaleDateString()}</> : null}
-              {meta.tags ? (
-                <> · {Array.isArray(meta.tags) ? meta.tags.join(", ") : meta.tags}</>
-              ) : null}
+              {meta.tags ? <> · {Array.isArray(meta.tags) ? meta.tags.join(", ") : meta.tags}</> : null}
             </p>
           ) : null}
 
