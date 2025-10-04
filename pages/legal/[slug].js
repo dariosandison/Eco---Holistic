@@ -117,3 +117,22 @@ export default function LegalPage({ slug, meta, mdxSource, fallbackHtml, seo }) 
       <SEO {...seo} />
       <div className="container">
         <article className="post">
+          <h1 className="post-title">{meta.title || slug.replace(/-/g, " ")}</h1>
+          {(meta.date || meta.updated) ? (
+            <p className="post-meta">
+              {meta.date ? <>Published {new Date(meta.date).toLocaleDateString()}</> : null}
+              {meta.date && meta.updated ? <> · </> : null}
+              {meta.updated ? <>Updated {new Date(meta.updated).toLocaleDateString()}</> : null}
+            </p>
+          ) : null}
+
+          {mdxSource ? (
+            <MDXRemote {...mdxSource} components={components} />
+          ) : (
+            <div dangerouslySetInnerHTML={{ __html: fallbackHtml || "" }} />
+          )}
+        </article>
+      </div>
+    </>
+  );
+}
