@@ -9,7 +9,7 @@ import { mdxComponents } from "../../components/MDXComponents";
 const ROOT = process.cwd();
 const DIR = path.join(ROOT, "content/legal");
 
-// Replace the placeholder MDX component <Thing .../> with a harmless <span .../>
+// Replace placeholder MDX component <Thing .../> with harmless <span .../>
 function sanitiseUnknownPlaceholders(src = "") {
   return src
     .replace(/<\s*Thing\b/g, "<span")
@@ -66,4 +66,54 @@ export async function getStaticProps({ params }) {
   let mdxSource = null;
   let fallbackHtml = null;
   try {
-    const cleaned =
+    const cleaned = sanitiseUnknownPlaceholders(content || "");
+    mdxSource = await serializeMdx(cleaned);
+  } catch {
+    fallbackHtml = `<pre style="white-space:pre-wrap">${escapeHtml(content || "")}</pre>`;
+  }
+
+  const title = meta.title || params.slug.replace(/-/g, " ");
+  const description = meta.description || "";
+  const url = `https://www.wild-and-well.store/legal/${params.slug}`;
+
+  return {
+    props: {
+      slug: params.slug,
+      meta,
+      mdxSource,
+      fallbackHtml,
+      seo: {
+        title: `${title} — Wild & Well`,
+        description,
+        url,
+        type: "webpage",
+        breadcrumbs: [
+          { name: "Home", item: "https://www.wild-and-well.store/" },
+          { name: "Legal", item: "https://www.wild-and-well.store/legal" },
+          { name: title, item: url },
+        ],
+      },
+    },
+    revalidate: 60 * 60 * 12,
+  };
+}
+
+export default function LegalPage({ slug, meta, mdxSource, fallbackHtml, seo }) {
+  const components = withFallback(mdxComponents);
+
+  return (
+    <>
+      <SEO {...seo} />
+      <div className="container">
+        <article className="post">
+          <h1 className="post-title">{meta.title || slug.replace(/-/g, " ")}</h1>
+          {mdxSource ? (
+            <MDXRemote {...mdxSource} components={components} />
+          ) : (
+            <div dangerouslySetInnerHTML={{ __html: fallbackHtml || "" }} />
+          )}
+        </article>
+      </div>
+    </>
+  );
+}
