@@ -4,21 +4,26 @@ import matter from "gray-matter";
 import { MDXRemote } from "next-mdx-remote";
 import { serializeMdx, jsonSafeMeta } from "../../lib/mdx";
 import SEO from "../../components/SEO";
+import { mdxComponents } from "../../components/MDXComponents";
 
-// Minimal fallback components for any unexpected Capitalized tags in MDX
-const Fallback = (tag) => (props) => {
+const ROOT = process.cwd();
+const DIR = path.join(ROOT, "content/legal");
+
+// Generic safe fallback for any unknown Capitalized MDX component
+const Fallback = (tagName) => (props) => {
   const { children, ...rest } = props || {};
   const Tag = "div";
   return <Tag {...rest}>{children}</Tag>;
 };
-
-// If the cookies MDX referenced <Thing />, provide a harmless stub.
-const components = {
-  Thing: Fallback("Thing"),
-};
-
-const ROOT = process.cwd();
-const DIR = path.join(ROOT, "content/legal");
+const withFallback = (base = {}) =>
+  new Proxy(base, {
+    get(target, prop) {
+      if (prop in target) return target[prop];
+      const key = String(prop);
+      if (/^[A-Z]/.test(key)) return Fallback(key);
+      return undefined;
+    },
+  });
 
 function listSlugs() {
   if (!fs.existsSync(DIR)) return [];
@@ -41,10 +46,7 @@ export async function getStaticPaths() {
 }
 
 function escapeHtml(s = "") {
-  return s
-    .replaceAll("&", "&amp;")
-    .replaceAll("<", "&lt;")
-    .replaceAll(">", "&gt;");
+  return s.replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;");
 }
 
 export async function getStaticProps({ params }) {
@@ -90,6 +92,8 @@ export async function getStaticProps({ params }) {
 }
 
 export default function LegalPage({ slug, meta, mdxSource, fallbackHtml, seo }) {
+  const components = withFallback(mdxComponents);
+
   return (
     <>
       <SEO {...seo} />
@@ -106,3 +110,4 @@ export default function LegalPage({ slug, meta, mdxSource, fallbackHtml, seo }) 
     </>
   );
 }
+
