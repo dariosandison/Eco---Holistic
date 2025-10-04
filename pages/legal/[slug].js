@@ -1,56 +1,106 @@
-// pages/legal/[slug].js
-import fs from 'fs';
-import path from 'path';
-import matter from 'gray-matter';
-import { MDXRemote } from 'next-mdx-remote';
-import { serializeMdx } from '../../lib/mdx';
-import SEO from '../../components/SEO';
-import { mdxComponents } from '../../components/MDXComponents';
+import fs from "fs";
+import path from "path";
+import matter from "gray-matter";
+import { MDXRemote } from "next-mdx-remote";
+import { serializeMdx, jsonSafeMeta } from "../../lib/mdx";
+import SEO from "../../components/SEO";
 
-const LEGAL_SLUGS = ['affiliate-disclosure','product-disclosure','cookies','disclaimer','privacy'];
+// Minimal fallback components for any unexpected Capitalized tags in MDX
+const Fallback = (tag) => (props) => {
+  const { children, ...rest } = props || {};
+  const Tag = "div";
+  return <Tag {...rest}>{children}</Tag>;
+};
+
+// If the cookies MDX referenced <Thing />, provide a harmless stub.
+const components = {
+  Thing: Fallback("Thing"),
+};
+
+const ROOT = process.cwd();
+const DIR = path.join(ROOT, "content/legal");
+
+function listSlugs() {
+  if (!fs.existsSync(DIR)) return [];
+  return fs
+    .readdirSync(DIR)
+    .filter((f) => f.endsWith(".md") || f.endsWith(".mdx"))
+    .map((f) => f.replace(/\.(md|mdx)$/i, ""));
+}
+
+function fileFor(slug) {
+  const mdx = path.join(DIR, `${slug}.mdx`);
+  const md = path.join(DIR, `${slug}.md`);
+  if (fs.existsSync(mdx)) return mdx;
+  if (fs.existsSync(md)) return md;
+  return null;
+}
 
 export async function getStaticPaths() {
-  return { paths: LEGAL_SLUGS.map(s => ({ params: { slug: s } })), fallback: false };
+  return { paths: listSlugs().map((s) => ({ params: { slug: s } })), fallback: false };
+}
+
+function escapeHtml(s = "") {
+  return s
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;");
 }
 
 export async function getStaticProps({ params }) {
-  const file = path.join(process.cwd(), 'content/legal', `${params.slug}.mdx`);
-  const raw = fs.readFileSync(file, 'utf8');
-  const { data, content } = matter(raw);
-  const mdxSource = await serializeMdx(content);
+  const filepath = fileFor(params.slug);
+  if (!filepath) return { notFound: true };
 
-  const title = data.title || 'Legal';
-  const description = data.description || '';
+  const raw = fs.readFileSync(filepath, "utf8");
+  const { data, content } = matter(raw);
+  const meta = jsonSafeMeta(data || {});
+
+  let mdxSource = null;
+  let fallbackHtml = null;
+  try {
+    mdxSource = await serializeMdx(content || "");
+  } catch {
+    fallbackHtml = `<pre style="white-space:pre-wrap">${escapeHtml(content || "")}</pre>`;
+  }
+
+  const title = meta.title || params.slug.replace(/-/g, " ");
+  const description = meta.description || "";
   const url = `https://www.wild-and-well.store/legal/${params.slug}`;
 
   return {
     props: {
       slug: params.slug,
+      meta,
       mdxSource,
+      fallbackHtml,
       seo: {
         title: `${title} — Wild & Well`,
         description,
         url,
-        type: 'website',
+        type: "webpage",
         breadcrumbs: [
-          { name: 'Home', item: 'https://www.wild-and-well.store/' },
-          { name: 'Legal', item: 'https://www.wild-and-well.store/legal' },
-          { name: title, item: url }
-        ]
-      }
+          { name: "Home", item: "https://www.wild-and-well.store/" },
+          { name: "Legal", item: "https://www.wild-and-well.store/legal" },
+          { name: title, item: url },
+        ],
+      },
     },
-    revalidate: 60 * 60 * 24
+    revalidate: 60 * 60 * 12,
   };
 }
 
-export default function LegalPage({ slug, mdxSource, seo }) {
+export default function LegalPage({ slug, meta, mdxSource, fallbackHtml, seo }) {
   return (
     <>
       <SEO {...seo} />
-      <meta name="robots" content="noindex,follow" />
-      <div className="container" style={{ marginTop: 22 }}>
+      <div className="container">
         <article className="post">
-          <MDXRemote {...mdxSource} components={mdxComponents} />
+          <h1 className="post-title">{meta.title || slug.replace(/-/g, " ")}</h1>
+          {mdxSource ? (
+            <MDXRemote {...mdxSource} components={components} />
+          ) : (
+            <div dangerouslySetInnerHTML={{ __html: fallbackHtml || "" }} />
+          )}
         </article>
       </div>
     </>
