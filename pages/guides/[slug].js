@@ -1,221 +1,131 @@
-import Head from 'next/head';
-// pages/guides/[slug].js
-// Robust guides page: safe frontmatter, no undefined in props, MDX without risky plugins.
+import Head from "next/head";
+import fs from "fs";
+import path from "path";
+import matter from "gray-matter";
+import { MDXRemote } from "next-mdx-remote";
+import { serializeMdx, jsonSafeMeta } from "../../lib/mdx";
+import SEO from "../../components/SEO";
+import { mdxComponents } from "../../components/MDXComponents";
 
-import fs from 'fs';
-import path from 'path';
-import matter from 'gray-matter';
-import Link from 'next/link';
-import { serialize } from 'next-mdx-remote/serialize';
-import { MDXRemote } from 'next-mdx-remote';
-import SEO from '../../components/SEO';
+const ROOT = process.cwd();
+const DIR = path.join(ROOT, "content/guides");
 
-const GUIDES_DIR = path.join(process.cwd(), 'content', 'guides');
-
-function withoutUndefined(obj) {
-  if (!obj || typeof obj !== 'object') return {};
-  const out = {};
-  for (const [k, v] of Object.entries(obj)) {
-    if (v === undefined) continue;
-    if (v && typeof v === 'object' && !Array.isArray(v)) {
-      out[k] = withoutUndefined(v);
-    } else {
-      out[k] = v;
-    }
-  }
-  return out;
+function listSlugs() {
+  if (!fs.existsSync(DIR)) return [];
+  return fs
+    .readdirSync(DIR)
+    .filter((f) => f.endsWith(".md") || f.endsWith(".mdx"))
+    .map((f) => f.replace(/\.(md|mdx)$/i, ""));
 }
 
-function cleanText(v, fallback = null) {
-  if (typeof v === 'string' && v.trim()) return v.trim();
-  return fallback;
-}
-
-
-function deriveFaqsFromContent(markdown) {
-  try {
-    if (!markdown) return [];
-    const faqs = [];
-    const m = markdown.match(/^##\s*FAQs\s*$/gmi);
-    if (!m) return [];
-    // Basic parse of the FAQs section using bold questions **Q**
-    const section = markdown.split(/^##\s*FAQs\s*$/gmi)[1] || "";
-    const upToNext = section.split(/^##\s+/m)[0] || section;
-    const parts = upToNext.split(/\n(?=\*\*.+?\*\*)/);
-    for (const part of parts) {
-      const qm = part.match(/\*\*(.+?)\*\*[\s\S]*/);
-      if (qm) {
-        const q = qm[1].trim();
-        let ans = part.replace(/\*\*(.+?)\*\*/, '').trim();
-        ans = ans.split(/\n\*\*.+?\*\*|\n#{1,6}\s/)[0]?.trim() || ans;
-        if (q && ans) faqs.push({ question: q, answer: ans });
-      }
-    }
-    return faqs;
-  } catch { return []; }
-}
-
-
-function firstDefined(...vals) {
-  for (const v of vals) {
-    if (v !== undefined && v !== null) return v;
-  }
+function fileFor(slug) {
+  const mdx = path.join(DIR, `${slug}.mdx`);
+  const md = path.join(DIR, `${slug}.md`);
+  if (fs.existsSync(mdx)) return mdx;
+  if (fs.existsSync(md)) return md;
   return null;
 }
 
-function preprocessMdx(src) {
-  // 1) Convert HTML comments to JSX comments outside code fences
-  const lines = src.split('\n');
-  let inFence = false;
-  const out = [];
-  for (const line of lines) {
-    const fence = line.trim().match(/^```/);
-    if (fence) inFence = !inFence;
-    if (!inFence) {
-      out.push(line.replace(/<!--/g, '{/*').replace(/-->/g, '*/}'));
-    } else {
-      out.push(line);
-    }
-  }
-  // 2) Replace angle-bracket autolinks <https://…> → https://…
-  const joined = out.join('\n').replace(/<((?:https?:\/\/|mailto:)[^>\s]+)>/g, '$1');
-  return joined;
-}
-
-function readSlugs() {
-  if (!fs.existsSync(GUIDES_DIR)) return [];
-  return fs
-    .readdirSync(GUIDES_DIR)
-    .filter((f) => f.endsWith('.md') || f.endsWith('.mdx'))
-    .map((f) => f.replace(/\.mdx?$/, ''));
-}
-
-function loadGuide(slug) {
-  const mdxPath = path.join(GUIDES_DIR, `${slug}.mdx`);
-  const mdPath = path.join(GUIDES_DIR, `${slug}.md`);
-  const filePath = fs.existsSync(mdxPath) ? mdxPath : mdPath;
-  const raw = fs.readFileSync(filePath, 'utf8');
-  const { content, data } = matter(raw);
-  return { content, data: data || {} };
-}
-
 export async function getStaticPaths() {
-  const slugs = readSlugs();
-  return {
-    paths: slugs.map((slug) => ({ params: { slug } })),
-    fallback: false,
-  };
+  return { paths: listSlugs().map((s) => ({ params: { slug: s } })), fallback: false };
+}
+
+function escapeHtml(s = "") {
+  return s
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;");
 }
 
 export async function getStaticProps({ params }) {
-  const { slug } = params;
-  const { content, data } = loadGuide(slug);
+  const filepath = fileFor(params.slug);
+  if (!filepath) return { notFound: true };
 
-  // Compile MDX with minimal options (avoid plugins that inject raw HTML nodes)
-  const mdxSource = await serialize(preprocessMdx(content), {
-    mdxOptions: { format: 'mdx' },
-    parseFrontmatter: false,
-  });
+  const raw = fs.readFileSync(filepath, "utf8");
+  const { data, content } = matter(raw);
+  const meta = jsonSafeMeta(data || {});
 
-  
-  const derivedFaqs = Array.isArray(meta?.faqs) && meta.faqs.length ? meta.faqs : deriveFaqsFromContent(content);
-  if (derivedFaqs && !meta.faqs) meta.faqs = derivedFaqs;
-// Build safe SEO/meta object (no undefined values)
-  const seo = {
-    title: cleanText(firstDefined(data.seo?.title, data.title), ''),
-    description: cleanText(firstDefined(data.seo?.description, data.description), null),
-    image: cleanText(firstDefined(data.seo?.image, data.image, Array.isArray(data.images) ? data.images[0] : null), null),
-    url: `/guides/${slug}`,
-  };
+  let mdxSource = null;
+  let fallbackHtml = null;
+  try {
+    mdxSource = await serializeMdx(content || "");
+  } catch (err) {
+    // If MDX fails to compile (bad expression, unknown component, etc),
+    // render a safe plaintext fallback so the build still succeeds.
+    fallbackHtml = `<pre style="white-space:pre-wrap">${escapeHtml(content || "")}</pre>`;
+  }
 
-  const meta = withoutUndefined({
-    ...data,
-    title: cleanText(firstDefined(data.title, data.seo?.title), ''),
-    description: cleanText(firstDefined(data.description, data.seo?.description), null),
-    image: cleanText(firstDefined(data.image, Array.isArray(data.images) ? data.images[0] : null), null),
-    slug,
-  });
+  const title = meta.title || params.slug.replace(/-/g, " ");
+  const description = meta.description || "";
+  const url = `https://www.wild-and-well.store/guides/${params.slug}`;
 
   return {
     props: {
-      slug,
-      mdxSource,
+      slug: params.slug,
       meta,
-      seo,
+      mdxSource,
+      fallbackHtml,
+      seo: {
+        title: `${title} — Guides — Wild & Well`,
+        description,
+        url,
+        type: "article",
+        breadcrumbs: [
+          { name: "Home", item: "https://www.wild-and-well.store/" },
+          { name: "Guides", item: "https://www.wild-and-well.store/guides" },
+          { name: title, item: url },
+        ],
+      },
     },
+    revalidate: 60 * 60 * 12,
   };
 }
 
-export default function GuidePage({ slug, mdxSource, meta, seo }) {
-  return (<>
-        <Head>
-          <script
-            type="application/ld+json"
-            dangerouslySetInnerHTML={{ __html: JSON.stringify({
+export default function GuidePage({ slug, meta, mdxSource, fallbackHtml, seo }) {
+  const updated = meta.updated || meta.date;
+  return (
+    <>
+      <Head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
               "@context": "https://schema.org",
               "@type": "Article",
-              "headline": meta?.title || "Wild & Well Article",
-              "description": meta?.description || undefined,
-              "datePublished": meta?.date || undefined,
-              "dateModified": meta?.updated || meta?.date || undefined,
-              "author": [{"@type":"Person","name":"Wild & Well Editorial Team"}],
-              "publisher": {"@type":"Organization","name":"Wild & Well"}
-            }) }}
-          />
-          {Array.isArray(meta?.faqs) && meta.faqs.length ? (
-            <script
-              type="application/ld+json"
-              dangerouslySetInnerHTML={{ __html: JSON.stringify({
-                "@context": "https://schema.org",
-                "@type": "FAQPage",
-                "mainEntity": meta.faqs.map(q => ({
-                  "@type": "Question",
-                  "name": q.question,
-                  "acceptedAnswer": {"@type":"Answer","text": q.answer}
-                }))
-              }) }}
-            />
-          ) : null}
-        </Head>
-        <>
-        <Head>
-          <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "Article",
-            "headline": (post?.title || title) ?? "Wild & Well Article",
-            "description": (post?.description || description) ?? undefined,
-            "datePublished": post?.date || null,
-            "dateModified": post?.updated || post?.date || null,
-            "author": [{"@type":"Person","name":"Wild & Well Editorial Team"}],
-            "publisher": {"@type":"Organization","name":"Wild & Well"}
-          }) }} />
-        </Head>
-        
-    <>
-      <SEO
-        title={seo.title || meta.title}
-        description={seo.description || meta.description || undefined}
-        image={seo.image || undefined}
-        url={seo.url}
-        breadcrumbs={[
-          { name: 'Home', item: '/' },
-          { name: 'Guides', item: '/guides' },
-          { name: meta.title || 'Guide', item: `/guides/${slug}` },
-        ]}
-      />
-      <main style={{ padding: '48px 20px', maxWidth: 820, margin: '0 auto' }}>
-        <p style={{ marginBottom: 12 }}>
-          <Link href="/guides">← All Guides</Link>
-        </p>
-        <h1 style={{ fontSize: 34, lineHeight: 1.2, fontWeight: 800 }}>{meta.title}</h1>
-        {meta.description ? (
-          <p style={{ marginTop: 8, opacity: 0.85, fontSize: 18 }}>{meta.description}</p>
-        ) : null}
+              headline: meta?.title || "Wild & Well Guide",
+              description: meta?.description || undefined,
+              datePublished: meta?.date || undefined,
+              dateModified: meta?.updated || meta?.date || undefined,
+              author: [{ "@type": "Person", name: "Wild & Well Editorial Team" }],
+              publisher: { "@type": "Organization", name: "Wild & Well" },
+            }),
+          }}
+        />
+      </Head>
 
-        <article style={{ marginTop: 28 }}>
-          <MDXRemote {...mdxSource} components={{}} />
+      <SEO {...seo} />
+      <div className="container">
+        <article className="post">
+          <h1 className="post-title">{meta.title || slug.replace(/-/g, " ")}</h1>
+          {(meta.date || updated || meta.tags) ? (
+            <p className="post-meta">
+              {meta.date ? <>Published {new Date(meta.date).toLocaleDateString()}</> : null}
+              {meta.date && updated ? <> · </> : null}
+              {updated ? <>Updated {new Date(updated).toLocaleDateString()}</> : null}
+              {meta.tags ? (
+                <> · {Array.isArray(meta.tags) ? meta.tags.join(", ") : meta.tags}</>
+              ) : null}
+            </p>
+          ) : null}
+
+          {mdxSource ? (
+            <MDXRemote {...mdxSource} components={mdxComponents} />
+          ) : (
+            // Safe fallback if MDX failed to compile
+            <div dangerouslySetInnerHTML={{ __html: fallbackHtml || "" }} />
+          )}
         </article>
-      </main></></>
+      </div>
     </>
   );
 }
