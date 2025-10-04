@@ -7,7 +7,7 @@ import { serialize } from "next-mdx-remote/serialize";
 
 const GUIDES_DIR = path.join(process.cwd(), "content", "guides");
 
-// ----------------------------- Helpers -------------------------------------
+/* ------------------------------ Helpers ------------------------------ */
 
 function getAllSlugs(dir) {
   if (!fs.existsSync(dir)) return [];
@@ -21,7 +21,6 @@ function loadBySlug(dir, slug) {
   const filePathMDX = path.join(dir, `${slug}.mdx`);
   const filePathMD = path.join(dir, `${slug}.md`);
   const filePath = fs.existsSync(filePathMDX) ? filePathMDX : filePathMD;
-
   if (!fs.existsSync(filePath)) return null;
 
   const raw = fs.readFileSync(filePath, "utf8");
@@ -49,7 +48,7 @@ function jsonSafeMeta(meta) {
 function sanitizeMDX(src) {
   if (!src) return src;
 
-  // 1) Temporarily lift fenced code blocks and inline code so we don't touch their contents
+  // 1) Lift fenced + inline code so we don't mutate inside them
   const codeBlocks = [];
   let lifted = src.replace(/```[\s\S]*?```/g, (m) => {
     const i = codeBlocks.push(m) - 1;
@@ -60,39 +59,4 @@ function sanitizeMDX(src) {
     return `@@CODEBLOCK_${i}@@`;
   });
 
-  // 2) Remove HTML comments and any <! ... > declarations
-  let cleaned = lifted
-    .replace(/<!--[\s\S]*?-->/g, "")
-    .replace(/<![\s\S]*?>/g, "");
-
-  // 3) Remove bare {UppercaseIdentifier} expressions that cause ReferenceError
-  cleaned = cleaned.replace(/\{[ \t]*[A-Z][A-Za-z0-9_]*[ \t]*\}/g, "");
-
-  // 4) Replace specific unknown JSX components with <div> to avoid "X is not defined"
-  //    (targeting names seen in errors; expand if needed)
-  const unknownTags = ["Thing", "Audience"];
-  unknownTags.forEach((name) => {
-    // Self-closing <Name ... />
-    const reSelf = new RegExp(`<${name}\\b([^>]*)\\/\\>`, "g");
-    cleaned = cleaned.replace(reSelf, `<div$1 />`);
-    // Opening <Name ...>
-    const reOpen = new RegExp(`<${name}\\b([^>]*)>`, "g");
-    cleaned = cleaned.replace(reOpen, `<div$1>`);
-    // Closing </Name>
-    const reClose = new RegExp(`</${name}>`, "g");
-    cleaned = cleaned.replace(reClose, `</div>`);
-  });
-
-  // 5) Restore code blocks
-  cleaned = cleaned.replace(/@@CODEBLOCK_(\d+)@@/g, (_, i) => codeBlocks[Number(i)]);
-
-  return cleaned;
-}
-
-// Return a components map that never crashes for unknown MDX tags
-function withFallback(base = {}) {
-  return new Proxy(base, {
-    get(target, prop) {
-      if (prop in target) return target[prop];
-      if (typeof prop === "string" && /^[A-Z]/.test(prop)) {
-        return (pro
+  // 2) Remove HTML comments and any <! ... >
