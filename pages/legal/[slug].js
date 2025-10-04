@@ -36,6 +36,39 @@ function titleFromSlug(slug) {
     .replace(/\b\w/g, (m) => m.toUpperCase());
 }
 
+// Make front-matter JSON-serializable (e.g., convert Date -> ISO string)
+function jsonSafeMeta(meta) {
+  const out = {};
+  for (const [k, v] of Object.entries(meta || {})) {
+    if (v instanceof Date) out[k] = v.toISOString();
+    else out[k] = v;
+  }
+  return out;
+}
+
+// Strip/neutralize patterns that break MDX compile
+function sanitizeMDX(src) {
+  if (!src) return src;
+
+  // 1) Temporarily lift fenced code blocks so we don't touch their contents
+  const codeBlocks = [];
+  const lifted = src.replace(/```[\s\S]*?```/g, (m) => {
+    const i = codeBlocks.push(m) - 1;
+    return `@@CODEBLOCK_${i}@@`;
+  });
+
+  // 2) Remove HTML comments <!-- ... -->
+  let cleaned = lifted.replace(/<!--[\s\S]*?-->/g, "");
+
+  // 3) Remove bare {UppercaseIdentifier} expressions that cause ReferenceError
+  cleaned = cleaned.replace(/\{[ \t]*[A-Z][A-Za-z0-9_]*[ \t]*\}/g, "");
+
+  // 4) Restore code blocks
+  cleaned = cleaned.replace(/@@CODEBLOCK_(\d+)@@/g, (_, i) => codeBlocks[Number(i)]);
+
+  return cleaned;
+}
+
 // Return a components map that never crashes for unknown MDX tags
 function withFallback(base = {}) {
   return new Proxy(base, {
@@ -95,16 +128,19 @@ export async function getStaticProps({ params }) {
     return { notFound: true };
   }
 
+  const safeMeta = jsonSafeMeta(loaded.meta);
+  const cleaned = sanitizeMDX(loaded.content);
+
   // Compile MDX
-  const mdxSource = await serialize(loaded.content, {
-    scope: loaded.meta || {},
+  const mdxSource = await serialize(cleaned, {
+    scope: safeMeta,
     parseFrontmatter: false,
   });
 
   return {
     props: {
       slug: params.slug,
-      meta: loaded.meta || {},
+      meta: safeMeta,
       mdxSource,
     },
   };
