@@ -16,8 +16,14 @@ const CONTENT_DIR = path.join(process.cwd(), "content", "legal");
 function cleanMdx(src) {
   if (!src) return src;
   let s = String(src);
+
+  // Strip HTML comments
   s = s.replace(/<!--[\s\S]*?-->/g, "");
+
+  // Convert <https://...> to [https://...](https://...)
   s = s.replace(/<((https?:\/\/)[^>\s]+)>/g, (_m, url) => `[${url}](${url})`);
+
+  // Neutralize a couple of stray component names if present
   ["Thing", "Audience"].forEach((name) => {
     s = s.replace(new RegExp(`<\\s*${name}\\b([^>]*)\\/\\s*>`, "g"), `<div$1></div>`);
     s = s.replace(
@@ -25,6 +31,7 @@ function cleanMdx(src) {
       `<div$1>$2</div>`
     );
   });
+
   return s;
 }
 
@@ -43,6 +50,8 @@ function loadFile(slug) {
   return { content, meta: data || {} };
 }
 
+/* ------------------------------- Components ------------------------------ */
+
 function SafeLink(props) {
   const { href = "", children, ...rest } = props;
   const isExternal = /^https?:\/\//i.test(href);
@@ -58,7 +67,34 @@ function SafeLink(props) {
   );
 }
 
-const mdxComponents = { a: SafeLink };
+function AffiliateLink({ href = "", children, ...rest }) {
+  const isExternal = /^https?:\/\//i.test(href);
+  return (
+    <a
+      href={href}
+      target={isExternal ? "_blank" : undefined}
+      rel={isExternal ? "nofollow sponsored noopener noreferrer" : undefined}
+      {...rest}
+    >
+      {children || "View product"}
+    </a>
+  );
+}
+
+const mdxComponents = {
+  a: SafeLink,
+  AffiliateLink,
+};
+
+const componentsProxy = new Proxy(mdxComponents, {
+  get(target, prop) {
+    if (prop in target) return target[prop];
+    if (typeof prop === "string" && /^[A-Z]/.test(prop)) {
+      return (p) => <span {...p} />;
+    }
+    return undefined;
+  },
+});
 
 /* --------------------------------- Page ---------------------------------- */
 
@@ -75,7 +111,7 @@ export default function LegalPage({ slug, meta, mdxSource }) {
       <main className="container" style={{ padding: "1.25rem 0 2rem" }}>
         <article className="post">
           <h1>{title}</h1>
-          <MDXRemote {...mdxSource} components={mdxComponents} />
+          <MDXRemote {...mdxSource} components={componentsProxy} />
         </article>
       </main>
 
