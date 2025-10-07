@@ -20,15 +20,15 @@ function cleanMdx(src) {
   // Remove HTML comments
   s = s.replace(/<!--[\s\S]*?-->/g, "");
 
-  // Convert <https://...> to markdown link
+  // Convert <https://...> to Markdown link
   s = s.replace(/<((https?:\/\/)[^>\s]+)>/g, (_m, url) => `[${url}](${url})`);
 
-  // Neutralize a few known stray component tags if they sneak in the content
+  // Neutralize a couple of stray component tags if they sneak in
   ["Thing", "Audience"].forEach((name) => {
-    s = s.replace(new RegExp(`<\\s*${name}\\b([^>]*)\\/\\s*>`, "g"), `<div$1></div>`);
+    s = s.replace(new RegExp(`<\\s*${name}\\b([^>]*)\\/\\s*>`, "g"), `<span$1></span>`);
     s = s.replace(
       new RegExp(`<\\s*${name}\\b([^>]*)>([\\s\\S]*?)<\\s*\\/\\s*${name}\\s*>`, "g"),
-      `<div$1>$2</div>`
+      `<span$1>$2</span>`
     );
   });
 
@@ -52,12 +52,11 @@ function loadFile(slug) {
 
 /* ------------------------------- Components ------------------------------ */
 
-// Safe <a> that fixes MDX links and sets rel/target for externals
+// Safe external links + fixes accidental .mdx links authored in content
 function SafeLink(props) {
   let { href = "", children, ...rest } = props;
   const isExternal = /^https?:\/\//i.test(href);
 
-  // Fix accidental .mdx links from content authors
   if (/\.mdx(\?|#|$)/i.test(href)) {
     const lower = href.toLowerCase();
     if (lower.includes("privacy")) href = "/privacy";
@@ -83,7 +82,7 @@ function SafeLink(props) {
   );
 }
 
-// Minimal <AffiliateLink> for MDX demos and real use
+// Minimal affiliate link that always sets safe rel/target
 function AffiliateLink({ href = "", children, ...rest }) {
   const isExternal = /^https?:\/\//i.test(href);
   return (
@@ -98,72 +97,45 @@ function AffiliateLink({ href = "", children, ...rest }) {
   );
 }
 
-const mdxComponents = {
-  a: SafeLink,
-  AffiliateLink,
-};
+// Very forgiving table component so the MDX demo page can render in SSG
+function ComparisonTable({ columns = [], rows = [], children }) {
+  // If MDX authors provided their own table markup as children, just wrap it.
+  if (children) {
+    return (
+      <div style={{ overflowX: "auto" }}>
+        <table>
+          {children}
+        </table>
+      </div>
+    );
+  }
 
-// Fallback for ANY unknown Capitalized MDX component (prevents “X is not defined”)
-const componentsProxy = new Proxy(mdxComponents, {
-  get(target, prop) {
-    if (prop in target) return target[prop];
-    if (typeof prop === "string" && /^[A-Z]/.test(prop)) {
-      return (p) => <span {...p} />;
+  // Otherwise try to render from simple arrays/objects.
+  const cols = Array.isArray(columns) ? columns : [];
+  const data = Array.isArray(rows) ? rows : [];
+
+  // Support rows as arrays OR array of objects keyed by column id/name
+  const getCell = (row, idx) => {
+    if (Array.isArray(row)) return row[idx];
+    if (row && typeof row === "object") {
+      const key = cols[idx]?.key ?? cols[idx]?.id ?? cols[idx]?.name ?? cols[idx];
+      return row[key];
     }
-    return undefined;
-  },
-});
-
-/* --------------------------------- Page ---------------------------------- */
-
-export default function GuidePage({ slug, meta, mdxSource }) {
-  const title = meta?.title || slug;
-  const desc = meta?.description || "Practical wellness guide from Wild & Well";
+    return row;
+  };
 
   return (
-    <>
-      <Head>
-        <title>{title} | Wild & Well</title>
-        <meta name="description" content={desc} />
-      </Head>
-
-      <SiteHeader />
-
-      <main className="container" style={{ padding: "1.25rem 0 2rem" }}>
-        <article className="post">
-          <h1>{title}</h1>
-          {meta?.updated && <p className="muted">Updated {meta.updated}</p>}
-          <MDXRemote {...mdxSource} components={componentsProxy} />
-        </article>
-      </main>
-
-      <SiteFooter />
-      <NewsletterBar />
-    </>
-  );
-}
-
-export async function getStaticPaths() {
-  const slugs = listSlugs();
-  return { paths: slugs.map((slug) => ({ params: { slug } })), fallback: false };
-}
-
-export async function getStaticProps({ params }) {
-  const { content, meta: rawMeta } = loadFile(params.slug);
-
-  const cleaned = cleanMdx(content);
-  const mdxSource = await serialize(cleaned, {
-    parseFrontmatter: false,
-    mdxOptions: { format: "mdx" },
-  });
-
-  // Force JSON-serializable meta
-  const meta = { ...rawMeta };
-  ["date", "updated", "datePublished", "dateModified"].forEach((k) => {
-    if (!meta[k]) return;
-    const v = meta[k];
-    meta[k] = v instanceof Date ? v.toISOString() : String(v);
-  });
-
-  return { props: { slug: params.slug, meta, mdxSource } };
-}
+    <div style={{ overflowX: "auto" }}>
+      <table>
+        {cols.length > 0 && (
+          <thead>
+            <tr>
+              {cols.map((c, i) => (
+                <th key={i}>{c?.label ?? c?.name ?? String(c)}</th>
+              ))}
+            </tr>
+          </thead>
+        )}
+        <tbody>
+          {data.map((r, ri) => (
+            <tr key={ri}>
