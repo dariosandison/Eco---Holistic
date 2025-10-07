@@ -17,25 +17,20 @@ function cleanMdx(src) {
   if (!src) return src;
   let s = String(src);
 
-  // Strip HTML comments
+  // Remove HTML comments
   s = s.replace(/<!--[\s\S]*?-->/g, "");
 
-  // Convert angle-bracket autolinks <https://...> to markdown links
+  // Convert <https://...> to markdown link
   s = s.replace(/<((https?:\/\/)[^>\s]+)>/g, (_m, url) => `[${url}](${url})`);
 
-  // Neutralize specific unknown JSX tags seen in content
+  // Neutralize a few known stray component tags if they sneak in the content
   ["Thing", "Audience"].forEach((name) => {
-    // Self-closing: <Thing ... />
     s = s.replace(new RegExp(`<\\s*${name}\\b([^>]*)\\/\\s*>`, "g"), `<div$1></div>`);
-    // Paired: <Thing>...</Thing>
     s = s.replace(
       new RegExp(`<\\s*${name}\\b([^>]*)>([\\s\\S]*?)<\\s*\\/\\s*${name}\\s*>`, "g"),
       `<div$1>$2</div>`
     );
   });
-
-  // Lines starting with !, !!, !!! (common author shorthand) → bold label
-  s = s.replace(/^\s*!{1,3}\s*(important|note|tip)?:?/gim, (_m, lbl) => `**${(lbl || "Note").trim()}:**`);
 
   return s;
 }
@@ -55,12 +50,14 @@ function loadFile(slug) {
   return { content, meta: data || {} };
 }
 
-// Safe link component: fixes raw .mdx hrefs, sets rel/target for externals
+/* ------------------------------- Components ------------------------------ */
+
+// Safe <a> that fixes MDX links and sets rel/target for externals
 function SafeLink(props) {
   let { href = "", children, ...rest } = props;
   const isExternal = /^https?:\/\//i.test(href);
 
-  // Fix accidental links to .mdx files or /pages/*.mdx
+  // Fix accidental .mdx links from content authors
   if (/\.mdx(\?|#|$)/i.test(href)) {
     const lower = href.toLowerCase();
     if (lower.includes("privacy")) href = "/privacy";
@@ -86,7 +83,36 @@ function SafeLink(props) {
   );
 }
 
-const mdxComponents = { a: SafeLink };
+// Minimal <AffiliateLink> for MDX demos and real use
+function AffiliateLink({ href = "", children, ...rest }) {
+  const isExternal = /^https?:\/\//i.test(href);
+  return (
+    <a
+      href={href}
+      target={isExternal ? "_blank" : undefined}
+      rel={isExternal ? "nofollow sponsored noopener noreferrer" : undefined}
+      {...rest}
+    >
+      {children || "View product"}
+    </a>
+  );
+}
+
+const mdxComponents = {
+  a: SafeLink,
+  AffiliateLink,
+};
+
+// Fallback for ANY unknown Capitalized MDX component (prevents “X is not defined”)
+const componentsProxy = new Proxy(mdxComponents, {
+  get(target, prop) {
+    if (prop in target) return target[prop];
+    if (typeof prop === "string" && /^[A-Z]/.test(prop)) {
+      return (p) => <span {...p} />;
+    }
+    return undefined;
+  },
+});
 
 /* --------------------------------- Page ---------------------------------- */
 
@@ -107,7 +133,7 @@ export default function GuidePage({ slug, meta, mdxSource }) {
         <article className="post">
           <h1>{title}</h1>
           {meta?.updated && <p className="muted">Updated {meta.updated}</p>}
-          <MDXRemote {...mdxSource} components={mdxComponents} />
+          <MDXRemote {...mdxSource} components={componentsProxy} />
         </article>
       </main>
 
@@ -128,11 +154,10 @@ export async function getStaticProps({ params }) {
   const cleaned = cleanMdx(content);
   const mdxSource = await serialize(cleaned, {
     parseFrontmatter: false,
-    // Keep options minimal to avoid missing-plugin build errors
     mdxOptions: { format: "mdx" },
   });
 
-  // Force JSON-serializable meta (fixes Date object errors)
+  // Force JSON-serializable meta
   const meta = { ...rawMeta };
   ["date", "updated", "datePublished", "dateModified"].forEach((k) => {
     if (!meta[k]) return;
