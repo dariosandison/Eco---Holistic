@@ -1,58 +1,19 @@
 // components/MDXComponents.js
-import Link from 'next/link';
-import AffiliateLink from './mdx/AffiliateLink';
-import BuyBox from './mdx/BuyBox';
-import ProsCons from './mdx/ProsCons';
-import Disclosure from './mdx/Disclosure';
-import ComparisonTable from './ComparisonTable';
-import StickyCTA from './mdx/StickyCTA';
+import React from "react";
+import AffiliateLink from "./AffiliateLink";
+import ComparisonTable from "./ComparisonTable";
 
-const A = ({ href = '', children, className = '', onClick, ...rest }) => {
-  const isExternal = /^https?:\/\//i.test(href);
-  const handleClick = (e) => {
-    try {
-      if (isExternal && typeof window !== 'undefined' && window.plausible) {
-        window.plausible('Outbound Click', {
-          props: {
-            href,
-            page: typeof location !== 'undefined' ? location.pathname : '',
-          },
-        });
-      }
-    } catch {}
-    if (typeof onClick === 'function') onClick(e);
-  };
+const Anchor = (props) => (
+  <a {...props} rel={props.rel || "noopener"} target={props.target || "_blank"} />
+);
 
-  if (isExternal) {
-    return (
-      <a
-        href={href}
-        target="_blank"
-        rel="nofollow sponsored noopener noreferrer"
-        className={className}
-        onClick={handleClick}
-        {...rest}
-      >
-        {children}
-      </a>
-    );
-  }
-  return (
-    <Link href={href} className={className} onClick={handleClick} {...rest}>
-      {children}
-    </Link>
-  );
-};
-
-const MDXComponents = {
-  a: A,
+export const mdxComponents = {
+  a: Anchor,
   AffiliateLink,
-  BuyBox,
-  ProsCons,
-  Disclosure,
   ComparisonTable,
-  StickyCTA,
+  table: (p) => <table {...p} className={"prose-table " + (p.className || "")} />,
+  th: (p) => <th {...p} className={"prose-th " + (p.className || "")} />,
+  td: (p) => <td {...p} className={"prose-td " + (p.className || "")} />,
 };
 
-export const mdxComponents = MDXComponents;
-export default MDXComponents;
+export default mdxComponents;

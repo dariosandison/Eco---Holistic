@@ -1,75 +1,29 @@
-// components/AffLink.js
-'use client';
-import React, { useCallback, forwardRef } from 'react';
-import { withUtm, isExternal } from '../lib/urls';
-import { track } from '../lib/tracking';
+// components/AffiliateLink.js
+import React from "react";
 
-function getCampaignFromPath() {
-  if (typeof window === 'undefined') return undefined;
-  const p = window.location.pathname.replace(/^\/|\/$/g, '');
-  return p || undefined;
-}
-
-const AffLink = forwardRef(function AffLink(
-  {
-    href,
-    children,
-    className,
-    rel,
-    target,
-    onClick,
-    dataMerchant,
-    dataProduct,
-    dataVariant,
-    utm = true,
-    ...rest
-  },
-  ref
-) {
-  const handleClick = useCallback(
-    (e) => {
-      const text =
-        (typeof children === 'string' && children) ||
-        (e?.currentTarget?.innerText || '').trim() ||
-        undefined;
-
-      const payload = {
-        link_url: href,
-        link_text: text,
-        merchant: dataMerchant,
-        product: dataProduct,
-        variant: dataVariant,
-        page: typeof window !== 'undefined' ? window.location.pathname : undefined,
-      };
-      track('aff_click', payload);
-      onClick && onClick(e);
-    },
-    [href, children, onClick, dataMerchant, dataProduct, dataVariant]
-  );
-
-  const source =
-    process.env.NEXT_PUBLIC_SITE_UTM_SOURCE ||
-    (typeof window !== 'undefined' ? window.location.hostname : undefined) ||
-    'site';
-
-  const decorated = utm ? withUtm(href, { source, campaign: getCampaignFromPath() }) : href;
-
-  const finalRel = (rel ? rel + ' ' : '') + 'nofollow sponsored noopener noreferrer';
-  const finalTarget = target || (isExternal(decorated) ? '_blank' : undefined);
-
+/**
+ * Usage in MDX:
+ * <AffiliateLink href="https://www.amazon.com/dp/B00XXXX?tag=mytag-20">Product</AffiliateLink>
+ * or <AffiliateLink asin="B00XXXX">Product</AffiliateLink>
+ */
+export default function AffiliateLink({ href, asin, tag, children, className = "" }) {
+  const amazonTag = tag || process.env.NEXT_PUBLIC_AMAZON_TAG || "";
+  let url = href || "";
+  if (!url && asin) {
+    const base = "https://www.amazon.com/dp/";
+    url = `${base}${asin}${amazonTag ? `?tag=${amazonTag}` : ""}`;
+  }
+  if (amazonTag && url && !/[?&]tag=/.test(url) && /amazon\./i.test(url)) {
+    url += (url.includes("?") ? "&" : "?") + `tag=${amazonTag}`;
+  }
   return (
     <a
-      ref={ref}
-      href={decorated}
-      className={className}
-      rel={finalRel}
-      target={finalTarget}
-      onClick={handleClick}
-      {...rest}
+      href={url}
+      target="_blank"
+      rel="nofollow sponsored noopener"
+      className={`underline underline-offset-2 hover:opacity-90 ${className}`}
     >
-      {children}
+      {children || url}
     </a>
   );
-});
-
-export default AffLink;
+}

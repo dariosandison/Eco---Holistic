@@ -1,24 +1,53 @@
-import fs from "fs";
-import path from "path";
-import matter from "gray-matter";
-import Head from "next/head";
+// pages/legal/[slug].js
+import React from "react";
 import { MDXRemote } from "next-mdx-remote";
-import { serialize } from "next-mdx-remote/serialize";
-
+import { getLegalSlugs, getLegalBySlug } from "../../lib/content";
+import mdxComponents from "../../components/MDXComponents";
 import SiteHeader from "../../components/SiteHeader";
 import SiteFooter from "../../components/SiteFooter";
-import NewsletterBar from "../../components/NewsletterBar";
 
-const CONTENT_DIR = path.join(process.cwd(), "content", "legal");
+function withSafeComponents(base) {
+  return new Proxy(base, {
+    get(target, prop) {
+      if (prop in target) return target[prop];
+      if (typeof prop === "string" && /^[A-Z]/.test(prop)) {
+        return (props) => <div {...props} />;
+      }
+      return undefined;
+    },
+  });
+}
 
-/* ----------------------------- MDX utilities ----------------------------- */
+export default function LegalPage({ meta, mdx }) {
+  const safe = withSafeComponents(mdxComponents);
+  return (
+    <>
+      <SiteHeader />
+      <main className="container prose">
+        <article>
+          <h1>{meta.title}</h1>
+          <MDXRemote {...mdx} components={safe} />
+        </article>
+      </main>
+      <SiteFooter />
+    </>
+  );
+}
 
-function cleanMdx(src) {
-  if (!src) return src;
-  let s = String(src);
+export async function getStaticPaths() {
+  const slugs = getLegalSlugs();
+  return {
+    paths: slugs.map((slug) => ({ params: { slug } })),
+    fallback: false,
+  };
+}
 
-  // Strip HTML comments
-  s = s.replace(/<!--[\s\S]*?-->/g, "");
-
-  // Convert <https://...> to [https://...](https://...)
-  s = s.replace(/
+export async function getStaticProps({ params }) {
+  const { meta, mdx } = await getLegalBySlug(params.slug);
+  const serialisable = {
+    ...meta,
+    date: meta.date || null,
+    updated: meta.updated || null,
+  };
+  return { props: { meta: serialisable, mdx } };
+}

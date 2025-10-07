@@ -1,55 +1,36 @@
 // components/ComparisonTable.jsx
-import Link from "next/link";
+import React from "react";
 
-export default function ComparisonTable({ items = [] }) {
-  if (!Array.isArray(items) || !items.length) return null;
-
+export default function ComparisonTable({ headers = [], rows = [], caption }) {
   return (
-    <div style={{ overflowX: "auto", border: "1px solid #e5e7eb", borderRadius: 12 }}>
-      <table style={{ width: "100%", borderCollapse: "separate", borderSpacing: 0 }}>
-        <thead>
-          <tr style={{ background: "#f8fafc" }}>
-            <th style={th}>Product</th>
-            <th style={th}>Best for</th>
-            <th style={th}>Key features</th>
-            <th style={th}>Price</th>
-            <th style={th}></th>
-          </tr>
-        </thead>
+    <div className="ww-table-wrap">
+      {caption ? <div className="ww-table-caption">{caption}</div> : null}
+      <table className="ww-table">
+        {headers.length ? (
+          <thead>
+            <tr>{headers.map((h, i) => <th key={i}>{h}</th>)}</tr>
+          </thead>
+        ) : null}
         <tbody>
-          {items.map((it, i) => (
-            <tr key={i} style={{ borderTop: "1px solid #e5e7eb" }}>
-              <td style={td}><strong>{it.name}</strong>{it.badge ? <span style={badge}>{it.badge}</span> : null}</td>
-              <td style={td}>{it.bestFor}</td>
-              <td style={td}>{Array.isArray(it.features) ? it.features.join(" • ") : it.features}</td>
-              <td style={td}>{it.price ? `$${it.price}` : "—"}</td>
-              <td style={{ ...td, textAlign: "right" }}>
-                <Link href={`/go/${it.slug}`} legacyBehavior>
-                  <a rel="nofollow sponsored noopener noreferrer" style={button}>
-                    {it.cta || "Check price"} <span style={pill}>{it.retailer || "Shop"}</span>
-                  </a>
-                </Link>
-              </td>
+          {rows.map((r, ri) => (
+            <tr key={ri}>
+              {r.map((c, ci) => <td key={ci}>{c}</td>)}
             </tr>
           ))}
         </tbody>
       </table>
+      <style jsx>{`
+        .ww-table-wrap { overflow-x: auto; margin: 1rem 0; }
+        .ww-table { width: 100%; border-collapse: collapse; }
+        .ww-table th, .ww-table td {
+          border: 1px solid rgba(255,255,255,0.08);
+          padding: 0.6rem 0.8rem;
+          text-align: left;
+        }
+        .ww-table thead th {
+          background: rgba(255,255,255,0.06);
+        }
+      `}</style>
     </div>
   );
 }
-
-const th = { textAlign: "left", padding: "12px 14px", fontWeight: 700, fontSize: 14, borderBottom: "1px solid #e5e7eb" };
-const td = { padding: "12px 14px", verticalAlign: "top", fontSize: 14 };
-const badge = { marginLeft: 8, background: "#0ea5e9", color: "#fff", borderRadius: 999, padding: "2px 8px", fontSize: 12 };
-const pill = { marginLeft: 8, background: "#111", color: "#fff", borderRadius: 999, padding: "2px 8px", fontSize: 12 };
-const button = {
-  display: "inline-flex",
-  alignItems: "center",
-  gap: 8,
-  padding: "10px 14px",
-  borderRadius: 10,
-  textDecoration: "none",
-  background: "#16a34a",
-  color: "#fff",
-  border: "1px solid #15803d",
-};
