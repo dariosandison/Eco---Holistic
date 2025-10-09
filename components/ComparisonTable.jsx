@@ -1,36 +1,29 @@
-// components/ComparisonTable.jsx
-import React from "react";
-
-export default function ComparisonTable({ headers = [], rows = [], caption }) {
+export default function ComparisonTable({ columns = [], rows = [] }) {
+  if (!Array.isArray(columns) || !Array.isArray(rows)) return null;
   return (
-    <div className="ww-table-wrap">
-      {caption ? <div className="ww-table-caption">{caption}</div> : null}
-      <table className="ww-table">
-        {headers.length ? (
-          <thead>
-            <tr>{headers.map((h, i) => <th key={i}>{h}</th>)}</tr>
-          </thead>
-        ) : null}
+    <div className="overflow-x-auto rounded-xl border border-white/10">
+      <table className="min-w-full text-sm">
+        <thead className="bg-white/5">
+          <tr>
+            {columns.map((c, i) => (
+              <th key={i} className="px-4 py-3 text-left font-medium">
+                {c}
+              </th>
+            ))}
+          </tr>
+        </thead>
         <tbody>
           {rows.map((r, ri) => (
-            <tr key={ri}>
-              {r.map((c, ci) => <td key={ci}>{c}</td>)}
+            <tr key={ri} className="odd:bg-white/0 even:bg-white/5">
+              {r.map((cell, ci) => (
+                <td key={ci} className="px-4 py-3 align-top">
+                  {cell}
+                </td>
+              ))}
             </tr>
           ))}
         </tbody>
       </table>
-      <style jsx>{`
-        .ww-table-wrap { overflow-x: auto; margin: 1rem 0; }
-        .ww-table { width: 100%; border-collapse: collapse; }
-        .ww-table th, .ww-table td {
-          border: 1px solid rgba(255,255,255,0.08);
-          padding: 0.6rem 0.8rem;
-          text-align: left;
-        }
-        .ww-table thead th {
-          background: rgba(255,255,255,0.06);
-        }
-      `}</style>
     </div>
   );
 }
