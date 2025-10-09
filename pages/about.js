@@ -1,48 +1,38 @@
-// pages/about.js
-import fs from 'fs';
-import path from 'path';
-import matter from 'gray-matter';
-import { MDXRemote } from 'next-mdx-remote';
-import { serializeMdx } from '../lib/mdx';
-import SEO from '../components/SEO';
-import { mdxComponents } from '../components/MDXComponents';
+import fs from "fs";
+import path from "path";
+import { MDXRemote } from "next-mdx-remote";
+import { serializeMdx, jsonSafeMeta } from "@/lib/mdx";
+import { mdxComponents } from "@/components/MDXComponents";
 
-export async function getStaticProps() {
-  const file = path.join(process.cwd(), 'content/pages', 'about.mdx');
-  const raw = fs.readFileSync(file, 'utf8');
-  const { data, content } = matter(raw);
-  const mdxSource = await serializeMdx(content);
-
-  const title = data.title || 'About';
-  const description = data.description || 'About Wild & Well';
-
-  return {
-    props: {
-      mdxSource,
-      seo: {
-        title: `${title} — Wild & Well`,
-        description,
-        url: 'https://www.wild-and-well.store/about',
-        type: 'website',
-        breadcrumbs: [
-          { name: 'Home', item: 'https://www.wild-and-well.store/' },
-          { name: 'About', item: 'https://www.wild-and-well.store/about' }
-        ]
-      }
-    },
-    revalidate: 60 * 60 * 24
-  };
+export default function AboutPage({ mdxSource, meta }) {
+  return (
+    <article className="prose prose-invert">
+      <h1>{meta.title || "About Wild & Well"}</h1>
+      {meta.description && <p className="text-cream/80">{meta.description}</p>}
+      <MDXRemote {...mdxSource} components={mdxComponents} />
+    </article>
+  );
 }
 
-export default function AboutPage({ mdxSource, seo }) {
-  return (
-    <>
-      <SEO {...seo} />
-      <div className="container" style={{ marginTop: 22 }}>
-        <article className="post">
-          <MDXRemote {...mdxSource} components={mdxComponents} />
-        </article>
-      </div>
-    </>
-  );
+export async function getStaticProps() {
+  const root = process.cwd();
+  const mdxFile = path.join(root, "content", "about.mdx");
+  const mdFile = path.join(root, "content", "about.md");
+
+  let src;
+  if (fs.existsSync(mdxFile)) src = fs.readFileSync(mdxFile, "utf8");
+  else if (fs.existsSync(mdFile)) src = fs.readFileSync(mdFile, "utf8");
+  else {
+    // Safe fallback if no file is present
+    src = `---
+title: About Wild & Well
+description: Practical wellness & eco choices.
+---
+
+We publish simple, trustworthy guides to help you live **wild & well**.`;
+  }
+
+  const mdxSource = await serializeMdx(src);
+  const meta = jsonSafeMeta(mdxSource.frontmatter || {});
+  return { props: { mdxSource, meta } };
 }
