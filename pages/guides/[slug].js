@@ -1,31 +1,34 @@
 import fs from "fs";
 import path from "path";
 import { MDXRemote } from "next-mdx-remote";
-import { serializeMdx, jsonSafeMeta } from "../../lib/mdx";
-import mdxComponents from "../../components/mdx-components";
+import { serializeMdx, jsonSafeMeta } from "@/lib/mdx";
+import mdxComponents from "@/components/mdx-components";
 
-export default function Guide({ source }) {
+export default function GuidePage({ mdxSource, meta }) {
   return (
-    <article className="prose max-w-3xl mx-auto py-10">
-      <MDXRemote {...source} components={mdxComponents} />
+    <article className="prose prose-invert">
+      <h1>{meta.title}</h1>
+      {meta.description && <p className="text-cream/80">{meta.description}</p>}
+      <MDXRemote {...mdxSource} components={mdxComponents} />
     </article>
   );
 }
 
 export async function getStaticPaths() {
-  const dir = path.join(process.cwd(), "content/guides");
-  const slugs = (fs.existsSync(dir) ? fs.readdirSync(dir) : [])
-    .filter(f => /\.(md|mdx)$/i.test(f))
-    .map(f => ({ params: { slug: f.replace(/\.(md|mdx)$/i, "") } }));
-  return { paths: slugs, fallback: false };
+  const dir = path.join(process.cwd(), "content", "guides");
+  const slugs = fs.existsSync(dir)
+    ? fs.readdirSync(dir).filter(f => /\.mdx?$/.test(f)).map(f => f.replace(/\.mdx?$/, ""))
+    : [];
+  return { paths: slugs.map(slug => ({ params: { slug } })), fallback: false };
 }
 
 export async function getStaticProps({ params }) {
-  const dir = path.join(process.cwd(), "content/guides");
-  const file = [".mdx", ".md"].map(ext => path.join(dir, params.slug + ext))
-    .find(p => fs.existsSync(p));
-  const raw = fs.readFileSync(file, "utf8");
-  const source = await serializeMdx(raw);
-  source.frontmatter = jsonSafeMeta(source.frontmatter || {});
-  return { props: { source } };
+  const file =
+    fs.existsSync(path.join(process.cwd(), "content", "guides", `${params.slug}.mdx`))
+      ? path.join(process.cwd(), "content", "guides", `${params.slug}.mdx`)
+      : path.join(process.cwd(), "content", "guides", `${params.slug}.md`);
+  const src = fs.readFileSync(file, "utf8");
+  const mdxSource = await serializeMdx(src);
+  const meta = jsonSafeMeta(mdxSource.frontmatter || {});
+  return { props: { mdxSource, meta } };
 }
