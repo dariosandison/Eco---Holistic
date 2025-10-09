@@ -1,18 +1,7 @@
-// components/MDXComponents.js
-import AffiliateLink from "./AffiliateLink";
-import ComparisonTable from "./ComparisonTable";
+import mdxComponentsDefault from "./mdx-components";
 
-const Passthrough = (props) => <div {...props} />;
+// Export a named `mdxComponents` (what older pages import)
+export const mdxComponents = mdxComponentsDefault;
 
-/** Components mapping for MDXRemote to prevent “X is not defined” crashes */
-const mdxComponents = {
-  AffiliateLink,
-  ComparisonTable,
-
-  // Safety nets for occasional stray tags found in content
-  Thing: Passthrough,
-  Audience: Passthrough,
-};
-
-export default mdxComponents;
-
+// Also allow default import just in case.
+export default mdxComponentsDefault;
