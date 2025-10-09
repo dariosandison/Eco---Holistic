@@ -1,25 +1,14 @@
-export default function AffiliateLink({
-  href,
-  asin,
-  tag = process.env.NEXT_PUBLIC_AMAZON_TAG,
-  children,
-  ...rest
-}) {
-  let url = href || "";
-  if (!url && asin) {
-    url = `https://www.amazon.co.uk/dp/${asin}`;
-  }
-  if (url && tag && !/[?&]tag=/.test(url)) {
-    url += (url.includes("?") ? "&" : "?") + `tag=${encodeURIComponent(tag)}`;
-  }
+export default function AffiliateLink({ href, children, className = "" }) {
+  const url = new URL(href, "https://amazon.com");
+  // Ensure we keep query string (eg. tag=yourtag-20)
   return (
     <a
-      href={url}
+      href={url.toString()}
       target="_blank"
-      rel="nofollow sponsored noopener noreferrer"
-      {...rest}
+      rel="noopener noreferrer sponsored"
+      className={`underline underline-offset-2 ${className}`}
     >
-      {children || "View on Amazon"}
+      {children}
     </a>
   );
 }
