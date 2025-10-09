@@ -2,7 +2,7 @@ import fs from "fs";
 import path from "path";
 import { MDXRemote } from "next-mdx-remote";
 import { serializeMdx, jsonSafeMeta } from "@/lib/mdx";
-import mdxComponents from "@/components/mdx-components";
+import { mdxComponents } from "@/components/MDXComponents";
 
 export default function BlogPost({ mdxSource, meta }) {
   return (
@@ -23,10 +23,10 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({ params }) {
-  const file =
-    fs.existsSync(path.join(process.cwd(), "content", "blog", `${params.slug}.mdx`))
-      ? path.join(process.cwd(), "content", "blog", `${params.slug}.mdx`)
-      : path.join(process.cwd(), "content", "blog", `${params.slug}.md`);
+  const base = path.join(process.cwd(), "content", "blog");
+  const file = fs.existsSync(path.join(base, `${params.slug}.mdx`))
+    ? path.join(base, `${params.slug}.mdx`)
+    : path.join(base, `${params.slug}.md`);
   const src = fs.readFileSync(file, "utf8");
   const mdxSource = await serializeMdx(src);
   const meta = jsonSafeMeta(mdxSource.frontmatter || {});
