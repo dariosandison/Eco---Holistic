@@ -1,19 +1,18 @@
 // components/MDXComponents.js
-import React from "react";
 import AffiliateLink from "./AffiliateLink";
 import ComparisonTable from "./ComparisonTable";
 
-const Anchor = (props) => (
-  <a {...props} rel={props.rel || "noopener"} target={props.target || "_blank"} />
-);
+const Passthrough = (props) => <div {...props} />;
 
-export const mdxComponents = {
-  a: Anchor,
+/** Components mapping for MDXRemote to prevent “X is not defined” crashes */
+const mdxComponents = {
   AffiliateLink,
   ComparisonTable,
-  table: (p) => <table {...p} className={"prose-table " + (p.className || "")} />,
-  th: (p) => <th {...p} className={"prose-th " + (p.className || "")} />,
-  td: (p) => <td {...p} className={"prose-td " + (p.className || "")} />,
+
+  // Safety nets for occasional stray tags found in content
+  Thing: Passthrough,
+  Audience: Passthrough,
 };
 
 export default mdxComponents;
+
