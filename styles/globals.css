@@ -1,29 +1,29 @@
-/* styles/globals.css */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+/* Base theme: cream text on deep green */
 :root {
-  --wild-green: #0d3b2e;
-  --wild-cream: #faf3e7;
+  --brand-green: #0b3d33;
+  --brand-cream: #F3EDE2;
 }
 
 html, body {
-  background-color: var(--wild-green);
-  color: var(--wild-cream);
+  background: var(--brand-green);
+  color: var(--brand-cream);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-a {
-  color: var(--wild-cream);
-  text-decoration: underline;
-}
+/* Links & headings */
+a { text-decoration: underline; }
+h1, h2, h3, h4, h5, h6 { color: var(--brand-cream); }
 
-h1, h2, h3, h4, h5, h6 {
-  color: var(--wild-cream);
+/* Prose readability */
+.prose {
+  color: var(--brand-cream);
 }
-
-::selection {
-  background: rgba(250, 243, 231, 0.25);
+.prose code, .prose pre {
+  background: rgba(255,255,255,0.06);
+  color: var(--brand-cream);
 }
