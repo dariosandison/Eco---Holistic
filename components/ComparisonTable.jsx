@@ -1,25 +1,14 @@
 export default function ComparisonTable({ columns = [], rows = [] }) {
-  if (!Array.isArray(columns) || !Array.isArray(rows)) return null;
   return (
-    <div className="overflow-x-auto rounded-xl border border-white/10">
-      <table className="min-w-full text-sm">
-        <thead className="bg-white/5">
-          <tr>
-            {columns.map((c, i) => (
-              <th key={i} className="px-4 py-3 text-left font-medium">
-                {c}
-              </th>
-            ))}
-          </tr>
+    <div className="overflow-x-auto my-6">
+      <table className="min-w-[600px]">
+        <thead>
+          <tr>{columns.map((c, i) => <th key={i} className="text-left">{c}</th>)}</tr>
         </thead>
         <tbody>
           {rows.map((r, ri) => (
-            <tr key={ri} className="odd:bg-white/0 even:bg-white/5">
-              {r.map((cell, ci) => (
-                <td key={ci} className="px-4 py-3 align-top">
-                  {cell}
-                </td>
-              ))}
+            <tr key={ri}>
+              {r.map((cell, ci) => <td key={ci}>{cell}</td>)}
             </tr>
           ))}
         </tbody>
@@ -27,3 +16,4 @@ export default function ComparisonTable({ columns = [], rows = [] }) {
     </div>
   );
 }
+
