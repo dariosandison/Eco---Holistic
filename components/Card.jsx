@@ -1,38 +1,42 @@
-"use client";
+'use client';
 
-export default function Card({ href, title, excerpt, image, tag }) {
-  const fallback = "/logo.png";
+import Link from 'next/link';
 
+export default function Card({ href = '#', title, excerpt, image, tag, date }) {
   return (
-    <a
+    <Link
       href={href}
-      className="group block rounded-2xl bg-[var(--card)] shadow-sm ring-1 ring-black/5 hover:shadow-md hover:-translate-y-0.5 transition"
+      className="group block overflow-hidden rounded-2xl border border-zinc-200 bg-white shadow-sm transition hover:shadow-md"
     >
-      {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img
-        src={image || fallback}
-        alt=""
-        className="aspect-[16/10] w-full object-cover rounded-t-2xl"
-        loading="lazy"
-        onError={(e) => {
-          // prevent infinite loop if fallback also fails
-          if (!e.currentTarget.src.endsWith(fallback)) {
-            e.currentTarget.src = fallback;
-          }
-        }}
-      />
-      <div className="p-4">
-        {tag && (
-          <span className="inline-flex items-center rounded-full border px-2 py-0.5 text-xs text-neutral-700 mb-2">
+      {/* Image */}
+      <div className="relative aspect-[3/2] overflow-hidden bg-zinc-100">
+        <img
+          src={image || '/og-default.jpg'}
+          alt={title || ''}
+          loading="lazy"
+          className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-[1.02]"
+          onError={(e) => {
+            e.currentTarget.src = '/og-default.jpg';
+            e.currentTarget.classList.add('opacity-75');
+          }}
+        />
+        {tag ? (
+          <span className="absolute left-3 top-3 rounded-full bg-emerald-700/90 px-2.5 py-1 text-xs font-semibold text-white">
             {tag}
           </span>
-        )}
-        <h3 className="font-semibold tracking-tight group-hover:underline">{title}</h3>
-        {excerpt && <p className="text-sm text-neutral-600 mt-1">{excerpt}</p>}
-        <span className="mt-3 inline-flex items-center text-sm text-[var(--brand)]">
-          Read more →
-        </span>
+        ) : null}
       </div>
-    </a>
+
+      {/* Text */}
+      <div className="space-y-2 p-4">
+        {date ? (
+          <span className="text-xs uppercase tracking-wide text-zinc-500">{date}</span>
+        ) : null}
+        <h3 className="text-base font-semibold text-zinc-900">{title}</h3>
+        {excerpt ? (
+          <p className="line-clamp-3 text-sm leading-6 text-zinc-600">{excerpt}</p>
+        ) : null}
+      </div>
+    </Link>
   );
 }
