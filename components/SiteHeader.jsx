@@ -1,22 +1,21 @@
-import Link from 'next/link';
-
 export default function SiteHeader() {
+  const nav = [
+    { href: '/guides', label: 'Guides' },
+    { href: '/blog', label: 'Blog' },
+    { href: '/deals', label: 'Deals' },
+  ]
   return (
-    <header className="sticky top-0 z-40 bg-white/90 backdrop-blur border-b">
-      <div className="mx-auto max-w-6xl px-4 py-3 flex items-center justify-between">
-        <nav className="flex items-center gap-4 text-sm font-medium">
-          <Link href="/">Home</Link>
-          <Link href="/guides">Guides</Link>
-          <Link href="/blog">Blog</Link>
-          <Link href="/about">About</Link>
-          <Link href="/contact">Contact</Link>
+    <header className="border-b bg-white">
+      <div className="mx-auto max-w-6xl px-4 h-14 flex items-center justify-between">
+        <a href="/" className="font-bold tracking-tight text-lg text-[var(--brand)]">Wild & Well</a>
+        <nav className="flex gap-5 text-sm">
+          {nav.map((n) => (
+            <a key={n.href} href={n.href} className="hover:underline">
+              {n.label}
+            </a>
+          ))}
         </nav>
-        <div className="flex items-center gap-4 text-sm">
-          <a href="https://www.instagram.com/wildandwell.store" aria-label="Instagram" rel="noopener noreferrer" target="_blank">Instagram</a>
-          <a href="https://www.tiktok.com/@wildandwell.store" aria-label="TikTok" rel="noopener noreferrer" target="_blank">TikTok</a>
-          <a href="https://www.pinterest.com/wildandwellstore" aria-label="Pinterest" rel="noopener noreferrer" target="_blank">Pinterest</a>
-        </div>
       </div>
     </header>
-  );
+  )
 }
