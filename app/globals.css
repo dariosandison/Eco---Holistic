@@ -3,14 +3,20 @@
 @tailwind utilities;
 
 :root{
-  --bg: #ffffff;
-  --fg: #0b1415;
-  --muted: #6b7280;
-  --card: #ffffff;
-  --border: #e5e7eb;
-  --brand: #0f766e;
-  --brand-contrast: #ffffff;
+  --brand:#1f6a58; /* deep sage */
+  --ink:#111827;   /* neutral-900 */
+  --muted:#6b7280; /* neutral-500/600 */
+  --card:#f8fafc;  /* slate-50 */
 }
+
+.btn-primary{
+  display:inline-flex; align-items:center; justify-content:center;
+  border-radius: 0.75rem; padding: 0.5rem 1rem;
+  background: var(--brand); color:#fff; font-weight:600;
+  transition: opacity .15s ease;
+}
+.btn-primary:hover{ opacity:.9; }
+
 
 html, body { height: 100%; }
 body{
