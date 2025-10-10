@@ -1,5 +1,8 @@
+"use client";
+
 export default function Card({ href, title, excerpt, image, tag }) {
-  const fallback = '/logo.png'
+  const fallback = "/logo.png";
+
   return (
     <a
       href={href}
@@ -11,7 +14,12 @@ export default function Card({ href, title, excerpt, image, tag }) {
         alt=""
         className="aspect-[16/10] w-full object-cover rounded-t-2xl"
         loading="lazy"
-        onError={(e) => { e.currentTarget.src = fallback }}
+        onError={(e) => {
+          // prevent infinite loop if fallback also fails
+          if (!e.currentTarget.src.endsWith(fallback)) {
+            e.currentTarget.src = fallback;
+          }
+        }}
       />
       <div className="p-4">
         {tag && (
@@ -21,8 +29,10 @@ export default function Card({ href, title, excerpt, image, tag }) {
         )}
         <h3 className="font-semibold tracking-tight group-hover:underline">{title}</h3>
         {excerpt && <p className="text-sm text-neutral-600 mt-1">{excerpt}</p>}
-        <span className="mt-3 inline-flex items-center text-sm text-[var(--brand)]">Read more →</span>
+        <span className="mt-3 inline-flex items-center text-sm text-[var(--brand)]">
+          Read more →
+        </span>
       </div>
     </a>
-  )
+  );
 }
