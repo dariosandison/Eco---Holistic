@@ -1,11 +1,43 @@
-import { MDXRemote } from 'next-mdx-remote/rsc';
-import AmazonLink from '@/components/AmazonLink';
-import ComparisonTable from '@/components/ComparisonTable';
-import RatingStars from '@/components/RatingStars';
-import ProsCons from '@/components/ProsCons';
+import { MDXRemote } from 'next-mdx-remote/rsc'
+import remarkGfm from 'remark-gfm'
+import rehypeSlug from 'rehype-slug'
+import rehypeAutolinkHeadings from 'rehype-autolink-headings'
 
-const components = { AmazonLink, ComparisonTable, RatingStars, ProsCons };
+import AffiliateLink from '@/components/mdx/AffiliateLink'
+import AmazonLink from '@/components/mdx/AmazonLink'
+import ComparisonTable from '@/components/mdx/ComparisonTable'
+import ProsCons from '@/components/mdx/ProsCons'
+import Note from '@/components/mdx/Note'
+import YouTube from '@/components/mdx/YouTube'
 
-export default function MDXRenderer({ source, options }){
-  return <MDXRemote source={source} components={components} options={options} />;
+const components = {
+  AffiliateLink,
+  AmazonLink,
+  ComparisonTable,
+  ProsCons,
+  Note,
+  YouTube,
+  a: (props) => (
+    <a
+      {...props}
+      rel="noopener nofollow sponsored"
+      target={props.href?.startsWith('http') ? '_blank' : undefined}
+    />
+  ),
+}
+
+export default function MDXRenderer({ source, options }) {
+  return (
+    <MDXRemote
+      source={source}
+      components={components}
+      options={{
+        mdxOptions: {
+          remarkPlugins: [remarkGfm],
+          rehypePlugins: [rehypeSlug, [rehypeAutolinkHeadings, { behavior: 'wrap' }]],
+        },
+        ...options,
+      }}
+    />
+  )
 }
