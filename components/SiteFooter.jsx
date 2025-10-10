@@ -1,39 +1,57 @@
-import Link from 'next/link';
-
 export default function SiteFooter() {
+  const socials = [
+    { href: 'https://www.instagram.com/', label: 'Instagram' },
+    { href: 'https://www.pinterest.com/', label: 'Pinterest' },
+    { href: 'https://www.tiktok.com/', label: 'TikTok' },
+    { href: 'https://www.youtube.com/', label: 'YouTube' },
+    { href: 'https://twitter.com/', label: 'X' },
+  ]
+  const legal = [
+    { href: '/editorial-policy', label: 'Editorial Policy' },
+    { href: '/how-we-test', label: 'How We Test' },
+    { href: '/product-disclosure', label: 'Product Disclosure' },
+    { href: '/affiliate-disclosure', label: 'Affiliate Disclosure' },
+    { href: '/privacy-policy', label: 'Privacy Policy' },
+    { href: '/terms', label: 'Terms' },
+    { href: '/contact', label: 'Contact' },
+  ]
+
   return (
-    <footer className="bg-neutral-50 border-t">
-      <div className="mx-auto max-w-6xl px-4 py-10 grid gap-8 md:grid-cols-4">
-        <div className="md:col-span-2 space-y-3">
-          <h3 className="font-semibold">Wild & Well</h3>
-          <p className="text-sm text-neutral-600">
-            Guides, ideas, and vetted picks for sustainable, low-tox living.
+    <footer className="border-t bg-white">
+      <div className="mx-auto max-w-6xl px-4 py-10 grid gap-6 md:grid-cols-3">
+        <div>
+          <div className="font-semibold text-[var(--brand)]">Wild & Well</div>
+          <p className="text-sm text-neutral-600 mt-2">
+            Practical, low-tox living — guides, reviews, and tips that save time and money.
           </p>
-          <p className="text-xs text-neutral-500">
-            As an Amazon Associate we earn from qualifying purchases. Content is for information only.
+          <p className="text-xs text-neutral-500 mt-3">
+            As an Amazon Associate, we earn from qualifying purchases.
           </p>
         </div>
-        <div className="space-y-2 text-sm">
-          <h4 className="font-semibold">Explore</h4>
-          <ul className="space-y-1">
-            <li><Link href="/guides">Guides</Link></li>
-            <li><Link href="/blog">Blog</Link></li>
-            <li><Link href="/about">About</Link></li>
-            <li><Link href="/contact">Contact</Link></li>
+        <div>
+          <div className="font-semibold mb-2">Follow</div>
+          <ul className="space-y-1 text-sm">
+            {socials.map((s) => (
+              <li key={s.href}>
+                <a href={s.href} target="_blank" rel="noopener nofollow" className="hover:underline">{s.label}</a>
+              </li>
+            ))}
           </ul>
         </div>
-        <div className="space-y-2 text-sm">
-          <h4 className="font-semibold">Legal</h4>
-          <ul className="space-y-1">
-            <li><Link href="/privacy">Privacy Policy</Link></li>
-            <li><Link href="/terms">Terms of Use</Link></li>
-            <li><Link href="/disclosure">Affiliate Disclosure</Link></li>
+        <div>
+          <div className="font-semibold mb-2">Site</div>
+          <ul className="space-y-1 text-sm">
+            {legal.map((l) => (
+              <li key={l.href}>
+                <a href={l.href} className="hover:underline">{l.label}</a>
+              </li>
+            ))}
           </ul>
         </div>
       </div>
-      <div className="border-t py-4 text-center text-xs text-neutral-500">
+      <div className="text-center text-xs text-neutral-500 pb-4">
         © {new Date().getFullYear()} Wild & Well. All rights reserved.
       </div>
     </footer>
-  );
+  )
 }
