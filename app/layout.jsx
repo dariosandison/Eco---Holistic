@@ -4,11 +4,15 @@ import SiteFooter from '@/components/SiteFooter'
 import NewsletterBar from '@/components/NewsletterBar'
 
 export const metadata = {
-  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://www.wild-and-well.store'),
-  title: { default: 'Wild & Well', template: '%s — Wild & Well' },
-  openGraph: { siteName: 'Wild & Well', type: 'website' },
-  twitter: { card: 'summary_large_image' },
-}
+  metadataBase: new URL("https://www.wild-and-well.store"),
+  openGraph: {
+    images: [{ url: "/og-default.jpg", width: 1200, height: 630 }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    images: ["/og-default.jpg"],
+  },
+};
 
 export default function RootLayout({ children }) {
   return (
