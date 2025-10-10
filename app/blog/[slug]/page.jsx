@@ -1,19 +1,19 @@
-import MDXRenderer from '@/components/MDXRenderer';
-import ArticleLayout from '@/components/ArticleLayout';
-import StructuredData from '@/components/StructuredData';
-import { getContent, listContent, tocFromMarkdown } from '@/lib/content';
+import MDXRenderer from '@/components/MDXRenderer'
+import ArticleLayout from '@/components/ArticleLayout'
+import StructuredData from '@/components/StructuredData'
+import AffiliateNotice from '@/components/mdx/AffiliateNotice'
+import { getContent, listContent, tocFromMarkdown } from '@/lib/content'
 
-// ESM plugin imports (required by Next 14 / Vercel)
-import remarkGfm from 'remark-gfm';
-import rehypeSlug from 'rehype-slug';
-import rehypeAutolinkHeadings from 'rehype-autolink-headings';
+import remarkGfm from 'remark-gfm'
+import rehypeSlug from 'rehype-slug'
+import rehypeAutolinkHeadings from 'rehype-autolink-headings'
 
 export async function generateStaticParams() {
-  return listContent('blog').map(({ slug }) => ({ slug }));
+  return listContent('blog').map(({ slug }) => ({ slug }))
 }
 
 export async function generateMetadata({ params }) {
-  const { frontmatter } = getContent('blog', params.slug);
+  const { frontmatter } = getContent('blog', params.slug)
   return {
     title: frontmatter.title,
     description: frontmatter.description,
@@ -23,19 +23,21 @@ export async function generateMetadata({ params }) {
       images: frontmatter.image ? [{ url: frontmatter.image }] : undefined,
       type: 'article',
     },
-  };
+  }
 }
 
 export default function Page({ params }) {
-  const { frontmatter, content } = getContent('blog', params.slug);
-  const toc = tocFromMarkdown(content);
+  const { frontmatter, content } = getContent('blog', params.slug)
+  const toc = tocFromMarkdown(content)
 
   const mdxOptions = {
     mdxOptions: {
       remarkPlugins: [remarkGfm],
       rehypePlugins: [[rehypeSlug], [rehypeAutolinkHeadings, { behavior: 'wrap' }]],
     },
-  };
+  }
+
+  const showAffiliateNotice = Boolean(process.env.NEXT_PUBLIC_AMAZON_TAG)
 
   return (
     <ArticleLayout
@@ -46,6 +48,7 @@ export default function Page({ params }) {
       image={frontmatter.image}
       toc={toc}
     >
+      {showAffiliateNotice && <AffiliateNotice />}
       <MDXRenderer source={content} options={mdxOptions} />
       <StructuredData
         data={{
@@ -65,5 +68,5 @@ export default function Page({ params }) {
         }}
       />
     </ArticleLayout>
-  );
+  )
 }
