@@ -1,3 +1,4 @@
+// components/MDXRenderer.jsx
 import { MDXRemote } from 'next-mdx-remote/rsc'
 import remarkGfm from 'remark-gfm'
 import rehypeSlug from 'rehype-slug'
@@ -9,6 +10,7 @@ import ComparisonTable from '@/components/mdx/ComparisonTable'
 import ProsCons from '@/components/mdx/ProsCons'
 import Note from '@/components/mdx/Note'
 import YouTube from '@/components/mdx/YouTube'
+import RatingStars from '@/components/mdx/RatingStars' // ⬅️ NEW
 
 const components = {
   AffiliateLink,
@@ -17,6 +19,7 @@ const components = {
   ProsCons,
   Note,
   YouTube,
+  RatingStars, // ⬅️ NEW
   a: (props) => (
     <a
       {...props}
