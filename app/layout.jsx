@@ -5,10 +5,12 @@ import SiteFooter from '@/components/SiteFooter';
 import GA from '@/components/GA';
 import ConsentBanner from '@/components/ConsentBanner';
 
-export const metadata = { openGraph: { title: 'Wild & Well', siteName: 'Wild & Well', type: 'website' }, twitter: { card: 'summary_large_image' },
-  title: 'Wild & Well',
-  description: 'Eco-holistic guides and curated picks.',
+export const metadata = {
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://www.wild-and-well.store'),
+  openGraph: { title: 'Wild & Well', siteName: 'Wild & Well', type: 'website' },
+  twitter: { card: 'summary_large_image' },
 };
+
 
 export default function RootLayout({ children }) {
   return (
