@@ -3,7 +3,7 @@ import ArticleLayout from '@/components/ArticleLayout';
 import StructuredData from '@/components/StructuredData';
 import { getContent, listContent, tocFromMarkdown } from '@/lib/content';
 
-// ESM plugin imports (fix for Vercel/Next build)
+// ESM plugin imports (required by Next 14 / Vercel)
 import remarkGfm from 'remark-gfm';
 import rehypeSlug from 'rehype-slug';
 import rehypeAutolinkHeadings from 'rehype-autolink-headings';
@@ -33,7 +33,6 @@ export default function Page({ params }) {
   const mdxOptions = {
     mdxOptions: {
       remarkPlugins: [remarkGfm],
-      // add options to autolink to wrap the heading element
       rehypePlugins: [[rehypeSlug], [rehypeAutolinkHeadings, { behavior: 'wrap' }]],
     },
   };
