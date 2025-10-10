@@ -1,1 +1,0 @@
-(function(){fetch('/data/site.config.json').then(r=>r.json()).then(cfg=>{window.__siteconfig=cfg||{};}).catch(()=>{});})();

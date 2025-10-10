@@ -1,0 +1,1 @@
+export default function Page(){return (<div className='mx-auto max-w-3xl px-4 py-12 prose'><h1>Affiliate Disclosure</h1><p>Wild & Well participates in affiliate programs, including Amazon Services LLC Associates Program. As an Amazon Associate, we earn from qualifying purchases.</p></div>)}

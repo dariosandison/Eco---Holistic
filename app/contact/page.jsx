@@ -1,0 +1,1 @@
+export default function Page(){return (<div className='mx-auto max-w-6xl px-4 py-12 prose'><h1>Contact</h1><p>Email <a href='mailto:hello@wild-and-well.store'>hello@wild-and-well.store</a>.</p></div>)}

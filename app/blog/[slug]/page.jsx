@@ -1,0 +1,43 @@
+import MDXRenderer from '@/components/MDXRenderer';
+import ArticleLayout from '@/components/ArticleLayout';
+import StructuredData from '@/components/StructuredData';
+import { getContent, listContent, tocFromMarkdown } from '@/lib/content';
+
+export async function generateStaticParams() {
+  return listContent('blog').map(({ slug }) => ({ slug }));
+}
+
+export async function generateMetadata({ params }){
+  const { frontmatter } = getContent('blog', params.slug);
+  return {
+    title: frontmatter.title,
+    description: frontmatter.description,
+    openGraph: {
+      title: frontmatter.title,
+      description: frontmatter.description,
+      images: frontmatter.image ? [{ url: frontmatter.image }] : undefined,
+      type: 'article'
+    }
+  };
+}
+
+export default function Page({ params }){
+  const { frontmatter, content } = getContent('blog', params.slug);
+  const toc = tocFromMarkdown(content);
+  return (
+    <ArticleLayout title={frontmatter.title} description={frontmatter.description} date={frontmatter.date} updated={frontmatter.updated} image={frontmatter.image} toc={toc}>
+      <MDXRenderer source={content} options={{ mdxOptions: { remarkPlugins: [require('remark-gfm')], rehypePlugins: [require('rehype-slug'), require('rehype-autolink-headings')] } }} />
+    
+      <StructuredData data={{
+        '@context': 'https://schema.org',
+        '@type': 'Article',
+        headline: frontmatter.title,
+        description: frontmatter.description,
+        datePublished: frontmatter.date,
+        dateModified: frontmatter.updated || frontmatter.date,
+        mainEntityOfPage: { '@type': 'WebPage', '@id': (process.env.NEXT_PUBLIC_SITE_URL || 'https://www.wild-and-well.store') + (typeof window==='undefined' ? '' : window.location.pathname) },
+        publisher: { '@type': 'Organization', name: 'Wild & Well' }
+      }} />
+    </ArticleLayout>
+  );
+}

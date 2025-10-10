@@ -1,21 +1,20 @@
-import Link from "next/link";
-import SearchBar from "./SearchBar";
+import Link from 'next/link';
 
 export default function SiteHeader() {
   return (
-    <header className="w-full sticky top-0 z-40 bg-hunter/95 backdrop-blur border-b border-cream/15">
-      <div className="container flex items-center justify-between py-4 gap-4">
-        <Link href="/" className="text-cream text-xl font-semibold tracking-wide">
-          Wild & Well
-        </Link>
-        <nav className="hidden md:flex items-center gap-6 text-cream/90">
+    <header className="sticky top-0 z-40 bg-white/90 backdrop-blur border-b">
+      <div className="mx-auto max-w-6xl px-4 py-3 flex items-center justify-between">
+        <nav className="flex items-center gap-4 text-sm font-medium">
+          <Link href="/">Home</Link>
           <Link href="/guides">Guides</Link>
           <Link href="/blog">Blog</Link>
-          <Link href="/deals">Deals</Link>
-          <Link href="/legal/cookies">Cookies</Link>
+          <Link href="/about">About</Link>
+          <Link href="/contact">Contact</Link>
         </nav>
-        <div className="min-w-[220px] max-w-[340px] w-full">
-          <SearchBar />
+        <div className="flex items-center gap-4 text-sm">
+          <a href="https://www.instagram.com/wildandwell.store" aria-label="Instagram" rel="noopener noreferrer" target="_blank">Instagram</a>
+          <a href="https://www.tiktok.com/@wildandwell.store" aria-label="TikTok" rel="noopener noreferrer" target="_blank">TikTok</a>
+          <a href="https://www.pinterest.com/wildandwellstore" aria-label="Pinterest" rel="noopener noreferrer" target="_blank">Pinterest</a>
         </div>
       </div>
     </header>

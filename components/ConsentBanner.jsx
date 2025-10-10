@@ -1,43 +1,24 @@
-// components/ConsentBanner.jsx
+'use client';
 import { useEffect, useState } from 'react';
-import { grantAnalyticsConsent, revokeAnalyticsConsent } from '../lib/analytics';
 
-const KEY = 'consent.analytics'; // "granted" | "denied" | null
-
-export default function ConsentBanner() {
-  const [visible, setVisible] = useState(false);
-
+export default function ConsentBanner(){
+  const requireConsent = process.env.NEXT_PUBLIC_REQUIRE_CONSENT === 'true';
+  const [open, setOpen] = useState(false);
   useEffect(() => {
-    const stored = typeof window !== 'undefined' ? localStorage.getItem(KEY) : null;
-    if (!stored) setVisible(true);
-  }, []);
-
-  const accept = () => {
-    localStorage.setItem(KEY, 'granted');
-    grantAnalyticsConsent();
-    setVisible(false);
-  };
-
-  const decline = () => {
-    localStorage.setItem(KEY, 'denied');
-    revokeAnalyticsConsent();
-    setVisible(false);
-  };
-
-  if (!visible) return null;
-
+    if (!requireConsent) return;
+    const v = localStorage.getItem('consent_analytics');
+    if (!v) setOpen(true);
+  }, [requireConsent]);
+  if (!requireConsent || !open) return null;
   return (
-    <div style={{
-      position: 'fixed', inset: 'auto 0 0 0', zIndex: 1000,
-      background: 'rgba(0,0,0,.85)', color: '#fff', padding: 16
-    }}>
-      <div style={{maxWidth: 960, margin: '0 auto', display: 'flex', gap: 12, alignItems: 'center', flexWrap: 'wrap'}}>
-        <div style={{flex: 1, minWidth: 260}}>
-          We use privacy-friendly analytics to improve the site. Accept to help us understand what works.
-        </div>
-        <div style={{display:'flex', gap:8}}>
-          <button onClick={decline} style={{padding:'10px 14px', borderRadius:8, background:'#444', color:'#fff', border:'none'}}>Decline</button>
-          <button onClick={accept} style={{padding:'10px 14px', borderRadius:8, background:'#22c55e', color:'#0b1', border:'none'}}>Accept</button>
+    <div className="fixed bottom-3 inset-x-0 z-50">
+      <div className="mx-auto max-w-3xl card px-4 py-3 bg-white shadow">
+        <p className="text-sm text-neutral-700">
+          We use cookies for analytics to improve our content. You can accept or decline analytics cookies.
+        </p>
+        <div className="mt-3 flex gap-2">
+          <button className="btn" onClick={() => { localStorage.setItem('consent_analytics','granted'); setOpen(false); location.reload(); }}>Accept</button>
+          <button className="btn" style={{background:'#e5e7eb', color:'#0b1415'}} onClick={() => { localStorage.setItem('consent_analytics','denied'); setOpen(false); }}>Decline</button>
         </div>
       </div>
     </div>

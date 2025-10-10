@@ -1,9 +1,12 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {
-  reactStrictMode: true,
-  // Keep builds smooth in CI; you can turn these back on once everything is green.
-  eslint: { ignoreDuringBuilds: true },
-  typescript: { ignoreBuildErrors: true },
+const nextConfig = { reactStrictMode: true, swcMinify: true,
+  images: {
+    remotePatterns: [
+      { protocol: 'https', hostname: 'm.media-amazon.com' },
+      { protocol: 'https', hostname: '**.images-amazon.com' },
+      { protocol: 'https', hostname: 'images-na.ssl-images-amazon.com' },
+      { protocol: 'https', hostname: '**.amazonaws.com' },
+    ],
+  },
 };
-
-export default nextConfig;
+module.exports = nextConfig;

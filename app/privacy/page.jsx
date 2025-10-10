@@ -1,0 +1,1 @@
+export default function Page(){return (<div className='mx-auto max-w-3xl px-4 py-12 prose'><h1>Privacy Policy</h1><p>We respect your privacy. This site uses analytics (Google Analytics) and affiliate links. See our disclosure for details.</p></div>)}

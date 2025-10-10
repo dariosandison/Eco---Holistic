@@ -1,0 +1,1 @@
+export default function Page(){return (<div className='mx-auto max-w-3xl px-4 py-12 prose'><h1>Terms of Use</h1><p>Use this site at your own risk. Content is for informational purposes only.</p></div>)}

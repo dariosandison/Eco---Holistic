@@ -1,0 +1,1 @@
+export default function Page(){return (<div className='mx-auto max-w-6xl px-4 py-12 prose'><h1>About</h1><p>Eco-holistic living without the overwhelm.</p></div>)}

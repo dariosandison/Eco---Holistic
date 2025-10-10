@@ -1,14 +1,22 @@
-export default function ComparisonTable({ columns = [], rows = [] }) {
+export default function ComparisonTable({ columns = [], rows = [] }){
+  // columns: [{ key:'name', label:'Product' }, { key:'price', label:'Price' }, ...]
+  // rows: [{ name:'X', price:'£', ... }, ...]
   return (
-    <div className="overflow-x-auto my-6">
-      <table className="min-w-[600px]">
+    <div className="overflow-x-auto">
+      <table className="w-full text-sm border-separate border-spacing-0">
         <thead>
-          <tr>{columns.map((c, i) => <th key={i} className="text-left">{c}</th>)}</tr>
+          <tr>
+            {columns.map(col => (
+              <th key={col.key} className="text-left bg-neutral-50 border-b px-3 py-2 sticky top-0">{col.label}</th>
+            ))}
+          </tr>
         </thead>
         <tbody>
-          {rows.map((r, ri) => (
-            <tr key={ri}>
-              {r.map((cell, ci) => <td key={ci}>{cell}</td>)}
+          {rows.map((r, i) => (
+            <tr key={i} className="odd:bg-white even:bg-neutral-50">
+              {columns.map(col => (
+                <td key={col.key} className="border-b px-3 py-2 align-top">{r[col.key]}</td>
+              ))}
             </tr>
           ))}
         </tbody>
@@ -16,4 +24,3 @@ export default function ComparisonTable({ columns = [], rows = [] }) {
     </div>
   );
 }
-
