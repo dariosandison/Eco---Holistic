@@ -1,26 +1,34 @@
-import Image from 'next/image'
+import Image from "next/image";
 
 export default function Hero() {
   return (
-    <section className="bg-white">
-      <div className="mx-auto max-w-5xl px-4 py-16 text-center">
+    <section className="relative mx-auto max-w-3xl px-4 pt-10 pb-2 text-center">
+      <div className="mx-auto mb-6">
         <Image
-          src="/logo.png"          // <- lowercase file you added
-          alt="Wild & Well"
-          width={120}
-          height={120}
+          src="/og-default.jpg"              // 1200 x 630 in /public
+          width={720}
+          height={378}
           priority
-          sizes="120px"
-          className="mx-auto mb-6"
+          alt="Wild & Well"
+          className="mx-auto h-auto w-[min(92vw,720px)] rounded-xl shadow-sm ring-1 ring-black/5"
         />
-        <h1 className="text-3xl md:text-4xl font-bold tracking-tight">Low-tox living made simple</h1>
-        <p className="mt-3 text-neutral-600 max-w-2xl mx-auto">
-          Tested picks, honest reviews, and practical guides to save you time and money.
-        </p>
-        <div className="mt-6">
-          <a href="/guides" className="btn-primary">Start with Guides</a>
-        </div>
+      </div>
+
+      <h1 className="text-4xl font-extrabold tracking-tight sm:text-5xl">
+        Low-tox living made simple
+      </h1>
+      <p className="mt-3 text-base text-neutral-600 sm:text-lg">
+        Tested picks, honest reviews, and practical guides to save you time and money.
+      </p>
+
+      <div className="mt-6">
+        <a
+          href="/guides"
+          className="inline-flex items-center rounded-full bg-[var(--brand)] px-5 py-2.5 text-white font-medium hover:opacity-90"
+        >
+          Start with Guides
+        </a>
       </div>
     </section>
-  )
+  );
 }
