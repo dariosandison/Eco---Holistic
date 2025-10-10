@@ -1,24 +1,45 @@
-'use client';
-import { useEffect, useState } from 'react';
+'use client'
+import { useEffect } from 'react'
 
 export default function NewsletterBar() {
-  const [visible, setVisible] = useState(true);
   useEffect(() => {
-    if (typeof window === 'undefined') return;
-    const closed = window.localStorage.getItem('newsletterClosed');
-    if (closed === '1') setVisible(false);
-  }, []);
-  if (!visible) return null;
+    const el = document.getElementById('newsletter-bar')
+    if (!el) return
+    const setH = () =>
+      document.documentElement.style.setProperty('--newsletter-h', `${el.offsetHeight}px`)
+    setH()
+    const ro = new ResizeObserver(setH)
+    ro.observe(el)
+    return () => ro.disconnect()
+  }, [])
+
   return (
-    <div className="sticky top-0 z-50 bg-emerald-600 text-white">
-      <div className="mx-auto max-w-6xl px-4 py-2 flex items-center justify-between gap-3">
-        <p className="text-sm">Get new guides in your inbox — no spam.</p>
-        <form action={process.env.NEXT_PUBLIC_NEWSLETTER_ACTION || '#'} method="post" className="flex gap-2">
-          <input required name="email" type="email" placeholder="you@email.com" className="rounded px-3 py-1 text-black"/>
-          <button className="rounded bg-black/90 text-white px-3 py-1">Subscribe</button>
+    <div
+      id="newsletter-bar"
+      className="fixed bottom-0 inset-x-0 z-50 border-t bg-white/95 backdrop-blur"
+    >
+      <div className="mx-auto max-w-6xl px-4 py-3 flex flex-col sm:flex-row items-center gap-3">
+        <p className="text-sm text-neutral-700">
+          Get new guides & tested picks (no spam, unsubscribe anytime).
+        </p>
+        <form
+          className="flex w-full sm:w-auto gap-2"
+          action={process.env.NEXT_PUBLIC_NEWSLETTER_ACTION || '#'}
+          method="post"
+          target="_blank"
+          rel="noopener"
+        >
+          <input
+            type="email"
+            name="email"
+            required
+            placeholder="your@email.com"
+            className="w-full sm:w-64 rounded-xl border px-3 py-2"
+          />
+          <button type="submit" className="btn-primary">Subscribe</button>
         </form>
-        <button aria-label="Close" onClick={() => { localStorage.setItem('newsletterClosed','1'); setVisible(false); }}>✕</button>
       </div>
     </div>
-  );
+  )
 }
+
