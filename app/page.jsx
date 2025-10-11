@@ -1,14 +1,10 @@
 // app/page.jsx
 import Image from "next/image";
 import Link from "next/link";
-import { allGuides } from "contentlayer/generated";
+import { getAllGuides } from "../lib/get-guides";
 
 export default function HomePage() {
-  // Take the latest 6 non-draft guides
-  const guides = allGuides
-    .filter((g) => !g.draft)
-    .sort((a, b) => new Date(b.date || 0) - new Date(a.date || 0))
-    .slice(0, 6);
+  const guides = getAllGuides().slice(0, 6);
 
   return (
     <>
@@ -17,18 +13,18 @@ export default function HomePage() {
         {/* Large background logo */}
         <div className="absolute inset-0 -z-10">
           <Image
-            src="/og.png"            // big background logo in /public
+            src="/og.png"        // big background logo in /public
             alt=""
             fill
             priority
             sizes="100vw"
             className="object-cover object-center"
           />
-          {/* Soft wash to keep text/buttons readable */}
+          {/* soft wash for readability */}
           <div className="absolute inset-0 bg-gradient-to-b from-white/60 via-white/30 to-white" />
         </div>
 
-        {/* Content sits at the bottom so it's below the big logo */}
+        {/* content is at the bottom so text sits below the logo */}
         <div className="mx-auto max-w-6xl px-4">
           <div className="flex min-h-[78vh] items-end justify-center pb-16 text-center">
             <div>
@@ -47,7 +43,7 @@ export default function HomePage() {
                 </Link>
               </div>
 
-              {/* Writing BELOW the buttons */}
+              {/* Writing BELOW the button */}
               <h1 className="mt-8 text-3xl font-semibold text-zinc-900 md:text-4xl">
                 Low-tox living made simple
               </h1>
@@ -70,31 +66,33 @@ export default function HomePage() {
         </div>
 
         <div className="mt-6 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {guides.map((g) => (
-            <Link
-              key={g.slug}
-              href={`/guides/${g.slug}`}
-              className="group overflow-hidden rounded-xl border border-zinc-200 bg-white shadow-sm transition hover:shadow-md"
-            >
-              <div className="aspect-[16/9] w-full overflow-hidden bg-zinc-100">
-                <Image
-                  src={g.coverImage || "/og.png"} // fallback so cards always show
-                  alt={g.title}
-                  width={1200}
-                  height={675}
-                  className="h-full w-full object-cover transition group-hover:scale-[1.02]"
-                />
-              </div>
-              <div className="p-4">
-                <h3 className="line-clamp-2 font-medium text-zinc-900">{g.title}</h3>
-                {g.description ? (
-                  <p className="mt-1 line-clamp-2 text-sm text-zinc-600">
-                    {g.description}
-                  </p>
-                ) : null}
-              </div>
-            </Link>
-          ))}
+          {guides.length === 0 ? (
+            <p className="text-zinc-600">No guides found.</p>
+          ) : (
+            guides.map((g) => (
+              <Link
+                key={g.slug}
+                href={`/guides/${g.slug}`}
+                className="group overflow-hidden rounded-xl border border-zinc-200 bg-white shadow-sm transition hover:shadow-md"
+              >
+                <div className="aspect-[16/9] w-full overflow-hidden bg-zinc-100">
+                  <Image
+                    src={g.coverImage || "/og.png"} // fallback so a thumbnail always shows
+                    alt={g.title}
+                    width={1200}
+                    height={675}
+                    className="h-full w-full object-cover transition group-hover:scale-[1.02]"
+                  />
+                </div>
+                <div className="p-4">
+                  <h3 className="line-clamp-2 font-medium text-zinc-900">{g.title}</h3>
+                  {g.description && (
+                    <p className="mt-1 line-clamp-2 text-sm text-zinc-600">{g.description}</p>
+                  )}
+                </div>
+              </Link>
+            ))
+          )}
         </div>
       </section>
     </>
