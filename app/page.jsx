@@ -8,21 +8,22 @@ export default function HomePage() {
 
   return (
     <>
-      {/* HERO */}
-      <section className="relative isolate">
-        {/* Large background logo */}
-        <div className="absolute inset-0 -z-10">
-          <Image
-            src="/og.png"        // big background logo in /public
-            alt=""
-            fill
-            priority
-            sizes="100vw"
-            className="object-cover object-center"
-          />
-          {/* soft wash for readability */}
-          <div className="absolute inset-0 bg-gradient-to-b from-white/60 via-white/30 to-white" />
-        </div>
+     {/* HERO */}
+<section className="relative isolate">
+  {/* Large background logo */}
+  <div className="absolute inset-0 -z-10">
+    <Image
+      src="/og-default.jpg"   // <-- use this file from /public
+      alt=""
+      fill
+      priority
+      sizes="100vw"
+      className="object-cover object-center"
+    />
+    <div className="absolute inset-0 bg-gradient-to-b from-white/60 via-white/30 to-white" />
+  </div>
+  {/* ...rest of your hero content (buttons, heading, paragraph) */}
+</section>
 
         {/* content is at the bottom so text sits below the logo */}
         <div className="mx-auto max-w-6xl px-4">
