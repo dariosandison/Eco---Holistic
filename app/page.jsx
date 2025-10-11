@@ -64,9 +64,8 @@ export default function HomePage() {
             </Link>
 
             {/* Copy BELOW the button */}
-            <p className="mt-6 text-base text-zinc-700 md:text-lg">
-              Make switching to low-tox, eco-friendly products easy — clear picks,
-              simple checklists, and no greenwashing.
+            <p className="mt-10 text-base text-zinc-700 md:text-lg">
+              Your guide to holistic health, natural healing and eco friendly living.
             </p>
           </div>
         </div>
