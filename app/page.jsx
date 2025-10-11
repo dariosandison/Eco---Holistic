@@ -29,6 +29,12 @@ export default function HomePage() {
         href="/guides"
         className="rounded-full bg-emerald-800 px-5 py-2 text-sm font-semibold text-white hover:bg-emerald-700"
       >
+       
+        
+        
+        
+        
+        
         Explore Guides
       </Link>
       <Link
@@ -44,8 +50,7 @@ export default function HomePage() {
       Low-tox living made simple
     </h1>
     <p className="mt-3 max-w-2xl text-base text-zinc-700 md:text-lg">
-      Honest, practical guidance for low-tox living — product reviews, how-tos,
-      and buyer’s guides you can trust.
+      Your guide to holistic health, eco friendly living and natural wellness.
     </p>
   </div>
 </section>
