@@ -10,7 +10,7 @@ export default function HomePage() {
   {/* Background OG-style logo */}
   <div className="absolute inset-0 -z-10">
     <Image
-      src="/og.png"           // your large background logo in /public
+      src="/og-default.jpg"           // your large background logo in /public
       alt=""
       fill
       priority
