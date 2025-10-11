@@ -1,3 +1,4 @@
+// components/SiteHeader.jsx
 'use client';
 
 import Link from 'next/link';
@@ -12,7 +13,13 @@ export default function SiteHeader() {
       <div className="mx-auto flex max-w-6xl items-center gap-4 px-4 py-3">
         {/* Brand */}
         <Link href="/" className="inline-flex items-center gap-2">
-          <Image src="/logo.png" alt="Wild & Well" width={32} height={32} priority />
+          <Image
+            src="/logo.png"
+            alt="Wild & Well"
+            width={32}
+            height={32}
+            priority
+          />
           <span className="font-semibold text-zinc-900">Wild &amp; Well</span>
         </Link>
 
@@ -45,9 +52,9 @@ export default function SiteHeader() {
         >
           <span className="sr-only">Open menu</span>
           <div className="space-y-1.5">
-            <span className="block h-0.5 w-5 bg-zinc-900"></span>
-            <span className="block h-0.5 w-5 bg-zinc-900"></span>
-            <span className="block h-0.5 w-5 bg-zinc-900"></span>
+            <span className="block h-0.5 w-5 bg-zinc-900" />
+            <span className="block h-0.5 w-5 bg-zinc-900" />
+            <span className="block h-0.5 w-5 bg-zinc-900" />
           </div>
         </button>
       </div>
@@ -58,3 +65,20 @@ export default function SiteHeader() {
           <Link href="/guides" className="rounded-md px-2 py-2 text-sm text-zinc-800 hover:bg-zinc-50">
             Guides
           </Link>
+          <Link href="/blog" className="rounded-md px-2 py-2 text-sm text-zinc-800 hover:bg-zinc-50">
+            Blog
+          </Link>
+          <Link href="/how-we-test" className="rounded-md px-2 py-2 text-sm text-zinc-800 hover:bg-zinc-50">
+            How We Test
+          </Link>
+          <Link
+            href="/product-disclosure"
+            className="rounded-md px-2 py-2 text-sm text-zinc-800 hover:bg-zinc-50"
+          >
+            Disclosure
+          </Link>
+        </nav>
+      </div>
+    </header>
+  );
+}
