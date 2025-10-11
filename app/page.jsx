@@ -1,101 +1,92 @@
 // app/page.jsx
 import Image from "next/image";
 import Link from "next/link";
-import { getAllGuides } from "../lib/get-guides";
+import { allGuides } from "contentlayer/generated";
+
+function GuideCard({ guide }) {
+  const href = guide.url || `/guides/${guide.slug}`;
+  const cover = guide.cover || "/placeholder-guide.jpg";
+  return (
+    <Link
+      href={href}
+      className="group block overflow-hidden rounded-2xl border border-zinc-200 transition-shadow hover:shadow-md"
+    >
+      <div className="relative aspect-[4/3]">
+        <Image
+          src={cover}
+          alt={guide.title || "Guide"}
+          fill
+          sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
+          className="object-cover"
+          priority={false}
+        />
+      </div>
+      <div className="p-4">
+        <h3 className="text-base font-medium text-zinc-900 group-hover:underline">
+          {guide.title}
+        </h3>
+        {guide.excerpt ? (
+          <p className="mt-2 line-clamp-2 text-sm text-zinc-600">
+            {guide.excerpt}
+          </p>
+        ) : null}
+      </div>
+    </Link>
+  );
+}
 
 export default function HomePage() {
-  const guides = getAllGuides().slice(0, 6);
+  // Pick the first 6 guides (adjust sorting to your preference)
+  const featuredGuides = (allGuides || [])
+    .filter((g) => !g.draft)
+    .slice(0, 6);
 
   return (
-    <>
-     {/* HERO */}
-<section className="relative isolate">
-  {/* Large background logo */}
-  <div className="absolute inset-0 -z-10">
-    <Image
-      src="/og-default.jpg"   // <-- use this file from /public
-      alt=""
-      fill
-      priority
-      sizes="100vw"
-      className="object-cover object-center"
-    />
-    <div className="absolute inset-0 bg-gradient-to-b from-white/60 via-white/30 to-white" />
-  </div>
-  {/* ...rest of your hero content (buttons, heading, paragraph) */}
-</section>
+    <main>
+      {/* HERO */}
+      <section className="relative isolate">
+        {/* Background logo/image */}
+        <div className="absolute inset-0 -z-10">
+          <Image
+            src="/og-default.jpg"
+            alt=""
+            fill
+            priority
+            sizes="100vw"
+            className="object-cover object-center"
+          />
+          {/* Soft wash for readability */}
+          <div className="absolute inset-0 bg-gradient-to-b from-white/70 via-white/50 to-white" />
+        </div>
 
-        {/* content is at the bottom so text sits below the logo */}
-        <div className="mx-auto max-w-6xl px-4">
-          <div className="flex min-h-[78vh] items-end justify-center pb-16 text-center">
-            <div>
-              <div className="flex justify-center gap-3">
-                <Link
-                  href="/guides"
-                  className="rounded-full bg-emerald-800 px-5 py-2 text-sm font-semibold text-white hover:bg-emerald-700"
-                >
-                  Explore Guides
-                </Link>
-                <Link
-                  href="/blog"
-                  className="rounded-full border border-zinc-300 bg-white/70 px-5 py-2 text-sm font-medium text-zinc-800 hover:bg-white"
-                >
-                  Read the Blog
-                </Link>
-              </div>
+        <div className="mx-auto max-w-6xl px-4 py-16 md:py-24">
+          <div className="max-w-2xl">
+            {/* Primary CTA */}
+            <Link
+              href="/guides"
+              className="inline-flex items-center rounded-full border border-zinc-300 bg-white/80 px-4 py-2 text-sm font-medium text-zinc-800 backdrop-blur transition hover:bg-white"
+            >
+              Explore guides
+            </Link>
 
-              {/* Writing BELOW the button */}
-              <h1 className="mt-8 text-3xl font-semibold text-zinc-900 md:text-4xl">
-                Low-tox living made simple
-              </h1>
-              <p className="mt-3 mx-auto max-w-2xl text-base text-zinc-700 md:text-lg">
-                Honest, practical guidance for low-tox living — product reviews,
-                how-tos, and buyer’s guides you can trust.
-              </p>
-            </div>
+            {/* Copy BELOW the button */}
+            <p className="mt-6 text-base text-zinc-700 md:text-lg">
+              Make switching to low-tox, eco-friendly products easy — clear
+              picks, simple checklists, and no greenwashing.
+            </p>
           </div>
         </div>
       </section>
 
       {/* FEATURED GUIDES (6 cards) */}
-      <section className="mx-auto max-w-6xl px-4 py-10">
-        <div className="flex items-baseline justify-between">
-          <h2 className="text-xl font-semibold">Featured Guides</h2>
-          <Link href="/guides" className="text-sm text-emerald-800 hover:underline">
-            View all
-          </Link>
-        </div>
-
+      <section className="mx-auto max-w-6xl px-4 py-10 md:py-14">
+        <h2 className="text-xl font-semibold text-zinc-900">Starter guides</h2>
         <div className="mt-6 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {guides.length === 0 ? (
-            <p className="text-zinc-600">No guides found.</p>
-          ) : (
-            guides.map((g) => (
-              <Link
-                key={g.slug}
-                href={`/guides/${g.slug}`}
-                className="group overflow-hidden rounded-xl border border-zinc-200 bg-white shadow-sm transition hover:shadow-md"
-              >
-                <div className="aspect-[16/9] w-full overflow-hidden bg-zinc-100">
-                  <Image
-                    src={g.coverImage || "/og.png"} // fallback so a thumbnail always shows
-                    alt={g.title}
-                    width={1200}
-                    height={675}
-                    className="h-full w-full object-cover transition group-hover:scale-[1.02]"
-                  />
-                </div>
-                <div className="p-4">
-                  <h3 className="line-clamp-2 font-medium text-zinc-900">{g.title}</h3>
-                  {g.description && (
-                    <p className="mt-1 line-clamp-2 text-sm text-zinc-600">{g.description}</p>
-                  )}
-                </div>
-              </Link>
-            ))
-          )}
+          {featuredGuides.map((g) => (
+            <GuideCard key={g._id || g.slug || g.title} guide={g} />
+          ))}
         </div>
       </section>
-    </>
+    </main>
   );
 }
