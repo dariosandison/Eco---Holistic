@@ -64,7 +64,7 @@ export default function HomePage() {
             </Link>
 
             {/* Copy BELOW the button */}
-            <p className="mt-10 text-base text-zinc-700 md:text-lg">
+            <p className="mt-26 text-base text-zinc-700 md:text-lg">
               Your guide to holistic health, natural healing and eco friendly living.
             </p>
           </div>
