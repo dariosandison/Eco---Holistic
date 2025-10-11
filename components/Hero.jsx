@@ -1,53 +1,41 @@
+// components/Hero.jsx
 import Image from 'next/image';
 import Link from 'next/link';
 
 export default function Hero() {
   return (
     <section className="relative isolate">
-      {/* Background image */}
+      {/* Background image (large OG-style logo) */}
       <div className="absolute inset-0 -z-10">
         <Image
-          src="/og-default.jpg"
+          src="/og.png"            // change to your actual file (e.g. /og-default.png) living in /public
           alt=""
           fill
           priority
           sizes="100vw"
-          className="object-cover"
+          className="object-cover object-center"
         />
-        {/* Soften lower half for legibility */}
-        <div className="absolute inset-0 bg-gradient-to-t from-white via-white/40 to-transparent" />
+        {/* Gentle gradient to keep foreground legible */}
+        <div className="absolute inset-0 bg-gradient-to-b from-white/70 via-white/30 to-white" />
       </div>
 
-      <div className="mx-auto max-w-6xl px-4 sm:px-6 py-16 sm:py-24 lg:py-28">
-        <div className="flex flex-col items-center text-center gap-6">
-          {/* Larger rectangular logo */}
-          <Image
-            src="/logo.png"
-            alt="Wild & Well"
-            width={360}
-            height={112}
-            priority
-            className="h-20 w-auto sm:h-24 md:h-28"
-          />
-
-          <p className="max-w-2xl text-pretty text-lg text-zinc-700 sm:text-xl">
-            Honest, practical guidance for low-tox living — product reviews, how-tos, and buyer’s guides you can trust.
-          </p>
-
-          <div className="flex flex-wrap items-center justify-center gap-3">
+      {/* Content is anchored near the bottom so it sits below the dense part of the background */}
+      <div className="mx-auto flex h-[68vh] max-w-6xl items-end px-4 pb-10 md:h-[74vh]">
+        <div className="w-full max-w-2xl">
+          {/* CTA first */}
+          <div className="flex flex-wrap gap-3">
             <Link
               href="/guides"
-              className="rounded-full bg-emerald-700 px-5 py-3 text-sm font-semibold text-white hover:bg-emerald-800"
+              className="rounded-full border border-zinc-300 px-5 py-2 text-sm font-medium text-zinc-800 hover:bg-white/70"
             >
-              Explore Guides
-            </Link>
-            <Link
-              href="/blog"
-              className="rounded-full border border-zinc-300 bg-white/80 px-5 py-3 text-sm font-semibold text-zinc-900 hover:bg-zinc-50"
-            >
-              Read the Blog
+              Explore guides
             </Link>
           </div>
+
+          {/* Writing BELOW the button */}
+          <p className="mt-6 text-base text-zinc-700 md:text-lg">
+            Your guide to hollistic health, natural healing and eco living.
+          </p>
         </div>
       </div>
     </section>
