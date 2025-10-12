@@ -4,10 +4,16 @@ import StructuredData from '@/components/StructuredData'
 import AffiliateNotice from '@/components/mdx/AffiliateNotice'
 import { getContent, listContent, tocFromMarkdown } from '@/lib/content'
 
-import remarkGfm from 'remark-gfm'
-import rehypeSlug from 'rehype-slug'
-import rehypeAutolinkHeadings from 'rehype-autolink-headings'
-const AMAZON_TAG = AMAZON_TAG || AMAZON_TAG || AMAZON_TAG || AMAZON_TAG;
+@@
+ import remarkGfm from 'remark-gfm'
+ import rehypeSlug from 'rehype-slug'
+ import rehypeAutolinkHeadings from 'rehype-autolink-headings'
+-const AMAZON_TAG = AMAZON_TAG || AMAZON_TAG || AMAZON_TAG || AMAZON_TAG;
++const AMAZON_TAG =
++  process.env.NEXT_PUBLIC_AMAZON_TAG ||
++  process.env.NEXT_PUBLIC_AMAZON_UK ||
++  process.env.NEXT_PUBLIC_AMAZON_US ||
++  process.env.NEXT_PUBLIC_AMAZON_EU;
 
 export async function generateStaticParams() {
   return listContent('guides').map(({ slug }) => ({ slug }))
