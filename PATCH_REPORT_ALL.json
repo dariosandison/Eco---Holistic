@@ -1,0 +1,14 @@
+{
+  "changes": [
+    "[MDX] Escaped '<35%' in content/guides/healthy-air-at-home.mdx",
+    "[TOC] item.slug -> item.id in components/ArticleLayout.jsx",
+    "[Route] Added alias page at app/affiliate-disclosure/page.jsx",
+    "[Analytics] Added GA to app/layout.jsx",
+    "[SEO] Added/updated app/sitemap.js",
+    "[SEO] Added app/robots.js and public/robots.txt",
+    "[ENV] GA fallback added in components/GA.jsx",
+    "[ENV] Amazon tag fallback in app/blog/[slug]/page.jsx",
+    "[ENV] Amazon tag fallback in app/guides/[slug]/page.jsx",
+    "[ENV] Amazon tag fallback in lib/affiliates.js"
+  ]
+}

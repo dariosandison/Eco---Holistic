@@ -7,6 +7,7 @@ import { getContent, listContent, tocFromMarkdown } from '@/lib/content'
 import remarkGfm from 'remark-gfm'
 import rehypeSlug from 'rehype-slug'
 import rehypeAutolinkHeadings from 'rehype-autolink-headings'
+const AMAZON_TAG = AMAZON_TAG || AMAZON_TAG || AMAZON_TAG || AMAZON_TAG;
 
 export async function generateStaticParams() {
   return listContent('guides').map(({ slug }) => ({ slug }))
@@ -37,7 +38,7 @@ export default function Page({ params }) {
     },
   }
 
-  const showAffiliateNotice = Boolean(process.env.NEXT_PUBLIC_AMAZON_TAG)
+  const showAffiliateNotice = Boolean(AMAZON_TAG)
 
   return (
     <ArticleLayout
