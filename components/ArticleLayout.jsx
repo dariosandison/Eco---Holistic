@@ -62,8 +62,8 @@ export default function ArticleLayout({
             <h2 className="font-semibold mb-2">On this page</h2>
             <ul className="space-y-1">
               {toc.map((item) => (
-                <li key={item.id} className="text-neutral-600">
-                  <a href={`#${item.id}`} className="hover:underline">
+                <li key={item.slug} className="text-neutral-600">
+                  <a href={`#${item.slug}`} className="hover:underline">
                     {item.text}
                   </a>
                 </li>
