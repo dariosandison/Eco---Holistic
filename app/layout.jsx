@@ -2,7 +2,6 @@ import './globals.css'
 import SiteHeader from '@/components/SiteHeader'
 import SiteFooter from '@/components/SiteFooter'
 import NewsletterBar from '@/components/NewsletterBar'
-import GA from '@/components/GA'
 
 export const metadata = {
   metadataBase: new URL("https://www.wild-and-well.store"),
@@ -24,7 +23,6 @@ export default function RootLayout({ children }) {
         <main className="flex-1">{children}</main>
         <SiteFooter />
         <NewsletterBar />
-        <GA />
       </body>
     </html>
   )

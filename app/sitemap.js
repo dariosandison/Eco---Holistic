@@ -1,15 +1,31 @@
 import { listContent } from '@/lib/content'
-export const dynamic = 'force-static'
-export default function sitemap() {
-  const now = new Date().toISOString()
-  const map = (base, kind) =>
-    listContent(kind).map(({ slug, updated, date }) => ({
-      url: `https://www.wild-and-well.store/${base}/${slug}`,
-      lastModified: updated || date || now,
-    }))
-  return [
-    { url: 'https://www.wild-and-well.store/' },
-    ...map('guides', 'guides'),
-    ...map('blog', 'blog'),
-  ]
+
+export default async function sitemap() {
+  const base = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.wild-and-well.store'
+
+  const staticRoutes = [
+    '',
+    '/recommended',
+    '/guides',
+    '/blog',
+    '/deals',
+    '/how-we-test',
+    '/editorial-policy',
+    '/product-disclosure',
+    '/privacy',
+    '/terms',
+    '/contact',
+  ].map((p) => ({ url: `${base}${p}`, lastModified: new Date() }))
+
+  const guideRoutes = listContent('guides').map((g) => ({
+    url: `${base}/guides/${g.slug}`,
+    lastModified: g.updated || g.date || new Date(),
+  }))
+
+  const blogRoutes = listContent('blog').map((b) => ({
+    url: `${base}/blog/${b.slug}`,
+    lastModified: b.updated || b.date || new Date(),
+  }))
+
+  return [...staticRoutes, ...guideRoutes, ...blogRoutes]
 }

@@ -6,6 +6,8 @@ import rehypeAutolinkHeadings from 'rehype-autolink-headings'
 
 import AffiliateLink from '@/components/mdx/AffiliateLink'
 import AmazonLink from '@/components/mdx/AmazonLink'
+import AmazonButton from '@/components/mdx/AmazonButton'
+import ProductPick from '@/components/mdx/ProductPick'
 import ComparisonTable from '@/components/mdx/ComparisonTable'
 import ProsCons from '@/components/mdx/ProsCons'
 import Note from '@/components/mdx/Note'
@@ -15,6 +17,8 @@ import RatingStars from '@/components/mdx/RatingStars' // ⬅️ NEW
 const components = {
   AffiliateLink,
   AmazonLink,
+  AmazonButton,
+  ProductPick,
   ComparisonTable,
   ProsCons,
   Note,

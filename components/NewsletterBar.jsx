@@ -20,7 +20,7 @@ export default function NewsletterBar() {
     >
       <div className="mx-auto max-w-6xl px-4 py-3 flex flex-col sm:flex-row items-center gap-3">
         <p className="text-sm text-neutral-700">
-          Get new guides & tested picks (no spam, unsubscribe anytime).
+          Free: Low‑Tox Shopping List + weekly trusted picks (no spam).
         </p>
         <form
           className="flex w-full sm:w-auto gap-2"
@@ -36,7 +36,7 @@ export default function NewsletterBar() {
             placeholder="your@email.com"
             className="w-full sm:w-64 rounded-xl border px-3 py-2"
           />
-          <button type="submit" className="btn-primary">Subscribe</button>
+          <button type="submit" className="btn-primary">Get it</button>
         </form>
       </div>
     </div>
