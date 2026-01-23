@@ -82,6 +82,10 @@ export default function SiteFooter() {
         </div>
       </div>
 
+      <div className="text-center text-xs text-neutral-500 px-4 pb-2">
+        Wild &amp; Well is run independently. We don’t accept paid placements disguised as advice — we recommend products we genuinely trust.
+      </div>
+
       <div className="text-center text-xs text-neutral-500 pb-4">
         © {new Date().getFullYear()} Wild &amp; Well. All rights reserved.
       </div>

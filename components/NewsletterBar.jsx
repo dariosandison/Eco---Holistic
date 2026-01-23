@@ -20,7 +20,7 @@ export default function NewsletterBar() {
     >
       <div className="mx-auto max-w-6xl px-4 py-3 flex flex-col sm:flex-row items-center gap-3">
         <p className="text-sm text-neutral-700">
-          Free: Low‑Tox Shopping List + weekly trusted picks (no spam).
+          Free: <a className="underline" href="/shopping-list">Low‑Tox Shopping List</a> + weekly trusted picks (no spam).
         </p>
         <form
           className="flex w-full sm:w-auto gap-2"

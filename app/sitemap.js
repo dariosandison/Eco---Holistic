@@ -15,6 +15,10 @@ export default async function sitemap() {
     '/privacy',
     '/terms',
     '/contact',
+    '/best-water-filters-uk',
+    '/best-natural-sleep-support',
+    '/best-low-tox-products-for-beginners',
+    '/shopping-list',
   ].map((p) => ({ url: `${base}${p}`, lastModified: new Date() }))
 
   const guideRoutes = listContent('guides').map((g) => ({

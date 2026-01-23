@@ -105,6 +105,7 @@ export default function HomePage() {
               Expert-led guides and trusted product picks for low-tox, holistic living —
               so you can make healthier choices with confidence.
             </p>
+            <p className="mt-2 text-sm text-zinc-600">For people who want healthier homes without overwhelm or fear-based advice.</p>
 
             <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
               <Link href="/guides" className="btn-primary w-full sm:w-auto text-center">
@@ -120,7 +121,7 @@ export default function HomePage() {
 
             <p className="mt-6 text-sm text-zinc-600">
               New here? Start with the{" "}
-              <Link href="/recommended#starter" className="underline decoration-dotted">
+              <Link href="/shopping-list" className="underline decoration-dotted">
                 Low-Tox Starter Picks
               </Link>{" "}
               and our{" "}
@@ -196,7 +197,7 @@ export default function HomePage() {
                 Our trusted swaps for skincare, home, and everyday wellness — in one simple list.
               </p>
             </div>
-            <Link href="/recommended#starter" className="btn-primary w-full md:w-auto text-center">
+            <Link href="/shopping-list" className="btn-primary w-full md:w-auto text-center">
               Get the list
             </Link>
           </div>
