@@ -19,6 +19,7 @@ export default async function sitemap() {
     '/best-natural-sleep-support',
     '/best-low-tox-products-for-beginners',
     '/shopping-list',
+    '/shopping-list/thanks',
   ].map((p) => ({ url: `${base}${p}`, lastModified: new Date() }))
 
   const guideRoutes = listContent('guides').map((g) => ({

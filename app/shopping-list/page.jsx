@@ -41,7 +41,7 @@ export default function ShoppingListPage() {
         </form>
 
         <p className="mt-3 text-xs text-zinc-600">
-          Prefer to browse now? Start with our <Link className="underline" href="/recommended">Trusted Picks</Link>.
+          After you subscribe, open the <Link className="underline" href="/shopping-list/thanks">thank‑you page</Link> for next steps. Prefer to browse now? Start with our <Link className="underline" href="/recommended">Trusted Picks</Link>.
         </p>
       </div>
 
