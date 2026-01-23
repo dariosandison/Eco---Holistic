@@ -187,29 +187,8 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* EMAIL CTA */}
-      <section className="mx-auto max-w-6xl px-4 pb-16 md:pb-20">
-        <div className="rounded-3xl border border-zinc-200 bg-white p-6 md:p-10">
-          <div className="flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
-            <div className="max-w-2xl">
-              <h2 className="text-xl font-semibold text-zinc-900">Free: Low‑Tox Shopping List</h2>
-              <p className="mt-2 text-sm text-zinc-700">
-                Our trusted swaps for skincare, home, and everyday wellness — in one simple list.
-              </p>
-            </div>
-            <Link href="/shopping-list" className="btn-primary w-full md:w-auto text-center">
-              Get the list
-            </Link>
-          </div>
-          <p className="mt-4 text-xs text-zinc-600">
-            Some links may earn us a small commission at no extra cost to you. We only recommend products we genuinely trust.
-          </p>
-        </div>
-      </section>
-    </main>
-  );
-}
-
+      
+{/* BEST OF */}
 <section className="mt-16">
   <div className="mx-auto max-w-6xl px-4">
     <h2 className="text-2xl font-semibold">Best Of (quick buyer’s guides)</h2>
@@ -232,3 +211,30 @@ export default function HomePage() {
     </div>
   </div>
 </section>
+
+{/* EMAIL CTA */}
+<section className="mt-16">
+  <div className="mx-auto max-w-6xl px-4">
+    <div className="rounded-2xl border border-zinc-200 bg-white p-6 md:p-10">
+      <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+        <div>
+          <h2 className="text-xl font-semibold text-zinc-900">Free: Low‑Tox Shopping List</h2>
+          <p className="mt-2 text-sm text-zinc-700">
+            Our trusted swaps for skincare, home, and everyday wellness — in one simple list.
+          </p>
+        </div>
+        <Link href="/shopping-list" className="btn-primary w-full md:w-auto text-center">
+          Get the list
+        </Link>
+      </div>
+      <p className="mt-4 text-xs text-zinc-600">
+        Some links may earn us a small commission at no extra cost to you. We only recommend products we genuinely trust.
+      </p>
+    </div>
+  </div>
+</section>
+
+    </main>
+  );
+}
+
