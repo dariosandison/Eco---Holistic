@@ -1,16 +1,15 @@
-// @ts-nocheck
 export default function RecommendedPage() {
   return (
     <main className="mx-auto max-w-3xl px-6 py-16">
       <h1 className="text-4xl font-bold mb-4">Our Trusted Wellness Picks</h1>
       <p className="mb-8">
-        These are our most trusted low‑tox and holistic wellness recommendations.
-        We research ingredients, sourcing, and real‑world use before suggesting anything.
+        These are our most trusted low-tox and holistic wellness recommendations.
+        We research ingredients, sourcing, and real-world use before suggesting anything.
       </p>
 
       <section className="space-y-6">
         <div>
-          <h2 className="text-2xl font-semibold">Best Low‑Tox Home Picks</h2>
+          <h2 className="text-2xl font-semibold">Best Low-Tox Home Picks</h2>
           <p>Our favourite air, water, and cleaning upgrades.</p>
         </div>
         <div>
