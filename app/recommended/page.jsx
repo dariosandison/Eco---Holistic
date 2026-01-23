@@ -22,6 +22,18 @@ export default function RecommendedPage() {
         </div>
       </section>
 
+      
+<section className="mt-12">
+  <h2 className="text-2xl font-semibold mb-3">Trending guides</h2>
+  <ul className="list-disc pl-6 space-y-2">
+    <li><a className="underline" href="/guides/water-filter-buying-guide-uk">Water filters (UK) – buyer’s guide</a></li>
+    <li><a className="underline" href="/guides/healthy-air-at-home">Healthy air at home</a></li>
+    <li><a className="underline" href="/guides/winter-humidity-guide">Winter humidity – what to do & what to buy</a></li>
+    <li><a className="underline" href="/guides/non-toxic-mattress-and-bedding-guide">Non-toxic mattress & bedding</a></li>
+    <li><a className="underline" href="/guides/non-toxic-cleaning-starter">Non-toxic cleaning starter</a></li>
+  </ul>
+</section>
+
       <p className="mt-12 text-sm text-gray-500">
         Some links may earn us a small commission at no extra cost to you.
       </p>
