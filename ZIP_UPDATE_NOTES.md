@@ -16,3 +16,9 @@ Changes:
 - Differentiated dish soap posts + added cross-links to prevent cannibalisation
 - Upgraded /deals empty state into lead-capture + categories
 - Added internal link checker script + GitHub Action (npm run check:links)
+
+
+## Post-deploy fixes
+- Added missing analytics export: trackAffiliateClick (fixes warnings in mdx affiliate components)
+- Removed duplicate blog post content: bamboo-toilet-paper-facts-duplicate.mdx
+- Added redirect for /blog/bamboo-toilet-paper-facts-duplicate -> /blog/bamboo-toilet-paper-facts
