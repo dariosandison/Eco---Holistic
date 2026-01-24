@@ -12,6 +12,7 @@ export default async function sitemap() {
     '/how-we-test',
     '/editorial-policy',
     '/product-disclosure',
+    '/affiliate-disclosure',
     '/privacy',
     '/terms',
     '/contact',

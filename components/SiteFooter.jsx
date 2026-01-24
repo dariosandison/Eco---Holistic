@@ -19,7 +19,7 @@ export default function SiteFooter() {
     { href: '/editorial-policy', label: 'Editorial Policy' },
     { href: '/how-we-test', label: 'How We Test' },
     { href: '/product-disclosure', label: 'Product Disclosure' },
-    { href: '/disclosure', label: 'Affiliate Disclosure' },
+    { href: '/affiliate-disclosure', label: 'Affiliate Disclosure' },
     { href: '/privacy', label: 'Privacy' },
     { href: '/terms', label: 'Terms' },
   ]

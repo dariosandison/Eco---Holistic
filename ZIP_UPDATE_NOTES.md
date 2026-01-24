@@ -7,3 +7,12 @@ Changes:
 - Added Best Of block to homepage and /guides index
 - Added link to thank-you page from /shopping-list
 - Added /shopping-list/thanks to sitemap
+
+
+## Audit fixes
+- Canonicalised affiliate disclosure to /affiliate-disclosure and redirected /disclosure
+- Updated footer disclosure link to /affiliate-disclosure
+- Added missing Best Of links on /guides (shower filters + fragrance-free laundry)
+- Differentiated dish soap posts + added cross-links to prevent cannibalisation
+- Upgraded /deals empty state into lead-capture + categories
+- Added internal link checker script + GitHub Action (npm run check:links)
