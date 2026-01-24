@@ -13,10 +13,10 @@ function PickCard({ tag, title, why, href, cta = "See options" }) {
       <h3 className="mt-2 text-lg font-semibold">{title}</h3>
       <p className="mt-2 text-sm text-zinc-700">{why}</p>
       <div className="mt-4 flex flex-wrap gap-2">
-        <Link className="btn-primary" href={href}>
+        <Link className="btn-primary" data-track="affiliate-primary" href={href}>
           {cta}
         </Link>
-        <Link className="btn-secondary" href="/shopping-list">
+        <Link className="btn-secondary" data-track="affiliate-secondary" href="/shopping-list">
           Get the free list
         </Link>
       </div>
@@ -55,7 +55,7 @@ export default function RecommendedPage() {
         <div className="grid gap-4 md:grid-cols-3">
           <PickCard
             tag="Best overall"
-            title="True HEPA purifier sized for your room"
+            title="True HEPA purifier sized for your room (e.g. Philips Series 3000i)"
             why="Most people see the biggest difference by choosing the right size and replacing filters on schedule."
             href="/guides/healthy-air-at-home"
             cta="Read the air guide"
@@ -83,7 +83,7 @@ export default function RecommendedPage() {
         <div className="grid gap-4 md:grid-cols-3">
           <PickCard
             tag="Best overall"
-            title="A UK-appropriate filter for daily drinking water"
+            title="A UK-appropriate filter for daily drinking water (e.g. Brita / ZeroWater)"
             why="Choose something with transparent specs and realistic maintenance — consistency beats perfection."
             href="/guides/water-filter-buying-guide-uk"
             cta="Read the water guide"
@@ -168,8 +168,8 @@ export default function RecommendedPage() {
           grab it free by email.
         </p>
         <div className="flex flex-wrap gap-2">
-          <Link className="btn-primary" href="/shopping-list">Get the free shopping list</Link>
-          <Link className="btn-secondary" href="/best-low-tox-products-for-beginners">Best low-tox for beginners</Link>
+          <Link className="btn-primary" data-track="affiliate-primary" href="/shopping-list">Get the free shopping list</Link>
+          <Link className="btn-secondary" data-track="affiliate-secondary" href="/best-low-tox-products-for-beginners">Best low-tox for beginners</Link>
         </div>
       </section>
 
