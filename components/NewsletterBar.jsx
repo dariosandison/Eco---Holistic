@@ -22,7 +22,7 @@ export default function NewsletterBar() {
         <p className="text-sm text-neutral-700">
           Free: <a className="underline" href="/shopping-list">Low‑Tox Shopping List</a> + weekly trusted picks (no spam).
         </p>
-        <form
+        <form onSubmit={() => trackEvent("newsletter_signup")}
           className="flex w-full sm:w-auto gap-2"
           action={process.env.NEXT_PUBLIC_NEWSLETTER_ACTION || '#'}
           method="post"

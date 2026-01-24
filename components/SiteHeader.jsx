@@ -34,7 +34,7 @@ export default function SiteHeader() {
           <Link href="/recommended" className="text-sm font-medium text-zinc-700 hover:text-zinc-900">
             Picks
           </Link>
-          <Link href="/shopping-list" className="text-sm font-medium text-zinc-700 hover:text-zinc-900">
+          <Link href="/shopping-list" onClick={() => trackEvent("click_shopping_list")} className="text-sm font-medium text-zinc-700 hover:text-zinc-900">
             Free List
           </Link>
           <Link href="/deals" className="text-sm font-medium text-zinc-700 hover:text-zinc-900">
@@ -83,7 +83,7 @@ export default function SiteHeader() {
           <Link href="/deals" className="rounded-md px-2 py-2 text-sm text-zinc-800 hover:bg-zinc-50">
             Deals
           </Link>
-          <Link href="/shopping-list" className="rounded-md px-2 py-2 text-sm text-zinc-800 hover:bg-zinc-50">
+          <Link href="/shopping-list" onClick={() => trackEvent("click_shopping_list")} className="rounded-md px-2 py-2 text-sm text-zinc-800 hover:bg-zinc-50">
             Free List
           </Link>
           <Link href="/how-we-test" className="rounded-md px-2 py-2 text-sm text-zinc-800 hover:bg-zinc-50">
