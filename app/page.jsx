@@ -208,17 +208,9 @@ export default function HomePage() {
         <h3 className="text-lg font-semibold">Best natural sleep support</h3>
         <p className="mt-1 text-sm text-zinc-600">Comfort-first upgrades that help you stick with it.</p>
       </Link>
-            <Link href="/best-shower-filters-uk-hard-water" className="card hover:shadow-sm transition-shadow">
-              <h3 className="text-lg font-semibold">Best shower filters (UK hard water)</h3>
-              <p className="mt-1 text-sm text-zinc-600">What they help with, what they don’t, and how to choose.</p>
-            </Link>
-            <Link href="/best-fragrance-free-laundry-detergents-uk" className="card hover:shadow-sm transition-shadow">
-              <h3 className="text-lg font-semibold">Best fragrance-free laundry detergents (UK)</h3>
-              <p className="mt-1 text-sm text-zinc-600">Sensitive-skin friendly laundry without strong scents.</p>
-            </Link>
-          </div>
-        </div>
-      </section>
+    </div>
+  </div>
+</section>
 
 {/* EMAIL CTA */}
 <section className="mt-16">
