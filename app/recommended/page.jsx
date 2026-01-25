@@ -1,12 +1,12 @@
 import Link from "next/link";
 
 export const metadata = {
-  title: "Recommended Picks | Wild & Well",
+  title: "Trusted Picks | Wild & Well",
   description:
-    "Curated low-tox, holistic wellness, and nutrition picks — designed to reduce overwhelm and help you choose confidently.",
+    "A calm decision hub — quick links to our best guides, buyer-intent pages, and beginner-friendly starting points.",
 };
 
-function PillarCard({ title, desc, href, tag }) {
+function HubCard({ title, desc, href, tag }) {
   return (
     <Link href={href} className="card hover:shadow-sm transition-shadow">
       <div className="flex items-start justify-between gap-3">
@@ -18,70 +18,29 @@ function PillarCard({ title, desc, href, tag }) {
           {tag}
         </span>
       </div>
+      <div className="mt-3 flex items-center justify-between">
+        <span className="text-xs text-zinc-500">Open</span>
+      </div>
     </Link>
   );
 }
 
-function PickCard({ badge, title, who, why, href, track }) {
-  return (
-    <div className="rounded-2xl border bg-white p-5 shadow-sm">
-      <div className="flex items-start justify-between gap-3">
-        <div>
-          <p className="text-xs text-zinc-500">{badge}</p>
-          <h3 className="mt-1 text-lg font-semibold">{title}</h3>
-        </div>
-        <span className="rounded-full bg-zinc-100 px-2 py-0.5 text-[11px] text-zinc-600">
-          Pick
-        </span>
-      </div>
-
-      <p className="mt-3 text-sm text-zinc-700">
-        <strong>Best for:</strong> {who}
-      </p>
-      <p className="mt-2 text-sm text-zinc-700">
-        <strong>Why:</strong> {why}
-      </p>
-
-      <div className="mt-4 flex flex-wrap gap-2">
-        <Link href={href} className="btn-primary" data-track={track}>
-          See our guide
-        </Link>
-        <Link href="/shopping-list" className="btn-secondary" data-track="newsletter-cta">
-          Get the free list
-        </Link>
-      </div>
-    </div>
-  );
-}
-
-function HowWeChoose() {
+function TrustBox() {
   return (
     <div className="rounded-2xl border bg-white p-6 shadow-sm">
-      <h2 className="text-xl font-semibold">How we choose (and what we avoid)</h2>
+      <h2 className="text-xl font-semibold">What “Trusted Picks” means here</h2>
       <p className="mt-2 text-sm text-zinc-700">
-        Wild &amp; Well keeps recommendations calm and practical. We’d rather give you 3 good choices than 30 confusing ones.
+        This page is intentionally short. It’s a <strong>map</strong> to the pages that help you decide quickly — without hype, panic-buying,
+        or endless lists.
       </p>
-      <ul className="mt-4 grid gap-3 md:grid-cols-2 text-sm text-zinc-700">
-        <li className="rounded-xl border bg-white p-4">
-          <strong>We prioritise:</strong> clear materials/ingredients, realistic maintenance, beginner-friendly choices, and good value over hype.
-        </li>
-        <li className="rounded-xl border bg-white p-4">
-          <strong>We avoid:</strong> miracle claims, fear-based marketing, unclear ingredient lists, and products with “mystery blends”.
-        </li>
-        <li className="rounded-xl border bg-white p-4">
-          <strong>We keep it simple:</strong> best overall, best budget, best sensitive/minimalist.
-        </li>
-        <li className="rounded-xl border bg-white p-4">
-          <strong>We update regularly:</strong> when guidance changes or products disappear, we refresh pages rather than leaving stale lists.
-        </li>
+      <ul className="mt-4 space-y-2 text-sm text-zinc-700 list-disc pl-6">
+        <li><strong>Guides</strong> explain the “why” and the basics.</li>
+        <li><strong>Best-of pages</strong> help you choose when you’re ready to buy.</li>
+        <li><strong>Products</strong> (ours) are optional shortcuts — never a requirement.</li>
       </ul>
       <div className="mt-4 flex flex-wrap gap-2">
-        <Link className="btn-secondary" href="/how-we-test">
-          Read our approach
-        </Link>
-        <Link className="btn-secondary" href="/affiliate-disclosure">
-          Affiliate disclosure
-        </Link>
+        <Link className="btn-secondary" href="/how-we-test">How we choose</Link>
+        <Link className="btn-secondary" href="/affiliate-disclosure">Affiliate disclosure</Link>
       </div>
       <p className="mt-4 text-xs text-zinc-500">Last updated: January 25, 2026</p>
     </div>
@@ -92,15 +51,14 @@ export default function Page() {
   return (
     <main className="mx-auto max-w-6xl px-4 py-16">
       <header className="max-w-3xl">
-        <h1 className="text-4xl font-bold">Recommended Picks</h1>
+        <h1 className="text-4xl font-bold">Trusted Picks</h1>
         <p className="mt-3 text-zinc-700">
-          The fastest way to make progress: pick <strong>one</strong> category, make <strong>one</strong> change.
-          Below are our most practical starting points across low-tox living, holistic health, and nutrition.
+          If you don’t want to research for hours, start here. Pick one goal, open one page, make one change.
         </p>
         <div className="mt-4 flex flex-wrap gap-2">
           <a className="btn-secondary" href="#start-here">Start here</a>
-          <a className="btn-secondary" href="#low-tox">Low-tox</a>
           <a className="btn-secondary" href="#sleep-stress">Sleep &amp; stress</a>
+          <a className="btn-secondary" href="#low-tox">Low-tox home</a>
           <a className="btn-secondary" href="#nutrition">Nutrition</a>
         </div>
       </header>
@@ -108,206 +66,204 @@ export default function Page() {
       <section id="start-here" className="mt-12">
         <h2 className="text-2xl font-semibold">Start here (choose one path)</h2>
         <p className="mt-2 text-sm text-zinc-600">
-          Each path takes you to a short guide with clear next steps and a “best overall / budget / sensitive” recommendation.
+          These are the simplest “first steps” — designed for beginners and busy weeks.
         </p>
         <div className="mt-6 grid gap-4 md:grid-cols-3">
-          <PillarCard
+          <HubCard
             title="Low-tox starter swaps"
-            desc="The easiest home upgrades to reduce irritation triggers and simplify shopping."
+            desc="Fragrance-free and high-contact swaps that give the biggest comfort wins first."
             href="/best-low-tox-products-for-beginners"
             tag="Home"
           />
-          <PillarCard
-            title="Sleep & stress support"
-            desc="Comfort-first upgrades and gentle habits you can actually stick with."
-            href="/best-natural-sleep-support"
+          <HubCard
+            title="Sleep better naturally (cornerstone)"
+            desc="A calm, step-by-step sleep plan — what to fix first, what to skip, and why."
+            href="/guides/sleep-naturally-without-overwhelm"
             tag="Rest"
           />
-          <PillarCard
-            title="Nutrition foundations"
-            desc="Food-first basics: simple swaps, shopping ideas, and beginner-friendly guidance."
-            href="/nutrition"
+          <HubCard
+            title="Anti-inflammatory foods (shopping guide)"
+            desc="Simple grocery upgrades — food-first foundations, not restrictive diet trends."
+            href="/best-anti-inflammatory-foods-shopping-list"
             tag="Food"
           />
         </div>
       </section>
 
       <section className="mt-12">
-        <HowWeChoose />
-      </section>
-
-      <section id="low-tox" className="mt-16">
-        <div className="max-w-3xl">
-          <h2 className="text-2xl font-semibold">Low-tox home picks</h2>
-          <p className="mt-2 text-sm text-zinc-600">
-            Prioritise the categories that touch skin, affect air, and impact sleep. One change per week is plenty.
-          </p>
-        </div>
-
-        <div id="starter" className="mt-6 grid gap-4 md:grid-cols-3">
-          <PickCard
-            badge="Best overall"
-            title="Low-tox starter swaps"
-            who="Beginners who want the biggest wins with the least overwhelm"
-            why="A short list of fragrance-free, practical swaps that don’t require perfection."
-            href="/best-low-tox-products-for-beginners"
-            track="affiliate-lowtox-starter"
-          />
-          <PickCard
-            badge="Best budget"
-            title="Fragrance-free laundry detergents (UK)"
-            who="Sensitive skin households and anyone reducing fragrance load"
-            why="Laundry sits on skin for hours — switching here is often a noticeable win."
-            href="/best-fragrance-free-laundry-detergents-uk"
-            track="affiliate-laundry"
-          />
-          <PickCard
-            badge="Best for sensitive households"
-            title="Air quality at home (guide)"
-            who="Allergies, irritation, or “stuffy room” symptoms"
-            why="Better filtration and simple habits can improve comfort quickly."
-            href="/guides/healthy-air-at-home"
-            track="affiliate-air"
-          />
-        </div>
-
-        <div className="mt-6 rounded-2xl border bg-white p-6 shadow-sm">
-          <h3 className="text-xl font-semibold">Want a UK-specific quick win?</h3>
-          <p className="mt-2 text-sm text-zinc-700">
-            Water filter confusion is common — we keep this guide practical and UK-appropriate.
-          </p>
-          <div className="mt-4 flex flex-wrap gap-2">
-            <Link className="btn-primary" href="/best-water-filters-uk" data-track="affiliate-water-bestof">
-              Best water filters (UK)
-            </Link>
-            <Link className="btn-secondary" href="/guides/water-filter-buying-guide-uk">
-              Water filter buying guide
-            </Link>
-          </div>
-        </div>
+        <TrustBox />
       </section>
 
       <section id="sleep-stress" className="mt-16">
         <div className="max-w-3xl">
-          <h2 className="text-2xl font-semibold">Sleep &amp; stress picks</h2>
+          <h2 className="text-2xl font-semibold">Sleep &amp; stress</h2>
           <p className="mt-2 text-sm text-zinc-600">
-            The goal isn’t hacks — it’s a calm routine and a comfortable environment. Start with our cornerstone guide → /guides/sleep-naturally-without-overwhelm
+            Start with comfort and consistency. Then add gentle supports if you want them.
           </p>
         </div>
 
         <div className="mt-6 grid gap-4 md:grid-cols-3">
-          <PickCard
-            badge="Best overall"
-            title="Natural sleep support (comfort-first)"
-            who="Anyone who wants a simple, non-overwhelming sleep upgrade plan"
-            why="Focuses on environment + habits first, with gentle add-ons where helpful."
+          <HubCard
+            title="Best natural sleep support"
+            desc="A shopping-style page with clear beginner picks (best overall/budget/sensitive)."
             href="/best-natural-sleep-support"
-            track="affiliate-sleep-bestof"
+            tag="Best-of"
           />
-          <PickCard
-            badge="Best budget"
-            title="Natural sleep remedies (non-pharma)"
-            who="People who want low-cost, food-first or tea-first options"
-            why="Practical basics that don’t rely on a big supplement stack."
+          <HubCard
+            title="Natural sleep remedies (non‑pharma)"
+            desc="Low-cost options and routines — no extreme supplement stacks."
             href="/best-natural-sleep-remedies-non-pharma"
-            track="affiliate-sleep-remedies"
+            tag="Best-of"
           />
-          <PickCard
-            badge="Best for stress support"
+          <HubCard
+            title="Wind-down routine that sticks"
+            desc="A simple 20-minute routine you can repeat nightly without willpower."
+            href="/guides/sleep-wind-down-routine"
+            tag="Guide"
+          />
+        </div>
+
+        <div className="mt-6 grid gap-4 md:grid-cols-3">
+          <HubCard
+            title="Caffeine timing (big lever)"
+            desc="A simple plan to adjust caffeine timing without headaches."
+            href="/guides/caffeine-and-sleep-timing"
+            tag="Guide"
+          />
+          <HubCard
+            title="Bedroom temperature & bedding"
+            desc="The comfort stack: cooler room, breathable bedding, and easy upgrades."
+            href="/guides/bedroom-temperature-bedding"
+            tag="Guide"
+          />
+          <HubCard
             title="Herbal remedies for stress & anxiety"
-            who="Gentle support alongside routines and lifestyle changes"
-            why="A beginner-friendly approach that avoids exaggerated claims."
+            desc="A gentle overview with beginner-friendly options and what to avoid."
             href="/best-herbal-remedies-for-stress-anxiety"
-            track="affiliate-stress-herbs"
+            tag="Best-of"
+          />
+        </div>
+      </section>
+
+      <section id="low-tox" className="mt-16">
+        <div className="max-w-3xl">
+          <h2 className="text-2xl font-semibold">Low-tox home</h2>
+          <p className="mt-2 text-sm text-zinc-600">
+            Focus on what you breathe, what touches skin, and what you use daily.
+          </p>
+        </div>
+
+        <div className="mt-6 grid gap-4 md:grid-cols-3">
+          <HubCard
+            title="Low-tox products for beginners"
+            desc="The simplest swaps to reduce fragrance load and irritation triggers."
+            href="/best-low-tox-products-for-beginners"
+            tag="Best-of"
+          />
+          <HubCard
+            title="Fragrance-free laundry detergents (UK)"
+            desc="A high-impact swap because laundry sits on skin for hours."
+            href="/best-fragrance-free-laundry-detergents-uk"
+            tag="Best-of"
+          />
+          <HubCard
+            title="Healthy air at home"
+            desc="Comfort-focused air quality guidance and practical next steps."
+            href="/guides/healthy-air-at-home"
+            tag="Guide"
+          />
+        </div>
+
+        <div className="mt-6 grid gap-4 md:grid-cols-3">
+          <HubCard
+            title="Best water filters (UK)"
+            desc="UK-friendly picks and simple decision rules."
+            href="/best-water-filters-uk"
+            tag="Best-of"
+          />
+          <HubCard
+            title="Shower filters (UK hard water)"
+            desc="For hair/skin comfort, especially in hard-water areas."
+            href="/best-shower-filters-uk-hard-water"
+            tag="Best-of"
+          />
+          <HubCard
+            title="Non-toxic cookware starter"
+            desc="A simple path to safer cookware without replacing everything at once."
+            href="/best-non-toxic-cookware-starter"
+            tag="Best-of"
           />
         </div>
       </section>
 
       <section id="nutrition" className="mt-16">
         <div className="max-w-3xl">
-          <h2 className="text-2xl font-semibold">Nutrition &amp; organic food picks</h2>
+          <h2 className="text-2xl font-semibold">Nutrition foundations</h2>
           <p className="mt-2 text-sm text-zinc-600">
-            We keep nutrition simple: add more whole foods, stabilise energy, and avoid extreme rules.
+            Keep it simple: food-first, stable energy, and repeatable basics.
           </p>
         </div>
 
         <div className="mt-6 grid gap-4 md:grid-cols-3">
-          <PickCard
-            badge="Best overall"
+          <HubCard
             title="Anti-inflammatory foods (shopping guide)"
-            who="Anyone who wants practical grocery upgrades"
-            why="Focused on easy staples (not restrictive diet trends)."
+            desc="Simple staples and swaps to build better meals without restrictive rules."
             href="/best-anti-inflammatory-foods-shopping-list"
-            track="affiliate-food-antiinflam"
+            tag="Best-of"
           />
-          <PickCard
-            badge="Best budget"
+          <HubCard
             title="Organic cooking oils (UK)"
-            who="People who want one high-impact pantry swap"
-            why="Choosing the right everyday oil is simple and widely useful."
+            desc="One high-impact pantry swap that’s easy to stick with."
             href="/best-organic-cooking-oils-uk"
-            track="affiliate-oils"
+            tag="Best-of"
           />
-          <PickCard
-            badge="Best for training / satiety"
+          <HubCard
             title="Organic protein powders (UK)"
-            who="Busy schedules, gym routines, or higher protein needs"
-            why="A clean ingredient list and digestibility matter more than hype."
+            desc="Busy schedules and training support — clean ingredients, no hype."
             href="/best-organic-protein-powders-uk"
-            track="affiliate-protein"
+            tag="Best-of"
           />
         </div>
 
-        <div className="mt-6 rounded-2xl border bg-white p-6 shadow-sm">
-          <h3 className="text-xl font-semibold">Want a full holistic reset path?</h3>
-          <p className="mt-2 text-sm text-zinc-700">
-            If you’re starting from scratch, this is our calm, step-by-step starter kit.
-          </p>
-          <div className="mt-4 flex flex-wrap gap-2">
-            <Link className="btn-primary" href="/best-holistic-wellness-starter-kit" data-track="affiliate-holistic-starter">
-              Holistic wellness starter kit
-            </Link>
-            <Link className="btn-secondary" href="/natural-remedies">
-              Natural remedies hub
-            </Link>
-          </div>
+        <div className="mt-6 grid gap-4 md:grid-cols-3">
+          <HubCard
+            title="Organic snacks (healthy)"
+            desc="Easy additions for satiety and better “between meals” choices."
+            href="/best-organic-snacks-healthy"
+            tag="Best-of"
+          />
+          <HubCard
+            title="Detox support foods"
+            desc="Food-first support — skip the extreme “detox” marketing."
+            href="/best-detox-support-foods"
+            tag="Best-of"
+          />
+          <HubCard
+            title="Nutrition hub"
+            desc="Browse nutrition basics, guides, and category pages."
+            href="/nutrition"
+            tag="Hub"
+          />
         </div>
       </section>
 
-
       <section className="mt-16">
         <div className="rounded-2xl border bg-white p-6 shadow-sm">
-          <h2 className="text-2xl font-semibold">New: The Holistic Home Reset</h2>
+          <h2 className="text-2xl font-semibold">Prefer a done-for-you plan?</h2>
           <p className="mt-2 text-sm text-zinc-700">
-            A calm 30‑day plan covering low‑tox essentials, sleep basics, and nutrition foundations — designed for beginners.
+            Our first digital guide is a calm 30‑day reset that combines low‑tox essentials, sleep basics, and nutrition foundations.
+            It’s optional — a shortcut for people who want a simple weekly checklist.
           </p>
           <div className="mt-4 flex flex-wrap gap-2">
             <Link className="btn-primary" href="/products/holistic-home-reset" data-track="product-from-recommended">
-              View the product
+              View The Holistic Home Reset
             </Link>
-            <Link className="btn-secondary" href="/shopping-list" data-track="product-waitlist-from-recommended">
-              Get early access (free list)
-            </Link>
-          </div>
-        </div>
-      </section>
-
-      <section className="mt-16">
-        <div className="rounded-2xl border bg-white p-6 shadow-sm">
-          <h2 className="text-2xl font-semibold">Want the fastest progress?</h2>
-          <p className="mt-2 text-sm text-zinc-700">
-            Grab the free shopping list and pick one category to start this week.
-          </p>
-          <div className="mt-4 flex flex-wrap gap-2">
-            <Link className="btn-primary" href="/shopping-list" data-track="newsletter-primary">
+            <Link className="btn-secondary" href="/shopping-list" data-track="newsletter-from-recommended">
               Get the free shopping list
-            </Link>
-            <Link className="btn-secondary" href="/guides">
-              Browse guides
             </Link>
           </div>
           <p className="mt-4 text-xs text-zinc-500">
-            Some links may earn us a small commission at no extra cost to you. We only recommend products we genuinely trust.
+            Some links across the site may earn us a small commission at no extra cost to you. We keep recommendations limited and practical.
           </p>
         </div>
       </section>

@@ -81,7 +81,7 @@ export default function Page() {
           </p>
           <ul className="mt-4 space-y-2 text-sm text-zinc-700">
             <li>
-              <Link className="underline" href="/recommended#start-here">Recommended: start here</Link>
+              <Link className="underline" href="/recommended#start-here">Trusted Picks: start here</Link>
             </li>
             <li>
               <Link className="underline" href="/guides/sleep-naturally-without-overwhelm">Sleep cornerstone guide</Link>

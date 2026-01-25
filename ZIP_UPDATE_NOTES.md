@@ -49,3 +49,8 @@ Changes:
 - Added /products index and /products/holistic-home-reset landing page (Product schema + prelaunch CTA)
 - Added Products link in footer and a promo block on /recommended
 - Added products routes to sitemap
+
+
+## Trusted Picks hub refresh
+- Rewrote /recommended as a calm decision map (less salesy): clearer Guides vs Best-of separation, anchors, and short route cards.
+- Ensured /products/holistic-home-reset links to /recommended#start-here label matches.
