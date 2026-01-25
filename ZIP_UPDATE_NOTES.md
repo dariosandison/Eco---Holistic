@@ -43,3 +43,9 @@ Changes:
 - Linked cornerstone from /recommended and /holistic-health, plus sleep buyer-intent pages
 
 - Fixed tsconfig path alias so @/* imports resolve on Vercel builds
+
+
+## Phase C: Digital product pre-launch
+- Added /products index and /products/holistic-home-reset landing page (Product schema + prelaunch CTA)
+- Added Products link in footer and a promo block on /recommended
+- Added products routes to sitemap

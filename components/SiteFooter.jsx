@@ -9,6 +9,7 @@ export default function SiteFooter() {
 
   const site = [
     { href: '/recommended', label: 'Trusted Picks' },
+    { href: '/products', label: 'Products' },
     { href: '/guides', label: 'Guides' },
     { href: '/blog', label: 'Blog' },
     { href: '/deals', label: 'Deals' },

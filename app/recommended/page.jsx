@@ -274,6 +274,24 @@ export default function Page() {
         </div>
       </section>
 
+
+      <section className="mt-16">
+        <div className="rounded-2xl border bg-white p-6 shadow-sm">
+          <h2 className="text-2xl font-semibold">New: The Holistic Home Reset</h2>
+          <p className="mt-2 text-sm text-zinc-700">
+            A calm 30‑day plan covering low‑tox essentials, sleep basics, and nutrition foundations — designed for beginners.
+          </p>
+          <div className="mt-4 flex flex-wrap gap-2">
+            <Link className="btn-primary" href="/products/holistic-home-reset" data-track="product-from-recommended">
+              View the product
+            </Link>
+            <Link className="btn-secondary" href="/shopping-list" data-track="product-waitlist-from-recommended">
+              Get early access (free list)
+            </Link>
+          </div>
+        </div>
+      </section>
+
       <section className="mt-16">
         <div className="rounded-2xl border bg-white p-6 shadow-sm">
           <h2 className="text-2xl font-semibold">Want the fastest progress?</h2>
