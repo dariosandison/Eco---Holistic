@@ -34,6 +34,29 @@ export default function SiteFooter() {
           <p className="text-sm text-neutral-600 mt-2">
             Natural wellness made simple — trusted guides and product picks that save time and money.
           </p>
+
+          <div className="mt-4 rounded-2xl border bg-zinc-50 p-4">
+            <div className="font-semibold">Get the free shopping list</div>
+            <p className="mt-1 text-xs text-neutral-600">
+              One email. Beginner swaps for air, water, cleaning, and sleep.
+            </p>
+            <form action="/api/subscribe" method="post" className="mt-3 flex gap-2">
+              <input type="hidden" name="source" value="footer" />
+              <input
+                type="email"
+                name="email"
+                required
+                placeholder="you@email.com"
+                className="w-full rounded-xl border px-3 py-2 text-sm"
+              />
+              <button type="submit" className="btn-primary whitespace-nowrap">
+                Get it
+              </button>
+            </form>
+            <p className="mt-2 text-[11px] text-neutral-500">
+              By subscribing you agree to our <a className="underline" href="/privacy">privacy policy</a>. Unsubscribe anytime.
+            </p>
+          </div>
           <p className="text-xs text-neutral-500 mt-3">
             As an Amazon Associate, we earn from qualifying purchases.
           </p>

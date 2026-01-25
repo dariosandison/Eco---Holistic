@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import StructuredData from '@/components/StructuredData'
+import ComparisonTable from '@/components/ComparisonTable'
 import ProductPick from '@/components/mdx/ProductPick'
 import { amazonSearchUrl } from '@/lib/amazon'
 
@@ -91,9 +92,41 @@ export default function Page() {
     },
   }
 
+  const faqLd = {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: [
+      {
+        '@type': 'Question',
+        name: 'Is an under-sink filter better than a jug?',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: 'Not automatically. Under-sink filters are mainly about convenience. The best choice is the one you will maintain and replace filters for.',
+        },
+      },
+      {
+        '@type': 'Question',
+        name: 'What is the hidden cost of water filters?',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: 'Replacement filters. Before buying, check the replacement price and how often you will replace it based on your household usage.',
+        },
+      },
+      {
+        '@type': 'Question',
+        name: 'Do certifications matter?',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: 'When brands make big performance claims, credible test reports matter. If claims are vague or unsupported, treat them as marketing until proven.',
+        },
+      },
+    ],
+  }
+
   return (
     <main className="mx-auto max-w-6xl px-4 py-16">
       <StructuredData data={ld} />
+      <StructuredData data={faqLd} />
 
       <header className="max-w-3xl">
         <h1 className="text-4xl font-bold">Best water filters (UK)</h1>
@@ -125,6 +158,64 @@ export default function Page() {
             <p className="mt-3 text-xs text-zinc-500">Watch-out: takes counter space and needs regular cleaning.</p>
           </div>
         </div>
+      </section>
+
+      <section className="mt-14">
+        <h2 className="text-2xl font-semibold">Top picks (quick decision)</h2>
+        <p className="mt-2 text-sm text-zinc-600">Three simple routes, depending on how you live.</p>
+        <div className="mt-6 grid gap-4 md:grid-cols-3">
+          <ProductPick
+            title="Best starter: jug filter"
+            badge="Best value"
+            description="Great for renters and small kitchens — easy to start and easy to stick with."
+            href={amazonSearchUrl('BRITA Style water filter jug MAXTRA filters')}
+            bullets={["Fits most fridges", "Replacement filters are the ongoing cost", "Start here if you’re unsure"]}
+          />
+          <ProductPick
+            title="Best set & forget: under-sink"
+            badge="Best overall"
+            description="Most convenient for daily use. Ideal if you want filtered water from a tap."
+            href={amazonSearchUrl('Doulton under sink water filter system UK')}
+            bullets={["Check installation space", "Budget for annual filter changes", "Great for families"]}
+          />
+          <ProductPick
+            title="Best no-plumbing: gravity filter"
+            badge="Best for"
+            description="High capacity without installing anything. Good for batch filtration and renters."
+            href={amazonSearchUrl('British Berkefeld gravity water filter')}
+            bullets={["Takes counter space", "Plan filter replacements", "Clean regularly"]}
+          />
+        </div>
+
+        <ComparisonTable
+          caption="At-a-glance comparison (the simplest decision rules)"
+          columns={[
+            { key: 'type', label: 'Type' },
+            { key: 'bestFor', label: 'Best for' },
+            { key: 'tradeoff', label: 'Main tradeoff' },
+            { key: 'whatToCheck', label: 'Check before buying' },
+          ]}
+          rows={[
+            {
+              type: 'Jug (fridge)',
+              bestFor: 'Renters, smaller kitchens, lighter usage',
+              tradeoff: 'Ongoing filter replacements',
+              whatToCheck: 'Replacement cost + frequency; fridge fit',
+            },
+            {
+              type: 'Under-sink',
+              bestFor: 'Daily use + convenience',
+              tradeoff: 'Needs space/installation',
+              whatToCheck: 'Under-sink space; annual filter cost',
+            },
+            {
+              type: 'Gravity countertop',
+              bestFor: 'High capacity without plumbing',
+              tradeoff: 'Counter space + cleaning',
+              whatToCheck: 'Footprint; replacement elements; cleaning routine',
+            },
+          ]}
+        />
       </section>
 
       <section className="mt-14">

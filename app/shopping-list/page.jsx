@@ -6,7 +6,18 @@ export const metadata = {
     "Download our simple low‑tox shopping list: trusted swaps for air, water, cleaning, and everyday wellness.",
 };
 
-export default function ShoppingListPage() {
+const ERROR_COPY = {
+  invalid_email: "Please enter a valid email address.",
+  not_configured:
+    "Newsletter is not configured yet. Add NEWSLETTER_FORM_ACTION (or NEWSLETTER_WEBHOOK_URL) in Vercel environment variables, then redeploy.",
+  subscribe_failed:
+    "Something went wrong subscribing you. Please try again in a moment — or use the contact page.",
+};
+
+export default function ShoppingListPage({ searchParams }) {
+  const error = searchParams?.error;
+  const errorMsg = error ? (ERROR_COPY[error] || "Something went wrong. Please try again.") : null;
+
   return (
     <main className="mx-auto max-w-3xl px-6 py-16">
       <h1 className="text-4xl font-bold mb-4">Free: Low‑Tox Shopping List</h1>
@@ -21,13 +32,19 @@ export default function ShoppingListPage() {
           Enter your email and we’ll send the list. (No spam — unsubscribe anytime.)
         </p>
 
-        <form
-          className="flex flex-col sm:flex-row gap-2"
-          action={process.env.NEXT_PUBLIC_NEWSLETTER_ACTION || "#"}
-          method="post"
-          target="_blank"
-          rel="noopener"
-        >
+        {errorMsg ? (
+          <div className="mb-4 rounded-xl border border-amber-200 bg-amber-50 p-3 text-sm text-amber-900">
+            {errorMsg}{" "}
+            {error === "subscribe_failed" ? (
+              <Link className="underline" href="/contact">
+                Contact us
+              </Link>
+            ) : null}
+          </div>
+        ) : null}
+
+        <form className="flex flex-col sm:flex-row gap-2" action="/api/subscribe" method="post">
+          <input type="hidden" name="source" value="shopping-list" />
           <input
             type="email"
             name="email"
@@ -41,7 +58,15 @@ export default function ShoppingListPage() {
         </form>
 
         <p className="mt-3 text-xs text-zinc-600">
-          After you subscribe, open the <Link className="underline" href="/shopping-list/thanks">thank‑you page</Link> for next steps. Prefer to browse now? Start with our <Link className="underline" href="/recommended">Trusted Picks</Link>.
+          After you subscribe, you’ll land on the{" "}
+          <Link className="underline" href="/shopping-list/thanks">
+            thank‑you page
+          </Link>
+          . Prefer to browse now? Start with our{" "}
+          <Link className="underline" href="/picks">
+            Picks hubs
+          </Link>
+          .
         </p>
       </div>
 

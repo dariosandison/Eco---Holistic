@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import StructuredData from '@/components/StructuredData'
+import ComparisonTable from '@/components/ComparisonTable'
 import ProductPick from '@/components/mdx/ProductPick'
 import { amazonSearchUrl } from '@/lib/amazon'
 
@@ -70,9 +71,41 @@ export default function Page() {
     mainEntity: { '@type': 'ItemList', itemListElement: itemList },
   }
 
+  const faqLd = {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: [
+      {
+        '@type': 'Question',
+        name: 'Do air purifiers help with pollen allergies?',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: 'They can reduce airborne particles indoors, but only if the unit is sized correctly for the room and you run it consistently (especially during high pollen periods).',
+        },
+      },
+      {
+        '@type': 'Question',
+        name: 'What matters most when choosing an air purifier?',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: 'Room-size coverage, true HEPA filtration for particles, and realistic filter replacement costs. Quiet operation matters most for bedrooms.',
+        },
+      },
+      {
+        '@type': 'Question',
+        name: 'How often do air purifier filters need replacing?',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: 'It varies by model, home conditions, and run time. Check the manufacturer guidance and always confirm replacement filter price and availability before buying.',
+        },
+      },
+    ],
+  }
+
   return (
     <main className="mx-auto max-w-6xl px-4 py-16">
       <StructuredData data={ld} />
+      <StructuredData data={faqLd} />
 
       <header className="max-w-3xl">
         <h1 className="text-4xl font-bold">Best air purifiers for allergies (UK)</h1>
@@ -106,6 +139,64 @@ export default function Page() {
           <p className="mt-3 text-sm text-zinc-700">A purifier helps particles, but damp often needs dehumidifying + ventilation.</p>
           <Link className="btn-secondary mt-4 inline-flex" href="/guides/winter-humidity-guide">Humidity guide</Link>
         </div>
+      </section>
+
+      <section className="mt-14">
+        <h2 className="text-2xl font-semibold">Top picks (quick decision)</h2>
+        <p className="mt-2 text-sm text-zinc-600">Three common scenarios — pick the one that matches your room and use.</p>
+        <div className="mt-6 grid gap-4 md:grid-cols-3">
+          <ProductPick
+            title="Best all‑rounder: Blueair 3250i"
+            badge="Best overall"
+            description="A straightforward everyday choice for general particle control in living areas."
+            href={amazonSearchUrl('Blueair Blue Max 3250i air purifier')}
+            bullets={['Size it to your room', 'Plan filter replacements', 'Auto mode is optional']}
+          />
+          <ProductPick
+            title="Best for bedrooms: Meaco HEPA"
+            badge="Best for"
+            description="Prioritises quiet comfort — helpful if allergies disturb sleep."
+            href={amazonSearchUrl('Meaco air purifier HEPA')}
+            bullets={['Quiet night mode matters', 'Don’t oversize if noise is a concern']}
+          />
+          <ProductPick
+            title="Best for larger rooms: Levoit 600S"
+            badge="Best value"
+            description="A common pick for higher coverage without premium pricing."
+            href={amazonSearchUrl('Levoit Core 600S air purifier')}
+            bullets={['Check noise at high speeds', 'Confirm filter availability']}
+          />
+        </div>
+
+        <ComparisonTable
+          caption="At-a-glance comparison (what to check before you buy)"
+          columns={[
+            { key: 'pick', label: 'Pick' },
+            { key: 'bestFor', label: 'Best for' },
+            { key: 'watchOut', label: 'Watch-out' },
+            { key: 'check', label: 'Check before buying' },
+          ]}
+          rows={[
+            {
+              pick: 'Bedroom unit',
+              bestFor: 'Quiet night use',
+              watchOut: 'Noise at higher speeds',
+              check: 'Night-mode dB + room-size coverage',
+            },
+            {
+              pick: 'Living room unit',
+              bestFor: 'Daytime particle control',
+              watchOut: 'Filter cost over time',
+              check: 'Replacement filter price + frequency',
+            },
+            {
+              pick: 'Large room unit',
+              bestFor: 'Open-plan spaces',
+              watchOut: 'You may need higher fan speeds',
+              check: 'Coverage spec at realistic settings',
+            },
+          ]}
+        />
       </section>
 
       <section className="mt-14">

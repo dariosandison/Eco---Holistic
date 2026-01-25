@@ -63,6 +63,37 @@ export default function Page() {
         </div>
       </header>
 
+      <section className="mt-10">
+        <h2 className="text-2xl font-semibold">Fast routes (Picks hubs)</h2>
+        <p className="mt-2 text-sm text-zinc-600">Shortlists + simple decision rules. Start here if you’re ready to act.</p>
+        <div className="mt-6 grid gap-4 md:grid-cols-2">
+          <HubCard
+            title="Sleep & recovery"
+            desc="A simple plan + the shortlist of products that actually help."
+            href="/picks/sleep"
+            tag="Hub"
+          />
+          <HubCard
+            title="Air quality"
+            desc="Allergies, damp, and the purifiers that make sense for UK homes."
+            href="/picks/air-quality"
+            tag="Hub"
+          />
+          <HubCard
+            title="Water"
+            desc="Under-sink vs jug vs countertop — and the easiest starter picks."
+            href="/picks/water"
+            tag="Hub"
+          />
+          <HubCard
+            title="Fragrance-free home"
+            desc="Sensitive household swaps that reduce irritation fast."
+            href="/picks/fragrance-free"
+            tag="Hub"
+          />
+        </div>
+      </section>
+
       <section id="start-here" className="mt-12">
         <h2 className="text-2xl font-semibold">Start here (choose one path)</h2>
         <p className="mt-2 text-sm text-zinc-600">

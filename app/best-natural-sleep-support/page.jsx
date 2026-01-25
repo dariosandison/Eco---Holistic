@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import StructuredData from '@/components/StructuredData'
+import ComparisonTable from '@/components/ComparisonTable'
 import ProductPick from '@/components/mdx/ProductPick'
 import { amazonSearchUrl } from '@/lib/amazon'
 
@@ -70,9 +71,44 @@ export default function Page() {
     mainEntity: { '@type': 'ItemList', itemListElement: itemList },
   }
 
+  const faqLd = {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: [
+      {
+        '@type': 'Question',
+        name: 'What is the best natural sleep support to try first?',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text:
+            'Start with environment and timing: consistent wake time, morning light, a cooler darker room, and an earlier caffeine cut-off. If you add a product, try one simple option at a time (not a big stack).',
+        },
+      },
+      {
+        '@type': 'Question',
+        name: 'Is magnesium good for sleep?',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text:
+            'Many people choose magnesium as a gentle evening supplement. Look for glycinate/bisglycinate rather than oxide, start low, and check with a clinician if you are pregnant or on medication.',
+        },
+      },
+      {
+        '@type': 'Question',
+        name: 'How long should I test a sleep supplement?',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text:
+            'Give one change 5–7 nights while keeping your routine steady. Track bedtime, wake-ups, and next-day grogginess before adding anything else.',
+        },
+      },
+    ],
+  }
+
   return (
     <main className="mx-auto max-w-6xl px-4 py-16">
       <StructuredData data={ld} />
+      <StructuredData data={faqLd} />
 
       <header className="max-w-3xl">
         <h1 className="text-4xl font-bold">Best natural sleep support (compared)</h1>
@@ -108,6 +144,84 @@ export default function Page() {
             <li>Anything that conflicts with medication advice</li>
           </ul>
         </div>
+      </section>
+
+      <section className="mt-14">
+        <h2 className="text-2xl font-semibold">Top picks (quick decision)</h2>
+        <p className="mt-2 text-sm text-zinc-600">
+          If you want the shortest path: pick one environment fix + one optional support.
+        </p>
+        <div className="mt-6 grid gap-4 md:grid-cols-3">
+          <ProductPick
+            title="Best simple supplement: magnesium glycinate"
+            badge="Best overall"
+            description="A gentle option many people add to an evening wind-down. Start low and assess tolerance."
+            href={amazonSearchUrl('magnesium glycinate capsules UK')}
+            bullets={['Look for glycinate/bisglycinate (not oxide)', 'Start low', 'Check interactions if medicated']}
+          />
+          <ProductPick
+            title="Best non-pill fix: blackout eye mask"
+            badge="Best value"
+            description="Light control often beats supplements. Cheap, easy, and immediate."
+            href={amazonSearchUrl('blackout sleep mask contoured')}
+            bullets={['Comfort matters', 'Washable is a plus', 'Pair with a cooler room']}
+          />
+          <ProductPick
+            title="Best for noisy homes: white noise machine"
+            badge="Best for" 
+            description="If you’re noise-sensitive, this can prevent repeated wake-ups and help you stay asleep."
+            href={amazonSearchUrl('white noise machine bedside')}
+            bullets={['Timer + continuous modes help', 'Simple interface beats “smart” features']}
+          />
+        </div>
+
+        <ComparisonTable
+          caption="At-a-glance comparison (check brand specs + your situation)"
+          columns={[
+            { key: 'pick', label: 'Pick' },
+            { key: 'bestFor', label: 'Best for' },
+            { key: 'tradeoff', label: 'Main tradeoff' },
+            { key: 'startTip', label: 'Start tip' },
+          ]}
+          rows={[
+            {
+              pick: 'Magnesium glycinate',
+              bestFor: 'Gentle evening support',
+              tradeoff: 'Not for everyone; check interactions',
+              startTip: 'Start low for 5–7 nights',
+            },
+            {
+              pick: 'L-theanine',
+              bestFor: 'Calm evenings / busy mind',
+              tradeoff: 'Keep dosing conservative',
+              startTip: 'Try alone (no stacks) for a week',
+            },
+            {
+              pick: 'Glycine',
+              bestFor: 'Simple amino acid trial',
+              tradeoff: 'Quality varies by brand',
+              startTip: 'Small amount; track next-day grogginess',
+            },
+            {
+              pick: 'Herbal tea',
+              bestFor: 'No-pill routine cue',
+              tradeoff: 'Subtle; relies on consistency',
+              startTip: 'Same time nightly; avoid sugar late',
+            },
+            {
+              pick: 'Blackout mask',
+              bestFor: 'Light control (big lever)',
+              tradeoff: 'Fit/comfort varies',
+              startTip: 'Pair with cooler temp',
+            },
+            {
+              pick: 'White noise',
+              bestFor: 'Noise-sensitive sleepers',
+              tradeoff: 'One more device',
+              startTip: 'Use continuous mode overnight',
+            },
+          ]}
+        />
       </section>
 
       <section className="mt-14">

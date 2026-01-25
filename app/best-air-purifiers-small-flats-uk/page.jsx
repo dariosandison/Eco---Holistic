@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import StructuredData from '@/components/StructuredData'
+import ComparisonTable from '@/components/ComparisonTable'
 import ProductPick from '@/components/mdx/ProductPick'
 import { amazonSearchUrl } from '@/lib/amazon'
 
@@ -63,9 +64,33 @@ export default function Page() {
     mainEntity: { '@type': 'ItemList', itemListElement: itemList },
   }
 
+  const faqLd = {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: [
+      {
+        '@type': 'Question',
+        name: 'What size air purifier is best for a small flat?',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: 'Size it to the room you care about most (often the bedroom). A too-small unit is the most common mistake. Noise and replacement filters matter more than smart features in small spaces.',
+        },
+      },
+      {
+        '@type': 'Question',
+        name: 'Do I need a purifier in every room?',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: 'Not usually. Start with the bedroom or main living space and run it consistently. You can add a second unit later if needed.',
+        },
+      },
+    ],
+  }
+
   return (
     <main className="mx-auto max-w-6xl px-4 py-16">
       <StructuredData data={ld} />
+      <StructuredData data={faqLd} />
 
       <header className="max-w-3xl">
         <h1 className="text-4xl font-bold">Best air purifiers for small flats (UK)</h1>
@@ -100,6 +125,64 @@ export default function Page() {
       </section>
 
       <section className="mt-14">
+        <h2 className="text-2xl font-semibold">Top picks (quick decision)</h2>
+        <p className="mt-2 text-sm text-zinc-600">In small flats: prioritise night-mode noise + realistic filter costs.</p>
+        <div className="mt-6 grid gap-4 md:grid-cols-3">
+          <ProductPick
+            title="Best compact: Blueair 511i Max"
+            badge="Best overall"
+            description="A strong small-room choice if you size it correctly for your bedroom."
+            href={amazonSearchUrl('Blueair 511i Max air purifier')}
+            bullets={['Quiet night mode matters', 'Plan filter replacements', 'Great bedroom starting point']}
+          />
+          <ProductPick
+            title="Best value: Levoit Core 300S"
+            badge="Best value"
+            description="Budget-friendly HEPA option often chosen for small rooms."
+            href={amazonSearchUrl('Levoit Core 300S air purifier')}
+            bullets={['Check filter availability', 'Keep it running daily']}
+          />
+          <ProductPick
+            title="Best for light sleepers: Meaco"
+            badge="Best for"
+            description="Often chosen for quieter bedroom operation — ideal if noise wakes you."
+            href={amazonSearchUrl('Meaco air purifier small room')}
+            bullets={['Prioritise low noise', 'Don’t oversize if noise-sensitive']}
+          />
+        </div>
+
+        <ComparisonTable
+          caption="At-a-glance comparison (small flat decision rules)"
+          columns={[
+            { key: 'focus', label: 'Focus' },
+            { key: 'bestFor', label: 'Best for' },
+            { key: 'watchOut', label: 'Watch-out' },
+            { key: 'check', label: 'Check before buying' },
+          ]}
+          rows={[
+            {
+              focus: 'Bedroom',
+              bestFor: 'Quiet night mode + steady daily run time',
+              watchOut: 'Noise at higher fan speeds',
+              check: 'Night-mode dB + room-size coverage',
+            },
+            {
+              focus: 'Kitchen smells',
+              bestFor: 'Occasional odours',
+              watchOut: 'Purifiers are not a full ventilation replacement',
+              check: 'Carbon filter availability (if smells matter)',
+            },
+            {
+              focus: 'Allergies',
+              bestFor: 'Particles (pollen/dust) indoors',
+              watchOut: 'Too-small units underperform',
+              check: 'Coverage spec + filter cost',
+            },
+          ]}
+        />
+      </section>
+
+      <section className="mt-14">
         <h2 className="text-2xl font-semibold">Shortlist (buyer picks)</h2>
         <p className="mt-2 text-sm text-zinc-600">Curated searches to compare prices and filter costs.</p>
         <div className="mt-6 grid gap-4 md:grid-cols-2">
@@ -118,6 +201,24 @@ export default function Page() {
         <div className="mt-8 flex flex-wrap gap-2">
           <Link className="btn-primary" href="/picks/air-quality">Go to Air Quality hub →</Link>
           <Link className="btn-secondary" href="/best-air-purifiers-allergies-uk">Allergies list →</Link>
+        </div>
+      </section>
+
+      <section className="mt-14 max-w-3xl">
+        <h2 className="text-2xl font-semibold">FAQ</h2>
+        <div className="mt-4 space-y-5 text-zinc-700">
+          <div>
+            <h3 className="font-semibold">What size purifier should I buy?</h3>
+            <p className="mt-1 text-sm text-zinc-700">
+              Size it to the room you care about most (often the bedroom). Too small is the most common mistake.
+            </p>
+          </div>
+          <div>
+            <h3 className="font-semibold">Do I need one in every room?</h3>
+            <p className="mt-1 text-sm text-zinc-700">
+              Not usually. Start with the bedroom or main living space, run it daily, then add a second unit later if needed.
+            </p>
+          </div>
         </div>
       </section>
 

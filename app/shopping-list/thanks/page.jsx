@@ -18,7 +18,7 @@ export default function ThanksPage() {
         <h2 className="text-2xl font-semibold">Start here</h2>
         <ul className="list-disc pl-6 text-zinc-700 space-y-1">
           <li>
-            <Link className="underline" href="/recommended">Shop Trusted Picks</Link> (fastest route to a good choice)
+            <Link className="underline" href="/picks">Browse Picks hubs</Link> (fastest route to a good choice)
           </li>
           <li>
             <Link className="underline" href="/best-low-tox-products-for-beginners">Best low‑tox products for beginners</Link>
