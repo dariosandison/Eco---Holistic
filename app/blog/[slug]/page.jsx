@@ -2,6 +2,7 @@ import MDXRenderer from '@/components/MDXRenderer'
 import ArticleLayout from '@/components/ArticleLayout'
 import StructuredData from '@/components/StructuredData'
 import AffiliateNotice from '@/components/mdx/AffiliateNotice'
+import { redirect } from 'next/navigation'
 import { getContent, listContent, tocFromMarkdown } from '@/lib/content'
 
 import remarkGfm from 'remark-gfm'
