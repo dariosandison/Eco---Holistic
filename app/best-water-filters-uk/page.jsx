@@ -1,66 +1,183 @@
-import Link from "next/link";
+import Link from 'next/link'
+import StructuredData from '@/components/StructuredData'
+import ProductPick from '@/components/mdx/ProductPick'
+import { amazonSearchUrl } from '@/lib/amazon'
 
 export const metadata = {
-  title: "Best Water Filters for UK Homes | Wild & Well",
-  description: "Best Water Filters for UK Homes — calm, practical recommendations and what to look for before you buy.",
-};
+  title: 'Best Water Filters (UK) — Jugs vs Under‑Sink vs Countertop | Wild & Well',
+  description: 'Shortlisted water filters for UK homes (jugs, under‑sink, gravity) with clear trade-offs and replacement cost notes.',
+}
+
+const PICKS = [
+  {
+    title: 'Doulton under‑sink water filter system',
+    badge: 'Best set & forget',
+    desc: 'Filtered water from a dedicated tap. Great if you’ll keep up with yearly replacements.',
+    query: 'Doulton under sink water filter system UK',
+    bullets: ['Best for: families + daily use', 'Check installation space under the sink', 'Budget for annual filter changes'],
+  },
+  {
+    title: 'BRITA Style / Marella jug + MAXTRA filters',
+    badge: 'Best starter jug',
+    desc: 'Easy, cheap to begin, widely available in the UK.',
+    query: 'BRITA Style water filter jug MAXTRA filters',
+    bullets: ['Best for: renters + small kitchens', 'Fits most fridges', 'Replacement filters are the ongoing cost'],
+  },
+  {
+    title: 'Aarke Purifier (pitcher)',
+    badge: 'Best design',
+    desc: 'Premium-feeling jug/pitcher option. Great if you want a “nice enough to live on the counter” piece.',
+    query: 'Aarke purifier pitcher',
+    bullets: ['Best for: aesthetics + everyday sipping', 'Check replacement filter pricing'],
+  },
+  {
+    title: 'Phox water filter jug',
+    badge: 'Best eco jug',
+    desc: 'A UK-friendly option often praised for reducing plastic vs constant cartridge swapping.',
+    query: 'Phox water filter jug',
+    bullets: ['Best for: reducing plastic', 'Check availability of refills'],
+  },
+  {
+    title: 'British Berkefeld gravity filter',
+    badge: 'Best no‑plumbing',
+    desc: 'Large capacity without installing anything. Useful for renters or if you want big batch filtration.',
+    query: 'British Berkefeld gravity water filter',
+    bullets: ['Best for: high capacity', 'Takes counter space', 'Plan filter replacements'],
+  },
+  {
+    title: 'BRITA Flow (large tank)',
+    badge: 'Best for families',
+    desc: 'A bigger “tap-style” tank that stays in the fridge. Great for high throughput.',
+    query: 'Brita Flow water filter tank',
+    bullets: ['Best for: lots of cups a day', 'Measure your fridge shelf first'],
+  },
+]
+
+function QuickSummary() {
+  return (
+    <div className="rounded-2xl border bg-white p-6 shadow-sm">
+      <h2 className="text-xl font-semibold">Quick answer</h2>
+      <p className="mt-2 text-zinc-700">
+        If you want the simplest option, start with a <strong>jug</strong>. If you’ll use filtered water daily and want convenience, go <strong>under‑sink</strong>.
+        If you want high capacity without plumbing, choose a <strong>countertop gravity filter</strong>.
+      </p>
+      <div className="mt-4 flex flex-wrap gap-2">
+        <Link className="btn-secondary" href="/picks/water">Water Picks hub</Link>
+        <Link className="btn-secondary" href="/guides/water-filter-buying-guide-uk">Buying guide</Link>
+        <Link className="btn-secondary" href="/shopping-list">Free shopping list</Link>
+      </div>
+      <p className="mt-4 text-xs text-zinc-500">Last updated: January 25, 2026</p>
+    </div>
+  )
+}
 
 export default function Page() {
+  const itemList = PICKS.map((p, i) => ({
+    '@type': 'ListItem',
+    position: i + 1,
+    name: p.title,
+    url: amazonSearchUrl(p.query),
+  }))
+
+  const ld = {
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    headline: 'Best Water Filters (UK) — Jugs vs Under‑Sink vs Countertop',
+    dateModified: '2026-01-25',
+    datePublished: '2026-01-25',
+    mainEntity: {
+      '@type': 'ItemList',
+      itemListElement: itemList,
+    },
+  }
+
   return (
-    <main className="mx-auto max-w-3xl px-6 py-16">
-      <h1 className="text-4xl font-bold mb-4">Best Water Filters for UK Homes</h1>
-      <p className="text-zinc-700 mb-8">
-        This page is designed for buying clarity: what matters, what to skip, and where to start if you’re new.
-      </p>
+    <main className="mx-auto max-w-6xl px-4 py-16">
+      <StructuredData data={ld} />
 
-      <div className="rounded-2xl border bg-white p-6 shadow-sm mb-10">
-        <h2 className="text-xl font-semibold mb-2">Quick answer</h2>
-        <p className="text-zinc-700">
-          If you only choose one option, start with our <Link className="underline" href="/recommended">Trusted Picks</Link> and pick the “Best overall”
-          choice for your needs.
+      <header className="max-w-3xl">
+        <h1 className="text-4xl font-bold">Best water filters (UK)</h1>
+        <p className="mt-3 text-zinc-700">
+          A shortlist — not an endless list. The best choice is the one you’ll actually use and keep replacing filters for.
         </p>
-        <p className="mt-3 text-sm text-zinc-600">
-          Want it emailed? <Link className="underline" href="/shopping-list">Get the free shopping list →</Link>
+      </header>
+
+      <section className="mt-10">
+        <QuickSummary />
+      </section>
+
+      <section className="mt-14">
+        <h2 className="text-2xl font-semibold">How to choose (in 60 seconds)</h2>
+        <div className="mt-4 grid gap-4 md:grid-cols-3">
+          <div className="card">
+            <h3 className="text-lg font-semibold">Jug</h3>
+            <p className="mt-2 text-sm text-zinc-700">Best starter option. Great taste improvement and easy to maintain.</p>
+            <p className="mt-3 text-xs text-zinc-500">Watch-out: filter replacements add up over time.</p>
+          </div>
+          <div className="card">
+            <h3 className="text-lg font-semibold">Under‑sink</h3>
+            <p className="mt-2 text-sm text-zinc-700">Most convenient for daily use. Ideal if you want filtered water from a tap.</p>
+            <p className="mt-3 text-xs text-zinc-500">Watch-out: check installation space and annual filter costs.</p>
+          </div>
+          <div className="card">
+            <h3 className="text-lg font-semibold">Countertop gravity</h3>
+            <p className="mt-2 text-sm text-zinc-700">High capacity without plumbing. Great for renters or batch filtering.</p>
+            <p className="mt-3 text-xs text-zinc-500">Watch-out: takes counter space and needs regular cleaning.</p>
+          </div>
+        </div>
+      </section>
+
+      <section className="mt-14">
+        <h2 className="text-2xl font-semibold">Shortlist (buyer picks)</h2>
+        <p className="mt-2 text-sm text-zinc-600">
+          These are curated searches so you can compare prices and check replacement filters.
         </p>
-      </div>
+        <div className="mt-6 grid gap-4 md:grid-cols-2">
+          {PICKS.map((p) => (
+            <ProductPick
+              key={p.title}
+              title={p.title}
+              badge={p.badge}
+              description={p.desc}
+              href={amazonSearchUrl(p.query)}
+              bullets={p.bullets}
+            />
+          ))}
+        </div>
 
-      <h2 className="text-2xl font-semibold mb-3">Comparison (starter)</h2>
-      <div className="overflow-x-auto rounded-2xl border bg-white">
-        <table className="min-w-full text-sm">
-          <thead>
-            <tr className="border-b">
-              <th className="px-4 py-3 text-left">What you want</th>
-              <th className="px-4 py-3 text-left">Our pick type</th>
-              <th className="px-4 py-3 text-left">Why</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr className="border-b">
-              <td className="px-4 py-3">Best overall</td>
-              <td className="px-4 py-3">A well-reviewed option with transparent specs</td>
-              <td className="px-4 py-3">Most people want the simplest reliable choice</td>
-            </tr>
-            <tr className="border-b">
-              <td className="px-4 py-3">Best budget</td>
-              <td className="px-4 py-3">Simple essentials</td>
-              <td className="px-4 py-3">Avoid paying for features you won’t use</td>
-            </tr>
-            <tr>
-              <td className="px-4 py-3">Best for sensitive households</td>
-              <td className="px-4 py-3">Low fragrance / low-VOC / fewer additives</td>
-              <td className="px-4 py-3">Comfort + consistency matters more than perfection</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+        <div className="mt-8 flex flex-wrap gap-2">
+          <Link className="btn-primary" href="/picks/water">Go to Water Picks hub →</Link>
+          <Link className="btn-secondary" href="/guides/water-filter-buying-guide-uk">Read the buying guide</Link>
+        </div>
+      </section>
 
-      <p className="mt-10">
-        For deeper context, read the related guide: <Link className="underline" href="/guides/water-filter-buying-guide-uk">start here →</Link>
-      </p>
+      <section className="mt-14 max-w-3xl">
+        <h2 className="text-2xl font-semibold">FAQ</h2>
+        <div className="mt-4 space-y-5 text-zinc-700">
+          <div>
+            <h3 className="font-semibold">Is an under‑sink filter “better” than a jug?</h3>
+            <p className="mt-1 text-sm text-zinc-700">
+              Not automatically. Under‑sink is mainly about convenience. The best filter is the one you’ll maintain.
+            </p>
+          </div>
+          <div>
+            <h3 className="font-semibold">What’s the hidden cost?</h3>
+            <p className="mt-1 text-sm text-zinc-700">
+              Replacements. Before buying, check filter price + how often you’ll replace it.
+            </p>
+          </div>
+          <div>
+            <h3 className="font-semibold">Should I worry about “certifications”?</h3>
+            <p className="mt-1 text-sm text-zinc-700">
+              When brands make big claims, credible test reports matter. If claims are vague, treat them as marketing.
+            </p>
+          </div>
+        </div>
+      </section>
 
-      <p className="mt-12 text-sm text-zinc-500">
-        Some links may earn us a small commission at no extra cost to you. We only recommend products we genuinely trust.
+      <p className="mt-12 text-xs text-zinc-500">
+        Some links may earn us a commission at no extra cost to you. We never accept paid placements in reviews.
       </p>
     </main>
-  );
+  )
 }

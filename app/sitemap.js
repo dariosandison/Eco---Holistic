@@ -6,6 +6,11 @@ export default async function sitemap() {
   const staticRoutes = [
     '',
     '/recommended',
+    '/picks',
+    '/picks/sleep',
+    '/picks/air-quality',
+    '/picks/water',
+    '/picks/fragrance-free',
     '/guides',
     '/blog',
     '/deals',

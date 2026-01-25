@@ -4,6 +4,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { useState } from 'react';
+import { trackEvent } from '@/lib/analytics';
 
 export default function SiteHeader() {
   const [open, setOpen] = useState(false);
@@ -31,7 +32,7 @@ export default function SiteHeader() {
           <Link href="/blog" className="text-sm font-medium text-zinc-700 hover:text-zinc-900">
             Blog
           </Link>
-          <Link href="/recommended" className="text-sm font-medium text-zinc-700 hover:text-zinc-900">
+          <Link href="/picks" className="text-sm font-medium text-zinc-700 hover:text-zinc-900">
             Picks
           </Link>
           <Link href="/shopping-list" onClick={() => trackEvent("click_shopping_list")} className="text-sm font-medium text-zinc-700 hover:text-zinc-900">
@@ -77,7 +78,7 @@ export default function SiteHeader() {
           <Link href="/blog" className="rounded-md px-2 py-2 text-sm text-zinc-800 hover:bg-zinc-50">
             Blog
           </Link>
-          <Link href="/recommended" className="rounded-md px-2 py-2 text-sm text-zinc-800 hover:bg-zinc-50">
+          <Link href="/picks" className="rounded-md px-2 py-2 text-sm text-zinc-800 hover:bg-zinc-50">
             Picks
           </Link>
           <Link href="/deals" className="rounded-md px-2 py-2 text-sm text-zinc-800 hover:bg-zinc-50">

@@ -1,64 +1,122 @@
-import Link from "next/link";
+import Link from 'next/link'
+import StructuredData from '@/components/StructuredData'
+import ProductPick from '@/components/mdx/ProductPick'
+import { amazonSearchUrl } from '@/lib/amazon'
 
 export const metadata = {
-  title: "Best Fragrance-Free Laundry Detergents (UK) | Wild & Well",
-  description: "Fragrance-free laundry detergent picks for sensitive skin — plus what to avoid and how to get clothes truly clean without strong scents.",
-};
+  title: 'Best Fragrance‑Free Laundry Detergents (UK) | Wild & Well',
+  description: 'A shortlist of fragrance‑free detergents for sensitive households in the UK — what to look for, what to avoid, and quick buyer picks.',
+}
+
+const PICKS = [
+  {
+    title: 'Ecover ZERO (fragrance-free)',
+    badge: 'Mainstream favourite',
+    desc: 'Fragrance-free detergent designed for sensitive skin.',
+    query: 'Ecover ZERO laundry liquid fragrance free',
+    bullets: ['Fragrance-free', 'Easy to repurchase in the UK', 'Consider refills to cut plastic'],
+  },
+  {
+    title: 'Surcare 0% Non‑Bio',
+    badge: 'Sensitive skin',
+    desc: 'A popular sensitive-skin option with wide UK availability.',
+    query: 'Surcare non bio laundry liquid 0% fragrance',
+    bullets: ['0% fragrance/dyes/enzymes', 'Great for bedding and towels'],
+  },
+  {
+    title: 'Bio‑D Fragrance Free',
+    badge: 'Refill-friendly',
+    desc: 'Often available in larger sizes and refills.',
+    query: 'Bio-D fragrance free laundry liquid',
+    bullets: ['Fragrance-free', 'Check local refill shops', 'Good for regular washing'],
+  },
+  {
+    title: 'Miniml Non‑Bio (sensitive)',
+    badge: 'Budget refill',
+    desc: 'Often found in refill formats; check the sensitive/fragrance-free variant.',
+    query: 'Miniml non bio laundry liquid sensitive fragrance free',
+    bullets: ['Look for sensitive variants', 'Refill options can reduce waste'],
+  },
+]
 
 export default function Page() {
+  const itemList = PICKS.map((p, i) => ({
+    '@type': 'ListItem',
+    position: i + 1,
+    name: p.title,
+    url: amazonSearchUrl(p.query),
+  }))
+
+  const ld = {
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    headline: 'Best Fragrance‑Free Laundry Detergents (UK)',
+    dateModified: '2026-01-25',
+    datePublished: '2026-01-25',
+    mainEntity: { '@type': 'ItemList', itemListElement: itemList },
+  }
+
   return (
-    <main className="mx-auto max-w-3xl px-6 py-16">
-      <header>
-        <h1 className="text-4xl font-bold mb-4">Best Fragrance-Free Laundry Detergents (UK)</h1>
-        <p className="text-zinc-700">Fragrance-free laundry detergent picks for sensitive skin</p>
-        <p className="text-xs text-zinc-500 mt-2">Last updated: January 24, 2026</p>
+    <main className="mx-auto max-w-6xl px-4 py-16">
+      <StructuredData data={ld} />
+
+      <header className="max-w-3xl">
+        <h1 className="text-4xl font-bold">Best fragrance‑free laundry detergents (UK)</h1>
+        <p className="mt-3 text-zinc-700">
+          Laundry touches your skin all day. If you’re sensitive to scent, detergent is the highest-impact swap.
+        </p>
+        <div className="mt-4 flex flex-wrap gap-2">
+          <Link className="btn-secondary" href="/picks/fragrance-free">Fragrance-free hub</Link>
+          <Link className="btn-secondary" href="/guides/eco-laundry">Laundry guide</Link>
+          <Link className="btn-secondary" href="/shopping-list">Free shopping list</Link>
+        </div>
+        <p className="mt-4 text-xs text-zinc-500">Last updated: January 25, 2026</p>
       </header>
 
-      <section className="mt-10">
-        <h2 className="text-2xl font-semibold mb-2">Quick answer</h2>
-        <p className="text-zinc-700">For most people, the best fragrance-free detergents are the ones with simple formulas, clear labelling, and strong cleaning performance at normal temperatures.</p>
+      <section className="mt-12 grid gap-4 md:grid-cols-3">
+        <div className="card">
+          <h2 className="text-lg font-semibold">What to look for</h2>
+          <ul className="mt-3 list-disc pl-6 text-sm text-zinc-700 space-y-2">
+            <li><strong>Fragrance-free</strong> (not “natural fragrance”).</li>
+            <li>Simple ingredient lists.</li>
+            <li>Realistic dosing (avoid residue).</li>
+          </ul>
+        </div>
+        <div className="card">
+          <h2 className="text-lg font-semibold">Common mistake</h2>
+          <p className="mt-3 text-sm text-zinc-700">Overdosing detergent. More isn’t cleaner — it often leaves residue.</p>
+        </div>
+        <div className="card">
+          <h2 className="text-lg font-semibold">Easy comfort win</h2>
+          <p className="mt-3 text-sm text-zinc-700">Wash bedding/towels fragrance-free and add an extra rinse for a week.</p>
+        </div>
       </section>
 
-      <section className="mt-10">
-        <h2 className="text-2xl font-semibold mb-2">What to look for</h2>
-        <ul className="list-disc pl-6 text-zinc-700 space-y-1">
-          <li>Truly fragrance-free (not ‘unscented’ with masking agents)</li>
-          <li>Works well at 30°C (common UK wash temperature)</li>
-          <li>Clear dosing guidance (overdosing leaves residue)</li>
-          <li>Avoid optical brighteners if you’re very sensitive</li>
-        </ul>
+      <section className="mt-14">
+        <h2 className="text-2xl font-semibold">Shortlist (buyer picks)</h2>
+        <p className="mt-2 text-sm text-zinc-600">Curated searches so you can compare sizes and prices.</p>
+        <div className="mt-6 grid gap-4 md:grid-cols-2">
+          {PICKS.map((p) => (
+            <ProductPick
+              key={p.title}
+              title={p.title}
+              badge={p.badge}
+              description={p.desc}
+              href={amazonSearchUrl(p.query)}
+              bullets={p.bullets}
+            />
+          ))}
+        </div>
+
+        <div className="mt-8 flex flex-wrap gap-2">
+          <Link className="btn-primary" href="/picks/fragrance-free">Go to Fragrance-free hub →</Link>
+          <Link className="btn-secondary" href="/guides/non-toxic-cleaning-starter">Cleaning starter</Link>
+        </div>
       </section>
 
-      <section className="mt-10">
-        <h2 className="text-2xl font-semibold mb-2">Best picks (summary)</h2>
-        <ul className="list-disc pl-6 text-zinc-700 space-y-1">
-          <li><strong>Best overall:</strong> Reliable fragrance-free everyday detergent</li>
-          <li><strong>Best budget:</strong> Concentrated formula (lower cost per wash)</li>
-          <li><strong>Sensitive households:</strong> Minimal additives + extra rinse if needed</li>
-        </ul>
-      </section>
-
-      <section className="mt-10">
-        <h2 className="text-2xl font-semibold mb-2">Where to buy</h2>
-        <p className="text-zinc-700">We keep our recommendations up to date on our picks hub.</p>
-        <Link href="/recommended" className="btn-primary mt-4 inline-block" data-track="affiliate-primary">
-          Shop trusted cleaning picks
-        </Link>
-      </section>
-
-      <section className="mt-12 rounded-2xl border bg-white p-6 shadow-sm">
-        <h2 className="text-xl font-semibold mb-2">New to low-tox living?</h2>
-        <p className="text-zinc-700 mb-3">
-          Start with one change. Our free shopping list shows the easiest swaps.
-        </p>
-        <Link href="/shopping-list" className="btn-secondary" data-track="newsletter-cta">
-          Get the free shopping list
-        </Link>
-      </section>
-
-      <p className="mt-12 text-sm text-zinc-500">
-        Some links may earn us a small commission at no extra cost to you. We only recommend products we genuinely trust.
+      <p className="mt-12 text-xs text-zinc-500">
+        Some links may earn us a commission at no extra cost to you. We never accept paid placements in reviews.
       </p>
     </main>
-  );
+  )
 }

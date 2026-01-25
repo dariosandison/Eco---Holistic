@@ -1,46 +1,106 @@
-export const metadata = { title: 'Today’s Deals — Wild & Well' }
+import Link from 'next/link'
+import { amazonSearchUrl } from '@/lib/amazon'
+
+export const metadata = {
+  title: 'Deals — Wild & Well',
+  description: 'Short, curated deal searches (UK) to help you compare prices without endless scrolling.',
+}
+
+function Deal({ title, desc, href, tag }) {
+  return (
+    <a
+      className="card hover:shadow-sm transition-shadow"
+      href={href}
+      target="_blank"
+      rel="noopener sponsored nofollow"
+    >
+      <div className="flex items-start justify-between gap-3">
+        <div>
+          <h2 className="text-lg font-semibold">{title}</h2>
+          <p className="mt-1 text-sm text-zinc-600">{desc}</p>
+        </div>
+        <span className="shrink-0 rounded-full border px-2 py-0.5 text-[11px] text-zinc-600 bg-white">
+          {tag}
+        </span>
+      </div>
+      <p className="mt-3 text-xs text-zinc-500">Open search →</p>
+    </a>
+  )
+}
 
 export default function Deals() {
   const items = [
-    // Example:
-    // { title:'Glass Food Storage Set', href:'https://www.amazon.co.uk/dp/B07PGL2N7J', note:'Ends Sunday' },
+    {
+      title: 'HEPA air purifiers under £150',
+      desc: 'Great for bedrooms + small flats. Compare filter costs too.',
+      href: amazonSearchUrl('HEPA air purifier under 150 quiet night mode'),
+      tag: 'Air',
+    },
+    {
+      title: 'Dehumidifiers (quiet + energy efficient)',
+      desc: 'If damp is the real problem, this often beats another “cleaning spray”.',
+      href: amazonSearchUrl('dehumidifier UK quiet energy efficient laundry mode'),
+      tag: 'Humidity',
+    },
+    {
+      title: 'Water filter jugs + replacement filters',
+      desc: 'Start simple: jug that fits your fridge + a replacement plan.',
+      href: amazonSearchUrl('water filter jug brita style + filters'),
+      tag: 'Water',
+    },
+    {
+      title: 'Fragrance-free laundry detergent',
+      desc: 'High-contact swap. Often a comfort win within a week.',
+      href: amazonSearchUrl('fragrance free laundry detergent Ecover Zero Surcare'),
+      tag: 'Laundry',
+    },
+    {
+      title: 'Magnesium glycinate (capsules)',
+      desc: 'Commonly used for evening wind-down. Start low if you try it.',
+      href: amazonSearchUrl('magnesium glycinate capsules UK'),
+      tag: 'Sleep',
+    },
+    {
+      title: 'Non-toxic cookware starter picks',
+      desc: 'Search by material and size (not marketing).',
+      href: amazonSearchUrl('stainless steel frying pan 24cm tri ply'),
+      tag: 'Kitchen',
+    },
   ]
+
   return (
-    <div className="mx-auto max-w-3xl px-4 py-12">
-      <h1 className="text-2xl font-bold mb-3">Today’s Deals</h1>
-      <p className="text-neutral-600 mb-6">Curated discounts on durable, low-tox picks.</p>
-      {items.length === 0 && (
-        <div className="mt-6 space-y-4">
-          <p className="text-zinc-700">
-            Deals change quickly — so instead of a long list that goes stale, we share a short weekly round-up.
-          </p>
-          <div className="flex flex-wrap gap-2">
-            <a className="btn-primary" href="/shopping-list">Get weekly deals + the free list</a>
-            <a className="btn-secondary" href="/recommended">Browse trusted picks</a>
-          </div>
-          <div className="rounded-2xl border bg-white p-5 shadow-sm">
-            <h2 className="text-xl font-semibold mb-2">Popular deal categories</h2>
-            <ul className="list-disc pl-6 text-zinc-700 space-y-1">
-              <li><a className="underline" href="/recommended#starter">Starter swaps</a></li>
-              <li><a className="underline" href="/guides/healthy-air-at-home">Air purifiers & filters</a></li>
-              <li><a className="underline" href="/guides/water-filter-buying-guide-uk">Water filters</a></li>
-              <li><a className="underline" href="/guides/non-toxic-cleaning-starter">Cleaning</a></li>
-              <li><a className="underline" href="/guides/non-toxic-mattress-and-bedding-guide">Sleep</a></li>
-            </ul>
-          </div>
+    <main className="mx-auto max-w-6xl px-4 py-16">
+      <header className="max-w-3xl">
+        <h1 className="text-4xl font-bold">Deals</h1>
+        <p className="mt-3 text-zinc-700">
+          Deals change fast. These are curated searches so you can compare prices across reputable options without chasing clickbait “limited time” lists.
+        </p>
+        <div className="mt-4 flex flex-wrap gap-2">
+          <Link className="btn-secondary" href="/shopping-list">Get the free shopping list</Link>
+          <Link className="btn-secondary" href="/picks">Browse Picks hubs</Link>
         </div>
-      )}
-      <ul className="space-y-3">
+      </header>
+
+      <section className="mt-10 grid gap-4 md:grid-cols-2">
         {items.map((d) => (
-          <li key={d.href}>
-            <a className="font-medium underline" href={d.href} target="_blank" rel="noopener sponsored nofollow">
-              {d.title}
-            </a>
-            {d.note && <span className="text-sm text-neutral-500"> — {d.note}</span>}
-          </li>
+          <Deal key={d.title} {...d} />
         ))}
-      </ul>
-      <p className="text-xs text-neutral-500 mt-8">As an Amazon Associate, we earn from qualifying purchases.</p>
-    </div>
+      </section>
+
+      <section className="mt-14 max-w-3xl">
+        <h2 className="text-2xl font-semibold">Want weekly deals?</h2>
+        <p className="mt-2 text-sm text-zinc-600">
+          Join the free list and we’ll include a short weekly round-up (no spam, unsubscribe anytime).
+        </p>
+        <div className="mt-4 flex flex-wrap gap-2">
+          <Link className="btn-primary" href="/shopping-list">Get the free list →</Link>
+          <Link className="btn-secondary" href="/recommended">Trusted Picks (start here)</Link>
+        </div>
+      </section>
+
+      <p className="text-xs text-zinc-500 mt-12">
+        As an Amazon Associate, we earn from qualifying purchases. We never accept paid placements in reviews.
+      </p>
+    </main>
   )
 }

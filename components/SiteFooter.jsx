@@ -8,6 +8,7 @@ export default function SiteFooter() {
   ]
 
   const site = [
+    { href: '/picks', label: 'Picks' },
     { href: '/recommended', label: 'Trusted Picks' },
     { href: '/products', label: 'Products' },
     { href: '/guides', label: 'Guides' },

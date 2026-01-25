@@ -258,6 +258,7 @@ export default function Page() {
             <Link className="btn-primary" href="/products/holistic-home-reset" data-track="product-from-recommended">
               View The Holistic Home Reset
             </Link>
+            <Link className="btn-secondary" href="/picks">Browse Picks hubs</Link>
             <Link className="btn-secondary" href="/shopping-list" data-track="newsletter-from-recommended">
               Get the free shopping list
             </Link>

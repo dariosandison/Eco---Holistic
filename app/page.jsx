@@ -13,24 +13,24 @@ const FEATURED_GUIDES = [
 
 const FEATURED_PICKS = [
   {
-    title: "Best low-tox skincare picks",
-    description: "Gentle, effective options we trust for everyday routines.",
-    href: "/recommended#skincare",
+    title: "Sleep & recovery hub",
+    description: "A simple plan + the shortlist of products that actually help.",
+    href: "/picks/sleep",
   },
   {
-    title: "Natural sleep support",
-    description: "Calm, practical tools + supplement picks for better rest.",
-    href: "/recommended#sleep",
+    title: "Air quality hub",
+    description: "Allergies, damp, and the purifiers that make sense for UK homes.",
+    href: "/picks/air-quality",
   },
   {
-    title: "Gut health essentials",
-    description: "Evidence-informed basics, with beginner-friendly options.",
-    href: "/recommended#gut-health",
+    title: "Water hub",
+    description: "Under-sink vs jug vs countertop — and the easiest starter picks.",
+    href: "/picks/water",
   },
   {
-    title: "Eco-friendly home swaps",
-    description: "Low-tox cleaning + home upgrades that actually stick.",
-    href: "/recommended#home",
+    title: "Fragrance-free home hub",
+    description: "Sensitive household swaps that reduce irritation fast.",
+    href: "/picks/fragrance-free",
   },
 ];
 

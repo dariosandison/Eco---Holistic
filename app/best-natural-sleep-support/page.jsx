@@ -1,73 +1,143 @@
-import Link from "next/link";
+import Link from 'next/link'
+import StructuredData from '@/components/StructuredData'
+import ProductPick from '@/components/mdx/ProductPick'
+import { amazonSearchUrl } from '@/lib/amazon'
 
 export const metadata = {
-  title: "Best Natural Sleep Support (Compared) | Wild & Well",
-  description: "Best Natural Sleep Support (Compared) — calm, practical recommendations and what to look for before you buy.",
-};
+  title: 'Best Natural Sleep Support (UK) | Wild & Well',
+  description: 'A calm shortlist of natural sleep support options — what tends to help most, what to skip, and buyer-friendly picks.',
+}
+
+const PICKS = [
+  {
+    title: 'Magnesium glycinate (capsules)',
+    badge: 'Gentle form',
+    desc: 'Often used as part of an evening wind-down routine. Start low and assess tolerance.',
+    query: 'magnesium glycinate capsules UK',
+    bullets: ['Look for glycinate/bisglycinate (not oxide)', 'Start low', 'Check with a clinician if pregnant/medicated'],
+  },
+  {
+    title: 'Glycine powder',
+    badge: 'Simple amino acid',
+    desc: 'Some people use glycine as an evening supplement. Choose a reputable brand and keep it simple.',
+    query: 'glycine powder supplement',
+    bullets: ['Start with small amounts', 'Avoid complex stacks at first'],
+  },
+  {
+    title: 'L‑theanine (capsules)',
+    badge: 'Calm focus',
+    desc: 'Commonly used for calmer evenings. Choose conservative dosing.',
+    query: 'L-theanine capsules',
+    bullets: ['Keep dosing conservative', 'Avoid mixing too many supplements at once'],
+  },
+  {
+    title: 'Chamomile or herbal tea (caffeine-free)',
+    badge: 'No-pill option',
+    desc: 'A low-risk wind-down cue that supports routine and consistency.',
+    query: 'chamomile tea caffeine free',
+    bullets: ['Use it as a cue: same time nightly', 'Avoid sugar late at night'],
+  },
+  {
+    title: 'Blackout eye mask',
+    badge: 'Light control',
+    desc: 'Light control often beats supplements. Cheap and effective.',
+    query: 'blackout sleep mask contoured',
+    bullets: ['Comfort matters', 'Washable is a plus'],
+  },
+  {
+    title: 'White noise machine',
+    badge: 'Noise buffer',
+    desc: 'If you’re noise-sensitive, this can prevent frequent wake-ups.',
+    query: 'white noise machine bedside',
+    bullets: ['Timer + continuous modes help', 'Simple interface beats “smart” features'],
+  },
+]
 
 export default function Page() {
+  const itemList = PICKS.map((p, i) => ({
+    '@type': 'ListItem',
+    position: i + 1,
+    name: p.title,
+    url: amazonSearchUrl(p.query),
+  }))
+
+  const ld = {
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    headline: 'Best Natural Sleep Support (UK)',
+    dateModified: '2026-01-25',
+    datePublished: '2026-01-25',
+    mainEntity: { '@type': 'ItemList', itemListElement: itemList },
+  }
+
   return (
-    <main className="mx-auto max-w-3xl px-6 py-16">
-      <h1 className="text-4xl font-bold mb-4">Best Natural Sleep Support (Compared)</h1>
-      <p className="text-zinc-700 mb-8">
-        This page is designed for buying clarity: what matters, what to skip, and where to start if you’re new.
-      </p>
+    <main className="mx-auto max-w-6xl px-4 py-16">
+      <StructuredData data={ld} />
 
-      <div className="rounded-2xl border bg-white p-6 shadow-sm mb-10">
-        <h2 className="text-xl font-semibold mb-2">Quick answer</h2>
-        <p className="text-zinc-700">
-          If you only choose one option, start with our <Link className="underline" href="/recommended">Trusted Picks</Link> and pick the “Best overall”
-          choice for your needs.
+      <header className="max-w-3xl">
+        <h1 className="text-4xl font-bold">Best natural sleep support (compared)</h1>
+        <p className="mt-3 text-zinc-700">
+          The best “sleep support” is usually a few simple environment and timing fixes. Supplements are optional — and should stay simple.
         </p>
-        <p className="mt-3 text-sm text-zinc-600">
-          Want it emailed? <Link className="underline" href="/shopping-list">Get the free shopping list →</Link>
+        <div className="mt-4 flex flex-wrap gap-2">
+          <Link className="btn-secondary" href="/picks/sleep">Sleep hub</Link>
+          <Link className="btn-secondary" href="/guides/sleep-naturally-without-overwhelm">Cornerstone sleep guide</Link>
+          <Link className="btn-secondary" href="/shopping-list">Free shopping list</Link>
+        </div>
+        <p className="mt-4 text-xs text-zinc-500">Last updated: January 25, 2026</p>
+      </header>
+
+      <section className="mt-12 grid gap-4 md:grid-cols-3">
+        <div className="card">
+          <h2 className="text-lg font-semibold">Start here</h2>
+          <ol className="mt-3 list-decimal pl-6 text-sm text-zinc-700 space-y-2">
+            <li>Morning light + consistent wake time</li>
+            <li>Cool, dark bedroom</li>
+            <li>Caffeine cut-off ~8 hours before bed</li>
+          </ol>
+        </div>
+        <div className="card">
+          <h2 className="text-lg font-semibold">If you try a supplement</h2>
+          <p className="mt-3 text-sm text-zinc-700">Try one at a time, start low, and keep notes for a week.</p>
+        </div>
+        <div className="card">
+          <h2 className="text-lg font-semibold">Avoid</h2>
+          <ul className="mt-3 list-disc pl-6 text-sm text-zinc-700 space-y-2">
+            <li>“Knockout” claims</li>
+            <li>Overcomplicated stacks</li>
+            <li>Anything that conflicts with medication advice</li>
+          </ul>
+        </div>
+      </section>
+
+      <section className="mt-14">
+        <h2 className="text-2xl font-semibold">Shortlist (buyer picks)</h2>
+        <p className="mt-2 text-sm text-zinc-600">
+          Curated searches to compare brands and prices. Keep it simple: routine first, products second.
         </p>
-      </div>
+        <div className="mt-6 grid gap-4 md:grid-cols-2">
+          {PICKS.map((p) => (
+            <ProductPick
+              key={p.title}
+              title={p.title}
+              badge={p.badge}
+              description={p.desc}
+              href={amazonSearchUrl(p.query)}
+              bullets={p.bullets}
+            />
+          ))}
+        </div>
 
-      <h2 className="text-2xl font-semibold mb-3">Comparison (starter)</h2>
-      <div className="overflow-x-auto rounded-2xl border bg-white">
-        <table className="min-w-full text-sm">
-          <thead>
-            <tr className="border-b">
-              <th className="px-4 py-3 text-left">What you want</th>
-              <th className="px-4 py-3 text-left">Our pick type</th>
-              <th className="px-4 py-3 text-left">Why</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr className="border-b">
-              <td className="px-4 py-3">Best overall</td>
-              <td className="px-4 py-3">A well-reviewed option with transparent specs</td>
-              <td className="px-4 py-3">Most people want the simplest reliable choice</td>
-            </tr>
-            <tr className="border-b">
-              <td className="px-4 py-3">Best budget</td>
-              <td className="px-4 py-3">Simple essentials</td>
-              <td className="px-4 py-3">Avoid paying for features you won’t use</td>
-            </tr>
-            <tr>
-              <td className="px-4 py-3">Best for sensitive households</td>
-              <td className="px-4 py-3">Low fragrance / low-VOC / fewer additives</td>
-              <td className="px-4 py-3">Comfort + consistency matters more than perfection</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+        <div className="mt-8 flex flex-wrap gap-2">
+          <Link className="btn-primary" href="/picks/sleep">Go to Sleep hub →</Link>
+          <Link className="btn-secondary" href="/guides/magnesium-for-sleep-basics">Magnesium basics</Link>
+          <Link className="btn-secondary" href="/guides/sleep-wind-down-routine">Wind-down routine</Link>
+        </div>
+      </section>
 
-      <p className="mt-10">
-        For deeper context, read the related guide: <Link className="underline" href="/guides/non-toxic-mattress-and-bedding-guide">start here →</Link>
+      <p className="mt-12 text-xs text-zinc-500">
+        This content is for general education and isn’t medical advice. If you’re pregnant, on medication, or managing a health condition, check with a qualified clinician first.
       </p>
-
-      <p className="mt-12 text-sm text-zinc-500">
-        Some links may earn us a small commission at no extra cost to you. We only recommend products we genuinely trust.
-      </p>
-    
-      <div className="mt-6 rounded-2xl border bg-white p-5 shadow-sm">
-        <h2 className="text-xl font-semibold">Start with the basics</h2>
-        <p className="mt-2 text-sm text-zinc-700">If you want a calm, step-by-step plan (no hacks), start with our cornerstone sleep guide.</p>
-        <a className="btn-secondary mt-3 inline-flex" href="/guides/sleep-naturally-without-overwhelm">Read the cornerstone sleep guide</a>
-      </div>
-
-</main>
-  );
+    </main>
+  )
 }

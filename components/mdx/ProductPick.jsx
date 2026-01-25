@@ -5,6 +5,7 @@ export default function ProductPick({
   title,
   description,
   asin,
+  href,
   image = '/og-default.jpg',
   badge,
   bullets = [],
@@ -36,7 +37,7 @@ export default function ProductPick({
           ) : null}
 
           <div className="mt-4">
-            <AmazonButton asin={asin}>Check price on Amazon</AmazonButton>
+            <AmazonButton asin={asin} href={href}>Check price on Amazon</AmazonButton>
           </div>
         </div>
       </div>

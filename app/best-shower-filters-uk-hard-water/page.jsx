@@ -1,64 +1,123 @@
-import Link from "next/link";
+import Link from 'next/link'
+import StructuredData from '@/components/StructuredData'
+import ProductPick from '@/components/mdx/ProductPick'
+import { amazonSearchUrl } from '@/lib/amazon'
 
 export const metadata = {
-  title: "Best Shower Filters (UK Hard Water) | Wild & Well",
-  description: "A practical guide to shower filters for UK hard water — what they can and can’t do, and how to choose without hype.",
-};
+  title: 'Best Shower Filters for UK Hard Water | Wild & Well',
+  description: 'Shortlisted shower filters for hard-water UK homes — what they can and can’t do, plus quick buyer picks.',
+}
+
+const PICKS = [
+  {
+    title: 'Hello Klean shower filter',
+    badge: 'Popular pick',
+    desc: 'A widely discussed shower filter brand. Good if you want simple replacements.',
+    query: 'Hello Klean shower filter',
+    bullets: ['Best for: simple setup', 'Check cartridge replacement cost', 'Don’t expect miracles on extreme hard water'],
+  },
+  {
+    title: 'Magichome shower filter',
+    badge: 'Budget',
+    desc: 'Budget-friendly option often compared on UK lists.',
+    query: 'Magichome shower filter hard water',
+    bullets: ['Best for: budget trials', 'Check replacement cartridges'],
+  },
+  {
+    title: 'Philips shower filter',
+    badge: 'Mainstream',
+    desc: 'Mainstream brand option with broad availability.',
+    query: 'Philips shower filter',
+    bullets: ['Best for: easy repurchase', 'Check flow rate'],
+  },
+  {
+    title: 'Universal replacement cartridges (multi-pack)',
+    badge: 'Save long-term',
+    desc: 'Cartridges are the ongoing cost — buying multipacks can reduce cost per change.',
+    query: 'shower filter replacement cartridge multi pack',
+    bullets: ['Compare compatibility with your filter model', 'Set reminders for replacements'],
+  },
+]
 
 export default function Page() {
+  const itemList = PICKS.map((p, i) => ({
+    '@type': 'ListItem',
+    position: i + 1,
+    name: p.title,
+    url: amazonSearchUrl(p.query),
+  }))
+
+  const ld = {
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    headline: 'Best Shower Filters for UK Hard Water',
+    dateModified: '2026-01-25',
+    datePublished: '2026-01-25',
+    mainEntity: { '@type': 'ItemList', itemListElement: itemList },
+  }
+
   return (
-    <main className="mx-auto max-w-3xl px-6 py-16">
-      <header>
-        <h1 className="text-4xl font-bold mb-4">Best Shower Filters (UK Hard Water)</h1>
-        <p className="text-zinc-700">A practical guide to shower filters for UK hard water</p>
-        <p className="text-xs text-zinc-500 mt-2">Last updated: January 24, 2026</p>
+    <main className="mx-auto max-w-6xl px-4 py-16">
+      <StructuredData data={ld} />
+
+      <header className="max-w-3xl">
+        <h1 className="text-4xl font-bold">Best shower filters for UK hard water</h1>
+        <p className="mt-3 text-zinc-700">
+          Shower filters can help with feel and chlorine-related dryness for some people — but they won’t “soften” water like a full home softener.
+        </p>
+        <div className="mt-4 flex flex-wrap gap-2">
+          <Link className="btn-secondary" href="/picks/fragrance-free">Sensitive-skin hub</Link>
+          <Link className="btn-secondary" href="/shopping-list">Free shopping list</Link>
+        </div>
+        <p className="mt-4 text-xs text-zinc-500">Last updated: January 25, 2026</p>
       </header>
 
-      <section className="mt-10">
-        <h2 className="text-2xl font-semibold mb-2">Quick answer</h2>
-        <p className="text-zinc-700">If your main issue is hard-water scale, a shower filter may help somewhat, but the biggest wins come from choosing the right filter media and replacing cartridges on schedule.</p>
+      <section className="mt-12 grid gap-4 md:grid-cols-3">
+        <div className="card">
+          <h2 className="text-lg font-semibold">What they can do</h2>
+          <ul className="mt-3 list-disc pl-6 text-sm text-zinc-700 space-y-2">
+            <li>Reduce chlorine and some impurities (varies by cartridge).</li>
+            <li>Improve hair/skin feel for some households.</li>
+          </ul>
+        </div>
+        <div className="card">
+          <h2 className="text-lg font-semibold">What they can’t do</h2>
+          <ul className="mt-3 list-disc pl-6 text-sm text-zinc-700 space-y-2">
+            <li>Fully soften hard water like a whole-home system.</li>
+            <li>Replace good ventilation for damp bathrooms.</li>
+          </ul>
+        </div>
+        <div className="card">
+          <h2 className="text-lg font-semibold">Hidden cost</h2>
+          <p className="mt-3 text-sm text-zinc-700">Cartridges. Before buying, check the price and replacement schedule.</p>
+        </div>
       </section>
 
-      <section className="mt-10">
-        <h2 className="text-2xl font-semibold mb-2">What to look for</h2>
-        <ul className="list-disc pl-6 text-zinc-700 space-y-1">
-          <li>What problem you’re solving (scale vs. chlorine smell vs. skin sensitivity)</li>
-          <li>Filter media and replacement cost</li>
-          <li>Compatibility with your shower type</li>
-          <li>Avoid unrealistic ‘removes everything’ claims</li>
-        </ul>
+      <section className="mt-14">
+        <h2 className="text-2xl font-semibold">Shortlist (buyer picks)</h2>
+        <p className="mt-2 text-sm text-zinc-600">Curated searches so you can compare price and replacement cartridges.</p>
+        <div className="mt-6 grid gap-4 md:grid-cols-2">
+          {PICKS.map((p) => (
+            <ProductPick
+              key={p.title}
+              title={p.title}
+              badge={p.badge}
+              description={p.desc}
+              href={amazonSearchUrl(p.query)}
+              bullets={p.bullets}
+            />
+          ))}
+        </div>
+
+        <div className="mt-8 flex flex-wrap gap-2">
+          <Link className="btn-primary" href="/picks/fragrance-free">Go to Sensitive household hub →</Link>
+          <Link className="btn-secondary" href="/shopping-list">Get the free shopping list</Link>
+        </div>
       </section>
 
-      <section className="mt-10">
-        <h2 className="text-2xl font-semibold mb-2">Best picks (summary)</h2>
-        <ul className="list-disc pl-6 text-zinc-700 space-y-1">
-          <li><strong>Best overall:</strong> A well-reviewed filter with clear replacement intervals</li>
-          <li><strong>Best budget:</strong> Simple option with affordable refills</li>
-          <li><strong>Sensitive households:</strong> Focus on irritation triggers (especially fragrance/skin sensitivity)</li>
-        </ul>
-      </section>
-
-      <section className="mt-10">
-        <h2 className="text-2xl font-semibold mb-2">Where to buy</h2>
-        <p className="text-zinc-700">We keep our recommendations up to date on our picks hub.</p>
-        <Link href="/recommended" className="btn-primary mt-4 inline-block" data-track="affiliate-primary">
-          Shop trusted water & bathroom picks
-        </Link>
-      </section>
-
-      <section className="mt-12 rounded-2xl border bg-white p-6 shadow-sm">
-        <h2 className="text-xl font-semibold mb-2">New to low-tox living?</h2>
-        <p className="text-zinc-700 mb-3">
-          Start with one change. Our free shopping list shows the easiest swaps.
-        </p>
-        <Link href="/shopping-list" className="btn-secondary" data-track="newsletter-cta">
-          Get the free shopping list
-        </Link>
-      </section>
-
-      <p className="mt-12 text-sm text-zinc-500">
-        Some links may earn us a small commission at no extra cost to you. We only recommend products we genuinely trust.
+      <p className="mt-12 text-xs text-zinc-500">
+        Some links may earn us a commission at no extra cost to you. We never accept paid placements in reviews.
       </p>
     </main>
-  );
+  )
 }
