@@ -41,3 +41,5 @@ Changes:
 - Added cornerstone guide: /guides/sleep-naturally-without-overwhelm
 - Added 6 supporting sleep guides (wind-down, caffeine timing, temperature/bedding, morning light, magnesium basics, sleep myths)
 - Linked cornerstone from /recommended and /holistic-health, plus sleep buyer-intent pages
+
+- Fixed tsconfig path alias so @/* imports resolve on Vercel builds
