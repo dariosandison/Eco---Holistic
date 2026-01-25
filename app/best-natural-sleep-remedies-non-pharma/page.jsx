@@ -61,6 +61,13 @@ export default function Page() {
       <p className="mt-12 text-sm text-zinc-500">
         Some links may earn us a small commission at no extra cost to you. We only recommend products we genuinely trust.
       </p>
-    </main>
+    
+      <div className="mt-6 rounded-2xl border bg-white p-5 shadow-sm">
+        <h2 className="text-xl font-semibold">Start with the basics</h2>
+        <p className="mt-2 text-sm text-zinc-700">If you want a calm, step-by-step plan (no hacks), start with our cornerstone sleep guide.</p>
+        <a className="btn-secondary mt-3 inline-flex" href="/guides/sleep-naturally-without-overwhelm">Read the cornerstone sleep guide</a>
+      </div>
+
+</main>
   );
 }

@@ -191,7 +191,7 @@ export default function Page() {
         <div className="max-w-3xl">
           <h2 className="text-2xl font-semibold">Sleep &amp; stress picks</h2>
           <p className="mt-2 text-sm text-zinc-600">
-            The goal isn’t hacks — it’s a calm routine and a comfortable environment.
+            The goal isn’t hacks — it’s a calm routine and a comfortable environment. Start with our cornerstone guide → /guides/sleep-naturally-without-overwhelm
           </p>
         </div>
 

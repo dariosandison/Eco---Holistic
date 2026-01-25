@@ -28,3 +28,16 @@ Changes:
 - Rebuilt /recommended into a decision-led conversion hub (Start here + Low-tox + Sleep/Stress + Nutrition)
 - Added on-page trust module (How we choose) linking to /how-we-test and /affiliate-disclosure
 - Added anchors for internal routing (#start-here, #starter)
+
+
+## Build log cleanup
+- Filtered out any *-duplicate.mdx from blog/guides listing to prevent accidental duplicate routes
+- Added redirect in /blog/[slug] for any '-duplicate' slug to canonical slug
+- Added tsconfig.json + devDependencies typescript/@types/node to avoid Vercel auto-generating tsconfig
+- Added optionalDependencies for @next/swc platform packages (best-effort to reduce SWC lockfile warnings)
+
+
+## Phase B: Sleep pillar
+- Added cornerstone guide: /guides/sleep-naturally-without-overwhelm
+- Added 6 supporting sleep guides (wind-down, caffeine timing, temperature/bedding, morning light, magnesium basics, sleep myths)
+- Linked cornerstone from /recommended and /holistic-health, plus sleep buyer-intent pages
