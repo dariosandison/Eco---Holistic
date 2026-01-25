@@ -22,3 +22,9 @@ Changes:
 - Added missing analytics export: trackAffiliateClick (fixes warnings in mdx affiliate components)
 - Removed duplicate blog post content: bamboo-toilet-paper-facts-duplicate.mdx
 - Added redirect for /blog/bamboo-toilet-paper-facts-duplicate -> /blog/bamboo-toilet-paper-facts
+
+
+## Recommended conversion hub
+- Rebuilt /recommended into a decision-led conversion hub (Start here + Low-tox + Sleep/Stress + Nutrition)
+- Added on-page trust module (How we choose) linking to /how-we-test and /affiliate-disclosure
+- Added anchors for internal routing (#start-here, #starter)
