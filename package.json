@@ -33,5 +33,8 @@
     "@next/swc-darwin-arm64": "14.2.35",
     "@next/swc-darwin-x64": "14.2.35",
     "@next/swc-win32-x64-msvc": "14.2.35"
+  },
+  "engines": {
+    "node": "20.x"
   }
 }
