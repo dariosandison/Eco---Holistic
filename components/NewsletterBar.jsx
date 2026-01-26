@@ -1,5 +1,6 @@
 'use client'
 import { useEffect } from 'react'
+import { trackEvent } from '@/lib/analytics'
 
 export default function NewsletterBar() {
   useEffect(() => {
@@ -22,13 +23,14 @@ export default function NewsletterBar() {
         <p className="text-sm text-neutral-700">
           Free: <a className="underline" href="/shopping-list">Low‑Tox Shopping List</a> + weekly trusted picks (no spam).
         </p>
-        <form onSubmit={() => trackEvent("newsletter_signup")}
+
+        <form
+          onSubmit={() => trackEvent('newsletter_signup', { placement: 'sticky_bar' })}
           className="flex w-full sm:w-auto gap-2"
-          action={process.env.NEXT_PUBLIC_NEWSLETTER_ACTION || '#'}
+          action="/api/subscribe"
           method="post"
-          target="_blank"
-          rel="noopener"
         >
+          <input type="hidden" name="source" value="newsletter-bar" />
           <input
             type="email"
             name="email"
@@ -42,4 +44,3 @@ export default function NewsletterBar() {
     </div>
   )
 }
-

@@ -9,7 +9,15 @@ export const metadata = {
 const ERROR_COPY = {
   invalid_email: "Please enter a valid email address.",
   not_configured:
-    "Newsletter is not configured yet. Add NEWSLETTER_FORM_ACTION (or NEWSLETTER_WEBHOOK_URL) in Vercel environment variables, then redeploy.",
+    "Newsletter is not configured yet. In Vercel → Environment Variables, either add NEWSLETTER_FORM_ACTION (embed form action URL) OR set Beehiiv credentials (BEEHIV_API_KEY + BEEHIV_PUBLICATION_ID). Then redeploy.",
+  beehiiv_auth:
+    "Subscription failed (Beehiiv auth). Double‑check BEEHIV_API_KEY in Vercel, then redeploy and try again.",
+  beehiiv_publication:
+    "Subscription failed (Beehiiv publication ID). Make sure BEEHIV_PUBLICATION_ID is the API v2 publication id (often starts with 'pub_'). Then redeploy and try again.",
+  beehiiv_rate_limited:
+    "Beehiiv is rate‑limiting requests right now. Please try again in a minute.",
+  beehiiv_bad_request:
+    "Subscription failed (Beehiiv rejected the request). Please try again — if it persists, contact us.",
   subscribe_failed:
     "Something went wrong subscribing you. Please try again in a moment — or use the contact page.",
 };
