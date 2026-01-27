@@ -41,7 +41,7 @@ export default function Page() {
       <section className="mt-10">
         <h2 className="text-2xl font-semibold mb-2">Where to buy</h2>
         <p className="text-zinc-700">We keep our recommendations up to date on our picks hub.</p>
-        <Link href="/recommended" className="btn-primary mt-4 inline-block" data-track="affiliate-primary">
+        <Link href="/best-of" className="btn-primary mt-4 inline-block" data-track="affiliate-primary">
           Shop trusted humidity picks
         </Link>
       </section>

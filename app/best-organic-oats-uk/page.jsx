@@ -86,7 +86,7 @@ function SummaryBox() {
       </p>
       <div className="mt-4 flex flex-wrap gap-2">
         <Link className="btn-secondary" href="/nutrition">Nutrition hub</Link>
-        <Link className="btn-secondary" href="/blog/single-ingredient-staples-that-actually-matter">Blog: single-ingredient staples</Link>
+        <Link className="btn-secondary" href="/blog/single-ingredient-staples-that-actually-matter">Wellness Insights: single-ingredient staples</Link>
       </div>
       <p className="mt-4 text-xs text-zinc-500">Last updated: January 27, 2026</p>
     </div>

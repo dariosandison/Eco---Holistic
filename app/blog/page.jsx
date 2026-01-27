@@ -2,7 +2,7 @@ import Link from 'next/link'
 import Card from '@/components/Card'
 import { listContent } from '@/lib/content'
 
-export const metadata = { title: 'Blog | Wild & Well' }
+export const metadata = { title: 'Wellness Insights | Wild & Well' }
 
 export default function Page() {
   const items = listContent('blog')
@@ -10,13 +10,13 @@ export default function Page() {
     <div className="mx-auto max-w-6xl px-4 py-12">
       <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
         <div>
-          <h1 className="text-2xl font-semibold text-zinc-900">Blog</h1>
+          <h1 className="text-2xl font-semibold text-zinc-900">Wellness Insights</h1>
           <p className="mt-1 text-sm text-zinc-700">
             Evidence‑informed wellness notes, routines, and product guidance — without the overwhelm.
           </p>
         </div>
-        <Link href="/recommended" className="rounded-xl border border-zinc-300 bg-white px-4 py-2.5 text-sm font-semibold text-zinc-900 hover:bg-zinc-50 w-full sm:w-auto text-center">
-          See picks
+        <Link href="/best-of" className="rounded-xl border border-zinc-300 bg-white px-4 py-2.5 text-sm font-semibold text-zinc-900 hover:bg-zinc-50 w-full sm:w-auto text-center">
+          Browse guides
         </Link>
       </div>
 

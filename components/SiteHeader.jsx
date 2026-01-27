@@ -26,17 +26,11 @@ export default function SiteHeader() {
 
         {/* Desktop nav */}
         <nav className="ml-auto hidden items-center gap-6 md:flex">
-          <Link href="/recommended" className="text-sm font-medium text-zinc-700 hover:text-zinc-900">
-            Recommended
-          </Link>
           <Link href="/best-of" className="text-sm font-medium text-zinc-700 hover:text-zinc-900">
             Guides
           </Link>
           <Link href="/blog" className="text-sm font-medium text-zinc-700 hover:text-zinc-900">
-            Blog
-          </Link>
-          <Link href="/guides" className="text-sm font-medium text-zinc-700 hover:text-zinc-900">
-            Learn
+            Wellness Insights
           </Link>
           <Link href="/picks" className="text-sm font-medium text-zinc-700 hover:text-zinc-900">
             Picks
@@ -78,17 +72,11 @@ export default function SiteHeader() {
       {/* Mobile nav */}
       <div className={`${open ? 'block' : 'hidden'} border-t border-zinc-200/60 md:hidden`}>
         <nav className="mx-auto flex max-w-6xl flex-col gap-1 px-4 py-3">
-          <Link href="/recommended" className="rounded-md px-2 py-2 text-sm text-zinc-800 hover:bg-zinc-50">
-            Recommended
-          </Link>
           <Link href="/best-of" className="rounded-md px-2 py-2 text-sm text-zinc-800 hover:bg-zinc-50">
             Guides
           </Link>
           <Link href="/blog" className="rounded-md px-2 py-2 text-sm text-zinc-800 hover:bg-zinc-50">
-            Blog
-          </Link>
-          <Link href="/guides" className="rounded-md px-2 py-2 text-sm text-zinc-800 hover:bg-zinc-50">
-            Learn
+            Wellness Insights
           </Link>
           <Link href="/picks" className="rounded-md px-2 py-2 text-sm text-zinc-800 hover:bg-zinc-50">
             Picks

@@ -4,9 +4,7 @@ export default async function sitemap() {
   const base = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.wild-and-well.store'
 
   const staticRoutes = [
-    '',
-    '/recommended',
-    '/picks',
+    '',    '/picks',
     '/picks/sleep',
     '/picks/air-quality',
     '/picks/water',
@@ -43,8 +41,7 @@ export default async function sitemap() {
     '/best-holistic-wellness-starter-kit',
     '/best-low-tox-products-for-beginners',
     '/shopping-list',
-    '/shopping-list/thanks',
-    '/best-of',
+    '/shopping-list/thanks',    '/best-of',
     '/nutrition',
     '/movement',
     '/best-fitness-trackers-beginners-uk',

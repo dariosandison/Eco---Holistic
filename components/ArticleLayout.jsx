@@ -81,7 +81,7 @@ export default function ArticleLayout({
           Browse our trusted picks for low‑tox and holistic living — curated to save you time (and money).
         </p>
         <div className="mt-4 flex flex-col gap-3 sm:flex-row sm:items-center">
-          <a href="/recommended" className="btn-primary text-center">Shop trusted picks</a>
+          <a href="/best-of" className="btn-primary text-center">Shop trusted picks</a>
           <a href="/guides" className="text-sm font-medium text-zinc-700 hover:underline">
             Or continue with guides →
           </a>

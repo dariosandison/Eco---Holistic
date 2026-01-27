@@ -178,7 +178,7 @@ export default function Page() {
           Product roundups designed to be clear and useful: what to look for, what to avoid, and a shortlist of solid options.
           If you want the “why” and the bigger picture, use{" "}
           <Link className="underline" href="/blog">
-            Blog
+            Wellness Insights
           </Link>{" "}
           and{" "}
           <Link className="underline" href="/guides">
@@ -187,7 +187,7 @@ export default function Page() {
           .
         </p>
         <div className="mt-5 flex flex-wrap gap-2">
-          <Link className="btn-secondary" href="/recommended">Recommended hub</Link>
+          <Link className="btn-secondary" href="/picks">Picks</Link>
           <Link className="btn-secondary" href="/deals">Deals</Link>
         </div>
         <p className="mt-3 text-xs text-zinc-500">Last updated: January 27, 2026</p>

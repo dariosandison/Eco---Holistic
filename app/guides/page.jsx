@@ -38,7 +38,7 @@ export default function Page() {
             Practical, calm guidance for low‑tox and holistic living — with trusted picks inside.
           </p>
         </div>
-        <Link href="/recommended" className="btn-primary w-full sm:w-auto text-center">
+        <Link href="/best-of" className="btn-primary w-full sm:w-auto text-center">
           Shop trusted picks
         </Link>
       </div>

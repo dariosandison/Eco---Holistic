@@ -112,7 +112,7 @@ export default function HomePage() {
                 Browse best-of guides
               </Link>
               <Link
-                href="/recommended"
+                href="/best-of"
                 className="w-full sm:w-auto text-center rounded-xl border border-zinc-300 bg-white/80 px-4 py-2.5 text-sm font-semibold text-zinc-900 backdrop-blur transition hover:bg-white"
               >
                 Browse recommendations
@@ -163,7 +163,7 @@ export default function HomePage() {
       <section className="mx-auto max-w-6xl px-4 py-10 md:py-14">
         <div className="flex items-end justify-between gap-4">
           <h2 className="text-xl font-semibold text-zinc-900">Trusted picks</h2>
-          <Link href="/recommended" className="text-sm font-medium text-zinc-800 hover:underline">
+          <Link href="/best-of" className="text-sm font-medium text-zinc-800 hover:underline">
             See all picks →
           </Link>
         </div>
@@ -250,7 +250,7 @@ export default function HomePage() {
             Start where you are — low-tox swaps, holistic health, or nutrition.
           </p>
           <div className="mt-6 grid gap-4 md:grid-cols-3">
-            <a href="/recommended" className="card">Low-tox & safer swaps</a>
+            <a href="/best-of" className="card">Low-tox & safer swaps</a>
             <a href="/holistic-health" className="card">Holistic health</a>
             <a href="/nutrition" className="card">Nutrition & organic food</a>
           </div>

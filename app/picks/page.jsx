@@ -31,7 +31,7 @@ export default function Page() {
           These hubs are built to be practical. Each one explains the basics, then points to best-of pages when you want to compare products.
         </p>
         <div className="mt-4 flex flex-wrap gap-2">
-          <Link className="btn-secondary" href="/recommended">Recommended hub</Link>
+          <Link className="btn-secondary" href="/best-of">Guides</Link>
           <Link className="btn-secondary" href="/shopping-list">Free shopping list</Link>
           <Link className="btn-secondary" href="/nutrition">Nutrition</Link>
           <Link className="btn-secondary" href="/movement">Movement</Link>

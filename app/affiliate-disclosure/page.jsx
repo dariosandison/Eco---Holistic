@@ -35,7 +35,7 @@ export default function Page() {
           If you want the fastest route to a good choice, start with our curated picks page.
         </p>
         <div className="flex flex-wrap gap-2">
-          <Link className="btn-primary" href="/recommended">
+          <Link className="btn-primary" href="/best-of">
             Shop trusted picks
           </Link>
           <Link className="btn-secondary" href="/shopping-list">
