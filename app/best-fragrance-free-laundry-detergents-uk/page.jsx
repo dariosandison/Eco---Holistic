@@ -118,7 +118,7 @@ export default function Page() {
       </section>
 
       <section className="mt-14">
-        <h2 className="text-2xl font-semibold">Top picks (quick decision)</h2>
+        <h2 className="text-2xl font-semibold">Top picks (shortlist)</h2>
         <p className="mt-2 text-sm text-zinc-600">Pick one route: sensitive-skin baseline, refill-friendly, or easy mainstream.</p>
         <div className="mt-6 grid gap-4 md:grid-cols-3">
           <ProductPick

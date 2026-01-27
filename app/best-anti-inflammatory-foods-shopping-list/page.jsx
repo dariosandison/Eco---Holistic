@@ -15,7 +15,7 @@ export default function Page() {
       </header>
 
       <section className="mt-10">
-        <h2 className="text-2xl font-semibold mb-2">Quick answer</h2>
+        <h2 className="text-2xl font-semibold mb-2">At a glance</h2>
         <p className="text-zinc-700">Consistency with whole foods matters more than eliminating everything at once.</p>
       </section>
 

@@ -28,11 +28,13 @@ export default function Page() {
       <header className="max-w-3xl">
         <h1 className="text-4xl font-bold">Picks</h1>
         <p className="mt-3 text-zinc-700">
-          These hubs are built for action. Each one gives you a simple plan, then points to the best-of pages when you’re ready to buy.
+          These hubs are built to be practical. Each one explains the basics, then points to best-of pages when you want to compare products.
         </p>
         <div className="mt-4 flex flex-wrap gap-2">
-          <Link className="btn-secondary" href="/recommended">Trusted Picks (map)</Link>
+          <Link className="btn-secondary" href="/recommended">Recommended hub</Link>
           <Link className="btn-secondary" href="/shopping-list">Free shopping list</Link>
+          <Link className="btn-secondary" href="/nutrition">Nutrition</Link>
+          <Link className="btn-secondary" href="/movement">Movement</Link>
         </div>
       </header>
 

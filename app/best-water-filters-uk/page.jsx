@@ -57,7 +57,7 @@ const PICKS = [
 function QuickSummary() {
   return (
     <div className="rounded-2xl border bg-white p-6 shadow-sm">
-      <h2 className="text-xl font-semibold">Quick answer</h2>
+      <h2 className="text-xl font-semibold">At a glance</h2>
       <p className="mt-2 text-zinc-700">
         If you want the simplest option, start with a <strong>jug</strong>. If you’ll use filtered water daily and want convenience, go <strong>under‑sink</strong>.
         If you want high capacity without plumbing, choose a <strong>countertop gravity filter</strong>.
@@ -161,7 +161,7 @@ export default function Page() {
       </section>
 
       <section className="mt-14">
-        <h2 className="text-2xl font-semibold">Top picks (quick decision)</h2>
+        <h2 className="text-2xl font-semibold">Top picks (shortlist)</h2>
         <p className="mt-2 text-sm text-zinc-600">Three simple routes, depending on how you live.</p>
         <div className="mt-6 grid gap-4 md:grid-cols-3">
           <ProductPick

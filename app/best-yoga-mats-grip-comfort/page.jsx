@@ -1,0 +1,231 @@
+import Link from 'next/link'
+import StructuredData from '@/components/StructuredData'
+import ProductPick from '@/components/mdx/ProductPick'
+import { amazonSearchUrl } from '@/lib/amazon'
+
+export const metadata = {
+  title: "Best Yoga Mats for Grip & Comfort | Wild & Well",
+  description: "A shortlist of yoga mats that balance grip, cushioning, and durability. Choose based on sweat level and joint comfort.",
+}
+
+const PICKS = [
+  {
+    "title": "Manduka PRO / PROlite",
+    "badge": "Best durability",
+    "desc": "Premium mats known for longevity.",
+    "query": "Manduka PRO yoga mat",
+    "bullets": [
+      "Very durable",
+      "Great support",
+      "Heavier than most mats"
+    ]
+  },
+  {
+    "title": "Liforme yoga mat",
+    "badge": "Best grip",
+    "desc": "High-grip option, popular for sweaty sessions.",
+    "query": "Liforme yoga mat",
+    "bullets": [
+      "Excellent grip",
+      "Alignment markings",
+      "Premium price"
+    ]
+  },
+  {
+    "title": "Decathlon / Domyos yoga mats",
+    "badge": "Best budget",
+    "desc": "Good starter mats if you’re building the habit.",
+    "query": "Decathlon yoga mat Domyos",
+    "bullets": [
+      "Affordable",
+      "Easy to replace",
+      "Check thickness"
+    ]
+  },
+  {
+    "title": "Gaiam yoga mats",
+    "badge": "Starter",
+    "desc": "Popular entry-level mats with plenty of styles.",
+    "query": "Gaiam yoga mat",
+    "bullets": [
+      "Good starter range",
+      "Widely available",
+      "Grip varies by model"
+    ]
+  },
+  {
+    "title": "Cork yoga mat",
+    "badge": "Natural feel",
+    "desc": "Cork can feel grippy as it warms up; check thickness.",
+    "query": "cork yoga mat non slip",
+    "bullets": [
+      "Natural material feel",
+      "Good for some sweat levels",
+      "Heavier than foam mats"
+    ]
+  },
+  {
+    "title": "Extra-thick mats (joint friendly)",
+    "badge": "Best cushioning",
+    "desc": "If knees/wrists complain, extra thickness can help.",
+    "query": "extra thick yoga mat 10mm",
+    "bullets": [
+      "More cushioning",
+      "Better for floor work",
+      "Can be less stable for balancing poses"
+    ]
+  }
+]
+
+function SummaryBox() {
+  return (
+    <div className="rounded-2xl border bg-white p-6 shadow-sm">
+      <h2 className="text-xl font-semibold">At a glance</h2>
+      <p className="mt-2 text-zinc-700">
+        A straightforward shortlist with sensible options for most people — plus guidance on what to look for so you don’t buy on hype.
+      </p>
+      <div className="mt-4 flex flex-wrap gap-2">
+        <Link className="btn-secondary" href="/movement">Movement hub</Link>
+      </div>
+      <p className="mt-4 text-xs text-zinc-500">Last updated: January 27, 2026</p>
+    </div>
+  )
+}
+
+export default function Page() {
+  const itemList = PICKS.map((p, i) => ({
+    '@type': 'ListItem',
+    position: i + 1,
+    name: p.title,
+    url: amazonSearchUrl(p.query),
+  }))
+
+  const ld = {
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    headline: "Best Yoga Mats for Grip & Comfort",
+    dateModified: '2026-01-27',
+    datePublished: '2026-01-27',
+    mainEntity: {
+      '@type': 'ItemList',
+      itemListElement: itemList,
+    },
+  }
+
+  return (
+    <main className="mx-auto max-w-6xl px-4 py-16">
+      <StructuredData data={ld} />
+      <StructuredData data={{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "How thick should a mat be?", "acceptedAnswer": {"@type": "Answer", "text": "Most people do well with 4–6mm. Go thicker if you need more cushioning on hard floors."}}, {"@type": "Question", "name": "What about smell/chemicals?", "acceptedAnswer": {"@type": "Answer", "text": "Let new mats air out. If you’re sensitive, choose reputable brands and avoid very strong odours."}}]}} />
+
+      <header className="max-w-3xl">
+        <h1 className="text-4xl font-bold">Best yoga mats for grip & comfort</h1>
+        <p className="mt-3 text-zinc-700">A shortlist of yoga mats that balance grip, cushioning, and durability. Choose based on sweat level and joint comfort.</p>
+      </header>
+
+      <section className="mt-8">
+        <SummaryBox />
+      </section>
+
+      <section className="mt-14">
+        <h2 className="text-2xl font-semibold">Top picks (shortlist)</h2>
+        <p className="mt-2 text-sm text-zinc-600">Three solid starting points, then a fuller list below.</p>
+        <div className="mt-6 grid gap-4 md:grid-cols-3">
+          <ProductPick
+            title="Manduka PRO / PROlite"
+            badge="Best durability"
+            description="Premium mats known for longevity."
+            href={amazonSearchUrl('Manduka PRO yoga mat')}
+            bullets={["Very durable", "Great support", "Heavier than most mats"]}
+          />
+
+          <ProductPick
+            title="Liforme yoga mat"
+            badge="Best grip"
+            description="High-grip option, popular for sweaty sessions."
+            href={amazonSearchUrl('Liforme yoga mat')}
+            bullets={["Excellent grip", "Alignment markings", "Premium price"]}
+          />
+
+          <ProductPick
+            title="Decathlon / Domyos yoga mats"
+            badge="Best budget"
+            description="Good starter mats if you’re building the habit."
+            href={amazonSearchUrl('Decathlon yoga mat Domyos')}
+            bullets={["Affordable", "Easy to replace", "Check thickness"]}
+          />
+
+        </div>
+      </section>
+
+      <section className="mt-14">
+        <h2 className="text-2xl font-semibold">Full shortlist</h2>
+        <p className="mt-2 text-sm text-zinc-600">Choose based on your needs (space, budget, comfort, and how often you’ll actually use it).</p>
+        <div className="mt-6 grid gap-4 md:grid-cols-2">
+          <ProductPick
+            title="Manduka PRO / PROlite"
+            badge="Best durability"
+            description="Premium mats known for longevity."
+            href={amazonSearchUrl('Manduka PRO yoga mat')}
+            bullets={["Very durable", "Great support", "Heavier than most mats"]}
+          />
+
+          <ProductPick
+            title="Liforme yoga mat"
+            badge="Best grip"
+            description="High-grip option, popular for sweaty sessions."
+            href={amazonSearchUrl('Liforme yoga mat')}
+            bullets={["Excellent grip", "Alignment markings", "Premium price"]}
+          />
+
+          <ProductPick
+            title="Decathlon / Domyos yoga mats"
+            badge="Best budget"
+            description="Good starter mats if you’re building the habit."
+            href={amazonSearchUrl('Decathlon yoga mat Domyos')}
+            bullets={["Affordable", "Easy to replace", "Check thickness"]}
+          />
+
+          <ProductPick
+            title="Gaiam yoga mats"
+            badge="Starter"
+            description="Popular entry-level mats with plenty of styles."
+            href={amazonSearchUrl('Gaiam yoga mat')}
+            bullets={["Good starter range", "Widely available", "Grip varies by model"]}
+          />
+
+          <ProductPick
+            title="Cork yoga mat"
+            badge="Natural feel"
+            description="Cork can feel grippy as it warms up; check thickness."
+            href={amazonSearchUrl('cork yoga mat non slip')}
+            bullets={["Natural material feel", "Good for some sweat levels", "Heavier than foam mats"]}
+          />
+
+          <ProductPick
+            title="Extra-thick mats (joint friendly)"
+            badge="Best cushioning"
+            description="If knees/wrists complain, extra thickness can help."
+            href={amazonSearchUrl('extra thick yoga mat 10mm')}
+            bullets={["More cushioning", "Better for floor work", "Can be less stable for balancing poses"]}
+          />
+
+        </div>
+      </section>
+
+      <section className="mt-14">
+        <h2 className="text-2xl font-semibold">How we think about “best”</h2>
+        <div className="mt-3 space-y-3 text-sm text-zinc-700 max-w-3xl">
+          <p>
+            “Best” here means: sensible features, decent reviews across many buyers, and a realistic fit for most homes — not hype, not extreme claims.
+          </p>
+          <p>
+            Always check sizing/specs and current pricing before you buy. If a product makes strong health claims without evidence, treat that as marketing.
+          </p>
+        </div>
+        <p className="mt-4 text-sm text-zinc-500">
+          Some links may earn us a small commission at no extra cost to you.
+        </p>
+      </section>
+    </main>
+  )
+}

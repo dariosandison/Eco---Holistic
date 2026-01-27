@@ -26,14 +26,26 @@ export default function SiteHeader() {
 
         {/* Desktop nav */}
         <nav className="ml-auto hidden items-center gap-6 md:flex">
-          <Link href="/guides" className="text-sm font-medium text-zinc-700 hover:text-zinc-900">
+          <Link href="/recommended" className="text-sm font-medium text-zinc-700 hover:text-zinc-900">
+            Recommended
+          </Link>
+          <Link href="/best-of" className="text-sm font-medium text-zinc-700 hover:text-zinc-900">
             Guides
           </Link>
           <Link href="/blog" className="text-sm font-medium text-zinc-700 hover:text-zinc-900">
             Blog
           </Link>
+          <Link href="/guides" className="text-sm font-medium text-zinc-700 hover:text-zinc-900">
+            Learn
+          </Link>
           <Link href="/picks" className="text-sm font-medium text-zinc-700 hover:text-zinc-900">
             Picks
+          </Link>
+          <Link href="/nutrition" className="text-sm font-medium text-zinc-700 hover:text-zinc-900">
+            Nutrition
+          </Link>
+          <Link href="/movement" className="text-sm font-medium text-zinc-700 hover:text-zinc-900">
+            Movement
           </Link>
           <Link href="/shopping-list" onClick={() => trackEvent("click_shopping_list")} className="text-sm font-medium text-zinc-700 hover:text-zinc-900">
             Free List
@@ -43,12 +55,6 @@ export default function SiteHeader() {
           </Link>
           <Link href="/how-we-test" className="text-sm font-medium text-zinc-700 hover:text-zinc-900">
             How We Test
-          </Link>
-          <Link
-            href="/product-disclosure"
-            className="text-sm font-medium text-zinc-700 hover:text-zinc-900"
-          >
-            Disclosure
           </Link>
         </nav>
 
@@ -72,29 +78,44 @@ export default function SiteHeader() {
       {/* Mobile nav */}
       <div className={`${open ? 'block' : 'hidden'} border-t border-zinc-200/60 md:hidden`}>
         <nav className="mx-auto flex max-w-6xl flex-col gap-1 px-4 py-3">
-          <Link href="/guides" className="rounded-md px-2 py-2 text-sm text-zinc-800 hover:bg-zinc-50">
+          <Link href="/recommended" className="rounded-md px-2 py-2 text-sm text-zinc-800 hover:bg-zinc-50">
+            Recommended
+          </Link>
+          <Link href="/best-of" className="rounded-md px-2 py-2 text-sm text-zinc-800 hover:bg-zinc-50">
             Guides
           </Link>
           <Link href="/blog" className="rounded-md px-2 py-2 text-sm text-zinc-800 hover:bg-zinc-50">
             Blog
           </Link>
+          <Link href="/guides" className="rounded-md px-2 py-2 text-sm text-zinc-800 hover:bg-zinc-50">
+            Learn
+          </Link>
           <Link href="/picks" className="rounded-md px-2 py-2 text-sm text-zinc-800 hover:bg-zinc-50">
             Picks
           </Link>
-          <Link href="/deals" className="rounded-md px-2 py-2 text-sm text-zinc-800 hover:bg-zinc-50">
-            Deals
+          <Link href="/nutrition" className="rounded-md px-2 py-2 text-sm text-zinc-800 hover:bg-zinc-50">
+            Nutrition
+          </Link>
+          <Link href="/movement" className="rounded-md px-2 py-2 text-sm text-zinc-800 hover:bg-zinc-50">
+            Movement
           </Link>
           <Link href="/shopping-list" onClick={() => trackEvent("click_shopping_list")} className="rounded-md px-2 py-2 text-sm text-zinc-800 hover:bg-zinc-50">
             Free List
           </Link>
+          <Link href="/deals" className="rounded-md px-2 py-2 text-sm text-zinc-800 hover:bg-zinc-50">
+            Deals
+          </Link>
           <Link href="/how-we-test" className="rounded-md px-2 py-2 text-sm text-zinc-800 hover:bg-zinc-50">
             How We Test
           </Link>
-          <Link
-            href="/product-disclosure"
-            className="rounded-md px-2 py-2 text-sm text-zinc-800 hover:bg-zinc-50"
-          >
+          <Link href="/product-disclosure" className="rounded-md px-2 py-2 text-sm text-zinc-800 hover:bg-zinc-50">
             Disclosure
+          </Link>
+          <Link href="/about" className="rounded-md px-2 py-2 text-sm text-zinc-800 hover:bg-zinc-50">
+            About
+          </Link>
+          <Link href="/contact" className="rounded-md px-2 py-2 text-sm text-zinc-800 hover:bg-zinc-50">
+            Contact
           </Link>
         </nav>
       </div>

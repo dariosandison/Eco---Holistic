@@ -44,6 +44,22 @@ export default async function sitemap() {
     '/best-low-tox-products-for-beginners',
     '/shopping-list',
     '/shopping-list/thanks',
+    '/best-of',
+    '/nutrition',
+    '/movement',
+    '/best-fitness-trackers-beginners-uk',
+    '/best-smart-scales-uk',
+    '/best-resistance-bands-home-workouts',
+    '/best-walking-shoes-daily-steps-uk',
+    '/best-yoga-mats-grip-comfort',
+    '/best-foam-rollers-recovery-tools',
+    '/best-extra-virgin-olive-oil-uk',
+    '/best-organic-oats-uk',
+    '/best-chia-seeds-uk',
+    '/best-ground-flaxseed-uk',
+    '/best-organic-matcha-uk',
+    '/best-fermented-foods-sauerkraut-kimchi',
+    '/best-activewear-basics-uk',
   ].map((p) => ({ url: `${base}${p}`, lastModified: new Date() }))
 
   const guideRoutes = listContent('guides').map((g) => ({

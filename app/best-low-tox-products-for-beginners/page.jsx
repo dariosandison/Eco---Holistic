@@ -14,7 +14,7 @@ export default function Page() {
       </p>
 
       <div className="rounded-2xl border bg-white p-6 shadow-sm mb-10">
-        <h2 className="text-xl font-semibold mb-2">Quick answer</h2>
+        <h2 className="text-xl font-semibold mb-2">At a glance</h2>
         <p className="text-zinc-700">
           If you only choose one option, start with our <Link className="underline" href="/recommended">Trusted Picks</Link> and pick the “Best overall”
           choice for your needs.

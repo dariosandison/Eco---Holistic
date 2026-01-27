@@ -108,14 +108,14 @@ export default function HomePage() {
             <p className="mt-2 text-sm text-zinc-600">For people who want healthier homes without overwhelm or fear-based advice.</p>
 
             <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
-              <Link href="/guides" className="btn-primary w-full sm:w-auto text-center">
-                Read our guides
+              <Link href="/best-of" className="btn-primary w-full sm:w-auto text-center">
+                Browse best-of guides
               </Link>
               <Link
                 href="/recommended"
                 className="w-full sm:w-auto text-center rounded-xl border border-zinc-300 bg-white/80 px-4 py-2.5 text-sm font-semibold text-zinc-900 backdrop-blur transition hover:bg-white"
               >
-                Shop our trusted picks
+                Browse recommendations
               </Link>
             </div>
 

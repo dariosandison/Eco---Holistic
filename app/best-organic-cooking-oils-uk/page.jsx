@@ -15,7 +15,7 @@ export default function Page() {
       </header>
 
       <section className="mt-10">
-        <h2 className="text-2xl font-semibold mb-2">Quick answer</h2>
+        <h2 className="text-2xl font-semibold mb-2">At a glance</h2>
         <p className="text-zinc-700">Different oils suit different cooking temperatures.</p>
       </section>
 

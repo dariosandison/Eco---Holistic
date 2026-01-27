@@ -8,12 +8,15 @@ export default function SiteFooter() {
   ]
 
   const site = [
-    { href: '/picks', label: 'Picks' },
-    { href: '/recommended', label: 'Trusted Picks' },
-    { href: '/products', label: 'Products' },
-    { href: '/guides', label: 'Guides' },
+    { href: '/recommended', label: 'Recommended' },
+    { href: '/best-of', label: 'Guides (Best-of)' },
     { href: '/blog', label: 'Blog' },
+    { href: '/guides', label: 'Learn' },
+    { href: '/picks', label: 'Picks' },
+    { href: '/nutrition', label: 'Nutrition' },
+    { href: '/movement', label: 'Movement' },
     { href: '/deals', label: 'Deals' },
+    { href: '/shopping-list', label: 'Free Shopping List' },
     { href: '/contact', label: 'Contact' },
   ]
 

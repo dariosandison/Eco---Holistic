@@ -125,7 +125,7 @@ export default function Page() {
       </section>
 
       <section className="mt-14">
-        <h2 className="text-2xl font-semibold">Top picks (quick decision)</h2>
+        <h2 className="text-2xl font-semibold">Top picks (shortlist)</h2>
         <p className="mt-2 text-sm text-zinc-600">In small flats: prioritise night-mode noise + realistic filter costs.</p>
         <div className="mt-6 grid gap-4 md:grid-cols-3">
           <ProductPick

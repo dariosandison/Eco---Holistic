@@ -15,7 +15,7 @@ export default function Page() {
       </header>
 
       <section className="mt-10">
-        <h2 className="text-2xl font-semibold mb-2">Quick answer</h2>
+        <h2 className="text-2xl font-semibold mb-2">At a glance</h2>
         <p className="text-zinc-700">If you’re starting from scratch, buy one high-quality pan you’ll use daily (stainless steel or cast iron), then add pieces only if you genuinely need them.</p>
       </section>
 
