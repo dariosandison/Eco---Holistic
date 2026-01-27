@@ -76,7 +76,6 @@ export default function ArticleLayout({
       </header>
 
       <div className="prose prose-neutral max-w-none">{children}</div>
-
       <div className="mt-10 not-prose">
         <AuthorBox />
       </div>
@@ -84,15 +83,12 @@ export default function ArticleLayout({
       <div className="mt-10 not-prose rounded-3xl border border-zinc-200 bg-zinc-50/60 p-6">
         <h2 className="text-lg font-semibold text-zinc-900">Want product options?</h2>
         <p className="mt-2 text-sm text-zinc-700">
-          If you&apos;re comparing products, our Guides keep things simple with shortlists and clear trade‑offs.
-          If you&apos;re starting from scratch, use Picks to follow a sensible path by topic.
+          When you&apos;re ready to compare products, our Favourites pages keep things simple with shortlists and clear trade-offs.
+          If you want more background first, explore Wellness Insights.
         </p>
         <div className="mt-4 flex flex-col gap-3 sm:flex-row sm:items-center">
-          <a href="/best-of" className="btn-primary text-center">Browse Guides</a>
-          <a href="/picks" className="btn-secondary text-center">Start with Picks</a>
-          <a href="/blog" className="text-sm font-medium text-zinc-700 hover:underline">
-            Keep reading →
-          </a>
+          <a href="/best-of" className="btn-primary text-center">Browse Favourites</a>
+          <a href="/blog" className="btn-secondary text-center">Explore Wellness Insights</a>
         </div>
         <p className="mt-3 text-xs text-zinc-600">
           Some links may earn a small commission at no extra cost to you. See our disclosure for details.

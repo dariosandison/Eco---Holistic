@@ -2,7 +2,7 @@ import Link from 'next/link'
 
 export const metadata = {
   title: 'About | Wild & Well',
-  description: 'Evidence‑informed wellness guidance with UK‑friendly recommendations.',
+  description: 'Evidence-informed wellness guidance with UK-friendly recommendations.',
 }
 
 export default function Page() {
@@ -10,8 +10,8 @@ export default function Page() {
     <div className="mx-auto max-w-3xl px-4 py-12">
       <h1 className="text-3xl font-bold tracking-tight text-zinc-900">About Wild &amp; Well</h1>
       <p className="mt-3 text-zinc-700">
-        Wild &amp; Well is a practical wellness site for people who want better health without the drama, gimmicks, or miracle claims.
-        We focus on what matters in modern life — food quality, sleep, movement, and the home environment — and we translate it into
+        Wild &amp; Well is a practical wellness site for people who want better health without gimmicks or miracle claims.
+        We focus on what matters in modern life — food quality, sleep, movement, and the home environment — and translate it into
         clear steps and sensible product choices.
       </p>
 
@@ -19,23 +19,28 @@ export default function Page() {
         <section className="rounded-3xl border border-zinc-200 bg-white p-6">
           <h2 className="text-xl font-semibold text-zinc-900">What you&apos;ll find here</h2>
           <ul className="mt-3 list-disc pl-5 text-sm text-zinc-700 space-y-2">
-            <li><strong>Wellness Insights</strong>: informative articles that explain the issue, where it shows up today, and what to do next.</li>
-            <li><strong>Guides</strong>: buyer guides and “best of” roundups with clear trade‑offs (not endless options).</li>
-            <li><strong>Picks</strong>: curated starting points by topic (sleep, air, water, nutrition, movement).</li>
-            <li><strong>Deals</strong>: a small, curated list of discounts on products we already cover — updated regularly.</li>
+            <li>
+              <strong>Wellness Insights</strong>: informative articles that explain the issue, where it shows up today, and what to do next.
+            </li>
+            <li>
+              <strong>Favourites</strong>: shortlists and comparisons with clear trade-offs (so you can choose without overwhelm).
+            </li>
+            <li>
+              <strong>Deals</strong>: a small, curated list of discounts on products we already cover — updated regularly.
+            </li>
           </ul>
         </section>
 
         <section className="rounded-3xl border border-zinc-200 bg-white p-6">
-          <h2 className="text-xl font-semibold text-zinc-900">How we research &amp; choose products</h2>
+          <h2 className="text-xl font-semibold text-zinc-900">How we research &amp; choose</h2>
           <p className="mt-2 text-sm text-zinc-700">
-            We use a consistent set of criteria: safety basics, materials and ingredients, durability, ease of use, cost of ownership
-            (including refills/filters), and whether a product actually fits real households and routines.
-            When possible, we prioritise reputable brands with clear specs, independent testing, and transparent documentation.
+            We use a consistent set of criteria: safety basics, materials and ingredients, durability, ease of use,
+            cost of ownership (including refills/filters), and whether a product fits real households and routines.
+            Where possible, we prioritise reputable brands with clear specs, independent testing, and transparent documentation.
           </p>
           <div className="mt-4 flex flex-wrap gap-3">
-            <Link href="/how-we-test" className="text-sm font-medium text-zinc-800 hover:underline">Read: How we test</Link>
-            <Link href="/editorial-policy" className="text-sm font-medium text-zinc-800 hover:underline">Read: Editorial policy</Link>
+            <Link href="/how-we-test" className="text-sm font-medium text-zinc-800 hover:underline">How we test</Link>
+            <Link href="/editorial-policy" className="text-sm font-medium text-zinc-800 hover:underline">Editorial policy</Link>
           </div>
         </section>
 
@@ -47,7 +52,7 @@ export default function Page() {
           </p>
           <div className="mt-4">
             <Link href="/affiliate-disclosure" className="text-sm font-medium text-zinc-800 hover:underline">
-              Read: Affiliate disclosure
+              Affiliate disclosure
             </Link>
           </div>
         </section>
@@ -55,8 +60,8 @@ export default function Page() {
         <section className="rounded-3xl border border-zinc-200 bg-white p-6">
           <h2 className="text-xl font-semibold text-zinc-900">Corrections &amp; updates</h2>
           <p className="mt-2 text-sm text-zinc-700">
-            Products change. Prices change. Research evolves. We add “updated” dates where relevant and revise guidance when we find
-            better information. If you spot something that looks wrong or outdated, let us know and we&apos;ll review it.
+            Products change. Prices change. Research evolves. We revise guidance when we find better information.
+            If you spot something that looks wrong or outdated, let us know and we&apos;ll review it.
           </p>
           <div className="mt-4">
             <Link href="/contact" className="text-sm font-medium text-zinc-800 hover:underline">Contact us</Link>

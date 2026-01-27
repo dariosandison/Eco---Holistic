@@ -193,7 +193,7 @@ export default function HomePage() {
   <div className="mx-auto max-w-6xl px-4">
     <h2 className="text-2xl font-semibold">Best Of (buyer guides)</h2>
     <p className="mt-2 text-sm text-zinc-600">
-      These pages are built for buying clarity: best overall, budget, and sensitive‑household options — with clear trade‑offs.
+      If you want product options, These pages are built for buying clarity: best overall, budget, and sensitive-household options — with clear trade-offs.
     </p>
     <div className="mt-6 grid gap-4 md:grid-cols-3">
       <Link href="/best-low-tox-products-for-beginners" className="card hover:shadow-sm transition-shadow">

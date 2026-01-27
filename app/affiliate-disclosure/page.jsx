@@ -32,14 +32,11 @@ export default function Page() {
       <section className="mt-10 rounded-2xl border bg-white p-6 shadow-sm">
         <h2 className="text-xl font-semibold mb-2">Where to start</h2>
         <p className="text-zinc-700 mb-4">
-          If you want the simplest route to a good choice, start with Picks (curated starting points by topic) or our Guides (shortlists and comparisons).
+          If you want the simple route to a good choice, start with our curated picks page.
         </p>
         <div className="flex flex-wrap gap-2">
-          <Link className="btn-primary" href="/picks">
-            Start with Picks
-          </Link>
-          <Link className="btn-secondary" href="/best-of">
-            Browse Guides
+          <Link className="btn-primary" href="/best-of">
+            Shop trusted picks
           </Link>
           <Link className="btn-secondary" href="/shopping-list">
             Get the free shopping list

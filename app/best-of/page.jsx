@@ -179,29 +179,12 @@ export default function Page() {
           If you want the “why” and the bigger picture, use{" "}
           <Link className="underline" href="/blog">
             Wellness Insights
-          </Link>{" "}
-          and{" "}
-          <Link className="underline" href="/guides">
-            How‑to guides
           </Link>
           .
         </p>
         <div className="mt-5 flex flex-wrap gap-2">
           <Link className="btn-secondary" href="/picks">Picks</Link>
           <Link className="btn-secondary" href="/deals">Deals</Link>
-        </div>
-        <div className="mt-6 rounded-3xl border border-zinc-200 bg-white p-6">
-          <h2 className="text-lg font-semibold text-zinc-900">How we choose</h2>
-          <ul className="mt-3 list-disc pl-5 text-sm text-zinc-700 space-y-1">
-            <li>Safety basics first (materials/ingredients, certifications where relevant).</li>
-            <li>Realistic ownership costs (refills, filters, maintenance) — not just the purchase price.</li>
-            <li>Clear trade‑offs: we tell you who each option is for (and who it isn&apos;t for).</li>
-            <li>Shortlists over endless lists — to reduce overwhelm and make decisions easier.</li>
-          </ul>
-          <div className="mt-4 flex flex-wrap gap-3">
-            <Link href="/how-we-test" className="text-sm font-medium text-zinc-800 hover:underline">How we test</Link>
-            <Link href="/editorial-policy" className="text-sm font-medium text-zinc-800 hover:underline">Editorial policy</Link>
-          </div>
         </div>
         <p className="mt-3 text-xs text-zinc-500">Last updated: January 27, 2026</p>
       </header>
