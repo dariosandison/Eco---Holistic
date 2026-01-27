@@ -55,7 +55,7 @@ export default function Page() {
       </section>
 
       <section className="mt-14">
-        <h2 className="text-2xl font-semibold">Shortlist (quick buyer’s picks)</h2>
+        <h2 className="text-2xl font-semibold">Shortlist (buyer picks)</h2>
         <p className="mt-2 text-sm text-zinc-600">
           These are intentionally broad “search links” so you can choose the best price/size for your needs.
         </p>

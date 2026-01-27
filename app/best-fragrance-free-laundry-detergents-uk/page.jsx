@@ -6,7 +6,7 @@ import { amazonSearchUrl } from '@/lib/amazon'
 
 export const metadata = {
   title: 'Best Fragrance‑Free Laundry Detergents (UK) | Wild & Well',
-  description: 'A shortlist of fragrance‑free detergents for sensitive households in the UK — what to look for, what to avoid, and quick buyer picks.',
+  description: 'A shortlist of fragrance‑free detergents for sensitive households in the UK — what to look for, what to avoid, and buyer picks.',
 }
 
 const PICKS = [

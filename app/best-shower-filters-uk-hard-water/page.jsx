@@ -5,7 +5,7 @@ import { amazonSearchUrl } from '@/lib/amazon'
 
 export const metadata = {
   title: 'Best Shower Filters for UK Hard Water | Wild & Well',
-  description: 'Shortlisted shower filters for hard-water UK homes — what they can and can’t do, plus quick buyer picks.',
+  description: 'Shortlisted shower filters for hard-water UK homes — what they can and can’t do, plus buyer picks.',
 }
 
 const PICKS = [

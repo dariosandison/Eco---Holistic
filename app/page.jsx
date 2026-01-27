@@ -191,9 +191,9 @@ export default function HomePage() {
 {/* BEST OF */}
 <section className="mt-16">
   <div className="mx-auto max-w-6xl px-4">
-    <h2 className="text-2xl font-semibold">Best Of (quick buyer’s guides)</h2>
+    <h2 className="text-2xl font-semibold">Best Of (buyer guides)</h2>
     <p className="mt-2 text-sm text-zinc-600">
-      Prefer a faster answer? These pages are built for buying clarity: best overall, budget, and sensitive-household options.
+      These pages are built for buying clarity: best overall, budget, and sensitive‑household options — with clear trade‑offs.
     </p>
     <div className="mt-6 grid gap-4 md:grid-cols-3">
       <Link href="/best-low-tox-products-for-beginners" className="card hover:shadow-sm transition-shadow">
