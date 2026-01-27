@@ -16,7 +16,7 @@ export default function Page() {
       <div className="rounded-2xl border bg-white p-6 shadow-sm mb-10">
         <h2 className="text-xl font-semibold mb-2">At a glance</h2>
         <p className="text-zinc-700">
-          If you only choose one option, start with our <Link className="underline" href="/best-of">Trusted Picks</Link> and pick the “Best overall”
+          If you only choose one option, start with our <Link className="underline" href="/topics">Trusted Favourites</Link> and pick the “Best overall”
           choice for your needs.
         </p>
         <p className="mt-3 text-sm text-zinc-600">

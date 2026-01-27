@@ -43,7 +43,7 @@ export default function Page() {
         <p className="text-zinc-700">
           Start with one addition or swap at a time. Consistency matters more than perfection.
         </p>
-        <Link href="/best-of" className="btn-primary mt-4 inline-block">
+        <Link href="/topics" className="btn-primary mt-4 inline-block">
           Explore trusted herbal picks
         </Link>
       </section>

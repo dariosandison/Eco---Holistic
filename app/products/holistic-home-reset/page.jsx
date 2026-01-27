@@ -41,8 +41,8 @@ export default function Page() {
           <Link className="btn-primary" href="/shopping-list" data-track="product-waitlist-primary">
             Get early access (free list)
           </Link>
-          <Link className="btn-secondary" href="/best-of">
-            See recommended picks
+          <Link className="btn-secondary" href="/topics">
+            See recommended favourites
           </Link>
         </div>
         <p className="mt-3 text-xs text-zinc-500">
@@ -81,7 +81,7 @@ export default function Page() {
           </p>
           <ul className="mt-4 space-y-2 text-sm text-zinc-700">
             <li>
-              <Link className="underline" href="/best-of#start-here">Trusted Picks: start here</Link>
+              <Link className="underline" href="/best-of#start-here">Trusted Favourites: start here</Link>
             </li>
             <li>
               <Link className="underline" href="/guides/sleep-naturally-without-overwhelm">Sleep cornerstone guide</Link>

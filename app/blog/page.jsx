@@ -79,6 +79,17 @@ export default function Page() {
           ))}
         </div>
       </section>
+
+      <div className="mt-12 rounded-3xl border border-zinc-200 bg-zinc-50/60 p-6">
+        <h2 className="text-lg font-semibold text-zinc-900">Want product options?</h2>
+        <p className="mt-2 text-sm text-zinc-700">
+          When you&apos;re ready to compare products, our Favourites pages keep things simple with shortlists and clear trade-offs.
+        </p>
+        <div className="mt-4 flex flex-col gap-3 sm:flex-row sm:items-center">
+          <a href="/best-of" className="btn-primary text-center">Browse Favourites</a>
+          <a href="/topics" className="btn-secondary text-center">Browse Topics</a>
+        </div>
+      </div>
     </div>
   )
 }

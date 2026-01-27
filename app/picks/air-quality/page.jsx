@@ -3,7 +3,7 @@ import ProductPick from '@/components/mdx/ProductPick'
 import { amazonSearchUrl } from '@/lib/amazon'
 
 export const metadata = {
-  title: 'Air Quality Picks — Wild & Well',
+  title: 'Air Quality Topics — Wild & Well',
   description: 'Air quality hub for UK homes: allergies, damp, and the small choices that make a big difference.',
 }
 
@@ -52,7 +52,7 @@ export default function Page() {
       </section>
 
       <section className="mt-14">
-        <h2 className="text-2xl font-semibold">Quick picks</h2>
+        <h2 className="text-2xl font-semibold">Quick topics</h2>
         <p className="mt-2 text-sm text-zinc-600">Short search links so you can compare price, warranty, and filter costs.</p>
 
         <div className="mt-6 grid gap-4 md:grid-cols-2">

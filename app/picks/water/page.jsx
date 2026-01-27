@@ -3,7 +3,7 @@ import ProductPick from '@/components/mdx/ProductPick'
 import { amazonSearchUrl } from '@/lib/amazon'
 
 export const metadata = {
-  title: 'Water Picks — Wild & Well',
+  title: 'Water Topics — Wild & Well',
   description: 'Water filter hub for UK homes: under-sink vs jug vs countertop, plus the best next steps.',
 }
 
@@ -50,7 +50,7 @@ export default function Page() {
       </section>
 
       <section className="mt-14">
-        <h2 className="text-2xl font-semibold">Quick picks (search links)</h2>
+        <h2 className="text-2xl font-semibold">Quick topics (search links)</h2>
         <div className="mt-6 grid gap-4 md:grid-cols-2">
           <ProductPick
             title="Water filter jug (everyday starter)"

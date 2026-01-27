@@ -3,8 +3,8 @@ import ProductPick from '@/components/mdx/ProductPick'
 import { amazonSearchUrl } from '@/lib/amazon'
 
 export const metadata = {
-  title: 'Fragrance-Free Picks — Wild & Well',
-  description: 'Fragrance-free + sensitive-skin friendly cleaning and laundry picks for UK homes.',
+  title: 'Fragrance-Free Topics — Wild & Well',
+  description: 'Fragrance-free + sensitive-skin friendly cleaning and laundry topics for UK homes.',
 }
 
 export default function Page() {

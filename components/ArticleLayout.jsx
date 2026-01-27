@@ -1,5 +1,3 @@
-import AuthorBox from '@/components/AuthorBox'
-
 export default function ArticleLayout({
   title,
   description,
@@ -76,22 +74,20 @@ export default function ArticleLayout({
       </header>
 
       <div className="prose prose-neutral max-w-none">{children}</div>
-      <div className="mt-10 not-prose">
-        <AuthorBox />
-      </div>
 
-      <div className="mt-10 not-prose rounded-3xl border border-zinc-200 bg-zinc-50/60 p-6">
-        <h2 className="text-lg font-semibold text-zinc-900">Want product options?</h2>
+      <div className="mt-12 not-prose rounded-3xl border border-zinc-200 bg-zinc-50/60 p-6">
+        <h2 className="text-lg font-semibold text-zinc-900">Want the fastest next step?</h2>
         <p className="mt-2 text-sm text-zinc-700">
-          When you&apos;re ready to compare products, our Favourites pages keep things simple with shortlists and clear trade-offs.
-          If you want more background first, explore Wellness Insights.
+          Browse our trusted picks for low‑tox and holistic living — curated to save you time (and money).
         </p>
         <div className="mt-4 flex flex-col gap-3 sm:flex-row sm:items-center">
-          <a href="/best-of" className="btn-primary text-center">Browse Favourites</a>
-          <a href="/blog" className="btn-secondary text-center">Explore Wellness Insights</a>
+          <a href="/best-of" className="btn-primary text-center">Shop trusted picks</a>
+          <a href="/guides" className="text-sm font-medium text-zinc-700 hover:underline">
+            Or continue with guides →
+          </a>
         </div>
         <p className="mt-3 text-xs text-zinc-600">
-          Some links may earn a small commission at no extra cost to you. See our disclosure for details.
+          Some links may earn us a small commission at no extra cost to you. We only recommend products we genuinely trust.
         </p>
       </div>
 

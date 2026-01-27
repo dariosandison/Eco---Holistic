@@ -63,7 +63,7 @@ function QuickSummary() {
         If you want high capacity without plumbing, choose a <strong>countertop gravity filter</strong>.
       </p>
       <div className="mt-4 flex flex-wrap gap-2">
-        <Link className="btn-secondary" href="/picks/water">Water Picks hub</Link>
+        <Link className="btn-secondary" href="/favourites/water">Water Favourites hub</Link>
         <Link className="btn-secondary" href="/guides/water-filter-buying-guide-uk">Buying guide</Link>
         <Link className="btn-secondary" href="/shopping-list">Free shopping list</Link>
       </div>
@@ -161,7 +161,7 @@ export default function Page() {
       </section>
 
       <section className="mt-14">
-        <h2 className="text-2xl font-semibold">Top picks (shortlist)</h2>
+        <h2 className="text-2xl font-semibold">Top favourites (shortlist)</h2>
         <p className="mt-2 text-sm text-zinc-600">Three simple routes, depending on how you live.</p>
         <div className="mt-6 grid gap-4 md:grid-cols-3">
           <ProductPick
@@ -219,7 +219,7 @@ export default function Page() {
       </section>
 
       <section className="mt-14">
-        <h2 className="text-2xl font-semibold">Shortlist (buyer picks)</h2>
+        <h2 className="text-2xl font-semibold">Shortlist (buyer favourites)</h2>
         <p className="mt-2 text-sm text-zinc-600">
           These are curated searches so you can compare prices and check replacement filters.
         </p>
@@ -237,7 +237,7 @@ export default function Page() {
         </div>
 
         <div className="mt-8 flex flex-wrap gap-2">
-          <Link className="btn-primary" href="/picks/water">Go to Water Picks hub →</Link>
+          <Link className="btn-primary" href="/favourites/water">Go to Water Favourites hub →</Link>
           <Link className="btn-secondary" href="/guides/water-filter-buying-guide-uk">Read the buying guide</Link>
         </div>
       </section>

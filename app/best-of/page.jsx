@@ -1,7 +1,7 @@
 import Link from "next/link";
 
 export const metadata = {
-  title: "Best-of Guides (Product Roundups) | Wild & Well",
+  title: "Favourites (Product Shortlists) | Wild & Well",
   description:
     "Browse our best-of product roundups: low-tox home, sleep, nutrition, and movement — with clear trade-offs and shortlists.",
 };
@@ -173,17 +173,16 @@ export default function Page() {
   return (
     <main className="mx-auto max-w-6xl px-4 py-16">
       <header className="max-w-3xl">
-        <h1 className="text-4xl font-bold">Best-of Guides</h1>
+        <h1 className="text-4xl font-bold">Favourites</h1>
         <p className="mt-3 text-zinc-700">
           Product roundups designed to be clear and useful: what to look for, what to avoid, and a shortlist of solid options.
           If you want the “why” and the bigger picture, use{" "}
           <Link className="underline" href="/blog">
             Wellness Insights
-          </Link>
-          .
+          </Link>.
         </p>
         <div className="mt-5 flex flex-wrap gap-2">
-          <Link className="btn-secondary" href="/picks">Picks</Link>
+          <Link className="btn-secondary" href="/topics">Topics hub</Link>
           <Link className="btn-secondary" href="/deals">Deals</Link>
         </div>
         <p className="mt-3 text-xs text-zinc-500">Last updated: January 27, 2026</p>

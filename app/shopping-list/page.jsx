@@ -71,8 +71,8 @@ export default function ShoppingListPage({ searchParams }) {
             thank‑you page
           </Link>
           . Prefer to browse now? Start with our{" "}
-          <Link className="underline" href="/picks">
-            Picks hubs
+          <Link className="underline" href="/topics">
+            Favourites hubs
           </Link>
           .
         </p>

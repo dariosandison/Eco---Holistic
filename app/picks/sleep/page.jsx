@@ -3,7 +3,7 @@ import ProductPick from '@/components/mdx/ProductPick'
 import { amazonSearchUrl } from '@/lib/amazon'
 
 export const metadata = {
-  title: 'Sleep Picks — Wild & Well',
+  title: 'Sleep Topics — Wild & Well',
   description: 'A calm, practical sleep hub: the few habits that move the needle, plus a shortlist of products that help when you’re ready.',
 }
 
@@ -55,7 +55,7 @@ export default function Page() {
       </section>
 
       <section className="mt-14">
-        <h2 className="text-2xl font-semibold">Shortlist (buyer picks)</h2>
+        <h2 className="text-2xl font-semibold">Shortlist (buyer topics)</h2>
         <p className="mt-2 text-sm text-zinc-600">
           These are intentionally broad “search links” so you can choose the best price/size for your needs.
         </p>

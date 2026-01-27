@@ -109,20 +109,20 @@ export default function HomePage() {
 
             <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
               <Link href="/best-of" className="btn-primary w-full sm:w-auto text-center">
-                Browse best-of guides
+                Browse favourites
               </Link>
               <Link
-                href="/best-of"
+                href="/blog"
                 className="w-full sm:w-auto text-center rounded-xl border border-zinc-300 bg-white/80 px-4 py-2.5 text-sm font-semibold text-zinc-900 backdrop-blur transition hover:bg-white"
               >
-                Browse recommendations
+                Explore Wellness Insights
               </Link>
             </div>
 
             <p className="mt-6 text-sm text-zinc-600">
               New here? Start with the{" "}
               <Link href="/shopping-list" className="underline decoration-dotted">
-                Low-Tox Starter Picks
+                Low‑Tox Shopping List
               </Link>{" "}
               and our{" "}
               <Link href="/guides/non-toxic-cleaning-starter" className="underline decoration-dotted">
@@ -163,8 +163,8 @@ export default function HomePage() {
       <section className="mx-auto max-w-6xl px-4 py-10 md:py-14">
         <div className="flex items-end justify-between gap-4">
           <h2 className="text-xl font-semibold text-zinc-900">Trusted picks</h2>
-          <Link href="/best-of" className="text-sm font-medium text-zinc-800 hover:underline">
-            See all picks →
+          <Link href="/blog" className="text-sm font-medium text-zinc-800 hover:underline">
+            See all topics →
           </Link>
         </div>
         <div className="mt-6 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
@@ -178,7 +178,7 @@ export default function HomePage() {
       <section className="mx-auto max-w-6xl px-4 py-10 md:py-14">
         <h2 className="text-xl font-semibold text-zinc-900">Starter guides</h2>
         <p className="mt-2 text-sm text-zinc-700">
-          Begin with the essentials — then follow the product picks inside each guide.
+          Start with the essentials — then use the product shortlists inside each explainer when you want options.
         </p>
         <div className="mt-6 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {FEATURED_GUIDES.map((g) => (
@@ -193,7 +193,7 @@ export default function HomePage() {
   <div className="mx-auto max-w-6xl px-4">
     <h2 className="text-2xl font-semibold">Best Of (buyer guides)</h2>
     <p className="mt-2 text-sm text-zinc-600">
-      If you want product options, These pages are built for buying clarity: best overall, budget, and sensitive-household options — with clear trade-offs.
+      Want product options? These pages are built for buying clarity: best overall, budget, and sensitive-household options.
     </p>
     <div className="mt-6 grid gap-4 md:grid-cols-3">
       <Link href="/best-low-tox-products-for-beginners" className="card hover:shadow-sm transition-shadow">
@@ -247,10 +247,10 @@ export default function HomePage() {
         <div className="mx-auto max-w-6xl px-4">
           <h2 className="text-2xl font-semibold">Explore our wellness guides</h2>
           <p className="mt-2 text-sm text-zinc-600">
-            Start where you are — low-tox swaps, holistic health, or nutrition.
+            Choose a lane: home environment, nutrition, sleep, or movement — and build from there.
           </p>
           <div className="mt-6 grid gap-4 md:grid-cols-3">
-            <a href="/best-of" className="card">Low-tox & safer swaps</a>
+            <a href="/blog" className="card">Low-tox & safer swaps</a>
             <a href="/holistic-health" className="card">Holistic health</a>
             <a href="/nutrition" className="card">Nutrition & organic food</a>
           </div>

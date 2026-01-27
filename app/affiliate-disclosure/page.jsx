@@ -3,7 +3,7 @@ import Link from "next/link";
 export const metadata = {
   title: "Affiliate Disclosure | Wild & Well",
   description:
-    "Transparency matters. Learn how Wild & Well uses affiliate links and how we choose recommendations.",
+    "Transparency matters. Wellness Insights how Wild & Well uses affiliate links and how we choose recommendations.",
 };
 
 export default function Page() {
@@ -32,7 +32,7 @@ export default function Page() {
       <section className="mt-10 rounded-2xl border bg-white p-6 shadow-sm">
         <h2 className="text-xl font-semibold mb-2">Where to start</h2>
         <p className="text-zinc-700 mb-4">
-          If you want the simple route to a good choice, start with our curated picks page.
+          If you want the fastest route to a good choice, start with our curated picks page.
         </p>
         <div className="flex flex-wrap gap-2">
           <Link className="btn-primary" href="/best-of">

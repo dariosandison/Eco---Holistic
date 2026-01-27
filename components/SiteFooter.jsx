@@ -8,9 +8,9 @@ export default function SiteFooter() {
   ]
 
   const site = [
-        { href: '/best-of', label: 'Guides' },
+    { href: '/best-of', label: 'Favourites' },
     { href: '/blog', label: 'Wellness Insights' },
-        { href: '/picks', label: 'Picks' },
+    { href: '/topics', label: 'Topics' },
     { href: '/nutrition', label: 'Nutrition' },
     { href: '/movement', label: 'Movement' },
     { href: '/deals', label: 'Deals' },

@@ -25,16 +25,16 @@ export default function Hero() {
           {/* CTA first */}
           <div className="flex flex-wrap gap-3">
             <Link
-              href="/blog"
+              href="/guides"
               className="rounded-full border border-zinc-300 px-5 py-2 text-sm font-medium text-zinc-800 hover:bg-white/70"
             >
-              Explore Wellness Insights
+              Explore guides
             </Link>
           </div>
 
           {/* Writing BELOW the button */}
           <p className="mt-6 text-base text-zinc-700 md:text-lg">
-            Your guide to holistic health, natural healing and eco living.
+            Your guide to hollistic health, natural healing and eco living.
           </p>
         </div>
       </div>

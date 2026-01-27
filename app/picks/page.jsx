@@ -1,8 +1,8 @@
 import Link from 'next/link'
 
 export const metadata = {
-  title: 'Picks — Wild & Well',
-  description: 'Topic hubs that link your guide reading to the best next action (and the best-of pages when you’re ready to buy).',
+  title: 'Topics — Wild & Well',
+  description: 'Practical topic hubs: simple context first, with product options when you want them.',
 }
 
 function Card({ title, desc, href, tag }) {
@@ -26,12 +26,12 @@ export default function Page() {
   return (
     <main className="mx-auto max-w-6xl px-4 py-16">
       <header className="max-w-3xl">
-        <h1 className="text-4xl font-bold">Picks</h1>
+        <h1 className="text-4xl font-bold">Topics</h1>
         <p className="mt-3 text-zinc-700">
-          These hubs are built to be practical. Each one explains the basics, then points to best-of pages when you want to compare products.
+          These hubs are built to be practical: learn the basics first, then jump to product shortlists when you want options.
         </p>
         <div className="mt-4 flex flex-wrap gap-2">
-          <Link className="btn-secondary" href="/best-of">Guides</Link>
+          <Link className="btn-secondary" href="/topics">Topics hub</Link>
           <Link className="btn-secondary" href="/shopping-list">Free shopping list</Link>
           <Link className="btn-secondary" href="/nutrition">Nutrition</Link>
           <Link className="btn-secondary" href="/movement">Movement</Link>
@@ -50,7 +50,7 @@ export default function Page() {
         <ol className="mt-3 list-decimal pl-6 text-zinc-700 space-y-2">
           <li>Pick one goal (sleep, air, water, cleaning).</li>
           <li>Read the “Start here” section and do one easy step today.</li>
-          <li>If you’re ready to buy, jump to the best-of page and choose from the shortlist.</li>
+          <li>When you want product options, jump to the Favourites shortlist and compare a few solid choices.</li>
         </ol>
       </section>
 

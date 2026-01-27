@@ -52,10 +52,10 @@ export default function DealsPage() {
         </p>
         <div className="mt-5 flex flex-wrap gap-2">
           <Link className="btn-secondary" href="/best-of">
-            Guides
+            Browse best-of guides
           </Link>
-          <Link className="btn-secondary" href="/picks">
-            Picks
+          <Link className="btn-secondary" href="/best-of">
+            Topics hub
           </Link>
         </div>
         <p className="mt-3 text-xs text-zinc-500">Last checked: January 27, 2026</p>

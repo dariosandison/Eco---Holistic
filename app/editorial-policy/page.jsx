@@ -43,7 +43,7 @@ export default function EditorialPolicy() {
         <ul className="list-disc pl-6 space-y-2">
           <li><strong>Guides</strong> explain basics and help you avoid common mistakes.</li>
           <li><strong>Best-of pages</strong> are for buyer intent — shortlists, not endless lists.</li>
-          <li><strong>Picks hubs</strong> connect the two: a simple plan + the best next action.</li>
+          <li><strong>Shortlists hubs</strong> connect the two: a simple plan + the best next action.</li>
         </ul>
         <p>
           We update pages as products change and as we learn what helps real people most.

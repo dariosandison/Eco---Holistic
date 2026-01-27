@@ -12,7 +12,7 @@ export default function Page() {
       <header className="max-w-3xl">
         <h1 className="text-4xl font-bold">Digital Products</h1>
         <p className="mt-3 text-zinc-700">
-          Calm, step-by-step guides you can follow without overthinking. Built from the same approach as our free Guides and Picks.
+          Calm, step-by-step guides you can follow without overthinking. Built from the same approach as our free Guides and Favourites.
         </p>
       </header>
 
@@ -39,8 +39,8 @@ export default function Page() {
           <Link className="btn-primary" href="/shopping-list" data-track="productlist-newsletter">
             Join the free list
           </Link>
-          <Link className="btn-secondary" href="/best-of">
-            Browse recommended picks
+          <Link className="btn-secondary" href="/topics">
+            Browse recommended favourites
           </Link>
         </div>
         <p className="mt-4 text-xs text-zinc-500">Last updated: January 25, 2026</p>
