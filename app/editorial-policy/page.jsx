@@ -19,13 +19,13 @@ export default function EditorialPolicy() {
     <main className="mx-auto max-w-3xl px-4 py-16">
       <h1 className="text-4xl font-bold">Editorial policy</h1>
       <p className="mt-3 text-zinc-700">
-        Our job is to help you decide without hype. That means clear trade-offs, transparent monetisation, and no paid placements influencing picks.
+        Our job is to help you decide without hype. That means clear trade-offs, transparent monetisation, and no paid placements influencing recommendations.
       </p>
 
       <Section title="Independence">
         <ul className="list-disc pl-6 space-y-2">
-          <li><strong>No paid placements in reviews.</strong> We don’t sell “best of” spots.</li>
-          <li><strong>Affiliate links never decide picks.</strong> We choose the best option first, then add links.</li>
+          <li><strong>No paid placements in reviews.</strong> We don’t sell placements in our shortlists.</li>
+          <li><strong>Affiliate links never decide recommendations.</strong> We choose the option first, then add links.</li>
           <li><strong>We prioritise transparency.</strong> When evidence is limited, we say so.</li>
         </ul>
       </Section>
@@ -41,9 +41,9 @@ export default function EditorialPolicy() {
 
       <Section title="How we create content">
         <ul className="list-disc pl-6 space-y-2">
-          <li><strong>Guides</strong> explain basics and help you avoid common mistakes.</li>
-          <li><strong>Best-of pages</strong> are for buyer intent — shortlists, not endless lists.</li>
-          <li><strong>Shortlists hubs</strong> connect the two: a simple plan + the best next action.</li>
+          <li><strong>Wellness Insights</strong> explain basics and help you avoid common mistakes.</li>
+          <li><strong>Favourites pages</strong> are for buyer intent — shortlists, not endless lists.</li>
+          <li><strong>Topics hubs</strong> connect the two: a simple plan + the next best action.</li>
         </ul>
         <p>
           We update pages as products change and as we learn what helps real people most.

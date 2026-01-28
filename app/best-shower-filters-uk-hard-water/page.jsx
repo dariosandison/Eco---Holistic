@@ -5,7 +5,7 @@ import { amazonSearchUrl } from '@/lib/amazon'
 
 export const metadata = {
   title: 'Best Shower Filters for UK Hard Water | Wild & Well',
-  description: 'Shortlisted shower filters for hard-water UK homes — what they can and can’t do, plus buyer picks.',
+  description: 'Shortlisted shower filters for hard-water UK homes — what they can and can’t do, plus buyer shortlist.',
 }
 
 const PICKS = [
@@ -66,7 +66,7 @@ export default function Page() {
           Shower filters can help with feel and chlorine-related dryness for some people — but they won’t “soften” water like a full home softener.
         </p>
         <div className="mt-4 flex flex-wrap gap-2">
-          <Link className="btn-secondary" href="/picks/fragrance-free">Sensitive-skin hub</Link>
+          <Link className="btn-secondary" href="/topics/fragrance-free">Sensitive-skin hub</Link>
           <Link className="btn-secondary" href="/shopping-list">Free shopping list</Link>
         </div>
         <p className="mt-4 text-xs text-zinc-500">Last updated: January 25, 2026</p>
@@ -94,7 +94,7 @@ export default function Page() {
       </section>
 
       <section className="mt-14">
-        <h2 className="text-2xl font-semibold">Shortlist (buyer picks)</h2>
+        <h2 className="text-2xl font-semibold">Shortlist (buyer-friendly)</h2>
         <p className="mt-2 text-sm text-zinc-600">Curated searches so you can compare price and replacement cartridges.</p>
         <div className="mt-6 grid gap-4 md:grid-cols-2">
           {PICKS.map((p) => (
@@ -110,7 +110,7 @@ export default function Page() {
         </div>
 
         <div className="mt-8 flex flex-wrap gap-2">
-          <Link className="btn-primary" href="/picks/fragrance-free">Go to Sensitive household hub →</Link>
+          <Link className="btn-primary" href="/topics/fragrance-free">Go to Sensitive household hub →</Link>
           <Link className="btn-secondary" href="/shopping-list">Get the free shopping list</Link>
         </div>
       </section>

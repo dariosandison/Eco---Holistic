@@ -6,7 +6,7 @@ import { amazonSearchUrl } from '@/lib/amazon'
 
 export const metadata = {
   title: 'Best Fragrance‑Free Laundry Detergents (UK) | Wild & Well',
-  description: 'A shortlist of fragrance‑free detergents for sensitive households in the UK — what to look for, what to avoid, and buyer picks.',
+  description: 'A shortlist of fragrance‑free detergents for sensitive households in the UK — what to look for, what to avoid, and buyer shortlist.',
 }
 
 const PICKS = [
@@ -91,8 +91,8 @@ export default function Page() {
           Laundry touches your skin all day. If you’re sensitive to scent, detergent is the highest-impact swap.
         </p>
         <div className="mt-4 flex flex-wrap gap-2">
-          <Link className="btn-secondary" href="/picks/fragrance-free">Fragrance-free hub</Link>
-          <Link className="btn-secondary" href="/guides/eco-laundry">Laundry guide</Link>
+          <Link className="btn-secondary" href="/topics/fragrance-free">Fragrance-free hub</Link>
+          <Link className="btn-secondary" href="/blog/eco-laundry">Laundry guide</Link>
           <Link className="btn-secondary" href="/shopping-list">Free shopping list</Link>
         </div>
         <p className="mt-4 text-xs text-zinc-500">Last updated: January 25, 2026</p>
@@ -118,7 +118,7 @@ export default function Page() {
       </section>
 
       <section className="mt-14">
-        <h2 className="text-2xl font-semibold">Top picks (shortlist)</h2>
+        <h2 className="text-2xl font-semibold">Top options (shortlist)</h2>
         <p className="mt-2 text-sm text-zinc-600">Pick one route: sensitive-skin baseline, refill-friendly, or easy mainstream.</p>
         <div className="mt-6 grid gap-4 md:grid-cols-3">
           <ProductPick
@@ -194,7 +194,7 @@ export default function Page() {
       </section>
 
       <section className="mt-14">
-        <h2 className="text-2xl font-semibold">Shortlist (buyer picks)</h2>
+        <h2 className="text-2xl font-semibold">Shortlist (buyer-friendly)</h2>
         <p className="mt-2 text-sm text-zinc-600">Curated searches so you can compare sizes and prices.</p>
         <div className="mt-6 grid gap-4 md:grid-cols-2">
           {PICKS.map((p) => (
@@ -210,8 +210,8 @@ export default function Page() {
         </div>
 
         <div className="mt-8 flex flex-wrap gap-2">
-          <Link className="btn-primary" href="/picks/fragrance-free">Go to Fragrance-free hub →</Link>
-          <Link className="btn-secondary" href="/guides/non-toxic-cleaning-starter">Cleaning starter</Link>
+          <Link className="btn-primary" href="/topics/fragrance-free">Go to Fragrance-free hub →</Link>
+          <Link className="btn-secondary" href="/blog/non-toxic-cleaning-starter">Cleaning starter</Link>
         </div>
       </section>
 

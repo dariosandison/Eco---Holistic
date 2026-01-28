@@ -81,10 +81,10 @@ export default function Page() {
           </p>
           <ul className="mt-4 space-y-2 text-sm text-zinc-700">
             <li>
-              <Link className="underline" href="/best-of#start-here">Trusted Favourites: start here</Link>
+              <Link className="underline" href="/favourites#start-here">Trusted Favourites: start here</Link>
             </li>
             <li>
-              <Link className="underline" href="/guides/sleep-naturally-without-overwhelm">Sleep cornerstone guide</Link>
+              <Link className="underline" href="/blog/sleep-naturally-without-overwhelm">Sleep cornerstone guide</Link>
             </li>
             <li>
               <Link className="underline" href="/best-low-tox-products-for-beginners">Low-tox starter swaps</Link>
@@ -133,7 +133,7 @@ export default function Page() {
         <div className="rounded-2xl border bg-white p-6 shadow-sm">
           <h2 className="text-2xl font-semibold">Ready for early access?</h2>
           <p className="mt-2 text-sm text-zinc-700">
-            Join the free list. You’ll get launch access and the weekly “best of” round-up.
+            Join the free list. You’ll get launch access and the weekly favourites round-up.
           </p>
           <div className="mt-4 flex flex-wrap gap-2">
             <Link className="btn-primary" href="/shopping-list" data-track="product-waitlist-footer">

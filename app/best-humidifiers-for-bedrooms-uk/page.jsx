@@ -30,7 +30,7 @@ export default function Page() {
       </section>
 
       <section className="mt-10">
-        <h2 className="text-2xl font-semibold mb-2">Best picks (summary)</h2>
+        <h2 className="text-2xl font-semibold mb-2">Shortlist (summary)</h2>
         <ul className="list-disc pl-6 text-zinc-700 space-y-1">
           <li><strong>Best overall:</strong> Quiet, easy-clean humidifier + hygrometer</li>
           <li><strong>Best budget:</strong> Small unit for single rooms</li>
@@ -40,9 +40,9 @@ export default function Page() {
 
       <section className="mt-10">
         <h2 className="text-2xl font-semibold mb-2">Where to buy</h2>
-        <p className="text-zinc-700">We keep our recommendations up to date on our picks hub.</p>
+        <p className="text-zinc-700">We keep our recommendations up to date on our topics hub.</p>
         <Link href="/topics" className="btn-primary mt-4 inline-block" data-track="affiliate-primary">
-          Shop trusted humidity picks
+          Browse humidifier favourites
         </Link>
       </section>
 

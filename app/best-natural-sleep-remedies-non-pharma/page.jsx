@@ -1,7 +1,7 @@
 import Link from "next/link";
 
 export const metadata = {
-  title: "Best Natural Sleep Remedies (Non-Pharmaceutical) | Wild & Well",
+  title: "Natural sleep remedies: what helps, what to skip | Wild & Well",
   description: "Natural sleep remedies that support rest without reliance on medication.",
 };
 
@@ -9,7 +9,7 @@ export default function Page() {
   return (
     <main className="mx-auto max-w-3xl px-6 py-16">
       <header>
-        <h1 className="text-4xl font-bold mb-4">Best Natural Sleep Remedies (Non-Pharmaceutical)</h1>
+        <h1 className="text-4xl font-bold mb-4">Natural sleep remedies: what helps, what to skip</h1>
         <p className="text-zinc-700">Natural sleep remedies that support rest without reliance on medication.</p>
         <p className="text-xs text-zinc-500 mt-2">Last updated: January 24, 2026</p>
       </header>
@@ -32,8 +32,8 @@ export default function Page() {
       <section className="mt-10">
         <h2 className="text-2xl font-semibold mb-2">Best options (summary)</h2>
         <ul className="list-disc pl-6 text-zinc-700 space-y-1">
-          <li>Best overall: Magnesium glycinate</li>
-          <li>Best budget: Chamomile tea</li>
+          <li>Overall favourite: Magnesium glycinate</li>
+          <li>Budget favourite: Chamomile tea</li>
           <li>Sensitive users: Very low-dose support</li>
         </ul>
       </section>
@@ -44,7 +44,7 @@ export default function Page() {
           Start with one addition or swap at a time. Consistency matters more than perfection.
         </p>
         <Link href="/topics" className="btn-primary mt-4 inline-block">
-          View natural sleep picks
+          Browse natural sleep options
         </Link>
       </section>
 
@@ -65,7 +65,7 @@ export default function Page() {
       <div className="mt-6 rounded-2xl border bg-white p-5 shadow-sm">
         <h2 className="text-xl font-semibold">Start with the basics</h2>
         <p className="mt-2 text-sm text-zinc-700">If you want a calm, step-by-step plan (no hacks), start with our cornerstone sleep guide.</p>
-        <a className="btn-secondary mt-3 inline-flex" href="/guides/sleep-naturally-without-overwhelm">Read the cornerstone sleep guide</a>
+        <a className="btn-secondary mt-3 inline-flex" href="/blog/sleep-naturally-without-overwhelm">Read the cornerstone sleep guide</a>
       </div>
 
 </main>

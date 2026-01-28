@@ -1,5 +1,7 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = { reactStrictMode: true, swcMinify: true,
+const nextConfig = {
+  reactStrictMode: true,
+  swcMinify: true,
   images: {
     remotePatterns: [
       { protocol: 'https', hostname: 'm.media-amazon.com' },
@@ -8,5 +10,16 @@ const nextConfig = { reactStrictMode: true, swcMinify: true,
       { protocol: 'https', hostname: '**.amazonaws.com' },
     ],
   },
+  async redirects() {
+    return [
+      { source: '/best-of', destination: '/favourites', permanent: true },
+      { source: '/recommended', destination: '/favourites', permanent: true },
+      { source: '/picks', destination: '/topics', permanent: true },
+      { source: '/picks/:path*', destination: '/topics/:path*', permanent: true },
+      { source: '/guides', destination: '/blog', permanent: true },
+      { source: '/guides/:slug*', destination: '/blog/:slug*', permanent: true },
+    ]
+  },
 };
+
 module.exports = nextConfig;

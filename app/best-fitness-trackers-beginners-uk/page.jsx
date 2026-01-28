@@ -86,7 +86,7 @@ function SummaryBox() {
       </p>
       <div className="mt-4 flex flex-wrap gap-2">
         <Link className="btn-secondary" href="/movement">Movement hub</Link>
-        <Link className="btn-secondary" href="/best-of">Best-of index</Link>
+        <Link className="btn-secondary" href="/favourites">Favourites hub</Link>
         <Link className="btn-secondary" href="/how-we-test">How we test</Link>
       </div>
       <p className="mt-4 text-xs text-zinc-500">Last updated: January 27, 2026</p>
@@ -129,7 +129,7 @@ export default function Page() {
       </section>
 
       <section className="mt-14">
-        <h2 className="text-2xl font-semibold">Top picks (shortlist)</h2>
+        <h2 className="text-2xl font-semibold">Top options (shortlist)</h2>
         <p className="mt-2 text-sm text-zinc-600">Three solid starting points, then a fuller list below.</p>
         <div className="mt-6 grid gap-4 md:grid-cols-3">
           <ProductPick

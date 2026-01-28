@@ -1,7 +1,7 @@
 import Link from "next/link";
 
 export const metadata = {
-  title: "Best Anti-Inflammatory Foods (Shopping Guide) | Wild & Well",
+  title: "Anti-inflammatory foods: a simple shopping list | Wild & Well",
   description: "A practical anti-inflammatory foods guide focused on everyday grocery choices rather than restrictive diets.",
 };
 
@@ -9,7 +9,7 @@ export default function Page() {
   return (
     <main className="mx-auto max-w-3xl px-6 py-16">
       <header>
-        <h1 className="text-4xl font-bold mb-4">Best Anti-Inflammatory Foods (Shopping Guide)</h1>
+        <h1 className="text-4xl font-bold mb-4">Anti-inflammatory foods: a simple shopping list</h1>
         <p className="text-zinc-700">A practical anti-inflammatory foods guide focused on everyday grocery choices rather than restrictive diets.</p>
         <p className="text-xs text-zinc-500 mt-2">Last updated: January 24, 2026</p>
       </header>
@@ -32,8 +32,8 @@ export default function Page() {
       <section className="mt-10">
         <h2 className="text-2xl font-semibold mb-2">Best options (summary)</h2>
         <ul className="list-disc pl-6 text-zinc-700 space-y-1">
-          <li>Best overall: Olive oil, berries, leafy greens</li>
-          <li>Best budget: Frozen vegetables</li>
+          <li>Overall favourite: Olive oil, berries, leafy greens</li>
+          <li>Budget favourite: Frozen vegetables</li>
           <li>Sensitive users: Simple whole foods</li>
         </ul>
       </section>
@@ -44,7 +44,7 @@ export default function Page() {
           Start with one addition or swap at a time. Consistency matters more than perfection.
         </p>
         <Link href="/topics" className="btn-primary mt-4 inline-block">
-          Explore food-based wellness picks
+          Explore food-first options
         </Link>
       </section>
 

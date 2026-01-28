@@ -38,21 +38,21 @@ export default function ThanksPage() {
       <section className="mt-10">
         <h2 className="text-2xl font-semibold">Browse by category</h2>
         <p className="mt-2 text-sm text-zinc-600 max-w-3xl">
-          These hub pages explain what matters, what to look for, and link to deeper guides and “best-of” roundups when you want them.
+          These hub pages explain what matters, what to look for, and link to deeper guides and “favourites” roundups when you want them.
         </p>
 
         <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          <Card title="Sleep" desc="Sleep basics + product options (only where they genuinely help)." href="/picks/sleep" />
-          <Card title="Water" desc="UK-friendly filter types, trade-offs, and recommended options." href="/picks/water" />
-          <Card title="Air quality" desc="Allergies, damp, ventilation, and air purifier guidance." href="/picks/air-quality" />
-          <Card title="Cleaning (fragrance-free)" desc="Low-tox swaps for laundry and cleaning without overhauling everything." href="/picks/fragrance-free" />
+          <Card title="Sleep" desc="Sleep basics + product options (only where they genuinely help)." href="/topics/sleep" />
+          <Card title="Water" desc="UK-friendly filter types, trade-offs, and recommended options." href="/topics/water" />
+          <Card title="Air quality" desc="Allergies, damp, ventilation, and air purifier guidance." href="/topics/air-quality" />
+          <Card title="Cleaning (fragrance-free)" desc="Low-tox swaps for laundry and cleaning without overhauling everything." href="/topics/fragrance-free" />
           <Card title="Nutrition" desc="Organic and single-ingredient foods, labels, and sensible upgrades." href="/nutrition" />
           <Card title="Movement" desc="Simple training + gear that isn’t gimmicky (trackers, bands, shoes, routines)." href="/movement" />
         </div>
       </section>
 
       <section className="mt-12">
-        <h2 className="text-2xl font-semibold">Popular “best-of” pages</h2>
+        <h2 className="text-2xl font-semibold">Popular favourites pages</h2>
         <p className="mt-2 text-sm text-zinc-600 max-w-3xl">
           If you’re comparing products, these pages are built to be straightforward — what to look for, what to avoid, and a short shortlist.
         </p>
@@ -60,17 +60,17 @@ export default function ThanksPage() {
         <div className="mt-6 grid gap-4 md:grid-cols-3">
           <Card title="Best water filters (UK)" desc="Jugs vs under-sink vs countertop: clear trade-offs." href="/best-water-filters-uk" />
           <Card title="Best air purifiers for allergies (UK)" desc="Room size guidance + a shortlist that makes sense." href="/best-air-purifiers-allergies-uk" />
-          <Card title="Best fragrance-free laundry detergents (UK)" desc="Sensitive-home picks, with ingredients to avoid." href="/best-fragrance-free-laundry-detergents-uk" />
+          <Card title="Best fragrance-free laundry detergents (UK)" desc="Sensitive-home options, with ingredients to avoid." href="/best-fragrance-free-laundry-detergents-uk" />
         </div>
 
         <div className="mt-6">
           <TrackedLink
-            href="/best-of"
+            href="/favourites"
             event="lead_next_step"
-            data={{ source: "shopping_list_thanks", destination: "/best-of", label: "Browse all best-of pages" }}
+            data={{ source: "shopping_list_thanks", destination: "/favourites", label: "Browse all favourites" }}
             className="btn-secondary"
           >
-            Browse all best-of pages
+            Browse all favourites
           </TrackedLink>
         </div>
       </section>

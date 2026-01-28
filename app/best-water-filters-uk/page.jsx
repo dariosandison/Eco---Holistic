@@ -64,7 +64,7 @@ function QuickSummary() {
       </p>
       <div className="mt-4 flex flex-wrap gap-2">
         <Link className="btn-secondary" href="/favourites/water">Water Favourites hub</Link>
-        <Link className="btn-secondary" href="/guides/water-filter-buying-guide-uk">Buying guide</Link>
+        <Link className="btn-secondary" href="/blog/water-filter-buying-guide-uk">Buying guide</Link>
         <Link className="btn-secondary" href="/shopping-list">Free shopping list</Link>
       </div>
       <p className="mt-4 text-xs text-zinc-500">Last updated: January 25, 2026</p>
@@ -238,7 +238,7 @@ export default function Page() {
 
         <div className="mt-8 flex flex-wrap gap-2">
           <Link className="btn-primary" href="/favourites/water">Go to Water Favourites hub →</Link>
-          <Link className="btn-secondary" href="/guides/water-filter-buying-guide-uk">Read the buying guide</Link>
+          <Link className="btn-secondary" href="/blog/water-filter-buying-guide-uk">Read the buying guide</Link>
         </div>
       </section>
 

@@ -4,14 +4,14 @@ import ProductPick from '@/components/mdx/ProductPick'
 import { amazonSearchUrl } from '@/lib/amazon'
 
 export const metadata = {
-  title: "Best Extra Virgin Olive Oil (UK) | Wild & Well",
+  title: "Extra virgin olive oil (UK): our favourites | Wild & Well",
   description: "A practical shortlist of extra virgin olive oils (EVOO) with notes on freshness, storage, and what to look for on the label.",
 }
 
 const PICKS = [
   {
     "title": "Single-origin EVOO (glass bottle)",
-    "badge": "Best label quality",
+    "badge": "Top label quality",
     "desc": "Look for harvest date, origin, and dark glass.",
     "query": "single origin extra virgin olive oil harvest date dark glass",
     "bullets": [
@@ -22,7 +22,7 @@ const PICKS = [
   },
   {
     "title": "Cold-pressed organic EVOO",
-    "badge": "Best organic pick",
+    "badge": "Organic favourite",
     "desc": "If organic matters to you, choose reputable brands and check dates.",
     "query": "organic cold pressed extra virgin olive oil",
     "bullets": [
@@ -33,7 +33,7 @@ const PICKS = [
   },
   {
     "title": "EVOO in tin (freshness)",
-    "badge": "Best protection",
+    "badge": "Top protection",
     "desc": "Tin can protect from light. Choose a good brand and use it.",
     "query": "extra virgin olive oil tin 1l",
     "bullets": [
@@ -86,7 +86,7 @@ function SummaryBox() {
       </p>
       <div className="mt-4 flex flex-wrap gap-2">
         <Link className="btn-secondary" href="/nutrition">Nutrition hub</Link>
-        <Link className="btn-secondary" href="/best-of">Best-of index</Link>
+        <Link className="btn-secondary" href="/favourites">Favourites hub</Link>
       </div>
       <p className="mt-4 text-xs text-zinc-500">Last updated: January 27, 2026</p>
     </div>
@@ -104,7 +104,7 @@ export default function Page() {
   const ld = {
     '@context': 'https://schema.org',
     '@type': 'Article',
-    headline: "Best Extra Virgin Olive Oil (UK)",
+    headline: "Extra virgin olive oil (UK): our favourites",
     dateModified: '2026-01-27',
     datePublished: '2026-01-27',
     mainEntity: {
@@ -118,7 +118,7 @@ export default function Page() {
       <StructuredData data={ld} />
 
       <header className="max-w-3xl">
-        <h1 className="text-4xl font-bold">Best extra virgin olive oil (UK)</h1>
+        <h1 className="text-4xl font-bold">Extra virgin olive oil (UK): our favourites</h1>
         <p className="mt-3 text-zinc-700">A practical shortlist of extra virgin olive oils (EVOO) with notes on freshness, storage, and what to look for on the label.</p>
       </header>
 
@@ -127,12 +127,12 @@ export default function Page() {
       </section>
 
       <section className="mt-14">
-        <h2 className="text-2xl font-semibold">Top picks (shortlist)</h2>
+        <h2 className="text-2xl font-semibold">Top options (shortlist)</h2>
         <p className="mt-2 text-sm text-zinc-600">Three solid starting points, then a fuller list below.</p>
         <div className="mt-6 grid gap-4 md:grid-cols-3">
           <ProductPick
             title="Single-origin EVOO (glass bottle)"
-            badge="Best label quality"
+            badge="Top label quality"
             description="Look for harvest date, origin, and dark glass."
             href={amazonSearchUrl('single origin extra virgin olive oil harvest date dark glass')}
             bullets={["Prefer harvest date", "Dark glass helps", "Store away from heat/light"]}
@@ -140,7 +140,7 @@ export default function Page() {
 
           <ProductPick
             title="Cold-pressed organic EVOO"
-            badge="Best organic pick"
+            badge="Organic favourite"
             description="If organic matters to you, choose reputable brands and check dates."
             href={amazonSearchUrl('organic cold pressed extra virgin olive oil')}
             bullets={["Check bottling/harvest info", "Avoid big \u201cdetox\u201d claims", "Buy smaller bottles more often"]}
@@ -148,7 +148,7 @@ export default function Page() {
 
           <ProductPick
             title="EVOO in tin (freshness)"
-            badge="Best protection"
+            badge="Top protection"
             description="Tin can protect from light. Choose a good brand and use it."
             href={amazonSearchUrl('extra virgin olive oil tin 1l')}
             bullets={["Great light protection", "Use within a reasonable time", "Decant if needed"]}
@@ -163,7 +163,7 @@ export default function Page() {
         <div className="mt-6 grid gap-4 md:grid-cols-2">
           <ProductPick
             title="Single-origin EVOO (glass bottle)"
-            badge="Best label quality"
+            badge="Top label quality"
             description="Look for harvest date, origin, and dark glass."
             href={amazonSearchUrl('single origin extra virgin olive oil harvest date dark glass')}
             bullets={["Prefer harvest date", "Dark glass helps", "Store away from heat/light"]}
@@ -171,7 +171,7 @@ export default function Page() {
 
           <ProductPick
             title="Cold-pressed organic EVOO"
-            badge="Best organic pick"
+            badge="Organic favourite"
             description="If organic matters to you, choose reputable brands and check dates."
             href={amazonSearchUrl('organic cold pressed extra virgin olive oil')}
             bullets={["Check bottling/harvest info", "Avoid big \u201cdetox\u201d claims", "Buy smaller bottles more often"]}
@@ -179,7 +179,7 @@ export default function Page() {
 
           <ProductPick
             title="EVOO in tin (freshness)"
-            badge="Best protection"
+            badge="Top protection"
             description="Tin can protect from light. Choose a good brand and use it."
             href={amazonSearchUrl('extra virgin olive oil tin 1l')}
             bullets={["Great light protection", "Use within a reasonable time", "Decant if needed"]}
@@ -213,10 +213,10 @@ export default function Page() {
       </section>
 
       <section className="mt-14">
-        <h2 className="text-2xl font-semibold">How we think about “best”</h2>
+        <h2 className="text-2xl font-semibold">How we build our shortlists</h2>
         <div className="mt-3 space-y-3 text-sm text-zinc-700 max-w-3xl">
           <p>
-            “Best” here means: sensible features, decent reviews across many buyers, and a realistic fit for most homes — not hype, not extreme claims.
+            Our approach here is: sensible features, decent reviews across many buyers, and a realistic fit for most homes — not hype, not extreme claims.
           </p>
           <p>
             Always check sizing/specs and current pricing before you buy. If a product makes strong health claims without evidence, treat that as marketing.

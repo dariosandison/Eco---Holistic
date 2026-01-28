@@ -30,17 +30,17 @@ export default function Page() {
         <h1 className="text-4xl font-bold">Nutrition &amp; Organic Food</h1>
         <p className="mt-3 text-zinc-700">
           Clear, practical nutrition content — focusing on the modern food environment, label reading, and simple upgrades you can repeat.
-          When it helps, we link to “best-of” product shortlists (single-ingredient foods, organic staples, and sensible add-ons).
+          When it helps, we link to “favourites” product shortlists (single-ingredient foods, organic staples, and sensible add-ons).
         </p>
         <div className="mt-5 flex flex-wrap gap-2">
           <Link className="btn-secondary" href="/blog">Read the blog</Link>
-          <Link className="btn-secondary" href="/best-of">Browse best-of pages</Link>
+          <Link className="btn-secondary" href="/favourites">Browse favourites pages</Link>
         </div>
         <p className="mt-3 text-xs text-zinc-500">Last updated: January 27, 2026</p>
       </header>
 
       <section className="mt-10">
-        <h2 className="text-2xl font-semibold">Best-of guides</h2>
+        <h2 className="text-2xl font-semibold">Favourites guides</h2>
         <p className="mt-2 text-sm text-zinc-600 max-w-3xl">
           Straightforward roundups: label cues that matter and a shortlist of solid options.
         </p>

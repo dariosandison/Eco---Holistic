@@ -12,7 +12,7 @@ export default function Page() {
       <header className="max-w-3xl">
         <h1 className="text-4xl font-bold">Digital Products</h1>
         <p className="mt-3 text-zinc-700">
-          Calm, step-by-step guides you can follow without overthinking. Built from the same approach as our free Guides and Favourites.
+          Calm, step-by-step routines you can follow without overthinking. Built from the same approach as our free Wellness Insights and Favourites.
         </p>
       </header>
 

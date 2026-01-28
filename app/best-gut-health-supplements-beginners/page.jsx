@@ -1,7 +1,7 @@
 import Link from "next/link";
 
 export const metadata = {
-  title: "Best Gut Health Supplements for Beginners | Wild & Well",
+  title: "Gut health supplements: beginner shortlist | Wild & Well",
   description: "A beginner’s guide to gut health supplements — probiotics, prebiotics, and when to use them.",
 };
 
@@ -9,7 +9,7 @@ export default function Page() {
   return (
     <main className="mx-auto max-w-3xl px-6 py-16">
       <header>
-        <h1 className="text-4xl font-bold mb-4">Best Gut Health Supplements for Beginners</h1>
+        <h1 className="text-4xl font-bold mb-4">Gut health supplements: beginner shortlist</h1>
         <p className="text-zinc-700">A beginner’s guide to gut health supplements</p>
         <p className="text-xs text-zinc-500 mt-2">Last updated: January 24, 2026</p>
       </header>
@@ -32,8 +32,8 @@ export default function Page() {
       <section className="mt-10">
         <h2 className="text-2xl font-semibold mb-2">Best options (summary)</h2>
         <ul className="list-disc pl-6 text-zinc-700 space-y-1">
-          <li>Best overall: Multi-strain probiotic</li>
-          <li>Best budget: Fermented foods</li>
+          <li>Overall favourite: Multi-strain probiotic</li>
+          <li>Budget favourite: Fermented foods</li>
           <li>Sensitive users: Lower CFU options</li>
         </ul>
       </section>
@@ -44,7 +44,7 @@ export default function Page() {
           Start with one addition or swap at a time. Consistency matters more than perfection.
         </p>
         <Link href="/topics" className="btn-primary mt-4 inline-block">
-          Browse gut health picks
+          Browse gut health options
         </Link>
       </section>
 

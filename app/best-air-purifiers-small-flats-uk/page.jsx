@@ -98,7 +98,7 @@ export default function Page() {
           In small spaces, noise and filter costs matter more than fancy features. Buy the unit you’ll actually run every day.
         </p>
         <div className="mt-4 flex flex-wrap gap-2">
-          <Link className="btn-secondary" href="/picks/air-quality">Air quality hub</Link>
+          <Link className="btn-secondary" href="/topics/air-quality">Air quality hub</Link>
           <Link className="btn-secondary" href="/best-air-purifiers-allergies-uk">Allergies list</Link>
         </div>
         <p className="mt-4 text-xs text-zinc-500">Last updated: January 25, 2026</p>
@@ -116,7 +116,7 @@ export default function Page() {
         <div className="card">
           <h2 className="text-lg font-semibold">Where to place it</h2>
           <p className="mt-3 text-sm text-zinc-700">Put it where air can flow — not hidden behind furniture.</p>
-          <Link className="btn-secondary mt-4 inline-flex" href="/guides/healthy-air-at-home">Placement tips</Link>
+          <Link className="btn-secondary mt-4 inline-flex" href="/blog/healthy-air-at-home">Placement tips</Link>
         </div>
         <div className="card">
           <h2 className="text-lg font-semibold">When to upgrade</h2>
@@ -125,7 +125,7 @@ export default function Page() {
       </section>
 
       <section className="mt-14">
-        <h2 className="text-2xl font-semibold">Top picks (shortlist)</h2>
+        <h2 className="text-2xl font-semibold">Top options (shortlist)</h2>
         <p className="mt-2 text-sm text-zinc-600">In small flats: prioritise night-mode noise + realistic filter costs.</p>
         <div className="mt-6 grid gap-4 md:grid-cols-3">
           <ProductPick
@@ -183,7 +183,7 @@ export default function Page() {
       </section>
 
       <section className="mt-14">
-        <h2 className="text-2xl font-semibold">Shortlist (buyer picks)</h2>
+        <h2 className="text-2xl font-semibold">Shortlist (buyer-friendly)</h2>
         <p className="mt-2 text-sm text-zinc-600">Curated searches to compare prices and filter costs.</p>
         <div className="mt-6 grid gap-4 md:grid-cols-2">
           {PICKS.map((p) => (
@@ -199,7 +199,7 @@ export default function Page() {
         </div>
 
         <div className="mt-8 flex flex-wrap gap-2">
-          <Link className="btn-primary" href="/picks/air-quality">Go to Air Quality hub →</Link>
+          <Link className="btn-primary" href="/topics/air-quality">Go to Air Quality hub →</Link>
           <Link className="btn-secondary" href="/best-air-purifiers-allergies-uk">Allergies list →</Link>
         </div>
       </section>

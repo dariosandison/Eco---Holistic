@@ -16,8 +16,8 @@ function fmtDate(d) {
 }
 
 export default function Page() {
-  const insights = listContent('blog')
-  const explainers = listContent('guides')
+  const insights = listContent('insights')
+  const explainers = listContent('explainers')
 
   return (
     <div className="mx-auto max-w-6xl px-4 py-12">
@@ -33,7 +33,7 @@ export default function Page() {
           </div>
         </div>
         <Link
-          href="/best-of"
+          href="/favourites"
           className="rounded-xl border border-zinc-300 bg-white px-4 py-2.5 text-sm font-semibold text-zinc-900 hover:bg-zinc-50 w-full sm:w-auto text-center"
         >
           Browse Favourites
@@ -69,7 +69,7 @@ export default function Page() {
           {explainers.map((g) => (
             <Card
               key={g.slug}
-              href={`/guides/${g.slug}`}
+              href={`/blog/${g.slug}`}
               title={g.title}
               excerpt={g.description}
               image={g.image || '/placeholder.png'}
@@ -86,7 +86,7 @@ export default function Page() {
           When you&apos;re ready to compare products, our Favourites pages keep things simple with shortlists and clear trade-offs.
         </p>
         <div className="mt-4 flex flex-col gap-3 sm:flex-row sm:items-center">
-          <a href="/best-of" className="btn-primary text-center">Browse Favourites</a>
+          <a href="/favourites" className="btn-primary text-center">Browse Favourites</a>
           <a href="/topics" className="btn-secondary text-center">Browse Topics</a>
         </div>
       </div>

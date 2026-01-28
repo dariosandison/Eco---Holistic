@@ -1,7 +1,7 @@
 import Link from "next/link";
 
 export const metadata = {
-  title: "Best Adaptogens for Beginners | Wild & Well",
+  title: "Adaptogens for beginners: what they are, what to skip | Wild & Well",
   description: "An approachable guide to adaptogens — what they are, how they’re used, and how to start safely.",
 };
 
@@ -9,7 +9,7 @@ export default function Page() {
   return (
     <main className="mx-auto max-w-3xl px-6 py-16">
       <header>
-        <h1 className="text-4xl font-bold mb-4">Best Adaptogens for Beginners</h1>
+        <h1 className="text-4xl font-bold mb-4">Adaptogens for beginners: what they are, what to skip</h1>
         <p className="text-zinc-700">An approachable guide to adaptogens</p>
         <p className="text-xs text-zinc-500 mt-2">Last updated: January 24, 2026</p>
       </header>
@@ -32,8 +32,8 @@ export default function Page() {
       <section className="mt-10">
         <h2 className="text-2xl font-semibold mb-2">Best options (summary)</h2>
         <ul className="list-disc pl-6 text-zinc-700 space-y-1">
-          <li>Best overall: Ashwagandha or rhodiola</li>
-          <li>Best budget: Adaptogen powders</li>
+          <li>Overall favourite: Ashwagandha or rhodiola</li>
+          <li>Budget favourite: Adaptogen powders</li>
           <li>Sensitive users: Lower-dose capsules</li>
         </ul>
       </section>

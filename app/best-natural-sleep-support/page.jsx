@@ -5,8 +5,8 @@ import ProductPick from '@/components/mdx/ProductPick'
 import { amazonSearchUrl } from '@/lib/amazon'
 
 export const metadata = {
-  title: 'Best Natural Sleep Support (UK) | Wild & Well',
-  description: 'A calm shortlist of natural sleep support options — what tends to help most, what to skip, and buyer-friendly picks.',
+  title: 'Natural sleep support: our favourites | Wild & Well',
+  description: 'A calm shortlist of natural sleep support options — what tends to help most, what to skip, and buyer-friendly options.',
 }
 
 const PICKS = [
@@ -65,7 +65,7 @@ export default function Page() {
   const ld = {
     '@context': 'https://schema.org',
     '@type': 'Article',
-    headline: 'Best Natural Sleep Support (UK)',
+    headline: 'Natural sleep support: our favourites',
     dateModified: '2026-01-25',
     datePublished: '2026-01-25',
     mainEntity: { '@type': 'ItemList', itemListElement: itemList },
@@ -111,13 +111,13 @@ export default function Page() {
       <StructuredData data={faqLd} />
 
       <header className="max-w-3xl">
-        <h1 className="text-4xl font-bold">Best natural sleep support (compared)</h1>
+        <h1 className="text-4xl font-bold">Natural sleep support: our favourites</h1>
         <p className="mt-3 text-zinc-700">
           The best “sleep support” is usually a few simple environment and timing fixes. Supplements are optional — and should stay simple.
         </p>
         <div className="mt-4 flex flex-wrap gap-2">
-          <Link className="btn-secondary" href="/picks/sleep">Sleep hub</Link>
-          <Link className="btn-secondary" href="/guides/sleep-naturally-without-overwhelm">Cornerstone sleep guide</Link>
+          <Link className="btn-secondary" href="/topics/sleep">Sleep hub</Link>
+          <Link className="btn-secondary" href="/blog/sleep-naturally-without-overwhelm">Cornerstone sleep guide</Link>
           <Link className="btn-secondary" href="/shopping-list">Free shopping list</Link>
         </div>
         <p className="mt-4 text-xs text-zinc-500">Last updated: January 25, 2026</p>
@@ -147,14 +147,14 @@ export default function Page() {
       </section>
 
       <section className="mt-14">
-        <h2 className="text-2xl font-semibold">Top picks (shortlist)</h2>
+        <h2 className="text-2xl font-semibold">Top options (shortlist)</h2>
         <p className="mt-2 text-sm text-zinc-600">
           If you want the shortest path: pick one environment fix + one optional support.
         </p>
         <div className="mt-6 grid gap-4 md:grid-cols-3">
           <ProductPick
             title="Best simple supplement: magnesium glycinate"
-            badge="Best overall"
+            badge="Overall favourite"
             description="A gentle option many people add to an evening wind-down. Start low and assess tolerance."
             href={amazonSearchUrl('magnesium glycinate capsules UK')}
             bullets={['Look for glycinate/bisglycinate (not oxide)', 'Start low', 'Check interactions if medicated']}
@@ -225,7 +225,7 @@ export default function Page() {
       </section>
 
       <section className="mt-14">
-        <h2 className="text-2xl font-semibold">Shortlist (buyer picks)</h2>
+        <h2 className="text-2xl font-semibold">Shortlist (buyer-friendly)</h2>
         <p className="mt-2 text-sm text-zinc-600">
           Curated searches to compare brands and prices. Keep it simple: routine first, products second.
         </p>
@@ -243,9 +243,9 @@ export default function Page() {
         </div>
 
         <div className="mt-8 flex flex-wrap gap-2">
-          <Link className="btn-primary" href="/picks/sleep">Go to Sleep hub →</Link>
-          <Link className="btn-secondary" href="/guides/magnesium-for-sleep-basics">Magnesium basics</Link>
-          <Link className="btn-secondary" href="/guides/sleep-wind-down-routine">Wind-down routine</Link>
+          <Link className="btn-primary" href="/topics/sleep">Go to Sleep hub →</Link>
+          <Link className="btn-secondary" href="/blog/magnesium-for-sleep-basics">Magnesium basics</Link>
+          <Link className="btn-secondary" href="/blog/sleep-wind-down-routine">Wind-down routine</Link>
         </div>
       </section>
 

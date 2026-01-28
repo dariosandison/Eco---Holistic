@@ -1,7 +1,7 @@
 import Link from "next/link";
 
 export const metadata = {
-  title: "Best Natural Immune Support Remedies | Wild & Well",
+  title: "Immune support: simple, evidence-led options | Wild & Well",
   description: "Evidence-informed natural approaches to immune support using foods, herbs, and lifestyle.",
 };
 
@@ -9,7 +9,7 @@ export default function Page() {
   return (
     <main className="mx-auto max-w-3xl px-6 py-16">
       <header>
-        <h1 className="text-4xl font-bold mb-4">Best Natural Immune Support Remedies</h1>
+        <h1 className="text-4xl font-bold mb-4">Immune support: simple, evidence-led options</h1>
         <p className="text-zinc-700">Evidence-informed natural approaches to immune support using foods, herbs, and lifestyle.</p>
         <p className="text-xs text-zinc-500 mt-2">Last updated: January 24, 2026</p>
       </header>
@@ -32,8 +32,8 @@ export default function Page() {
       <section className="mt-10">
         <h2 className="text-2xl font-semibold mb-2">Best options (summary)</h2>
         <ul className="list-disc pl-6 text-zinc-700 space-y-1">
-          <li>Best overall: Vitamin C-rich foods</li>
-          <li>Best budget: Garlic and ginger</li>
+          <li>Overall favourite: Vitamin C-rich foods</li>
+          <li>Budget favourite: Garlic and ginger</li>
           <li>Sensitive users: Food-first strategies</li>
         </ul>
       </section>
@@ -44,7 +44,7 @@ export default function Page() {
           Start with one addition or swap at a time. Consistency matters more than perfection.
         </p>
         <Link href="/topics" className="btn-primary mt-4 inline-block">
-          Explore immune support picks
+          Explore immune support options
         </Link>
       </section>
 

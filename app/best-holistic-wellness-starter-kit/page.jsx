@@ -1,7 +1,7 @@
 import Link from "next/link";
 
 export const metadata = {
-  title: "Best Holistic Wellness Starter Kit | Wild & Well",
+  title: "Holistic wellness starter kit: simple essentials | Wild & Well",
   description: "A calm, beginner-friendly holistic wellness starter guide covering food, remedies, and daily habits.",
 };
 
@@ -9,7 +9,7 @@ export default function Page() {
   return (
     <main className="mx-auto max-w-3xl px-6 py-16">
       <header>
-        <h1 className="text-4xl font-bold mb-4">Best Holistic Wellness Starter Kit</h1>
+        <h1 className="text-4xl font-bold mb-4">Holistic wellness starter kit: simple essentials</h1>
         <p className="text-zinc-700">A calm, beginner-friendly holistic wellness starter guide covering food, remedies, and daily habits.</p>
         <p className="text-xs text-zinc-500 mt-2">Last updated: January 24, 2026</p>
       </header>
@@ -32,8 +32,8 @@ export default function Page() {
       <section className="mt-10">
         <h2 className="text-2xl font-semibold mb-2">Best options (summary)</h2>
         <ul className="list-disc pl-6 text-zinc-700 space-y-1">
-          <li>Best overall: Food, sleep, movement basics</li>
-          <li>Best budget: Daily routines</li>
+          <li>Overall favourite: Food, sleep, movement basics</li>
+          <li>Budget favourite: Daily routines</li>
           <li>Sensitive users: Slow incremental changes</li>
         </ul>
       </section>
@@ -44,7 +44,7 @@ export default function Page() {
           Start with one addition or swap at a time. Consistency matters more than perfection.
         </p>
         <Link href="/topics" className="btn-primary mt-4 inline-block">
-          Explore holistic starter picks
+          Explore simple essentials
         </Link>
       </section>
 

@@ -78,12 +78,12 @@ export default function ArticleLayout({
       <div className="mt-12 not-prose rounded-3xl border border-zinc-200 bg-zinc-50/60 p-6">
         <h2 className="text-lg font-semibold text-zinc-900">Want the fastest next step?</h2>
         <p className="mt-2 text-sm text-zinc-700">
-          Browse our trusted picks for low‑tox and holistic living — curated to save you time (and money).
+          Browse our favourites for low‑tox and holistic living — curated to save you time (and money).
         </p>
         <div className="mt-4 flex flex-col gap-3 sm:flex-row sm:items-center">
-          <a href="/best-of" className="btn-primary text-center">Shop trusted picks</a>
-          <a href="/guides" className="text-sm font-medium text-zinc-700 hover:underline">
-            Or continue with guides →
+          <a href="/favourites" className="btn-primary text-center">Shop favourites</a>
+          <a href="/blog" className="text-sm font-medium text-zinc-700 hover:underline">
+            Or continue with Wellness Insights →
           </a>
         </div>
         <p className="mt-3 text-xs text-zinc-600">

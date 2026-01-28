@@ -33,13 +33,13 @@ export default function Page() {
         </p>
         <div className="mt-5 flex flex-wrap gap-2">
           <Link className="btn-secondary" href="/blog">Read the blog</Link>
-          <Link className="btn-secondary" href="/best-of">Browse best-of pages</Link>
+          <Link className="btn-secondary" href="/favourites">Browse favourites pages</Link>
         </div>
         <p className="mt-3 text-xs text-zinc-500">Last updated: January 27, 2026</p>
       </header>
 
       <section className="mt-10">
-        <h2 className="text-2xl font-semibold">Best-of guides</h2>
+        <h2 className="text-2xl font-semibold">Favourites guides</h2>
         <p className="mt-2 text-sm text-zinc-600 max-w-3xl">
           Straightforward roundups: what to look for, what to avoid, and a shortlist of solid options.
         </p>

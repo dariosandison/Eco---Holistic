@@ -6,7 +6,7 @@ import { amazonSearchUrl } from '@/lib/amazon'
 
 export const metadata = {
   title: 'Best Air Purifiers for Allergies (UK) | Wild & Well',
-  description: 'Shortlisted HEPA air purifiers for allergies in UK homes — what matters, what to skip, and the best picks for bedrooms and living rooms.',
+  description: 'Shortlisted HEPA air purifiers for allergies in UK homes — what matters, what to skip, and top options for bedrooms and living rooms.',
 }
 
 const PICKS = [
@@ -113,8 +113,8 @@ export default function Page() {
           The biggest mistake is buying a purifier that’s too small for the room. Size first, features second.
         </p>
         <div className="mt-4 flex flex-wrap gap-2">
-          <Link className="btn-secondary" href="/picks/air-quality">Air quality hub</Link>
-          <Link className="btn-secondary" href="/guides/healthy-air-at-home">Healthy air guide</Link>
+          <Link className="btn-secondary" href="/topics/air-quality">Air quality hub</Link>
+          <Link className="btn-secondary" href="/blog/healthy-air-at-home">Healthy air guide</Link>
           <Link className="btn-secondary" href="/best-air-purifiers-small-flats-uk">Small flats list</Link>
         </div>
         <p className="mt-4 text-xs text-zinc-500">Last updated: January 25, 2026</p>
@@ -137,12 +137,12 @@ export default function Page() {
         <div className="card">
           <h2 className="text-lg font-semibold">If damp is the issue</h2>
           <p className="mt-3 text-sm text-zinc-700">A purifier helps particles, but damp often needs dehumidifying + ventilation.</p>
-          <Link className="btn-secondary mt-4 inline-flex" href="/guides/winter-humidity-guide">Humidity guide</Link>
+          <Link className="btn-secondary mt-4 inline-flex" href="/blog/winter-humidity-guide">Humidity guide</Link>
         </div>
       </section>
 
       <section className="mt-14">
-        <h2 className="text-2xl font-semibold">Top picks (shortlist)</h2>
+        <h2 className="text-2xl font-semibold">Top options (shortlist)</h2>
         <p className="mt-2 text-sm text-zinc-600">Three common scenarios — pick the one that matches your room and use.</p>
         <div className="mt-6 grid gap-4 md:grid-cols-3">
           <ProductPick
@@ -200,7 +200,7 @@ export default function Page() {
       </section>
 
       <section className="mt-14">
-        <h2 className="text-2xl font-semibold">Shortlist (buyer picks)</h2>
+        <h2 className="text-2xl font-semibold">Shortlist (buyer-friendly)</h2>
         <p className="mt-2 text-sm text-zinc-600">Curated searches to compare prices and check filter costs.</p>
         <div className="mt-6 grid gap-4 md:grid-cols-2">
           {PICKS.map((p) => (
@@ -216,7 +216,7 @@ export default function Page() {
         </div>
 
         <div className="mt-8 flex flex-wrap gap-2">
-          <Link className="btn-primary" href="/picks/air-quality">Go to Air Quality hub →</Link>
+          <Link className="btn-primary" href="/topics/air-quality">Go to Air Quality hub →</Link>
           <Link className="btn-secondary" href="/best-air-purifiers-small-flats-uk">Best for small flats →</Link>
         </div>
       </section>

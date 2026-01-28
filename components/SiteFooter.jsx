@@ -8,7 +8,7 @@ export default function SiteFooter() {
   ]
 
   const site = [
-    { href: '/best-of', label: 'Favourites' },
+    { href: '/favourites', label: 'Favourites' },
     { href: '/blog', label: 'Wellness Insights' },
     { href: '/topics', label: 'Topics' },
     { href: '/nutrition', label: 'Nutrition' },
@@ -33,7 +33,7 @@ export default function SiteFooter() {
         <div>
           <div className="font-semibold text-[var(--brand)]">Wild &amp; Well</div>
           <p className="text-sm text-neutral-600 mt-2">
-            Natural wellness made simple — trusted guides and product picks that save time and money.
+            Natural wellness made simple — calm insights and product shortlists that save time and money.
           </p>
 
           <div className="mt-4 rounded-2xl border bg-zinc-50 p-4">

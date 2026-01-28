@@ -51,10 +51,10 @@ export default function DealsPage() {
           products we already cover in our guides. If you see a good price, cross-check specs and reviews before buying.
         </p>
         <div className="mt-5 flex flex-wrap gap-2">
-          <Link className="btn-secondary" href="/best-of">
-            Browse best-of guides
+          <Link className="btn-secondary" href="/favourites">
+            Browse favourites guides
           </Link>
-          <Link className="btn-secondary" href="/best-of">
+          <Link className="btn-secondary" href="/favourites">
             Topics hub
           </Link>
         </div>
@@ -109,7 +109,7 @@ export default function DealsPage() {
             title="Sleep essentials deals"
             desc="Practical non-gimmick sleep items."
             query="blackout curtains earplugs white noise machine deal"
-            guideHref="/picks/sleep"
+            guideHref="/topics/sleep"
             tag="Sleep"
           />
         </div>

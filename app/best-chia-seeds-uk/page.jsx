@@ -4,7 +4,7 @@ import ProductPick from '@/components/mdx/ProductPick'
 import { amazonSearchUrl } from '@/lib/amazon'
 
 export const metadata = {
-  title: "Best Chia Seeds (UK) | Wild & Well",
+  title: "Chia seeds (UK): simple shortlist | Wild & Well",
   description: "A shortlist of chia seeds for puddings, oats, and smoothies — plus what to look for (freshness and packaging).",
 }
 
@@ -103,7 +103,7 @@ export default function Page() {
   const ld = {
     '@context': 'https://schema.org',
     '@type': 'Article',
-    headline: "Best Chia Seeds (UK)",
+    headline: "Chia seeds (UK): simple shortlist",
     dateModified: '2026-01-27',
     datePublished: '2026-01-27',
     mainEntity: {
@@ -117,7 +117,7 @@ export default function Page() {
       <StructuredData data={ld} />
 
       <header className="max-w-3xl">
-        <h1 className="text-4xl font-bold">Best chia seeds (UK)</h1>
+        <h1 className="text-4xl font-bold">Chia seeds (UK): simple shortlist</h1>
         <p className="mt-3 text-zinc-700">A shortlist of chia seeds for puddings, oats, and smoothies — plus what to look for (freshness and packaging).</p>
       </header>
 
@@ -126,7 +126,7 @@ export default function Page() {
       </section>
 
       <section className="mt-14">
-        <h2 className="text-2xl font-semibold">Top picks (shortlist)</h2>
+        <h2 className="text-2xl font-semibold">Top options (shortlist)</h2>
         <p className="mt-2 text-sm text-zinc-600">Three solid starting points, then a fuller list below.</p>
         <div className="mt-6 grid gap-4 md:grid-cols-3">
           <ProductPick
@@ -212,10 +212,10 @@ export default function Page() {
       </section>
 
       <section className="mt-14">
-        <h2 className="text-2xl font-semibold">How we think about “best”</h2>
+        <h2 className="text-2xl font-semibold">How we build our shortlists</h2>
         <div className="mt-3 space-y-3 text-sm text-zinc-700 max-w-3xl">
           <p>
-            “Best” here means: sensible features, decent reviews across many buyers, and a realistic fit for most homes — not hype, not extreme claims.
+            Our approach here is: sensible features, decent reviews across many buyers, and a realistic fit for most homes — not hype, not extreme claims.
           </p>
           <p>
             Always check sizing/specs and current pricing before you buy. If a product makes strong health claims without evidence, treat that as marketing.

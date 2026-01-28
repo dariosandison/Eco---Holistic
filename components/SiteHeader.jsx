@@ -26,7 +26,7 @@ export default function SiteHeader() {
 
         {/* Desktop nav */}
         <nav className="ml-auto hidden items-center gap-6 md:flex">
-          <Link href="/best-of" className="text-sm font-medium text-zinc-700 hover:text-zinc-900">
+          <Link href="/favourites" className="text-sm font-medium text-zinc-700 hover:text-zinc-900">
             Favourites
           </Link>
           <Link href="/blog" className="text-sm font-medium text-zinc-700 hover:text-zinc-900">
@@ -72,7 +72,7 @@ export default function SiteHeader() {
       {/* Mobile nav */}
       <div className={`${open ? 'block' : 'hidden'} border-t border-zinc-200/60 md:hidden`}>
         <nav className="mx-auto flex max-w-6xl flex-col gap-1 px-4 py-3">
-          <Link href="/best-of" className="rounded-md px-2 py-2 text-sm text-zinc-800 hover:bg-zinc-50">
+          <Link href="/favourites" className="rounded-md px-2 py-2 text-sm text-zinc-800 hover:bg-zinc-50">
             Favourites
           </Link>
           <Link href="/blog" className="rounded-md px-2 py-2 text-sm text-zinc-800 hover:bg-zinc-50">

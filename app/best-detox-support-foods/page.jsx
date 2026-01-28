@@ -1,7 +1,7 @@
 import Link from "next/link";
 
 export const metadata = {
-  title: "Best Detox Support Foods (Gentle Approach) | Wild & Well",
+  title: "Detox support foods: gentle, food-first options | Wild & Well",
   description: "A gentle, food-based approach to supporting natural detox pathways.",
 };
 
@@ -9,7 +9,7 @@ export default function Page() {
   return (
     <main className="mx-auto max-w-3xl px-6 py-16">
       <header>
-        <h1 className="text-4xl font-bold mb-4">Best Detox Support Foods (Gentle Approach)</h1>
+        <h1 className="text-4xl font-bold mb-4">Detox support foods: gentle, food-first options</h1>
         <p className="text-zinc-700">A gentle, food-based approach to supporting natural detox pathways.</p>
         <p className="text-xs text-zinc-500 mt-2">Last updated: January 24, 2026</p>
       </header>
@@ -32,8 +32,8 @@ export default function Page() {
       <section className="mt-10">
         <h2 className="text-2xl font-semibold mb-2">Best options (summary)</h2>
         <ul className="list-disc pl-6 text-zinc-700 space-y-1">
-          <li>Best overall: Leafy greens</li>
-          <li>Best budget: Cabbage and broccoli</li>
+          <li>Overall favourite: Leafy greens</li>
+          <li>Budget favourite: Cabbage and broccoli</li>
           <li>Sensitive users: Cooked vegetables</li>
         </ul>
       </section>

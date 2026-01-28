@@ -128,7 +128,7 @@ export default function Page() {
       </section>
 
       <section className="mt-14">
-        <h2 className="text-2xl font-semibold">Top picks (shortlist)</h2>
+        <h2 className="text-2xl font-semibold">Top options (shortlist)</h2>
         <p className="mt-2 text-sm text-zinc-600">Three solid starting points, then a fuller list below.</p>
         <div className="mt-6 grid gap-4 md:grid-cols-3">
           <ProductPick
