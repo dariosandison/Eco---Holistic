@@ -1,66 +1,84 @@
-import Link from "next/link";
+import Link from 'next/link'
+import StructuredData from '@/components/StructuredData'
+import ComparisonTable from '@/components/ComparisonTable'
+import { SITE_NAME, SITE_URL } from '@/lib/site'
 
 export const metadata = {
-  title: "Detox support foods: gentle, food-first options | Wild & Well",
-  description: "A gentle, food-based approach to supporting natural detox pathways.",
-};
+  title: 'Everyday foods that support your body (no detox hype) | Wild & Well',
+  description:
+    'A food-first, no‑nonsense page: hydration, fibre, and simple staples that support your body’s normal processes — without “detox” claims.',
+}
 
 export default function Page() {
+  const url = `${SITE_URL}/best-detox-support-foods`
+
+  const ld = {
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    headline: 'Everyday foods that support your body (no detox hype)',
+    datePublished: '2026-01-24',
+    dateModified: '2026-01-29',
+    mainEntityOfPage: { '@type': 'WebPage', '@id': url },
+    publisher: {
+      '@type': 'Organization',
+      name: SITE_NAME,
+      url: SITE_URL,
+      logo: { '@type': 'ImageObject', url: `${SITE_URL}/og-default.jpg` },
+    },
+  }
+
   return (
-    <main className="mx-auto max-w-3xl px-6 py-16">
-      <header>
-        <h1 className="text-4xl font-bold mb-4">Detox support foods: gentle, food-first options</h1>
-        <p className="text-zinc-700">A gentle, food-based approach to supporting natural detox pathways.</p>
-        <p className="text-xs text-zinc-500 mt-2">Last updated: January 24, 2026</p>
+    <main className="mx-auto max-w-6xl px-4 py-16">
+      <StructuredData data={ld} />
+
+      <header className="max-w-3xl">
+        <h1 className="text-4xl font-bold">Everyday foods that support your body (no detox hype)</h1>
+        <p className="mt-3 text-zinc-700">
+          “Detox” is a marketing word. Your body already has systems for processing and eliminating waste. What helps most is boring stuff: hydration, fibre, and stable meals.
+        </p>
+        <div className="mt-5 flex flex-wrap gap-2">
+          <Link className="btn-secondary" href="/nutrition">Nutrition hub</Link>
+          <Link className="btn-secondary" href="/shopping-list">Free shopping list</Link>
+          <Link className="btn-secondary" href="/blog/food-first-basics">Food‑first basics</Link>
+        </div>
+        <p className="mt-3 text-xs text-zinc-500">Last updated: January 29, 2026</p>
       </header>
 
       <section className="mt-10">
-        <h2 className="text-2xl font-semibold mb-2">At a glance</h2>
-        <p className="text-zinc-700">Your body detoxes daily — food choices simply support the process.</p>
+        <h2 className="text-2xl font-semibold">What actually helps</h2>
+        <ComparisonTable
+          caption="High-leverage basics"
+          columns={[
+            { key: 'thing', label: 'Thing' },
+            { key: 'why', label: 'Why it matters' },
+            { key: 'simple', label: 'Simple start' },
+          ]}
+          rows={[
+            { thing: 'Hydration', why: 'Supports normal digestion and daily energy', simple: 'Keep a bottle nearby; add a glass with each meal' },
+            { thing: 'Fibre', why: 'Supports regularity and gut comfort for many people', simple: 'Add oats/beans/veg; increase gradually' },
+            { thing: 'Protein + veg', why: 'Stabilises appetite and reduces snack chaos', simple: 'Repeatable meals, not perfect variety' },
+            { thing: 'Sleep', why: 'Recovery and appetite regulation', simple: 'Consistent wake time; morning light' },
+          ]}
+        />
       </section>
 
-      <section className="mt-10">
-        <h2 className="text-2xl font-semibold mb-2">What to look for</h2>
-        <ul className="list-disc pl-6 text-zinc-700 space-y-1">
-          <li>Hydration</li>
-          <li>Fibre-rich foods</li>
-          <li>Cruciferous vegetables</li>
-          <li>Avoid extreme cleanses</li>
+      <section className="mt-12">
+        <h2 className="text-2xl font-semibold">Staples worth keeping around</h2>
+        <ul className="mt-4 list-disc pl-6 text-zinc-700 space-y-1 max-w-3xl">
+          <li><strong>Fibre staples:</strong> oats, beans, lentils, chia/flax (start slowly).</li>
+          <li><strong>Veg defaults:</strong> frozen mixed veg, leafy greens, onions/garlic.</li>
+          <li><strong>Healthy fats:</strong> extra virgin olive oil (buy smaller bottles, store well).</li>
+          <li><strong>Fermented foods (optional):</strong> yoghurt, kefir, sauerkraut — only if they suit you.</li>
+          <li><strong>Simple spices:</strong> turmeric/ginger for flavour (don’t treat as medicine).</li>
         </ul>
-      </section>
-
-      <section className="mt-10">
-        <h2 className="text-2xl font-semibold mb-2">Best options (summary)</h2>
-        <ul className="list-disc pl-6 text-zinc-700 space-y-1">
-          <li>Overall favourite: Leafy greens</li>
-          <li>Budget favourite: Cabbage and broccoli</li>
-          <li>Sensitive users: Cooked vegetables</li>
-        </ul>
-      </section>
-
-      <section className="mt-10">
-        <h2 className="text-2xl font-semibold mb-2">How to start simply</h2>
-        <p className="text-zinc-700">
-          Start with one addition or swap at a time. Consistency matters more than perfection.
+        <p className="mt-5 text-sm text-zinc-600 max-w-3xl">
+          If you want product-level buying guidance, use our shortlists: <Link className="underline" href="/best-extra-virgin-olive-oil-uk">olive oil favourites</Link>, <Link className="underline" href="/best-organic-oats-uk">oats favourites</Link>, and <Link className="underline" href="/best-organic-snacks-healthy">snack favourites</Link>.
         </p>
-        <Link href="/topics" className="btn-primary mt-4 inline-block">
-          Browse detox-support foods
-        </Link>
       </section>
 
-      <section className="mt-12 rounded-2xl border bg-white p-6 shadow-sm">
-        <h2 className="text-xl font-semibold mb-2">New to holistic wellness?</h2>
-        <p className="text-zinc-700 mb-3">
-          Our free shopping list covers low-tox, nutrition basics, and gentle wellness swaps.
-        </p>
-        <Link href="/shopping-list" className="btn-secondary">
-          Get the free shopping list
-        </Link>
-      </section>
-
-      <p className="mt-12 text-sm text-zinc-500">
-        Some links may earn us a small commission at no extra cost to you. We only recommend products we genuinely trust.
+      <p className="mt-12 text-sm text-zinc-500 max-w-3xl">
+        This page is informational and not medical advice.
       </p>
     </main>
-  );
+  )
 }

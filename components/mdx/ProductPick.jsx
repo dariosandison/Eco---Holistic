@@ -9,7 +9,11 @@ export default function ProductPick({
   image = '/og-default.jpg',
   badge,
   bullets = [],
+  links = null,
 }) {
+  const resolvedLinks = Array.isArray(links) && links.length
+    ? links
+    : [{ label: 'Check price', merchant: 'amazon', asin, href, variant: 'primary' }]
   return (
     <div className="not-prose overflow-hidden rounded-2xl border border-zinc-200 bg-white p-5">
       <div className="flex flex-col gap-4 sm:flex-row sm:items-start">
@@ -37,7 +41,37 @@ export default function ProductPick({
           ) : null}
 
           <div className="mt-4">
-            <AmazonButton asin={asin} href={href}>Check price on Amazon</AmazonButton>
+            <div className="flex flex-wrap gap-2">
+              {resolvedLinks.map((l, i) => {
+                const merchant = String(l.merchant || '').toLowerCase()
+                const label = l.label || 'Check price'
+                const v = l.variant || 'primary'
+
+                if (merchant.includes('amazon') || merchant === '') {
+                  return (
+                    <AmazonButton key={i} asin={l.asin || asin} href={l.href || href} variant={v}>
+                      {label}
+                    </AmazonButton>
+                  )
+                }
+
+                const className = v === 'ghost'
+                  ? 'inline-flex items-center justify-center rounded-xl border border-zinc-300 bg-white px-4 py-2.5 text-sm font-semibold text-zinc-900 transition hover:bg-zinc-50'
+                  : 'btn-secondary'
+
+                return (
+                  <a
+                    key={i}
+                    href={l.href}
+                    target="_blank"
+                    rel="noopener nofollow sponsored"
+                    className={className}
+                  >
+                    {label}
+                  </a>
+                )
+              })}
+            </div>
           </div>
         </div>
       </div>

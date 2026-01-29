@@ -59,6 +59,25 @@ export default function DealsPage() {
         <p className="mt-3 text-xs text-zinc-500">Last checked: January 27, 2026</p>
       </header>
 
+      <section className="mt-10 grid gap-4 md:grid-cols-2">
+        <div className="rounded-2xl border bg-white p-6 shadow-sm">
+          <h2 className="text-xl font-semibold">Best times to buy</h2>
+          <ul className="mt-3 list-disc pl-6 text-sm text-zinc-700 space-y-1">
+            <li><strong>Seasonal peaks:</strong> air purifiers (spring allergies), humidifiers (autumn/winter), fans (summer).</li>
+            <li><strong>Sales events:</strong> big retailer sales can be real discounts — but check history if you can.</li>
+            <li><strong>End-of-line:</strong> older models can be great value if filters/spares remain available.</li>
+          </ul>
+        </div>
+        <div className="rounded-2xl border bg-white p-6 shadow-sm">
+          <h2 className="text-xl font-semibold">What to check before you buy</h2>
+          <ul className="mt-3 list-disc pl-6 text-sm text-zinc-700 space-y-1">
+            <li><strong>Size fit:</strong> room coverage, tank size, or dimensions (especially bedrooms and small flats).</li>
+            <li><strong>Ongoing costs:</strong> filters, refills, and replacement parts (often the hidden expense).</li>
+            <li><strong>Returns &amp; warranty:</strong> only worth it if you can return easily and the brand supports spares.</li>
+          </ul>
+        </div>
+      </section>
+
       <section className="mt-10">
         <h2 className="text-2xl font-semibold">Home (low-tox, air, water)</h2>
         <div className="mt-6 grid gap-4 md:grid-cols-2">

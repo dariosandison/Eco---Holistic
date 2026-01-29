@@ -11,6 +11,8 @@ export default function SiteFooter() {
     { href: '/favourites', label: 'Favourites' },
     { href: '/blog', label: 'Wellness Insights' },
     { href: '/topics', label: 'Topics' },
+    { href: '/about', label: 'About' },
+    { href: '/authors', label: 'Authors' },
     { href: '/nutrition', label: 'Nutrition' },
     { href: '/movement', label: 'Movement' },
     { href: '/deals', label: 'Deals' },

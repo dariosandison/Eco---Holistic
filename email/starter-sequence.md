@@ -39,3 +39,22 @@ If you want the fastest progress, these pages help most readers:
 • Sleep Upgrades → /best-natural-sleep-support
 
 One choice at a time works.
+
+
+## Email 4 – Trust & next steps (Day 10)
+Subject: How we choose what we recommend
+
+If you ever wonder “can I trust this shortlist?”, here’s our promise:
+
+• We keep lists short (no endless rankings)
+• We focus on fit + trade-offs (what it’s good for, and what to skip)
+• We watch the hidden costs (filters/refills)
+• We update pages as products change
+
+See the process:
+→ https://www.wild-and-well.store/how-we-test
+
+And if you want a simple path, choose one topic:
+→ https://www.wild-and-well.store/topics
+
+— Wild & Well

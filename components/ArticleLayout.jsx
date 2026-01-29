@@ -4,6 +4,7 @@ export default function ArticleLayout({
   date,
   updated,
   image,
+  author,
   toc,
   children,
 }) {
@@ -31,6 +32,18 @@ export default function ArticleLayout({
         {description && (
           <p className="text-neutral-600 mt-2">{description}</p>
         )}
+
+        {author?.name ? (
+          <div className="text-sm text-neutral-600 mt-3">
+            <span>By </span>
+            {author.url ? (
+              <a className="underline" href={author.url}>{author.name}</a>
+            ) : (
+              <span className="font-medium">{author.name}</span>
+            )}
+            {author.role ? <span className="text-neutral-500"> · {author.role}</span> : null}
+          </div>
+        ) : null}
         {(published || modified) && (
           <div className="text-sm text-neutral-500 mt-3">
             {published && (

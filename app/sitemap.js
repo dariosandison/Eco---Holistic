@@ -19,6 +19,7 @@ export default function sitemap() {
     '/affiliate-disclosure',
     '/product-disclosure',
     '/about',
+    '/authors',
     '/contact',
     '/cookies',
     '/corrections',

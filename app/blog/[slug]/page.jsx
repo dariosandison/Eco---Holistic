@@ -4,6 +4,8 @@ import StructuredData from '@/components/StructuredData'
 import AffiliateNotice from '@/components/mdx/AffiliateNotice'
 import { redirect } from 'next/navigation'
 import { getContent, listContent, tocFromMarkdown } from '@/lib/content'
+import { SITE_NAME, SITE_URL } from '@/lib/site'
+import { getAuthor } from '@/lib/authors'
 
 import remarkGfm from 'remark-gfm'
 import rehypeSlug from 'rehype-slug'
@@ -29,6 +31,7 @@ export async function generateMetadata({ params }) {
 
 export default function Page({ params }) {
   const { frontmatter, content } = getContent('blog', params.slug)
+  const author = getAuthor(frontmatter.author)
   const toc = tocFromMarkdown(content)
 
   const mdxOptions = {
@@ -47,6 +50,7 @@ export default function Page({ params }) {
       date={frontmatter.date}
       updated={frontmatter.updated}
       image={frontmatter.image}
+      author={author}
       toc={toc}
     >
       {showAffiliateNotice && <AffiliateNotice />}
@@ -61,11 +65,49 @@ export default function Page({ params }) {
           dateModified: frontmatter.updated || frontmatter.date,
           mainEntityOfPage: {
             '@type': 'WebPage',
-            '@id':
-              (process.env.NEXT_PUBLIC_SITE_URL || 'https://www.wild-and-well.store') +
-              (typeof window === 'undefined' ? '' : window.location.pathname),
+            '@id': `${SITE_URL}/blog/${params.slug}`,
           },
-          publisher: { '@type': 'Organization', name: 'Wild & Well' },
+          author: {
+            '@type': 'Person',
+            name: author.name,
+            url: author.url,
+          },
+          publisher: {
+            '@type': 'Organization',
+            name: SITE_NAME,
+            url: SITE_URL,
+            logo: {
+              '@type': 'ImageObject',
+              url: `${SITE_URL}/og-default.jpg`,
+            },
+          },
+        }}
+      />
+
+      <StructuredData
+        data={{
+          '@context': 'https://schema.org',
+          '@type': 'BreadcrumbList',
+          itemListElement: [
+            {
+              '@type': 'ListItem',
+              position: 1,
+              name: 'Home',
+              item: SITE_URL,
+            },
+            {
+              '@type': 'ListItem',
+              position: 2,
+              name: 'Wellness Insights',
+              item: `${SITE_URL}/blog`,
+            },
+            {
+              '@type': 'ListItem',
+              position: 3,
+              name: frontmatter.title,
+              item: `${SITE_URL}/blog/${params.slug}`,
+            },
+          ],
         }}
       />
     </ArticleLayout>
