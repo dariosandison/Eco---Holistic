@@ -20,6 +20,8 @@ export default function sitemap() {
     '/product-disclosure',
     '/about',
     '/contact',
+    '/cookies',
+    '/corrections',
     '/privacy',
     '/terms',
   ]

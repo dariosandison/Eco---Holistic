@@ -8,14 +8,14 @@ Hi,
 Here’s your Wild & Well Low‑Tox Shopping List.
 
 Start simple:
-→ https://www.wild-and-well.store/recommended
+→ https://www.wild-and-well.store/favourites
 
 Pick ONE category and make one change this week. That’s enough.
 
 — Wild & Well
 
 
-## Email 2 – Reduce Overwhelm (Day 2)
+## Email 2 – Start small (Day 2)
 Subject: Where most people start wrong (and what to do instead)
 
 Most people try to replace everything at once.
@@ -34,7 +34,7 @@ Subject: The easiest wins for a healthier home
 
 If you want the fastest progress, these pages help most readers:
 
-• Trusted Picks → /recommended
+• Favourites → /favourites
 • Water Filters (UK) → /best-water-filters-uk
 • Sleep Upgrades → /best-natural-sleep-support
 

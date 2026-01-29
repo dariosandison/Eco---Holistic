@@ -30,7 +30,7 @@ export default function ShoppingListPage({ searchParams }) {
     <main className="mx-auto max-w-3xl px-6 py-16">
       <h1 className="text-4xl font-bold mb-4">Free: Low‑Tox Shopping List</h1>
       <p className="text-zinc-700 mb-8">
-        A calm, beginner-friendly shortcut to healthier choices — without overwhelm. Get our trusted swaps for
+        A calm, beginner-friendly shortcut to healthier choices — in plain English. Get our trusted swaps for
         <strong> air</strong>, <strong>water</strong>, <strong>cleaning</strong>, and <strong>everyday wellness</strong>.
       </p>
 

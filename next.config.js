@@ -18,6 +18,7 @@ const nextConfig = {
       { source: '/picks/:path*', destination: '/topics/:path*', permanent: true },
       { source: '/guides', destination: '/blog', permanent: true },
       { source: '/guides/:slug*', destination: '/blog/:slug*', permanent: true },
+      { source: '/blog/sleep-naturally-without-overwhelm', destination: '/blog/sleep-naturally-simple-guide', permanent: true },
     ]
   },
 };

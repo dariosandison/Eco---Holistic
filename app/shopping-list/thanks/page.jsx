@@ -38,7 +38,7 @@ export default function ThanksPage() {
       <section className="mt-10">
         <h2 className="text-2xl font-semibold">Browse by category</h2>
         <p className="mt-2 text-sm text-zinc-600 max-w-3xl">
-          These hub pages explain what matters, what to look for, and link to deeper guides and “favourites” roundups when you want them.
+          These hub pages explain what matters, what to look for, and link to deeper explainers and “favourites” shortlists when you want them.
         </p>
 
         <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">

@@ -3,7 +3,7 @@ import Link from "next/link";
 export const metadata = {
   title: "Affiliate Disclosure | Wild & Well",
   description:
-    "Transparency matters. Wellness Insights how Wild & Well uses affiliate links and how we choose recommendations.",
+    "Transparency matters. How Wild & Well uses affiliate links and how we choose recommendations.",
 };
 
 export default function Page() {
@@ -22,7 +22,7 @@ export default function Page() {
           <li>We prioritise practical, low-tox choices and clear product information.</li>
           <li>We avoid exaggerated claims and “miracle cure” language.</li>
           <li>We prefer transparency: materials, testing, and realistic maintenance.</li>
-          <li>We keep lists short to reduce overwhelm and help you choose confidently.</li>
+          <li>We keep lists short to save you time and help you choose confidently.</li>
         </ul>
         <p className="text-zinc-700">
           If you ever spot an issue or a link that’s out of date, you can contact us and we’ll review it.

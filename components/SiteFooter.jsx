@@ -23,6 +23,8 @@ export default function SiteFooter() {
     { href: '/how-we-test', label: 'How We Test' },
     { href: '/product-disclosure', label: 'Product Disclosure' },
     { href: '/affiliate-disclosure', label: 'Affiliate Disclosure' },
+    { href: '/cookies', label: 'Cookies' },
+    { href: '/corrections', label: 'Corrections' },
     { href: '/privacy', label: 'Privacy' },
     { href: '/terms', label: 'Terms' },
   ]

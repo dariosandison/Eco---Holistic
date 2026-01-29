@@ -102,10 +102,10 @@ export default function HomePage() {
               Natural wellness, made simple.
             </h1>
             <p className="mt-4 text-base text-zinc-700 md:text-lg">
-              Expert-led guides and product shortlists for low-tox, holistic living —
+              Clear Wellness Insights and product shortlists for low-tox, holistic living —
               so you can make healthier choices with confidence.
             </p>
-            <p className="mt-2 text-sm text-zinc-600">For people who want healthier homes without overwhelm or fear-based advice.</p>
+            <p className="mt-2 text-sm text-zinc-600">For people who want healthier homes with clear, practical advice — no fear-based marketing.</p>
 
             <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
               <Link href="/favourites" className="btn-primary w-full sm:w-auto text-center">
@@ -147,7 +147,7 @@ export default function HomePage() {
           <div>
             <h2 className="text-lg font-semibold text-zinc-900">We explain it clearly</h2>
             <p className="mt-2 text-sm text-zinc-700">
-              Practical guidance without the overwhelm. No fear-mongering — just what matters.
+              Practical guidance, no fear-mongering — just what matters.
             </p>
           </div>
           <div>

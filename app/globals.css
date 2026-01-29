@@ -7,6 +7,10 @@
   --ink:#111827;   /* neutral-900 */
   --muted:#6b7280; /* neutral-500/600 */
   --card:#f8fafc;  /* slate-50 */
+  --bg:#ffffff;
+  --fg:var(--ink);
+  --border:#e5e7eb;
+  --brand-contrast:#ffffff;
 }
 
 .btn-primary{
@@ -41,3 +45,12 @@ body{
   @apply rounded-2xl border bg-white;
   border-color: var(--border);
 }
+
+
+.btn-secondary{
+  @apply inline-flex items-center justify-center rounded-2xl px-4 py-2 font-medium border transition;
+  background: #ffffff;
+  color: var(--ink);
+  border-color: #d1d5db;
+}
+.btn-secondary:hover{ background:#f9fafb; }

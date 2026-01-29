@@ -33,25 +33,25 @@ export default function Page() {
           When it helps, we link to “favourites” product shortlists (single-ingredient foods, organic staples, and sensible add-ons).
         </p>
         <div className="mt-5 flex flex-wrap gap-2">
-          <Link className="btn-secondary" href="/blog">Read the blog</Link>
-          <Link className="btn-secondary" href="/favourites">Browse favourites pages</Link>
+          <Link className="btn-secondary" href="/blog">Read Wellness Insights</Link>
+          <Link className="btn-secondary" href="/favourites">Browse favourites</Link>
         </div>
         <p className="mt-3 text-xs text-zinc-500">Last updated: January 27, 2026</p>
       </header>
 
       <section className="mt-10">
-        <h2 className="text-2xl font-semibold">Favourites guides</h2>
+        <h2 className="text-2xl font-semibold">Favourites shortlists</h2>
         <p className="mt-2 text-sm text-zinc-600 max-w-3xl">
           Straightforward roundups: label cues that matter and a shortlist of solid options.
         </p>
 
         <div className="mt-6 grid gap-4 md:grid-cols-3">
-          <Card title="Best extra virgin olive oil (UK)" desc="Freshness, storage, and label cues that actually help." href="/best-extra-virgin-olive-oil-uk" tag="Staples" />
-          <Card title="Best organic oats (UK)" desc="Rolled vs jumbo vs steel-cut — pick what you’ll use." href="/best-organic-oats-uk" tag="Staples" />
-          <Card title="Best chia seeds (UK)" desc="Simple seeds, easy fibre add-in, and storage tips." href="/best-chia-seeds-uk" tag="Superfoods" />
-          <Card title="Best ground flaxseed (UK)" desc="Freshness matters — plus easy daily uses." href="/best-ground-flaxseed-uk" tag="Superfoods" />
-          <Card title="Best matcha (UK)" desc="Everyday vs ceremonial-style and what to look for." href="/best-organic-matcha-uk" tag="Drinks" />
-          <Card title="Best fermented foods to start with" desc="Sauerkraut & kimchi: simple ingredients, realistic expectations." href="/best-fermented-foods-sauerkraut-kimchi" tag="Gut" />
+          <Card title="Extra virgin olive oil (UK): our favourites" desc="Freshness, storage, and label cues that actually help." href="/best-extra-virgin-olive-oil-uk" tag="Staples" />
+          <Card title="Organic oats (UK): our favourites" desc="Rolled vs jumbo vs steel-cut — pick what you’ll use." href="/best-organic-oats-uk" tag="Staples" />
+          <Card title="Chia seeds (UK): simple shortlist" desc="Simple seeds, easy fibre add-in, and storage tips." href="/best-chia-seeds-uk" tag="Superfoods" />
+          <Card title="Ground flaxseed (UK): simple shortlist" desc="Freshness matters — plus easy daily uses." href="/best-ground-flaxseed-uk" tag="Superfoods" />
+          <Card title="Matcha (UK): what to buy" desc="Everyday vs ceremonial-style and what to look for." href="/best-organic-matcha-uk" tag="Drinks" />
+          <Card title="Fermented foods to start with" desc="Sauerkraut & kimchi: simple ingredients, realistic expectations." href="/best-fermented-foods-sauerkraut-kimchi" tag="Gut" />
         </div>
       </section>
 

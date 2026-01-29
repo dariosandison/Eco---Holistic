@@ -3,7 +3,7 @@ import Link from "next/link";
 export const metadata = {
   title: "Digital Products | Wild & Well",
   description:
-    "Simple, practical wellness guides designed to reduce overwhelm and help you build sustainable routines.",
+    "Simple, practical resources designed to help you build sustainable routines.",
 };
 
 export default function Page() {
@@ -33,14 +33,14 @@ export default function Page() {
       <section className="mt-12 rounded-2xl border bg-white p-6 shadow-sm">
         <h2 className="text-2xl font-semibold">Want early access?</h2>
         <p className="mt-2 text-sm text-zinc-700">
-          Join the free list and we’ll email you when new guides drop (and when we run discounts).
+          Join the free list and we’ll email you when new resources go live (and when we run discounts).
         </p>
         <div className="mt-4 flex flex-wrap gap-2">
           <Link className="btn-primary" href="/shopping-list" data-track="productlist-newsletter">
             Join the free list
           </Link>
-          <Link className="btn-secondary" href="/topics">
-            Browse recommended favourites
+          <Link className="btn-secondary" href="/favourites">
+            Browse favourites
           </Link>
         </div>
         <p className="mt-4 text-xs text-zinc-500">Last updated: January 25, 2026</p>

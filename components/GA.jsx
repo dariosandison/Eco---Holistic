@@ -1,7 +1,7 @@
 export default function GA(){
   const id = process.env.NEXT_PUBLIC_GA_ID || process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID;
   if(!id) return null;
-  const requireConsent = process.env.NEXT_PUBLIC_REQUIRE_CONSENT === 'true';
+  const requireConsent = process.env.NEXT_PUBLIC_REQUIRE_CONSENT !== 'false';
   return (
     <>
       <script dangerouslySetInnerHTML={{__html:`

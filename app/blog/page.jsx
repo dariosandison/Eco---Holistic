@@ -25,7 +25,7 @@ export default function Page() {
         <div>
           <h1 className="text-2xl font-semibold text-zinc-900">Wellness Insights</h1>
           <p className="mt-1 text-sm text-zinc-700">
-            Informative articles and practical explainers on nutrition, sleep, movement, and a healthier home — without the drama.
+            Informative articles and practical explainers on nutrition, sleep, movement, and a healthier home — with clear, practical writing.
           </p>
           <div className="mt-3 flex flex-wrap gap-3 text-sm">
             <a href="#insights" className="font-medium text-zinc-800 hover:underline">Insights</a>

@@ -16,7 +16,7 @@ export default function Page() {
           The goal isn’t “perfect sleep”. It’s fewer bad nights — with the smallest changes first.
         </p>
         <div className="mt-4 flex flex-wrap gap-2">
-          <Link className="btn-secondary" href="/blog/sleep-naturally-without-overwhelm">Start with the cornerstone guide</Link>
+          <Link className="btn-secondary" href="/blog/sleep-naturally-simple-guide">Start with the cornerstone guide</Link>
           <Link className="btn-secondary" href="/best-natural-sleep-support">Best natural sleep support</Link>
           <Link className="btn-secondary" href="/shopping-list">Free shopping list</Link>
         </div>

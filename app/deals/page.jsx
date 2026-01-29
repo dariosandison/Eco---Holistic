@@ -29,7 +29,7 @@ function DealCard({ title, desc, query, guideHref, tag }) {
         </a>
         {guideHref ? (
           <Link className="btn-secondary" href={guideHref}>
-            Read the guide
+            Open the page
           </Link>
         ) : null}
       </div>
@@ -48,15 +48,13 @@ export default function DealsPage() {
         <h1 className="text-4xl font-bold">Deals</h1>
         <p className="mt-3 text-zinc-700">
           We’re not running live price scraping here. Instead, this page gives you quick access to deal searches for
-          products we already cover in our guides. If you see a good price, cross-check specs and reviews before buying.
+          products we already cover on our pages. If you see a good price, cross-check specs and reviews before buying.
         </p>
         <div className="mt-5 flex flex-wrap gap-2">
           <Link className="btn-secondary" href="/favourites">
-            Browse favourites guides
+            Browse favourites
           </Link>
-          <Link className="btn-secondary" href="/favourites">
-            Topics hub
-          </Link>
+          <Link className="btn-secondary" href="/topics">Topics hub</Link>
         </div>
         <p className="mt-3 text-xs text-zinc-500">Last checked: January 27, 2026</p>
       </header>

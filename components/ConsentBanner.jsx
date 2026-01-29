@@ -2,7 +2,7 @@
 import { useEffect, useState } from 'react';
 
 export default function ConsentBanner(){
-  const requireConsent = process.env.NEXT_PUBLIC_REQUIRE_CONSENT === 'true';
+  const requireConsent = process.env.NEXT_PUBLIC_REQUIRE_CONSENT !== 'false';
   const [open, setOpen] = useState(false);
   useEffect(() => {
     if (!requireConsent) return;

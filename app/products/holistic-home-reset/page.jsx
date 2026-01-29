@@ -4,7 +4,7 @@ import StructuredData from "@/components/StructuredData";
 export const metadata = {
   title: "The Holistic Home Reset | Wild & Well",
   description:
-    "A calm 30‑day plan to improve your home environment, sleep, and nutrition foundations — without overwhelm.",
+    "A calm 30‑day plan to improve your home environment, sleep, and nutrition foundations — with a simple weekly rhythm.",
 };
 
 export default function Page() {
@@ -84,7 +84,7 @@ export default function Page() {
               <Link className="underline" href="/favourites#start-here">Trusted Favourites: start here</Link>
             </li>
             <li>
-              <Link className="underline" href="/blog/sleep-naturally-without-overwhelm">Sleep cornerstone guide</Link>
+              <Link className="underline" href="/blog/sleep-naturally-simple-guide">Sleep cornerstone guide</Link>
             </li>
             <li>
               <Link className="underline" href="/best-low-tox-products-for-beginners">Low-tox starter swaps</Link>

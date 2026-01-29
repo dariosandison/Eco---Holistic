@@ -117,7 +117,7 @@ export default function Page() {
         </p>
         <div className="mt-4 flex flex-wrap gap-2">
           <Link className="btn-secondary" href="/topics/sleep">Sleep hub</Link>
-          <Link className="btn-secondary" href="/blog/sleep-naturally-without-overwhelm">Cornerstone sleep guide</Link>
+          <Link className="btn-secondary" href="/blog/sleep-naturally-simple-guide">Cornerstone sleep guide</Link>
           <Link className="btn-secondary" href="/shopping-list">Free shopping list</Link>
         </div>
         <p className="mt-4 text-xs text-zinc-500">Last updated: January 25, 2026</p>
