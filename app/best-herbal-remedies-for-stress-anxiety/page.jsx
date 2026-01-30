@@ -7,6 +7,9 @@ import { SITE_NAME, SITE_URL } from '@/lib/site'
 import EducationFirstCallout from '@/components/EducationFirstCallout'
 import MoneyPageEducationBlock from '@/components/MoneyPageEducationBlock'
 import { getMoneyPageEdu } from '@/lib/moneyPageEdu'
+import MoneyPageNextLinks from '@/components/MoneyPageNextLinks'
+
+
 
 
 export const metadata = {
@@ -61,7 +64,9 @@ const PICKS = [
 ]
 
 export default function Page() {
-    const edu = getMoneyPageEdu('best-herbal-remedies-for-stress-anxiety')
+    
+  const edu = getMoneyPageEdu('best-herbal-remedies-for-stress-anxiety')
+
 const url = `${SITE_URL}/best-herbal-remedies-for-stress-anxiety`
 
   const itemList = PICKS.map((p, i) => ({
@@ -179,6 +184,9 @@ const url = `${SITE_URL}/best-herbal-remedies-for-stress-anxiety`
       <p className="mt-12 text-sm text-zinc-500 max-w-3xl">
         This page is informational and not medical advice. Some links may earn us a small commission at no extra cost to you.
       </p>
-    </main>
+    
+      <MoneyPageNextLinks slug="best-herbal-remedies-for-stress-anxiety" />
+
+</main>
   )
 }

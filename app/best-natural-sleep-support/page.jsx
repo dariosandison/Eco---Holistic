@@ -6,6 +6,9 @@ import { amazonSearchUrl } from '@/lib/amazon'
 import EducationFirstCallout from '@/components/EducationFirstCallout'
 import MoneyPageEducationBlock from '@/components/MoneyPageEducationBlock'
 import { getMoneyPageEdu } from '@/lib/moneyPageEdu'
+import MoneyPageNextLinks from '@/components/MoneyPageNextLinks'
+
+
 
 
 export const metadata = {
@@ -59,7 +62,9 @@ const PICKS = [
 ]
 
 export default function Page() {
-    const edu = getMoneyPageEdu('best-natural-sleep-support')
+    
+  const edu = getMoneyPageEdu('best-natural-sleep-support')
+
 const itemList = PICKS.map((p, i) => ({
     '@type': 'ListItem',
     position: i + 1,
@@ -257,6 +262,7 @@ const itemList = PICKS.map((p, i) => ({
           <Link className="btn-secondary" href="/blog/sleep-wind-down-routine">Wind-down routine</Link>
         </div>
       </section>
+      <MoneyPageNextLinks slug=\"best-natural-sleep-support\" />
 
       <p className="mt-12 text-xs text-zinc-500">
         This content is for general education and isn’t medical advice. If you’re pregnant, on medication, or managing a health condition, check with a qualified clinician first.

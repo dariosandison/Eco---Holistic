@@ -5,6 +5,11 @@ import { amazonSearchUrl } from '@/lib/amazon'
 import EducationFirstCallout from '@/components/EducationFirstCallout'
 import MoneyPageEducationBlock from '@/components/MoneyPageEducationBlock'
 import { getMoneyPageEdu } from '@/lib/moneyPageEdu'
+import MoneyPageQuickCompare from '@/components/MoneyPageQuickCompare'
+import MoneyPageFAQ from '@/components/MoneyPageFAQ'
+import MoneyPageNextLinks from '@/components/MoneyPageNextLinks'
+
+
 
 
 export const metadata = {
@@ -97,7 +102,9 @@ function SummaryBox() {
 }
 
 export default function Page() {
-    const edu = getMoneyPageEdu('best-chia-seeds-uk')
+    
+  const edu = getMoneyPageEdu('best-chia-seeds-uk')
+
 const itemList = PICKS.map((p, i) => ({
     '@type': 'ListItem',
     position: i + 1,
@@ -130,6 +137,8 @@ const itemList = PICKS.map((p, i) => ({
 
       
       <MoneyPageEducationBlock edu={edu} />
+
+      <MoneyPageQuickCompare picks={PICKS} />
 <section className="mt-8">
         <SummaryBox />
       </section>
@@ -234,6 +243,12 @@ const itemList = PICKS.map((p, i) => ({
           Some links may earn us a small commission at no extra cost to you.
         </p>
       </section>
-    </main>
+    
+      <MoneyPageNextLinks slug="best-chia-seeds-uk" />
+
+
+      <MoneyPageFAQ slug="best-chia-seeds-uk" />
+
+</main>
   )
 }

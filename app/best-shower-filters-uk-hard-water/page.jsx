@@ -5,6 +5,11 @@ import { amazonSearchUrl } from '@/lib/amazon'
 import EducationFirstCallout from '@/components/EducationFirstCallout'
 import MoneyPageEducationBlock from '@/components/MoneyPageEducationBlock'
 import { getMoneyPageEdu } from '@/lib/moneyPageEdu'
+import MoneyPageQuickCompare from '@/components/MoneyPageQuickCompare'
+import MoneyPageFAQ from '@/components/MoneyPageFAQ'
+import MoneyPageNextLinks from '@/components/MoneyPageNextLinks'
+
+
 
 
 export const metadata = {
@@ -44,7 +49,9 @@ const PICKS = [
 ]
 
 export default function Page() {
-    const edu = getMoneyPageEdu('best-shower-filters-uk-hard-water')
+    
+  const edu = getMoneyPageEdu('best-shower-filters-uk-hard-water')
+
 const itemList = PICKS.map((p, i) => ({
     '@type': 'ListItem',
     position: i + 1,
@@ -81,6 +88,8 @@ const itemList = PICKS.map((p, i) => ({
 
       
       <MoneyPageEducationBlock edu={edu} />
+
+      <MoneyPageQuickCompare picks={PICKS} />
 <section className="mt-12 grid gap-4 md:grid-cols-3">
         <div className="card">
           <h2 className="text-lg font-semibold">What they can do</h2>
@@ -123,8 +132,11 @@ const itemList = PICKS.map((p, i) => ({
           <Link className="btn-secondary" href="/shopping-list">Get the free shopping list</Link>
         </div>
       </section>
+      <MoneyPageNextLinks slug=\"best-shower-filters-uk-hard-water\" />
 
-      <p className="mt-12 text-xs text-zinc-500">
+      
+      <MoneyPageFAQ slug=\"best-shower-filters-uk-hard-water\" />
+<p className="mt-12 text-xs text-zinc-500">
         Some links may earn us a commission at no extra cost to you. We never accept paid placements in reviews.
       </p>
     </main>

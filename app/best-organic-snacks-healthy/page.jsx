@@ -7,6 +7,9 @@ import { SITE_NAME, SITE_URL } from '@/lib/site'
 import EducationFirstCallout from '@/components/EducationFirstCallout'
 import MoneyPageEducationBlock from '@/components/MoneyPageEducationBlock'
 import { getMoneyPageEdu } from '@/lib/moneyPageEdu'
+import MoneyPageNextLinks from '@/components/MoneyPageNextLinks'
+
+
 
 
 export const metadata = {
@@ -60,7 +63,9 @@ const PICKS = [
 ]
 
 export default function Page() {
-    const edu = getMoneyPageEdu('best-organic-snacks-healthy')
+    
+  const edu = getMoneyPageEdu('best-organic-snacks-healthy')
+
 const url = `${SITE_URL}/best-organic-snacks-healthy`
 
   const itemList = PICKS.map((p, i) => ({
@@ -186,6 +191,9 @@ const url = `${SITE_URL}/best-organic-snacks-healthy`
       <p className="mt-12 text-sm text-zinc-500 max-w-3xl">
         Some links may earn us a small commission at no extra cost to you.
       </p>
-    </main>
+    
+      <MoneyPageNextLinks slug="best-organic-snacks-healthy" />
+
+</main>
   )
 }

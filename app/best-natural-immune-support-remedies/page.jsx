@@ -7,6 +7,10 @@ import { SITE_NAME, SITE_URL } from '@/lib/site'
 import EducationFirstCallout from '@/components/EducationFirstCallout'
 import MoneyPageEducationBlock from '@/components/MoneyPageEducationBlock'
 import { getMoneyPageEdu } from '@/lib/moneyPageEdu'
+import MoneyPageFAQ from '@/components/MoneyPageFAQ'
+import MoneyPageNextLinks from '@/components/MoneyPageNextLinks'
+
+
 
 
 export const metadata = {
@@ -61,7 +65,9 @@ const PICKS = [
 ]
 
 export default function Page() {
-    const edu = getMoneyPageEdu('best-natural-immune-support-remedies')
+    
+  const edu = getMoneyPageEdu('best-natural-immune-support-remedies')
+
 const url = `${SITE_URL}/best-natural-immune-support-remedies`
 
   const itemList = PICKS.map((p, i) => ({
@@ -149,6 +155,12 @@ const url = `${SITE_URL}/best-natural-immune-support-remedies`
       <p className="mt-12 text-sm text-zinc-500 max-w-3xl">
         This page is informational and not medical advice. Some links may earn us a small commission at no extra cost to you.
       </p>
-    </main>
+    
+      <MoneyPageNextLinks slug="best-natural-immune-support-remedies" />
+
+
+      <MoneyPageFAQ slug="best-natural-immune-support-remedies" />
+
+</main>
   )
 }

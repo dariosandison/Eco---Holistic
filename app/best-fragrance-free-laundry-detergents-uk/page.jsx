@@ -6,6 +6,9 @@ import { amazonSearchUrl } from '@/lib/amazon'
 import EducationFirstCallout from '@/components/EducationFirstCallout'
 import MoneyPageEducationBlock from '@/components/MoneyPageEducationBlock'
 import { getMoneyPageEdu } from '@/lib/moneyPageEdu'
+import MoneyPageNextLinks from '@/components/MoneyPageNextLinks'
+
+
 
 
 export const metadata = {
@@ -45,7 +48,9 @@ const PICKS = [
 ]
 
 export default function Page() {
-    const edu = getMoneyPageEdu('best-fragrance-free-laundry-detergents-uk')
+    
+  const edu = getMoneyPageEdu('best-fragrance-free-laundry-detergents-uk')
+
 const itemList = PICKS.map((p, i) => ({
     '@type': 'ListItem',
     position: i + 1,
@@ -223,6 +228,7 @@ const itemList = PICKS.map((p, i) => ({
           <Link className="btn-secondary" href="/blog/non-toxic-cleaning-starter">Cleaning starter</Link>
         </div>
       </section>
+      <MoneyPageNextLinks slug=\"best-fragrance-free-laundry-detergents-uk\" />
 
       <p className="mt-12 text-xs text-zinc-500">
         Some links may earn us a commission at no extra cost to you. We never accept paid placements in reviews.

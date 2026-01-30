@@ -5,6 +5,10 @@ import { SITE_NAME, SITE_URL } from '@/lib/site'
 import EducationFirstCallout from '@/components/EducationFirstCallout'
 import MoneyPageEducationBlock from '@/components/MoneyPageEducationBlock'
 import { getMoneyPageEdu } from '@/lib/moneyPageEdu'
+import MoneyPageFAQ from '@/components/MoneyPageFAQ'
+import MoneyPageNextLinks from '@/components/MoneyPageNextLinks'
+
+
 
 
 export const metadata = {
@@ -14,7 +18,9 @@ export const metadata = {
 }
 
 export default function Page() {
-    const edu = getMoneyPageEdu('best-anti-inflammatory-foods-shopping-list')
+    
+  const edu = getMoneyPageEdu('best-anti-inflammatory-foods-shopping-list')
+
 const url = `${SITE_URL}/best-anti-inflammatory-foods-shopping-list`
 
   const ld = {
@@ -95,6 +101,12 @@ const url = `${SITE_URL}/best-anti-inflammatory-foods-shopping-list`
       <p className="mt-12 text-sm text-zinc-500 max-w-3xl">
         This page is informational and not medical advice.
       </p>
-    </main>
+    
+      <MoneyPageNextLinks slug="best-anti-inflammatory-foods-shopping-list" />
+
+
+      <MoneyPageFAQ slug="best-anti-inflammatory-foods-shopping-list" />
+
+</main>
   )
 }

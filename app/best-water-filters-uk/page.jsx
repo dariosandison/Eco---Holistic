@@ -6,6 +6,9 @@ import { amazonSearchUrl } from '@/lib/amazon'
 import EducationFirstCallout from '@/components/EducationFirstCallout'
 import MoneyPageEducationBlock from '@/components/MoneyPageEducationBlock'
 import { getMoneyPageEdu } from '@/lib/moneyPageEdu'
+import MoneyPageNextLinks from '@/components/MoneyPageNextLinks'
+
+
 
 
 export const metadata = {
@@ -77,7 +80,9 @@ function QuickSummary() {
 }
 
 export default function Page() {
-    const edu = getMoneyPageEdu('best-water-filters-uk')
+    
+  const edu = getMoneyPageEdu('best-water-filters-uk')
+
 const itemList = PICKS.map((p, i) => ({
     '@type': 'ListItem',
     position: i + 1,
@@ -274,6 +279,7 @@ const itemList = PICKS.map((p, i) => ({
           </div>
         </div>
       </section>
+      <MoneyPageNextLinks slug=\"best-water-filters-uk\" />
 
       <p className="mt-12 text-xs text-zinc-500">
         Some links may earn us a commission at no extra cost to you. We never accept paid placements in reviews.

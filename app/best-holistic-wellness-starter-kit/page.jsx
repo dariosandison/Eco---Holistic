@@ -7,6 +7,10 @@ import { SITE_NAME, SITE_URL } from '@/lib/site'
 import EducationFirstCallout from '@/components/EducationFirstCallout'
 import MoneyPageEducationBlock from '@/components/MoneyPageEducationBlock'
 import { getMoneyPageEdu } from '@/lib/moneyPageEdu'
+import MoneyPageFAQ from '@/components/MoneyPageFAQ'
+import MoneyPageNextLinks from '@/components/MoneyPageNextLinks'
+
+
 
 
 export const metadata = {
@@ -81,7 +85,9 @@ function StartCard({ title, desc, href, tag }) {
 }
 
 export default function Page() {
-    const edu = getMoneyPageEdu('best-holistic-wellness-starter-kit')
+    
+  const edu = getMoneyPageEdu('best-holistic-wellness-starter-kit')
+
 const url = `${SITE_URL}/best-holistic-wellness-starter-kit`
 
   const ld = {
@@ -168,6 +174,12 @@ const url = `${SITE_URL}/best-holistic-wellness-starter-kit`
       <p className="mt-12 text-sm text-zinc-500 max-w-3xl">
         Some links may earn us a small commission at no extra cost to you.
       </p>
-    </main>
+    
+      <MoneyPageNextLinks slug="best-holistic-wellness-starter-kit" />
+
+
+      <MoneyPageFAQ slug="best-holistic-wellness-starter-kit" />
+
+</main>
   )
 }
