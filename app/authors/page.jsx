@@ -12,7 +12,7 @@ export default function Page() {
       <header className="max-w-3xl">
         <h1 className="text-4xl font-bold">Authors</h1>
         <p className="mt-3 text-zinc-700">
-          Wild &amp; Well is written and maintained by our editorial team. We publish practical wellness content for UK homes,
+          Wild &amp; Well is founded and edited in‑house. We publish practical wellness content for UK homes,
           and we update key pages as products and evidence change.
         </p>
         <div className="mt-5 flex flex-wrap gap-2">

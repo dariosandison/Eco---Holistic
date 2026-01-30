@@ -40,6 +40,17 @@ export default function ShoppingListPage({ searchParams }) {
           Enter your email and we’ll send the list. (No spam — unsubscribe anytime.)
         </p>
 
+        <div className="mb-5 rounded-2xl border bg-zinc-50 p-4">
+          <div className="text-sm font-semibold text-zinc-900">Quick preview (examples)</div>
+          <ul className="mt-2 list-disc pl-6 text-sm text-zinc-700 space-y-1">
+            <li>Air: what “true HEPA” means and how to size a purifier for your room</li>
+            <li>Water: jug vs under‑sink vs countertop — a simple way to choose</li>
+            <li>Cleaning: fragrance‑free laundry + all‑purpose starter swaps</li>
+            <li>Sleep: light, caffeine timing, and a few low‑risk upgrades</li>
+            <li>Kitchen: a small “swap next” checklist (no overhaul required)</li>
+          </ul>
+        </div>
+
         {errorMsg ? (
           <div className="mb-4 rounded-xl border border-amber-200 bg-amber-50 p-3 text-sm text-amber-900">
             {errorMsg}{" "}
@@ -66,13 +77,14 @@ export default function ShoppingListPage({ searchParams }) {
         </form>
 
         <p className="mt-3 text-xs text-zinc-600">
+          What happens next: the email arrives within a couple of minutes. If you don’t see it, check promotions/spam.
           After you subscribe, you’ll land on the{" "}
           <Link className="underline" href="/shopping-list/thanks">
             thank‑you page
           </Link>
           . Prefer to browse now? Start with our{" "}
-          <Link className="underline" href="/topics">
-            Favouritess
+          <Link className="underline" href="/favourites">
+            Favourites
           </Link>
           .
         </p>

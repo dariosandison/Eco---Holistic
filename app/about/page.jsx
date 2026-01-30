@@ -45,7 +45,8 @@ export default function Page(){
 
       <h2>Who’s behind Wild &amp; Well</h2>
       <p>
-        Our content is maintained by the Wild &amp; Well editorial team. See author profiles and recent updates on the <Link href='/authors'>Authors</Link> page.
+        Wild &amp; Well is founded and edited in‑house. You can read the <Link href='/authors/wild-and-well-founder'>Founder &amp; Editor profile</Link>
+        and see other contributors on the <Link href='/authors'>Authors</Link> page.
       </p>
 
       <p>

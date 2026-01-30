@@ -35,6 +35,38 @@ export default function ThanksPage() {
           Thanks — you’re on the list. If you don’t see the email, check promotions/spam.
           In the meantime, here are the best places to browse next (no hype, just clear info).
         </p>
+        <div className="mt-5 rounded-2xl border bg-white p-5 shadow-sm">
+          <h2 className="text-lg font-semibold">Start in 2 minutes</h2>
+          <p className="mt-2 text-sm text-zinc-600">
+            Pick one area for this week (don’t try to fix everything at once).
+          </p>
+          <div className="mt-4 flex flex-wrap gap-2">
+            <TrackedLink
+              href="/topics/air-quality"
+              event="lead_next_step"
+              data={{ source: "shopping_list_thanks", destination: "/topics/air-quality", label: "Start: air quality" }}
+              className="btn-secondary"
+            >
+              Air quality (allergies)
+            </TrackedLink>
+            <TrackedLink
+              href="/topics/water"
+              event="lead_next_step"
+              data={{ source: "shopping_list_thanks", destination: "/topics/water", label: "Start: water" }}
+              className="btn-secondary"
+            >
+              Water filters
+            </TrackedLink>
+            <TrackedLink
+              href="/topics/fragrance-free"
+              event="lead_next_step"
+              data={{ source: "shopping_list_thanks", destination: "/topics/fragrance-free", label: "Start: fragrance-free" }}
+              className="btn-secondary"
+            >
+              Fragrance‑free home
+            </TrackedLink>
+          </div>
+        </div>
         <p className="mt-3 text-xs text-zinc-500">Last updated: January 27, 2026</p>
       </header>
 

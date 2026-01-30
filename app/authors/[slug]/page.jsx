@@ -1,11 +1,11 @@
 import Link from 'next/link'
 import { listContent } from '@/lib/content'
-import { getAuthor } from '@/lib/authors'
+import { AUTHORS, getAuthor } from '@/lib/authors'
 
 export async function generateStaticParams() {
-  return listContent('blog')
-    .map((p) => ({ slug: (p.author || 'wild-and-well-editorial') }))
-    .filter((v, i, arr) => arr.findIndex((x) => x.slug === v.slug) === i)
+  const fromPosts = listContent('blog').map((p) => ({ slug: (p.author || 'wild-and-well-editorial') }))
+  const fromAuthors = AUTHORS.map((a) => ({ slug: a.slug }))
+  return [...fromAuthors, ...fromPosts].filter((v, i, arr) => arr.findIndex((x) => x.slug === v.slug) === i)
 }
 
 export async function generateMetadata({ params }) {
