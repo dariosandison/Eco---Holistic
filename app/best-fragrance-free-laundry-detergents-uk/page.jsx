@@ -228,7 +228,7 @@ const itemList = PICKS.map((p, i) => ({
           <Link className="btn-secondary" href="/blog/non-toxic-cleaning-starter">Cleaning starter</Link>
         </div>
       </section>
-      <MoneyPageNextLinks slug=\"best-fragrance-free-laundry-detergents-uk\" />
+      <MoneyPageNextLinks slug="best-fragrance-free-laundry-detergents-uk" />
 
       <p className="mt-12 text-xs text-zinc-500">
         Some links may earn us a commission at no extra cost to you. We never accept paid placements in reviews.

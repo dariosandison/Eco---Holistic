@@ -262,7 +262,7 @@ const itemList = PICKS.map((p, i) => ({
           <Link className="btn-secondary" href="/blog/sleep-wind-down-routine">Wind-down routine</Link>
         </div>
       </section>
-      <MoneyPageNextLinks slug=\"best-natural-sleep-support\" />
+      <MoneyPageNextLinks slug="best-natural-sleep-support" />
 
       <p className="mt-12 text-xs text-zinc-500">
         This content is for general education and isn’t medical advice. If you’re pregnant, on medication, or managing a health condition, check with a qualified clinician first.

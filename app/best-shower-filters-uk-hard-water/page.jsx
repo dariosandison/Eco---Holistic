@@ -132,10 +132,10 @@ const itemList = PICKS.map((p, i) => ({
           <Link className="btn-secondary" href="/shopping-list">Get the free shopping list</Link>
         </div>
       </section>
-      <MoneyPageNextLinks slug=\"best-shower-filters-uk-hard-water\" />
+      <MoneyPageNextLinks slug="best-shower-filters-uk-hard-water" />
 
       
-      <MoneyPageFAQ slug=\"best-shower-filters-uk-hard-water\" />
+      <MoneyPageFAQ slug="best-shower-filters-uk-hard-water" />
 <p className="mt-12 text-xs text-zinc-500">
         Some links may earn us a commission at no extra cost to you. We never accept paid placements in reviews.
       </p>
