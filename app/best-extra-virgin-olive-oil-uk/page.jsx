@@ -87,8 +87,8 @@ function SummaryBox() {
         A short, practical shortlist plus the label cues that matter (freshness, ingredients, and how you’ll actually use it).
       </p>
       <div className="mt-4 flex flex-wrap gap-2">
-        <Link className="btn-secondary" href="/nutrition">Nutrition hub</Link>
-        <Link className="btn-secondary" href="/favourites">Favourites hub</Link>
+        <Link className="btn-secondary" href="/nutrition">Nutrition</Link>
+        <Link className="btn-secondary" href="/favourites">Favourites</Link>
       </div>
       <p className="mt-4 text-xs text-zinc-500">Last updated: January 27, 2026</p>
     </div>

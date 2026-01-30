@@ -4,7 +4,7 @@ import { amazonSearchUrl } from '@/lib/amazon'
 
 export const metadata = {
   title: 'Air Quality Topics — Wild & Well',
-  description: 'Air quality hub for UK homes: allergies, damp, and the small choices that make a big difference.',
+  description: 'Air quality for UK homes: allergies, damp, and the small choices that make a big difference.',
 }
 
 export default function Page() {
@@ -17,8 +17,8 @@ export default function Page() {
         </p>
         <div className="mt-4 flex flex-wrap gap-2">
           <Link className="btn-secondary" href="/blog/healthy-air-at-home">Read the air guide</Link>
-          <Link className="btn-secondary" href="/best-air-purifiers-allergies-uk">Best for allergies (UK)</Link>
-          <Link className="btn-secondary" href="/best-air-purifiers-small-flats-uk">Best for small flats</Link>
+          <Link className="btn-secondary" href="/best-air-purifiers-allergies-uk">Great for allergies (UK)</Link>
+          <Link className="btn-secondary" href="/best-air-purifiers-small-flats-uk">Great for small flats</Link>
         </div>
       </header>
 
@@ -87,8 +87,8 @@ export default function Page() {
         </div>
 
         <div className="mt-8 flex flex-wrap gap-2">
-          <Link className="btn-primary" href="/best-air-purifiers-allergies-uk">Best air purifiers for allergies →</Link>
-          <Link className="btn-secondary" href="/best-air-purifiers-small-flats-uk">Best for small flats →</Link>
+          <Link className="btn-primary" href="/best-air-purifiers-allergies-uk">Air purifiers for allergies: shortlist →</Link>
+          <Link className="btn-secondary" href="/best-air-purifiers-small-flats-uk">Great for small flats →</Link>
         </div>
       </section>
 

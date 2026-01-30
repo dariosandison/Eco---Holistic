@@ -6,14 +6,14 @@ import EducationFirstCallout from '@/components/EducationFirstCallout'
 
 
 export const metadata = {
-  title: "Best Activewear Basics (UK) | Wild & Well",
+  title: "Activewear Basics (UK): shortlist | Wild & Well",
   description: "A practical shortlist of activewear basics (tops, leggings, socks, layers) that prioritise comfort and durability over gimmicks.",
 }
 
 const PICKS = [
   {
     "title": "Moisture-wicking training tops",
-    "badge": "Best all-round",
+    "badge": "all-round",
     "desc": "Simple breathable tops for walking and training.",
     "query": "men women moisture wicking training top",
     "bullets": [
@@ -87,8 +87,8 @@ function SummaryBox() {
         Comfort-first activewear basics that support consistency — without paying for hype.
       </p>
       <div className="mt-4 flex flex-wrap gap-2">
-        <Link className="btn-secondary" href="/movement">Movement hub</Link>
-        <Link className="btn-secondary" href="/favourites">Favourites hub</Link>
+        <Link className="btn-secondary" href="/movement">Movement</Link>
+        <Link className="btn-secondary" href="/favourites">Favourites</Link>
       </div>
       <p className="mt-4 text-xs text-zinc-500">Last updated: January 27, 2026</p>
     </div>
@@ -106,7 +106,7 @@ export default function Page() {
   const ld = {
     '@context': 'https://schema.org',
     '@type': 'Article',
-    headline: "Best Activewear Basics (UK)",
+    headline: "Activewear Basics (UK): shortlist",
     dateModified: '2026-01-27',
     datePublished: '2026-01-27',
     mainEntity: {
@@ -121,7 +121,7 @@ export default function Page() {
       <StructuredData data={{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Do I need “technical” clothing?", "acceptedAnswer": {"@type": "Answer", "text": "Not necessarily. Comfortable basics are enough for most beginners. Buy for comfort and durability, not buzzwords."}}]}} />
 
       <header className="max-w-3xl">
-        <h1 className="text-4xl font-bold">Best activewear basics (UK)</h1>
+        <h1 className="text-4xl font-bold">activewear basics (UK): shortlist</h1>
         <p className="mt-3 text-zinc-700">A practical shortlist of activewear basics (tops, leggings, socks, layers) that prioritise comfort and durability over gimmicks.</p>
 
         <EducationFirstCallout topicHref="/movement" topicLabel="Movement basics" insightHref="/blog/home-strength-basics-busy-people" insightLabel="Strength basics" />
@@ -137,7 +137,7 @@ export default function Page() {
         <div className="mt-6 grid gap-4 md:grid-cols-3">
           <ProductPick
             title="Moisture-wicking training tops"
-            badge="Best all-round"
+            badge="all-round"
             description="Simple breathable tops for walking and training."
             href={amazonSearchUrl('men women moisture wicking training top')}
             bullets={["Breathable", "Easy to wash", "Buy 2\u20133 and rotate"]}
@@ -168,7 +168,7 @@ export default function Page() {
         <div className="mt-6 grid gap-4 md:grid-cols-2">
           <ProductPick
             title="Moisture-wicking training tops"
-            badge="Best all-round"
+            badge="all-round"
             description="Simple breathable tops for walking and training."
             href={amazonSearchUrl('men women moisture wicking training top')}
             bullets={["Breathable", "Easy to wash", "Buy 2\u20133 and rotate"]}
@@ -221,7 +221,7 @@ export default function Page() {
         <h2 className="text-2xl font-semibold">How we think about “best”</h2>
         <div className="mt-3 space-y-3 text-sm text-zinc-700 max-w-3xl">
           <p>
-            “Best” here means: sensible features, decent reviews across many buyers, and a realistic fit for most homes — not hype, not extreme claims.
+            “Shortlist” here means: sensible features, decent reviews across many buyers, and a realistic fit for most homes — not hype, not extreme claims.
           </p>
           <p>
             Always check sizing/specs and current pricing before you buy. If a product makes strong health claims without evidence, treat that as marketing.

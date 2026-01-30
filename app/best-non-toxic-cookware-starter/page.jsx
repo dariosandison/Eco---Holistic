@@ -17,28 +17,28 @@ const PICKS = [
     badge: 'First buy',
     desc: 'A workhorse pan you’ll use daily. Learn heat control once and you’re set.',
     query: 'stainless steel frying pan 24cm UK',
-    bullets: ['Best for: most cooking', 'Look for: thick base + comfortable handle', 'Use medium heat; preheat properly'],
+    bullets: ['Great for: most cooking', 'Look for: thick base + comfortable handle', 'Use medium heat; preheat properly'],
   },
   {
     title: 'Cast iron skillet (simple + durable)',
     badge: 'Budget-friendly',
     desc: 'Great once seasoned and cared for. Heavy, but lasts forever.',
     query: 'cast iron skillet pre-seasoned UK',
-    bullets: ['Best for: searing + oven use', 'Watch-out: heavy + needs drying', 'Seasoning maintenance is the tradeoff'],
+    bullets: ['Great for: searing + oven use', 'Watch-out: heavy + needs drying', 'Seasoning maintenance is the tradeoff'],
   },
   {
     title: 'Stainless steel saucepan (1–2L)',
     badge: 'Every kitchen',
     desc: 'For sauces, grains, and reheating. Start with one good pot, not a full set.',
     query: 'stainless steel saucepan 1.5L UK',
-    bullets: ['Best for: daily basics', 'Look for: tight lid + solid base', 'Avoid buying sets you won’t use'],
+    bullets: ['Great for: daily basics', 'Look for: tight lid + solid base', 'Avoid buying sets you won’t use'],
   },
   {
     title: 'Enameled cast iron (dutch oven)',
     badge: 'If you cook a lot',
     desc: 'Optional, but brilliant for soups, stews, and slow cooking.',
     query: 'enameled cast iron dutch oven UK',
-    bullets: ['Best for: batch cooking', 'Watch-out: expensive + heavy', 'Great if you actually use it weekly'],
+    bullets: ['Great for: batch cooking', 'Watch-out: expensive + heavy', 'Great if you actually use it weekly'],
   },
 ]
 
@@ -168,7 +168,7 @@ export default function Page(){
           caption="At-a-glance comparison"
           columns={[
             { key: 'material', label: 'Material' },
-            { key: 'bestFor', label: 'Best for' },
+            { key: 'bestFor', label: 'Great for' },
             { key: 'tradeoff', label: 'Main tradeoff' },
             { key: 'care', label: 'Care notes' },
           ]}

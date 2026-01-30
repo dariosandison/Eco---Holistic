@@ -6,7 +6,7 @@ import EducationFirstCallout from '@/components/EducationFirstCallout'
 
 
 export const metadata = {
-  title: 'Best Shower Filters for UK Hard Water | Wild & Well',
+  title: 'Shower Filters for UK Hard Water: shortlist | Wild & Well',
   description: 'Shortlisted shower filters for hard-water UK homes — what they can and can’t do, plus buyer shortlist.',
 }
 
@@ -16,21 +16,21 @@ const PICKS = [
     badge: 'Popular pick',
     desc: 'A widely discussed shower filter brand. Good if you want simple replacements.',
     query: 'Hello Klean shower filter',
-    bullets: ['Best for: simple setup', 'Check cartridge replacement cost', 'Don’t expect miracles on extreme hard water'],
+    bullets: ['Great for: simple setup', 'Check cartridge replacement cost', 'Don’t expect miracles on extreme hard water'],
   },
   {
     title: 'Magichome shower filter',
     badge: 'Budget',
     desc: 'Budget-friendly option often compared on UK lists.',
     query: 'Magichome shower filter hard water',
-    bullets: ['Best for: budget trials', 'Check replacement cartridges'],
+    bullets: ['Great for: budget trials', 'Check replacement cartridges'],
   },
   {
     title: 'Philips shower filter',
     badge: 'Mainstream',
     desc: 'Mainstream brand option with broad availability.',
     query: 'Philips shower filter',
-    bullets: ['Best for: easy repurchase', 'Check flow rate'],
+    bullets: ['Great for: easy repurchase', 'Check flow rate'],
   },
   {
     title: 'Universal replacement cartridges (multi-pack)',
@@ -52,7 +52,7 @@ export default function Page() {
   const ld = {
     '@context': 'https://schema.org',
     '@type': 'Article',
-    headline: 'Best Shower Filters for UK Hard Water',
+    headline: 'Shower Filters for UK Hard Water: shortlist',
     dateModified: '2026-01-25',
     datePublished: '2026-01-25',
     mainEntity: { '@type': 'ItemList', itemListElement: itemList },
@@ -63,14 +63,14 @@ export default function Page() {
       <StructuredData data={ld} />
 
       <header className="max-w-3xl">
-        <h1 className="text-4xl font-bold">Best shower filters for UK hard water</h1>
+        <h1 className="text-4xl font-bold">Shower filters for UK hard water: shortlist</h1>
         <p className="mt-3 text-zinc-700">
           Shower filters can help with feel and chlorine-related dryness for some people — but they won’t “soften” water like a full home softener.
         </p>
 
-        <EducationFirstCallout topicHref="/topics/water" topicLabel="Water topic hub" insightHref="/blog/water-filter-buying-guide-uk" insightLabel="Water filter buying guide" />
+        <EducationFirstCallout topicHref="/topics/water" topicLabel="Water topic" insightHref="/blog/water-filter-buying-guide-uk" insightLabel="Water filter buying guide" />
         <div className="mt-4 flex flex-wrap gap-2">
-          <Link className="btn-secondary" href="/topics/fragrance-free">Sensitive-skin hub</Link>
+          <Link className="btn-secondary" href="/topics/fragrance-free">Sensitive skin</Link>
           <Link className="btn-secondary" href="/shopping-list">Free shopping list</Link>
         </div>
         <p className="mt-4 text-xs text-zinc-500">Last updated: January 25, 2026</p>
@@ -114,7 +114,7 @@ export default function Page() {
         </div>
 
         <div className="mt-8 flex flex-wrap gap-2">
-          <Link className="btn-primary" href="/topics/fragrance-free">Go to Sensitive household hub →</Link>
+          <Link className="btn-primary" href="/topics/fragrance-free">Go to Sensitive household →</Link>
           <Link className="btn-secondary" href="/shopping-list">Get the free shopping list</Link>
         </div>
       </section>

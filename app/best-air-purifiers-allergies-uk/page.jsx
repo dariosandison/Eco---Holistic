@@ -7,7 +7,7 @@ import EducationFirstCallout from '@/components/EducationFirstCallout'
 
 
 export const metadata = {
-  title: 'Best Air Purifiers for Allergies (UK) | Wild & Well',
+  title: 'Air Purifiers for Allergies (UK): shortlist | Wild & Well',
   description: 'Shortlisted HEPA air purifiers for allergies in UK homes — what matters, what to skip, and top options for bedrooms and living rooms.',
 }
 
@@ -17,42 +17,42 @@ const PICKS = [
     badge: 'Low filter fuss',
     desc: 'A popular option marketed around longer filter life. Still check replacement costs.',
     query: 'Shark NeverChange5 air purifier',
-    bullets: ['Best for: busy households', 'Check room size coverage', 'Prioritise quiet night mode'],
+    bullets: ['Great for: busy households', 'Check room size coverage', 'Prioritise quiet night mode'],
   },
   {
     title: 'Blueair Blue Max 3250i',
     badge: 'Strong all‑rounder',
     desc: 'Well-regarded for everyday particle control with simple use.',
     query: 'Blueair Blue Max 3250i air purifier',
-    bullets: ['Best for: living rooms', 'Plan for filter replacements', 'Auto mode is useful, not essential'],
+    bullets: ['Great for: living rooms', 'Plan for filter replacements', 'Auto mode is useful, not essential'],
   },
   {
     title: 'Levoit Core 600S (large rooms)',
     badge: 'Big room value',
     desc: 'Often recommended for higher coverage without jumping to premium pricing.',
     query: 'Levoit Core 600S air purifier',
-    bullets: ['Best for: open plan spaces', 'Check noise at higher fan speeds'],
+    bullets: ['Great for: open plan spaces', 'Check noise at higher fan speeds'],
   },
   {
     title: 'Meaco HEPA air purifier',
     badge: 'Quiet comfort',
     desc: 'Meaco units are often praised for quiet operation — ideal for sleep.',
     query: 'Meaco air purifier HEPA',
-    bullets: ['Best for: bedrooms', 'Look for quiet night mode'],
+    bullets: ['Great for: bedrooms', 'Look for quiet night mode'],
   },
   {
     title: 'Dyson purifier (HEPA + carbon)',
     badge: 'Premium',
     desc: 'Expensive, but some households value the build and sensor feedback.',
     query: 'Dyson purifier HEPA carbon',
-    bullets: ['Best for: premium features', 'Check filter costs before committing'],
+    bullets: ['Great for: premium features', 'Check filter costs before committing'],
   },
   {
     title: 'Blueair Blue 511i Max (bedrooms)',
     badge: 'Small space',
     desc: 'Great for bedrooms/small rooms if you size it correctly.',
     query: 'Blueair 511i Max air purifier',
-    bullets: ['Best for: small rooms', 'Quiet night mode matters'],
+    bullets: ['Great for: small rooms', 'Quiet night mode matters'],
   },
 ]
 
@@ -67,7 +67,7 @@ export default function Page() {
   const ld = {
     '@context': 'https://schema.org',
     '@type': 'Article',
-    headline: 'Best Air Purifiers for Allergies (UK)',
+    headline: 'Air Purifiers for Allergies (UK): shortlist',
     dateModified: '2026-01-25',
     datePublished: '2026-01-25',
     mainEntity: { '@type': 'ItemList', itemListElement: itemList },
@@ -110,14 +110,14 @@ export default function Page() {
       <StructuredData data={faqLd} />
 
       <header className="max-w-3xl">
-        <h1 className="text-4xl font-bold">Best air purifiers for allergies (UK)</h1>
+        <h1 className="text-4xl font-bold">Air purifiers for allergies (UK): shortlist</h1>
         <p className="mt-3 text-zinc-700">
           The biggest mistake is buying a purifier that’s too small for the room. Size first, features second.
         </p>
 
-        <EducationFirstCallout topicHref="/topics/air-quality" topicLabel="Air quality topic hub" insightHref="/blog/healthy-air-at-home" insightLabel="Healthy air at home" />
+        <EducationFirstCallout topicHref="/topics/air-quality" topicLabel="Air quality topic" insightHref="/blog/healthy-air-at-home" insightLabel="Healthy air at home" />
         <div className="mt-4 flex flex-wrap gap-2">
-          <Link className="btn-secondary" href="/topics/air-quality">Air quality hub</Link>
+          <Link className="btn-secondary" href="/topics/air-quality">Air quality</Link>
           <Link className="btn-secondary" href="/blog/healthy-air-at-home">Healthy air guide</Link>
           <Link className="btn-secondary" href="/best-air-purifiers-small-flats-uk">Small flats list</Link>
         </div>
@@ -150,22 +150,22 @@ export default function Page() {
         <p className="mt-2 text-sm text-zinc-600">Three common scenarios — pick the one that matches your room and use.</p>
         <div className="mt-6 grid gap-4 md:grid-cols-3">
           <ProductPick
-            title="Best all‑rounder: Blueair 3250i"
-            badge="Best overall"
+            title="all‑rounder: Blueair 3250i"
+            badge="Overall favourite"
             description="A straightforward everyday choice for general particle control in living areas."
             href={amazonSearchUrl('Blueair Blue Max 3250i air purifier')}
             bullets={['Size it to your room', 'Plan filter replacements', 'Auto mode is optional']}
           />
           <ProductPick
-            title="Best for bedrooms: Meaco HEPA"
-            badge="Best for"
+            title="Great for bedrooms: Meaco HEPA"
+            badge="Great for"
             description="Prioritises quiet comfort — helpful if allergies disturb sleep."
             href={amazonSearchUrl('Meaco air purifier HEPA')}
             bullets={['Quiet night mode matters', 'Don’t oversize if noise is a concern']}
           />
           <ProductPick
-            title="Best for larger rooms: Levoit 600S"
-            badge="Best value"
+            title="Great for larger rooms: Levoit 600S"
+            badge="Good value"
             description="A common pick for higher coverage without premium pricing."
             href={amazonSearchUrl('Levoit Core 600S air purifier')}
             bullets={['Check noise at high speeds', 'Confirm filter availability']}
@@ -176,7 +176,7 @@ export default function Page() {
           caption="At-a-glance comparison (what to check before you buy)"
           columns={[
             { key: 'pick', label: 'Pick' },
-            { key: 'bestFor', label: 'Best for' },
+            { key: 'bestFor', label: 'Great for' },
             { key: 'watchOut', label: 'Watch-out' },
             { key: 'check', label: 'Check before buying' },
           ]}
@@ -220,8 +220,8 @@ export default function Page() {
         </div>
 
         <div className="mt-8 flex flex-wrap gap-2">
-          <Link className="btn-primary" href="/topics/air-quality">Go to Air Quality hub →</Link>
-          <Link className="btn-secondary" href="/best-air-purifiers-small-flats-uk">Best for small flats →</Link>
+          <Link className="btn-primary" href="/topics/air-quality">Go to Air Quality →</Link>
+          <Link className="btn-secondary" href="/best-air-purifiers-small-flats-uk">Great for small flats →</Link>
         </div>
       </section>
 

@@ -127,7 +127,7 @@ export default function Page() {
 
         <EducationFirstCallout topicHref="/nutrition" topicLabel="Nutrition basics" insightHref="/blog/fibre-gut-health-practical-guide" insightLabel="Fibre & gut health" />
         <div className="mt-5 flex flex-wrap gap-2">
-          <Link className="btn-secondary" href="/nutrition">Nutrition hub</Link>
+          <Link className="btn-secondary" href="/nutrition">Nutrition</Link>
           <Link className="btn-secondary" href="/shopping-list">Free shopping list</Link>
           <Link className="btn-secondary" href="/blog/single-ingredient-staples-that-actually-matter">Single‑ingredient staples</Link>
         </div>

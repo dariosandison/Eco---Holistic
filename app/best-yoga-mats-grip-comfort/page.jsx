@@ -6,14 +6,14 @@ import EducationFirstCallout from '@/components/EducationFirstCallout'
 
 
 export const metadata = {
-  title: "Best Yoga Mats for Grip & Comfort | Wild & Well",
+  title: "Yoga Mats for Grip & Comfort: shortlist | Wild & Well",
   description: "A shortlist of yoga mats that balance grip, cushioning, and durability. Choose based on sweat level and joint comfort.",
 }
 
 const PICKS = [
   {
     "title": "Manduka PRO / PROlite",
-    "badge": "Best durability",
+    "badge": "durability",
     "desc": "Premium mats known for longevity.",
     "query": "Manduka PRO yoga mat",
     "bullets": [
@@ -24,7 +24,7 @@ const PICKS = [
   },
   {
     "title": "Liforme yoga mat",
-    "badge": "Best grip",
+    "badge": "grip",
     "desc": "High-grip option, popular for sweaty sessions.",
     "query": "Liforme yoga mat",
     "bullets": [
@@ -35,7 +35,7 @@ const PICKS = [
   },
   {
     "title": "Decathlon / Domyos yoga mats",
-    "badge": "Best budget",
+    "badge": "Good value",
     "desc": "Good starter mats if you’re building the habit.",
     "query": "Decathlon yoga mat Domyos",
     "bullets": [
@@ -68,7 +68,7 @@ const PICKS = [
   },
   {
     "title": "Extra-thick mats (joint friendly)",
-    "badge": "Best cushioning",
+    "badge": "cushioning",
     "desc": "If knees/wrists complain, extra thickness can help.",
     "query": "extra thick yoga mat 10mm",
     "bullets": [
@@ -87,7 +87,7 @@ function SummaryBox() {
         A straightforward shortlist with sensible options for most people — plus guidance on what to look for so you don’t buy on hype.
       </p>
       <div className="mt-4 flex flex-wrap gap-2">
-        <Link className="btn-secondary" href="/movement">Movement hub</Link>
+        <Link className="btn-secondary" href="/movement">Movement</Link>
       </div>
       <p className="mt-4 text-xs text-zinc-500">Last updated: January 27, 2026</p>
     </div>
@@ -105,7 +105,7 @@ export default function Page() {
   const ld = {
     '@context': 'https://schema.org',
     '@type': 'Article',
-    headline: "Best Yoga Mats for Grip & Comfort",
+    headline: "Yoga Mats for Grip & Comfort: shortlist",
     dateModified: '2026-01-27',
     datePublished: '2026-01-27',
     mainEntity: {
@@ -120,7 +120,7 @@ export default function Page() {
       <StructuredData data={{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "How thick should a mat be?", "acceptedAnswer": {"@type": "Answer", "text": "Most people do well with 4–6mm. Go thicker if you need more cushioning on hard floors."}}, {"@type": "Question", "name": "What about smell/chemicals?", "acceptedAnswer": {"@type": "Answer", "text": "Let new mats air out. If you’re sensitive, choose reputable brands and avoid very strong odours."}}]}} />
 
       <header className="max-w-3xl">
-        <h1 className="text-4xl font-bold">Best yoga mats for grip & comfort</h1>
+        <h1 className="text-4xl font-bold">yoga mats for grip & comfort: shortlist</h1>
         <p className="mt-3 text-zinc-700">A shortlist of yoga mats that balance grip, cushioning, and durability. Choose based on sweat level and joint comfort.</p>
 
         <EducationFirstCallout topicHref="/movement" topicLabel="Movement basics" insightHref="/blog/home-strength-basics-busy-people" insightLabel="Strength basics" />
@@ -136,7 +136,7 @@ export default function Page() {
         <div className="mt-6 grid gap-4 md:grid-cols-3">
           <ProductPick
             title="Manduka PRO / PROlite"
-            badge="Best durability"
+            badge="durability"
             description="Premium mats known for longevity."
             href={amazonSearchUrl('Manduka PRO yoga mat')}
             bullets={["Very durable", "Great support", "Heavier than most mats"]}
@@ -144,7 +144,7 @@ export default function Page() {
 
           <ProductPick
             title="Liforme yoga mat"
-            badge="Best grip"
+            badge="grip"
             description="High-grip option, popular for sweaty sessions."
             href={amazonSearchUrl('Liforme yoga mat')}
             bullets={["Excellent grip", "Alignment markings", "Premium price"]}
@@ -152,7 +152,7 @@ export default function Page() {
 
           <ProductPick
             title="Decathlon / Domyos yoga mats"
-            badge="Best budget"
+            badge="Good value"
             description="Good starter mats if you’re building the habit."
             href={amazonSearchUrl('Decathlon yoga mat Domyos')}
             bullets={["Affordable", "Easy to replace", "Check thickness"]}
@@ -167,7 +167,7 @@ export default function Page() {
         <div className="mt-6 grid gap-4 md:grid-cols-2">
           <ProductPick
             title="Manduka PRO / PROlite"
-            badge="Best durability"
+            badge="durability"
             description="Premium mats known for longevity."
             href={amazonSearchUrl('Manduka PRO yoga mat')}
             bullets={["Very durable", "Great support", "Heavier than most mats"]}
@@ -175,7 +175,7 @@ export default function Page() {
 
           <ProductPick
             title="Liforme yoga mat"
-            badge="Best grip"
+            badge="grip"
             description="High-grip option, popular for sweaty sessions."
             href={amazonSearchUrl('Liforme yoga mat')}
             bullets={["Excellent grip", "Alignment markings", "Premium price"]}
@@ -183,7 +183,7 @@ export default function Page() {
 
           <ProductPick
             title="Decathlon / Domyos yoga mats"
-            badge="Best budget"
+            badge="Good value"
             description="Good starter mats if you’re building the habit."
             href={amazonSearchUrl('Decathlon yoga mat Domyos')}
             bullets={["Affordable", "Easy to replace", "Check thickness"]}
@@ -207,7 +207,7 @@ export default function Page() {
 
           <ProductPick
             title="Extra-thick mats (joint friendly)"
-            badge="Best cushioning"
+            badge="cushioning"
             description="If knees/wrists complain, extra thickness can help."
             href={amazonSearchUrl('extra thick yoga mat 10mm')}
             bullets={["More cushioning", "Better for floor work", "Can be less stable for balancing poses"]}
@@ -220,7 +220,7 @@ export default function Page() {
         <h2 className="text-2xl font-semibold">How we think about “best”</h2>
         <div className="mt-3 space-y-3 text-sm text-zinc-700 max-w-3xl">
           <p>
-            “Best” here means: sensible features, decent reviews across many buyers, and a realistic fit for most homes — not hype, not extreme claims.
+            “Shortlist” here means: sensible features, decent reviews across many buyers, and a realistic fit for most homes — not hype, not extreme claims.
           </p>
           <p>
             Always check sizing/specs and current pricing before you buy. If a product makes strong health claims without evidence, treat that as marketing.

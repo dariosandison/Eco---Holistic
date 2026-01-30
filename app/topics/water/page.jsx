@@ -4,7 +4,7 @@ import { amazonSearchUrl } from '@/lib/amazon'
 
 export const metadata = {
   title: 'Water Topics — Wild & Well',
-  description: 'Water filter hub for UK homes: under-sink vs jug vs countertop, plus the best next steps.',
+  description: 'Water filters for UK homes: under-sink vs jug vs countertop, plus the next steps.',
 }
 
 export default function Page() {
@@ -17,7 +17,7 @@ export default function Page() {
         </p>
         <div className="mt-4 flex flex-wrap gap-2">
           <Link className="btn-secondary" href="/blog/water-filter-buying-guide-uk">Read the buying guide</Link>
-          <Link className="btn-secondary" href="/best-water-filters-uk">Best water filters (UK)</Link>
+          <Link className="btn-secondary" href="/best-water-filters-uk">Water filters (UK): favourites</Link>
         </div>
       </header>
 
@@ -55,7 +55,7 @@ export default function Page() {
           <ProductPick
             title="Water filter jug (everyday starter)"
             badge="Easy"
-            description="Best for most people: easy to use, easy to maintain."
+            description="Great for most people: easy to use, easy to maintain."
             href={amazonSearchUrl('BRITA Style water filter jug')}
             bullets={['Pick a size that fits your fridge', 'Budget for filters', 'Replace on schedule']}
           />

@@ -118,9 +118,9 @@ export default function Page() {
           The best “sleep support” is usually a few simple environment and timing fixes. Supplements are optional — and should stay simple.
         </p>
 
-        <EducationFirstCallout topicHref="/topics/sleep" topicLabel="Sleep topic hub" insightHref="/blog/caffeine-and-sleep-timing" insightLabel="Caffeine & sleep timing" />
+        <EducationFirstCallout topicHref="/topics/sleep" topicLabel="Sleep topic" insightHref="/blog/caffeine-and-sleep-timing" insightLabel="Caffeine & sleep timing" />
         <div className="mt-4 flex flex-wrap gap-2">
-          <Link className="btn-secondary" href="/topics/sleep">Sleep hub</Link>
+          <Link className="btn-secondary" href="/topics/sleep">Sleep</Link>
           <Link className="btn-secondary" href="/blog/sleep-naturally-simple-guide">Cornerstone sleep guide</Link>
           <Link className="btn-secondary" href="/shopping-list">Free shopping list</Link>
         </div>
@@ -157,22 +157,22 @@ export default function Page() {
         </p>
         <div className="mt-6 grid gap-4 md:grid-cols-3">
           <ProductPick
-            title="Best simple supplement: magnesium glycinate"
+            title="Simple option: magnesium glycinate"
             badge="Overall favourite"
             description="A gentle option many people add to an evening wind-down. Start low and assess tolerance."
             href={amazonSearchUrl('magnesium glycinate capsules UK')}
             bullets={['Look for glycinate/bisglycinate (not oxide)', 'Start low', 'Check interactions if medicated']}
           />
           <ProductPick
-            title="Best non-pill fix: blackout eye mask"
-            badge="Best value"
+            title="Non-pill option: blackout eye mask"
+            badge="Good value"
             description="Light control often beats supplements. Cheap, easy, and immediate."
             href={amazonSearchUrl('blackout sleep mask contoured')}
             bullets={['Comfort matters', 'Washable is a plus', 'Pair with a cooler room']}
           />
           <ProductPick
-            title="Best for noisy homes: white noise machine"
-            badge="Best for" 
+            title="Great for noisy homes: white noise machine"
+            badge="Great for" 
             description="If you’re noise-sensitive, this can prevent repeated wake-ups and help you stay asleep."
             href={amazonSearchUrl('white noise machine bedside')}
             bullets={['Timer + continuous modes help', 'Simple interface beats “smart” features']}
@@ -183,7 +183,7 @@ export default function Page() {
           caption="At-a-glance comparison (check brand specs + your situation)"
           columns={[
             { key: 'pick', label: 'Pick' },
-            { key: 'bestFor', label: 'Best for' },
+            { key: 'bestFor', label: 'Great for' },
             { key: 'tradeoff', label: 'Main tradeoff' },
             { key: 'startTip', label: 'Start tip' },
           ]}
@@ -247,7 +247,7 @@ export default function Page() {
         </div>
 
         <div className="mt-8 flex flex-wrap gap-2">
-          <Link className="btn-primary" href="/topics/sleep">Go to Sleep hub →</Link>
+          <Link className="btn-primary" href="/topics/sleep">Go to Sleep →</Link>
           <Link className="btn-secondary" href="/blog/magnesium-for-sleep-basics">Magnesium basics</Link>
           <Link className="btn-secondary" href="/blog/sleep-wind-down-routine">Wind-down routine</Link>
         </div>

@@ -7,7 +7,7 @@ import EducationFirstCallout from '@/components/EducationFirstCallout'
 
 
 export const metadata = {
-  title: 'Best Humidifiers for Bedrooms (UK) | Wild & Well',
+  title: 'Humidifiers for Bedrooms (UK): shortlist | Wild & Well',
   description: 'A shortlist for bedroom humidifiers in the UK: what to look for, what to avoid, and simple maintenance rules.',
 }
 
@@ -17,21 +17,21 @@ const PICKS = [
     badge: 'Quiet nights',
     desc: 'A good default for most bedrooms if you keep up with cleaning and don’t over-humidify.',
     query: 'quiet ultrasonic humidifier bedroom UK',
-    bullets: ['Best for: typical bedrooms', 'Check tank size + noise level', 'Clean regularly to prevent biofilm'],
+    bullets: ['Great for: typical bedrooms', 'Check tank size + noise level', 'Clean regularly to prevent biofilm'],
   },
   {
     title: 'Evaporative humidifier (lower mist risk)',
     badge: 'Low-fuss option',
     desc: 'Often preferred for steadier humidity output. Slightly bulkier, but can be easier to live with.',
     query: 'evaporative humidifier bedroom UK',
-    bullets: ['Best for: steady humidity', 'Check filter/wick replacement cost', 'Still needs regular cleaning'],
+    bullets: ['Great for: steady humidity', 'Check filter/wick replacement cost', 'Still needs regular cleaning'],
   },
   {
     title: 'Warm mist humidifier (occasional use)',
     badge: 'Seasonal',
     desc: 'Useful for very dry weeks, but not necessary for most homes. Prioritise safety and easy cleaning.',
     query: 'warm mist humidifier UK',
-    bullets: ['Best for: occasional dry spells', 'Watch-out: hot water/steam safety', 'Choose simple controls'],
+    bullets: ['Great for: occasional dry spells', 'Watch-out: hot water/steam safety', 'Choose simple controls'],
   },
   {
     title: 'Small hygrometer (measure first)',
@@ -52,7 +52,7 @@ function QuickSummary(){
         <strong>evaporative</strong> unit. Keep humidity sensible — pushing it high increases mould risk.
       </p>
       <div className="mt-4 flex flex-wrap gap-2">
-        <Link className="btn-secondary" href="/topics/sleep">Sleep topic hub</Link>
+        <Link className="btn-secondary" href="/topics/sleep">Sleep</Link>
         <Link className="btn-secondary" href="/blog/winter-humidity-guide">Humidity guide</Link>
         <Link className="btn-secondary" href="/shopping-list">Free shopping list</Link>
       </div>
@@ -72,7 +72,7 @@ export default function Page(){
   const ld = {
     '@context': 'https://schema.org',
     '@type': 'Article',
-    headline: 'Best Humidifiers for Bedrooms (UK)',
+    headline: 'Humidifiers for Bedrooms (UK): shortlist',
     dateModified: '2026-01-29',
     datePublished: '2026-01-29',
     mainEntity: {
@@ -118,12 +118,12 @@ export default function Page(){
       <StructuredData data={faqLd} />
 
       <header className="max-w-3xl">
-        <h1 className="text-4xl font-bold">Best humidifiers for bedrooms (UK)</h1>
+        <h1 className="text-4xl font-bold">Humidifiers for bedrooms (UK): shortlist</h1>
         <p className="mt-3 text-zinc-700">
           A shortlist with simple decision rules: what to buy, what to avoid, and how to keep humidity in a sensible range.
         </p>
 
-        <EducationFirstCallout topicHref="/topics/sleep" topicLabel="Sleep topic hub" insightHref="/blog/caffeine-and-sleep-timing" insightLabel="Caffeine & sleep timing" />
+        <EducationFirstCallout topicHref="/topics/sleep" topicLabel="Sleep topic" insightHref="/blog/caffeine-and-sleep-timing" insightLabel="Caffeine & sleep timing" />
       </header>
 
       <section className="mt-10">
@@ -171,7 +171,7 @@ export default function Page(){
           caption="At-a-glance comparison"
           columns={[
             { key: 'type', label: 'Type' },
-            { key: 'bestFor', label: 'Best for' },
+            { key: 'bestFor', label: 'Great for' },
             { key: 'tradeoff', label: 'Main tradeoff' },
             { key: 'whatToCheck', label: 'Check before buying' },
           ]}
@@ -198,7 +198,7 @@ export default function Page(){
         />
 
         <div className="mt-8 flex flex-wrap gap-2">
-          <Link className="btn-primary" href="/topics/sleep">Sleep hub →</Link>
+          <Link className="btn-primary" href="/topics/sleep">Sleep →</Link>
           <Link className="btn-secondary" href="/blog/winter-humidity-guide">Read the humidity guide</Link>
         </div>
       </section>

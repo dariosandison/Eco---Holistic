@@ -3,44 +3,54 @@ import Image from "next/image";
 import Link from "next/link";
 
 const FEATURED_EXPLAINERS = [
-  { title: "Non-Toxic Cleaning Starter", href: "/blog/non-toxic-cleaning-starter" },
-  { title: "Low-Tox Kitchen", href: "/blog/low-tox-kitchen" },
-  { title: "Eco Laundry", href: "/blog/eco-laundry" },
-  { title: "Zero Waste Bathroom", href: "/blog/zero-waste-bathroom" },
-  { title: "Composting", href: "/blog/composting" },
-  { title: "Water Filter Buying Guide (UK)", href: "/blog/water-filter-buying-guide-uk" },
+  { title: "Non-Toxic Cleaning Starter", href: "/blog/non-toxic-cleaning-starter", cover: "/images/cards/cleaning.svg" },
+  { title: "Low-Tox Kitchen", href: "/blog/low-tox-kitchen", cover: "/images/cards/kitchen.svg" },
+  { title: "Eco Laundry", href: "/blog/eco-laundry", cover: "/images/cards/laundry.svg" },
+  { title: "Zero Waste Bathroom", href: "/blog/zero-waste-bathroom", cover: "/images/cards/neutral.svg" },
+  { title: "Composting", href: "/blog/composting", cover: "/images/cards/neutral.svg" },
+  { title: "Water Filter Buying Guide (UK)", href: "/blog/water-filter-buying-guide-uk", cover: "/images/cards/water-filter.svg" },
 ];
 
 const FEATURED_TOPICS = [
   {
-    title: "Sleep & recovery hub",
+    title: "Sleep & recovery",
+    image: "/images/cards/sleep.svg",
     description: "A simple plan + the shortlist of products that actually help.",
     href: "/topics/sleep",
   },
   {
-    title: "Air quality hub",
+    title: "Air quality",
+    image: "/images/cards/air-purifier.svg",
     description: "Allergies, damp, and the purifiers that make sense for UK homes.",
     href: "/topics/air-quality",
   },
   {
-    title: "Water hub",
+    title: "Water",
+    image: "/images/cards/water-filter.svg",
     description: "Under-sink vs jug vs countertop — and the easiest starter options.",
     href: "/topics/water",
   },
   {
-    title: "Fragrance-free home hub",
+    title: "Fragrance-free home",
+    image: "/images/cards/laundry.svg",
     description: "Sensitive household swaps that reduce irritation fast.",
     href: "/topics/fragrance-free",
   },
 ];
 
-function Card({ href, title, description }) {
+function Card({ href, title, description, image }) {
   return (
     <Link
       href={href}
       className="group block overflow-hidden rounded-2xl border border-zinc-200 transition-shadow hover:shadow-md"
     >
       <div className="p-5">
+        <div className="mb-3 flex items-center gap-3">
+          <div className="h-10 w-10 overflow-hidden rounded-xl bg-zinc-100">
+            <img src={image || '/images/cards/neutral.svg'} alt="" className="h-full w-full object-cover" loading="lazy" />
+          </div>
+          <div className="text-xs font-semibold uppercase tracking-wide text-zinc-500">Topic</div>
+        </div>
         <h3 className="text-base font-semibold text-zinc-900 group-hover:underline">
           {title}
         </h3>
@@ -200,23 +210,35 @@ export default function HomePage() {
     </p>
     <div className="mt-6 grid gap-4 md:grid-cols-3">
       <Link href="/best-low-tox-products-for-beginners" className="card hover:shadow-sm transition-shadow">
-        <h3 className="text-lg font-semibold">Low‑tox starter favourites</h3>
+        
+        
+        <div className="mt-4 h-12 w-12 overflow-hidden rounded-xl bg-zinc-100"><img src="/images/cards/cleaning.svg" alt="" className="h-full w-full object-cover" loading="lazy" /></div>
+<div className="mt-4 h-12 w-12 overflow-hidden rounded-xl bg-zinc-100"><img src="/images/cards/cleaning.svg" alt="" className="h-full w-full object-cover" loading="lazy" /></div>
+<h3 className="text-lg font-semibold">Low‑tox starter favourites</h3>
         <p className="mt-1 text-sm text-zinc-600">The easiest first swaps that make the biggest difference.</p>
       </Link>
       <Link href="/best-water-filters-uk" className="card hover:shadow-sm transition-shadow">
-        <h3 className="text-lg font-semibold">Best water filters (UK)</h3>
+        
+        <div className="mt-4 h-12 w-12 overflow-hidden rounded-xl bg-zinc-100"><img src="/images/cards/water-filter.svg" alt="" className="h-full w-full object-cover" loading="lazy" /></div>
+<h3 className="text-lg font-semibold">Water filters (UK): shortlist</h3>
         <p className="mt-1 text-sm text-zinc-600">Practical choices for taste, scale, and common concerns.</p>
       </Link>
       <Link href="/best-natural-sleep-support" className="card hover:shadow-sm transition-shadow">
-        <h3 className="text-lg font-semibold">Natural sleep support: our favourites</h3>
+        
+        <div className="mt-4 h-12 w-12 overflow-hidden rounded-xl bg-zinc-100"><img src="/images/cards/sleep.svg" alt="" className="h-full w-full object-cover" loading="lazy" /></div>
+<h3 className="text-lg font-semibold">Natural sleep support: our favourites</h3>
         <p className="mt-1 text-sm text-zinc-600">Comfort-first upgrades that help you stick with it.</p>
       </Link>
             <Link href="/best-shower-filters-uk-hard-water" className="card hover:shadow-sm transition-shadow">
-              <h3 className="text-lg font-semibold">Best shower filters (UK hard water)</h3>
+              
+        <div className="mt-4 h-12 w-12 overflow-hidden rounded-xl bg-zinc-100"><img src="/images/cards/shower-filter.svg" alt="" className="h-full w-full object-cover" loading="lazy" /></div>
+<h3 className="text-lg font-semibold">Shower filters (UK hard water): shortlist</h3>
               <p className="mt-1 text-sm text-zinc-600">What they help with, what they don’t, and how to choose.</p>
             </Link>
             <Link href="/best-fragrance-free-laundry-detergents-uk" className="card hover:shadow-sm transition-shadow">
-              <h3 className="text-lg font-semibold">Best fragrance-free laundry detergents (UK)</h3>
+              
+        <div className="mt-4 h-12 w-12 overflow-hidden rounded-xl bg-zinc-100"><img src="/images/cards/laundry.svg" alt="" className="h-full w-full object-cover" loading="lazy" /></div>
+<h3 className="text-lg font-semibold">Fragrance-free laundry detergents (UK): shortlist</h3>
               <p className="mt-1 text-sm text-zinc-600">Sensitive-skin friendly laundry without strong scents.</p>
             </Link>
           </div>

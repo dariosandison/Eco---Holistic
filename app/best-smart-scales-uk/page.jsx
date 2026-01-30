@@ -6,14 +6,14 @@ import EducationFirstCallout from '@/components/EducationFirstCallout'
 
 
 export const metadata = {
-  title: "Best Smart Scales (UK) | Wild & Well",
+  title: "Smart Scales (UK): shortlist | Wild & Well",
   description: "A shortlist of smart scales that track trends over time. Useful if you can use the data calmly and consistently.",
 }
 
 const PICKS = [
   {
     "title": "Withings Body / Body+",
-    "badge": "Best overall",
+    "badge": "Overall favourite",
     "desc": "Strong app and a trusted smart-scale brand.",
     "query": "Withings Body smart scale",
     "bullets": [
@@ -24,7 +24,7 @@ const PICKS = [
   },
   {
     "title": "RENPHO smart scale",
-    "badge": "Best value",
+    "badge": "Good value",
     "desc": "Popular budget pick with simple trend graphs.",
     "query": "RENPHO smart scale",
     "bullets": [
@@ -87,7 +87,7 @@ function SummaryBox() {
         A straightforward shortlist with sensible options for most people — plus guidance on what to look for so you don’t buy on hype.
       </p>
       <div className="mt-4 flex flex-wrap gap-2">
-        <Link className="btn-secondary" href="/movement">Movement hub</Link>
+        <Link className="btn-secondary" href="/movement">Movement</Link>
         <Link className="btn-secondary" href="/blog/home-strength-basics-busy-people">Blog: strength basics</Link>
       </div>
       <p className="mt-4 text-xs text-zinc-500">Last updated: January 27, 2026</p>
@@ -106,7 +106,7 @@ export default function Page() {
   const ld = {
     '@context': 'https://schema.org',
     '@type': 'Article',
-    headline: "Best Smart Scales (UK)",
+    headline: "Smart Scales (UK): shortlist",
     dateModified: '2026-01-27',
     datePublished: '2026-01-27',
     mainEntity: {
@@ -121,7 +121,7 @@ export default function Page() {
       <StructuredData data={{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Are body-fat percentage readings accurate?", "acceptedAnswer": {"@type": "Answer", "text": "Treat them as estimates. The best use is tracking trends over time under similar conditions, not absolute accuracy."}}, {"@type": "Question", "name": "How often should I weigh?", "acceptedAnswer": {"@type": "Answer", "text": "If you use a scale, many people prefer weekly or twice-weekly to avoid fixation. Choose what keeps you sane and consistent."}}]}} />
 
       <header className="max-w-3xl">
-        <h1 className="text-4xl font-bold">Best smart scales (UK)</h1>
+        <h1 className="text-4xl font-bold">Smart scales (UK): shortlist</h1>
         <p className="mt-3 text-zinc-700">A shortlist of smart scales that track trends over time. Useful if you can use the data calmly and consistently.</p>
 
         <EducationFirstCallout topicHref="/topics" topicLabel="Explore topics" insightHref="/blog" insightLabel="Read Wellness Insights" />
@@ -137,7 +137,7 @@ export default function Page() {
         <div className="mt-6 grid gap-4 md:grid-cols-3">
           <ProductPick
             title="Withings Body / Body+"
-            badge="Best overall"
+            badge="Overall favourite"
             description="Strong app and a trusted smart-scale brand."
             href={amazonSearchUrl('Withings Body smart scale')}
             bullets={["Good long-term trend tracking", "Strong app experience", "Multiple profiles"]}
@@ -145,7 +145,7 @@ export default function Page() {
 
           <ProductPick
             title="RENPHO smart scale"
-            badge="Best value"
+            badge="Good value"
             description="Popular budget pick with simple trend graphs."
             href={amazonSearchUrl('RENPHO smart scale')}
             bullets={["Affordable", "App is easy", "Ignore the more speculative body metrics"]}
@@ -168,7 +168,7 @@ export default function Page() {
         <div className="mt-6 grid gap-4 md:grid-cols-2">
           <ProductPick
             title="Withings Body / Body+"
-            badge="Best overall"
+            badge="Overall favourite"
             description="Strong app and a trusted smart-scale brand."
             href={amazonSearchUrl('Withings Body smart scale')}
             bullets={["Good long-term trend tracking", "Strong app experience", "Multiple profiles"]}
@@ -176,7 +176,7 @@ export default function Page() {
 
           <ProductPick
             title="RENPHO smart scale"
-            badge="Best value"
+            badge="Good value"
             description="Popular budget pick with simple trend graphs."
             href={amazonSearchUrl('RENPHO smart scale')}
             bullets={["Affordable", "App is easy", "Ignore the more speculative body metrics"]}
@@ -221,7 +221,7 @@ export default function Page() {
         <h2 className="text-2xl font-semibold">How we think about “best”</h2>
         <div className="mt-3 space-y-3 text-sm text-zinc-700 max-w-3xl">
           <p>
-            “Best” here means: sensible features, decent reviews across many buyers, and a realistic fit for most homes — not hype, not extreme claims.
+            “Shortlist” here means: sensible features, decent reviews across many buyers, and a realistic fit for most homes — not hype, not extreme claims.
           </p>
           <p>
             Always check sizing/specs and current pricing before you buy. If a product makes strong health claims without evidence, treat that as marketing.

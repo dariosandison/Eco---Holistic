@@ -6,14 +6,14 @@ import EducationFirstCallout from '@/components/EducationFirstCallout'
 
 
 export const metadata = {
-  title: "Best Resistance Bands for Home Workouts | Wild & Well",
+  title: "Resistance Bands for Home Workouts: shortlist | Wild & Well",
   description: "A practical shortlist of resistance band types (loop bands and long bands) for strength training, rehab, and mobility at home.",
 }
 
 const PICKS = [
   {
     "title": "Long resistance bands (set)",
-    "badge": "Best all-round",
+    "badge": "all-round",
     "desc": "Most versatile for rows, presses, and assisted movements.",
     "query": "long resistance bands set with handles",
     "bullets": [
@@ -24,7 +24,7 @@ const PICKS = [
   },
   {
     "title": "Loop mini bands (fabric)",
-    "badge": "Best for glutes",
+    "badge": "Great for glutes",
     "desc": "Great for activation work and lower-body accessories.",
     "query": "fabric loop resistance bands mini",
     "bullets": [
@@ -35,7 +35,7 @@ const PICKS = [
   },
   {
     "title": "TheraBand (classic)",
-    "badge": "Best rehab",
+    "badge": "rehab",
     "desc": "A trusted option often used in physiotherapy settings.",
     "query": "TheraBand resistance band",
     "bullets": [
@@ -46,7 +46,7 @@ const PICKS = [
   },
   {
     "title": "Power bands (pull-up assist)",
-    "badge": "Best for pull-ups",
+    "badge": "Great for pull-ups",
     "desc": "Thicker bands for assisted pull-ups and heavier resistance.",
     "query": "pull up assist power bands set",
     "bullets": [
@@ -57,7 +57,7 @@ const PICKS = [
   },
   {
     "title": "Door anchor + handles kit",
-    "badge": "Best kit",
+    "badge": "kit",
     "desc": "A simple setup if you’re training in a small space.",
     "query": "resistance bands door anchor handles kit",
     "bullets": [
@@ -87,7 +87,7 @@ function SummaryBox() {
         A straightforward shortlist with sensible options for most people — plus guidance on what to look for so you don’t buy on hype.
       </p>
       <div className="mt-4 flex flex-wrap gap-2">
-        <Link className="btn-secondary" href="/movement">Movement hub</Link>
+        <Link className="btn-secondary" href="/movement">Movement</Link>
         <Link className="btn-secondary" href="/blog/home-strength-basics-busy-people">Blog: home strength basics</Link>
       </div>
       <p className="mt-4 text-xs text-zinc-500">Last updated: January 27, 2026</p>
@@ -106,7 +106,7 @@ export default function Page() {
   const ld = {
     '@context': 'https://schema.org',
     '@type': 'Article',
-    headline: "Best Resistance Bands for Home Workouts",
+    headline: "Resistance Bands for Home Workouts: shortlist",
     dateModified: '2026-01-27',
     datePublished: '2026-01-27',
     mainEntity: {
@@ -121,7 +121,7 @@ export default function Page() {
       <StructuredData data={{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Do bands build muscle?", "acceptedAnswer": {"@type": "Answer", "text": "They can, especially for beginners, if you use enough tension and progressive overload."}}, {"@type": "Question", "name": "Which should I buy first?", "acceptedAnswer": {"@type": "Answer", "text": "A set of long bands is usually the most versatile starting point."}}]}} />
 
       <header className="max-w-3xl">
-        <h1 className="text-4xl font-bold">Best resistance bands for home workouts</h1>
+        <h1 className="text-4xl font-bold">Resistance bands for home workouts: shortlist</h1>
         <p className="mt-3 text-zinc-700">A practical shortlist of resistance band types (loop bands and long bands) for strength training, rehab, and mobility at home.</p>
 
         <EducationFirstCallout topicHref="/movement" topicLabel="Movement basics" insightHref="/blog/home-strength-basics-busy-people" insightLabel="Strength basics" />
@@ -137,7 +137,7 @@ export default function Page() {
         <div className="mt-6 grid gap-4 md:grid-cols-3">
           <ProductPick
             title="Long resistance bands (set)"
-            badge="Best all-round"
+            badge="all-round"
             description="Most versatile for rows, presses, and assisted movements."
             href={amazonSearchUrl('long resistance bands set with handles')}
             bullets={["Versatile", "Good for full-body workouts", "Check band strength levels"]}
@@ -145,7 +145,7 @@ export default function Page() {
 
           <ProductPick
             title="Loop mini bands (fabric)"
-            badge="Best for glutes"
+            badge="Great for glutes"
             description="Great for activation work and lower-body accessories."
             href={amazonSearchUrl('fabric loop resistance bands mini')}
             bullets={["Comfortable on skin", "Great for glute work", "Choose multiple strengths"]}
@@ -153,7 +153,7 @@ export default function Page() {
 
           <ProductPick
             title="TheraBand (classic)"
-            badge="Best rehab"
+            badge="rehab"
             description="A trusted option often used in physiotherapy settings."
             href={amazonSearchUrl('TheraBand resistance band')}
             bullets={["Good for rehab", "Consistent resistance", "Pick appropriate strength"]}
@@ -168,7 +168,7 @@ export default function Page() {
         <div className="mt-6 grid gap-4 md:grid-cols-2">
           <ProductPick
             title="Long resistance bands (set)"
-            badge="Best all-round"
+            badge="all-round"
             description="Most versatile for rows, presses, and assisted movements."
             href={amazonSearchUrl('long resistance bands set with handles')}
             bullets={["Versatile", "Good for full-body workouts", "Check band strength levels"]}
@@ -176,7 +176,7 @@ export default function Page() {
 
           <ProductPick
             title="Loop mini bands (fabric)"
-            badge="Best for glutes"
+            badge="Great for glutes"
             description="Great for activation work and lower-body accessories."
             href={amazonSearchUrl('fabric loop resistance bands mini')}
             bullets={["Comfortable on skin", "Great for glute work", "Choose multiple strengths"]}
@@ -184,7 +184,7 @@ export default function Page() {
 
           <ProductPick
             title="TheraBand (classic)"
-            badge="Best rehab"
+            badge="rehab"
             description="A trusted option often used in physiotherapy settings."
             href={amazonSearchUrl('TheraBand resistance band')}
             bullets={["Good for rehab", "Consistent resistance", "Pick appropriate strength"]}
@@ -192,7 +192,7 @@ export default function Page() {
 
           <ProductPick
             title="Power bands (pull-up assist)"
-            badge="Best for pull-ups"
+            badge="Great for pull-ups"
             description="Thicker bands for assisted pull-ups and heavier resistance."
             href={amazonSearchUrl('pull up assist power bands set')}
             bullets={["Strong resistance", "Great for pull-up progress", "Requires anchor point"]}
@@ -200,7 +200,7 @@ export default function Page() {
 
           <ProductPick
             title="Door anchor + handles kit"
-            badge="Best kit"
+            badge="kit"
             description="A simple setup if you’re training in a small space."
             href={amazonSearchUrl('resistance bands door anchor handles kit')}
             bullets={["Small-space friendly", "Good variety", "Check anchor quality"]}
@@ -221,7 +221,7 @@ export default function Page() {
         <h2 className="text-2xl font-semibold">How we think about “best”</h2>
         <div className="mt-3 space-y-3 text-sm text-zinc-700 max-w-3xl">
           <p>
-            “Best” here means: sensible features, decent reviews across many buyers, and a realistic fit for most homes — not hype, not extreme claims.
+            “Shortlist” here means: sensible features, decent reviews across many buyers, and a realistic fit for most homes — not hype, not extreme claims.
           </p>
           <p>
             Always check sizing/specs and current pricing before you buy. If a product makes strong health claims without evidence, treat that as marketing.

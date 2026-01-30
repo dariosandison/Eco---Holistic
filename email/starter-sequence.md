@@ -25,7 +25,7 @@ Instead:
 • Choose fragrance‑free first
 • Ignore perfection
 
-Best place to begin:
+Good place to begin:
 → https://www.wild-and-well.store/best-low-tox-products-for-beginners
 
 

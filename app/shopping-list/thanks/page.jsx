@@ -6,7 +6,7 @@ export const metadata = {
   description: "Thanks for subscribing. Use these links to explore the site: Sleep, Water, Air, Cleaning, Nutrition, and Movement.",
 };
 
-function Card({ title, desc, href, label }) {
+function Card({ title, desc, href, label, image }) {
   return (
     <TrackedLink
       href={href}
@@ -14,6 +14,9 @@ function Card({ title, desc, href, label }) {
       data={{ source: "shopping_list_thanks", destination: href, label: label || title }}
       className="card hover:shadow-sm transition-shadow"
     >
+      <div className="mt-4 h-12 w-12 overflow-hidden rounded-xl bg-zinc-100">
+        <img src={image || '/images/cards/neutral.svg'} alt="" className="h-full w-full object-cover" loading="lazy" />
+      </div>
       <h3 className="text-lg font-semibold">{title}</h3>
       <p className="mt-2 text-sm text-zinc-700">{desc}</p>
       <p className="mt-3 text-xs text-zinc-500">Open →</p>
@@ -38,16 +41,16 @@ export default function ThanksPage() {
       <section className="mt-10">
         <h2 className="text-2xl font-semibold">Browse by category</h2>
         <p className="mt-2 text-sm text-zinc-600 max-w-3xl">
-          These hub pages explain what matters, what to look for, and link to deeper explainers and “favourites” shortlists when you want them.
+          These topic pages explain what matters, what to look for, and link to deeper explainers and “favourites” shortlists when you want them.
         </p>
 
         <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          <Card title="Sleep" desc="Sleep basics + product options (only where they genuinely help)." href="/topics/sleep" />
-          <Card title="Water" desc="UK-friendly filter types, trade-offs, and recommended options." href="/topics/water" />
-          <Card title="Air quality" desc="Allergies, damp, ventilation, and air purifier guidance." href="/topics/air-quality" />
-          <Card title="Cleaning (fragrance-free)" desc="Low-tox swaps for laundry and cleaning without overhauling everything." href="/topics/fragrance-free" />
-          <Card title="Nutrition" desc="Organic and single-ingredient foods, labels, and sensible upgrades." href="/nutrition" />
-          <Card title="Movement" desc="Simple training + gear that isn’t gimmicky (trackers, bands, shoes, routines)." href="/movement" />
+          <Card image="/images/cards/sleep.svg" title="Sleep" desc="Sleep basics + product options (only where they genuinely help)." href="/topics/sleep" />
+          <Card image="/images/cards/water-filter.svg" title="Water" desc="UK-friendly filter types, trade-offs, and recommended options." href="/topics/water" />
+          <Card image="/images/cards/air-purifier.svg" title="Air quality" desc="Allergies, damp, ventilation, and air purifier guidance." href="/topics/air-quality" />
+          <Card image="/images/cards/laundry.svg" title="Cleaning (fragrance-free)" desc="Low-tox swaps for laundry and cleaning without overhauling everything." href="/topics/fragrance-free" />
+          <Card image="/images/cards/supplements.svg" title="Nutrition" desc="Organic and single-ingredient foods, labels, and sensible upgrades." href="/nutrition" />
+          <Card image="/images/cards/bands.svg" title="Movement" desc="Simple training + gear that isn’t gimmicky (trackers, bands, shoes, routines)." href="/movement" />
         </div>
       </section>
 
@@ -58,9 +61,9 @@ export default function ThanksPage() {
         </p>
 
         <div className="mt-6 grid gap-4 md:grid-cols-3">
-          <Card title="Best water filters (UK)" desc="Jugs vs under-sink vs countertop: clear trade-offs." href="/best-water-filters-uk" />
-          <Card title="Best air purifiers for allergies (UK)" desc="Room size guidance + a shortlist that makes sense." href="/best-air-purifiers-allergies-uk" />
-          <Card title="Best fragrance-free laundry detergents (UK)" desc="Sensitive-home options, with ingredients to avoid." href="/best-fragrance-free-laundry-detergents-uk" />
+          <Card image="/images/cards/water-filter.svg" title="Water filters (UK): favourites" desc="Jugs vs under-sink vs countertop: clear trade-offs." href="/best-water-filters-uk" />
+          <Card image="/images/cards/air-purifier.svg" title="Air purifiers for allergies (UK): shortlist" desc="Room size guidance + a shortlist that makes sense." href="/best-air-purifiers-allergies-uk" />
+          <Card image="/images/cards/laundry.svg" title="Fragrance-free laundry detergents (UK): shortlist" desc="Sensitive-home options, with ingredients to avoid." href="/best-fragrance-free-laundry-detergents-uk" />
         </div>
 
         <div className="mt-6">

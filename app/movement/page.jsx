@@ -5,13 +5,23 @@ export const metadata = {
   description: "Strength, walking, mobility, and no‑gimmick gear recommendations (trackers, bands, shoes, mats).",
 };
 
-function Card({ title, desc, href, tag }) {
+function Card({ title, desc, href, tag, image }) {
   return (
     <Link href={href} className="card hover:shadow-sm transition-shadow">
       <div className="flex items-start justify-between gap-3">
-        <div>
-          <h2 className="text-lg font-semibold">{title}</h2>
-          <p className="mt-1 text-sm text-zinc-600">{desc}</p>
+        <div className="flex min-w-0 gap-3">
+          <div className="relative mt-0.5 h-12 w-12 shrink-0 overflow-hidden rounded-xl bg-zinc-100">
+            <img
+              src={image || '/images/cards/neutral.svg'}
+              alt=""
+              className="h-full w-full object-cover"
+              loading="lazy"
+            />
+          </div>
+          <div className="min-w-0">
+            <h2 className="text-lg font-semibold">{title}</h2>
+            <p className="mt-1 text-sm text-zinc-600">{desc}</p>
+          </div>
         </div>
         {tag ? (
           <span className="shrink-0 rounded-full border px-2 py-0.5 text-[11px] text-zinc-600 bg-white">{tag}</span>
@@ -45,13 +55,13 @@ export default function Page() {
         </p>
 
         <div className="mt-6 grid gap-4 md:grid-cols-3">
-          <Card title="Best fitness trackers for beginners (UK)" desc="Steps, sleep, heart-rate: what matters and what doesn’t." href="/best-fitness-trackers-beginners-uk" tag="Trackers" />
-          <Card title="Best smart scales (UK)" desc="If you use one, use it for trends — not daily obsession." href="/best-smart-scales-uk" tag="Scales" />
-          <Card title="Best resistance bands for home workouts" desc="A small kit that covers strength + rehab basics." href="/best-resistance-bands-home-workouts" tag="Bands" />
-          <Card title="Best walking shoes for daily steps (UK)" desc="Comfort-first shoes for regular walking." href="/best-walking-shoes-daily-steps-uk" tag="Footwear" />
-          <Card title="Best yoga mats for grip & comfort" desc="A mat you’ll actually want to use." href="/best-yoga-mats-grip-comfort" tag="Mobility" />
-          <Card title="Best foam rollers & recovery tools" desc="Simple recovery tools for tight hips/backs." href="/best-foam-rollers-recovery-tools" tag="Recovery" />
-          <Card title="Best activewear basics (UK)" desc="Comfort-first basics: tops, leggings, socks, layers." href="/best-activewear-basics-uk" tag="Clothing" />
+          <Card image="/images/cards/tracker.svg" title="Fitness trackers for beginners (UK): shortlist" desc="Steps, sleep, heart-rate: what matters and what doesn’t." href="/best-fitness-trackers-beginners-uk" tag="Trackers" />
+          <Card image="/images/cards/scale.svg" title="Smart scales (UK): shortlist" desc="If you use one, use it for trends — not daily obsession." href="/best-smart-scales-uk" tag="Scales" />
+          <Card image="/images/cards/bands.svg" title="Resistance bands for home workouts: shortlist" desc="A small kit that covers strength + rehab basics." href="/best-resistance-bands-home-workouts" tag="Bands" />
+          <Card image="/images/cards/shoe.svg" title="Walking shoes for daily steps (UK): shortlist" desc="Comfort-first shoes for regular walking." href="/best-walking-shoes-daily-steps-uk" tag="Footwear" />
+          <Card image="/images/cards/bands.svg" title="yoga mats for grip & comfort" desc="A mat you’ll actually want to use." href="/best-yoga-mats-grip-comfort" tag="Mobility" />
+          <Card image="/images/cards/bands.svg" title="foam rollers & recovery tools" desc="Simple recovery tools for tight hips/backs." href="/best-foam-rollers-recovery-tools" tag="Recovery" />
+          <Card image="/images/cards/neutral.svg" title="activewear basics (UK)" desc="Comfort-first basics: tops, leggings, socks, layers." href="/best-activewear-basics-uk" tag="Clothing" />
         </div>
       </section>
 

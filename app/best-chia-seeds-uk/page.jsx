@@ -13,7 +13,7 @@ export const metadata = {
 const PICKS = [
   {
     "title": "Organic chia seeds (1kg)",
-    "badge": "Best value",
+    "badge": "Good value",
     "desc": "Great if you use chia weekly.",
     "query": "organic chia seeds 1kg",
     "bullets": [
@@ -24,7 +24,7 @@ const PICKS = [
   },
   {
     "title": "Organic chia seeds (small bag)",
-    "badge": "Best starter",
+    "badge": "Easy starter",
     "desc": "Start small if you’re trying chia for the first time.",
     "query": "organic chia seeds 300g",
     "bullets": [
@@ -87,7 +87,7 @@ function SummaryBox() {
         A short, practical shortlist plus the label cues that matter (freshness, ingredients, and how you’ll actually use it).
       </p>
       <div className="mt-4 flex flex-wrap gap-2">
-        <Link className="btn-secondary" href="/nutrition">Nutrition hub</Link>
+        <Link className="btn-secondary" href="/nutrition">Nutrition</Link>
       </div>
       <p className="mt-4 text-xs text-zinc-500">Last updated: January 27, 2026</p>
     </div>
@@ -135,7 +135,7 @@ export default function Page() {
         <div className="mt-6 grid gap-4 md:grid-cols-3">
           <ProductPick
             title="Organic chia seeds (1kg)"
-            badge="Best value"
+            badge="Good value"
             description="Great if you use chia weekly."
             href={amazonSearchUrl('organic chia seeds 1kg')}
             bullets={["Good value", "Seal and store well", "Use within a reasonable timeframe"]}
@@ -143,7 +143,7 @@ export default function Page() {
 
           <ProductPick
             title="Organic chia seeds (small bag)"
-            badge="Best starter"
+            badge="Easy starter"
             description="Start small if you’re trying chia for the first time."
             href={amazonSearchUrl('organic chia seeds 300g')}
             bullets={["Lower commitment", "Freshness easier", "Great for testing"]}
@@ -166,7 +166,7 @@ export default function Page() {
         <div className="mt-6 grid gap-4 md:grid-cols-2">
           <ProductPick
             title="Organic chia seeds (1kg)"
-            badge="Best value"
+            badge="Good value"
             description="Great if you use chia weekly."
             href={amazonSearchUrl('organic chia seeds 1kg')}
             bullets={["Good value", "Seal and store well", "Use within a reasonable timeframe"]}
@@ -174,7 +174,7 @@ export default function Page() {
 
           <ProductPick
             title="Organic chia seeds (small bag)"
-            badge="Best starter"
+            badge="Easy starter"
             description="Start small if you’re trying chia for the first time."
             href={amazonSearchUrl('organic chia seeds 300g')}
             bullets={["Lower commitment", "Freshness easier", "Great for testing"]}

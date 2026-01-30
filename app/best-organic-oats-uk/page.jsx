@@ -13,7 +13,7 @@ export const metadata = {
 const PICKS = [
   {
     "title": "Organic jumbo rolled oats",
-    "badge": "Best all-round",
+    "badge": "all-round",
     "desc": "Great texture for porridge and overnight oats.",
     "query": "organic jumbo rolled oats",
     "bullets": [
@@ -35,7 +35,7 @@ const PICKS = [
   },
   {
     "title": "Organic steel-cut oats",
-    "badge": "Best slow-cook",
+    "badge": "slow-cook",
     "desc": "Chewier texture; great if you like batch cooking.",
     "query": "organic steel cut oats",
     "bullets": [
@@ -46,7 +46,7 @@ const PICKS = [
   },
   {
     "title": "Organic gluten-free oats",
-    "badge": "Best gluten-free",
+    "badge": "gluten-free",
     "desc": "If gluten-free is needed, look for certification.",
     "query": "organic gluten free oats certified",
     "bullets": [
@@ -87,7 +87,7 @@ function SummaryBox() {
         A short, practical shortlist plus the label cues that matter (freshness, ingredients, and how you’ll actually use it).
       </p>
       <div className="mt-4 flex flex-wrap gap-2">
-        <Link className="btn-secondary" href="/nutrition">Nutrition hub</Link>
+        <Link className="btn-secondary" href="/nutrition">Nutrition</Link>
         <Link className="btn-secondary" href="/blog/single-ingredient-staples-that-actually-matter">Blog: single-ingredient staples</Link>
       </div>
       <p className="mt-4 text-xs text-zinc-500">Last updated: January 27, 2026</p>
@@ -136,7 +136,7 @@ export default function Page() {
         <div className="mt-6 grid gap-4 md:grid-cols-3">
           <ProductPick
             title="Organic jumbo rolled oats"
-            badge="Best all-round"
+            badge="all-round"
             description="Great texture for porridge and overnight oats."
             href={amazonSearchUrl('organic jumbo rolled oats')}
             bullets={["Great texture", "Versatile", "Check for simple ingredients"]}
@@ -152,7 +152,7 @@ export default function Page() {
 
           <ProductPick
             title="Organic steel-cut oats"
-            badge="Best slow-cook"
+            badge="slow-cook"
             description="Chewier texture; great if you like batch cooking."
             href={amazonSearchUrl('organic steel cut oats')}
             bullets={["Chewy texture", "Great for batch cooking", "Longer cook time"]}
@@ -167,7 +167,7 @@ export default function Page() {
         <div className="mt-6 grid gap-4 md:grid-cols-2">
           <ProductPick
             title="Organic jumbo rolled oats"
-            badge="Best all-round"
+            badge="all-round"
             description="Great texture for porridge and overnight oats."
             href={amazonSearchUrl('organic jumbo rolled oats')}
             bullets={["Great texture", "Versatile", "Check for simple ingredients"]}
@@ -183,7 +183,7 @@ export default function Page() {
 
           <ProductPick
             title="Organic steel-cut oats"
-            badge="Best slow-cook"
+            badge="slow-cook"
             description="Chewier texture; great if you like batch cooking."
             href={amazonSearchUrl('organic steel cut oats')}
             bullets={["Chewy texture", "Great for batch cooking", "Longer cook time"]}
@@ -191,7 +191,7 @@ export default function Page() {
 
           <ProductPick
             title="Organic gluten-free oats"
-            badge="Best gluten-free"
+            badge="gluten-free"
             description="If gluten-free is needed, look for certification."
             href={amazonSearchUrl('organic gluten free oats certified')}
             bullets={["Look for certification", "Good for coeliac needs", "Usually pricier"]}

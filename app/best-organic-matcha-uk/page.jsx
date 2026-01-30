@@ -13,7 +13,7 @@ export const metadata = {
 const PICKS = [
   {
     "title": "Everyday matcha (cooking grade)",
-    "badge": "Best value",
+    "badge": "Good value",
     "desc": "Great for smoothies and lattes.",
     "query": "matcha powder culinary grade",
     "bullets": [
@@ -24,7 +24,7 @@ const PICKS = [
   },
   {
     "title": "Ceremonial-style matcha (small tin)",
-    "badge": "Best taste",
+    "badge": "taste",
     "desc": "If you drink it straight, small tins keep it fresher.",
     "query": "ceremonial matcha tin",
     "bullets": [
@@ -87,7 +87,7 @@ function SummaryBox() {
         A short, practical shortlist plus the label cues that matter (freshness, ingredients, and how you’ll actually use it).
       </p>
       <div className="mt-4 flex flex-wrap gap-2">
-        <Link className="btn-secondary" href="/nutrition">Nutrition hub</Link>
+        <Link className="btn-secondary" href="/nutrition">Nutrition</Link>
       </div>
       <p className="mt-4 text-xs text-zinc-500">Last updated: January 27, 2026</p>
     </div>
@@ -135,7 +135,7 @@ export default function Page() {
         <div className="mt-6 grid gap-4 md:grid-cols-3">
           <ProductPick
             title="Everyday matcha (cooking grade)"
-            badge="Best value"
+            badge="Good value"
             description="Great for smoothies and lattes."
             href={amazonSearchUrl('matcha powder culinary grade')}
             bullets={["Great for lattes", "Good value", "Taste is less delicate"]}
@@ -143,7 +143,7 @@ export default function Page() {
 
           <ProductPick
             title="Ceremonial-style matcha (small tin)"
-            badge="Best taste"
+            badge="taste"
             description="If you drink it straight, small tins keep it fresher."
             href={amazonSearchUrl('ceremonial matcha tin')}
             bullets={["Better taste", "Buy small tins", "Store airtight away from light"]}
@@ -166,7 +166,7 @@ export default function Page() {
         <div className="mt-6 grid gap-4 md:grid-cols-2">
           <ProductPick
             title="Everyday matcha (cooking grade)"
-            badge="Best value"
+            badge="Good value"
             description="Great for smoothies and lattes."
             href={amazonSearchUrl('matcha powder culinary grade')}
             bullets={["Great for lattes", "Good value", "Taste is less delicate"]}
@@ -174,7 +174,7 @@ export default function Page() {
 
           <ProductPick
             title="Ceremonial-style matcha (small tin)"
-            badge="Best taste"
+            badge="taste"
             description="If you drink it straight, small tins keep it fresher."
             href={amazonSearchUrl('ceremonial matcha tin')}
             bullets={["Better taste", "Buy small tins", "Store airtight away from light"]}

@@ -7,6 +7,22 @@ export const metadata = {
     "Browse our product shortlists: low-tox home, sleep, nutrition, and movement — with clear trade-offs.",
 };
 
+const TAG_ICON = {
+  Water: '/images/cards/water-filter.svg',
+  Air: '/images/cards/air-purifier.svg',
+  Laundry: '/images/cards/laundry.svg',
+  Kitchen: '/images/cards/kitchen.svg',
+  Shower: '/images/cards/shower-filter.svg',
+  Sleep: '/images/cards/sleep.svg',
+  Movement: '/images/cards/bands.svg',
+  Fitness: '/images/cards/tracker.svg',
+  Recovery: '/images/cards/bands.svg',
+  'Body comp': '/images/cards/scale.svg',
+  'Body Comp': '/images/cards/scale.svg',
+  Supplements: '/images/cards/supplements.svg',
+  Nutrition: '/images/cards/supplements.svg',
+}
+
 function Section({ title, desc, items }) {
   return (
     <section className="mt-12">
@@ -16,9 +32,19 @@ function Section({ title, desc, items }) {
         {items.map((it) => (
           <Link key={it.href} href={it.href} className="card hover:shadow-sm transition-shadow">
             <div className="flex items-start justify-between gap-3">
-              <div>
-                <h3 className="text-lg font-semibold">{it.label}</h3>
-                <p className="mt-1 text-sm text-zinc-600">{it.desc}</p>
+              <div className="flex min-w-0 gap-3">
+                <div className="relative mt-0.5 h-12 w-12 shrink-0 overflow-hidden rounded-xl bg-zinc-100">
+                  <img
+                    src={(it.image || TAG_ICON[it.tag] || '/images/cards/neutral.svg')}
+                    alt=""
+                    className="h-full w-full object-cover"
+                    loading="lazy"
+                  />
+                </div>
+                <div className="min-w-0">
+                  <h3 className="text-lg font-semibold">{it.label}</h3>
+                  <p className="mt-1 text-sm text-zinc-600">{it.desc}</p>
+                </div>
               </div>
               <span className="shrink-0 rounded-full border px-2 py-0.5 text-[11px] text-zinc-600 bg-white">
                 {it.tag}
@@ -36,19 +62,19 @@ export default function Page() {
   const home = [
     {
       href: "/best-water-filters-uk",
-      label: "Best water filters (UK)",
+      label: "Water filters (UK): favourites",
       desc: "Jugs vs under-sink vs countertop: clear trade-offs.",
       tag: "Water",
     },
     {
       href: "/best-air-purifiers-allergies-uk",
-      label: "Best air purifiers for allergies (UK)",
+      label: "Air purifiers for allergies (UK): shortlist",
       desc: "Shortlist by room size and realistic use-cases.",
       tag: "Air",
     },
     {
       href: "/best-fragrance-free-laundry-detergents-uk",
-      label: "Best fragrance-free laundry detergents (UK)",
+      label: "Fragrance-free laundry detergents (UK): shortlist",
       desc: "High-contact swap with ingredient notes.",
       tag: "Laundry",
     },
@@ -60,13 +86,13 @@ export default function Page() {
     },
     {
       href: "/best-shower-filters-uk-hard-water",
-      label: "Best shower filters (UK hard water)",
+      label: "Shower filters (UK hard water): shortlist",
       desc: "If your hair/skin hates hard water, start here.",
       tag: "Water",
     },
     {
       href: "/best-humidifiers-for-bedrooms-uk",
-      label: "Best humidifiers for bedrooms (UK)",
+      label: "Humidifiers for bedrooms (UK): shortlist",
       desc: "Dry air comfort options + maintenance reminders.",
       tag: "Humidity",
     },
@@ -75,13 +101,13 @@ export default function Page() {
   const sleep = [
     {
       href: "/best-natural-sleep-support",
-      label: "Best natural sleep support",
+      label: "natural sleep support",
       desc: "A calm shortlist with realistic expectations.",
       tag: "Sleep",
     },
     {
       href: "/best-natural-sleep-remedies-non-pharma",
-      label: "Best natural sleep remedies (non‑pharma)",
+      label: "natural sleep remedies (non‑pharma)",
       desc: "What may help vs what’s mostly marketing.",
       tag: "Sleep",
     },
@@ -129,43 +155,43 @@ export default function Page() {
   const movement = [
     {
       href: "/best-fitness-trackers-beginners-uk",
-      label: "Best fitness trackers for beginners (UK)",
+      label: "Fitness trackers for beginners (UK): shortlist",
       desc: "Steps, sleep, heart-rate: what matters.",
       tag: "Trackers",
     },
     {
       href: "/best-smart-scales-uk",
-      label: "Best smart scales (UK)",
+      label: "Smart scales (UK): shortlist",
       desc: "Use trends, not daily obsession.",
       tag: "Scales",
     },
     {
       href: "/best-resistance-bands-home-workouts",
-      label: "Best resistance bands for home workouts",
+      label: "Resistance bands for home workouts: shortlist",
       desc: "A small kit that covers most needs.",
       tag: "Strength",
     },
     {
       href: "/best-walking-shoes-daily-steps-uk",
-      label: "Best walking shoes for daily steps (UK)",
+      label: "Walking shoes for daily steps (UK): shortlist",
       desc: "Comfort-first options for regular walking.",
       tag: "Walking",
     },
     {
       href: "/best-yoga-mats-grip-comfort",
-      label: "Best yoga mats for grip & comfort",
+      label: "yoga mats for grip & comfort",
       desc: "Grip and joint comfort without nonsense.",
       tag: "Mobility",
     },
     {
       href: "/best-foam-rollers-recovery-tools",
-      label: "Best foam rollers & recovery tools",
+      label: "foam rollers & recovery tools",
       desc: "Simple recovery tools that help you keep moving.",
       tag: "Recovery",
     },
     {
       href: "/best-activewear-basics-uk",
-      label: "Best activewear basics (UK)",
+      label: "activewear basics (UK)",
       desc: "Comfort-first basics for walking and training.",
       tag: "Clothing",
     },
@@ -185,7 +211,7 @@ export default function Page() {
 
         <EducationFirstCallout topicHref="/topics" topicLabel="Start with topics" insightHref="/blog" insightLabel="Read Wellness Insights" />
         <div className="mt-5 flex flex-wrap gap-2">
-          <Link className="btn-secondary" href="/topics">Topics hub</Link>
+          <Link className="btn-secondary" href="/topics">Topics</Link>
           <Link className="btn-secondary" href="/deals">Deals</Link>
         </div>
         <p className="mt-3 text-xs text-zinc-500">Last updated: January 27, 2026</p>

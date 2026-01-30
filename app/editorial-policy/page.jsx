@@ -43,7 +43,7 @@ export default function EditorialPolicy() {
         <ul className="list-disc pl-6 space-y-2">
           <li><strong>Wellness Insights</strong> explain basics and help you avoid common mistakes.</li>
           <li><strong>Favourites pages</strong> are for buyer intent — shortlists, not endless lists.</li>
-          <li><strong>Topics hubs</strong> connect the two: a simple plan + the next best action.</li>
+          <li><strong>Topicss</strong> connect the two: a simple plan + the next best action.</li>
         </ul>
         <p>
           We update pages as products change and as we learn what helps real people most.

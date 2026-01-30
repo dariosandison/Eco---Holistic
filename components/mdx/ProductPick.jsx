@@ -11,6 +11,26 @@ export default function ProductPick({
   bullets = [],
   links = null,
 }) {
+
+  const needsAutoImage = !image || image === '/og-default.jpg'
+  const key = `${title || ''} ${badge || ''}`.toLowerCase()
+  const autoImage = needsAutoImage
+    ? (() => {
+        if (key.includes('humidifier')) return '/images/products/humidifier.svg'
+        if (key.includes('air purifier') || key.includes('purifier') || key.includes('hepa')) return '/images/products/air-purifier.svg'
+        if (key.includes('shower')) return '/images/products/shower-filter.svg'
+        if (key.includes('laundry') || key.includes('detergent')) return '/images/products/laundry.svg'
+        if (key.includes('water') || key.includes('filter') || key.includes('brita') || key.includes('doulton')) return '/images/products/water-filter.svg'
+        if (key.includes('cookware') || key.includes('pan') || key.includes('skillet')) return '/images/products/kitchen.svg'
+        if (key.includes('magnesium') || key.includes('supplement') || key.includes('capsule') || key.includes('vitamin')) return '/images/products/supplements.svg'
+        if (key.includes('tracker') || key.includes('watch') || key.includes('wearable')) return '/images/products/tracker.svg'
+        if (key.includes('scale')) return '/images/products/scale.svg'
+        if (key.includes('band')) return '/images/products/bands.svg'
+        if (key.includes('shoe') || key.includes('trainer')) return '/images/products/shoe.svg'
+        return '/images/products/neutral.svg'
+      })()
+    : image
+
   const resolvedLinks = Array.isArray(links) && links.length
     ? links
     : [{ label: 'Check price', merchant: 'amazon', asin, href, variant: 'primary' }]
@@ -18,7 +38,7 @@ export default function ProductPick({
     <div className="not-prose overflow-hidden rounded-2xl border border-zinc-200 bg-white p-5">
       <div className="flex flex-col gap-4 sm:flex-row sm:items-start">
         <div className="relative h-24 w-24 shrink-0 overflow-hidden rounded-xl bg-zinc-100">
-          <Image src={image} alt="" fill className="object-cover" sizes="96px" />
+          <Image src={autoImage} alt="" fill className="object-cover" sizes="96px" />
         </div>
 
         <div className="min-w-0 flex-1">

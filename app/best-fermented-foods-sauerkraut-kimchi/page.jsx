@@ -13,7 +13,7 @@ export const metadata = {
 const PICKS = [
   {
     "title": "Refrigerated sauerkraut (simple ingredients)",
-    "badge": "Best starter",
+    "badge": "Easy starter",
     "desc": "Look for cabbage, salt — and not much else.",
     "query": "refrigerated sauerkraut cabbage salt",
     "bullets": [
@@ -24,7 +24,7 @@ const PICKS = [
   },
   {
     "title": "Kimchi (refrigerated)",
-    "badge": "Best flavour",
+    "badge": "flavour",
     "desc": "Great as a side, in rice bowls, or eggs.",
     "query": "kimchi refrigerated jar",
     "bullets": [
@@ -87,7 +87,7 @@ function SummaryBox() {
         A short, practical shortlist plus the label cues that matter (freshness, ingredients, and how you’ll actually use it).
       </p>
       <div className="mt-4 flex flex-wrap gap-2">
-        <Link className="btn-secondary" href="/nutrition">Nutrition hub</Link>
+        <Link className="btn-secondary" href="/nutrition">Nutrition</Link>
         <Link className="btn-secondary" href="/blog/ultra-processed-foods-what-they-are-and-why-they-matter">Blog: UPFs</Link>
       </div>
       <p className="mt-4 text-xs text-zinc-500">Last updated: January 27, 2026</p>
@@ -136,7 +136,7 @@ export default function Page() {
         <div className="mt-6 grid gap-4 md:grid-cols-3">
           <ProductPick
             title="Refrigerated sauerkraut (simple ingredients)"
-            badge="Best starter"
+            badge="Easy starter"
             description="Look for cabbage, salt — and not much else."
             href={amazonSearchUrl('refrigerated sauerkraut cabbage salt')}
             bullets={["Simple ingredients", "Check refrigeration", "Taste varies a lot"]}
@@ -144,7 +144,7 @@ export default function Page() {
 
           <ProductPick
             title="Kimchi (refrigerated)"
-            badge="Best flavour"
+            badge="flavour"
             description="Great as a side, in rice bowls, or eggs."
             href={amazonSearchUrl('kimchi refrigerated jar')}
             bullets={["Great flavour", "Check spice level", "Watch added sugars if sensitive"]}
@@ -167,7 +167,7 @@ export default function Page() {
         <div className="mt-6 grid gap-4 md:grid-cols-2">
           <ProductPick
             title="Refrigerated sauerkraut (simple ingredients)"
-            badge="Best starter"
+            badge="Easy starter"
             description="Look for cabbage, salt — and not much else."
             href={amazonSearchUrl('refrigerated sauerkraut cabbage salt')}
             bullets={["Simple ingredients", "Check refrigeration", "Taste varies a lot"]}
@@ -175,7 +175,7 @@ export default function Page() {
 
           <ProductPick
             title="Kimchi (refrigerated)"
-            badge="Best flavour"
+            badge="flavour"
             description="Great as a side, in rice bowls, or eggs."
             href={amazonSearchUrl('kimchi refrigerated jar')}
             bullets={["Great flavour", "Check spice level", "Watch added sugars if sensitive"]}

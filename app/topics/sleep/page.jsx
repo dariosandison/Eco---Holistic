@@ -4,7 +4,7 @@ import { amazonSearchUrl } from '@/lib/amazon'
 
 export const metadata = {
   title: 'Sleep Topics — Wild & Well',
-  description: 'A calm, practical sleep hub: the few habits that move the needle, plus a shortlist of products that help when you’re ready.',
+  description: 'A calm, practical sleep topic: the few habits that move the needle, plus a shortlist of products that help when you’re ready.',
 }
 
 export default function Page() {
@@ -17,7 +17,7 @@ export default function Page() {
         </p>
         <div className="mt-4 flex flex-wrap gap-2">
           <Link className="btn-secondary" href="/blog/sleep-naturally-simple-guide">Start with the cornerstone guide</Link>
-          <Link className="btn-secondary" href="/best-natural-sleep-support">Best natural sleep support</Link>
+          <Link className="btn-secondary" href="/best-natural-sleep-support">Natural sleep support: shortlist</Link>
           <Link className="btn-secondary" href="/shopping-list">Free shopping list</Link>
         </div>
       </header>
@@ -96,7 +96,7 @@ export default function Page() {
         </div>
 
         <div className="mt-8 flex flex-wrap gap-2">
-          <Link className="btn-primary" href="/best-natural-sleep-support">See the full “Best Natural Sleep Support” page →</Link>
+          <Link className="btn-primary" href="/best-natural-sleep-support">See the full shortlist page →</Link>
           <Link className="btn-secondary" href="/blog/magnesium-for-sleep-basics">Read: magnesium basics</Link>
         </div>
       </section>

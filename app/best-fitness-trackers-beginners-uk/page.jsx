@@ -6,14 +6,14 @@ import EducationFirstCallout from '@/components/EducationFirstCallout'
 
 
 export const metadata = {
-  title: "Best Fitness Trackers for Beginners (UK) | Wild & Well",
+  title: "Fitness Trackers for Beginners (UK): shortlist | Wild & Well",
   description: "A straightforward shortlist of fitness trackers for beginners: steps, sleep, heart-rate, and the features that actually matter.",
 }
 
 const PICKS = [
   {
     "title": "Fitbit Charge series",
-    "badge": "Best all-round",
+    "badge": "all-round",
     "desc": "Solid balance of step tracking + sleep features.",
     "query": "Fitbit Charge tracker",
     "bullets": [
@@ -24,7 +24,7 @@ const PICKS = [
   },
   {
     "title": "Garmin vívosmart / Venu (entry models)",
-    "badge": "Best for training",
+    "badge": "Great for training",
     "desc": "Great if you want activity insights and strong battery.",
     "query": "Garmin vivosmart fitness tracker",
     "bullets": [
@@ -35,7 +35,7 @@ const PICKS = [
   },
   {
     "title": "Amazfit Band / GTS series",
-    "badge": "Best budget",
+    "badge": "Good value",
     "desc": "Affordable options with useful basics and good battery.",
     "query": "Amazfit band fitness tracker",
     "bullets": [
@@ -46,11 +46,11 @@ const PICKS = [
   },
   {
     "title": "Apple Watch SE",
-    "badge": "Best iPhone",
+    "badge": "iPhone",
     "desc": "If you’re on iPhone and want smart features + fitness.",
     "query": "Apple Watch SE",
     "bullets": [
-      "Best with iPhone",
+      "with iPhone",
       "Lots of apps",
       "Battery is usually shorter than bands"
     ]
@@ -68,7 +68,7 @@ const PICKS = [
   },
   {
     "title": "Xiaomi Smart Band",
-    "badge": "Best starter band",
+    "badge": "Easy starter band",
     "desc": "Popular entry band with the essentials.",
     "query": "Xiaomi Smart Band",
     "bullets": [
@@ -87,8 +87,8 @@ function SummaryBox() {
         A straightforward shortlist with sensible options for most people — plus guidance on what to look for so you don’t buy on hype.
       </p>
       <div className="mt-4 flex flex-wrap gap-2">
-        <Link className="btn-secondary" href="/movement">Movement hub</Link>
-        <Link className="btn-secondary" href="/favourites">Favourites hub</Link>
+        <Link className="btn-secondary" href="/movement">Movement</Link>
+        <Link className="btn-secondary" href="/favourites">Favourites</Link>
         <Link className="btn-secondary" href="/how-we-test">How we test</Link>
       </div>
       <p className="mt-4 text-xs text-zinc-500">Last updated: January 27, 2026</p>
@@ -107,7 +107,7 @@ export default function Page() {
   const ld = {
     '@context': 'https://schema.org',
     '@type': 'Article',
-    headline: "Best Fitness Trackers for Beginners (UK)",
+    headline: "Fitness Trackers for Beginners (UK): shortlist",
     dateModified: '2026-01-27',
     datePublished: '2026-01-27',
     mainEntity: {
@@ -122,7 +122,7 @@ export default function Page() {
       <StructuredData data={{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Do I need a tracker to get fitter?", "acceptedAnswer": {"@type": "Answer", "text": "No. A tracker is optional. It helps some people stay consistent by making steps and sleep more visible."}}, {"@type": "Question", "name": "Which metric matters most?", "acceptedAnswer": {"@type": "Answer", "text": "For most beginners: daily steps, weekly minutes of movement, and sleep consistency are the most useful starting points."}}]}} />
 
       <header className="max-w-3xl">
-        <h1 className="text-4xl font-bold">Best fitness trackers for beginners (UK)</h1>
+        <h1 className="text-4xl font-bold">Fitness trackers for beginners (UK): shortlist</h1>
         <p className="mt-3 text-zinc-700">A straightforward shortlist of fitness trackers for beginners: steps, sleep, heart-rate, and the features that actually matter.</p>
 
         <EducationFirstCallout topicHref="/movement" topicLabel="Movement basics" insightHref="/blog/home-strength-basics-busy-people" insightLabel="Strength basics" />
@@ -138,7 +138,7 @@ export default function Page() {
         <div className="mt-6 grid gap-4 md:grid-cols-3">
           <ProductPick
             title="Fitbit Charge series"
-            badge="Best all-round"
+            badge="all-round"
             description="Solid balance of step tracking + sleep features."
             href={amazonSearchUrl('Fitbit Charge tracker')}
             bullets={["Good sleep tracking features", "Comfortable for daily wear", "Check subscription features"]}
@@ -146,7 +146,7 @@ export default function Page() {
 
           <ProductPick
             title="Garmin vívosmart / Venu (entry models)"
-            badge="Best for training"
+            badge="Great for training"
             description="Great if you want activity insights and strong battery."
             href={amazonSearchUrl('Garmin vivosmart fitness tracker')}
             bullets={["Great battery on many models", "Good activity insights", "App ecosystem is strong"]}
@@ -154,7 +154,7 @@ export default function Page() {
 
           <ProductPick
             title="Amazfit Band / GTS series"
-            badge="Best budget"
+            badge="Good value"
             description="Affordable options with useful basics and good battery."
             href={amazonSearchUrl('Amazfit band fitness tracker')}
             bullets={["Good value", "Battery often strong", "Keep expectations realistic on \u201cadvanced\u201d metrics"]}
@@ -169,7 +169,7 @@ export default function Page() {
         <div className="mt-6 grid gap-4 md:grid-cols-2">
           <ProductPick
             title="Fitbit Charge series"
-            badge="Best all-round"
+            badge="all-round"
             description="Solid balance of step tracking + sleep features."
             href={amazonSearchUrl('Fitbit Charge tracker')}
             bullets={["Good sleep tracking features", "Comfortable for daily wear", "Check subscription features"]}
@@ -177,7 +177,7 @@ export default function Page() {
 
           <ProductPick
             title="Garmin vívosmart / Venu (entry models)"
-            badge="Best for training"
+            badge="Great for training"
             description="Great if you want activity insights and strong battery."
             href={amazonSearchUrl('Garmin vivosmart fitness tracker')}
             bullets={["Great battery on many models", "Good activity insights", "App ecosystem is strong"]}
@@ -185,7 +185,7 @@ export default function Page() {
 
           <ProductPick
             title="Amazfit Band / GTS series"
-            badge="Best budget"
+            badge="Good value"
             description="Affordable options with useful basics and good battery."
             href={amazonSearchUrl('Amazfit band fitness tracker')}
             bullets={["Good value", "Battery often strong", "Keep expectations realistic on \u201cadvanced\u201d metrics"]}
@@ -193,10 +193,10 @@ export default function Page() {
 
           <ProductPick
             title="Apple Watch SE"
-            badge="Best iPhone"
+            badge="iPhone"
             description="If you’re on iPhone and want smart features + fitness."
             href={amazonSearchUrl('Apple Watch SE')}
-            bullets={["Best with iPhone", "Lots of apps", "Battery is usually shorter than bands"]}
+            bullets={["with iPhone", "Lots of apps", "Battery is usually shorter than bands"]}
           />
 
           <ProductPick
@@ -209,7 +209,7 @@ export default function Page() {
 
           <ProductPick
             title="Xiaomi Smart Band"
-            badge="Best starter band"
+            badge="Easy starter band"
             description="Popular entry band with the essentials."
             href={amazonSearchUrl('Xiaomi Smart Band')}
             bullets={["Very affordable", "Good for steps", "Great as a first tracker"]}
@@ -222,7 +222,7 @@ export default function Page() {
         <h2 className="text-2xl font-semibold">How we think about “best”</h2>
         <div className="mt-3 space-y-3 text-sm text-zinc-700 max-w-3xl">
           <p>
-            “Best” here means: sensible features, decent reviews across many buyers, and a realistic fit for most homes — not hype, not extreme claims.
+            “Shortlist” here means: sensible features, decent reviews across many buyers, and a realistic fit for most homes — not hype, not extreme claims.
           </p>
           <p>
             Always check sizing/specs and current pricing before you buy. If a product makes strong health claims without evidence, treat that as marketing.

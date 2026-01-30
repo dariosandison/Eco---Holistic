@@ -54,14 +54,14 @@ export default function DealsPage() {
           <Link className="btn-secondary" href="/favourites">
             Browse favourites
           </Link>
-          <Link className="btn-secondary" href="/topics">Topics hub</Link>
+          <Link className="btn-secondary" href="/topics">Topics</Link>
         </div>
         <p className="mt-3 text-xs text-zinc-500">Last checked: January 27, 2026</p>
       </header>
 
       <section className="mt-10 grid gap-4 md:grid-cols-2">
         <div className="rounded-2xl border bg-white p-6 shadow-sm">
-          <h2 className="text-xl font-semibold">Best times to buy</h2>
+          <h2 className="text-xl font-semibold">Good times to buy</h2>
           <ul className="mt-3 list-disc pl-6 text-sm text-zinc-700 space-y-1">
             <li><strong>Seasonal peaks:</strong> air purifiers (spring allergies), humidifiers (autumn/winter), fans (summer).</li>
             <li><strong>Sales events:</strong> big retailer sales can be real discounts — but check history if you can.</li>

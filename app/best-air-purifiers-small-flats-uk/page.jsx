@@ -7,45 +7,45 @@ import EducationFirstCallout from '@/components/EducationFirstCallout'
 
 
 export const metadata = {
-  title: 'Best Air Purifiers for Small Flats (UK) | Wild & Well',
+  title: 'Air Purifiers for Small Flats (UK): shortlist | Wild & Well',
   description: 'Shortlisted air purifiers that make sense for small UK flats: quiet bedrooms, compact units, and realistic filter costs.',
 }
 
 const PICKS = [
   {
     title: 'Blueair Blue 511i Max',
-    badge: 'Best compact',
+    badge: 'compact',
     desc: 'A strong “bedroom size” pick if you size it correctly.',
     query: 'Blueair 511i Max air purifier',
-    bullets: ['Best for: bedrooms', 'Quiet night mode matters', 'Plan filter replacements'],
+    bullets: ['Great for: bedrooms', 'Quiet night mode matters', 'Plan filter replacements'],
   },
   {
     title: 'Levoit Core 300S',
-    badge: 'Best value',
+    badge: 'Good value',
     desc: 'Often praised as a budget-friendly HEPA option for small rooms.',
     query: 'Levoit Core 300S air purifier',
-    bullets: ['Best for: small flats', 'Check filter availability'],
+    bullets: ['Great for: small flats', 'Check filter availability'],
   },
   {
     title: 'Philips Series 800 air purifier',
     badge: 'Solid mainstream',
     desc: 'A mainstream option with good availability and easy support.',
     query: 'Philips 800 series air purifier',
-    bullets: ['Best for: everyday use', 'Compare filter costs'],
+    bullets: ['Great for: everyday use', 'Compare filter costs'],
   },
   {
     title: 'Shark small room HEPA purifier',
     badge: 'Easy use',
     desc: 'Look for quiet operation and sensible replacement filters.',
     query: 'Shark air purifier small room HEPA',
-    bullets: ['Best for: simple setup', 'Check room size coverage'],
+    bullets: ['Great for: simple setup', 'Check room size coverage'],
   },
   {
     title: 'Meaco small room HEPA purifier',
     badge: 'Quiet sleep',
     desc: 'Meaco models are often chosen for low-noise bedrooms.',
     query: 'Meaco air purifier small room',
-    bullets: ['Best for: light sleepers', 'Prioritise low noise'],
+    bullets: ['Great for: light sleepers', 'Prioritise low noise'],
   },
 ]
 
@@ -60,7 +60,7 @@ export default function Page() {
   const ld = {
     '@context': 'https://schema.org',
     '@type': 'Article',
-    headline: 'Best Air Purifiers for Small Flats (UK)',
+    headline: 'Air Purifiers for Small Flats (UK): shortlist',
     dateModified: '2026-01-25',
     datePublished: '2026-01-25',
     mainEntity: { '@type': 'ItemList', itemListElement: itemList },
@@ -95,14 +95,14 @@ export default function Page() {
       <StructuredData data={faqLd} />
 
       <header className="max-w-3xl">
-        <h1 className="text-4xl font-bold">Best air purifiers for small flats (UK)</h1>
+        <h1 className="text-4xl font-bold">Air purifiers for small flats (UK): shortlist</h1>
         <p className="mt-3 text-zinc-700">
           In small spaces, noise and filter costs matter more than fancy features. Buy the unit you’ll actually run every day.
         </p>
 
-        <EducationFirstCallout topicHref="/topics/air-quality" topicLabel="Air quality topic hub" insightHref="/blog/healthy-air-at-home" insightLabel="Healthy air at home" />
+        <EducationFirstCallout topicHref="/topics/air-quality" topicLabel="Air quality topic" insightHref="/blog/healthy-air-at-home" insightLabel="Healthy air at home" />
         <div className="mt-4 flex flex-wrap gap-2">
-          <Link className="btn-secondary" href="/topics/air-quality">Air quality hub</Link>
+          <Link className="btn-secondary" href="/topics/air-quality">Air quality</Link>
           <Link className="btn-secondary" href="/best-air-purifiers-allergies-uk">Allergies list</Link>
         </div>
         <p className="mt-4 text-xs text-zinc-500">Last updated: January 25, 2026</p>
@@ -133,22 +133,22 @@ export default function Page() {
         <p className="mt-2 text-sm text-zinc-600">In small flats: prioritise night-mode noise + realistic filter costs.</p>
         <div className="mt-6 grid gap-4 md:grid-cols-3">
           <ProductPick
-            title="Best compact: Blueair 511i Max"
-            badge="Best overall"
+            title="compact: Blueair 511i Max"
+            badge="Overall favourite"
             description="A strong small-room choice if you size it correctly for your bedroom."
             href={amazonSearchUrl('Blueair 511i Max air purifier')}
             bullets={['Quiet night mode matters', 'Plan filter replacements', 'Great bedroom starting point']}
           />
           <ProductPick
-            title="Best value: Levoit Core 300S"
-            badge="Best value"
+            title="Good value: Levoit Core 300S"
+            badge="Good value"
             description="Budget-friendly HEPA option often chosen for small rooms."
             href={amazonSearchUrl('Levoit Core 300S air purifier')}
             bullets={['Check filter availability', 'Keep it running daily']}
           />
           <ProductPick
-            title="Best for light sleepers: Meaco"
-            badge="Best for"
+            title="Great for light sleepers: Meaco"
+            badge="Great for"
             description="Often chosen for quieter bedroom operation — ideal if noise wakes you."
             href={amazonSearchUrl('Meaco air purifier small room')}
             bullets={['Prioritise low noise', 'Don’t oversize if noise-sensitive']}
@@ -159,7 +159,7 @@ export default function Page() {
           caption="At-a-glance comparison (small flat decision rules)"
           columns={[
             { key: 'focus', label: 'Focus' },
-            { key: 'bestFor', label: 'Best for' },
+            { key: 'bestFor', label: 'Great for' },
             { key: 'watchOut', label: 'Watch-out' },
             { key: 'check', label: 'Check before buying' },
           ]}
@@ -203,7 +203,7 @@ export default function Page() {
         </div>
 
         <div className="mt-8 flex flex-wrap gap-2">
-          <Link className="btn-primary" href="/topics/air-quality">Go to Air Quality hub →</Link>
+          <Link className="btn-primary" href="/topics/air-quality">Go to Air Quality →</Link>
           <Link className="btn-secondary" href="/best-air-purifiers-allergies-uk">Allergies list →</Link>
         </div>
       </section>

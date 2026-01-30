@@ -17,7 +17,7 @@ export default function Page() {
         </p>
         <div className="mt-4 flex flex-wrap gap-2">
           <Link className="btn-secondary" href="/blog/non-toxic-cleaning-starter">Cleaning starter guide</Link>
-          <Link className="btn-secondary" href="/best-fragrance-free-laundry-detergents-uk">Best fragrance-free detergents</Link>
+          <Link className="btn-secondary" href="/best-fragrance-free-laundry-detergents-uk">Fragrance-free detergents: shortlist</Link>
         </div>
       </header>
 

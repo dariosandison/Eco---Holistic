@@ -6,14 +6,14 @@ import EducationFirstCallout from '@/components/EducationFirstCallout'
 
 
 export const metadata = {
-  title: "Best Walking Shoes for Daily Steps (UK) | Wild & Well",
+  title: "Walking Shoes for Daily Steps (UK): shortlist | Wild & Well",
   description: "A comfort-first shortlist of walking shoes for daily steps. Focus on fit, cushioning, and the surfaces you walk on.",
 }
 
 const PICKS = [
   {
     "title": "Skechers GOwalk range",
-    "badge": "Best comfort",
+    "badge": "comfort",
     "desc": "Popular comfort-first walking shoes.",
     "query": "Skechers GOwalk walking shoes men women",
     "bullets": [
@@ -24,7 +24,7 @@ const PICKS = [
   },
   {
     "title": "New Balance walking/running comfort models",
-    "badge": "Best support",
+    "badge": "support",
     "desc": "Good if you want more structured support.",
     "query": "New Balance walking shoes cushioned",
     "bullets": [
@@ -35,7 +35,7 @@ const PICKS = [
   },
   {
     "title": "ASICS Gel (walking-friendly models)",
-    "badge": "Best cushioned",
+    "badge": "cushioned",
     "desc": "Cushioning-focused options that many people like for longer walks.",
     "query": "ASICS Gel walking shoes",
     "bullets": [
@@ -87,7 +87,7 @@ function SummaryBox() {
         A straightforward shortlist with sensible options for most people — plus guidance on what to look for so you don’t buy on hype.
       </p>
       <div className="mt-4 flex flex-wrap gap-2">
-        <Link className="btn-secondary" href="/movement">Movement hub</Link>
+        <Link className="btn-secondary" href="/movement">Movement</Link>
       </div>
       <p className="mt-4 text-xs text-zinc-500">Last updated: January 27, 2026</p>
     </div>
@@ -105,7 +105,7 @@ export default function Page() {
   const ld = {
     '@context': 'https://schema.org',
     '@type': 'Article',
-    headline: "Best Walking Shoes for Daily Steps (UK)",
+    headline: "Walking Shoes for Daily Steps (UK): shortlist",
     dateModified: '2026-01-27',
     datePublished: '2026-01-27',
     mainEntity: {
@@ -120,7 +120,7 @@ export default function Page() {
       <StructuredData data={{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Should I buy running shoes for walking?", "acceptedAnswer": {"@type": "Answer", "text": "Often yes — many running shoes work well for walking due to cushioning and support."}}, {"@type": "Question", "name": "What matters most?", "acceptedAnswer": {"@type": "Answer", "text": "Fit and comfort. If the shoe annoys you, you won’t wear it."}}]}} />
 
       <header className="max-w-3xl">
-        <h1 className="text-4xl font-bold">Best walking shoes for daily steps (UK)</h1>
+        <h1 className="text-4xl font-bold">Walking shoes for daily steps (UK): shortlist</h1>
         <p className="mt-3 text-zinc-700">A comfort-first shortlist of walking shoes for daily steps. Focus on fit, cushioning, and the surfaces you walk on.</p>
 
         <EducationFirstCallout topicHref="/movement" topicLabel="Movement basics" insightHref="/blog/home-strength-basics-busy-people" insightLabel="Strength basics" />
@@ -136,7 +136,7 @@ export default function Page() {
         <div className="mt-6 grid gap-4 md:grid-cols-3">
           <ProductPick
             title="Skechers GOwalk range"
-            badge="Best comfort"
+            badge="comfort"
             description="Popular comfort-first walking shoes."
             href={amazonSearchUrl('Skechers GOwalk walking shoes men women')}
             bullets={["Comfort-first", "Easy daily wear", "Try sizing carefully"]}
@@ -144,7 +144,7 @@ export default function Page() {
 
           <ProductPick
             title="New Balance walking/running comfort models"
-            badge="Best support"
+            badge="support"
             description="Good if you want more structured support."
             href={amazonSearchUrl('New Balance walking shoes cushioned')}
             bullets={["Supportive feel", "Good cushioning", "Pick the right width"]}
@@ -152,7 +152,7 @@ export default function Page() {
 
           <ProductPick
             title="ASICS Gel (walking-friendly models)"
-            badge="Best cushioned"
+            badge="cushioned"
             description="Cushioning-focused options that many people like for longer walks."
             href={amazonSearchUrl('ASICS Gel walking shoes')}
             bullets={["Good cushioning", "Often durable", "Check fit and toe box"]}
@@ -167,7 +167,7 @@ export default function Page() {
         <div className="mt-6 grid gap-4 md:grid-cols-2">
           <ProductPick
             title="Skechers GOwalk range"
-            badge="Best comfort"
+            badge="comfort"
             description="Popular comfort-first walking shoes."
             href={amazonSearchUrl('Skechers GOwalk walking shoes men women')}
             bullets={["Comfort-first", "Easy daily wear", "Try sizing carefully"]}
@@ -175,7 +175,7 @@ export default function Page() {
 
           <ProductPick
             title="New Balance walking/running comfort models"
-            badge="Best support"
+            badge="support"
             description="Good if you want more structured support."
             href={amazonSearchUrl('New Balance walking shoes cushioned')}
             bullets={["Supportive feel", "Good cushioning", "Pick the right width"]}
@@ -183,7 +183,7 @@ export default function Page() {
 
           <ProductPick
             title="ASICS Gel (walking-friendly models)"
-            badge="Best cushioned"
+            badge="cushioned"
             description="Cushioning-focused options that many people like for longer walks."
             href={amazonSearchUrl('ASICS Gel walking shoes')}
             bullets={["Good cushioning", "Often durable", "Check fit and toe box"]}
@@ -220,7 +220,7 @@ export default function Page() {
         <h2 className="text-2xl font-semibold">How we think about “best”</h2>
         <div className="mt-3 space-y-3 text-sm text-zinc-700 max-w-3xl">
           <p>
-            “Best” here means: sensible features, decent reviews across many buyers, and a realistic fit for most homes — not hype, not extreme claims.
+            “Shortlist” here means: sensible features, decent reviews across many buyers, and a realistic fit for most homes — not hype, not extreme claims.
           </p>
           <p>
             Always check sizing/specs and current pricing before you buy. If a product makes strong health claims without evidence, treat that as marketing.

@@ -13,7 +13,7 @@ export const metadata = {
 const PICKS = [
   {
     "title": "Organic ground flaxseed (linseed)",
-    "badge": "Best all-round",
+    "badge": "all-round",
     "desc": "Easy to add to oats, yoghurt, and baking.",
     "query": "organic ground flaxseed linseed",
     "bullets": [
@@ -87,7 +87,7 @@ function SummaryBox() {
         A short, practical shortlist plus the label cues that matter (freshness, ingredients, and how you’ll actually use it).
       </p>
       <div className="mt-4 flex flex-wrap gap-2">
-        <Link className="btn-secondary" href="/nutrition">Nutrition hub</Link>
+        <Link className="btn-secondary" href="/nutrition">Nutrition</Link>
         <Link className="btn-secondary" href="/blog/fibre-gut-health-practical-guide">Blog: fibre & gut health</Link>
       </div>
       <p className="mt-4 text-xs text-zinc-500">Last updated: January 27, 2026</p>
@@ -136,7 +136,7 @@ export default function Page() {
         <div className="mt-6 grid gap-4 md:grid-cols-3">
           <ProductPick
             title="Organic ground flaxseed (linseed)"
-            badge="Best all-round"
+            badge="all-round"
             description="Easy to add to oats, yoghurt, and baking."
             href={amazonSearchUrl('organic ground flaxseed linseed')}
             bullets={["Easy add-in", "Check packaging", "Store cool/dry"]}
@@ -167,7 +167,7 @@ export default function Page() {
         <div className="mt-6 grid gap-4 md:grid-cols-2">
           <ProductPick
             title="Organic ground flaxseed (linseed)"
-            badge="Best all-round"
+            badge="all-round"
             description="Easy to add to oats, yoghurt, and baking."
             href={amazonSearchUrl('organic ground flaxseed linseed')}
             bullets={["Easy add-in", "Check packaging", "Store cool/dry"]}

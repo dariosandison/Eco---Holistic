@@ -7,7 +7,7 @@ import EducationFirstCallout from '@/components/EducationFirstCallout'
 
 
 export const metadata = {
-  title: 'Best Fragrance‑Free Laundry Detergents (UK) | Wild & Well',
+  title: 'Fragrance‑Free Laundry Detergents (UK): shortlist | Wild & Well',
   description: 'A shortlist of fragrance‑free detergents for sensitive households in the UK — what to look for, what to avoid, and buyer shortlist.',
 }
 
@@ -53,7 +53,7 @@ export default function Page() {
   const ld = {
     '@context': 'https://schema.org',
     '@type': 'Article',
-    headline: 'Best Fragrance‑Free Laundry Detergents (UK)',
+    headline: 'Fragrance‑Free Laundry Detergents (UK): shortlist',
     dateModified: '2026-01-25',
     datePublished: '2026-01-25',
     mainEntity: { '@type': 'ItemList', itemListElement: itemList },
@@ -88,14 +88,14 @@ export default function Page() {
       <StructuredData data={faqLd} />
 
       <header className="max-w-3xl">
-        <h1 className="text-4xl font-bold">Best fragrance‑free laundry detergents (UK)</h1>
+        <h1 className="text-4xl font-bold">Fragrance‑free laundry detergents (UK): shortlist</h1>
         <p className="mt-3 text-zinc-700">
           Laundry touches your skin all day. If you’re sensitive to scent, detergent is the highest-impact swap.
         </p>
 
-        <EducationFirstCallout topicHref="/topics/fragrance-free" topicLabel="Fragrance‑free topic hub" insightHref="/blog/ingredient-red-flags" insightLabel="Ingredient red flags" />
+        <EducationFirstCallout topicHref="/topics/fragrance-free" topicLabel="Fragrance‑free topic" insightHref="/blog/ingredient-red-flags" insightLabel="Ingredient red flags" />
         <div className="mt-4 flex flex-wrap gap-2">
-          <Link className="btn-secondary" href="/topics/fragrance-free">Fragrance-free hub</Link>
+          <Link className="btn-secondary" href="/topics/fragrance-free">Fragrance-free</Link>
           <Link className="btn-secondary" href="/blog/eco-laundry">Laundry guide</Link>
           <Link className="btn-secondary" href="/shopping-list">Free shopping list</Link>
         </div>
@@ -126,22 +126,22 @@ export default function Page() {
         <p className="mt-2 text-sm text-zinc-600">Pick one route: sensitive-skin baseline, refill-friendly, or easy mainstream.</p>
         <div className="mt-6 grid gap-4 md:grid-cols-3">
           <ProductPick
-            title="Best for sensitive skin: Surcare 0%"
-            badge="Best overall"
+            title="Great for sensitive skin: Surcare 0%"
+            badge="Overall favourite"
             description="Widely available in the UK and a common sensitive-household baseline."
             href={amazonSearchUrl('Surcare non bio laundry liquid 0% fragrance')}
             bullets={['0% fragrance/dyes/enzymes', 'Great for bedding and towels', 'Add an extra rinse for comfort']}
           />
           <ProductPick
-            title="Best refill-friendly: Bio-D"
-            badge="Best for"
+            title="refill-friendly: Bio-D"
+            badge="Great for"
             description="Often sold in larger sizes/refills — great if you want to reduce plastic and keep things simple."
             href={amazonSearchUrl('Bio-D fragrance free laundry liquid')}
             bullets={['Check local refill shops', 'Good for regular washing', 'Stick to recommended dosing']}
           />
           <ProductPick
-            title="Best mainstream: Ecover ZERO"
-            badge="Best value"
+            title="mainstream: Ecover ZERO"
+            badge="Good value"
             description="Easy to repurchase and a straightforward fragrance-free swap."
             href={amazonSearchUrl('Ecover ZERO laundry liquid fragrance free')}
             bullets={['Fragrance-free (avoid “natural fragrance”)', 'Consider refills to cut plastic']}
@@ -152,7 +152,7 @@ export default function Page() {
           caption="At-a-glance comparison (choose what you’ll stick with)"
           columns={[
             { key: 'pick', label: 'Pick' },
-            { key: 'bestFor', label: 'Best for' },
+            { key: 'bestFor', label: 'Great for' },
             { key: 'watchOut', label: 'Watch-out' },
             { key: 'startTip', label: 'Start tip' },
           ]}
@@ -214,7 +214,7 @@ export default function Page() {
         </div>
 
         <div className="mt-8 flex flex-wrap gap-2">
-          <Link className="btn-primary" href="/topics/fragrance-free">Go to Fragrance-free hub →</Link>
+          <Link className="btn-primary" href="/topics/fragrance-free">Go to Fragrance-free →</Link>
           <Link className="btn-secondary" href="/blog/non-toxic-cleaning-starter">Cleaning starter</Link>
         </div>
       </section>

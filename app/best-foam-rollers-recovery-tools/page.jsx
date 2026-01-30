@@ -6,14 +6,14 @@ import EducationFirstCallout from '@/components/EducationFirstCallout'
 
 
 export const metadata = {
-  title: "Best Foam Rollers & Recovery Tools | Wild & Well",
+  title: "Foam Rollers & Recovery Tools: shortlist | Wild & Well",
   description: "A practical shortlist of foam rollers and simple recovery tools for tight hips, backs, and post-walk stiffness.",
 }
 
 const PICKS = [
   {
     "title": "TriggerPoint foam roller",
-    "badge": "Best all-round",
+    "badge": "all-round",
     "desc": "A classic, mid-density roller that suits most people.",
     "query": "TriggerPoint foam roller",
     "bullets": [
@@ -46,7 +46,7 @@ const PICKS = [
   },
   {
     "title": "Massage ball / lacrosse ball",
-    "badge": "Best targeted",
+    "badge": "targeted",
     "desc": "Great for feet, glutes, and tight spots.",
     "query": "lacrosse ball massage ball",
     "bullets": [
@@ -87,7 +87,7 @@ function SummaryBox() {
         A straightforward shortlist with sensible options for most people — plus guidance on what to look for so you don’t buy on hype.
       </p>
       <div className="mt-4 flex flex-wrap gap-2">
-        <Link className="btn-secondary" href="/movement">Movement hub</Link>
+        <Link className="btn-secondary" href="/movement">Movement</Link>
       </div>
       <p className="mt-4 text-xs text-zinc-500">Last updated: January 27, 2026</p>
     </div>
@@ -105,7 +105,7 @@ export default function Page() {
   const ld = {
     '@context': 'https://schema.org',
     '@type': 'Article',
-    headline: "Best Foam Rollers & Recovery Tools",
+    headline: "Foam Rollers & Recovery Tools: shortlist",
     dateModified: '2026-01-27',
     datePublished: '2026-01-27',
     mainEntity: {
@@ -120,7 +120,7 @@ export default function Page() {
       <StructuredData data={{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Does foam rolling “remove toxins”?", "acceptedAnswer": {"@type": "Answer", "text": "No. Think of it as a comfort tool: it can reduce stiffness and make movement feel easier."}}, {"@type": "Question", "name": "How long should I roll?", "acceptedAnswer": {"@type": "Answer", "text": "A few minutes after walking or training is enough. More intensity is not always better."}}]}} />
 
       <header className="max-w-3xl">
-        <h1 className="text-4xl font-bold">Best foam rollers & recovery tools</h1>
+        <h1 className="text-4xl font-bold">foam rollers & recovery tools: shortlist</h1>
         <p className="mt-3 text-zinc-700">A practical shortlist of foam rollers and simple recovery tools for tight hips, backs, and post-walk stiffness.</p>
 
         <EducationFirstCallout topicHref="/movement" topicLabel="Movement basics" insightHref="/blog/home-strength-basics-busy-people" insightLabel="Strength basics" />
@@ -136,7 +136,7 @@ export default function Page() {
         <div className="mt-6 grid gap-4 md:grid-cols-3">
           <ProductPick
             title="TriggerPoint foam roller"
-            badge="Best all-round"
+            badge="all-round"
             description="A classic, mid-density roller that suits most people."
             href={amazonSearchUrl('TriggerPoint foam roller')}
             bullets={["Good for most users", "Durable", "Not overly painful"]}
@@ -167,7 +167,7 @@ export default function Page() {
         <div className="mt-6 grid gap-4 md:grid-cols-2">
           <ProductPick
             title="TriggerPoint foam roller"
-            badge="Best all-round"
+            badge="all-round"
             description="A classic, mid-density roller that suits most people."
             href={amazonSearchUrl('TriggerPoint foam roller')}
             bullets={["Good for most users", "Durable", "Not overly painful"]}
@@ -191,7 +191,7 @@ export default function Page() {
 
           <ProductPick
             title="Massage ball / lacrosse ball"
-            badge="Best targeted"
+            badge="targeted"
             description="Great for feet, glutes, and tight spots."
             href={amazonSearchUrl('lacrosse ball massage ball')}
             bullets={["Targeted relief", "Small and cheap", "Use gently around joints"]}
@@ -220,7 +220,7 @@ export default function Page() {
         <h2 className="text-2xl font-semibold">How we think about “best”</h2>
         <div className="mt-3 space-y-3 text-sm text-zinc-700 max-w-3xl">
           <p>
-            “Best” here means: sensible features, decent reviews across many buyers, and a realistic fit for most homes — not hype, not extreme claims.
+            “Shortlist” here means: sensible features, decent reviews across many buyers, and a realistic fit for most homes — not hype, not extreme claims.
           </p>
           <p>
             Always check sizing/specs and current pricing before you buy. If a product makes strong health claims without evidence, treat that as marketing.
