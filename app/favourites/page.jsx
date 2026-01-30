@@ -14,13 +14,25 @@ const TAG_ICON = {
   Kitchen: '/images/cards/kitchen.svg',
   Shower: '/images/cards/shower-filter.svg',
   Sleep: '/images/cards/sleep.svg',
+  Humidity: '/images/cards/humidifier.svg',
+
+  Nutrition: '/images/cards/nutrition.svg',
+  Staples: '/images/cards/nutrition.svg',
+  Superfoods: '/images/cards/nutrition.svg',
+  Drinks: '/images/cards/nutrition.svg',
+  Gut: '/images/cards/nutrition.svg',
+  Supplements: '/images/cards/supplements.svg',
+
   Movement: '/images/cards/bands.svg',
-  Fitness: '/images/cards/tracker.svg',
+  Strength: '/images/cards/bands.svg',
+  Mobility: '/images/cards/bands.svg',
   Recovery: '/images/cards/bands.svg',
+  Walking: '/images/cards/shoe.svg',
+  Trackers: '/images/cards/tracker.svg',
+  Fitness: '/images/cards/tracker.svg',
+  Scales: '/images/cards/scale.svg',
   'Body comp': '/images/cards/scale.svg',
   'Body Comp': '/images/cards/scale.svg',
-  Supplements: '/images/cards/supplements.svg',
-  Nutrition: '/images/cards/supplements.svg',
 }
 
 function Section({ title, desc, items }) {

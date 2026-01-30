@@ -3,6 +3,8 @@ import StructuredData from '@/components/StructuredData'
 import ProductPick from '@/components/mdx/ProductPick'
 import { amazonSearchUrl } from '@/lib/amazon'
 import EducationFirstCallout from '@/components/EducationFirstCallout'
+import MoneyPageEducationBlock from '@/components/MoneyPageEducationBlock'
+import { getMoneyPageEdu } from '@/lib/moneyPageEdu'
 
 
 export const metadata = {
@@ -42,7 +44,8 @@ const PICKS = [
 ]
 
 export default function Page() {
-  const itemList = PICKS.map((p, i) => ({
+    const edu = getMoneyPageEdu('best-shower-filters-uk-hard-water')
+const itemList = PICKS.map((p, i) => ({
     '@type': 'ListItem',
     position: i + 1,
     name: p.title,
@@ -76,7 +79,9 @@ export default function Page() {
         <p className="mt-4 text-xs text-zinc-500">Last updated: January 25, 2026</p>
       </header>
 
-      <section className="mt-12 grid gap-4 md:grid-cols-3">
+      
+      <MoneyPageEducationBlock edu={edu} />
+<section className="mt-12 grid gap-4 md:grid-cols-3">
         <div className="card">
           <h2 className="text-lg font-semibold">What they can do</h2>
           <ul className="mt-3 list-disc pl-6 text-sm text-zinc-700 space-y-2">

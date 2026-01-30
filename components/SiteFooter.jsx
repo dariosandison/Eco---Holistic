@@ -7,18 +7,26 @@ export default function SiteFooter() {
     { href: 'https://twitter.com/', label: 'X' },
   ]
 
-  const site = [
+  const learn = [
     { href: '/blog', label: 'Wellness Insights' },
     { href: '/topics', label: 'Topics' },
     { href: '/nutrition', label: 'Nutrition' },
     { href: '/movement', label: 'Movement' },
+    { href: '/how-we-test', label: 'How We Test' },
+  ]
+
+  const shop = [
     { href: '/shopping-list', label: 'Free Shopping List' },
     { href: '/favourites', label: 'Favourites' },
     { href: '/deals', label: 'Deals' },
+  ]
+
+  const about = [
     { href: '/about', label: 'About' },
     { href: '/authors', label: 'Authors' },
     { href: '/contact', label: 'Contact' },
   ]
+
 const legal = [
     { href: '/editorial-policy', label: 'Editorial Policy' },
     { href: '/how-we-test', label: 'How We Test' },
@@ -67,9 +75,9 @@ const legal = [
         </div>
 
         <div>
-          <div className="font-semibold mb-2">Explore</div>
+          <div className="font-semibold mb-2">Learn</div>
           <ul className="space-y-1 text-sm">
-            {site.map((l) => (
+            {learn.map((l) => (
               <li key={l.href}>
                 <a href={l.href} className="hover:underline">
                   {l.label}
@@ -77,6 +85,32 @@ const legal = [
               </li>
             ))}
           </ul>
+
+          <div className="mt-6">
+            <div className="font-semibold mb-2">Shop</div>
+            <ul className="space-y-1 text-sm">
+              {shop.map((l) => (
+                <li key={l.href}>
+                  <a href={l.href} className="hover:underline">
+                    {l.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div className="mt-6">
+            <div className="font-semibold mb-2">About</div>
+            <ul className="space-y-1 text-sm">
+              {about.map((l) => (
+                <li key={l.href}>
+                  <a href={l.href} className="hover:underline">
+                    {l.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
 
         <div>

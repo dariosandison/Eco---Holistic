@@ -4,6 +4,8 @@ import ComparisonTable from '@/components/ComparisonTable'
 import ProductPick from '@/components/mdx/ProductPick'
 import { amazonSearchUrl } from '@/lib/amazon'
 import EducationFirstCallout from '@/components/EducationFirstCallout'
+import MoneyPageEducationBlock from '@/components/MoneyPageEducationBlock'
+import { getMoneyPageEdu } from '@/lib/moneyPageEdu'
 
 
 export const metadata = {
@@ -61,7 +63,8 @@ function QuickSummary(){
 }
 
 export default function Page(){
-  const itemList = PICKS.map((p, i) => ({
+    const edu = getMoneyPageEdu('best-non-toxic-cookware-starter')
+const itemList = PICKS.map((p, i) => ({
     '@type': 'ListItem',
     position: i + 1,
     name: p.title,
@@ -123,7 +126,9 @@ export default function Page(){
         <EducationFirstCallout topicHref="/blog" topicLabel="Read starter explainers" insightHref="/blog/non-toxic-cleaning-starter" insightLabel="Non‑toxic cleaning starter" />
       </header>
 
-      <section className="mt-10">
+      
+      <MoneyPageEducationBlock edu={edu} />
+<section className="mt-10">
         <QuickSummary />
       </section>
 

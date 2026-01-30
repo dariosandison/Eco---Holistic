@@ -3,6 +3,8 @@ import StructuredData from '@/components/StructuredData'
 import ProductPick from '@/components/mdx/ProductPick'
 import { amazonSearchUrl } from '@/lib/amazon'
 import EducationFirstCallout from '@/components/EducationFirstCallout'
+import MoneyPageEducationBlock from '@/components/MoneyPageEducationBlock'
+import { getMoneyPageEdu } from '@/lib/moneyPageEdu'
 
 
 export const metadata = {
@@ -95,7 +97,8 @@ function SummaryBox() {
 }
 
 export default function Page() {
-  const itemList = PICKS.map((p, i) => ({
+    const edu = getMoneyPageEdu('best-walking-shoes-daily-steps-uk')
+const itemList = PICKS.map((p, i) => ({
     '@type': 'ListItem',
     position: i + 1,
     name: p.title,
@@ -126,7 +129,9 @@ export default function Page() {
         <EducationFirstCallout topicHref="/movement" topicLabel="Movement basics" insightHref="/blog/home-strength-basics-busy-people" insightLabel="Strength basics" />
       </header>
 
-      <section className="mt-8">
+      
+      <MoneyPageEducationBlock edu={edu} />
+<section className="mt-8">
         <SummaryBox />
       </section>
 

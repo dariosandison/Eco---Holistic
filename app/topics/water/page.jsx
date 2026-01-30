@@ -31,7 +31,7 @@ export default function Page() {
           </ul>
         </div>
         <div className="card">
-          <h2 className="text-lg font-semibold">Which type is best?</h2>
+          <h2 className="text-lg font-semibold">Which type should you choose?</h2>
           <p className="mt-3 text-sm text-zinc-700">
             Jugs are easiest. Under-sink is “set and forget”. Gravity filters are great if you want big capacity without plumbing.
           </p>

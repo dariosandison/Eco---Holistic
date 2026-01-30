@@ -5,6 +5,8 @@ import ComparisonTable from '@/components/ComparisonTable'
 import { amazonSearchUrl } from '@/lib/amazon'
 import { SITE_NAME, SITE_URL } from '@/lib/site'
 import EducationFirstCallout from '@/components/EducationFirstCallout'
+import MoneyPageEducationBlock from '@/components/MoneyPageEducationBlock'
+import { getMoneyPageEdu } from '@/lib/moneyPageEdu'
 
 
 export const metadata = {
@@ -58,7 +60,8 @@ const PICKS = [
 ]
 
 export default function Page() {
-  const url = `${SITE_URL}/best-organic-snacks-healthy`
+    const edu = getMoneyPageEdu('best-organic-snacks-healthy')
+const url = `${SITE_URL}/best-organic-snacks-healthy`
 
   const itemList = PICKS.map((p, i) => ({
     '@type': 'ListItem',
@@ -134,7 +137,9 @@ export default function Page() {
         <p className="mt-3 text-xs text-zinc-500">Last updated: January 29, 2026</p>
       </header>
 
-      <section className="mt-10">
+      
+      <MoneyPageEducationBlock edu={edu} />
+<section className="mt-10">
         <h2 className="text-2xl font-semibold">At a glance</h2>
         <p className="mt-2 text-zinc-700 max-w-3xl">
           Most “healthy snacks” fail because they’re either not filling or they’re too processed. The best default is a small combination of fruit + fibre + protein/fat.

@@ -201,7 +201,7 @@ export default function HomePage() {
       </section>
 
       
-{/* BEST OF */}
+{/* FAVOURITES */}
 <section className="mt-16">
   <div className="mx-auto max-w-6xl px-4">
     <h2 className="text-2xl font-semibold">Favourites (shortlists)</h2>
@@ -213,7 +213,6 @@ export default function HomePage() {
         
         
         <div className="mt-4 h-12 w-12 overflow-hidden rounded-xl bg-zinc-100"><img src="/images/cards/cleaning.svg" alt="" className="h-full w-full object-cover" loading="lazy" /></div>
-<div className="mt-4 h-12 w-12 overflow-hidden rounded-xl bg-zinc-100"><img src="/images/cards/cleaning.svg" alt="" className="h-full w-full object-cover" loading="lazy" /></div>
 <h3 className="text-lg font-semibold">Low‑tox starter favourites</h3>
         <p className="mt-1 text-sm text-zinc-600">The easiest first swaps that make the biggest difference.</p>
       </Link>

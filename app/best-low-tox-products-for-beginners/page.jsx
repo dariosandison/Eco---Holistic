@@ -3,6 +3,8 @@ import StructuredData from '@/components/StructuredData'
 import ComparisonTable from '@/components/ComparisonTable'
 import { SITE_NAME, SITE_URL } from '@/lib/site'
 import EducationFirstCallout from '@/components/EducationFirstCallout'
+import MoneyPageEducationBlock from '@/components/MoneyPageEducationBlock'
+import { getMoneyPageEdu } from '@/lib/moneyPageEdu'
 
 
 export const metadata = {
@@ -28,7 +30,8 @@ function StartCard({ title, desc, href, tag }) {
 }
 
 export default function Page() {
-  const url = `${SITE_URL}/best-low-tox-products-for-beginners`
+    const edu = getMoneyPageEdu('best-low-tox-products-for-beginners')
+const url = `${SITE_URL}/best-low-tox-products-for-beginners`
 
   const ld = {
     '@context': 'https://schema.org',
@@ -96,7 +99,9 @@ export default function Page() {
         <p className="mt-3 text-xs text-zinc-500">Last updated: January 29, 2026</p>
       </header>
 
-      <section className="mt-10">
+      
+      <MoneyPageEducationBlock edu={edu} />
+<section className="mt-10">
         <h2 className="text-2xl font-semibold">Start with one of these (most useful first)</h2>
         <p className="mt-2 text-sm text-zinc-600 max-w-3xl">
           Choose ONE route based on your home: allergies/bedroom air, daily water, or fragrance‑free basics. Then stop.
