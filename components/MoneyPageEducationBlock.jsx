@@ -93,6 +93,12 @@ export default function MoneyPageEducationBlock({ edu }) {
             <Link className="underline" href="/editorial-policy">Editorial policy</Link>
             <Link className="underline" href="/affiliate-disclosure">Affiliate disclosure</Link>
           </div>
+
+          <div className="mt-4">
+            <Link className="btn-secondary" href="/shopping-list">
+              Get the free shopping list
+            </Link>
+          </div>
         </div>
       </div>
     </section>

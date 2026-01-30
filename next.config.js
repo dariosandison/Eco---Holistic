@@ -19,6 +19,10 @@ const nextConfig = {
       { source: '/guides', destination: '/blog', permanent: true },
       { source: '/guides/:slug*', destination: '/blog/:slug*', permanent: true },
       { source: '/blog/sleep-naturally-without-overwhelm', destination: '/blog/sleep-naturally-simple-guide', permanent: true },
+      // Common shorthand URLs
+      { source: '/free-list', destination: '/shopping-list', permanent: true },
+      { source: '/free-shopping-list', destination: '/shopping-list', permanent: true },
+      { source: '/shoppinglist', destination: '/shopping-list', permanent: true },
     ]
   },
 };
