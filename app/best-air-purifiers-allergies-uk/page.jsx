@@ -3,6 +3,8 @@ import StructuredData from '@/components/StructuredData'
 import ComparisonTable from '@/components/ComparisonTable'
 import ProductPick from '@/components/mdx/ProductPick'
 import { amazonSearchUrl } from '@/lib/amazon'
+import EducationFirstCallout from '@/components/EducationFirstCallout'
+
 
 export const metadata = {
   title: 'Best Air Purifiers for Allergies (UK) | Wild & Well',
@@ -112,6 +114,8 @@ export default function Page() {
         <p className="mt-3 text-zinc-700">
           The biggest mistake is buying a purifier that’s too small for the room. Size first, features second.
         </p>
+
+        <EducationFirstCallout topicHref="/topics/air-quality" topicLabel="Air quality topic hub" insightHref="/blog/healthy-air-at-home" insightLabel="Healthy air at home" />
         <div className="mt-4 flex flex-wrap gap-2">
           <Link className="btn-secondary" href="/topics/air-quality">Air quality hub</Link>
           <Link className="btn-secondary" href="/blog/healthy-air-at-home">Healthy air guide</Link>

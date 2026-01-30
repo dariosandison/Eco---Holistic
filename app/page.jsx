@@ -108,14 +108,17 @@ export default function HomePage() {
             <p className="mt-2 text-sm text-zinc-600">For people who want healthier homes with clear, practical advice — no fear-based marketing.</p>
 
             <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
-              <Link href="/favourites" className="btn-primary w-full sm:w-auto text-center">
-                Browse favourites
+              <Link href="/topics" className="btn-primary w-full sm:w-auto text-center">
+                Start with topics
               </Link>
               <Link
                 href="/blog"
                 className="w-full sm:w-auto text-center rounded-xl border border-zinc-300 bg-white/80 px-4 py-2.5 text-sm font-semibold text-zinc-900 backdrop-blur transition hover:bg-white"
               >
-                Explore Wellness Insights
+                Read Wellness Insights
+              </Link>
+              <Link href="/favourites" className="text-sm font-semibold text-zinc-900 hover:underline">
+                Browse favourites →
               </Link>
             </div>
 

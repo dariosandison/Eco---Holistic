@@ -4,6 +4,8 @@ import ProductPick from '@/components/mdx/ProductPick'
 import ComparisonTable from '@/components/ComparisonTable'
 import { amazonSearchUrl } from '@/lib/amazon'
 import { SITE_NAME, SITE_URL } from '@/lib/site'
+import EducationFirstCallout from '@/components/EducationFirstCallout'
+
 
 export const metadata = {
   title: 'Immune support (natural): practical habits and cautious options | Wild & Well',
@@ -92,6 +94,8 @@ export default function Page() {
           This page is intentionally conservative. The biggest “immune support” wins are habits: sleep, basic nutrition, stress load, and hygiene.
           Supplements can be optional — and should be chosen carefully.
         </p>
+
+        <EducationFirstCallout topicHref="/topics" topicLabel="Explore topics" insightHref="/blog" insightLabel="Read Wellness Insights" />
         <div className="mt-5 flex flex-wrap gap-2">
           <Link className="btn-secondary" href="/topics/sleep">Sleep topic</Link>
           <Link className="btn-secondary" href="/nutrition">Nutrition hub</Link>

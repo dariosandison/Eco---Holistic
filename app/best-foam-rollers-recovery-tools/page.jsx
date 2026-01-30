@@ -2,6 +2,8 @@ import Link from 'next/link'
 import StructuredData from '@/components/StructuredData'
 import ProductPick from '@/components/mdx/ProductPick'
 import { amazonSearchUrl } from '@/lib/amazon'
+import EducationFirstCallout from '@/components/EducationFirstCallout'
+
 
 export const metadata = {
   title: "Best Foam Rollers & Recovery Tools | Wild & Well",
@@ -120,6 +122,8 @@ export default function Page() {
       <header className="max-w-3xl">
         <h1 className="text-4xl font-bold">Best foam rollers & recovery tools</h1>
         <p className="mt-3 text-zinc-700">A practical shortlist of foam rollers and simple recovery tools for tight hips, backs, and post-walk stiffness.</p>
+
+        <EducationFirstCallout topicHref="/movement" topicLabel="Movement basics" insightHref="/blog/home-strength-basics-busy-people" insightLabel="Strength basics" />
       </header>
 
       <section className="mt-8">

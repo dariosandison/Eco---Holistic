@@ -2,6 +2,8 @@ import Link from 'next/link'
 import StructuredData from '@/components/StructuredData'
 import ComparisonTable from '@/components/ComparisonTable'
 import { SITE_NAME, SITE_URL } from '@/lib/site'
+import EducationFirstCallout from '@/components/EducationFirstCallout'
+
 
 export const metadata = {
   title: 'Anti-inflammatory-style shopping list: simple staples | Wild & Well',
@@ -37,6 +39,8 @@ export default function Page() {
           “Anti-inflammatory” works best as a pattern: more fibre and colourful plants, sensible fats, and fewer ultra‑processed extras.
           This list is food-first and UK-friendly.
         </p>
+
+        <EducationFirstCallout topicHref="/topics" topicLabel="Explore topics" insightHref="/blog" insightLabel="Read Wellness Insights" />
         <div className="mt-5 flex flex-wrap gap-2">
           <Link className="btn-secondary" href="/shopping-list">Get the free shopping list</Link>
           <Link className="btn-secondary" href="/nutrition">Nutrition hub</Link>

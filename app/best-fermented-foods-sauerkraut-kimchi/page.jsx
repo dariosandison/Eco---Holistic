@@ -2,6 +2,8 @@ import Link from 'next/link'
 import StructuredData from '@/components/StructuredData'
 import ProductPick from '@/components/mdx/ProductPick'
 import { amazonSearchUrl } from '@/lib/amazon'
+import EducationFirstCallout from '@/components/EducationFirstCallout'
+
 
 export const metadata = {
   title: "Fermented foods to start with | Wild & Well",
@@ -120,6 +122,8 @@ export default function Page() {
       <header className="max-w-3xl">
         <h1 className="text-4xl font-bold">Fermented foods to start with</h1>
         <p className="mt-3 text-zinc-700">A shortlist of sauerkraut and kimchi options with simple ingredients. Look for refrigerated jars and minimal additives where possible.</p>
+
+        <EducationFirstCallout topicHref="/topics" topicLabel="Explore topics" insightHref="/blog" insightLabel="Read Wellness Insights" />
       </header>
 
       <section className="mt-8">

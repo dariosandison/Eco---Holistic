@@ -4,6 +4,8 @@ import ProductPick from '@/components/mdx/ProductPick'
 import ComparisonTable from '@/components/ComparisonTable'
 import { amazonSearchUrl } from '@/lib/amazon'
 import { SITE_NAME, SITE_URL } from '@/lib/site'
+import EducationFirstCallout from '@/components/EducationFirstCallout'
+
 
 export const metadata = {
   title: 'Gut health supplements: beginner shortlist | Wild & Well',
@@ -122,6 +124,8 @@ export default function Page() {
         <p className="mt-3 text-zinc-700">
           This page is intentionally conservative. Most people don’t need a big “gut stack”. Start with food-first basics, then add one simple option at a time if it helps.
         </p>
+
+        <EducationFirstCallout topicHref="/topics" topicLabel="Explore topics" insightHref="/blog" insightLabel="Read Wellness Insights" />
         <div className="mt-5 flex flex-wrap gap-2">
           <Link className="btn-secondary" href="/nutrition">Nutrition hub</Link>
           <Link className="btn-secondary" href="/shopping-list">Free shopping list</Link>

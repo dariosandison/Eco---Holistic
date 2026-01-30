@@ -4,6 +4,8 @@ import ProductPick from '@/components/mdx/ProductPick'
 import ComparisonTable from '@/components/ComparisonTable'
 import { amazonSearchUrl } from '@/lib/amazon'
 import { SITE_NAME, SITE_URL } from '@/lib/site'
+import EducationFirstCallout from '@/components/EducationFirstCallout'
+
 
 export const metadata = {
   title: 'Herbal options for stress: calm, cautious shortlist | Wild & Well',
@@ -123,6 +125,8 @@ export default function Page() {
         <p className="mt-3 text-zinc-700">
           Herbs can be a helpful part of a calming routine — but the routine is the real engine. This page focuses on simple, widely used options and clear label checks.
         </p>
+
+        <EducationFirstCallout topicHref="/topics" topicLabel="Explore topics" insightHref="/blog" insightLabel="Read Wellness Insights" />
         <div className="mt-5 flex flex-wrap gap-2">
           <Link className="btn-secondary" href="/topics/sleep">Sleep topic</Link>
           <Link className="btn-secondary" href="/blog/sleep-naturally-simple-guide">Cornerstone sleep guide</Link>

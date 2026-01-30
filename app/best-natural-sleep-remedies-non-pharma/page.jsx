@@ -4,6 +4,8 @@ import ProductPick from '@/components/mdx/ProductPick'
 import ComparisonTable from '@/components/ComparisonTable'
 import { amazonSearchUrl } from '@/lib/amazon'
 import { SITE_NAME, SITE_URL } from '@/lib/site'
+import EducationFirstCallout from '@/components/EducationFirstCallout'
+
 
 export const metadata = {
   title: 'Natural sleep support (non‑pharma): what helps, what to skip | Wild & Well',
@@ -122,6 +124,8 @@ export default function Page() {
         <p className="mt-3 text-zinc-700">
           A calm shortlist that prioritises environment upgrades first, then gentle optional tools. No hacks — just repeatable basics.
         </p>
+
+        <EducationFirstCallout topicHref="/topics/sleep" topicLabel="Sleep topic hub" insightHref="/blog/caffeine-and-sleep-timing" insightLabel="Caffeine & sleep timing" />
         <div className="mt-5 flex flex-wrap gap-2">
           <Link className="btn-secondary" href="/topics/sleep">Sleep topic</Link>
           <Link className="btn-secondary" href="/best-humidifiers-for-bedrooms-uk">Bedroom humidifiers</Link>

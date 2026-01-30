@@ -3,6 +3,8 @@ import StructuredData from '@/components/StructuredData'
 import ComparisonTable from '@/components/ComparisonTable'
 import ProductPick from '@/components/mdx/ProductPick'
 import { amazonSearchUrl } from '@/lib/amazon'
+import EducationFirstCallout from '@/components/EducationFirstCallout'
+
 
 export const metadata = {
   title: 'Best Water Filters (UK) — Jugs vs Under‑Sink vs Countertop | Wild & Well',
@@ -133,6 +135,8 @@ export default function Page() {
         <p className="mt-3 text-zinc-700">
           A shortlist — not an endless list. The best choice is the one you’ll actually use and keep replacing filters for.
         </p>
+
+        <EducationFirstCallout topicHref="/topics/water" topicLabel="Water topic hub" insightHref="/blog/water-filter-buying-guide-uk" insightLabel="Water filter buying guide" />
       </header>
 
       <section className="mt-10">

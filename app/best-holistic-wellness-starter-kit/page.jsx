@@ -4,6 +4,8 @@ import ProductPick from '@/components/mdx/ProductPick'
 import ComparisonTable from '@/components/ComparisonTable'
 import { amazonSearchUrl } from '@/lib/amazon'
 import { SITE_NAME, SITE_URL } from '@/lib/site'
+import EducationFirstCallout from '@/components/EducationFirstCallout'
+
 
 export const metadata = {
   title: 'Holistic wellness starter kit: a small, repeatable setup | Wild & Well',
@@ -103,6 +105,8 @@ export default function Page() {
         <p className="mt-3 text-zinc-700">
           A “starter kit” that won’t take over your life: choose a few high‑leverage upgrades, then keep them going.
         </p>
+
+        <EducationFirstCallout topicHref="/topics" topicLabel="Explore topics" insightHref="/blog" insightLabel="Read Wellness Insights" />
         <div className="mt-5 flex flex-wrap gap-2">
           <Link className="btn-secondary" href="/shopping-list">Free shopping list</Link>
           <Link className="btn-secondary" href="/topics">Browse Topics</Link>

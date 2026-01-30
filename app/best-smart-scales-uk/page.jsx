@@ -2,6 +2,8 @@ import Link from 'next/link'
 import StructuredData from '@/components/StructuredData'
 import ProductPick from '@/components/mdx/ProductPick'
 import { amazonSearchUrl } from '@/lib/amazon'
+import EducationFirstCallout from '@/components/EducationFirstCallout'
+
 
 export const metadata = {
   title: "Best Smart Scales (UK) | Wild & Well",
@@ -121,6 +123,8 @@ export default function Page() {
       <header className="max-w-3xl">
         <h1 className="text-4xl font-bold">Best smart scales (UK)</h1>
         <p className="mt-3 text-zinc-700">A shortlist of smart scales that track trends over time. Useful if you can use the data calmly and consistently.</p>
+
+        <EducationFirstCallout topicHref="/topics" topicLabel="Explore topics" insightHref="/blog" insightLabel="Read Wellness Insights" />
       </header>
 
       <section className="mt-8">

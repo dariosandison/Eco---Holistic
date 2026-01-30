@@ -3,6 +3,8 @@ import StructuredData from '@/components/StructuredData'
 import ComparisonTable from '@/components/ComparisonTable'
 import ProductPick from '@/components/mdx/ProductPick'
 import { amazonSearchUrl } from '@/lib/amazon'
+import EducationFirstCallout from '@/components/EducationFirstCallout'
+
 
 export const metadata = {
   title: 'Natural sleep support: our favourites | Wild & Well',
@@ -115,6 +117,8 @@ export default function Page() {
         <p className="mt-3 text-zinc-700">
           The best “sleep support” is usually a few simple environment and timing fixes. Supplements are optional — and should stay simple.
         </p>
+
+        <EducationFirstCallout topicHref="/topics/sleep" topicLabel="Sleep topic hub" insightHref="/blog/caffeine-and-sleep-timing" insightLabel="Caffeine & sleep timing" />
         <div className="mt-4 flex flex-wrap gap-2">
           <Link className="btn-secondary" href="/topics/sleep">Sleep hub</Link>
           <Link className="btn-secondary" href="/blog/sleep-naturally-simple-guide">Cornerstone sleep guide</Link>

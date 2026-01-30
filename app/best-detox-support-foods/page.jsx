@@ -2,6 +2,8 @@ import Link from 'next/link'
 import StructuredData from '@/components/StructuredData'
 import ComparisonTable from '@/components/ComparisonTable'
 import { SITE_NAME, SITE_URL } from '@/lib/site'
+import EducationFirstCallout from '@/components/EducationFirstCallout'
+
 
 export const metadata = {
   title: 'Everyday foods that support your body (no detox hype) | Wild & Well',
@@ -36,6 +38,8 @@ export default function Page() {
         <p className="mt-3 text-zinc-700">
           “Detox” is a marketing word. Your body already has systems for processing and eliminating waste. What helps most is boring stuff: hydration, fibre, and stable meals.
         </p>
+
+        <EducationFirstCallout topicHref="/topics" topicLabel="Explore topics" insightHref="/blog" insightLabel="Read Wellness Insights" />
         <div className="mt-5 flex flex-wrap gap-2">
           <Link className="btn-secondary" href="/nutrition">Nutrition hub</Link>
           <Link className="btn-secondary" href="/shopping-list">Free shopping list</Link>

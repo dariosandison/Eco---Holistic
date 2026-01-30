@@ -2,6 +2,8 @@ import Link from 'next/link'
 import StructuredData from '@/components/StructuredData'
 import ProductPick from '@/components/mdx/ProductPick'
 import { amazonSearchUrl } from '@/lib/amazon'
+import EducationFirstCallout from '@/components/EducationFirstCallout'
+
 
 export const metadata = {
   title: 'Best Shower Filters for UK Hard Water | Wild & Well',
@@ -65,6 +67,8 @@ export default function Page() {
         <p className="mt-3 text-zinc-700">
           Shower filters can help with feel and chlorine-related dryness for some people — but they won’t “soften” water like a full home softener.
         </p>
+
+        <EducationFirstCallout topicHref="/topics/water" topicLabel="Water topic hub" insightHref="/blog/water-filter-buying-guide-uk" insightLabel="Water filter buying guide" />
         <div className="mt-4 flex flex-wrap gap-2">
           <Link className="btn-secondary" href="/topics/fragrance-free">Sensitive-skin hub</Link>
           <Link className="btn-secondary" href="/shopping-list">Free shopping list</Link>

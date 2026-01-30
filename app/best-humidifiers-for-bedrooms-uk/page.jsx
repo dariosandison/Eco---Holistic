@@ -3,6 +3,8 @@ import StructuredData from '@/components/StructuredData'
 import ComparisonTable from '@/components/ComparisonTable'
 import ProductPick from '@/components/mdx/ProductPick'
 import { amazonSearchUrl } from '@/lib/amazon'
+import EducationFirstCallout from '@/components/EducationFirstCallout'
+
 
 export const metadata = {
   title: 'Best Humidifiers for Bedrooms (UK) | Wild & Well',
@@ -120,6 +122,8 @@ export default function Page(){
         <p className="mt-3 text-zinc-700">
           A shortlist with simple decision rules: what to buy, what to avoid, and how to keep humidity in a sensible range.
         </p>
+
+        <EducationFirstCallout topicHref="/topics/sleep" topicLabel="Sleep topic hub" insightHref="/blog/caffeine-and-sleep-timing" insightLabel="Caffeine & sleep timing" />
       </header>
 
       <section className="mt-10">

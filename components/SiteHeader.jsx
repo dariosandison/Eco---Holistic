@@ -26,9 +26,6 @@ export default function SiteHeader() {
 
         {/* Desktop nav */}
         <nav className="ml-auto hidden items-center gap-6 md:flex">
-          <Link href="/favourites" className="text-sm font-medium text-zinc-700 hover:text-zinc-900">
-            Favourites
-          </Link>
           <Link href="/blog" className="text-sm font-medium text-zinc-700 hover:text-zinc-900">
             Wellness Insights
           </Link>
@@ -40,6 +37,9 @@ export default function SiteHeader() {
           </Link>
           <Link href="/movement" className="text-sm font-medium text-zinc-700 hover:text-zinc-900">
             Movement
+          </Link>
+          <Link href="/favourites" className="text-sm font-medium text-zinc-700 hover:text-zinc-900">
+            Favourites
           </Link>
           <Link href="/deals" className="text-sm font-medium text-zinc-700 hover:text-zinc-900">
             Deals
@@ -72,9 +72,6 @@ export default function SiteHeader() {
       {/* Mobile nav */}
       <div className={`${open ? 'block' : 'hidden'} border-t border-zinc-200/60 md:hidden`}>
         <nav className="mx-auto flex max-w-6xl flex-col gap-1 px-4 py-3">
-          <Link href="/favourites" className="rounded-md px-2 py-2 text-sm text-zinc-800 hover:bg-zinc-50">
-            Favourites
-          </Link>
           <Link href="/blog" className="rounded-md px-2 py-2 text-sm text-zinc-800 hover:bg-zinc-50">
             Wellness Insights
           </Link>
@@ -87,11 +84,14 @@ export default function SiteHeader() {
           <Link href="/movement" className="rounded-md px-2 py-2 text-sm text-zinc-800 hover:bg-zinc-50">
             Movement
           </Link>
-          <Link href="/shopping-list" onClick={() => trackEvent("click_shopping_list")} className="rounded-md px-2 py-2 text-sm text-zinc-800 hover:bg-zinc-50">
-            Free List
+          <Link href="/favourites" className="rounded-md px-2 py-2 text-sm text-zinc-800 hover:bg-zinc-50">
+            Favourites
           </Link>
           <Link href="/deals" className="rounded-md px-2 py-2 text-sm text-zinc-800 hover:bg-zinc-50">
             Deals
+          </Link>
+          <Link href="/shopping-list" onClick={() => trackEvent("click_shopping_list")} className="rounded-md px-2 py-2 text-sm text-zinc-800 hover:bg-zinc-50">
+            Free List
           </Link>
           <Link href="/how-we-test" className="rounded-md px-2 py-2 text-sm text-zinc-800 hover:bg-zinc-50">
             How We Test
@@ -105,7 +105,7 @@ export default function SiteHeader() {
           <Link href="/contact" className="rounded-md px-2 py-2 text-sm text-zinc-800 hover:bg-zinc-50">
             Contact
           </Link>
-</nav>
+        </nav>
       </div>
     </header>
   );

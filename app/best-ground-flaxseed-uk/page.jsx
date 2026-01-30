@@ -2,6 +2,8 @@ import Link from 'next/link'
 import StructuredData from '@/components/StructuredData'
 import ProductPick from '@/components/mdx/ProductPick'
 import { amazonSearchUrl } from '@/lib/amazon'
+import EducationFirstCallout from '@/components/EducationFirstCallout'
+
 
 export const metadata = {
   title: "Ground flaxseed (UK): simple shortlist | Wild & Well",
@@ -120,6 +122,8 @@ export default function Page() {
       <header className="max-w-3xl">
         <h1 className="text-4xl font-bold">Ground flaxseed (UK): simple shortlist</h1>
         <p className="mt-3 text-zinc-700">A shortlist of ground flaxseed (linseed) and how to store it so it stays fresh. Great for oats, yoghurt, and baking.</p>
+
+        <EducationFirstCallout topicHref="/nutrition" topicLabel="Nutrition basics" insightHref="/blog/fibre-gut-health-practical-guide" insightLabel="Fibre & gut health" />
       </header>
 
       <section className="mt-8">

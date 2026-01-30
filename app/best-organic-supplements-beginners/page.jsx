@@ -4,6 +4,8 @@ import ProductPick from '@/components/mdx/ProductPick'
 import ComparisonTable from '@/components/ComparisonTable'
 import { amazonSearchUrl } from '@/lib/amazon'
 import { SITE_NAME, SITE_URL } from '@/lib/site'
+import EducationFirstCallout from '@/components/EducationFirstCallout'
+
 
 export const metadata = {
   title: 'Supplements for beginners: a simple, cautious shortlist | Wild & Well',
@@ -123,6 +125,8 @@ export default function Page() {
         <p className="mt-3 text-zinc-700">
           This page is intentionally conservative. If you’re new, the goal is not a “stack” — it’s one or two simple options that fit your life, with clear reasons to skip.
         </p>
+
+        <EducationFirstCallout topicHref="/topics" topicLabel="Explore topics" insightHref="/blog" insightLabel="Read Wellness Insights" />
         <div className="mt-5 flex flex-wrap gap-2">
           <Link className="btn-secondary" href="/nutrition">Nutrition hub</Link>
           <Link className="btn-secondary" href="/blog">Wellness Insights</Link>

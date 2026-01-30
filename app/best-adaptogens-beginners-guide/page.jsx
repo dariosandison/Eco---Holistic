@@ -4,6 +4,8 @@ import ProductPick from '@/components/mdx/ProductPick'
 import ComparisonTable from '@/components/ComparisonTable'
 import { amazonSearchUrl } from '@/lib/amazon'
 import { SITE_NAME, SITE_URL } from '@/lib/site'
+import EducationFirstCallout from '@/components/EducationFirstCallout'
+
 
 export const metadata = {
   title: 'Adaptogens for beginners: a calm, cautious guide | Wild & Well',
@@ -91,6 +93,8 @@ export default function Page() {
         <p className="mt-3 text-zinc-700">
           Adaptogens are popular, but they’re not a mandatory part of wellness. If you try them, treat them like an experiment: one change at a time, conservative doses, and clear reasons for using them.
         </p>
+
+        <EducationFirstCallout topicHref="/topics" topicLabel="Explore topics" insightHref="/blog" insightLabel="Read Wellness Insights" />
         <div className="mt-5 flex flex-wrap gap-2">
           <Link className="btn-secondary" href="/topics/sleep">Sleep topic</Link>
           <Link className="btn-secondary" href="/topics/natural-remedies">Natural remedies</Link>

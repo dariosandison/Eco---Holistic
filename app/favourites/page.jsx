@@ -1,4 +1,5 @@
 import Link from "next/link";
+import EducationFirstCallout from "@/components/EducationFirstCallout";
 
 export const metadata = {
   title: "Favourites (Product Shortlists) | Wild & Well",
@@ -175,12 +176,14 @@ export default function Page() {
       <header className="max-w-3xl">
         <h1 className="text-4xl font-bold">Favourites</h1>
         <p className="mt-3 text-zinc-700">
-          Product roundups designed to be clear and useful: what to look for, what to avoid, and a shortlist of solid options.
+          Shortlists designed to be clear and useful: what to look for, what to avoid, and a small set of solid options.
           If you want the “why” and the bigger picture, use{" "}
           <Link className="underline" href="/blog">
             Wellness Insights
           </Link>.
         </p>
+
+        <EducationFirstCallout topicHref="/topics" topicLabel="Start with topics" insightHref="/blog" insightLabel="Read Wellness Insights" />
         <div className="mt-5 flex flex-wrap gap-2">
           <Link className="btn-secondary" href="/topics">Topics hub</Link>
           <Link className="btn-secondary" href="/deals">Deals</Link>

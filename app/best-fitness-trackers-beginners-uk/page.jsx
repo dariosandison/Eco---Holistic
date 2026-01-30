@@ -2,6 +2,8 @@ import Link from 'next/link'
 import StructuredData from '@/components/StructuredData'
 import ProductPick from '@/components/mdx/ProductPick'
 import { amazonSearchUrl } from '@/lib/amazon'
+import EducationFirstCallout from '@/components/EducationFirstCallout'
+
 
 export const metadata = {
   title: "Best Fitness Trackers for Beginners (UK) | Wild & Well",
@@ -122,6 +124,8 @@ export default function Page() {
       <header className="max-w-3xl">
         <h1 className="text-4xl font-bold">Best fitness trackers for beginners (UK)</h1>
         <p className="mt-3 text-zinc-700">A straightforward shortlist of fitness trackers for beginners: steps, sleep, heart-rate, and the features that actually matter.</p>
+
+        <EducationFirstCallout topicHref="/movement" topicLabel="Movement basics" insightHref="/blog/home-strength-basics-busy-people" insightLabel="Strength basics" />
       </header>
 
       <section className="mt-8">

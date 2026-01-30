@@ -3,6 +3,8 @@ import StructuredData from '@/components/StructuredData'
 import ComparisonTable from '@/components/ComparisonTable'
 import ProductPick from '@/components/mdx/ProductPick'
 import { amazonSearchUrl } from '@/lib/amazon'
+import EducationFirstCallout from '@/components/EducationFirstCallout'
+
 
 export const metadata = {
   title: 'Best Fragrance‑Free Laundry Detergents (UK) | Wild & Well',
@@ -90,6 +92,8 @@ export default function Page() {
         <p className="mt-3 text-zinc-700">
           Laundry touches your skin all day. If you’re sensitive to scent, detergent is the highest-impact swap.
         </p>
+
+        <EducationFirstCallout topicHref="/topics/fragrance-free" topicLabel="Fragrance‑free topic hub" insightHref="/blog/ingredient-red-flags" insightLabel="Ingredient red flags" />
         <div className="mt-4 flex flex-wrap gap-2">
           <Link className="btn-secondary" href="/topics/fragrance-free">Fragrance-free hub</Link>
           <Link className="btn-secondary" href="/blog/eco-laundry">Laundry guide</Link>

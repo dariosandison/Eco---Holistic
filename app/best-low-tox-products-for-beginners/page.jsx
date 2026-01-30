@@ -2,6 +2,8 @@ import Link from 'next/link'
 import StructuredData from '@/components/StructuredData'
 import ComparisonTable from '@/components/ComparisonTable'
 import { SITE_NAME, SITE_URL } from '@/lib/site'
+import EducationFirstCallout from '@/components/EducationFirstCallout'
+
 
 export const metadata = {
   title: 'Low‑tox products for beginners: starter favourites | Wild & Well',
@@ -84,6 +86,8 @@ export default function Page() {
         <p className="mt-3 text-zinc-700">
           If you’re new, this page is your shortcut: one small change first, then build from there. No perfect “everything list” — just the pages that help most UK readers make a good first decision.
         </p>
+
+        <EducationFirstCallout topicHref="/blog" topicLabel="Read starter explainers" insightHref="/blog/non-toxic-cleaning-starter" insightLabel="Non‑toxic cleaning starter" />
         <div className="mt-5 flex flex-wrap gap-2">
           <Link className="btn-secondary" href="/shopping-list">Get the free shopping list</Link>
           <Link className="btn-secondary" href="/topics">Browse Topics</Link>

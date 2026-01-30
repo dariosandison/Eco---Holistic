@@ -2,6 +2,8 @@ import Link from 'next/link'
 import StructuredData from '@/components/StructuredData'
 import ProductPick from '@/components/mdx/ProductPick'
 import { amazonSearchUrl } from '@/lib/amazon'
+import EducationFirstCallout from '@/components/EducationFirstCallout'
+
 
 export const metadata = {
   title: "Extra virgin olive oil (UK): our favourites | Wild & Well",
@@ -120,6 +122,8 @@ export default function Page() {
       <header className="max-w-3xl">
         <h1 className="text-4xl font-bold">Extra virgin olive oil (UK): our favourites</h1>
         <p className="mt-3 text-zinc-700">A practical shortlist of extra virgin olive oils (EVOO) with notes on freshness, storage, and what to look for on the label.</p>
+
+        <EducationFirstCallout topicHref="/nutrition" topicLabel="Nutrition basics" insightHref="/blog/fibre-gut-health-practical-guide" insightLabel="Fibre & gut health" />
       </header>
 
       <section className="mt-8">

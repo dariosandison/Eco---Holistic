@@ -3,6 +3,8 @@ import StructuredData from '@/components/StructuredData'
 import ComparisonTable from '@/components/ComparisonTable'
 import ProductPick from '@/components/mdx/ProductPick'
 import { amazonSearchUrl } from '@/lib/amazon'
+import EducationFirstCallout from '@/components/EducationFirstCallout'
+
 
 export const metadata = {
   title: 'Non-toxic cookware: starter favourites | Wild & Well',
@@ -117,6 +119,8 @@ export default function Page(){
       <header className="max-w-3xl">
         <h1 className="text-4xl font-bold">Non-toxic cookware: starter favourites</h1>
         <p className="mt-3 text-zinc-700">A simple shortlist — what to buy first, what to skip, and how to avoid overbuying.</p>
+
+        <EducationFirstCallout topicHref="/blog" topicLabel="Read starter explainers" insightHref="/blog/non-toxic-cleaning-starter" insightLabel="Non‑toxic cleaning starter" />
       </header>
 
       <section className="mt-10">

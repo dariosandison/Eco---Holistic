@@ -8,19 +8,18 @@ export default function SiteFooter() {
   ]
 
   const site = [
-    { href: '/favourites', label: 'Favourites' },
     { href: '/blog', label: 'Wellness Insights' },
     { href: '/topics', label: 'Topics' },
-    { href: '/about', label: 'About' },
-    { href: '/authors', label: 'Authors' },
     { href: '/nutrition', label: 'Nutrition' },
     { href: '/movement', label: 'Movement' },
-    { href: '/deals', label: 'Deals' },
     { href: '/shopping-list', label: 'Free Shopping List' },
+    { href: '/favourites', label: 'Favourites' },
+    { href: '/deals', label: 'Deals' },
+    { href: '/about', label: 'About' },
+    { href: '/authors', label: 'Authors' },
     { href: '/contact', label: 'Contact' },
   ]
-
-  const legal = [
+const legal = [
     { href: '/editorial-policy', label: 'Editorial Policy' },
     { href: '/how-we-test', label: 'How We Test' },
     { href: '/product-disclosure', label: 'Product Disclosure' },

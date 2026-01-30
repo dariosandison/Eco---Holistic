@@ -4,6 +4,8 @@ import ProductPick from '@/components/mdx/ProductPick'
 import ComparisonTable from '@/components/ComparisonTable'
 import { amazonSearchUrl } from '@/lib/amazon'
 import { SITE_NAME, SITE_URL } from '@/lib/site'
+import EducationFirstCallout from '@/components/EducationFirstCallout'
+
 
 export const metadata = {
   title: 'Protein powders (UK): clean shortlist | Wild & Well',
@@ -122,6 +124,8 @@ export default function Page() {
         <p className="mt-3 text-zinc-700">
           A practical shortlist of protein powder styles, focusing on minimal ingredients and everyday usability — not hype.
         </p>
+
+        <EducationFirstCallout topicHref="/nutrition" topicLabel="Nutrition basics" insightHref="/blog/fibre-gut-health-practical-guide" insightLabel="Fibre & gut health" />
         <div className="mt-5 flex flex-wrap gap-2">
           <Link className="btn-secondary" href="/nutrition">Nutrition hub</Link>
           <Link className="btn-secondary" href="/favourites">Favourites hub</Link>

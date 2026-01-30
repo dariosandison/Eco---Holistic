@@ -2,6 +2,8 @@ import Link from 'next/link'
 import StructuredData from '@/components/StructuredData'
 import ProductPick from '@/components/mdx/ProductPick'
 import { amazonSearchUrl } from '@/lib/amazon'
+import EducationFirstCallout from '@/components/EducationFirstCallout'
+
 
 export const metadata = {
   title: "Matcha (UK): what to buy | Wild & Well",
@@ -119,6 +121,8 @@ export default function Page() {
       <header className="max-w-3xl">
         <h1 className="text-4xl font-bold">Matcha (UK): what to buy</h1>
         <p className="mt-3 text-zinc-700">A shortlist of matcha options (everyday vs ceremonial-style) and what to look for: origin, taste, and how you’ll use it.</p>
+
+        <EducationFirstCallout topicHref="/nutrition" topicLabel="Nutrition basics" insightHref="/blog/fibre-gut-health-practical-guide" insightLabel="Fibre & gut health" />
       </header>
 
       <section className="mt-8">
