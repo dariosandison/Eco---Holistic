@@ -9,6 +9,7 @@ export default function SiteFooter() {
 
   const learn = [
     { href: '/blog', label: 'Wellness Insights' },
+    { href: '/guides', label: 'Guides' },
     { href: '/topics', label: 'Topics' },
     { href: '/nutrition', label: 'Nutrition' },
     { href: '/movement', label: 'Movement' },

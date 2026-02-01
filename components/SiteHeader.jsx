@@ -29,6 +29,9 @@ export default function SiteHeader() {
           <Link href="/blog" className="text-sm font-medium text-zinc-700 hover:text-zinc-900">
             Wellness Insights
           </Link>
+          <Link href="/guides" className="text-sm font-medium text-zinc-700 hover:text-zinc-900">
+            Guides
+          </Link>
           <Link href="/topics" className="text-sm font-medium text-zinc-700 hover:text-zinc-900">
             Topics
           </Link>
@@ -74,6 +77,9 @@ export default function SiteHeader() {
         <nav className="mx-auto flex max-w-6xl flex-col gap-1 px-4 py-3">
           <Link href="/blog" className="rounded-md px-2 py-2 text-sm text-zinc-800 hover:bg-zinc-50">
             Wellness Insights
+          </Link>
+          <Link href="/guides" className="rounded-md px-2 py-2 text-sm text-zinc-800 hover:bg-zinc-50">
+            Guides
           </Link>
           <Link href="/topics" className="rounded-md px-2 py-2 text-sm text-zinc-800 hover:bg-zinc-50">
             Topics
