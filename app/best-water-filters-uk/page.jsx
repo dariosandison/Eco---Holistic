@@ -16,6 +16,10 @@ export const metadata = {
   description: 'Shortlisted water filters for UK homes (jugs, under‑sink, gravity) with clear trade-offs and replacement cost notes.',
 }
 
+// Awin (ZeroWater) affiliate links
+const ZW_BESTWATER_STARTER = 'https://www.awin1.com/cread.php?awinmid=30649&awinaffid=2754234&clickref=ww_bestwater_zw_starter&ued=https%3A%2F%2Fwww.zerowater.com%2Fcollections%2Fstarter-kits'
+const ZW_BESTWATER_FILTERS = 'https://www.awin1.com/cread.php?awinmid=30649&awinaffid=2754234&clickref=ww_bestwater_zw_filters&ued=https%3A%2F%2Fwww.zerowater.com%2Fcollections%2F5-stage-replacement-water-filters'
+
 const PICKS = [
   {
     title: 'Doulton under‑sink water filter system',
@@ -179,11 +183,15 @@ const itemList = PICKS.map((p, i) => ({
         <p className="mt-2 text-sm text-zinc-600">Three simple routes, depending on how you live.</p>
         <div className="mt-6 grid gap-4 md:grid-cols-3">
           <ProductPick
-            title="Easy starter: jug filter"
-            badge="Good value"
-            description="Great for renters and small kitchens — easy to start and easy to stick with."
-            href={amazonSearchUrl('BRITA Style water filter jug MAXTRA filters')}
-            bullets={["Fits most fridges", "Replacement filters are the ongoing cost", "Start here if you’re unsure"]}
+            title="Best jug for taste: ZeroWater"
+            badge="Best for taste"
+            description="A simple jug route if taste/odour is your main goal. Always check replacement filters before you commit."
+            bullets={["Great for renters + small kitchens", "Replacement filters are the ongoing cost", "Start with a starter kit and adjust from there"]}
+            links={[
+              { label: 'Check price at ZeroWater', merchant: 'zerowater', href: ZW_BESTWATER_STARTER, variant: 'primary' },
+              { label: 'Replacement filters', merchant: 'zerowater', href: ZW_BESTWATER_FILTERS, variant: 'ghost' },
+              { label: 'Amazon alternatives', merchant: 'amazon', href: amazonSearchUrl('BRITA Style water filter jug MAXTRA filters'), variant: 'ghost' },
+            ]}
           />
           <ProductPick
             title="Low effort: under-sink"
@@ -199,6 +207,16 @@ const itemList = PICKS.map((p, i) => ({
             href={amazonSearchUrl('British Berkefeld gravity water filter')}
             bullets={["Takes counter space", "Plan filter replacements", "Clean regularly"]}
           />
+        </div>
+
+        <div className="mt-8 rounded-2xl border bg-white p-6 shadow-sm">
+          <h3 className="text-lg font-semibold">Replacement filters matter</h3>
+          <p className="mt-2 text-sm text-zinc-700">
+            The ongoing cost is the replacements. Before you choose any jug system, check how often you’ll replace filters and what they cost.
+          </p>
+          <div className="mt-4 flex flex-wrap gap-2">
+            <a className="btn-secondary" href={ZW_BESTWATER_FILTERS} target="_blank" rel="noopener nofollow sponsored">ZeroWater replacement filters</a>
+          </div>
         </div>
 
         <ComparisonTable

@@ -1,8 +1,8 @@
-ZIP update: Recommended hub + Best Of blocks + Shopping List thank-you page
+ZIP update: Recommended page + Best Of blocks + Shopping List thank-you page
 Generated: 2026-01-23T23:14:05.743193 UTC
 
 Changes:
-- Rebuilt /recommended as a category-based picks hub (Air, Water, Cleaning, Sleep) with Best overall / Budget / Sensitive cards
+- Rebuilt /recommended as a category-based picks page (Air, Water, Cleaning, Sleep) with Best overall / Budget / Sensitive cards
 - Added /shopping-list/thanks page (post-signup next steps)
 - Added Best Of block to homepage and /guides index
 - Added link to thank-you page from /shopping-list
@@ -24,8 +24,8 @@ Changes:
 - Added redirect for /blog/bamboo-toilet-paper-facts-duplicate -> /blog/bamboo-toilet-paper-facts
 
 
-## Recommended conversion hub
-- Rebuilt /recommended into a decision-led conversion hub (Start here + Low-tox + Sleep/Stress + Nutrition)
+## Recommended conversion page
+- Rebuilt /recommended into a decision-led conversion page (Start here + Low-tox + Sleep/Stress + Nutrition)
 - Added on-page trust module (How we choose) linking to /how-we-test and /affiliate-disclosure
 - Added anchors for internal routing (#start-here, #starter)
 
@@ -51,6 +51,6 @@ Changes:
 - Added products routes to sitemap
 
 
-## Trusted Picks hub refresh
+## Trusted Picks page refresh
 - Rewrote /recommended as a calm decision map (less salesy): clearer Guides vs Best-of separation, anchors, and short route cards.
 - Ensured /products/holistic-home-reset links to /recommended#start-here label matches.

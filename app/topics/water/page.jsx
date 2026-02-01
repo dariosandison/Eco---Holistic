@@ -7,6 +7,10 @@ export const metadata = {
   description: 'Water filters for UK homes: under-sink vs jug vs countertop, plus the next steps.',
 }
 
+// Awin (ZeroWater) affiliate links
+const ZW_TOPIC_STARTER = 'https://www.awin1.com/cread.php?awinmid=30649&awinaffid=2754234&clickref=ww_topics_water_zw_starter&ued=https%3A%2F%2Fwww.zerowater.com%2Fcollections%2Fstarter-kits'
+const ZW_TOPIC_FILTERS = 'https://www.awin1.com/cread.php?awinmid=30649&awinaffid=2754234&clickref=ww_topics_water_zw_filters&ued=https%3A%2F%2Fwww.zerowater.com%2Fcollections%2F5-stage-replacement-water-filters'
+
 export default function Page() {
   return (
     <main className="mx-auto max-w-6xl px-4 py-16">
@@ -46,6 +50,42 @@ export default function Page() {
             <li>Vague “removes 99%” claims without specifics.</li>
             <li>Overcomplicating it if your goal is simply better-tasting water.</li>
           </ul>
+        </div>
+      </section>
+
+      <section className="mt-14">
+        <h2 className="text-2xl font-semibold">ZeroWater quick picks</h2>
+        <p className="mt-2 text-sm text-zinc-600">A simple jug route if your main goal is better taste — check filter replacements before you commit.</p>
+
+        <div className="mt-6 grid gap-4 md:grid-cols-2">
+          <ProductPick
+            title="ZeroWater starter kits"
+            badge="Best for taste"
+            description="A simple jug route if taste/odour is your main goal."
+            bullets={[
+              'Great for: taste + simplicity',
+              'Check replacement filter cost before buying',
+              'Start with a starter kit and adjust from there',
+            ]}
+            links={[
+              { label: 'Check price at ZeroWater', merchant: 'zerowater', href: ZW_TOPIC_STARTER, variant: 'primary' },
+              { label: 'Replacement filters', merchant: 'zerowater', href: ZW_TOPIC_FILTERS, variant: 'ghost' },
+            ]}
+          />
+
+          <ProductPick
+            title="ZeroWater replacement filters"
+            badge="Ongoing cost"
+            description="Always check replacements before committing to any jug system."
+            bullets={[
+              'This is the long‑term cost to compare',
+              'Plan a replacement schedule you’ll stick with',
+              'Factor it into your monthly budget',
+            ]}
+            links={[
+              { label: 'View replacement filters', merchant: 'zerowater', href: ZW_TOPIC_FILTERS, variant: 'primary' },
+            ]}
+          />
         </div>
       </section>
 
