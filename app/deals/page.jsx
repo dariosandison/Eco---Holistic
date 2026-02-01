@@ -4,7 +4,7 @@ import { amazonSearchUrl } from "@/lib/amazon";
 export const metadata = {
   title: "Deals | Wild & Well",
   description:
-    "A practical place to check deal searches for products we already cover — updated manually. Always verify current price and specs before buying.",
+    "Deal searches for products we already cover. Always verify current price and specs before buying.",
 };
 
 function DealCard({ title, desc, query, guideHref, tag }) {
@@ -35,7 +35,7 @@ function DealCard({ title, desc, query, guideHref, tag }) {
       </div>
 
       <p className="mt-3 text-xs text-zinc-500">
-        Note: This is a search link, not a price promise. Deals change quickly — check the listing.
+        Prices and availability change quickly. Check the listing for current details.
       </p>
     </div>
   );
@@ -47,8 +47,8 @@ export default function DealsPage() {
       <header className="max-w-3xl">
         <h1 className="text-4xl font-bold">Deals</h1>
         <p className="mt-3 text-zinc-700">
-          We’re not running live price scraping here. Instead, this page gives you quick access to deal searches for
-          products we already cover on our pages. If you see a good price, cross-check specs and reviews before buying.
+          Quick access to deal searches for products we already cover on our pages. If you see a good price, cross-check
+          specs and reviews before buying.
         </p>
         <div className="mt-5 flex flex-wrap gap-2">
           <Link className="btn-secondary" href="/favourites">
@@ -124,7 +124,7 @@ export default function DealsPage() {
           />
           <DealCard
             title="Sleep essentials deals"
-            desc="Practical non-gimmick sleep items."
+            desc="Practical sleep items."
             query="blackout curtains earplugs white noise machine deal"
             guideHref="/topics/sleep"
             tag="Sleep"

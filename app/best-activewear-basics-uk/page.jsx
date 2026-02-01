@@ -13,7 +13,7 @@ import MoneyPageNextLinks from '@/components/MoneyPageNextLinks'
 
 export const metadata = {
   title: "Activewear Basics (UK): shortlist | Wild & Well",
-  description: "A practical shortlist of activewear basics (tops, leggings, socks, layers) that prioritise comfort and durability over gimmicks.",
+  description: "A practical shortlist of activewear basics (tops, leggings, socks, layers) that prioritise comfort and durability.",
 }
 
 const PICKS = [
@@ -131,7 +131,7 @@ const itemList = PICKS.map((p, i) => ({
 
       <header className="max-w-3xl">
         <h1 className="text-4xl font-bold">activewear basics (UK): shortlist</h1>
-        <p className="mt-3 text-zinc-700">A practical shortlist of activewear basics (tops, leggings, socks, layers) that prioritise comfort and durability over gimmicks.</p>
+        <p className="mt-3 text-zinc-700">A practical shortlist of activewear basics (tops, leggings, socks, layers) that prioritise comfort and durability.</p>
 
         <EducationFirstCallout topicHref="/movement" topicLabel="Movement basics" insightHref="/blog/home-strength-basics-busy-people" insightLabel="Strength basics" />
       </header>

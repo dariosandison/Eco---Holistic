@@ -115,7 +115,7 @@ export default function HomePage() {
               Clear Wellness Insights and product shortlists for low-tox, holistic living —
               so you can make healthier choices with confidence.
             </p>
-            <p className="mt-2 text-sm text-zinc-600">For people who want healthier homes with clear, practical advice — no fear-based marketing.</p>
+            <p className="mt-2 text-sm text-zinc-600">For people who want healthier homes with clear, practical advice.</p>
 
             <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
               <Link href="/topics" className="btn-primary w-full sm:w-auto text-center">
@@ -160,7 +160,7 @@ export default function HomePage() {
           <div>
             <h2 className="text-lg font-semibold text-zinc-900">We explain it clearly</h2>
             <p className="mt-2 text-sm text-zinc-700">
-              Practical guidance, no fear-mongering — just what matters.
+              Practical guidance focused on what matters.
             </p>
           </div>
           <div>

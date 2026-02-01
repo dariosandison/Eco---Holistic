@@ -258,7 +258,7 @@ export default function Page() {
           We start with the simplest option (usually Amazon). As partner approvals come through, we’ll also add tracked links for retailers and brands like AO.com,
           Currys, and Pro Breeze.
         </p>
-        <p className="mt-3 text-xs text-zinc-500">Some links may earn us a commission. We never accept paid placements in reviews.</p>
+        <p className="mt-3 text-xs text-zinc-500">Some links may earn us a commission.</p>
       </section>
 
       <MoneyPageNextLinks slug={slug} />

@@ -33,7 +33,7 @@ const PICKS = [
     badge: 'Daily use',
     desc: 'Pick a type you will keep up with. Filter costs matter as much as the product.',
     query: 'water filter jug UK',
-    bullets: ['Check replacement filter costs', 'Choose realistic maintenance', 'Avoid gimmicks'],
+    bullets: ['Check replacement filter costs', 'Choose realistic maintenance', 'Avoid features you won’t use'],
     internal: '/best-water-filters-uk',
   },
   {
@@ -47,7 +47,7 @@ const PICKS = [
   {
     title: 'Blackout support (curtains or eye mask)',
     badge: 'Sleep',
-    desc: 'Light control is a simple, non‑gimmick sleep upgrade for many people.',
+    desc: 'Light control is a simple sleep upgrade for many people.',
     query: 'blackout curtains thermal UK',
     bullets: ['Start with bedroom', 'Aim for consistent darkness', 'Keep it comfortable'],
   },

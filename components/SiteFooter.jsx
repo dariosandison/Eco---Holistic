@@ -44,7 +44,7 @@ const legal = [
         <div>
           <div className="font-semibold text-[var(--brand)]">Wild &amp; Well</div>
           <p className="text-sm text-neutral-600 mt-2">
-            Natural wellness made simple — calm insights and product shortlists that save time and money.
+            Natural wellness, practical guides, and product shortlists.
           </p>
 
           <div className="mt-4 rounded-2xl border bg-zinc-50 p-4">
@@ -146,7 +146,7 @@ const legal = [
       </div>
 
       <div className="text-center text-xs text-neutral-500 px-4 pb-2">
-        Wild &amp; Well is run independently. We don’t accept paid placements disguised as advice.
+        Some links may earn us a small commission at no extra cost to you.
       </div>
 
       <div className="text-center text-xs text-neutral-500 pb-4">

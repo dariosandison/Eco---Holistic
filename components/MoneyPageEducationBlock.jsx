@@ -82,23 +82,14 @@ export default function MoneyPageEducationBlock({ edu }) {
         )}
 
         <div className="mt-4 rounded-2xl border bg-zinc-50 p-4">
-          <div className="text-sm font-semibold text-zinc-900">Why trust this page</div>
-          <ul className="mt-2 list-disc pl-6 text-sm text-zinc-700 space-y-1">
-            <li>We don’t accept paid placements in our shortlists.</li>
-            <li>We explain trade‑offs and keep claims conservative.</li>
-            <li>We update key pages when products and availability change.</li>
-          </ul>
+          <div className="text-sm font-semibold text-zinc-900">Resources</div>
           <div className="mt-3 flex flex-wrap gap-3 text-sm">
             <Link className="underline" href="/how-we-test">How we test</Link>
             <Link className="underline" href="/editorial-policy">Editorial policy</Link>
             <Link className="underline" href="/affiliate-disclosure">Affiliate disclosure</Link>
+            <Link className="underline" href="/shopping-list">Shopping list</Link>
           </div>
-
-          <div className="mt-4">
-            <Link className="btn-secondary" href="/shopping-list">
-              Get the free shopping list
-            </Link>
-          </div>
+          <p className="mt-3 text-xs text-zinc-600">Some links may earn us a small commission at no extra cost to you.</p>
         </div>
       </div>
     </section>

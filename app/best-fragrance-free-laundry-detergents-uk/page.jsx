@@ -231,7 +231,7 @@ const itemList = PICKS.map((p, i) => ({
       <MoneyPageNextLinks slug="best-fragrance-free-laundry-detergents-uk" />
 
       <p className="mt-12 text-xs text-zinc-500">
-        Some links may earn us a commission at no extra cost to you. We never accept paid placements in reviews.
+        Some links may earn us a commission at no extra cost to you.
       </p>
     </main>
   )

@@ -88,16 +88,16 @@ export default function ArticleLayout({
 
       <div className="prose prose-neutral max-w-none">{children}</div>
 
-      <div className="mt-12 not-prose rounded-3xl border border-zinc-200 bg-zinc-50/60 p-6">
-        <h2 className="text-lg font-semibold text-zinc-900">Want the fastest next step?</h2>
+      <div className="mt-12 not-prose panel">
+        <h2 className="text-lg font-semibold text-zinc-900">Explore</h2>
         <p className="mt-2 text-sm text-zinc-700">
-          Browse our favourites for low‑tox and holistic living — curated to save you time (and money).
+          Related sections of the site.
         </p>
-        <div className="mt-4 flex flex-col gap-3 sm:flex-row sm:items-center">
-          <a href="/favourites" className="btn-primary text-center">Shop favourites</a>
-          <a href="/blog" className="text-sm font-medium text-zinc-700 hover:underline">
-            Or continue with Wellness Insights →
-          </a>
+        <div className="mt-4 flex flex-wrap gap-2">
+          <a href="/topics" className="btn-secondary">Topics</a>
+          <a href="/favourites" className="btn-secondary">Shortlists</a>
+          <a href="/shopping-list" className="btn-secondary">Shopping list</a>
+          <a href="/blog" className="btn-secondary">Wellness Insights</a>
         </div>
         <p className="mt-3 text-xs text-zinc-600">
           Some links may earn us a small commission at no extra cost to you.

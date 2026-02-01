@@ -1,5 +1,6 @@
 import Link from "next/link";
 import EducationFirstCallout from "@/components/EducationFirstCallout";
+import ShortlistExplorer from "@/components/ShortlistExplorer";
 
 export const metadata = {
   title: "Favourites (Product Shortlists) | Wild & Well",
@@ -7,68 +8,7 @@ export const metadata = {
     "Browse our product shortlists: low-tox home, sleep, nutrition, and movement — with clear trade-offs.",
 };
 
-const TAG_ICON = {
-  Water: '/images/cards/water-filter.svg',
-  Air: '/images/cards/air-purifier.svg',
-  Laundry: '/images/cards/laundry.svg',
-  Kitchen: '/images/cards/kitchen.svg',
-  Shower: '/images/cards/shower-filter.svg',
-  Sleep: '/images/cards/sleep.svg',
-  Humidity: '/images/cards/humidifier.svg',
-
-  Nutrition: '/images/cards/nutrition.svg',
-  Staples: '/images/cards/nutrition.svg',
-  Superfoods: '/images/cards/nutrition.svg',
-  Drinks: '/images/cards/nutrition.svg',
-  Gut: '/images/cards/nutrition.svg',
-  Supplements: '/images/cards/supplements.svg',
-
-  Movement: '/images/cards/bands.svg',
-  Strength: '/images/cards/bands.svg',
-  Mobility: '/images/cards/bands.svg',
-  Recovery: '/images/cards/bands.svg',
-  Walking: '/images/cards/shoe.svg',
-  Trackers: '/images/cards/tracker.svg',
-  Fitness: '/images/cards/tracker.svg',
-  Scales: '/images/cards/scale.svg',
-  'Body comp': '/images/cards/scale.svg',
-  'Body Comp': '/images/cards/scale.svg',
-}
-
-function Section({ title, desc, items }) {
-  return (
-    <section className="mt-12">
-      <h2 className="text-2xl font-semibold">{title}</h2>
-      <p className="mt-2 text-sm text-zinc-600 max-w-3xl">{desc}</p>
-      <div className="mt-6 grid gap-4 md:grid-cols-3">
-        {items.map((it) => (
-          <Link key={it.href} href={it.href} className="card hover:shadow-sm transition-shadow">
-            <div className="flex items-start justify-between gap-3">
-              <div className="flex min-w-0 gap-3">
-                <div className="relative mt-0.5 h-12 w-12 shrink-0 overflow-hidden rounded-xl bg-zinc-100">
-                  <img
-                    src={(it.image || TAG_ICON[it.tag] || '/images/cards/neutral.svg')}
-                    alt=""
-                    className="h-full w-full object-cover"
-                    loading="lazy"
-                  />
-                </div>
-                <div className="min-w-0">
-                  <h3 className="text-lg font-semibold">{it.label}</h3>
-                  <p className="mt-1 text-sm text-zinc-600">{it.desc}</p>
-                </div>
-              </div>
-              <span className="shrink-0 rounded-full border px-2 py-0.5 text-[11px] text-zinc-600 bg-white">
-                {it.tag}
-              </span>
-            </div>
-            <p className="mt-3 text-xs text-zinc-500">Open →</p>
-          </Link>
-        ))}
-      </div>
-    </section>
-  );
-}
+// (Explorer UI is in components/ShortlistExplorer.jsx)
 
 export default function Page() {
   const home = [
@@ -81,7 +21,7 @@ export default function Page() {
     {
       href: "/best-air-purifiers-allergies-uk",
       label: "Air purifiers for allergies (UK): shortlist",
-      desc: "Shortlist by room size and realistic use-cases.",
+      desc: "Shortlist by room size and common use-cases.",
       tag: "Air",
     },
     {
@@ -93,7 +33,7 @@ export default function Page() {
     {
       href: "/best-non-toxic-cookware-starter",
       label: "Non-toxic cookware: starter favourites",
-      desc: "Simple first upgrades (without perfectionism).",
+      desc: "Simple first upgrades to start with.",
       tag: "Kitchen",
     },
     {
@@ -120,13 +60,13 @@ export default function Page() {
     {
       href: "/best-natural-sleep-support",
       label: "natural sleep support",
-      desc: "A calm shortlist with realistic expectations.",
+      desc: "Shortlist of comfort-first options.",
       tag: "Sleep",
     },
     {
       href: "/best-natural-sleep-remedies-non-pharma",
       label: "natural sleep remedies (non‑pharma)",
-      desc: "What may help vs what’s mostly marketing.",
+      desc: "What is supported vs what is uncertain.",
       tag: "Sleep",
     },
   ];
@@ -180,7 +120,7 @@ export default function Page() {
     {
       href: "/best-smart-scales-uk",
       label: "Smart scales (UK): shortlist",
-      desc: "Use trends, not daily obsession.",
+      desc: "Use trend lines rather than single readings.",
       tag: "Scales",
     },
     {
@@ -198,7 +138,7 @@ export default function Page() {
     {
       href: "/best-yoga-mats-grip-comfort",
       label: "yoga mats for grip & comfort",
-      desc: "Grip and joint comfort without nonsense.",
+      desc: "Grip and joint comfort for mobility and floor work.",
       tag: "Mobility",
     },
     {
@@ -212,6 +152,29 @@ export default function Page() {
       label: "activewear basics (UK)",
       desc: "Comfort-first basics for walking and training.",
       tag: "Clothing",
+    },
+  ];
+
+  const sections = [
+    {
+      title: "Home (low-tox, air, water)",
+      desc: "High-impact basics for most homes.",
+      items: home,
+    },
+    {
+      title: "Sleep",
+      desc: "Comfort and environment-focused shortlists.",
+      items: sleep,
+    },
+    {
+      title: "Nutrition",
+      desc: "Single-ingredient staples and simple add-ins.",
+      items: nutrition,
+    },
+    {
+      title: "Movement",
+      desc: "Walking, strength, mobility — and gear basics for regular use.",
+      items: movement,
     },
   ];
 
@@ -235,10 +198,7 @@ export default function Page() {
         <p className="mt-3 text-xs text-zinc-500">Last updated: January 27, 2026</p>
       </header>
 
-      <Section title="Home (low-tox, air, water)" desc="Start with high-impact basics; don’t try to replace everything at once." items={home} />
-      <Section title="Sleep" desc="Calm, practical shortlists and realistic expectations." items={sleep} />
-      <Section title="Nutrition" desc="Single-ingredient staples and sensible “superfood” add-ons." items={nutrition} />
-      <Section title="Movement" desc="Walking, strength, mobility — and gear that isn’t gimmicky." items={movement} />
+      <ShortlistExplorer sections={sections} />
 
       <p className="mt-12 text-sm text-zinc-500 max-w-3xl">
         Some links may earn us a small commission at no extra cost to you.

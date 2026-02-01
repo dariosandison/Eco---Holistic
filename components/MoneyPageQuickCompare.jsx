@@ -1,7 +1,7 @@
 // components/MoneyPageQuickCompare.jsx
 /**
  * Quick comparison table built from a PICKS array.
- * Keeps pages consistent without turning them into salesy "rankings".
+ * Designed for scanning: best-for label + one key note + one trade-off.
  */
 export default function MoneyPageQuickCompare({ picks, title = "Quick compare" }) {
   if (!picks || !Array.isArray(picks) || picks.length === 0) return null;
@@ -22,8 +22,27 @@ export default function MoneyPageQuickCompare({ picks, title = "Quick compare" }
     <section className="mt-10">
       <h2 className="text-2xl font-semibold">{title}</h2>
       <p className="mt-2 text-sm text-zinc-600 max-w-3xl">
-        A fast overview before you dive into the shortlist. If you’re unsure, start with the “Before you buy” section above.
+        Summary of the main differences across a small set of options.
       </p>
+
+      <div className="mt-6 grid gap-4 md:grid-cols-3">
+        {picks.slice(0, 3).map((p, idx) => (
+          <div key={idx} className="card p-4">
+            <div className="flex flex-wrap items-center gap-2">
+              <div className="text-sm font-semibold text-zinc-900">{p.title}</div>
+              {p.badge ? <span className="chip">{p.badge}</span> : null}
+            </div>
+            {p.desc ? <p className="mt-2 text-sm text-zinc-700">{p.desc}</p> : null}
+            {Array.isArray(p.bullets) && p.bullets.length ? (
+              <ul className="mt-3 list-disc pl-5 text-sm text-zinc-700 space-y-1">
+                {p.bullets.slice(0, 2).map((b, i) => (
+                  <li key={i}>{b}</li>
+                ))}
+              </ul>
+            ) : null}
+          </div>
+        ))}
+      </div>
 
       <div className="mt-6 overflow-x-auto rounded-2xl border bg-white">
         <table className="w-full text-left text-sm">
