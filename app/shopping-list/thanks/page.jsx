@@ -24,10 +24,12 @@ function Card({ title, desc, href, label, image }) {
   );
 }
 
-export default function ThanksPage() {
+export default function ThanksPage({ searchParams }) {
+  const source = searchParams?.source || "site";
   return (
     <main className="mx-auto max-w-6xl px-4 py-16">
-      <TrackOnLoad event="newsletter_subscribed" data={{ source: "shopping-list" }} />
+      <TrackOnLoad event="sign_up" data={{ method: "email", placement: source }} />
+      <TrackOnLoad event="newsletter_subscribed" data={{ source }} />
 
       <header className="max-w-3xl">
         <h1 className="text-4xl font-bold">You’re subscribed</h1>

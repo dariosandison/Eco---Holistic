@@ -108,6 +108,12 @@ export default function Page() {
       desc: "Dry air comfort options + maintenance reminders.",
       tag: "Humidity",
     },
+    {
+      href: "/best-dehumidifiers-damp-mould-uk",
+      label: "Dehumidifiers for damp & mould (UK): shortlist",
+      desc: "What to buy first for damp rooms and laundry drying.",
+      tag: "Humidity",
+    },
   ];
 
   const sleep = [

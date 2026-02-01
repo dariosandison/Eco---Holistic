@@ -1,4 +1,5 @@
 import Link from "next/link";
+import SignupFormTracker from "@/components/SignupFormTracker";
 
 export const metadata = {
   title: "Free Low‑Tox Shopping List | Wild & Well",
@@ -62,7 +63,8 @@ export default function ShoppingListPage({ searchParams }) {
           </div>
         ) : null}
 
-        <form className="flex flex-col sm:flex-row gap-2" action="/api/subscribe" method="post">
+        <SignupFormTracker formId="shopping-list-form" placement="shopping-list" />
+        <form id="shopping-list-form" className="flex flex-col sm:flex-row gap-2" action="/api/subscribe" method="post">
           <input type="hidden" name="source" value="shopping-list" />
           <input
             type="email"

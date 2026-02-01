@@ -46,8 +46,20 @@ export default function Page() {
           <Link className="btn-secondary" href="/blog">Read Wellness Insights</Link>
           <Link className="btn-secondary" href="/favourites">Browse favourites</Link>
         </div>
-        <p className="mt-3 text-xs text-zinc-500">Last updated: January 27, 2026</p>
+        <p className="mt-3 text-xs text-zinc-500">Last updated: February 1, 2026</p>
       </header>
+
+      <section className="mt-10">
+        <h2 className="text-2xl font-semibold">Explore nutrition sections</h2>
+        <p className="mt-2 text-sm text-zinc-600 max-w-3xl">
+          Education comes first. These sections go deeper before we ever talk products.
+        </p>
+        <div className="mt-6 grid gap-4 md:grid-cols-3">
+          <Card image="/images/cards/supplements.svg" title="Supplements" desc="A low-additive, label-reading approach — quality signals, common traps, and simple tools." href="/nutrition/supplements" tag="Education" />
+          <Card image="/images/cards/kitchen.svg" title="Grow your own" desc="Home or allotment: start small, get the basics right (light, soil, watering), then scale." href="/nutrition/grow-your-own" tag="Education" />
+          <Card image="/images/cards/nutrition.svg" title="Organic & single-ingredient" desc="Staples that scale: label-reading, simple swaps, and where organic upgrades make sense." href="/nutrition/organic-single-ingredient" tag="Education" />
+        </div>
+      </section>
 
       <section className="mt-10">
         <h2 className="text-2xl font-semibold">Favourites shortlists</h2>

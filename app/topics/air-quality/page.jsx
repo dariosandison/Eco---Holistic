@@ -19,6 +19,7 @@ export default function Page() {
           <Link className="btn-secondary" href="/blog/healthy-air-at-home">Read the air guide</Link>
           <Link className="btn-secondary" href="/best-air-purifiers-allergies-uk">Great for allergies (UK)</Link>
           <Link className="btn-secondary" href="/best-air-purifiers-small-flats-uk">Great for small flats</Link>
+          <Link className="btn-secondary" href="/best-dehumidifiers-damp-mould-uk">Dehumidifiers for damp &amp; mould</Link>
         </div>
       </header>
 
@@ -39,6 +40,7 @@ export default function Page() {
           </p>
           <div className="mt-4 flex gap-2 flex-wrap">
             <Link className="btn-secondary" href="/blog/winter-humidity-guide">Winter humidity guide</Link>
+            <Link className="btn-secondary" href="/best-dehumidifiers-damp-mould-uk">Dehumidifier shortlist</Link>
           </div>
         </div>
         <div className="card">
@@ -89,7 +91,17 @@ export default function Page() {
         <div className="mt-8 flex flex-wrap gap-2">
           <Link className="btn-primary" href="/best-air-purifiers-allergies-uk">Air purifiers for allergies: shortlist →</Link>
           <Link className="btn-secondary" href="/best-air-purifiers-small-flats-uk">Great for small flats →</Link>
+          <Link className="btn-secondary" href="/best-dehumidifiers-damp-mould-uk">Dehumidifiers for damp &amp; mould →</Link>
         </div>
+      </section>
+
+      <section className="mt-12 rounded-2xl border bg-white p-6 shadow-sm">
+        <h2 className="text-lg font-semibold">Where we check price (UK)</h2>
+        <p className="mt-2 text-sm text-zinc-700">
+          We start with the simplest options (usually Amazon). As partner approvals come through, we’ll also add tracked links for
+          retailers and brands like AO.com, Currys, Boots, Pro Breeze, Coway, and Blueair.
+        </p>
+        <p className="mt-3 text-xs text-zinc-500">We never accept paid placements in reviews.</p>
       </section>
 
       <p className="mt-12 text-xs text-zinc-500">Some links may earn us a commission. We never accept paid placements in reviews.</p>

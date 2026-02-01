@@ -5,6 +5,7 @@ import NewsletterBar from '@/components/NewsletterBar'
 import ConsentBanner from '@/components/ConsentBanner'
 import GA from '@/components/GA'
 import SiteJsonLd from '@/components/SiteJsonLd'
+import OutboundAffiliateTracker from '@/components/OutboundAffiliateTracker'
 
 export const metadata = {
   metadataBase: new URL("https://www.wild-and-well.store"),
@@ -26,6 +27,7 @@ export default function RootLayout({ children }) {
       {/* Reserve space for sticky newsletter bar so it never overlaps the footer */}
       <body className="min-h-screen flex flex-col pb-[var(--newsletter-h,0px)] bg-white text-[var(--ink)]">
         <GA />
+        <OutboundAffiliateTracker />
         <SiteHeader />
         <main className="flex-1">{children}</main>
         <SiteFooter />

@@ -45,8 +45,20 @@ export default function Page() {
           <Link className="btn-secondary" href="/blog">Read Wellness Insights</Link>
           <Link className="btn-secondary" href="/favourites">Browse favourites</Link>
         </div>
-        <p className="mt-3 text-xs text-zinc-500">Last updated: January 27, 2026</p>
+        <p className="mt-3 text-xs text-zinc-500">Last updated: February 1, 2026</p>
       </header>
+
+      <section className="mt-10">
+        <h2 className="text-2xl font-semibold">Explore movement styles</h2>
+        <p className="mt-2 text-sm text-zinc-600 max-w-3xl">
+          Education comes first. Pick a lane and build a repeatable routine before you buy anything.
+        </p>
+        <div className="mt-6 grid gap-4 md:grid-cols-3">
+          <Card image="/images/cards/bands.svg" title="Stretches & mobility" desc="A simple 10‑minute routine for desk bodies, stiff hips, and tight backs — plus optional tools." href="/movement/stretches" tag="Education" />
+          <Card image="/images/cards/scale.svg" title="Hypertrophy" desc="Build muscle with a simple plan, progressive overload, and minimal equipment." href="/movement/hypertrophy" tag="Education" />
+          <Card image="/images/cards/tracker.svg" title="Cardio" desc="Sustainable fitness: start with walking, build a base, then add gentle intervals when ready." href="/movement/cardio" tag="Education" />
+        </div>
+      </section>
 
       <section className="mt-10">
         <h2 className="text-2xl font-semibold">Favourites shortlists</h2>
