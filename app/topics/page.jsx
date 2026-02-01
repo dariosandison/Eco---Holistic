@@ -2,7 +2,7 @@ import Link from 'next/link'
 
 export const metadata = {
   title: 'Topics — Wild & Well',
-  description: 'Practical topics: simple context first, with product options when you want them.',
+  description: 'Topic guides for sleep, air quality, water, and fragrance-free home in the UK.',
 }
 
 function Card({ title, desc, href, tag, image }) {
@@ -38,10 +38,9 @@ export default function Page() {
       <header className="max-w-3xl">
         <h1 className="text-4xl font-bold">Topics</h1>
         <p className="mt-3 text-zinc-700">
-          These topic pages are built to be practical: learn the basics first, then jump to product shortlists when you want options.
+          Practical topic guides for UK homes: sleep, air quality, water, and fragrance-free cleaning.
         </p>
         <div className="mt-4 flex flex-wrap gap-2">
-          <Link className="btn-secondary" href="/topics">Topics</Link>
           <Link className="btn-secondary" href="/shopping-list">Free shopping list</Link>
           <Link className="btn-secondary" href="/nutrition">Nutrition</Link>
           <Link className="btn-secondary" href="/movement">Movement</Link>
@@ -49,24 +48,22 @@ export default function Page() {
       </header>
 
       <section className="mt-10 grid gap-4 md:grid-cols-2">
-        <Card image="/images/cards/sleep.svg" title="Sleep & recovery" desc="The simplest path to better sleep: light, timing, temperature, and the few products that actually help." href="/topics/sleep" tag="Sleep" />
-        <Card image="/images/cards/air-purifier.svg" title="Air quality (allergies + damp)" desc="What matters in HEPA, where to place it, and our short list for small flats and allergy seasons." href="/topics/air-quality" tag="Home" />
-        <Card image="/images/cards/water-filter.svg" title="Water (filters + hydration)" desc="Under-sink vs jugs, what certifications mean, and the starter options that work in UK homes." href="/topics/water" tag="Kitchen" />
-        <Card image="/images/cards/laundry.svg" title="Fragrance-free cleaning & laundry" desc="Sensitive-skin friendly cleaning, laundry, and the quick swaps that reduce irritation fast." href="/topics/fragrance-free" tag="Cleaning" />
+        <Card image="/images/cards/sleep.svg" title="Sleep & recovery" desc="Light, timing, temperature, and practical options." href="/topics/sleep" tag="Sleep" />
+        <Card image="/images/cards/air-purifier.svg" title="Air quality (allergies + damp)" desc="HEPA basics, placement, and shortlists for common rooms." href="/topics/air-quality" tag="Home" />
+        <Card image="/images/cards/water-filter.svg" title="Water (filters + hydration)" desc="Under-sink vs jugs, replacement filters, and buying basics." href="/topics/water" tag="Kitchen" />
+        <Card image="/images/cards/laundry.svg" title="Fragrance-free cleaning & laundry" desc="Ingredient checks and the quickest swaps for sensitive households." href="/topics/fragrance-free" tag="Cleaning" />
       </section>
 
       <section className="mt-14 max-w-3xl">
-        <h2 className="text-2xl font-semibold">How to use these topics</h2>
+        <h2 className="section-title">Suggested order</h2>
         <ol className="mt-3 list-decimal pl-6 text-zinc-700 space-y-2">
-          <li>Pick one goal (sleep, air, water, cleaning).</li>
-          <li>Read the “Start here” section and do one easy step today.</li>
-          <li>When you want product options, jump to the Favourites shortlist and compare a few solid choices.</li>
+          <li>Pick one topic (sleep, air, water, cleaning).</li>
+          <li>Skim the “At a glance” section and choose one practical next step.</li>
+          <li>When you want options, use the shortlist links to compare a few solid choices.</li>
         </ol>
       </section>
 
-      <p className="mt-12 text-xs text-zinc-500">
-        Some links may earn us a small commission at no extra cost to you.
-      </p>
+      <p className="mt-12 text-xs text-zinc-500">Some links are affiliate links.</p>
     </main>
   )
 }

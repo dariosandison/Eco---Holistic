@@ -103,7 +103,7 @@ export default function ShoppingListPage({ searchParams }) {
       </section>
 
       <p className="mt-12 text-sm text-zinc-500">
-        Some links on Wild & Well may earn us a small commission at no extra cost to you.
+        Some links are affiliate links.
       </p>
     </main>
   );

@@ -255,15 +255,14 @@ export default function Page() {
       <section className="mt-12 rounded-2xl border bg-white p-6 shadow-sm">
         <h2 className="text-lg font-semibold">Where to buy (UK)</h2>
         <p className="mt-2 text-sm text-zinc-700">
-          We start with the simplest option (usually Amazon). As partner approvals come through, we’ll also add tracked links for retailers and brands like AO.com,
-          Currys, and Pro Breeze.
+          Common UK retailers include Amazon, AO.com, Currys, and brand stores (for example: Pro Breeze). Compare extraction rate, noise, and energy use before buying.
         </p>
-        <p className="mt-3 text-xs text-zinc-500">Some links may earn us a commission.</p>
+        <p className="mt-3 text-xs text-zinc-500">Some links are affiliate links.</p>
       </section>
 
       <MoneyPageNextLinks slug={slug} />
 
-      <p className="mt-12 text-xs text-zinc-500">Some links may earn us a commission at no extra cost to you.</p>
+      <p className="mt-12 text-xs text-zinc-500">Some links are affiliate links.</p>
     </main>
   )
 }

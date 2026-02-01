@@ -151,7 +151,7 @@ const url = `${SITE_URL}/best-adaptogens-beginners-guide`
       </section>
 
       <p className="mt-12 text-sm text-zinc-500 max-w-3xl">
-        This page is informational and not medical advice. Some links may earn us a small commission at no extra cost to you.
+        This page is informational and not medical advice. Some links are affiliate links.
       </p>
     
       <MoneyPageNextLinks slug="best-adaptogens-beginners-guide" />

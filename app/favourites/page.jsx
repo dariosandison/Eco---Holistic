@@ -201,7 +201,7 @@ export default function Page() {
       <ShortlistExplorer sections={sections} />
 
       <p className="mt-12 text-sm text-zinc-500 max-w-3xl">
-        Some links may earn us a small commission at no extra cost to you.
+        Some links are affiliate links.
       </p>
     </main>
   );

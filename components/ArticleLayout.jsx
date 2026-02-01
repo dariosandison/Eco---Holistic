@@ -100,7 +100,7 @@ export default function ArticleLayout({
           <a href="/blog" className="btn-secondary">Wellness Insights</a>
         </div>
         <p className="mt-3 text-xs text-zinc-600">
-          Some links may earn us a small commission at no extra cost to you.
+          Some links are affiliate links.
         </p>
       </div>
 

@@ -172,7 +172,7 @@ const url = `${SITE_URL}/best-holistic-wellness-starter-kit`
       </section>
 
       <p className="mt-12 text-sm text-zinc-500 max-w-3xl">
-        Some links may earn us a small commission at no extra cost to you.
+        Some links are affiliate links.
       </p>
     
       <MoneyPageNextLinks slug="best-holistic-wellness-starter-kit" />

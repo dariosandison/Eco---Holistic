@@ -96,7 +96,7 @@ export default function HowWeTest() {
       </Section>
 
       <p className="mt-12 text-xs text-zinc-500">
-        Some links may earn us a small commission at no extra cost to you. We never accept paid placements in reviews.
+        Some links are affiliate links. We never accept paid placements in reviews.
       </p>
     </main>
   )

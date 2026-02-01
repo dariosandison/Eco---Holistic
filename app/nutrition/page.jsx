@@ -52,7 +52,7 @@ export default function Page() {
       <section className="mt-10">
         <h2 className="text-2xl font-semibold">Explore nutrition sections</h2>
         <p className="mt-2 text-sm text-zinc-600 max-w-3xl">
-          Education comes first. These sections go deeper before we ever talk products.
+          Three deep-dive sections: fundamentals first, then practical tools and shortlists where they help.
         </p>
         <div className="mt-6 grid gap-4 md:grid-cols-3">
           <Card image="/images/cards/supplements.svg" title="Supplements" desc="A low-additive, label-reading approach — quality signals, common traps, and simple tools." href="/nutrition/supplements" tag="Education" />
@@ -91,7 +91,7 @@ export default function Page() {
       </section>
 
       <p className="mt-12 text-sm text-zinc-500 max-w-3xl">
-        Some links may earn us a small commission at no extra cost to you.
+        Some links are affiliate links.
       </p>
     </main>
   );

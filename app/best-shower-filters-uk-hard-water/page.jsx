@@ -137,7 +137,7 @@ const itemList = PICKS.map((p, i) => ({
       
       <MoneyPageFAQ slug="best-shower-filters-uk-hard-water" />
 <p className="mt-12 text-xs text-zinc-500">
-        Some links may earn us a commission at no extra cost to you.
+        Some links are affiliate links.
       </p>
     </main>
   )

@@ -1,110 +1,141 @@
 import Link from 'next/link'
 import ProductPick from '@/components/mdx/ProductPick'
+import TopicAtAGlance from '@/components/TopicAtAGlance'
+import TopicFAQ from '@/components/TopicFAQ'
 import { amazonSearchUrl } from '@/lib/amazon'
 
 export const metadata = {
   title: 'Air Quality Topics — Wild & Well',
-  description: 'Air quality for UK homes: allergies, damp, and the small choices that make a big difference.',
+  description: 'Air quality for UK homes: allergies, damp, and the practical steps that matter most.',
 }
 
 export default function Page() {
+  const faqs = [
+    {
+      q: 'Do air purifiers help with allergies?',
+      a: 'They can reduce airborne particles (e.g., pollen, dust) when sized correctly for the room and used consistently. Room size and filter replacement matter more than extra features.',
+    },
+    {
+      q: 'Do air purifiers help with damp or mould?',
+      a: [
+        'Purifiers help with particles; they do not remove moisture. If damp is the driver, focus on ventilation and humidity control first.',
+        'A dehumidifier can be the more direct tool when humidity stays high and condensation/mould is recurring.',
+      ],
+    },
+    {
+      q: 'How do I choose the right size?',
+      a: 'Match the purifier’s stated coverage or CADR to your room size. A small unit in a large room is a common reason people see no improvement.',
+    },
+    {
+      q: 'HEPA vs “HEPA-style”: what’s the difference?',
+      a: 'Prefer true HEPA claims from reputable brands. “HEPA-style” is not a standard and can mean almost anything.',
+    },
+  ]
+
   return (
     <main className="mx-auto max-w-6xl px-4 py-16">
       <header className="max-w-3xl">
         <h1 className="text-4xl font-bold">Air Quality (Allergies + Damp)</h1>
         <p className="mt-3 text-zinc-700">
-          The biggest win is matching the purifier to the room size — not buying the fanciest model.
+          The biggest win is matching the purifier to the room size and using it consistently. For damp, moisture control usually matters more than air cleaning.
         </p>
         <div className="mt-4 flex flex-wrap gap-2">
           <Link className="btn-secondary" href="/blog/healthy-air-at-home">Read the air guide</Link>
-          <Link className="btn-secondary" href="/best-air-purifiers-allergies-uk">Great for allergies (UK)</Link>
-          <Link className="btn-secondary" href="/best-air-purifiers-small-flats-uk">Great for small flats</Link>
+          <Link className="btn-secondary" href="/best-air-purifiers-allergies-uk">Air purifiers for allergies</Link>
+          <Link className="btn-secondary" href="/best-air-purifiers-small-flats-uk">Air purifiers for small flats</Link>
           <Link className="btn-secondary" href="/best-dehumidifiers-damp-mould-uk">Dehumidifiers for damp &amp; mould</Link>
+        </div>
+
+        <div className="mt-4 flex flex-wrap gap-2">
+          <a className="chip" href="#start">Start</a>
+          <a className="chip" href="#shortlist">Shortlist</a>
+          <a className="chip" href="#faqs">FAQs</a>
         </div>
       </header>
 
-      <section className="mt-12 grid gap-4 md:grid-cols-3">
-        <div className="card">
-          <h2 className="text-lg font-semibold">Start here</h2>
-          <ul className="mt-3 list-disc pl-6 text-sm text-zinc-700 space-y-2">
-            <li>Check your room size (m²) before buying.</li>
-            <li>Choose HEPA + carbon if odours bother you.</li>
-            <li>Put it where the air flows (not hidden in a corner).</li>
-            <li>Replace filters on schedule — it matters more than “extras”.</li>
-          </ul>
-        </div>
-        <div className="card">
-          <h2 className="text-lg font-semibold">If damp/mould is the issue</h2>
-          <p className="mt-3 text-sm text-zinc-700">
-            A purifier helps particles, but damp often needs dehumidifying + ventilation.
-          </p>
-          <div className="mt-4 flex gap-2 flex-wrap">
-            <Link className="btn-secondary" href="/blog/winter-humidity-guide">Winter humidity guide</Link>
-            <Link className="btn-secondary" href="/best-dehumidifiers-damp-mould-uk">Dehumidifier shortlist</Link>
-          </div>
-        </div>
-        <div className="card">
-          <h2 className="text-lg font-semibold">Avoid</h2>
-          <ul className="mt-3 list-disc pl-6 text-sm text-zinc-700 space-y-2">
-            <li>Overpaying for “smart” features you’ll never use.</li>
-            <li>Units that are too loud for bedrooms (you’ll stop using them).</li>
-            <li>Buying small units for big rooms.</li>
-          </ul>
-        </div>
-      </section>
+      <div id="start" />
+      <TopicAtAGlance
+        items={[
+          {
+            title: 'Start here',
+            bullets: [
+              'Check room size (m²) and choose a unit that can cover it.',
+              'HEPA is the baseline; add carbon if odours are a problem.',
+              'Place it where air moves, not behind furniture.',
+              'Replace filters on schedule.',
+            ],
+          },
+          {
+            title: 'If damp is the issue',
+            bullets: [
+              'Measure humidity with a hygrometer (aim roughly 40–60%).',
+              'Ventilate high-moisture rooms (kitchen/bathroom).',
+              'Consider a dehumidifier if humidity stays high and mould recurs.',
+            ],
+          },
+          {
+            title: 'Common mistakes',
+            bullets: [
+              'Buying a small unit for a large room.',
+              'Choosing based on “smart” features instead of performance and noise.',
+              'Skipping filter replacements.',
+            ],
+          },
+        ]}
+      />
 
-      <section className="mt-14">
-        <h2 className="text-2xl font-semibold">Quick topics</h2>
-        <p className="mt-2 text-sm text-zinc-600">Short search links so you can compare price, warranty, and filter costs.</p>
+      <section className="mt-14" id="shortlist">
+        <h2 className="section-title">Shortlist (search links)</h2>
+        <p className="section-subtitle">Broad search links so you can compare price, noise, warranty, and replacement filter cost.</p>
 
         <div className="mt-6 grid gap-4 md:grid-cols-2">
           <ProductPick
             title="Air purifier (bedroom / small room)"
             badge="Small spaces"
-            description="Look for true HEPA + quiet night mode."
+            description="Choose based on room size and noise level for night use."
             href={amazonSearchUrl('HEPA air purifier small room quiet night mode')}
-            bullets={['Choose based on room size', 'Plan for replacement filters', 'Aim for quiet night mode']}
+            bullets={['Match to room size', 'Plan for replacement filters', 'Quiet mode matters for bedrooms']}
           />
           <ProductPick
             title="Air purifier (allergy season / living room)"
             badge="Allergens"
-            description="Bigger rooms need higher CADR / coverage."
+            description="Larger rooms need higher coverage/CADR."
             href={amazonSearchUrl('HEPA air purifier allergies UK large room')}
-            bullets={['HEPA + carbon helps with smells', 'Auto mode is useful, not essential']}
+            bullets={['HEPA + carbon helps with smells', 'Auto mode can help but is not essential']}
           />
           <ProductPick
             title="Humidity monitor (hygrometer)"
             badge="Damp control"
-            description="If your humidity is regularly high, the fix isn’t another candle — it’s airflow and moisture control."
+            description="Useful for deciding if humidity is actually the problem."
             href={amazonSearchUrl('digital hygrometer humidity monitor')}
-            bullets={['Aim for ~40–60% humidity', 'Use to decide if a dehumidifier is worth it']}
+            bullets={['Aim roughly 40–60% humidity', 'Use measurements to guide decisions']}
           />
           <ProductPick
             title="Dehumidifier (if needed)"
             badge="Moisture"
-            description="If your home stays damp, dehumidifying often beats purifying."
+            description="A direct tool for recurring condensation and mould risk."
             href={amazonSearchUrl('dehumidifier UK energy efficient quiet')}
             bullets={['Check tank size', 'Look for laundry mode', 'Consider noise for bedrooms']}
           />
         </div>
 
         <div className="mt-8 flex flex-wrap gap-2">
-          <Link className="btn-primary" href="/best-air-purifiers-allergies-uk">Air purifiers for allergies: shortlist →</Link>
-          <Link className="btn-secondary" href="/best-air-purifiers-small-flats-uk">Great for small flats →</Link>
-          <Link className="btn-secondary" href="/best-dehumidifiers-damp-mould-uk">Dehumidifiers for damp &amp; mould →</Link>
+          <Link className="btn-primary" href="/best-air-purifiers-allergies-uk">Allergy shortlist →</Link>
+          <Link className="btn-secondary" href="/best-air-purifiers-small-flats-uk">Small flats →</Link>
+          <Link className="btn-secondary" href="/best-dehumidifiers-damp-mould-uk">Dehumidifier shortlist →</Link>
         </div>
       </section>
 
-      <section className="mt-12 rounded-2xl border bg-white p-6 shadow-sm">
-        <h2 className="text-lg font-semibold">Where we check price (UK)</h2>
+      <section className="mt-12 panel">
+        <h2 className="text-lg font-semibold">Where to buy (UK)</h2>
         <p className="mt-2 text-sm text-zinc-700">
-          We start with the simplest options (usually Amazon). As partner approvals come through, we’ll also add tracked links for
-          retailers and brands like AO.com, Currys, Boots, Pro Breeze, Coway, and Blueair.
+          Common retailers for air-quality products include Amazon, AO.com, Currys, and brand stores (for example: Pro Breeze, Coway, Blueair). Always compare replacement filter costs and returns.
         </p>
-        <p className="mt-3 text-xs text-zinc-500"></p>
       </section>
 
-      <p className="mt-12 text-xs text-zinc-500">Some links may earn us a commission.</p>
+      <TopicFAQ faqs={faqs} />
+
+      <p className="mt-12 text-xs text-zinc-500">Some links are affiliate links.</p>
     </main>
   )
 }

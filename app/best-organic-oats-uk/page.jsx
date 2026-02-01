@@ -241,7 +241,7 @@ const itemList = PICKS.map((p, i) => ({
           </p>
         </div>
         <p className="mt-4 text-sm text-zinc-500">
-          Some links may earn us a small commission at no extra cost to you.
+          Some links are affiliate links.
         </p>
       </section>
     

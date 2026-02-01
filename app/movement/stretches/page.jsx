@@ -24,8 +24,7 @@ export default function Page() {
         <p className="text-xs font-semibold tracking-wide text-zinc-500">Movement</p>
         <h1 className="mt-2 text-4xl font-bold">Stretches &amp; mobility</h1>
         <p className="mt-3 text-zinc-700">
-          Mobility isn’t about complicated routines — it’s about keeping your joints moving well enough that walking, strength training, and daily life feel easier.
-          The goal is a small routine you can repeat, not “perfect flexibility”.
+          Mobility is the ability to move joints through useful ranges of motion. Short, regular mobility sessions can reduce stiffness and make walking, training, and daily movement more comfortable.
         </p>
         <div className="mt-4 flex flex-wrap gap-2">
           <Link className="btn-secondary" href="/movement">Back to Movement</Link>
@@ -123,7 +122,7 @@ export default function Page() {
         </div>
       </section>
 
-      <p className="mt-12 text-xs text-zinc-500">Some links may earn us a commission at no extra cost to you.</p>
+      <p className="mt-12 text-xs text-zinc-500">Some links are affiliate links.</p>
     </main>
   )
 }

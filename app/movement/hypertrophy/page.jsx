@@ -24,8 +24,7 @@ export default function Page() {
         <p className="text-xs font-semibold tracking-wide text-zinc-500">Movement</p>
         <h1 className="mt-2 text-4xl font-bold">Hypertrophy (building muscle)</h1>
         <p className="mt-3 text-zinc-700">
-          Hypertrophy means building muscle over time. The main drivers are consistent training, progressive overload, enough protein, and sleep.
-          This page covers simple weekly templates and how to progress week to week.
+          Hypertrophy means building muscle over time. The main drivers are consistent training, progressive overload, enough protein, and sleep. A simple weekly template and a clear progression rule are often enough for steady progress.
         </p>
         <div className="mt-4 flex flex-wrap gap-2">
           <Link className="btn-secondary" href="/movement">Back to Movement</Link>
@@ -135,7 +134,7 @@ export default function Page() {
         </div>
       </section>
 
-      <p className="mt-12 text-xs text-zinc-500">Some links may earn us a commission at no extra cost to you.</p>
+      <p className="mt-12 text-xs text-zinc-500">Some links are affiliate links.</p>
     </main>
   )
 }

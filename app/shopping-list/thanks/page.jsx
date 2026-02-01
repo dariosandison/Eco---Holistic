@@ -112,7 +112,7 @@ export default function ThanksPage({ searchParams }) {
         </div>
       </section>
 
-      <p className="mt-12 text-sm text-zinc-500 max-w-3xl">Some links may earn us a small commission at no extra cost to you.</p>
+      <p className="mt-12 text-sm text-zinc-500 max-w-3xl">Some links are affiliate links.</p>
     </main>
   );
 }

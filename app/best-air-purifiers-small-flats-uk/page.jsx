@@ -238,7 +238,7 @@ const itemList = PICKS.map((p, i) => ({
       <MoneyPageNextLinks slug="best-air-purifiers-small-flats-uk" />
 
       <p className="mt-12 text-xs text-zinc-500">
-        Some links may earn us a commission at no extra cost to you.
+        Some links are affiliate links.
       </p>
     </main>
   )

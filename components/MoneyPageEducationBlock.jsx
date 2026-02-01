@@ -89,7 +89,7 @@ export default function MoneyPageEducationBlock({ edu }) {
             <Link className="underline" href="/affiliate-disclosure">Affiliate disclosure</Link>
             <Link className="underline" href="/shopping-list">Shopping list</Link>
           </div>
-          <p className="mt-3 text-xs text-zinc-600">Some links may earn us a small commission at no extra cost to you.</p>
+          <p className="mt-3 text-xs text-zinc-600">Some links are affiliate links.</p>
         </div>
       </div>
     </section>

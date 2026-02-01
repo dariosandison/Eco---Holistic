@@ -1,5 +1,7 @@
 import Link from 'next/link'
 import ProductPick from '@/components/mdx/ProductPick'
+import TopicAtAGlance from '@/components/TopicAtAGlance'
+import TopicFAQ from '@/components/TopicFAQ'
 import { amazonSearchUrl } from '@/lib/amazon'
 
 export const metadata = {
@@ -8,64 +10,102 @@ export const metadata = {
     'Guide to growing your own food: how to start small, what matters (light, soil, watering), allotment basics, and beginner equipment for common tasks.',
 }
 
-function MiniCard({ title, children }) {
-  return (
-    <div className="card">
-      <h2 className="text-lg font-semibold">{title}</h2>
-      <div className="mt-3 text-sm text-zinc-700 space-y-2">{children}</div>
-    </div>
-  )
-}
-
 export default function Page() {
+  const faqs = [
+    {
+      q: 'How much sun do plants need?',
+      a: 'Most edible plants do best with several hours of direct light. Herbs and salad leaves can cope with less; fruiting plants (like tomatoes) usually want more sun to thrive.',
+    },
+    {
+      q: 'How often should I water pots?',
+      a: 'Check the top few centimetres of soil. If it feels dry, water. Pots dry out faster than beds, especially in wind and sun—bigger containers are usually more forgiving.',
+    },
+    {
+      q: 'What compost should I start with?',
+      a: 'Multipurpose compost is fine to begin. If it stays waterlogged, add perlite or a similar aeration amendment and make sure containers drain properly.',
+    },
+    {
+      q: 'Do I need fertiliser?',
+      a: 'Not always at the start. Healthy compost and regular watering get most beginners far. If growth stalls later, a simple feed used occasionally can help—follow label instructions and avoid overdoing it.',
+    },
+    {
+      q: 'How do I deal with slugs and pests?',
+      a: 'Start with prevention: healthy plants, removing hiding spots, and protecting young seedlings. Barriers and traps can help. For allotments, early protection is often more effective than trying to fix damage later.',
+    },
+    {
+      q: 'Are allotments worth it?',
+      a: 'They can be, if you can visit regularly and enjoy the process. Most success comes from simple routines: keeping weeds down, watering, and growing a small number of crops you eat often.',
+    },
+    {
+      q: 'Keeping hens: what should I check first?',
+      a: 'Local rules, space, and daily time. Secure housing and welfare matter more than setup cost. Plan for daily care and what happens when you’re away.',
+    },
+  ]
+
   return (
     <main className="mx-auto max-w-6xl px-4 py-16">
       <header className="max-w-3xl">
         <p className="text-xs font-semibold tracking-wide text-zinc-500">Nutrition</p>
         <h1 className="mt-2 text-4xl font-bold">Grow your own (home or allotment)</h1>
         <p className="mt-3 text-zinc-700">
-          Growing a little of your own food can improve freshness and give you more control over what goes into your soil and onto your plants. This guide covers the basics that matter most—light, soil, drainage, and watering—plus a simple home/allotment plan.
+          Growing a little of your own food can improve freshness and give you more control over what goes into your soil and onto your plants.
+          This guide covers the basics that matter most—light, soil, drainage, and watering—plus a simple home/allotment plan.
         </p>
+
         <div className="mt-4 flex flex-wrap gap-2">
           <Link className="btn-secondary" href="/nutrition">Back to Nutrition</Link>
           <Link className="btn-secondary" href="/blog">Wellness insights</Link>
         </div>
+
+        <div className="mt-4 flex flex-wrap gap-2">
+          <a className="chip" href="#start">Start</a>
+          <a className="chip" href="#home">Home setup</a>
+          <a className="chip" href="#allotment">Allotment</a>
+          <a className="chip" href="#hens">Hens</a>
+          <a className="chip" href="#equipment">Equipment</a>
+          <a className="chip" href="#faqs">FAQs</a>
+        </div>
+
         <p className="mt-3 text-xs text-zinc-500">Last updated: February 1, 2026</p>
       </header>
 
-      <section className="mt-12 grid gap-4 md:grid-cols-3">
-        <MiniCard title="Start small (the 80/20)">
-          <ul className="list-disc pl-6 space-y-2">
-            <li><strong>Herbs</strong> (basil, mint, parsley) are the easiest win.</li>
-            <li><strong>Salad leaves</strong> grow fast and are satisfying.</li>
-            <li><strong>Tomatoes</strong> work well in pots if you have sun.</li>
-          </ul>
-          <p className="text-xs text-zinc-500">Pick 1–2 crops you eat regularly; it’s easier to maintain and troubleshoot.</p>
-        </MiniCard>
+      <div id="start" />
+      <TopicAtAGlance
+        items={[
+          {
+            title: 'Start small (the 80/20)',
+            bullets: [
+              'Herbs (basil, mint, parsley) are the easiest win.',
+              'Salad leaves grow fast and are satisfying.',
+              'Tomatoes work well in pots if you have sun.',
+              'Pick 1–2 crops you eat regularly; it’s easier to maintain and troubleshoot.',
+            ],
+          },
+          {
+            title: 'What matters most',
+            bullets: [
+              'Light: south-facing windows / a sunny balcony helps a lot.',
+              'Soil: decent compost + drainage prevents most problems.',
+              'Watering: under‑watering is common; over‑watering can kill roots.',
+            ],
+          },
+          {
+            title: 'Common mistakes',
+            bullets: [
+              'Buying lots of gear before you’ve grown your first herb pot.',
+              'Using containers with no drainage holes.',
+              'Starting too many varieties at once (you won’t know what worked).',
+            ],
+          },
+        ]}
+      />
 
-        <MiniCard title="What matters most">
-          <ul className="list-disc pl-6 space-y-2">
-            <li><strong>Light</strong>: south-facing windows / sunny balcony is gold.</li>
-            <li><strong>Soil</strong>: decent compost + drainage prevents most problems.</li>
-            <li><strong>Watering</strong>: under‑watering is common; over‑watering kills roots.</li>
-          </ul>
-        </MiniCard>
-
-        <MiniCard title="Common mistakes">
-          <ul className="list-disc pl-6 space-y-2">
-            <li>Buying lots of gear before you’ve grown your first herb pot.</li>
-            <li>Using containers with no drainage holes.</li>
-            <li>Starting too many varieties at once (you won’t know what worked).</li>
-          </ul>
-        </MiniCard>
-      </section>
-
-      <section className="mt-14">
-        <h2 className="text-2xl font-semibold">Home setup (balcony / windowsill)</h2>
+      <section className="mt-14" id="home">
+        <h2 className="section-title">Home setup (balcony / windowsill)</h2>
         <div className="mt-3 max-w-3xl text-sm text-zinc-700 space-y-3">
           <p>
-            If you can grow herbs successfully, you can grow a lot more. The simplest setup is: a pot with drainage, decent compost, and a small watering routine.
-            Start with the plants you cook with, and treat it like a tiny repeatable habit.
+            If you can grow herbs successfully, you can grow a lot more. The simplest setup is: a pot with drainage, decent compost,
+            and a small watering routine.
           </p>
           <ul className="list-disc pl-6 space-y-2">
             <li><strong>Containers:</strong> any pot works if it drains. Bigger = more forgiving.</li>
@@ -75,12 +115,12 @@ export default function Page() {
         </div>
       </section>
 
-      <section className="mt-14">
-        <h2 className="text-2xl font-semibold">Allotment basics (simple plan)</h2>
+      <section className="mt-14" id="allotment">
+        <h2 className="section-title">Allotment basics (simple plan)</h2>
         <div className="mt-3 max-w-3xl text-sm text-zinc-700 space-y-3">
           <p>
             Allotments reward simple systems: a plan for what you’ll grow, regular visits, and a way to manage weeds.
-            Don’t overbuild the first season — learn your plot first.
+            Don’t overbuild the first season—learn your plot first.
           </p>
           <ol className="list-decimal pl-6 space-y-2">
             <li><strong>Pick 4–6 crops</strong> you actually eat weekly (not 20 varieties).</li>
@@ -91,33 +131,30 @@ export default function Page() {
         </div>
       </section>
 
-      <section className="mt-14">
-        <h2 className="text-2xl font-semibold">Keeping hens for eggs (optional)</h2>
+      <section className="mt-14" id="hens">
+        <h2 className="section-title">Keeping hens for eggs (optional)</h2>
         <div className="mt-3 max-w-3xl text-sm text-zinc-700 space-y-3">
           <p>
-            Chickens can be brilliant — and they are a real responsibility. Before buying anything, check your local rules, space, and time.
-            Plan for daily care, secure housing, and animal welfare from day one.
+            Chickens can be great, but they are a real responsibility. Before buying anything, check your local rules, space, and time.
+            Plan for daily care, secure housing, and animal welfare.
           </p>
           <ul className="list-disc pl-6 space-y-2">
             <li><strong>Secure coop + run:</strong> predator‑proofing matters more than aesthetics.</li>
-            <li><strong>Feed + bedding:</strong> budget ongoing costs, not just the initial setup.</li>
+            <li><strong>Ongoing costs:</strong> feed, bedding, health, maintenance.</li>
             <li><strong>Time:</strong> they need care every day (including holidays).</li>
           </ul>
-          <p className="text-xs text-zinc-500">We keep this section general. Follow local guidance and welfare best practice.</p>
         </div>
       </section>
 
-      <section className="mt-14">
-        <h2 className="text-2xl font-semibold">Beginner equipment (core basics)</h2>
-        <p className="mt-2 text-sm text-zinc-600 max-w-3xl">
-          The main tasks are drainage, seed starting, soil improvement, and watering. These are common items used for those tasks.
-        </p>
+      <section className="mt-14" id="equipment">
+        <h2 className="section-title">Beginner equipment (core basics)</h2>
+        <p className="section-subtitle">For drainage, seed starting, soil improvement, and watering.</p>
 
         <div className="mt-6 grid gap-4 md:grid-cols-3">
           <ProductPick
             title="Herb pots with drainage"
             badge="Start here"
-            description="Drainage is the key. Bigger pots are more forgiving than tiny ones."
+            description="Drainage is key. Bigger pots are more forgiving than tiny ones."
             href={amazonSearchUrl('plant pots with drainage holes saucers')}
             bullets={['Drainage holes + saucers', 'Bigger = less watering stress', 'Simple is fine']}
           />
@@ -138,28 +175,30 @@ export default function Page() {
           <ProductPick
             title="Raised bed (starter)"
             badge="Allotment"
-            description="A simple, contained start if your soil needs work."
+            description="A contained start if your soil needs work."
             href={amazonSearchUrl('raised garden bed kit')}
             bullets={['Choose a manageable size', 'Use compost + topsoil mix', 'Mulch to reduce weeds']}
           />
           <ProductPick
             title="Watering can (or hose timer)"
             badge="Consistency"
-            description="Make watering easy and it’ll actually happen."
+            description="Make watering easy and it’ll happen more often."
             href={amazonSearchUrl('watering can long spout')}
             bullets={['Long spout helps pots', 'Keep it near plants', 'Water early when possible']}
           />
           <ProductPick
             title="Chicken coop + run (browse)"
             badge="Optional"
-            description="Only if you’ve checked local rules, space, and daily care."
+            description="Only after you’ve checked local rules, space, and daily care."
             href={amazonSearchUrl('chicken coop run predator proof')}
             bullets={['Prioritise security', 'Budget ongoing costs', 'Plan holiday cover']}
           />
         </div>
       </section>
 
-      <p className="mt-12 text-xs text-zinc-500">Some links may earn us a commission at no extra cost to you.</p>
+      <TopicFAQ faqs={faqs} />
+
+      <p className="mt-12 text-xs text-zinc-500">Some links are affiliate links.</p>
     </main>
   )
 }

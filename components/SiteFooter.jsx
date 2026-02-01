@@ -146,7 +146,7 @@ const legal = [
       </div>
 
       <div className="text-center text-xs text-neutral-500 px-4 pb-2">
-        Some links may earn us a small commission at no extra cost to you.
+        Some links are affiliate links.
       </div>
 
       <div className="text-center text-xs text-neutral-500 pb-4">
