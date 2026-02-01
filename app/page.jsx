@@ -15,7 +15,7 @@ const FEATURED_TOPICS = [
   {
     title: "Sleep & recovery",
     image: "/images/cards/sleep.svg",
-    description: "A simple plan + the shortlist of products that actually help.",
+    description: "A practical plan, routines, and a shortlist of options.",
     href: "/topics/sleep",
   },
   {
@@ -33,10 +33,90 @@ const FEATURED_TOPICS = [
   {
     title: "Fragrance-free home",
     image: "/images/cards/laundry.svg",
-    description: "Sensitive household swaps that reduce irritation fast.",
+    description: "A practical approach to fragrance exposure across laundry, cleaning, and everyday products.",
     href: "/topics/fragrance-free",
   },
 ];
+
+// Three pages that work well as first-click destinations from social (Pinterest/IG)
+const START_HERE = [
+  {
+    title: "Air quality",
+    image: "/images/cards/air-purifier.svg",
+    description: "Indoor air basics for allergies, damp, and everyday comfort in UK homes.",
+    href: "/topics/air-quality",
+    links: [
+      { label: "Air purifiers for allergies (UK)", href: "/best-air-purifiers-allergies-uk" },
+      { label: "Dehumidifiers for damp & mould (UK)", href: "/best-dehumidifiers-damp-mould-uk" },
+      { label: "Air purifiers for small flats (UK)", href: "/best-air-purifiers-small-flats-uk" },
+    ],
+  },
+  {
+    title: "Water",
+    image: "/images/cards/water-filter.svg",
+    description: "Filter types, running costs, and straightforward choices for common UK setups.",
+    href: "/topics/water",
+    links: [
+      { label: "Water filters (UK): shortlist", href: "/best-water-filters-uk" },
+      { label: "Shower filters for hard water (UK)", href: "/best-shower-filters-uk-hard-water" },
+      { label: "Water filter buying guide (UK)", href: "/blog/water-filter-buying-guide-uk" },
+    ],
+  },
+  {
+    title: "Fragrance-free home",
+    image: "/images/cards/laundry.svg",
+    description: "A practical approach to fragrance exposure in laundry, cleaning, and everyday products.",
+    href: "/topics/fragrance-free",
+    links: [
+      { label: "Fragrance-free laundry detergents (UK)", href: "/best-fragrance-free-laundry-detergents-uk" },
+      { label: "Non-toxic cleaning starter", href: "/blog/non-toxic-cleaning-starter" },
+      { label: "Low‑tox starter favourites", href: "/best-low-tox-products-for-beginners" },
+    ],
+  },
+];
+
+function StartHereCard({ item }) {
+  return (
+    <div className="card">
+      <div className="flex items-start justify-between gap-4">
+        <div>
+          <div className="mb-3 flex items-center gap-3">
+            <div className="h-10 w-10 overflow-hidden rounded-xl bg-zinc-100">
+              <img
+                src={item.image || "/images/cards/neutral.svg"}
+                alt=""
+                className="h-full w-full object-cover"
+                loading="lazy"
+              />
+            </div>
+            <div className="text-xs font-semibold uppercase tracking-wide text-zinc-500">Start here</div>
+          </div>
+          <h3 className="text-lg font-semibold text-zinc-900">
+            <Link href={item.href} className="hover:underline">
+              {item.title}
+            </Link>
+          </h3>
+          <p className="mt-2 text-sm text-zinc-700">{item.description}</p>
+        </div>
+        <Link href={item.href} className="text-sm font-semibold text-zinc-900 hover:underline whitespace-nowrap">
+          Open →
+        </Link>
+      </div>
+
+      <div className="mt-5 grid gap-2">
+        {item.links.map((l) => (
+          <Link
+            key={l.href}
+            href={l.href}
+            className="rounded-xl border border-zinc-200 bg-white px-3 py-2 text-sm text-zinc-900 hover:bg-zinc-50"
+          >
+            {l.label}
+          </Link>
+        ))}
+      </div>
+    </div>
+  );
+}
 
 function Card({ href, title, description, image }) {
   return (
@@ -109,41 +189,59 @@ export default function HomePage() {
         <div className="mx-auto max-w-6xl px-4 py-14 md:py-20">
           <div className="max-w-2xl">
             <h1 className="text-3xl font-semibold tracking-tight text-zinc-900 md:text-5xl">
-              Natural wellness, made simple.
+              Low‑tox living and natural wellness, in plain English.
             </h1>
             <p className="mt-4 text-base text-zinc-700 md:text-lg">
-              Clear Wellness Insights and product shortlists for low-tox, holistic living —
-              so you can make healthier choices with confidence.
+              Practical guides and shortlists for air, water, fragrance‑free living, sleep, nutrition, and movement.
             </p>
-            <p className="mt-2 text-sm text-zinc-600">For people who want healthier homes with clear, practical advice.</p>
+            <p className="mt-2 text-sm text-zinc-600">UK‑focused guidance you can use at home, without specialist knowledge.</p>
 
             <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
               <Link href="/topics" className="btn-primary w-full sm:w-auto text-center">
-                Start with topics
+                Explore topics
               </Link>
               <Link
-                href="/blog"
+                href="/shopping-list"
                 className="w-full sm:w-auto text-center rounded-xl border border-zinc-300 bg-white/80 px-4 py-2.5 text-sm font-semibold text-zinc-900 backdrop-blur transition hover:bg-white"
               >
-                Read Wellness Insights
+                Low‑Tox Shopping List
               </Link>
               <Link href="/favourites" className="text-sm font-semibold text-zinc-900 hover:underline">
                 Browse favourites →
               </Link>
             </div>
 
-            <p className="mt-6 text-sm text-zinc-600">
-              New here? Start with the{" "}
-              <Link href="/shopping-list" className="underline decoration-dotted">
-                Low‑Tox Shopping List
-              </Link>{" "}
-              and our{" "}
-              <Link href="/blog/non-toxic-cleaning-starter" className="underline decoration-dotted">
-                Non-Toxic Cleaning Starter
+            <div className="mt-6 flex flex-wrap items-center gap-2 text-sm">
+              <span className="text-zinc-700">Quick start:</span>
+              <Link href="/topics/air-quality" className="rounded-full border border-zinc-200 bg-white/80 px-3 py-1 text-zinc-900 hover:bg-white">
+                Air quality
               </Link>
-              .
-            </p>
+              <Link href="/topics/water" className="rounded-full border border-zinc-200 bg-white/80 px-3 py-1 text-zinc-900 hover:bg-white">
+                Water
+              </Link>
+              <Link href="/topics/fragrance-free" className="rounded-full border border-zinc-200 bg-white/80 px-3 py-1 text-zinc-900 hover:bg-white">
+                Fragrance‑free home
+              </Link>
+            </div>
           </div>
+        </div>
+      </section>
+
+      {/* START HERE */}
+      <section className="mx-auto max-w-6xl px-4 py-10 md:py-14">
+        <div className="flex items-end justify-between gap-4">
+          <h2 className="text-xl font-semibold text-zinc-900">Start here</h2>
+          <Link href="/topics" className="text-sm font-medium text-zinc-800 hover:underline">
+            All topics →
+          </Link>
+        </div>
+        <p className="mt-2 max-w-3xl text-sm text-zinc-700">
+          Three Topic pages that answer the most common questions and link to shortlists where comparisons help.
+        </p>
+        <div className="mt-6 grid gap-6 lg:grid-cols-3">
+          {START_HERE.map((item) => (
+            <StartHereCard key={item.href} item={item} />
+          ))}
         </div>
       </section>
 
@@ -153,21 +251,29 @@ export default function HomePage() {
           <div>
             <h2 className="text-lg font-semibold text-zinc-900">We do the research</h2>
             <p className="mt-2 text-sm text-zinc-700">
-              We review ingredients, sourcing, and real-world use — focusing on safety,
-              effectiveness, and sustainability.
+              We summarise ingredients, common standards, and practical trade-offs people run into at home.
             </p>
           </div>
           <div>
             <h2 className="text-lg font-semibold text-zinc-900">We explain it clearly</h2>
             <p className="mt-2 text-sm text-zinc-700">
-              Practical guidance focused on what matters.
+              Clear definitions, what to look for, and what changes outcomes most.
             </p>
           </div>
           <div>
             <h2 className="text-lg font-semibold text-zinc-900">We share sensible options</h2>
             <p className="mt-2 text-sm text-zinc-700">
-              When products meet our standards, we share shortlists to save you time and money.
+              Where products help, we keep the list short and include the main trade-offs.
             </p>
+          </div>
+          <div className="md:col-span-3">
+            <div className="mt-2 flex flex-wrap gap-3 text-sm">
+              <Link href="/how-we-test" className="underline decoration-dotted text-zinc-900">How we test</Link>
+              <span className="text-zinc-500">•</span>
+              <Link href="/editorial-policy" className="underline decoration-dotted text-zinc-900">Editorial policy</Link>
+              <span className="text-zinc-500">•</span>
+              <Link href="/affiliate-disclosure" className="underline decoration-dotted text-zinc-900">Affiliate disclosure</Link>
+            </div>
           </div>
         </div>
       </section>
@@ -189,9 +295,9 @@ export default function HomePage() {
 
       {/* FEATURED GUIDES */}
       <section className="mx-auto max-w-6xl px-4 py-10 md:py-14">
-        <h2 className="text-xl font-semibold text-zinc-900">Starter explainers</h2>
+        <h2 className="text-xl font-semibold text-zinc-900">Foundational guides</h2>
         <p className="mt-2 text-sm text-zinc-700">
-          Start with the essentials — then use the product shortlists inside each explainer when you want options.
+          Clear starting points for common questions. Where comparisons help, you’ll find shortlists linked inside.
         </p>
         <div className="mt-6 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {FEATURED_EXPLAINERS.map((g) => (
@@ -206,7 +312,7 @@ export default function HomePage() {
   <div className="mx-auto max-w-6xl px-4">
     <h2 className="text-2xl font-semibold">Favourites (shortlists)</h2>
     <p className="mt-2 text-sm text-zinc-600">
-      Want product options? These pages are built for buying clarity: clear trade-offs and a short list of solid options.
+      Shortlists with the key trade-offs and a small set of options.
     </p>
     <div className="mt-6 grid gap-4 md:grid-cols-3">
       <Link href="/best-low-tox-products-for-beginners" className="card hover:shadow-sm transition-shadow">
@@ -214,7 +320,7 @@ export default function HomePage() {
         
         <div className="mt-4 h-12 w-12 overflow-hidden rounded-xl bg-zinc-100"><img src="/images/cards/cleaning.svg" alt="" className="h-full w-full object-cover" loading="lazy" /></div>
 <h3 className="text-lg font-semibold">Low‑tox starter favourites</h3>
-        <p className="mt-1 text-sm text-zinc-600">The easiest first swaps that make the biggest difference.</p>
+        <p className="mt-1 text-sm text-zinc-600">A small set of practical first swaps.</p>
       </Link>
       <Link href="/best-water-filters-uk" className="card hover:shadow-sm transition-shadow">
         
@@ -225,8 +331,8 @@ export default function HomePage() {
       <Link href="/best-natural-sleep-support" className="card hover:shadow-sm transition-shadow">
         
         <div className="mt-4 h-12 w-12 overflow-hidden rounded-xl bg-zinc-100"><img src="/images/cards/sleep.svg" alt="" className="h-full w-full object-cover" loading="lazy" /></div>
-<h3 className="text-lg font-semibold">Natural sleep support: our favourites</h3>
-        <p className="mt-1 text-sm text-zinc-600">Comfort-first upgrades that help you stick with it.</p>
+<h3 className="text-lg font-semibold">Natural sleep support: shortlist</h3>
+        <p className="mt-1 text-sm text-zinc-600">Options across routine, environment, and gentle supports.</p>
       </Link>
             <Link href="/best-shower-filters-uk-hard-water" className="card hover:shadow-sm transition-shadow">
               
@@ -250,18 +356,16 @@ export default function HomePage() {
     <div className="rounded-2xl border border-zinc-200 bg-white p-6 md:p-10">
       <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
         <div>
-          <h2 className="text-xl font-semibold text-zinc-900">Free: Low‑Tox Shopping List</h2>
+          <h2 className="text-xl font-semibold text-zinc-900">Low‑Tox Shopping List</h2>
           <p className="mt-2 text-sm text-zinc-700">
-            Our trusted swaps for skincare, home, and everyday wellness — in one simple list.
+            Starter swaps for skincare, home, and everyday wellness — in one list.
           </p>
         </div>
         <Link href="/shopping-list" className="btn-primary w-full md:w-auto text-center">
-          Get the list
+          View the list
         </Link>
       </div>
-      <p className="mt-4 text-xs text-zinc-600">
-        Some links may earn us a small commission at no extra cost to you.
-      </p>
+      <p className="mt-4 text-xs text-zinc-600">Some links are affiliate links.</p>
     </div>
   </div>
 </section>
@@ -269,14 +373,35 @@ export default function HomePage() {
     
       <section className="mt-16">
         <div className="mx-auto max-w-6xl px-4">
-          <h2 className="text-2xl font-semibold">Explore our wellness insights</h2>
+          <h2 className="text-2xl font-semibold">Explore sections</h2>
           <p className="mt-2 text-sm text-zinc-600">
-            Choose a lane: home environment, nutrition, sleep, or movement — and build from there.
+            Browse by area. Each section links to Topic pages, guides, and shortlists.
           </p>
           <div className="mt-6 grid gap-4 md:grid-cols-3">
-            <a href="/blog" className="card">Low-tox & safer swaps</a>
-            <a href="/holistic-health" className="card">Holistic health</a>
-            <a href="/nutrition" className="card">Nutrition & organic food</a>
+            <Link href="/topics" className="card">
+              <div className="text-sm font-semibold text-zinc-900">Topics</div>
+              <div className="mt-1 text-sm text-zinc-600">Air, water, fragrance‑free home, sleep & recovery.</div>
+            </Link>
+            <Link href="/favourites" className="card">
+              <div className="text-sm font-semibold text-zinc-900">Favourites (shortlists)</div>
+              <div className="mt-1 text-sm text-zinc-600">A small set of options with the main trade-offs.</div>
+            </Link>
+            <Link href="/shopping-list" className="card">
+              <div className="text-sm font-semibold text-zinc-900">Shopping list</div>
+              <div className="mt-1 text-sm text-zinc-600">Starter swaps in one place.</div>
+            </Link>
+            <Link href="/nutrition" className="card">
+              <div className="text-sm font-semibold text-zinc-900">Nutrition</div>
+              <div className="mt-1 text-sm text-zinc-600">Supplements, organic & single‑ingredient foods, grow your own.</div>
+            </Link>
+            <Link href="/movement" className="card">
+              <div className="text-sm font-semibold text-zinc-900">Movement</div>
+              <div className="mt-1 text-sm text-zinc-600">Stretches, hypertrophy, cardio.</div>
+            </Link>
+            <Link href="/natural-remedies" className="card">
+              <div className="text-sm font-semibold text-zinc-900">Natural remedies</div>
+              <div className="mt-1 text-sm text-zinc-600">Evidence‑informed options and safety notes.</div>
+            </Link>
           </div>
         </div>
       </section>
