@@ -3,7 +3,7 @@ import Link from 'next/link'
 export const metadata = {
   title: 'Organic & single‑ingredient foods — practical staples | Wild & Well',
   description:
-    'Education-first guide to organic and single-ingredient foods: label reading, staple-building, and practical swaps you can repeat — before any product recommendations.',
+    'Guide to organic and single-ingredient foods: label reading, staple-building, and practical swaps you can repeat.',
 }
 
 function Card({ title, children }) {
@@ -23,7 +23,7 @@ export default function Page() {
         <h1 className="mt-2 text-4xl font-bold">Organic &amp; single‑ingredient foods</h1>
         <p className="mt-3 text-zinc-700">
           If you want a simple nutrition strategy that scales, start with <strong>single‑ingredient staples</strong> and upgrade quality where it matters.
-          This page focuses on label reading and practical swaps before any product pushing.
+          This guide covers label reading and practical swaps you can repeat.
         </p>
         <div className="mt-4 flex flex-wrap gap-2">
           <Link className="btn-secondary" href="/nutrition">Back to Nutrition</Link>

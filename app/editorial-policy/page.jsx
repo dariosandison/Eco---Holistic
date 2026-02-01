@@ -19,7 +19,7 @@ export default function EditorialPolicy() {
     <main className="mx-auto max-w-3xl px-4 py-16">
       <h1 className="text-4xl font-bold">Editorial policy</h1>
       <p className="mt-3 text-zinc-700">
-        Our job is to help you decide without hype. That means clear trade-offs, transparent monetisation, and no paid placements influencing recommendations.
+        Our job is to help you decide with clear trade-offs. That means transparent monetisation and no paid placements influencing recommendations.
       </p>
 
       <Section title="Independence">

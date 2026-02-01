@@ -14,7 +14,7 @@ import MoneyPageNextLinks from '@/components/MoneyPageNextLinks'
 export const metadata = {
   title: 'Anti-inflammatory-style shopping list: simple staples | Wild & Well',
   description:
-    'A simple UK-friendly shopping list built around fibre, colourful plants, and healthy fats — without medical claims or “superfood” hype.',
+    'A simple UK-friendly shopping list built around fibre, colourful plants, and healthy fats — without medical claims or “superfood” marketing.',
 }
 
 export default function Page() {

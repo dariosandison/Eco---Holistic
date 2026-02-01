@@ -53,7 +53,7 @@ function QuickSummary(){
       <h2 className="text-xl font-semibold">At a glance</h2>
       <p className="mt-2 text-zinc-700">
         If you’re starting from scratch, buy <strong>one</strong> high‑quality pan you’ll use daily (usually stainless steel),
-        then add pieces only if you genuinely need them. Heat control and cooking habits matter more than chasing perfection.
+        then add pieces only if you need them. Heat control and cooking habits matter more than chasing perfection.
       </p>
       <div className="mt-4 flex flex-wrap gap-2">
         <Link className="btn-secondary" href="/topics/fragrance-free">Low-tox kitchen basics</Link>

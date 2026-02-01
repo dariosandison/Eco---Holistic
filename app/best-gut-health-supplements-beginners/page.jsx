@@ -44,7 +44,7 @@ const PICKS = [
     badge: 'Optional',
     desc: 'A broader option for people who already tolerate probiotics — avoid stacking multiple changes.',
     query: 'multi strain probiotic UK third party tested',
-    bullets: ['Avoid “mega CFU” hype', 'Check storage requirements', 'Keep dose consistent'],
+    bullets: ['Be cautious with “mega CFU” marketing', 'Check storage requirements', 'Keep dose consistent'],
   },
   {
     title: 'Digestive enzyme blends (situational)',
@@ -163,7 +163,7 @@ const url = `${SITE_URL}/best-gut-health-supplements-beginners`
           rows={[
             { thing: 'Fibre', aimFor: 'Start low, increase slowly', avoid: 'Big jumps in dose' },
             { thing: 'Probiotics', aimFor: 'Clear strain labeling', avoid: 'Vague proprietary blends' },
-            { thing: 'Claims', aimFor: 'Modest, realistic claims', avoid: '“Cleanse/detox” hype' },
+            { thing: 'Claims', aimFor: 'Modest, realistic claims', avoid: '“Cleanse/detox” claims' },
             { thing: 'Stacking', aimFor: 'One new thing at a time', avoid: 'Multiple changes at once' },
           ]}
         />

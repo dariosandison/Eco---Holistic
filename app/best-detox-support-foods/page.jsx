@@ -12,9 +12,9 @@ import MoneyPageNextLinks from '@/components/MoneyPageNextLinks'
 
 
 export const metadata = {
-  title: 'Everyday foods that support your body (no detox hype) | Wild & Well',
+  title: 'Everyday foods that support your body | Wild & Well',
   description:
-    'A food-first, no‑nonsense page: hydration, fibre, and simple staples that support your body’s normal processes — without “detox” claims.',
+    'Food-first overview: hydration, fibre, and simple staples that support your body’s normal processes — without “detox” claims.',
 }
 
 export default function Page() {
@@ -26,7 +26,7 @@ const url = `${SITE_URL}/best-detox-support-foods`
   const ld = {
     '@context': 'https://schema.org',
     '@type': 'Article',
-    headline: 'Everyday foods that support your body (no detox hype)',
+    headline: 'Everyday foods that support your body',
     datePublished: '2026-01-24',
     dateModified: '2026-01-29',
     mainEntityOfPage: { '@type': 'WebPage', '@id': url },
@@ -43,9 +43,9 @@ const url = `${SITE_URL}/best-detox-support-foods`
       <StructuredData data={ld} />
 
       <header className="max-w-3xl">
-        <h1 className="text-4xl font-bold">Everyday foods that support your body (no detox hype)</h1>
+        <h1 className="text-4xl font-bold">Everyday foods that support your body</h1>
         <p className="mt-3 text-zinc-700">
-          “Detox” is a marketing word. Your body already has systems for processing and eliminating waste. What helps most is boring stuff: hydration, fibre, and stable meals.
+          “Detox” is a marketing term. Your body already has systems for processing and eliminating waste. What helps most is hydration, fibre, and stable meals.
         </p>
 
         <EducationFirstCallout topicHref="/topics" topicLabel="Explore topics" insightHref="/blog" insightLabel="Read Wellness Insights" />

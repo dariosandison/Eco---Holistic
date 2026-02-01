@@ -35,12 +35,12 @@ export default function ThanksPage({ searchParams }) {
         <h1 className="text-4xl font-bold">You’re subscribed</h1>
         <p className="mt-3 text-zinc-700">
           Thanks — you’re on the list. If you don’t see the email, check promotions/spam.
-          In the meantime, here are the best places to browse next (no hype, just clear info).
+          In the meantime, here are the best places to browse next.
         </p>
         <div className="mt-5 rounded-2xl border bg-white p-5 shadow-sm">
           <h2 className="text-lg font-semibold">Start in 2 minutes</h2>
           <p className="mt-2 text-sm text-zinc-600">
-            Pick one area for this week (don’t try to fix everything at once).
+            Pick one area for this week.
           </p>
           <div className="mt-4 flex flex-wrap gap-2">
             <TrackedLink
@@ -79,12 +79,12 @@ export default function ThanksPage({ searchParams }) {
         </p>
 
         <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          <Card image="/images/cards/sleep.svg" title="Sleep" desc="Sleep basics + product options (only where they genuinely help)." href="/topics/sleep" />
+          <Card image="/images/cards/sleep.svg" title="Sleep" desc="Sleep basics + practical options." href="/topics/sleep" />
           <Card image="/images/cards/water-filter.svg" title="Water" desc="UK-friendly filter types, trade-offs, and recommended options." href="/topics/water" />
           <Card image="/images/cards/air-purifier.svg" title="Air quality" desc="Allergies, damp, ventilation, and air purifier guidance." href="/topics/air-quality" />
           <Card image="/images/cards/laundry.svg" title="Cleaning (fragrance-free)" desc="Low-tox swaps for laundry and cleaning without overhauling everything." href="/topics/fragrance-free" />
-          <Card image="/images/cards/supplements.svg" title="Nutrition" desc="Organic and single-ingredient foods, labels, and sensible upgrades." href="/nutrition" />
-          <Card image="/images/cards/bands.svg" title="Movement" desc="Simple training + gear that isn’t gimmicky (trackers, bands, shoes, routines)." href="/movement" />
+          <Card image="/images/cards/supplements.svg" title="Nutrition" desc="Organic and single-ingredient foods, labels, and practical staples." href="/nutrition" />
+          <Card image="/images/cards/bands.svg" title="Movement" desc="Walking, strength training, and simple routines (with optional gear)." href="/movement" />
         </div>
       </section>
 
@@ -112,9 +112,7 @@ export default function ThanksPage({ searchParams }) {
         </div>
       </section>
 
-      <p className="mt-12 text-sm text-zinc-500 max-w-3xl">
-        Some links may earn us a small commission at no extra cost to you. We use that to keep the site running and keep the content free.
-      </p>
+      <p className="mt-12 text-sm text-zinc-500 max-w-3xl">Some links may earn us a small commission at no extra cost to you.</p>
     </main>
   );
 }

@@ -234,7 +234,7 @@ const itemList = PICKS.map((p, i) => ({
         <h2 className="text-2xl font-semibold">How we build our shortlists</h2>
         <div className="mt-3 space-y-3 text-sm text-zinc-700 max-w-3xl">
           <p>
-            Our approach here is: sensible features, decent reviews across many buyers, and a realistic fit for most homes — not hype, not extreme claims.
+            Our approach here is: sensible features, consistent buyer reviews, and a realistic fit for most people.
           </p>
           <p>
             Always check sizing/specs and current pricing before you buy. If a product makes strong health claims without evidence, treat that as marketing.

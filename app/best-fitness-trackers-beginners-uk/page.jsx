@@ -90,7 +90,7 @@ function SummaryBox() {
     <div className="rounded-2xl border bg-white p-6 shadow-sm">
       <h2 className="text-xl font-semibold">At a glance</h2>
       <p className="mt-2 text-zinc-700">
-        A straightforward shortlist with sensible options for most people — plus guidance on what to look for so you don’t buy on hype.
+        A straightforward shortlist with sensible options for most people — plus guidance on what to look for before you buy.
       </p>
       <div className="mt-4 flex flex-wrap gap-2">
         <Link className="btn-secondary" href="/movement">Movement</Link>
@@ -235,7 +235,7 @@ const itemList = PICKS.map((p, i) => ({
         <h2 className="text-2xl font-semibold">How we think about “best”</h2>
         <div className="mt-3 space-y-3 text-sm text-zinc-700 max-w-3xl">
           <p>
-            “Shortlist” here means: sensible features, decent reviews across many buyers, and a realistic fit for most homes — not hype, not extreme claims.
+            “Shortlist” here means: sensible features, consistent buyer reviews, and a realistic fit for most people.
           </p>
           <p>
             Always check sizing/specs and current pricing before you buy. If a product makes strong health claims without evidence, treat that as marketing.

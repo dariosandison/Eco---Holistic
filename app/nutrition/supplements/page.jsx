@@ -5,7 +5,7 @@ import { amazonSearchUrl } from '@/lib/amazon'
 export const metadata = {
   title: 'Supplements — a simple, low‑additive approach | Wild & Well',
   description:
-    'Education-first supplements guide: how to read labels, spot quality signals, avoid common traps, and choose minimal-additive options when they genuinely help.',
+    'Supplements guide: how to read labels, spot quality signals, and avoid common traps when choosing minimal-additive options.',
 }
 
 function MiniCard({ title, children }) {
@@ -24,8 +24,7 @@ export default function Page() {
         <p className="text-xs font-semibold tracking-wide text-zinc-500">Nutrition</p>
         <h1 className="mt-2 text-4xl font-bold">Supplements (simple + low‑additive)</h1>
         <p className="mt-3 text-zinc-700">
-          Supplements can be useful — but they’re also a place where marketing runs ahead of evidence.
-          This page is education-first: how to shop smart, keep ingredients simple, and avoid common traps.
+          Supplements can be useful, but marketing often runs ahead of evidence. This guide covers label reading, quality signals, and common traps, with a focus on simple formulas and clear dosing.
         </p>
         <div className="mt-4 flex flex-wrap gap-2">
           <Link className="btn-secondary" href="/nutrition">Back to Nutrition</Link>
@@ -39,7 +38,7 @@ export default function Page() {
           <ul className="list-disc pl-6 space-y-2">
             <li><strong>Food first.</strong> Supplements work best as a small add‑on, not a replacement for basics.</li>
             <li><strong>One change at a time.</strong> It’s the easiest way to spot what helps and what doesn’t.</li>
-            <li><strong>Keep it boring.</strong> Single‑ingredient or minimal blends are easier to assess.</li>
+            <li><strong>Prefer simple formulas.</strong> Single‑ingredient or minimal blends are easier to assess.</li>
           </ul>
         </MiniCard>
 

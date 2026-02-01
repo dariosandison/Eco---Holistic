@@ -5,7 +5,7 @@ import { amazonSearchUrl } from '@/lib/amazon'
 export const metadata = {
   title: 'Cardio — build fitness without burnout | Wild & Well',
   description:
-    'Education-first cardio guide: build a base with walking, add gentle intervals, and choose gear that supports consistency.',
+    'Cardio guide: build a base with walking, add gentle intervals, and choose gear that supports consistency.',
 }
 
 function Card({ title, children }) {
@@ -25,7 +25,6 @@ export default function Page() {
         <h1 className="mt-2 text-4xl font-bold">Cardio (walking, running, and beyond)</h1>
         <p className="mt-3 text-zinc-700">
           Cardio works best when it’s sustainable. Start with a base you can repeat (walking counts), then add a small amount of harder work once you feel ready.
-          This page is education-first — gear comes last.
         </p>
         <div className="mt-4 flex flex-wrap gap-2">
           <Link className="btn-secondary" href="/movement">Back to Movement</Link>

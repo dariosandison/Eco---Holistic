@@ -5,7 +5,7 @@ import { amazonSearchUrl } from '@/lib/amazon'
 export const metadata = {
   title: 'Stretches & mobility — a simple daily routine | Wild & Well',
   description:
-    'Education-first mobility guide: what to do for desk bodies, how to build a 10-minute routine, and the optional gear that makes consistency easier.',
+    'Mobility guide: what to do for desk bodies, how to build a 10-minute routine, and optional gear for comfort and assistance.',
 }
 
 function Card({ title, children }) {
@@ -63,10 +63,10 @@ export default function Page() {
       </section>
 
       <section className="mt-14">
-        <h2 className="text-2xl font-semibold">Make it stick</h2>
+        <h2 className="text-2xl font-semibold">Routine setup</h2>
         <div className="mt-3 max-w-3xl text-sm text-zinc-700 space-y-3">
           <p>
-            Treat mobility like brushing your teeth: short, frequent, and boring. Leave your mat where you can see it and attach the routine to something you already do.
+            Short, frequent sessions are easier to maintain than long sessions. Leave your mat where you can see it and pair the routine with something you already do.
           </p>
           <ul className="list-disc pl-6 space-y-2">
             <li><strong>After a walk</strong> (your body is warm).</li>

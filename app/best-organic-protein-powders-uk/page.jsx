@@ -130,7 +130,7 @@ const url = `${SITE_URL}/best-organic-protein-powders-uk`
       <header className="max-w-3xl">
         <h1 className="text-4xl font-bold">Protein powders (UK): clean shortlist</h1>
         <p className="mt-3 text-zinc-700">
-          A practical shortlist of protein powder styles, focusing on minimal ingredients and everyday usability — not hype.
+          A practical shortlist of protein powder styles, focusing on minimal ingredients and everyday usability.
         </p>
 
         <EducationFirstCallout topicHref="/nutrition" topicLabel="Nutrition basics" insightHref="/blog/fibre-gut-health-practical-guide" insightLabel="Fibre & gut health" />

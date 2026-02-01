@@ -5,7 +5,7 @@ import { amazonSearchUrl } from '@/lib/amazon'
 export const metadata = {
   title: 'Grow your own — fruit, veg, herbs (and optional hens) | Wild & Well',
   description:
-    'Education-first guide to growing your own food: how to start small, what matters (light, soil, watering), allotment basics, and beginner equipment that actually helps before you buy anything expensive.',
+    'Guide to growing your own food: how to start small, what matters (light, soil, watering), allotment basics, and beginner equipment for common tasks.',
 }
 
 function MiniCard({ title, children }) {
@@ -24,8 +24,7 @@ export default function Page() {
         <p className="text-xs font-semibold tracking-wide text-zinc-500">Nutrition</p>
         <h1 className="mt-2 text-4xl font-bold">Grow your own (home or allotment)</h1>
         <p className="mt-3 text-zinc-700">
-          Growing a little of your own food is one of the highest‑confidence upgrades: fresher produce, fewer unknowns, and a habit that nudges you toward better meals.
-          This page is education-first — start small, learn the basics, and only then buy equipment.
+          Growing a little of your own food can improve freshness and give you more control over what goes into your soil and onto your plants. This guide covers the basics that matter most—light, soil, drainage, and watering—plus a simple home/allotment plan.
         </p>
         <div className="mt-4 flex flex-wrap gap-2">
           <Link className="btn-secondary" href="/nutrition">Back to Nutrition</Link>
@@ -41,7 +40,7 @@ export default function Page() {
             <li><strong>Salad leaves</strong> grow fast and are satisfying.</li>
             <li><strong>Tomatoes</strong> work well in pots if you have sun.</li>
           </ul>
-          <p className="text-xs text-zinc-500">Pick 1–2 things you’ll actually eat. Consistency beats ambition.</p>
+          <p className="text-xs text-zinc-500">Pick 1–2 crops you eat regularly; it’s easier to maintain and troubleshoot.</p>
         </MiniCard>
 
         <MiniCard title="What matters most">
@@ -109,9 +108,9 @@ export default function Page() {
       </section>
 
       <section className="mt-14">
-        <h2 className="text-2xl font-semibold">Beginner equipment (only what helps)</h2>
+        <h2 className="text-2xl font-semibold">Beginner equipment (core basics)</h2>
         <p className="mt-2 text-sm text-zinc-600 max-w-3xl">
-          You don’t need much. These picks are the “most useful, least regrettable” items — start with one or two.
+          The main tasks are drainage, seed starting, soil improvement, and watering. These are common items used for those tasks.
         </p>
 
         <div className="mt-6 grid gap-4 md:grid-cols-3">
