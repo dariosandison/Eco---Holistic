@@ -4,7 +4,7 @@ import TopicFAQ from '@/components/TopicFAQ'
 
 export const metadata = {
   title: 'Holistic health | Wild & Well',
-  description: 'Holistic health: daily habits, whole-body fundamentals, and practical guides on sleep, movement, and a healthier home.',
+  description: 'Holistic health: daily habits, whole-body fundamentals, and practical insights on sleep, movement, and a healthier home.',
 }
 
 function MiniCard({ title, desc, href, tag, image }) {
@@ -58,7 +58,7 @@ export default function Page() {
       <header className="max-w-3xl">
         <h1 className="text-4xl font-bold">Holistic health</h1>
         <p className="mt-3 text-zinc-700">
-          Whole-body fundamentals: sleep, movement, nutrition, and a healthier home — with practical guides you can apply without adding complexity.
+          Whole-body fundamentals: sleep, movement, nutrition, and a healthier home — with practical insights you can apply without adding complexity.
         </p>
 
         <div className="mt-4 flex flex-wrap gap-2">
@@ -69,7 +69,7 @@ export default function Page() {
 
         <div className="mt-4 flex flex-wrap gap-2">
           <a className="chip" href="#start">Start</a>
-          <a className="chip" href="#guides">Guides</a>
+          <a className="chip" href="#insights">Insights</a>
           <a className="chip" href="#faqs">FAQs</a>
         </div>
 
@@ -106,9 +106,9 @@ export default function Page() {
         ]}
       />
 
-      <section className="mt-14" id="guides">
-        <h2 className="section-title">Start with these guides</h2>
-        <p className="section-subtitle">Cornerstone reading and practical next steps.</p>
+      <section className="mt-14" id="insights">
+        <h2 className="section-title">Start with these insights</h2>
+        <p className="section-subtitle">Cornerstone reading and practical next steps (without the overwhelm).</p>
 
         <div className="mt-6 grid gap-4 md:grid-cols-3">
           <MiniCard

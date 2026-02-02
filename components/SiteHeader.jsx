@@ -17,29 +17,18 @@ export default function SiteHeader() {
       >
         Skip to content
       </a>
+
       <div className="mx-auto flex max-w-6xl items-center gap-4 px-4 py-3">
         {/* Brand */}
         <Link href="/" className="inline-flex items-center gap-2">
-          <Image
-            src="/logo.png"
-            alt="Wild & Well"
-            width={32}
-            height={32}
-            priority
-          />
+          <Image src="/logo.png" alt="Wild & Well" width={32} height={32} priority />
           <span className="font-semibold text-zinc-900">Wild &amp; Well</span>
         </Link>
 
         {/* Desktop nav */}
         <nav className="ml-auto hidden items-center gap-6 md:flex">
-          <Link href="/best-of" className="text-sm font-medium text-zinc-700 hover:text-zinc-900">
-            Best of
-          </Link>
           <Link href="/blog" className="text-sm font-medium text-zinc-700 hover:text-zinc-900">
             Wellness Insights
-          </Link>
-          <Link href="/guides" className="text-sm font-medium text-zinc-700 hover:text-zinc-900">
-            Guides
           </Link>
           <Link href="/topics" className="text-sm font-medium text-zinc-700 hover:text-zinc-900">
             Topics
@@ -56,7 +45,11 @@ export default function SiteHeader() {
           <Link href="/deals" className="text-sm font-medium text-zinc-700 hover:text-zinc-900">
             Deals
           </Link>
-          <Link href="/shopping-list" onClick={() => trackEvent("click_shopping_list")} className="text-sm font-medium text-zinc-700 hover:text-zinc-900">
+          <Link
+            href="/shopping-list"
+            onClick={() => trackEvent('click_shopping_list')}
+            className="text-sm font-medium text-zinc-700 hover:text-zinc-900"
+          >
             Free List
           </Link>
           <Link href="/how-we-test" className="text-sm font-medium text-zinc-700 hover:text-zinc-900">
@@ -84,14 +77,8 @@ export default function SiteHeader() {
       {/* Mobile nav */}
       <div className={`${open ? 'block' : 'hidden'} border-t border-zinc-200/60 md:hidden`}>
         <nav className="mx-auto flex max-w-6xl flex-col gap-1 px-4 py-3">
-          <Link href="/best-of" className="rounded-md px-2 py-2 text-sm text-zinc-800 hover:bg-zinc-50">
-            Best of
-          </Link>
           <Link href="/blog" className="rounded-md px-2 py-2 text-sm text-zinc-800 hover:bg-zinc-50">
             Wellness Insights
-          </Link>
-          <Link href="/guides" className="rounded-md px-2 py-2 text-sm text-zinc-800 hover:bg-zinc-50">
-            Guides
           </Link>
           <Link href="/topics" className="rounded-md px-2 py-2 text-sm text-zinc-800 hover:bg-zinc-50">
             Topics
@@ -108,7 +95,11 @@ export default function SiteHeader() {
           <Link href="/deals" className="rounded-md px-2 py-2 text-sm text-zinc-800 hover:bg-zinc-50">
             Deals
           </Link>
-          <Link href="/shopping-list" onClick={() => trackEvent("click_shopping_list")} className="rounded-md px-2 py-2 text-sm text-zinc-800 hover:bg-zinc-50">
+          <Link
+            href="/shopping-list"
+            onClick={() => trackEvent('click_shopping_list')}
+            className="rounded-md px-2 py-2 text-sm text-zinc-800 hover:bg-zinc-50"
+          >
             Free List
           </Link>
           <Link href="/how-we-test" className="rounded-md px-2 py-2 text-sm text-zinc-800 hover:bg-zinc-50">

@@ -5,7 +5,7 @@ import Link from "next/link";
 export const metadata = {
   title: 'Low‑tox living & natural wellness',
   description:
-    'Practical, UK‑focused guides and shortlists for air, water, fragrance‑free living, sleep, nutrition, and movement — calm, conservative recommendations in plain English.',
+    'Practical, UK‑focused insights and shortlists for air, water, fragrance‑free living, sleep, nutrition, and movement — calm, conservative recommendations in plain English.',
 }
 
 
@@ -199,7 +199,7 @@ export default function HomePage() {
               Low‑tox living and natural wellness, in plain English.
             </h1>
             <p className="mt-4 text-base text-zinc-700 md:text-lg">
-              Practical guides and shortlists for air, water, fragrance‑free living, sleep, nutrition, and movement.
+              Practical insights and shortlists for air, water, fragrance‑free living, sleep, nutrition, and movement.
             </p>
             <p className="mt-2 text-sm text-zinc-600">UK‑focused guidance you can use at home, without specialist knowledge.</p>
 
@@ -300,9 +300,9 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* FEATURED GUIDES */}
+      {/* FEATURED INSIGHTS */}
       <section className="mx-auto max-w-6xl px-4 py-10 md:py-14">
-        <h2 className="text-xl font-semibold text-zinc-900">Foundational guides</h2>
+        <h2 className="text-xl font-semibold text-zinc-900">Foundational insights</h2>
         <p className="mt-2 text-sm text-zinc-700">
           Clear starting points for common questions. Where comparisons help, you’ll find shortlists linked inside.
         </p>
@@ -382,7 +382,7 @@ export default function HomePage() {
         <div className="mx-auto max-w-6xl px-4">
           <h2 className="text-2xl font-semibold">Explore sections</h2>
           <p className="mt-2 text-sm text-zinc-600">
-            Browse by area. Each section links to Topic pages, guides, and shortlists.
+            Browse by area. Each section links to Topic pages, insights, and shortlists.
           </p>
           <div className="mt-6 grid gap-4 md:grid-cols-3">
             <Link href="/topics" className="card">

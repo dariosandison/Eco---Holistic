@@ -1,8 +1,10 @@
 import Link from 'next/link'
 import ProductPick from '@/components/mdx/ProductPick'
+import TopicEducationDeepDive from '@/components/TopicEducationDeepDive'
 import TopicAtAGlance from '@/components/TopicAtAGlance'
 import TopicFAQ from '@/components/TopicFAQ'
 import { amazonSearchUrl } from '@/lib/amazon'
+import { getTopicEdu } from '@/lib/topicEdu'
 
 export const metadata = {
   title: 'Fragrance-Free Topics — Wild & Well',
@@ -10,6 +12,8 @@ export const metadata = {
 }
 
 export default function Page() {
+  const edu = getTopicEdu('fragrance-free')
+
   const faqs = [
     {
       q: 'Is “unscented” the same as fragrance-free?',
@@ -42,11 +46,16 @@ export default function Page() {
         </div>
 
         <div className="mt-4 flex flex-wrap gap-2">
+          <a className="chip" href="#understand">Understand</a>
           <a className="chip" href="#start">Start</a>
-          <a className="chip" href="#shortlist">Shortlist</a>
+          <a className="chip" href="#options">Options</a>
           <a className="chip" href="#faqs">FAQs</a>
         </div>
+
+        <p className="mt-3 text-xs text-zinc-500">Last updated: February 2, 2026</p>
       </header>
+
+      <TopicEducationDeepDive edu={edu} />
 
       <div id="start" />
       <TopicAtAGlance
@@ -78,9 +87,9 @@ export default function Page() {
         ]}
       />
 
-      <section className="mt-14" id="shortlist">
-        <h2 className="section-title">Shortlist (search links)</h2>
-        <p className="section-subtitle">Broad search links so you can compare price and availability.</p>
+      <section className="mt-14" id="options">
+        <h2 className="section-title">Options (compare links)</h2>
+        <p className="section-subtitle">If you’ve done the “no-spend” basics, these broad links help you compare price and availability.</p>
 
         <div className="mt-6 grid gap-4 md:grid-cols-2">
           <ProductPick

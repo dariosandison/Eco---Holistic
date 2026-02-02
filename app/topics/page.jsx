@@ -2,7 +2,7 @@ import Link from 'next/link'
 
 export const metadata = {
   title: 'Topics — Wild & Well',
-  description: 'Topic guides for sleep, air quality, water, and fragrance-free home in the UK.',
+  description: 'Education-first topic insights for sleep, air quality, water, and fragrance-free home in the UK.',
 }
 
 function Card({ title, desc, href, tag, image }) {
@@ -38,7 +38,7 @@ export default function Page() {
       <header className="max-w-3xl">
         <h1 className="text-4xl font-bold">Topics</h1>
         <p className="mt-3 text-zinc-700">
-          Practical topic guides for UK homes: sleep, air quality, water, and fragrance-free cleaning.
+          Education-first topic pages for UK homes: what the issue is, why it matters, common causes, and no-spend first steps — then optional shortlists.
         </p>
         <div className="mt-4 flex flex-wrap gap-2">
           <Link className="btn-secondary" href="/shopping-list">Free shopping list</Link>

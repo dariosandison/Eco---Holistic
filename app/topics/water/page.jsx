@@ -1,8 +1,10 @@
 import Link from 'next/link'
 import ProductPick from '@/components/mdx/ProductPick'
+import TopicEducationDeepDive from '@/components/TopicEducationDeepDive'
 import TopicAtAGlance from '@/components/TopicAtAGlance'
 import TopicFAQ from '@/components/TopicFAQ'
 import { amazonSearchUrl } from '@/lib/amazon'
+import { getTopicEdu } from '@/lib/topicEdu'
 
 export const metadata = {
   title: 'Water Topics — Wild & Well',
@@ -14,6 +16,8 @@ const ZW_TOPIC_STARTER = 'https://www.awin1.com/cread.php?awinmid=30649&awinaffi
 const ZW_TOPIC_FILTERS = 'https://www.awin1.com/cread.php?awinmid=30649&awinaffid=2754234&clickref=ww_topics_water_zw_filters&ued=https%3A%2F%2Fwww.zerowater.com%2Fcollections%2F5-stage-replacement-water-filters'
 
 export default function Page() {
+  const edu = getTopicEdu('water')
+
   const faqs = [
     {
       q: 'Do I need a water filter in the UK?',
@@ -54,12 +58,16 @@ export default function Page() {
         </div>
 
         <div className="mt-4 flex flex-wrap gap-2">
+          <a className="chip" href="#understand">Understand</a>
           <a className="chip" href="#start">Start</a>
-          <a className="chip" href="#quick-picks">Quick picks</a>
-          <a className="chip" href="#shortlist">Shortlist</a>
+          <a className="chip" href="#options">Options</a>
           <a className="chip" href="#faqs">FAQs</a>
         </div>
+
+        <p className="mt-3 text-xs text-zinc-500">Last updated: February 2, 2026</p>
       </header>
+
+      <TopicEducationDeepDive edu={edu} />
 
       <div id="start" />
       <TopicAtAGlance
@@ -91,45 +99,9 @@ export default function Page() {
         ]}
       />
 
-      <section className="mt-14" id="quick-picks">
-        <h2 className="section-title">ZeroWater quick picks</h2>
-        <p className="section-subtitle">A straightforward jug option. Compare replacement filters before committing to any jug system.</p>
-
-        <div className="mt-6 grid gap-4 md:grid-cols-2">
-          <ProductPick
-            title="ZeroWater starter kits"
-            badge="Best for taste"
-            description="Jug starter kits in a range of sizes. Use replacements cost to decide long-term value."
-            bullets={[
-              'Most useful for taste/odour goals',
-              'Compare replacement filters as part of the purchase',
-              'Choose a size that fits your fridge/kitchen',
-            ]}
-            links={[
-              { label: 'Check price at ZeroWater', merchant: 'zerowater', href: ZW_TOPIC_STARTER, variant: 'primary' },
-              { label: 'Replacement filters', merchant: 'zerowater', href: ZW_TOPIC_FILTERS, variant: 'ghost' },
-            ]}
-          />
-
-          <ProductPick
-            title="ZeroWater replacement filters"
-            badge="Ongoing cost"
-            description="Replacement filters are the main long-term cost for jug systems."
-            bullets={[
-              'Compare cost per filter and expected lifespan',
-              'Check availability and delivery to the UK',
-              'Use a replacement schedule you can maintain',
-            ]}
-            links={[
-              { label: 'View replacement filters', merchant: 'zerowater', href: ZW_TOPIC_FILTERS, variant: 'primary' },
-            ]}
-          />
-        </div>
-      </section>
-
-      <section className="mt-14" id="shortlist">
-        <h2 className="section-title">Shortlist (search links)</h2>
-        <p className="section-subtitle">Broad search links so you can compare price, warranty, and replacement filters.</p>
+      <section className="mt-14" id="options">
+        <h2 className="section-title">Options (compare links)</h2>
+        <p className="section-subtitle">After the basics, these broad links help you compare warranty, replacements, and real-world usability.</p>
 
         <div className="mt-6 grid gap-4 md:grid-cols-2">
           <ProductPick
@@ -160,6 +132,17 @@ export default function Page() {
             href={amazonSearchUrl('stainless steel water bottle wide mouth')}
             bullets={['Dishwasher safe is helpful', 'Wide mouth is easier to clean']}
           />
+        </div>
+
+        <div className="mt-8 rounded-2xl border bg-white p-6 shadow-sm">
+          <h3 className="text-lg font-semibold">ZeroWater (optional)</h3>
+          <p className="mt-2 text-sm text-zinc-700">
+            If taste is your main goal, a jug system can be a simple start. Compare replacement filters before you commit long-term.
+          </p>
+          <div className="mt-4 flex flex-wrap gap-2">
+            <a className="btn-secondary" href={ZW_TOPIC_STARTER} target="_blank" rel="noopener nofollow sponsored">ZeroWater starter kits</a>
+            <a className="btn-secondary" href={ZW_TOPIC_FILTERS} target="_blank" rel="noopener nofollow sponsored">Replacement filters</a>
+          </div>
         </div>
 
         <div className="mt-8 flex flex-wrap gap-2">

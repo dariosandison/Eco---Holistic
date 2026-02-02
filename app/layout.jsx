@@ -11,7 +11,7 @@ import BreadcrumbBar from '@/components/BreadcrumbBar'
 const SITE_URL = 'https://www.wild-and-well.store'
 const DEFAULT_TITLE = 'Wild & Well'
 const DEFAULT_DESC =
-  'Low‑tox living and natural wellness, in plain English. UK‑focused guides and shortlists for air, water, fragrance‑free living, sleep, nutrition, and movement.'
+  'Low‑tox living and natural wellness, in plain English. UK‑focused insights and shortlists for air, water, fragrance‑free living, sleep, nutrition, and movement.'
 
 export const metadata = {
   metadataBase: new URL(SITE_URL),

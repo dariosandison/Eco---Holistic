@@ -10,6 +10,11 @@ export default function MoneyPageEducationBlock({ edu }) {
   if (!edu) return null;
   const {
     intro,
+    whyItMatters,
+    healthEffects,
+    commonCauses,
+    noSpendFirstSteps,
+    whenToGetHelp,
     topicHref,
     topicLabel,
     insightHref,
@@ -24,16 +29,21 @@ export default function MoneyPageEducationBlock({ edu }) {
     runningCosts = null,
   } = edu;
 
+  const arr = (v) => (Array.isArray(v) ? v.filter(Boolean) : (v ? [v] : []));
+  const Why = arr(whyItMatters);
+  const Effects = arr(healthEffects);
+  const Causes = arr(commonCauses);
+  const NoSpend = arr(noSpendFirstSteps);
+  const Help = arr(whenToGetHelp);
+
   return (
     <section className="mt-8">
       <div className="rounded-2xl border bg-white p-6 shadow-sm">
         <div className="flex flex-col gap-3 md:flex-row md:items-start md:justify-between">
           <div className="min-w-0">
-            <h2 className="text-xl font-semibold text-zinc-900">Before you buy</h2>
+            <h2 className="text-xl font-semibold text-zinc-900">Understand the basics</h2>
             <p className="mt-2 text-sm text-zinc-700 max-w-3xl">{intro}</p>
-            <p className="mt-2 text-xs text-zinc-500">
-              Affiliate disclosure: some links may earn us a commission at no extra cost to you.
-            </p>
+            <p className="mt-2 text-xs text-zinc-500">Educational info only — not medical advice.</p>
           </div>
           <div className="flex flex-wrap gap-2">
             {topicHref && (
@@ -47,6 +57,76 @@ export default function MoneyPageEducationBlock({ edu }) {
               </Link>
             )}
           </div>
+        </div>
+
+        {(Why.length || Causes.length || NoSpend.length || Effects.length || Help.length) ? (
+          <div className="mt-6">
+            <div className="grid gap-4 md:grid-cols-3">
+              {Why.length ? (
+                <div className="card">
+                  <h3 className="text-lg font-semibold">Why it matters</h3>
+                  <ul className="mt-3 list-disc pl-6 text-sm text-zinc-700 space-y-2">
+                    {Why.slice(0, 6).map((b, i) => (
+                      <li key={i}>{b}</li>
+                    ))}
+                  </ul>
+                </div>
+              ) : null}
+
+              {Causes.length ? (
+                <div className="card">
+                  <h3 className="text-lg font-semibold">Common causes</h3>
+                  <ul className="mt-3 list-disc pl-6 text-sm text-zinc-700 space-y-2">
+                    {Causes.slice(0, 7).map((b, i) => (
+                      <li key={i}>{b}</li>
+                    ))}
+                  </ul>
+                </div>
+              ) : null}
+
+              {NoSpend.length ? (
+                <div className="card">
+                  <h3 className="text-lg font-semibold">First steps (no spend)</h3>
+                  <ul className="mt-3 list-disc pl-6 text-sm text-zinc-700 space-y-2">
+                    {NoSpend.slice(0, 7).map((b, i) => (
+                      <li key={i}>{b}</li>
+                    ))}
+                  </ul>
+                </div>
+              ) : null}
+            </div>
+
+            {(Effects.length || Help.length) ? (
+              <div className="mt-4 grid gap-4 md:grid-cols-2">
+                {Effects.length ? (
+                  <div className="card">
+                    <h3 className="text-lg font-semibold">How it can affect health</h3>
+                    <ul className="mt-3 list-disc pl-6 text-sm text-zinc-700 space-y-2">
+                      {Effects.slice(0, 8).map((b, i) => (
+                        <li key={i}>{b}</li>
+                      ))}
+                    </ul>
+                  </div>
+                ) : null}
+
+                {Help.length ? (
+                  <div className="card">
+                    <h3 className="text-lg font-semibold">When to get help</h3>
+                    <ul className="mt-3 list-disc pl-6 text-sm text-zinc-700 space-y-2">
+                      {Help.slice(0, 6).map((b, i) => (
+                        <li key={i}>{b}</li>
+                      ))}
+                    </ul>
+                  </div>
+                ) : null}
+              </div>
+            ) : null}
+          </div>
+        ) : null}
+
+        <div className="mt-6 flex items-center justify-between gap-3">
+          <div className="text-sm font-semibold text-zinc-900">If you want options, use this quick buying lens</div>
+          <Link className="text-sm underline" href="/affiliate-disclosure">Affiliate disclosure</Link>
         </div>
 
         <div className="mt-6 grid gap-4 md:grid-cols-3">

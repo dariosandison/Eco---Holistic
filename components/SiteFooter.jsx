@@ -9,7 +9,6 @@ export default function SiteFooter() {
 
   const learn = [
     { href: '/blog', label: 'Wellness Insights' },
-    { href: '/guides', label: 'Guides' },
     { href: '/topics', label: 'Topics' },
     { href: '/nutrition', label: 'Nutrition' },
     { href: '/movement', label: 'Movement' },
@@ -18,7 +17,6 @@ export default function SiteFooter() {
 
   const shop = [
     { href: '/shopping-list', label: 'Free Shopping List' },
-    { href: '/best-of', label: 'Best of' },
     { href: '/favourites', label: 'Favourites' },
     { href: '/deals', label: 'Deals' },
   ]
@@ -29,7 +27,7 @@ export default function SiteFooter() {
     { href: '/contact', label: 'Contact' },
   ]
 
-const legal = [
+  const legal = [
     { href: '/editorial-policy', label: 'Editorial Policy' },
     { href: '/how-we-test', label: 'How We Test' },
     { href: '/product-disclosure', label: 'Product Disclosure' },
@@ -42,18 +40,16 @@ const legal = [
 
   return (
     <footer className="border-t bg-white">
-      <div className="mx-auto max-w-6xl px-4 py-10 grid gap-6 md:grid-cols-3">
+      <div className="mx-auto grid max-w-6xl gap-6 px-4 py-10 md:grid-cols-3">
         <div>
           <div className="font-semibold text-[var(--brand)]">Wild &amp; Well</div>
-          <p className="text-sm text-neutral-600 mt-2">
-            Natural wellness, practical guides, and product shortlists.
+          <p className="mt-2 text-sm text-neutral-600">
+            Natural wellness made simple — calm insights and product shortlists.
           </p>
 
           <div className="mt-4 rounded-2xl border bg-zinc-50 p-4">
             <div className="font-semibold">Get the free shopping list</div>
-            <p className="mt-1 text-xs text-neutral-600">
-              One email. Beginner swaps for air, water, cleaning, and sleep.
-            </p>
+            <p className="mt-1 text-xs text-neutral-600">One email. Beginner swaps for air, water, cleaning, and sleep.</p>
             <form action="/api/subscribe" method="post" className="mt-3 flex gap-2">
               <input type="hidden" name="source" value="footer" />
               <input
@@ -71,16 +67,19 @@ const legal = [
               </button>
             </form>
             <p className="mt-2 text-[11px] text-neutral-500">
-              By subscribing you agree to our <a className="underline" href="/privacy">privacy policy</a>. Unsubscribe anytime.
+              By subscribing you agree to our{' '}
+              <a className="underline" href="/privacy">
+                privacy policy
+              </a>
+              . Unsubscribe anytime.
             </p>
           </div>
-          <p className="text-xs text-neutral-500 mt-3">
-            Some links are affiliate links. If you buy via them, we earn a commission.
-          </p>
+
+          <p className="mt-3 text-xs text-neutral-500">Some links may earn us a small commission at no extra cost to you. As an Amazon Associate, we earn from qualifying purchases.</p>
         </div>
 
         <div>
-          <div className="font-semibold mb-2">Learn</div>
+          <div className="mb-2 font-semibold">Learn</div>
           <ul className="space-y-1 text-sm">
             {learn.map((l) => (
               <li key={l.href}>
@@ -92,7 +91,7 @@ const legal = [
           </ul>
 
           <div className="mt-6">
-            <div className="font-semibold mb-2">Shop</div>
+            <div className="mb-2 font-semibold">Shop</div>
             <ul className="space-y-1 text-sm">
               {shop.map((l) => (
                 <li key={l.href}>
@@ -105,7 +104,7 @@ const legal = [
           </div>
 
           <div className="mt-6">
-            <div className="font-semibold mb-2">About</div>
+            <div className="mb-2 font-semibold">About</div>
             <ul className="space-y-1 text-sm">
               {about.map((l) => (
                 <li key={l.href}>
@@ -119,7 +118,7 @@ const legal = [
         </div>
 
         <div>
-          <div className="font-semibold mb-2">Policies</div>
+          <div className="mb-2 font-semibold">Policies</div>
           <ul className="space-y-1 text-sm">
             {legal.map((l) => (
               <li key={l.href}>
@@ -132,16 +131,11 @@ const legal = [
 
           {socials.length ? (
             <div className="mt-4">
-              <div className="font-semibold mb-2">Follow</div>
+              <div className="mb-2 font-semibold">Follow</div>
               <ul className="space-y-1 text-sm">
                 {socials.map((s) => (
                   <li key={s.href}>
-                    <a
-                      href={s.href}
-                      target="_blank"
-                      rel="noopener nofollow"
-                      className="hover:underline"
-                    >
+                    <a href={s.href} target="_blank" rel="noopener nofollow" className="hover:underline">
                       {s.label}
                     </a>
                   </li>
@@ -149,12 +143,14 @@ const legal = [
               </ul>
             </div>
           ) : null}
+
+          <p className="mt-4 text-xs text-neutral-500">
+            Wild &amp; Well is run independently. We don’t accept paid placements disguised as advice — we recommend products we genuinely trust.
+          </p>
         </div>
       </div>
 
-      <div className="text-center text-xs text-neutral-500 pb-4">
-        © {new Date().getFullYear()} Wild &amp; Well. All rights reserved.
-      </div>
+      <div className="pb-4 text-center text-xs text-neutral-500">© {new Date().getFullYear()} Wild &amp; Well. All rights reserved.</div>
     </footer>
   )
 }
