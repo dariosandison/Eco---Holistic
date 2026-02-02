@@ -365,7 +365,7 @@ export default function HomePage() {
           View the list
         </Link>
       </div>
-      <p className="mt-4 text-xs text-zinc-600">Some links are affiliate links.</p>
+      <p className="mt-4 text-xs text-zinc-600">Some links are affiliate links. If you buy via them, we earn a commission.</p>
     </div>
   </div>
 </section>

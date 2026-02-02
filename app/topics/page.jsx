@@ -63,7 +63,7 @@ export default function Page() {
         </ol>
       </section>
 
-      <p className="mt-12 text-xs text-zinc-500">Some links are affiliate links.</p>
+      <p className="mt-12 text-xs text-zinc-500">Some links are affiliate links. If you buy via them, we earn a commission.</p>
     </main>
   )
 }

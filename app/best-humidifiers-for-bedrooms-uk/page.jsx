@@ -61,7 +61,7 @@ function QuickSummary(){
         <Link className="btn-secondary" href="/blog/winter-humidity-guide">Humidity guide</Link>
         <Link className="btn-secondary" href="/shopping-list">Free shopping list</Link>
       </div>
-      <p className="mt-4 text-xs text-zinc-500">Last updated: January 29, 2026</p>
+      <p className="mt-4 text-xs text-zinc-500">Last updated: February 2, 2026 · Wild & Well Editorial Team</p>
     </div>
   )
 }
@@ -81,7 +81,7 @@ const itemList = PICKS.map((p, i) => ({
     '@context': 'https://schema.org',
     '@type': 'Article',
     headline: 'Humidifiers for Bedrooms (UK): shortlist',
-    dateModified: '2026-01-29',
+    dateModified: '2026-02-02',
     datePublished: '2026-01-29',
     mainEntity: {
       '@type': 'ItemList',
@@ -238,7 +238,7 @@ const itemList = PICKS.map((p, i) => ({
       </section>
 
       <p className="mt-12 text-sm text-zinc-500 max-w-3xl">
-        Some links are affiliate links.
+        Some links are affiliate links. If you buy via them, we earn a commission.
       </p>
     
       <MoneyPageNextLinks slug="best-humidifiers-for-bedrooms-uk" />

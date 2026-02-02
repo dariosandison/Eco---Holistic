@@ -43,7 +43,7 @@ const url = `${SITE_URL}/best-low-tox-products-for-beginners`
     '@type': 'Article',
     headline: 'Low‑tox products for beginners: starter favourites',
     datePublished: '2026-01-25',
-    dateModified: '2026-01-29',
+    dateModified: '2026-02-02',
     mainEntityOfPage: { '@type': 'WebPage', '@id': url },
     publisher: {
       '@type': 'Organization',
@@ -101,7 +101,7 @@ const url = `${SITE_URL}/best-low-tox-products-for-beginners`
           <Link className="btn-secondary" href="/topics">Browse Topics</Link>
           <Link className="btn-secondary" href="/favourites">Browse Favourites</Link>
         </div>
-        <p className="mt-3 text-xs text-zinc-500">Last updated: January 29, 2026</p>
+        <p className="mt-3 text-xs text-zinc-500">Last updated: February 2, 2026 · Wild & Well Editorial Team</p>
       </header>
 
       
@@ -176,7 +176,7 @@ const url = `${SITE_URL}/best-low-tox-products-for-beginners`
       </section>
 
       <p className="mt-12 text-sm text-zinc-500 max-w-3xl">
-        Some links are affiliate links.
+        Some links are affiliate links. If you buy via them, we earn a commission.
       </p>
     
       <MoneyPageNextLinks slug="best-low-tox-products-for-beginners" />

@@ -1,71 +1,133 @@
+'use client'
+
 // components/MoneyPageQuickCompare.jsx
+import { useMemo, useState } from 'react'
+
 /**
  * Quick comparison table built from a PICKS array.
  * Designed for scanning: best-for label + one key note + one trade-off.
+ *
+ * This is intentionally lightweight: filtering/searching helps readers
+ * find the right row fast without changing the editorial order by default.
  */
-export default function MoneyPageQuickCompare({ picks, title = "Quick compare" }) {
-  if (!picks || !Array.isArray(picks) || picks.length === 0) return null;
+export default function MoneyPageQuickCompare({ picks = [] }) {
+  const [q, setQ] = useState('')
+  const [badge, setBadge] = useState('All')
+  const [sort, setSort] = useState('Recommended')
 
-  const rows = picks.slice(0, 6).map((p) => {
-    const keyNote = Array.isArray(p.bullets) && p.bullets.length ? p.bullets[0] : "";
-    const tradeOff = Array.isArray(p.bullets) && p.bullets.length > 1 ? p.bullets[1] : (p.desc || "");
-    const bestFor = p.badge || "Good fit";
-    return {
-      name: p.title,
-      bestFor,
-      keyNote,
-      tradeOff,
-    };
-  });
+  const badgeOptions = useMemo(() => {
+    const set = new Set()
+    picks.forEach((p) => {
+      if (p?.badge) set.add(String(p.badge))
+    })
+    return ['All', ...Array.from(set)]
+  }, [picks])
+
+  const filtered = useMemo(() => {
+    const query = q.trim().toLowerCase()
+    let out = Array.isArray(picks) ? [...picks] : []
+
+    if (badge !== 'All') {
+      out = out.filter((p) => String(p?.badge || '') === badge)
+    }
+
+    if (query) {
+      out = out.filter((p) => {
+        const hay = [
+          p?.title,
+          p?.badge,
+          p?.note,
+          p?.tradeoff,
+          ...(Array.isArray(p?.bullets) ? p.bullets : []),
+        ]
+          .filter(Boolean)
+          .join(' ')
+          .toLowerCase()
+        return hay.includes(query)
+      })
+    }
+
+    if (sort === 'A–Z') {
+      out.sort((a, b) => String(a?.title || '').localeCompare(String(b?.title || '')))
+    }
+
+    return out
+  }, [picks, q, badge, sort])
+
+  if (!picks || picks.length === 0) return null
 
   return (
-    <section className="mt-10">
-      <h2 className="text-2xl font-semibold">{title}</h2>
-      <p className="mt-2 text-sm text-zinc-600 max-w-3xl">
-        Summary of the main differences across a small set of options.
-      </p>
-
-      <div className="mt-6 grid gap-4 md:grid-cols-3">
-        {picks.slice(0, 3).map((p, idx) => (
-          <div key={idx} className="card p-4">
-            <div className="flex flex-wrap items-center gap-2">
-              <div className="text-sm font-semibold text-zinc-900">{p.title}</div>
-              {p.badge ? <span className="chip">{p.badge}</span> : null}
-            </div>
-            {p.desc ? <p className="mt-2 text-sm text-zinc-700">{p.desc}</p> : null}
-            {Array.isArray(p.bullets) && p.bullets.length ? (
-              <ul className="mt-3 list-disc pl-5 text-sm text-zinc-700 space-y-1">
-                {p.bullets.slice(0, 2).map((b, i) => (
-                  <li key={i}>{b}</li>
-                ))}
-              </ul>
-            ) : null}
+    <section className="mt-8">
+      <div className="rounded-2xl border bg-white p-6 shadow-sm">
+        <div className="flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
+          <div className="min-w-0">
+            <h2 className="text-xl font-semibold text-zinc-900">Quick comparison</h2>
+            <p className="mt-2 text-sm text-zinc-700 max-w-3xl">
+              Scan the best‑for label, one key note, and one trade‑off.
+            </p>
           </div>
-        ))}
-      </div>
 
-      <div className="mt-6 overflow-x-auto rounded-2xl border bg-white">
-        <table className="w-full text-left text-sm">
-          <thead className="border-b bg-zinc-50">
-            <tr>
-              <th className="px-4 py-3 font-semibold">Option</th>
-              <th className="px-4 py-3 font-semibold">Good for</th>
-              <th className="px-4 py-3 font-semibold">Key note</th>
-              <th className="px-4 py-3 font-semibold">Trade-off</th>
-            </tr>
-          </thead>
-          <tbody>
-            {rows.map((r, idx) => (
-              <tr key={idx} className="border-b last:border-0">
-                <td className="px-4 py-3 font-medium text-zinc-900">{r.name}</td>
-                <td className="px-4 py-3 text-zinc-700">{r.bestFor}</td>
-                <td className="px-4 py-3 text-zinc-700">{r.keyNote}</td>
-                <td className="px-4 py-3 text-zinc-700">{r.tradeOff}</td>
+          <div className="flex flex-col gap-2 sm:flex-row sm:items-center">
+            <input
+              value={q}
+              onChange={(e) => setQ(e.target.value)}
+              placeholder="Search picks…"
+              className="w-full sm:w-56 rounded-2xl border border-zinc-200 bg-white px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-emerald-200"
+            />
+
+            <select
+              value={badge}
+              onChange={(e) => setBadge(e.target.value)}
+              className="w-full sm:w-48 rounded-2xl border border-zinc-200 bg-white px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-emerald-200"
+              aria-label="Filter by label"
+            >
+              {badgeOptions.map((b) => (
+                <option key={b} value={b}>{b}</option>
+              ))}
+            </select>
+
+            <select
+              value={sort}
+              onChange={(e) => setSort(e.target.value)}
+              className="w-full sm:w-40 rounded-2xl border border-zinc-200 bg-white px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-emerald-200"
+              aria-label="Sort order"
+            >
+              <option value="Recommended">Recommended</option>
+              <option value="A–Z">A–Z</option>
+            </select>
+          </div>
+        </div>
+
+        <div className="mt-5 overflow-auto rounded-2xl border">
+          <table className="min-w-[760px] w-full border-collapse text-sm">
+            <thead className="bg-zinc-50 text-left text-zinc-700">
+              <tr>
+                <th className="px-4 py-3 font-semibold w-[220px]">Pick</th>
+                <th className="px-4 py-3 font-semibold">Best for</th>
+                <th className="px-4 py-3 font-semibold">Key note</th>
+                <th className="px-4 py-3 font-semibold">Trade‑off</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {filtered.map((p, i) => (
+                <tr key={i} className="border-t">
+                  <td className="px-4 py-3 font-semibold text-zinc-900">{p.title}</td>
+                  <td className="px-4 py-3 text-zinc-700">{p.badge}</td>
+                  <td className="px-4 py-3 text-zinc-700">{p.note}</td>
+                  <td className="px-4 py-3 text-zinc-700">{p.tradeoff}</td>
+                </tr>
+              ))}
+              {filtered.length === 0 ? (
+                <tr className="border-t">
+                  <td className="px-4 py-5 text-zinc-600" colSpan={4}>
+                    No matches. Try a different search or filter.
+                  </td>
+                </tr>
+              ) : null}
+            </tbody>
+          </table>
+        </div>
       </div>
     </section>
-  );
+  )
 }

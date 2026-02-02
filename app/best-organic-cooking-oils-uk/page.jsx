@@ -82,7 +82,7 @@ const url = `${SITE_URL}/best-organic-cooking-oils-uk`
     '@type': 'Article',
     headline: 'Cooking oils (UK): simple favourites',
     datePublished: '2026-01-24',
-    dateModified: '2026-01-29',
+    dateModified: '2026-02-02',
     mainEntityOfPage: { '@type': 'WebPage', '@id': url },
     mainEntity: { '@type': 'ItemList', itemListElement: itemList },
     publisher: {
@@ -109,7 +109,7 @@ const url = `${SITE_URL}/best-organic-cooking-oils-uk`
           <Link className="btn-secondary" href="/best-extra-virgin-olive-oil-uk">EVOO favourites</Link>
           <Link className="btn-secondary" href="/shopping-list">Free shopping list</Link>
         </div>
-        <p className="mt-3 text-xs text-zinc-500">Last updated: January 29, 2026</p>
+        <p className="mt-3 text-xs text-zinc-500">Last updated: February 2, 2026 · Wild & Well Editorial Team</p>
       </header>
 
       
@@ -158,7 +158,7 @@ const url = `${SITE_URL}/best-organic-cooking-oils-uk`
       </section>
 
       <p className="mt-12 text-sm text-zinc-500 max-w-3xl">
-        Some links are affiliate links.
+        Some links are affiliate links. If you buy via them, we earn a commission.
       </p>
     
       <MoneyPageNextLinks slug="best-organic-cooking-oils-uk" />

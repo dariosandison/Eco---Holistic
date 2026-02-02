@@ -1,11 +1,11 @@
 export default function SiteFooter() {
   const socials = [
-    { href: 'https://www.instagram.com/', label: 'Instagram' },
-    { href: 'https://www.pinterest.com/', label: 'Pinterest' },
-    { href: 'https://www.tiktok.com/', label: 'TikTok' },
-    { href: 'https://www.youtube.com/', label: 'YouTube' },
-    { href: 'https://twitter.com/', label: 'X' },
-  ]
+    { href: process.env.NEXT_PUBLIC_INSTAGRAM_URL, label: 'Instagram' },
+    { href: process.env.NEXT_PUBLIC_PINTEREST_URL, label: 'Pinterest' },
+    { href: process.env.NEXT_PUBLIC_TIKTOK_URL, label: 'TikTok' },
+    { href: process.env.NEXT_PUBLIC_YOUTUBE_URL, label: 'YouTube' },
+    { href: process.env.NEXT_PUBLIC_X_URL, label: 'X' },
+  ].filter((s) => s.href)
 
   const learn = [
     { href: '/blog', label: 'Wellness Insights' },
@@ -18,6 +18,7 @@ export default function SiteFooter() {
 
   const shop = [
     { href: '/shopping-list', label: 'Free Shopping List' },
+    { href: '/best-of', label: 'Best of' },
     { href: '/favourites', label: 'Favourites' },
     { href: '/deals', label: 'Deals' },
   ]
@@ -71,7 +72,7 @@ const legal = [
             </p>
           </div>
           <p className="text-xs text-neutral-500 mt-3">
-            As an Amazon Associate, we earn from qualifying purchases.
+            Some links are affiliate links. If you buy via them, we earn a commission.
           </p>
         </div>
 
@@ -126,28 +127,26 @@ const legal = [
             ))}
           </ul>
 
-          <div className="mt-4">
-            <div className="font-semibold mb-2">Follow</div>
-            <ul className="space-y-1 text-sm">
-              {socials.map((s) => (
-                <li key={s.href}>
-                  <a
-                    href={s.href}
-                    target="_blank"
-                    rel="noopener nofollow"
-                    className="hover:underline"
-                  >
-                    {s.label}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
+          {socials.length ? (
+            <div className="mt-4">
+              <div className="font-semibold mb-2">Follow</div>
+              <ul className="space-y-1 text-sm">
+                {socials.map((s) => (
+                  <li key={s.href}>
+                    <a
+                      href={s.href}
+                      target="_blank"
+                      rel="noopener nofollow"
+                      className="hover:underline"
+                    >
+                      {s.label}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ) : null}
         </div>
-      </div>
-
-      <div className="text-center text-xs text-neutral-500 px-4 pb-2">
-        Some links are affiliate links.
       </div>
 
       <div className="text-center text-xs text-neutral-500 pb-4">

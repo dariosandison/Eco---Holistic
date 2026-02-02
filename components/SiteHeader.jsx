@@ -11,6 +11,12 @@ export default function SiteHeader() {
 
   return (
     <header className="sticky top-0 z-50 border-b border-zinc-200/60 bg-white/85 backdrop-blur supports-[backdrop-filter]:bg-white/70">
+      <a
+        href="#content"
+        className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:rounded-xl focus:border focus:bg-white focus:px-3 focus:py-2 focus:text-sm focus:font-semibold"
+      >
+        Skip to content
+      </a>
       <div className="mx-auto flex max-w-6xl items-center gap-4 px-4 py-3">
         {/* Brand */}
         <Link href="/" className="inline-flex items-center gap-2">
@@ -26,6 +32,9 @@ export default function SiteHeader() {
 
         {/* Desktop nav */}
         <nav className="ml-auto hidden items-center gap-6 md:flex">
+          <Link href="/best-of" className="text-sm font-medium text-zinc-700 hover:text-zinc-900">
+            Best of
+          </Link>
           <Link href="/blog" className="text-sm font-medium text-zinc-700 hover:text-zinc-900">
             Wellness Insights
           </Link>
@@ -75,6 +84,9 @@ export default function SiteHeader() {
       {/* Mobile nav */}
       <div className={`${open ? 'block' : 'hidden'} border-t border-zinc-200/60 md:hidden`}>
         <nav className="mx-auto flex max-w-6xl flex-col gap-1 px-4 py-3">
+          <Link href="/best-of" className="rounded-md px-2 py-2 text-sm text-zinc-800 hover:bg-zinc-50">
+            Best of
+          </Link>
           <Link href="/blog" className="rounded-md px-2 py-2 text-sm text-zinc-800 hover:bg-zinc-50">
             Wellness Insights
           </Link>
@@ -102,8 +114,8 @@ export default function SiteHeader() {
           <Link href="/how-we-test" className="rounded-md px-2 py-2 text-sm text-zinc-800 hover:bg-zinc-50">
             How We Test
           </Link>
-          <Link href="/product-disclosure" className="rounded-md px-2 py-2 text-sm text-zinc-800 hover:bg-zinc-50">
-            Disclosure
+          <Link href="/affiliate-disclosure" className="rounded-md px-2 py-2 text-sm text-zinc-800 hover:bg-zinc-50">
+            Affiliate disclosure
           </Link>
           <Link href="/about" className="rounded-md px-2 py-2 text-sm text-zinc-800 hover:bg-zinc-50">
             About

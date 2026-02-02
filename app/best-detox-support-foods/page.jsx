@@ -28,7 +28,7 @@ const url = `${SITE_URL}/best-detox-support-foods`
     '@type': 'Article',
     headline: 'Everyday foods that support your body',
     datePublished: '2026-01-24',
-    dateModified: '2026-01-29',
+    dateModified: '2026-02-02',
     mainEntityOfPage: { '@type': 'WebPage', '@id': url },
     publisher: {
       '@type': 'Organization',
@@ -54,7 +54,7 @@ const url = `${SITE_URL}/best-detox-support-foods`
           <Link className="btn-secondary" href="/shopping-list">Free shopping list</Link>
           <Link className="btn-secondary" href="/blog/food-first-basics">Food‑first basics</Link>
         </div>
-        <p className="mt-3 text-xs text-zinc-500">Last updated: January 29, 2026</p>
+        <p className="mt-3 text-xs text-zinc-500">Last updated: February 2, 2026 · Wild & Well Editorial Team</p>
       </header>
 
       

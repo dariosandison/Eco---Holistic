@@ -96,7 +96,7 @@ function SummaryBox() {
       <div className="mt-4 flex flex-wrap gap-2">
         <Link className="btn-secondary" href="/nutrition">Nutrition</Link>
       </div>
-      <p className="mt-4 text-xs text-zinc-500">Last updated: January 27, 2026</p>
+      <p className="mt-4 text-xs text-zinc-500">Last updated: February 2, 2026 · Wild & Well Editorial Team</p>
     </div>
   )
 }
@@ -116,7 +116,7 @@ const itemList = PICKS.map((p, i) => ({
     '@context': 'https://schema.org',
     '@type': 'Article',
     headline: "Chia seeds (UK): simple shortlist",
-    dateModified: '2026-01-27',
+    dateModified: '2026-02-02',
     datePublished: '2026-01-27',
     mainEntity: {
       '@type': 'ItemList',
@@ -240,7 +240,7 @@ const itemList = PICKS.map((p, i) => ({
           </p>
         </div>
         <p className="mt-4 text-sm text-zinc-500">
-          Some links are affiliate links.
+          Some links are affiliate links. If you buy via them, we earn a commission.
         </p>
       </section>
     

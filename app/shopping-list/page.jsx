@@ -103,7 +103,7 @@ export default function ShoppingListPage({ searchParams }) {
       </section>
 
       <p className="mt-12 text-sm text-zinc-500">
-        Some links are affiliate links.
+        Some links are affiliate links. If you buy via them, we earn a commission.
       </p>
     </main>
   );

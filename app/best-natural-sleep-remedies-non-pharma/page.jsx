@@ -80,7 +80,7 @@ const url = `${SITE_URL}/best-natural-sleep-remedies-non-pharma`
     '@type': 'Article',
     headline: 'Natural sleep support (non‑pharma): what helps, what to skip',
     datePublished: '2026-01-24',
-    dateModified: '2026-01-29',
+    dateModified: '2026-02-02',
     mainEntityOfPage: { '@type': 'WebPage', '@id': url },
     mainEntity: { '@type': 'ItemList', itemListElement: itemList },
     publisher: {
@@ -139,7 +139,7 @@ const url = `${SITE_URL}/best-natural-sleep-remedies-non-pharma`
           <Link className="btn-secondary" href="/best-humidifiers-for-bedrooms-uk">Bedroom humidifiers</Link>
           <Link className="btn-secondary" href="/blog/sleep-naturally-simple-guide">Cornerstone sleep guide</Link>
         </div>
-        <p className="mt-3 text-xs text-zinc-500">Last updated: January 29, 2026</p>
+        <p className="mt-3 text-xs text-zinc-500">Last updated: February 2, 2026 · Wild & Well Editorial Team</p>
       </header>
 
       
@@ -189,7 +189,7 @@ const url = `${SITE_URL}/best-natural-sleep-remedies-non-pharma`
       </section>
 
       <p className="mt-12 text-sm text-zinc-500 max-w-3xl">
-        This page is informational and not medical advice. Some links are affiliate links.
+        This page is informational and not medical advice. Some links are affiliate links. If you buy via them, we earn a commission.
       </p>
     
       <MoneyPageNextLinks slug="best-natural-sleep-remedies-non-pharma" />

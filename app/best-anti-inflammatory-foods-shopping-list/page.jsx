@@ -28,7 +28,7 @@ const url = `${SITE_URL}/best-anti-inflammatory-foods-shopping-list`
     '@type': 'Article',
     headline: 'Anti-inflammatory-style shopping list: simple staples',
     datePublished: '2026-01-24',
-    dateModified: '2026-01-29',
+    dateModified: '2026-02-02',
     mainEntityOfPage: { '@type': 'WebPage', '@id': url },
     publisher: {
       '@type': 'Organization',
@@ -55,7 +55,7 @@ const url = `${SITE_URL}/best-anti-inflammatory-foods-shopping-list`
           <Link className="btn-secondary" href="/nutrition">Nutrition</Link>
           <Link className="btn-secondary" href="/best-extra-virgin-olive-oil-uk">Olive oil favourites</Link>
         </div>
-        <p className="mt-3 text-xs text-zinc-500">Last updated: January 29, 2026</p>
+        <p className="mt-3 text-xs text-zinc-500">Last updated: February 2, 2026 · Wild & Well Editorial Team</p>
       </header>
 
       

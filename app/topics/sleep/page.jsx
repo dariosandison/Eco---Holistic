@@ -132,7 +132,7 @@ export default function Page() {
         General information only. If you are pregnant, on medication, or managing a health condition, check with a qualified clinician first.
       </p>
 
-      <p className="mt-3 text-xs text-zinc-500">Some links are affiliate links.</p>
+      <p className="mt-3 text-xs text-zinc-500">Some links are affiliate links. If you buy via them, we earn a commission.</p>
     </main>
   )
 }

@@ -76,7 +76,7 @@ function QuickSummary() {
         <Link className="btn-secondary" href="/blog/winter-humidity-guide">Winter humidity guide</Link>
         <Link className="btn-secondary" href="/shopping-list">Free shopping list</Link>
       </div>
-      <p className="mt-4 text-xs text-zinc-500">Last updated: February 1, 2026</p>
+      <p className="mt-4 text-xs text-zinc-500">Last updated: February 2, 2026 · Wild & Well Editorial Team</p>
     </div>
   )
 }
@@ -96,7 +96,7 @@ export default function Page() {
     '@context': 'https://schema.org',
     '@type': 'Article',
     headline: 'Best dehumidifiers for damp & mould (UK): what to buy first',
-    dateModified: '2026-02-01',
+    dateModified: '2026-02-02',
     datePublished: '2026-02-01',
     mainEntity: {
       '@type': 'ItemList',
@@ -257,12 +257,12 @@ export default function Page() {
         <p className="mt-2 text-sm text-zinc-700">
           Common UK retailers include Amazon, AO.com, Currys, and brand stores (for example: Pro Breeze). Compare extraction rate, noise, and energy use before buying.
         </p>
-        <p className="mt-3 text-xs text-zinc-500">Some links are affiliate links.</p>
+        <p className="mt-3 text-xs text-zinc-500">Some links are affiliate links. If you buy via them, we earn a commission.</p>
       </section>
 
       <MoneyPageNextLinks slug={slug} />
 
-      <p className="mt-12 text-xs text-zinc-500">Some links are affiliate links.</p>
+      <p className="mt-12 text-xs text-zinc-500">Some links are affiliate links. If you buy via them, we earn a commission.</p>
     </main>
   )
 }

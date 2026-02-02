@@ -91,7 +91,7 @@ export default function Page() {
       </section>
 
       <p className="mt-12 text-sm text-zinc-500 max-w-3xl">
-        Some links are affiliate links.
+        Some links are affiliate links. If you buy via them, we earn a commission.
       </p>
     </main>
   );

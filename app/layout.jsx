@@ -6,6 +6,7 @@ import ConsentBanner from '@/components/ConsentBanner'
 import GA from '@/components/GA'
 import SiteJsonLd from '@/components/SiteJsonLd'
 import OutboundAffiliateTracker from '@/components/OutboundAffiliateTracker'
+import BreadcrumbBar from '@/components/BreadcrumbBar'
 
 export const metadata = {
   metadataBase: new URL("https://www.wild-and-well.store"),
@@ -29,7 +30,8 @@ export default function RootLayout({ children }) {
         <GA />
         <OutboundAffiliateTracker />
         <SiteHeader />
-        <main className="flex-1">{children}</main>
+        <BreadcrumbBar />
+        <main id="content" className="flex-1">{children}</main>
         <SiteFooter />
         <NewsletterBar />
         <ConsentBanner />
