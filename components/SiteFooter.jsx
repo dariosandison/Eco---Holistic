@@ -61,6 +61,9 @@ const legal = [
                 name="email"
                 required
                 placeholder="you@email.com"
+                aria-label="Email address"
+                autoComplete="email"
+                inputMode="email"
                 className="w-full rounded-xl border px-3 py-2 text-sm"
               />
               <button type="submit" className="btn-primary whitespace-nowrap">

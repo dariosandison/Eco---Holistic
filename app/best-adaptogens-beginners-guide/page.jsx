@@ -106,7 +106,7 @@ const url = `${SITE_URL}/best-adaptogens-beginners-guide`
         <EducationFirstCallout topicHref="/topics" topicLabel="Explore topics" insightHref="/blog" insightLabel="Read Wellness Insights" />
         <div className="mt-5 flex flex-wrap gap-2">
           <Link className="btn-secondary" href="/topics/sleep">Sleep topic</Link>
-          <Link className="btn-secondary" href="/topics/natural-remedies">Natural remedies</Link>
+          <Link className="btn-secondary" href="/natural-remedies">Natural remedies</Link>
           <Link className="btn-secondary" href="/shopping-list">Free shopping list</Link>
         </div>
         <p className="mt-3 text-xs text-zinc-500">Last updated: February 2, 2026 · Wild & Well Editorial Team</p>

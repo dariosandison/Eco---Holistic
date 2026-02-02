@@ -36,6 +36,9 @@ export default function NewsletterBar() {
             name="email"
             required
             placeholder="your@email.com"
+            aria-label="Email address"
+            autoComplete="email"
+            inputMode="email"
             className="w-full sm:w-64 rounded-xl border px-3 py-2"
           />
           <button type="submit" className="btn-primary">Get it</button>

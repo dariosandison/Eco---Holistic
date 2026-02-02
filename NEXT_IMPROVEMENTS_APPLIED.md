@@ -23,3 +23,14 @@ Priority 5: Trust
 
 SEO
 - Added new routes to sitemap.js
+
+## Audit fixes – February 2, 2026
+
+- Added comprehensive global metadata (OpenGraph/Twitter) and set site language to en-GB.
+- Added a PWA manifest route (app/manifest.js) and referenced it from metadata.
+- Improved cookie consent UX: banner no longer reloads the page, sits above the sticky newsletter bar, and loads GA immediately on accept.
+- Added `btn-muted` and focus-visible styling for better accessibility.
+- Updated email inputs (sticky bar, footer, shopping list) with aria-label and autocomplete hints.
+- Hardened internal link checker and fixed broken internal links found during the audit.
+- Added query-param based tag filtering to Favourites so pages can deep-link to Water/Air, etc.
+

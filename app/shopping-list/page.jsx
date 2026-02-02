@@ -71,6 +71,9 @@ export default function ShoppingListPage({ searchParams }) {
             name="email"
             required
             placeholder="your@email.com"
+            aria-label="Email address"
+            autoComplete="email"
+            inputMode="email"
             className="w-full rounded-xl border px-3 py-2"
           />
           <button type="submit" className="btn-primary">

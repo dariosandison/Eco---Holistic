@@ -1,6 +1,6 @@
 'use client'
 
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import Link from 'next/link'
 
 const TAG_ICON = {
@@ -64,6 +64,16 @@ function ItemCard({ it }) {
 export default function ShortlistExplorer({ sections }) {
   const [q, setQ] = useState('')
   const [tag, setTag] = useState('')
+
+  useEffect(() => {
+    try {
+      const sp = new URLSearchParams(window.location.search)
+      const qp = sp.get('q') || ''
+      const tp = sp.get('tag') || ''
+      if (qp) setQ(qp)
+      if (tp) setTag(tp)
+    } catch (e) {}
+  }, [])
 
   const allItems = useMemo(() => {
     const flat = []

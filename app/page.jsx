@@ -2,6 +2,13 @@
 import Image from "next/image";
 import Link from "next/link";
 
+export const metadata = {
+  title: 'Low‑tox living & natural wellness',
+  description:
+    'Practical, UK‑focused guides and shortlists for air, water, fragrance‑free living, sleep, nutrition, and movement — calm, conservative recommendations in plain English.',
+}
+
+
 const FEATURED_EXPLAINERS = [
   { title: "Non-Toxic Cleaning Starter", href: "/blog/non-toxic-cleaning-starter", cover: "/images/cards/cleaning.svg" },
   { title: "Low-Tox Kitchen", href: "/blog/low-tox-kitchen", cover: "/images/cards/kitchen.svg" },

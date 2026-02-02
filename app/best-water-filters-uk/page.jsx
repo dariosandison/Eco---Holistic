@@ -74,7 +74,7 @@ function QuickSummary() {
         If you want high capacity without plumbing, choose a <strong>countertop gravity filter</strong>.
       </p>
       <div className="mt-4 flex flex-wrap gap-2">
-        <Link className="btn-secondary" href="/favourites/water">Water favourites</Link>
+        <Link className="btn-secondary" href="/favourites?tag=Water">Water favourites</Link>
         <Link className="btn-secondary" href="/blog/water-filter-buying-guide-uk">Buying guide</Link>
         <Link className="btn-secondary" href="/shopping-list">Free shopping list</Link>
       </div>
@@ -269,7 +269,7 @@ const itemList = PICKS.map((p, i) => ({
         </div>
 
         <div className="mt-8 flex flex-wrap gap-2">
-          <Link className="btn-primary" href="/favourites/water">Go to Water favourites →</Link>
+          <Link className="btn-primary" href="/favourites?tag=Water">Go to Water favourites →</Link>
           <Link className="btn-secondary" href="/blog/water-filter-buying-guide-uk">Read the buying guide</Link>
         </div>
       </section>

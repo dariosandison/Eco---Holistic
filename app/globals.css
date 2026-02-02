@@ -30,7 +30,7 @@ body{
 }
 
 .prose { max-width: 70ch; }
-.prose a { color: theme('colors.brand.DEFAULT'); text-decoration: underline; }
+.prose a { color: var(--brand); text-decoration: underline; }
 .prose h2, .prose h3 { scroll-margin-top: 6rem; }
 .prose p{ line-height: 1.75; }
 .prose h2{ font-weight: 700; letter-spacing: -0.01em; }
@@ -80,3 +80,15 @@ body{
 .section-subtitle{
   @apply mt-2 text-sm text-zinc-700 max-w-3xl;
 }
+
+
+/* Accessibility */
+:focus-visible{ outline: 2px solid var(--brand); outline-offset: 2px; }
+
+.btn-muted{
+  @apply inline-flex items-center justify-center rounded-2xl px-4 py-2 font-medium border transition;
+  background: #e5e7eb;
+  color: var(--ink);
+  border-color: #d1d5db;
+}
+.btn-muted:hover{ background:#d1d5db; }

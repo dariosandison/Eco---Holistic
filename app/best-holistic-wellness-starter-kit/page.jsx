@@ -130,7 +130,7 @@ const url = `${SITE_URL}/best-holistic-wellness-starter-kit`
         <h2 className="text-2xl font-semibold">Start here (pick one path)</h2>
         <div className="mt-6 grid gap-4 md:grid-cols-3">
           <StartCard title="Sleep" desc="Light, routine, and the basics that actually move the needle." href="/topics/sleep" tag="Sleep" />
-          <StartCard title="Air" desc="Bedrooms and allergies: right-sized HEPA and low-tox basics." href="/topics/air" tag="Air" />
+          <StartCard title="Air" desc="Bedrooms and allergies: right-sized HEPA and low-tox basics." href="/topics/air-quality" tag="Air" />
           <StartCard title="Nutrition" desc="Food-first, repeatable meals, and simple staples." href="/nutrition" tag="Food" />
         </div>
       </section>

@@ -1,18 +1,20 @@
-'use client';
+'use client'
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react'
+import { loadGA } from '@/lib/ga-client'
 
-export default function CookiePreferences(){
-  const [value, setValue] = useState(null);
+export default function CookiePreferences() {
+  const [value, setValue] = useState(null)
 
   useEffect(() => {
-    const v = localStorage.getItem('consent_analytics');
-    setValue(v || 'unset');
-  }, []);
+    const v = localStorage.getItem('consent_analytics')
+    setValue(v || 'unset')
+  }, [])
 
-  function setConsent(next){
-    localStorage.setItem('consent_analytics', next);
-    setValue(next);
+  function setConsent(next) {
+    localStorage.setItem('consent_analytics', next)
+    setValue(next)
+    if (next === 'granted') loadGA()
   }
 
   return (
@@ -24,12 +26,12 @@ export default function CookiePreferences(){
 
       <div className="mt-4 flex flex-wrap gap-2">
         <button className="btn" onClick={() => setConsent('granted')}>Allow analytics</button>
-        <button className="btn" style={{background:'#e5e7eb', color:'#111827'}} onClick={() => setConsent('denied')}>Disable analytics</button>
+        <button className="btn-muted" onClick={() => setConsent('denied')}>Disable analytics</button>
       </div>
 
       <p className="mt-3 text-xs text-zinc-500">
         Current setting: <span className="font-medium">{value || 'unset'}</span>
       </p>
     </div>
-  );
+  )
 }
