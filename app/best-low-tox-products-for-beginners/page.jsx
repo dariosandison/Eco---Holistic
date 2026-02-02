@@ -11,7 +11,7 @@ import MoneyPageNextLinks from '@/components/MoneyPageNextLinks'
 
 
 export const metadata = {
-  title: 'Low‑tox products for beginners: starter favourites | Wild & Well',
+  title: 'Low‑tox products for beginners: starter favourites',
   description: 'A simple, UK‑friendly starter path: where to begin, what to avoid, and the few pages that help most people first.',
 }
 

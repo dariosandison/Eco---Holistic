@@ -2,7 +2,7 @@ import Link from "next/link";
 import SignupFormTracker from "@/components/SignupFormTracker";
 
 export const metadata = {
-  title: "Free Low‑Tox Shopping List | Wild & Well",
+  title: "Free Low‑Tox Shopping List",
   description:
     "Download our simple low‑tox shopping list: trusted swaps for air, water, cleaning, and everyday wellness.",
 };

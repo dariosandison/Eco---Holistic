@@ -1,5 +1,5 @@
 export const metadata = {
-  title: 'Terms of Use | Wild & Well',
+  title: 'Terms of Use',
   description: 'Terms of use for Wild & Well, including disclaimers and contact details.',
 }
 

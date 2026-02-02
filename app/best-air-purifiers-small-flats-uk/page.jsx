@@ -12,7 +12,7 @@ import MoneyPageNextLinks from '@/components/MoneyPageNextLinks'
 
 
 export const metadata = {
-  title: 'Air Purifiers for Small Flats (UK): shortlist | Wild & Well',
+  title: 'Air Purifiers for Small Flats (UK): shortlist',
   description: 'Shortlisted air purifiers that make sense for small UK flats: quiet bedrooms, compact units, and realistic filter costs.',
 }
 

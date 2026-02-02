@@ -5,7 +5,7 @@ import TopicFAQ from '@/components/TopicFAQ'
 import { amazonSearchUrl } from '@/lib/amazon'
 
 export const metadata = {
-  title: 'Cardio — build fitness with a simple progression | Wild & Well',
+  title: 'Cardio — build fitness with a simple progression',
   description:
     'Cardio guide: build a base with walking, add gentle intervals, and choose optional gear that supports consistency.',
 }

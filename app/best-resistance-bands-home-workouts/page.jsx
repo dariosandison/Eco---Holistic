@@ -12,7 +12,7 @@ import MoneyPageNextLinks from '@/components/MoneyPageNextLinks'
 
 
 export const metadata = {
-  title: "Resistance Bands for Home Workouts: shortlist | Wild & Well",
+  title: "Resistance Bands for Home Workouts: shortlist",
   description: "A practical shortlist of resistance band types (loop bands and long bands) for strength training, rehab, and mobility at home.",
 }
 

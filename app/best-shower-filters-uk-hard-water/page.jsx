@@ -13,7 +13,7 @@ import MoneyPageNextLinks from '@/components/MoneyPageNextLinks'
 
 
 export const metadata = {
-  title: 'Shower Filters for UK Hard Water: shortlist | Wild & Well',
+  title: 'Shower Filters for UK Hard Water: shortlist',
   description: 'Shortlisted shower filters for hard-water UK homes — what they can and can’t do, plus buyer shortlist.',
 }
 

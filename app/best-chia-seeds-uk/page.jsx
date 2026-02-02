@@ -13,7 +13,7 @@ import MoneyPageNextLinks from '@/components/MoneyPageNextLinks'
 
 
 export const metadata = {
-  title: "Chia seeds (UK): simple shortlist | Wild & Well",
+  title: "Chia seeds (UK): simple shortlist",
   description: "A shortlist of chia seeds for puddings, oats, and smoothies — plus what to look for (freshness and packaging).",
 }
 

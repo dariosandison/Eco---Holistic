@@ -1,7 +1,7 @@
 import Link from 'next/link'
 
 export const metadata = {
-  title: 'How We Test — Wild & Well',
+  title: 'How We Test',
   description: 'Our repeatable process for choosing and reviewing low-tox, natural wellness, and holistic health products.',
 }
 

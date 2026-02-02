@@ -7,7 +7,7 @@ import { amazonSearchUrl } from '@/lib/amazon'
 import { getTopicEdu } from '@/lib/topicEdu'
 
 export const metadata = {
-  title: 'Fragrance-Free Topics — Wild & Well',
+  title: 'Fragrance-free home',
   description: 'Fragrance-free + sensitive-skin friendly cleaning and laundry topics for UK homes.',
 }
 
@@ -61,7 +61,7 @@ export default function Page() {
       <TopicAtAGlance
         items={[
           {
-            title: 'Start here',
+  title: 'Fragrance-free home',
             bullets: [
               'Switch laundry detergent first (skin contact all day).',
               'Then dish soap and hand soap.',
@@ -69,7 +69,7 @@ export default function Page() {
             ],
           },
           {
-            title: 'What to watch for',
+  title: 'Fragrance-free home',
             bullets: [
               'Look for parfum/fragrance in ingredient lists.',
               'Essential oils can be a trigger even in “natural” products.',
@@ -77,7 +77,7 @@ export default function Page() {
             ],
           },
           {
-            title: 'Common mistakes',
+  title: 'Fragrance-free home',
             bullets: [
               'Buying “natural” products that are still heavily scented.',
               'Overdosing detergent and leaving residue.',

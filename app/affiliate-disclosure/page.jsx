@@ -1,7 +1,7 @@
 import Link from "next/link";
 
 export const metadata = {
-  title: "Affiliate Disclosure | Wild & Well",
+  title: "Affiliate Disclosure",
   description:
     "Transparency matters. How Wild & Well uses affiliate links and how we choose recommendations.",
 };

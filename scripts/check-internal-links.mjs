@@ -1,13 +1,13 @@
 /**
  * Internal link checker (fast, no network).
  *
- * - Uses app/sitemap.js to collect static routes
+ * - Scans app/ to collect static routes (filesystem-based)
  * - Scans app/, components/, and content/ for internal href="/..." links
  * - Verifies targets exist as:
- *    - a static route (from sitemap), OR
+ *    - a static route, OR
  *    - a blog slug in content/blog (for /blog/<slug>), OR
- *    - a blog slug for /guides/<slug> (guides redirect), OR
- *    - an author slug in lib/authors.js (for /authors/<slug>)
+ *    - an author slug in lib/authors.js (for /authors/<slug>), OR
+ *    - a legacy /guides/<slug> (redirected to /blog/<slug>)
  */
 
 import fs from 'fs'
@@ -16,49 +16,68 @@ import { pathToFileURL } from 'url'
 
 const root = process.cwd()
 
-function readText(p) {
-  return fs.readFileSync(p, 'utf8')
+function normalize(urlPath) {
+  if (!urlPath) return '/'
+  const clean = String(urlPath).split('#')[0].split('?')[0]
+  if (clean === '/') return '/'
+  return clean.replace(/\/+$/, '')
 }
 
-function listFiles(dir, exts) {
-  const out = []
-  for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
-    const p = path.join(dir, entry.name)
-    if (entry.isDirectory()) out.push(...listFiles(p, exts))
-    else if (exts.includes(path.extname(entry.name))) out.push(p)
-  }
-  return out
+function isPageFile(name) {
+  return /^page\.(js|jsx|ts|tsx)$/.test(name)
 }
 
-async function routesFromSitemap() {
-  const p = path.join(root, 'app', 'sitemap.js')
-  if (!fs.existsSync(p)) return new Set()
+function isRouteGroup(seg) {
+  return seg.startsWith('(') && seg.endsWith(')')
+}
 
-  try {
-    const mod = await import(pathToFileURL(p).href)
-    const entries = await mod.default()
-    const routes = new Set()
+function shouldSkipSegment(seg) {
+  if (!seg) return true
+  if (seg.startsWith('.')) return true
+  if (seg.startsWith('_')) return true
+  return false
+}
 
-    for (const e of entries || []) {
-      try {
-        const u = new URL(e.url)
-        const pathname = u.pathname || '/'
-        routes.add(normalize(pathname))
-      } catch {
-        // ignore
+function collectStaticRoutes() {
+  const appDir = path.join(root, 'app')
+  const routes = new Set()
+
+  function walk(dir, segments = []) {
+    const entries = fs.readdirSync(dir, { withFileTypes: true })
+
+    for (const ent of entries) {
+      const full = path.join(dir, ent.name)
+
+      if (ent.isDirectory()) {
+        if (shouldSkipSegment(ent.name)) continue
+
+        const nextSegments = isRouteGroup(ent.name) ? segments : [...segments, ent.name]
+        walk(full, nextSegments)
+        continue
+      }
+
+      if (ent.isFile() && isPageFile(ent.name)) {
+        const route = '/' + segments.join('/')
+        if (route.includes('[') || route.includes(']')) continue // dynamic
+        routes.add(normalize(route || '/'))
       }
     }
-
-    return routes
-  } catch (e) {
-    return new Set()
   }
+
+  if (fs.existsSync(appDir)) walk(appDir, [])
+
+  // Common "file" routes we treat as valid.
+  routes.add('/rss.xml')
+  routes.add('/sitemap.xml')
+  routes.add('/robots.txt')
+  routes.add('/manifest.webmanifest')
+
+  return routes
 }
 
 function blogSlugs() {
   const dir = path.join(root, 'content', 'blog')
   if (!fs.existsSync(dir)) return new Set()
-
   const slugs = new Set()
   for (const f of fs.readdirSync(dir)) {
     if (f.endsWith('.mdx') || f.endsWith('.md')) {
@@ -76,16 +95,9 @@ async function authorSlugs() {
     const mod = await import(pathToFileURL(p).href)
     const AUTHORS = mod.AUTHORS || []
     return new Set(AUTHORS.map((a) => a.slug).filter(Boolean))
-  } catch (e) {
+  } catch {
     return new Set()
   }
-}
-
-function normalize(urlPath) {
-  if (!urlPath) return '/'
-  const clean = String(urlPath).split('#')[0].split('?')[0]
-  if (clean === '/') return '/'
-  return clean.replace(/\/+$/, '')
 }
 
 function isSkippableTarget(target) {
@@ -110,10 +122,20 @@ const scanDirs = [
   { dir: path.join(root, 'content'), exts: ['.mdx', '.md'] },
 ]
 
+function listFiles(dir, exts) {
+  const out = []
+  for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
+    const p = path.join(dir, entry.name)
+    if (entry.isDirectory()) out.push(...listFiles(p, exts))
+    else if (exts.includes(path.extname(entry.name))) out.push(p)
+  }
+  return out
+}
+
 const hrefRe = /href\s*=\s*(?:\{\s*)?["'](\/[^"']+)["']\s*(?:\}\s*)?/g
 const mdLinkRe = /\[[^\]]+\]\((\/[^)]+)\)/g
 
-const routes = await routesFromSitemap()
+const routes = collectStaticRoutes()
 const blog = blogSlugs()
 const authors = await authorSlugs()
 
@@ -129,7 +151,7 @@ function isOk(target) {
 
   if (clean.startsWith('/guides/')) {
     const slug = clean.replace('/guides/', '')
-    return blog.has(slug) || routes.has('/guides')
+    return blog.has(slug) || routes.has('/guides') || routes.has('/blog')
   }
 
   if (clean.startsWith('/authors/')) {
@@ -147,7 +169,7 @@ for (const sd of scanDirs) {
   const files = listFiles(sd.dir, sd.exts)
 
   for (const file of files) {
-    const txt = readText(file)
+    const txt = fs.readFileSync(file, 'utf8')
     let m
 
     while ((m = hrefRe.exec(txt))) {

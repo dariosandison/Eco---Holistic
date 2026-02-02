@@ -13,7 +13,7 @@ import MoneyPageNextLinks from '@/components/MoneyPageNextLinks'
 
 
 export const metadata = {
-  title: 'Gut health supplements: beginner shortlist | Wild & Well',
+  title: 'Gut health supplements: beginner shortlist',
   description: 'A food-first, beginner-friendly gut-support shortlist: when to consider fibre, probiotics, and what to avoid if you’re sensitive.',
 }
 

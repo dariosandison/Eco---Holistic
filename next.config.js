@@ -12,6 +12,7 @@ const nextConfig = {
   },
   async redirects() {
     return [
+      { source: '/guides/gut-health-basics', destination: '/blog/fibre-gut-health-practical-guide', permanent: true },
       { source: '/best-of', destination: '/favourites', permanent: true },
       { source: '/recommended', destination: '/favourites', permanent: true },
       { source: '/picks', destination: '/topics', permanent: true },

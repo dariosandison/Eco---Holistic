@@ -2,7 +2,7 @@ import Link from 'next/link'
 import Card from '@/components/Card'
 import { listContent } from '@/lib/content'
 
-export const metadata = { title: 'Wellness Insights | Wild & Well' }
+export const metadata = { title: 'Wellness Insights' }
 
 function fmtDate(d) {
   if (!d) return null

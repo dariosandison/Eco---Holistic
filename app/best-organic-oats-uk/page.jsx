@@ -13,7 +13,7 @@ import MoneyPageNextLinks from '@/components/MoneyPageNextLinks'
 
 
 export const metadata = {
-  title: "Organic oats (UK): our favourites | Wild & Well",
+  title: "Organic oats (UK): our favourites",
   description: "A shortlist of organic oats (rolled, jumbo, steel-cut) and how to choose based on your breakfast and baking habits.",
 }
 

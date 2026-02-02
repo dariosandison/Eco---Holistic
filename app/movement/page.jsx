@@ -1,8 +1,8 @@
 import Link from "next/link";
 
 export const metadata = {
-  title: "Movement & Fitness | Wild & Well",
-  description: "Strength, walking, mobility, and gear basics (trackers, bands, shoes, mats).",
+  title: "Movement & Fitness",
+  description: "Walking, basic strength, mobility, and recovery — education first, with optional gear when it genuinely helps.",
 };
 
 function Card({ title, desc, href, tag, image }) {
@@ -38,14 +38,33 @@ export default function Page() {
       <header className="max-w-3xl">
         <h1 className="text-4xl font-bold">Movement &amp; Fitness</h1>
         <p className="mt-3 text-zinc-700">
-          Walking, basic strength, mobility, and recovery — with optional gear when it helps.
+          Education-first movement you can actually repeat: walking, basic strength, mobility, and recovery.
+          Gear is optional — we only recommend it when it meaningfully improves adherence or reduces friction.
         </p>
         <div className="mt-5 flex flex-wrap gap-2">
           <Link className="btn-secondary" href="/blog">Read Wellness Insights</Link>
-          <Link className="btn-secondary" href="/favourites">Browse favourites</Link>
+          <Link className="btn-secondary" href="/topics">Explore topics</Link>
         </div>
-        <p className="mt-3 text-xs text-zinc-500">Last updated: February 1, 2026</p>
+        <p className="mt-3 text-xs text-zinc-500">Last updated: February 2, 2026</p>
       </header>
+
+      <section className="mt-10 max-w-3xl">
+        <h2 className="text-2xl font-semibold">Why movement matters (even without weight loss)</h2>
+        <p className="mt-2 text-sm text-zinc-600">
+          Most people don’t need a perfect plan — they need a plan that’s easy to start and easy to keep.
+          Consistent movement supports:
+        </p>
+        <ul className="mt-4 list-disc pl-5 text-sm text-zinc-700 space-y-1">
+          <li><strong>Cardiometabolic health</strong> (blood pressure, blood sugar, circulation)</li>
+          <li><strong>Strength and resilience</strong> (joints, back, daily function)</li>
+          <li><strong>Sleep quality</strong> (especially when you walk and get daylight)</li>
+          <li><strong>Mood and stress</strong> (more stable energy and calmer baseline)</li>
+        </ul>
+        <div className="mt-5 flex flex-wrap gap-2">
+          <Link className="btn-secondary" href="/blog/simple-weekly-movement-plan-beginners">Start with the 7‑day beginner template</Link>
+          <Link className="btn-secondary" href="/blog/walking-for-health-how-much-is-enough">Walking guide</Link>
+        </div>
+      </section>
 
       <section className="mt-10">
         <h2 className="text-2xl font-semibold">Explore movement styles</h2>
@@ -53,14 +72,14 @@ export default function Page() {
           Pick a lane and build a repeatable routine before adding equipment.
         </p>
         <div className="mt-6 grid gap-4 md:grid-cols-3">
-          <Card image="/images/cards/bands.svg" title="Stretches & mobility" desc="A simple 10‑minute routine for desk bodies, stiff hips, and tight backs — plus optional tools." href="/movement/stretches" tag="Guide" />
-          <Card image="/images/cards/scale.svg" title="Hypertrophy" desc="Build muscle with a simple plan, progressive overload, and minimal equipment." href="/movement/hypertrophy" tag="Guide" />
-          <Card image="/images/cards/tracker.svg" title="Cardio" desc="Start with walking, build a base, then add gentle intervals when ready." href="/movement/cardio" tag="Guide" />
+          <Card image="/images/cards/bands.svg" title="Stretches & mobility" desc="A simple 10‑minute routine for desk bodies, stiff hips, and tight backs — plus optional tools." href="/movement/stretches" tag="Routine" />
+          <Card image="/images/cards/scale.svg" title="Hypertrophy" desc="Build muscle with a simple plan, progressive overload, and minimal equipment." href="/movement/hypertrophy" tag="Routine" />
+          <Card image="/images/cards/tracker.svg" title="Cardio" desc="Start with walking, build a base, then add gentle intervals when ready." href="/movement/cardio" tag="Routine" />
         </div>
       </section>
 
       <section className="mt-10">
-        <h2 className="text-2xl font-semibold">Favourites shortlists</h2>
+        <h2 className="text-2xl font-semibold">Favourites shortlists (optional)</h2>
         <p className="mt-2 text-sm text-zinc-600 max-w-3xl">
           Straightforward roundups: what to look for, what to avoid, and a shortlist of solid options.
         </p>
@@ -70,9 +89,9 @@ export default function Page() {
           <Card image="/images/cards/scale.svg" title="Smart scales (UK): shortlist" desc="If you use one, use it for trends — not daily readings." href="/best-smart-scales-uk" tag="Scales" />
           <Card image="/images/cards/bands.svg" title="Resistance bands for home workouts: shortlist" desc="A small kit that covers strength + rehab basics." href="/best-resistance-bands-home-workouts" tag="Bands" />
           <Card image="/images/cards/shoe.svg" title="Walking shoes for daily steps (UK): shortlist" desc="Comfort-first shoes for regular walking." href="/best-walking-shoes-daily-steps-uk" tag="Footwear" />
-          <Card image="/images/cards/bands.svg" title="yoga mats for grip & comfort" desc="Grip and cushioning for floor work." href="/best-yoga-mats-grip-comfort" tag="Mobility" />
-          <Card image="/images/cards/bands.svg" title="foam rollers & recovery tools" desc="Simple recovery tools for tight hips/backs." href="/best-foam-rollers-recovery-tools" tag="Recovery" />
-          <Card image="/images/cards/neutral.svg" title="activewear basics (UK)" desc="Comfort-first basics: tops, leggings, socks, layers." href="/best-activewear-basics-uk" tag="Clothing" />
+          <Card image="/images/cards/bands.svg" title="Yoga mats for grip & comfort" desc="Grip and cushioning for floor work." href="/best-yoga-mats-grip-comfort" tag="Mobility" />
+          <Card image="/images/cards/bands.svg" title="Foam rollers & recovery tools" desc="Simple recovery tools for tight hips/backs." href="/best-foam-rollers-recovery-tools" tag="Recovery" />
+          <Card image="/images/cards/neutral.svg" title="Activewear basics (UK)" desc="Comfort-first basics: tops, leggings, socks, layers." href="/best-activewear-basics-uk" tag="Clothing" />
         </div>
       </section>
 
@@ -82,7 +101,7 @@ export default function Page() {
           Start with simple routines you can repeat. Equipment is optional.
         </p>
         <div className="mt-4 flex flex-wrap gap-2">
-          <Link className="btn-secondary" href="/blog/walking-for-health-how-much-is-enough">Walking guide</Link>
+          <Link className="btn-secondary" href="/blog/simple-weekly-movement-plan-beginners">Weekly beginner plan</Link>
           <Link className="btn-secondary" href="/blog/home-strength-basics-busy-people">Home strength basics</Link>
           <Link className="btn-secondary" href="/blog/mobility-for-desk-workers">Mobility for desk work</Link>
         </div>

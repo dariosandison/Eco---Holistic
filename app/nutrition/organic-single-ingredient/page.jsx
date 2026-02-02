@@ -3,7 +3,7 @@ import TopicAtAGlance from '@/components/TopicAtAGlance'
 import TopicFAQ from '@/components/TopicFAQ'
 
 export const metadata = {
-  title: 'Organic & single‑ingredient foods — practical staples | Wild & Well',
+  title: 'Organic & single‑ingredient foods — practical staples',
   description:
     'Guide to organic and single-ingredient foods: label reading, staple-building, and practical swaps you can repeat.',
 }

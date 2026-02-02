@@ -1,7 +1,7 @@
 import Link from "next/link";
 
 export const metadata = {
-  title: "Digital Products | Wild & Well",
+  title: "Digital Products",
   description:
     "Simple, practical resources designed to help you build sustainable routines.",
 };

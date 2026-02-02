@@ -12,7 +12,7 @@ import MoneyPageNextLinks from '@/components/MoneyPageNextLinks'
 
 
 export const metadata = {
-  title: 'Air Purifiers for Allergies (UK): shortlist | Wild & Well',
+  title: 'Air Purifiers for Allergies (UK): shortlist',
   description: 'Shortlisted HEPA air purifiers for allergies in UK homes — what matters, what to skip, and top options for bedrooms and living rooms.',
 }
 

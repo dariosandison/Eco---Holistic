@@ -14,7 +14,7 @@ import MoneyPageNextLinks from '@/components/MoneyPageNextLinks'
 
 
 export const metadata = {
-  title: 'Holistic wellness starter kit: a small, repeatable setup | Wild & Well',
+  title: 'Holistic wellness starter kit: a small, repeatable setup',
   description:
     'A calm, minimal starter kit: the few upgrades that improve air, water, sleep, and daily routines without turning wellness into a project.',
 }

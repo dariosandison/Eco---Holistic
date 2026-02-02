@@ -12,7 +12,7 @@ import MoneyPageNextLinks from '@/components/MoneyPageNextLinks'
 
 
 export const metadata = {
-  title: "Smart Scales (UK): shortlist | Wild & Well",
+  title: "Smart Scales (UK): shortlist",
   description: "A shortlist of smart scales that track trends over time. Useful if you can use the data calmly and consistently.",
 }
 

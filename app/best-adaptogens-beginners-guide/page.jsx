@@ -14,7 +14,7 @@ import MoneyPageNextLinks from '@/components/MoneyPageNextLinks'
 
 
 export const metadata = {
-  title: 'Adaptogens for beginners: a calm, cautious guide | Wild & Well',
+  title: 'Adaptogens for beginners: a calm, cautious guide',
   description:
     'A practical beginner guide to adaptogens: what they are, who should skip them, and simple ways to start without building a big supplement stack.',
 }

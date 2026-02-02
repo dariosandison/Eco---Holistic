@@ -1,7 +1,7 @@
 import Link from 'next/link'
 
 export const metadata = {
-  title: 'Topics — Wild & Well',
+  title: 'Topics',
   description: 'Education-first topic insights for sleep, air quality, water, and fragrance-free home in the UK.',
 }
 

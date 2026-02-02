@@ -12,7 +12,7 @@ import MoneyPageNextLinks from '@/components/MoneyPageNextLinks'
 
 
 export const metadata = {
-  title: "Yoga Mats for Grip & Comfort: shortlist | Wild & Well",
+  title: "Yoga Mats for Grip & Comfort: shortlist",
   description: "A shortlist of yoga mats that balance grip, cushioning, and durability. Choose based on sweat level and joint comfort.",
 }
 

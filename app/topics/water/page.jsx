@@ -7,7 +7,7 @@ import { amazonSearchUrl } from '@/lib/amazon'
 import { getTopicEdu } from '@/lib/topicEdu'
 
 export const metadata = {
-  title: 'Water Topics — Wild & Well',
+  title: 'Water',
   description: 'Water filters for UK homes: under-sink vs jug vs countertop, plus the next steps.',
 }
 
@@ -73,7 +73,7 @@ export default function Page() {
       <TopicAtAGlance
         items={[
           {
-            title: 'Start here',
+  title: 'Water',
             bullets: [
               'Choose a type: jug, under-sink, or gravity/countertop.',
               'Compare replacement filters (schedule + cost).',
@@ -81,7 +81,7 @@ export default function Page() {
             ],
           },
           {
-            title: 'Which type suits you?',
+  title: 'Water',
             bullets: [
               'Jug: easiest entry point for most kitchens.',
               'Under-sink: filtered water from a tap (requires install).',
@@ -89,7 +89,7 @@ export default function Page() {
             ],
           },
           {
-            title: 'Common mistakes',
+  title: 'Water',
             bullets: [
               'Buying a system with expensive replacements you won’t keep up with.',
               'Choosing based on marketing claims instead of verified details.',

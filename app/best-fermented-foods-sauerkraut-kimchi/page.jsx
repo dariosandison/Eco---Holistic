@@ -13,7 +13,7 @@ import MoneyPageNextLinks from '@/components/MoneyPageNextLinks'
 
 
 export const metadata = {
-  title: "Fermented foods to start with | Wild & Well",
+  title: "Fermented foods to start with",
   description: "A shortlist of sauerkraut and kimchi options with simple ingredients. Look for refrigerated jars and minimal additives where possible.",
 }
 

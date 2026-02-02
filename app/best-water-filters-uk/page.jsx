@@ -12,7 +12,7 @@ import MoneyPageNextLinks from '@/components/MoneyPageNextLinks'
 
 
 export const metadata = {
-  title: 'Water Filters (UK) — Jugs vs Under‑Sink vs Countertop: shortlist | Wild & Well',
+  title: 'Water Filters (UK) — Jugs vs Under‑Sink vs Countertop: shortlist',
   description: 'Shortlisted water filters for UK homes (jugs, under‑sink, gravity) with clear trade-offs and replacement cost notes.',
 }
 

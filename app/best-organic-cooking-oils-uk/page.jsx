@@ -14,7 +14,7 @@ import MoneyPageNextLinks from '@/components/MoneyPageNextLinks'
 
 
 export const metadata = {
-  title: 'Cooking oils (UK): simple favourites | Wild & Well',
+  title: 'Cooking oils (UK): simple favourites',
   description: 'A simple cooking-oil toolkit: which oils for everyday sautéing, salads, and high heat — plus label cues and storage tips.',
 }
 

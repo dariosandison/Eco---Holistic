@@ -13,7 +13,7 @@ import MoneyPageNextLinks from '@/components/MoneyPageNextLinks'
 
 
 export const metadata = {
-  title: 'Supplements for beginners: a simple, cautious shortlist | Wild & Well',
+  title: 'Supplements for beginners: a simple, cautious shortlist',
   description:
     'A conservative, beginner-friendly supplement shortlist (UK) focused on simple options, label clarity, and when to skip.',
 }

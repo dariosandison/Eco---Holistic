@@ -1,7 +1,7 @@
 import Link from 'next/link'
 
 export const metadata = {
-  title: 'About | Wild & Well',
+  title: 'About',
   description: 'What Wild & Well is, how we choose what we recommend, and how we keep things honest.',
 }
 

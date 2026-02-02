@@ -7,7 +7,7 @@ import { amazonSearchUrl } from '@/lib/amazon'
 import { getTopicEdu } from '@/lib/topicEdu'
 
 export const metadata = {
-  title: 'Sleep Topics — Wild & Well',
+  title: 'Sleep & recovery',
   description: 'Sleep and recovery: light, timing, temperature, and practical options for UK homes.',
 }
 
@@ -62,7 +62,7 @@ export default function Page() {
       <TopicAtAGlance
         items={[
           {
-            title: '7-day reset (simple)',
+  title: 'Sleep & recovery',
             bullets: [
               'Morning light within ~1 hour of waking.',
               'Caffeine cut-off: about 8 hours before bed.',
@@ -71,7 +71,7 @@ export default function Page() {
             ],
           },
           {
-            title: 'Useful purchases',
+  title: 'Sleep & recovery',
             bullets: [
               'Light control: blackout curtains or an eye mask.',
               'Noise buffer: white noise if you wake easily.',
@@ -80,7 +80,7 @@ export default function Page() {
             ],
           },
           {
-            title: 'Common mistakes',
+  title: 'Sleep & recovery',
             bullets: [
               'Trying many changes at once (hard to tell what helps).',
               'Overcomplicating supplements and routines.',

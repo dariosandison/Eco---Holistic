@@ -5,7 +5,7 @@ import TopicFAQ from '@/components/TopicFAQ'
 import { amazonSearchUrl } from '@/lib/amazon'
 
 export const metadata = {
-  title: 'Supplements — a simple, low‑additive approach | Wild & Well',
+  title: 'Supplements — a simple, low‑additive approach',
   description:
     'Supplements guide: how to read labels, spot quality signals, and avoid common traps when choosing minimal-additive options.',
 }
