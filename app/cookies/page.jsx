@@ -2,7 +2,7 @@ import Link from 'next/link'
 import CookiePreferences from '@/components/CookiePreferences'
 
 export const metadata = {
-  title: 'Cookies',
+  title: 'Cookies | Wild & Well',
   description: 'Cookie information and preferences for analytics cookies.',
 }
 

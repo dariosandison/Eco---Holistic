@@ -34,3 +34,21 @@ SEO
 - Hardened internal link checker and fixed broken internal links found during the audit.
 - Added query-param based tag filtering to Favourites so pages can deep-link to Water/Air, etc.
 
+
+
+## Upgrade – February 3, 2026 (FIX4)
+
+Education-first depth (site-wide for Wellness Insights)
+- Added an “Understand first” deep-dive block that automatically expands on shorter posts (what’s going on, why it matters, common causes, no-spend steps, and a calm buying checklist).
+- Added Related Reading at the end of blog posts to improve session depth and internal linking (informative, not salesy).
+- Hardened blog route: missing slugs return a proper 404 and legacy slugs redirect cleanly.
+
+Visual trust upgrade (without needing real photos yet)
+- Replaced repetitive “same logo” cards with deterministic, unique, branded SVG thumbnails per post when an image is missing/generic.
+- Removed broken placeholder image usage (no more /placeholder.png 404s).
+
+SEO / reliability
+- Sitemap now runs in Node.js runtime and includes blog post URLs + author pages, plus RSS endpoints.
+- RSS now runs in Node.js runtime; added /rss.xml redirect for compatibility.
+- Added a proper app/not-found.jsx to reduce bounce from old/incorrect links.
+

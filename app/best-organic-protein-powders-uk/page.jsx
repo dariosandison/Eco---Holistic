@@ -13,7 +13,7 @@ import MoneyPageNextLinks from '@/components/MoneyPageNextLinks'
 
 
 export const metadata = {
-  title: 'Protein powders (UK): clean shortlist',
+  title: 'Protein powders (UK): clean shortlist | Wild & Well',
   description: 'A practical, minimal‑ingredient shortlist of protein powder styles — plus what to check on labels (sweeteners, gums, and additives).',
 }
 

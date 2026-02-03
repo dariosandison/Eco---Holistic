@@ -12,7 +12,7 @@ import MoneyPageNextLinks from '@/components/MoneyPageNextLinks'
 
 
 export const metadata = {
-  title: "Activewear Basics (UK): shortlist",
+  title: "Activewear Basics (UK): shortlist | Wild & Well",
   description: "A practical shortlist of activewear basics (tops, leggings, socks, layers) that prioritise comfort and durability.",
 }
 

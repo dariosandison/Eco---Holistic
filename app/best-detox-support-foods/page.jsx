@@ -12,7 +12,7 @@ import MoneyPageNextLinks from '@/components/MoneyPageNextLinks'
 
 
 export const metadata = {
-  title: 'Everyday foods that support your body',
+  title: 'Everyday foods that support your body | Wild & Well',
   description:
     'Food-first overview: hydration, fibre, and simple staples that support your body’s normal processes — without “detox” claims.',
 }

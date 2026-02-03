@@ -12,7 +12,7 @@ import MoneyPageNextLinks from '@/components/MoneyPageNextLinks'
 
 
 export const metadata = {
-  title: 'Non-toxic cookware: starter favourites',
+  title: 'Non-toxic cookware: starter favourites | Wild & Well',
   description: 'A simple non-toxic cookware starter shortlist: what to buy first, what to skip, and how to avoid overbuying.',
 }
 

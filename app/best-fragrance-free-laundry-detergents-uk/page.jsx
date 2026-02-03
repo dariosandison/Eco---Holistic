@@ -12,7 +12,7 @@ import MoneyPageNextLinks from '@/components/MoneyPageNextLinks'
 
 
 export const metadata = {
-  title: 'Fragrance‑Free Laundry Detergents (UK): shortlist',
+  title: 'Fragrance‑Free Laundry Detergents (UK): shortlist | Wild & Well',
   description: 'A shortlist of fragrance‑free detergents for sensitive households in the UK — what to look for, what to avoid, and buyer shortlist.',
 }
 

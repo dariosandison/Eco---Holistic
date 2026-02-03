@@ -14,7 +14,7 @@ import MoneyPageNextLinks from '@/components/MoneyPageNextLinks'
 
 
 export const metadata = {
-  title: 'Immune support (natural): practical habits and cautious options',
+  title: 'Immune support (natural): practical habits and cautious options | Wild & Well',
   description:
     'A conservative, UK‑friendly immune-support page: the high‑leverage habits first, plus common “support” options and what to check before you buy.',
 }

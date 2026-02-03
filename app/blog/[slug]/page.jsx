@@ -2,6 +2,8 @@ import MDXRenderer from '@/components/MDXRenderer'
 import ArticleLayout from '@/components/ArticleLayout'
 import StructuredData from '@/components/StructuredData'
 import AffiliateNotice from '@/components/mdx/AffiliateNotice'
+import ArticleEducationBlock from '@/components/ArticleEducationBlock'
+import RelatedReading from '@/components/RelatedReading'
 import { redirect, notFound } from 'next/navigation'
 import { getContent, listContent, tocFromMarkdown } from '@/lib/content'
 import { SITE_NAME, SITE_URL } from '@/lib/site'
@@ -11,11 +13,10 @@ import remarkGfm from 'remark-gfm'
 import rehypeSlug from 'rehype-slug'
 import rehypeAutolinkHeadings from 'rehype-autolink-headings'
 
-export const runtime = 'nodejs'
-
-// Legacy slugs we want to keep working (avoid 500s for old links).
 const LEGACY_SLUG_REDIRECTS = {
+  // Old guide slugs that may still be indexed/shared.
   'gut-health-basics': 'fibre-gut-health-practical-guide',
+  'gut-health-starters': 'fibre-gut-health-practical-guide',
 }
 
 export async function generateStaticParams() {
@@ -23,17 +24,11 @@ export async function generateStaticParams() {
 }
 
 export async function generateMetadata({ params }) {
-  const slug = params.slug
-
-  if (LEGACY_SLUG_REDIRECTS[slug]) {
-    return {
-      title: 'Redirecting…',
-      robots: { index: false, follow: false },
-    }
-  }
+  const legacy = LEGACY_SLUG_REDIRECTS[params.slug]
+  if (legacy) return { title: 'Redirecting…' }
 
   try {
-    const { frontmatter } = getContent('blog', slug)
+    const { frontmatter } = getContent('blog', params.slug)
     return {
       title: frontmatter.title,
       description: frontmatter.description,
@@ -45,22 +40,17 @@ export async function generateMetadata({ params }) {
       },
     }
   } catch {
-    return {
-      title: 'Not found',
-      robots: { index: false, follow: false },
-    }
+    return { title: 'Not found' }
   }
 }
 
 export default function Page({ params }) {
-  const slug = params.slug
-
-  const redirectTo = LEGACY_SLUG_REDIRECTS[slug]
-  if (redirectTo) redirect(`/blog/${redirectTo}`)
+  const legacy = LEGACY_SLUG_REDIRECTS[params.slug]
+  if (legacy) redirect(`/blog/${legacy}`)
 
   let data
   try {
-    data = getContent('blog', slug)
+    data = getContent('blog', params.slug)
   } catch {
     notFound()
   }
@@ -77,6 +67,7 @@ export default function Page({ params }) {
   }
 
   const showAffiliateNotice = Boolean(process.env.NEXT_PUBLIC_AMAZON_TAG)
+  const allPosts = listContent('blog')
 
   return (
     <ArticleLayout
@@ -89,7 +80,14 @@ export default function Page({ params }) {
       toc={toc}
     >
       {showAffiliateNotice && <AffiliateNotice />}
+
+      {/* Education-first framing, especially for shorter posts */}
+      <ArticleEducationBlock frontmatter={frontmatter} content={content} />
+
       <MDXRenderer source={content} options={mdxOptions} />
+
+      {/* Keep users learning (SEO + conversions, without salesiness) */}
+      <RelatedReading currentSlug={params.slug} currentTags={frontmatter.tags || []} posts={allPosts} />
 
       <StructuredData
         data={{
@@ -101,7 +99,7 @@ export default function Page({ params }) {
           dateModified: frontmatter.updated || frontmatter.date,
           mainEntityOfPage: {
             '@type': 'WebPage',
-            '@id': `${SITE_URL}/blog/${slug}`,
+            '@id': `${SITE_URL}/blog/${params.slug}`,
           },
           author: {
             '@type': 'Person',
@@ -127,7 +125,7 @@ export default function Page({ params }) {
           itemListElement: [
             { '@type': 'ListItem', position: 1, name: 'Home', item: SITE_URL },
             { '@type': 'ListItem', position: 2, name: 'Wellness Insights', item: `${SITE_URL}/blog` },
-            { '@type': 'ListItem', position: 3, name: frontmatter.title, item: `${SITE_URL}/blog/${slug}` },
+            { '@type': 'ListItem', position: 3, name: frontmatter.title, item: `${SITE_URL}/blog/${params.slug}` },
           ],
         }}
       />

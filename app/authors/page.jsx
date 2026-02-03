@@ -2,7 +2,7 @@ import Link from 'next/link'
 import { AUTHORS } from '@/lib/authors'
 
 export const metadata = {
-  title: 'Authors',
+  title: 'Authors | Wild & Well',
   description: 'Who writes and updates Wild & Well — plus our editorial approach and areas of focus.',
 }
 

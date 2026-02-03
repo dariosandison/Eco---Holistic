@@ -2,7 +2,7 @@ import Link from "next/link";
 import { amazonSearchUrl } from "@/lib/amazon";
 
 export const metadata = {
-  title: "Deals",
+  title: "Deals | Wild & Well",
   description:
     "Deal searches for products we already cover. Always verify current price and specs before buying.",
 };

@@ -2,7 +2,7 @@ import TrackedLink from "@/components/TrackedLink";
 import TrackOnLoad from "@/components/TrackOnLoad";
 
 export const metadata = {
-  title: "Subscribed",
+  title: "Subscribed | Wild & Well",
   description: "Thanks for subscribing. Use these links to explore the site: Sleep, Water, Air, Cleaning, Nutrition, and Movement.",
 };
 

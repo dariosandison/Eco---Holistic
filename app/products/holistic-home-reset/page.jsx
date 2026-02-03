@@ -2,7 +2,7 @@ import Link from "next/link";
 import StructuredData from "@/components/StructuredData";
 
 export const metadata = {
-  title: "The Holistic Home Reset",
+  title: "The Holistic Home Reset | Wild & Well",
   description:
     "A calm 30‑day plan to improve your home environment, sleep, and nutrition foundations — with a simple weekly rhythm.",
 };

@@ -13,7 +13,7 @@ import MoneyPageNextLinks from '@/components/MoneyPageNextLinks'
 
 
 export const metadata = {
-  title: "Matcha (UK): what to buy",
+  title: "Matcha (UK): what to buy | Wild & Well",
   description: "A shortlist of matcha options (everyday vs ceremonial-style) and what to look for: origin, taste, and how you’ll use it.",
 }
 

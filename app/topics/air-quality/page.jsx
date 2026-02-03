@@ -7,7 +7,7 @@ import { amazonSearchUrl } from '@/lib/amazon'
 import { getTopicEdu } from '@/lib/topicEdu'
 
 export const metadata = {
-  title: 'Air quality',
+  title: 'Air Quality Topics — Wild & Well',
   description: 'Air quality for UK homes: allergies, damp, and the practical steps that matter most.',
 }
 
@@ -66,7 +66,7 @@ export default function Page() {
       <TopicAtAGlance
         items={[
           {
-  title: 'Air quality',
+            title: 'Start here',
             bullets: [
               'Check room size (m²) and choose a unit that can cover it.',
               'HEPA is the baseline; add carbon if odours are a problem.',
@@ -75,7 +75,7 @@ export default function Page() {
             ],
           },
           {
-  title: 'Air quality',
+            title: 'If damp is the issue',
             bullets: [
               'Measure humidity with a hygrometer (aim roughly 40–60%).',
               'Ventilate high-moisture rooms (kitchen/bathroom).',
@@ -83,7 +83,7 @@ export default function Page() {
             ],
           },
           {
-  title: 'Air quality',
+            title: 'Common mistakes',
             bullets: [
               'Buying a small unit for a large room.',
               'Choosing based on “smart” features instead of performance and noise.',

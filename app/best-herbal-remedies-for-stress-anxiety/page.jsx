@@ -13,7 +13,7 @@ import MoneyPageNextLinks from '@/components/MoneyPageNextLinks'
 
 
 export const metadata = {
-  title: 'Herbal options for stress: calm, cautious shortlist',
+  title: 'Herbal options for stress: calm, cautious shortlist | Wild & Well',
   description:
     'A conservative look at herbal options for stress: simple routines first, then common tea/herb choices and what to check on labels.',
 }

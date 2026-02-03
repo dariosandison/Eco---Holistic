@@ -12,7 +12,7 @@ import MoneyPageNextLinks from '@/components/MoneyPageNextLinks'
 
 
 export const metadata = {
-  title: "Foam Rollers & Recovery Tools: shortlist",
+  title: "Foam Rollers & Recovery Tools: shortlist | Wild & Well",
   description: "A practical shortlist of foam rollers and simple recovery tools for tight hips, backs, and post-walk stiffness.",
 }
 

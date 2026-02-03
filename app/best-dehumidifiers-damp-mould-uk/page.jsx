@@ -9,7 +9,7 @@ import { getMoneyPageEdu } from '@/lib/moneyPageEdu'
 import MoneyPageNextLinks from '@/components/MoneyPageNextLinks'
 
 export const metadata = {
-  title: 'Best dehumidifiers for damp & mould (UK): what to buy first',
+  title: 'Best dehumidifiers for damp & mould (UK): what to buy first | Wild & Well',
   description:
     'A practical shortlist for UK homes: dehumidifiers for damp, condensation and laundry drying — with simple rules on size, type and running costs.',
 }

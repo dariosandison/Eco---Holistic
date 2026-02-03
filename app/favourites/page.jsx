@@ -3,7 +3,7 @@ import EducationFirstCallout from "@/components/EducationFirstCallout";
 import ShortlistExplorer from "@/components/ShortlistExplorer";
 
 export const metadata = {
-  title: "Favourites (Product Shortlists)",
+  title: "Favourites (Product Shortlists) | Wild & Well",
   description:
     "Browse our product shortlists: low-tox home, sleep, nutrition, and movement — with clear trade-offs.",
 };

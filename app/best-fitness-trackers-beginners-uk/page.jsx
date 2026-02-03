@@ -12,7 +12,7 @@ import MoneyPageNextLinks from '@/components/MoneyPageNextLinks'
 
 
 export const metadata = {
-  title: "Fitness Trackers for Beginners (UK): shortlist",
+  title: "Fitness Trackers for Beginners (UK): shortlist | Wild & Well",
   description: "A straightforward shortlist of fitness trackers for beginners: steps, sleep, heart-rate, and the features that actually matter.",
 }
 

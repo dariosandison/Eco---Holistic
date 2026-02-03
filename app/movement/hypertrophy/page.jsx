@@ -5,7 +5,7 @@ import TopicFAQ from '@/components/TopicFAQ'
 import { amazonSearchUrl } from '@/lib/amazon'
 
 export const metadata = {
-  title: 'Hypertrophy — build muscle with simple training',
+  title: 'Hypertrophy — build muscle with simple training | Wild & Well',
   description:
     'Hypertrophy guide: progressive overload, simple weekly plans, and beginner-friendly home equipment options.',
 }

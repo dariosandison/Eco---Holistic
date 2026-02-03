@@ -1,23 +1,27 @@
 'use client';
 
 import Link from 'next/link';
+import { makeThumbDataUri } from '@/lib/thumb';
 
-export default function Card({ href = '#', title, excerpt, image, tag, date }) {
+export default function Card({ href = '#', title, excerpt, image, tag, date, slug }) {
+  const isGeneric =
+    !image || image === '/og-default.jpg' || image === '/logo.png' || image === '/placeholder.png';
+  const src = isGeneric ? makeThumbDataUri({ title, tag, slug }) : image;
+
   return (
     <Link
       href={href}
       className="group block overflow-hidden rounded-2xl border border-zinc-200 bg-white shadow-sm transition hover:shadow-md"
     >
-      {/* Image */}
       <div className="relative aspect-[3/2] overflow-hidden bg-zinc-100">
         <img
-          src={image || '/og-default.jpg'}
+          src={src}
           alt={title || ''}
           loading="lazy"
           className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-[1.02]"
           onError={(e) => {
-            e.currentTarget.src = '/og-default.jpg';
-            e.currentTarget.classList.add('opacity-75');
+            e.currentTarget.src = makeThumbDataUri({ title, tag, slug });
+            e.currentTarget.classList.add('opacity-95');
           }}
         />
         {tag ? (
@@ -27,7 +31,6 @@ export default function Card({ href = '#', title, excerpt, image, tag, date }) {
         ) : null}
       </div>
 
-      {/* Text */}
       <div className="space-y-2 p-4">
         {date ? (
           <span className="text-xs uppercase tracking-wide text-zinc-500">{date}</span>

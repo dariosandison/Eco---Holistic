@@ -2,7 +2,12 @@ import Link from 'next/link'
 import Card from '@/components/Card'
 import { listContent } from '@/lib/content'
 
-export const metadata = { title: 'Wellness Insights' }
+export const metadata = {
+  title: 'Wellness Insights',
+  description:
+    'Informative articles and practical explainers on nutrition, sleep, movement, and a healthier home — with clear, practical writing.',
+}
+
 
 function fmtDate(d) {
   if (!d) return null
@@ -49,10 +54,11 @@ export default function Page() {
           {insights.map((i) => (
             <Card
               key={i.slug}
+              slug={i.slug}
               href={`/blog/${i.slug}`}
               title={i.title}
               excerpt={i.description}
-              image={i.image || '/placeholder.png'}
+              image={i.image}
               tag="Insight"
               date={fmtDate(i.date)}
             />
@@ -69,10 +75,11 @@ export default function Page() {
           {explainers.map((g) => (
             <Card
               key={g.slug}
+              slug={g.slug}
               href={`/blog/${g.slug}`}
               title={g.title}
               excerpt={g.description}
-              image={g.image || '/placeholder.png'}
+              image={g.image}
               tag="Explainer"
               date={fmtDate(g.date)}
             />
@@ -81,9 +88,9 @@ export default function Page() {
       </section>
 
       <div className="mt-12 rounded-3xl border border-zinc-200 bg-zinc-50/60 p-6">
-        <h2 className="text-lg font-semibold text-zinc-900">Want product options?</h2>
+        <h2 className="text-lg font-semibold text-zinc-900">Shortlists — when you’re ready</h2>
         <p className="mt-2 text-sm text-zinc-700">
-          When you&apos;re ready to compare products, our Favourites pages keep things simple with shortlists and clear trade-offs.
+          When you’re ready to compare options, our Favourites pages keep things simple with small shortlists and clear trade-offs.
         </p>
         <div className="mt-4 flex flex-col gap-3 sm:flex-row sm:items-center">
           <a href="/favourites" className="btn-primary text-center">Browse Favourites</a>

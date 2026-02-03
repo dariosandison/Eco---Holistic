@@ -13,7 +13,7 @@ import MoneyPageNextLinks from '@/components/MoneyPageNextLinks'
 
 
 export const metadata = {
-  title: 'Natural sleep support (non‑pharma): what helps, what to skip',
+  title: 'Natural sleep support (non‑pharma): what helps, what to skip | Wild & Well',
   description: 'A calm, non‑pharma sleep shortlist: environment upgrades first, then gentle options. No hacks — just repeatable basics.',
 }
 

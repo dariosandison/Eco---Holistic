@@ -13,7 +13,7 @@ import MoneyPageNextLinks from '@/components/MoneyPageNextLinks'
 
 
 export const metadata = {
-  title: 'Organic snacks: simple favourites',
+  title: 'Organic snacks: simple favourites | Wild & Well',
   description: 'A simple, whole‑ingredient snack shortlist that keeps ultra‑processed extras low — plus what to look for on labels.',
 }
 

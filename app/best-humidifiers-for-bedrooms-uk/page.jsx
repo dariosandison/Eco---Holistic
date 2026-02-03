@@ -12,7 +12,7 @@ import MoneyPageNextLinks from '@/components/MoneyPageNextLinks'
 
 
 export const metadata = {
-  title: 'Humidifiers for Bedrooms (UK): shortlist',
+  title: 'Humidifiers for Bedrooms (UK): shortlist | Wild & Well',
   description: 'A shortlist for bedroom humidifiers in the UK: what to look for, what to avoid, and simple maintenance rules.',
 }
 

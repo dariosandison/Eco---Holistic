@@ -5,7 +5,7 @@ import TopicFAQ from '@/components/TopicFAQ'
 import { amazonSearchUrl } from '@/lib/amazon'
 
 export const metadata = {
-  title: 'Stretches & mobility — a simple daily routine',
+  title: 'Stretches & mobility — a simple daily routine | Wild & Well',
   description:
     'Mobility guide: what to do for desk bodies, how to build a 10-minute routine, and optional gear for comfort and assistance.',
 }

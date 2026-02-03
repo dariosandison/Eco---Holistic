@@ -12,7 +12,7 @@ import MoneyPageNextLinks from '@/components/MoneyPageNextLinks'
 
 
 export const metadata = {
-  title: 'Natural sleep support: our favourites',
+  title: 'Natural sleep support: our favourites | Wild & Well',
   description: 'A calm shortlist of natural sleep support options — what tends to help most, what to skip, and buyer-friendly options.',
 }
 

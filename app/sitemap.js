@@ -1,6 +1,10 @@
 import fs from 'fs'
 import path from 'path'
 
+export const runtime = 'nodejs'
+export const revalidate = 3600
+
+
 function isPageFile(name) {
   return /^page\.(js|jsx|ts|tsx)$/.test(name)
 }
@@ -75,8 +79,32 @@ export default function sitemap() {
   // Stable ordering helps caching and diffing.
   routes.sort((a, b) => a.localeCompare(b))
 
+  // Include blog posts and known author pages.
+  try {
+    const blogDir = path.join(process.cwd(), 'content', 'blog')
+    if (fs.existsSync(blogDir)) {
+      for (const file of fs.readdirSync(blogDir)) {
+        if (file.endsWith('.mdx') && !file.endsWith('-duplicate.mdx')) {
+          const slug = file.replace(/\.mdx$/, '')
+          routes.push(`/blog/${slug}`)
+        }
+      }
+    }
+  } catch (e) {
+    // ignore and keep sitemap functional
+  }
+
+  // Author profile pages (keep in sync with lib/authors.js)
+  routes.push('/authors/wild-and-well-founder')
+  routes.push('/authors/wild-and-well-editorial')
+  routes.push('/authors')
+
+  // RSS feeds
+  routes.push('/rss')
+  routes.push('/rss.xml')
   const now = new Date().toISOString()
-  return routes.map((route) => ({
+  const unique = Array.from(new Set(routes)).sort((a,b)=>a.localeCompare(b))
+  return unique.map((route) => ({
     url: baseUrl + route,
     lastModified: now,
   }))

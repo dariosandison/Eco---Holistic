@@ -13,7 +13,7 @@ import MoneyPageNextLinks from '@/components/MoneyPageNextLinks'
 
 
 export const metadata = {
-  title: "Extra virgin olive oil (UK): our favourites",
+  title: "Extra virgin olive oil (UK): our favourites | Wild & Well",
   description: "A practical shortlist of extra virgin olive oils (EVOO) with notes on freshness, storage, and what to look for on the label.",
 }
 

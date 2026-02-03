@@ -5,7 +5,7 @@ import TopicFAQ from '@/components/TopicFAQ'
 import { amazonSearchUrl } from '@/lib/amazon'
 
 export const metadata = {
-  title: 'Grow your own — fruit, veg, herbs (and optional hens)',
+  title: 'Grow your own — fruit, veg, herbs (and optional hens) | Wild & Well',
   description:
     'Guide to growing your own food: how to start small, what matters (light, soil, watering), allotment basics, and beginner equipment for common tasks.',
 }

@@ -12,7 +12,7 @@ import MoneyPageNextLinks from '@/components/MoneyPageNextLinks'
 
 
 export const metadata = {
-  title: "Walking Shoes for Daily Steps (UK): shortlist",
+  title: "Walking Shoes for Daily Steps (UK): shortlist | Wild & Well",
   description: "A comfort-first shortlist of walking shoes for daily steps. Focus on fit, cushioning, and the surfaces you walk on.",
 }
 

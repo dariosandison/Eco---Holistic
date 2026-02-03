@@ -13,7 +13,7 @@ import MoneyPageNextLinks from '@/components/MoneyPageNextLinks'
 
 
 export const metadata = {
-  title: "Ground flaxseed (UK): simple shortlist",
+  title: "Ground flaxseed (UK): simple shortlist | Wild & Well",
   description: "A shortlist of ground flaxseed (linseed) and how to store it so it stays fresh. Great for oats, yoghurt, and baking.",
 }
 

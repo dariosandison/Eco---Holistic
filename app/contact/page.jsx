@@ -1,7 +1,7 @@
 import Link from 'next/link'
 
 export const metadata = {
-  title: 'Contact',
+  title: 'Contact | Wild & Well',
   description: 'Contact Wild & Well for corrections, feedback, and questions about our content.',
 }
 
