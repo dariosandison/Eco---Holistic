@@ -115,7 +115,7 @@ export default function ShortlistExplorer({ sections }) {
               value={q}
               onChange={(e) => setQ(e.target.value)}
               placeholder="Try: water, sleep, laundry, trackers…"
-              className="mt-2 w-full rounded-2xl border border-zinc-200 bg-white px-4 py-2.5 text-sm outline-none focus:ring-2 focus:ring-emerald-200"
+              className="mt-2 w-full rounded-2xl border border-zinc-200 bg-white px-4 py-2.5 text-sm outline-none focus:ring-2 focus:ring-[color:var(--ring)]"
             />
           </div>
           <div>
@@ -123,7 +123,7 @@ export default function ShortlistExplorer({ sections }) {
             <select
               value={tag}
               onChange={(e) => setTag(e.target.value)}
-              className="mt-2 w-full rounded-2xl border border-zinc-200 bg-white px-4 py-2.5 text-sm outline-none focus:ring-2 focus:ring-emerald-200"
+              className="mt-2 w-full rounded-2xl border border-zinc-200 bg-white px-4 py-2.5 text-sm outline-none focus:ring-2 focus:ring-[color:var(--ring)]"
             >
               <option value="">All</option>
               {tags.map((t) => (

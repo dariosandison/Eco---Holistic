@@ -72,13 +72,13 @@ export default function MoneyPageQuickCompare({ picks = [] }) {
               value={q}
               onChange={(e) => setQ(e.target.value)}
               placeholder="Search picks…"
-              className="w-full sm:w-56 rounded-2xl border border-zinc-200 bg-white px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-emerald-200"
+              className="w-full sm:w-56 rounded-2xl border border-zinc-200 bg-white px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-[color:var(--ring)]"
             />
 
             <select
               value={badge}
               onChange={(e) => setBadge(e.target.value)}
-              className="w-full sm:w-48 rounded-2xl border border-zinc-200 bg-white px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-emerald-200"
+              className="w-full sm:w-48 rounded-2xl border border-zinc-200 bg-white px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-[color:var(--ring)]"
               aria-label="Filter by label"
             >
               {badgeOptions.map((b) => (
@@ -89,7 +89,7 @@ export default function MoneyPageQuickCompare({ picks = [] }) {
             <select
               value={sort}
               onChange={(e) => setSort(e.target.value)}
-              className="w-full sm:w-40 rounded-2xl border border-zinc-200 bg-white px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-emerald-200"
+              className="w-full sm:w-40 rounded-2xl border border-zinc-200 bg-white px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-[color:var(--ring)]"
               aria-label="Sort order"
             >
               <option value="Recommended">Recommended</option>

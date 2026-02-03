@@ -101,7 +101,7 @@ export default function RunningCostTool({
                   onChange={(e) => setPackPrice(e.target.value)}
                   inputMode="decimal"
                   placeholder="e.g. 25"
-                  className="mt-2 w-full rounded-2xl border border-zinc-200 bg-white px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-emerald-200"
+                  className="mt-2 w-full rounded-2xl border border-zinc-200 bg-white px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-[color:var(--ring)]"
                 />
               </div>
               <div>
@@ -110,7 +110,7 @@ export default function RunningCostTool({
                   value={filtersPerPack}
                   onChange={(e) => setFiltersPerPack(e.target.value)}
                   inputMode="numeric"
-                  className="mt-2 w-full rounded-2xl border border-zinc-200 bg-white px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-emerald-200"
+                  className="mt-2 w-full rounded-2xl border border-zinc-200 bg-white px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-[color:var(--ring)]"
                 />
               </div>
               <div>
@@ -120,7 +120,7 @@ export default function RunningCostTool({
                   onChange={(e) => setReplacementsPerYear(e.target.value)}
                   inputMode="decimal"
                   placeholder="e.g. 6"
-                  className="mt-2 w-full rounded-2xl border border-zinc-200 bg-white px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-emerald-200"
+                  className="mt-2 w-full rounded-2xl border border-zinc-200 bg-white px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-[color:var(--ring)]"
                 />
               </div>
             </div>
@@ -151,7 +151,7 @@ export default function RunningCostTool({
                   onChange={(e) => setWatts(e.target.value)}
                   inputMode="decimal"
                   placeholder="e.g. 250"
-                  className="mt-2 w-full rounded-2xl border border-zinc-200 bg-white px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-emerald-200"
+                  className="mt-2 w-full rounded-2xl border border-zinc-200 bg-white px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-[color:var(--ring)]"
                 />
               </div>
               <div>
@@ -161,7 +161,7 @@ export default function RunningCostTool({
                   onChange={(e) => setHoursPerDay(e.target.value)}
                   inputMode="decimal"
                   placeholder="e.g. 6"
-                  className="mt-2 w-full rounded-2xl border border-zinc-200 bg-white px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-emerald-200"
+                  className="mt-2 w-full rounded-2xl border border-zinc-200 bg-white px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-[color:var(--ring)]"
                 />
               </div>
               <div>
@@ -170,7 +170,7 @@ export default function RunningCostTool({
                   value={fmtPencePerKwh(pencePerKwh)}
                   onChange={(e) => setPencePerKwh(e.target.value)}
                   inputMode="decimal"
-                  className="mt-2 w-full rounded-2xl border border-zinc-200 bg-white px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-emerald-200"
+                  className="mt-2 w-full rounded-2xl border border-zinc-200 bg-white px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-[color:var(--ring)]"
                 />
               </div>
             </div>

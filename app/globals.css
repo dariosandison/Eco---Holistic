@@ -3,28 +3,46 @@
 @tailwind utilities;
 
 :root{
-  --brand:#1f6a58; /* deep sage */
+  /* Core brand */
+  --brand:#1f6a58;        /* deep sage (accessible with white text) */
+  --brand-dark:#174f42;
+  --brand-soft:#e7f3ef;
+  --brand-soft-2:#f1f8f6;
+
+  /* Logo accent (used sparingly for highlights) */
+  --accent:#88c038;
+  --accent-soft:#f3f8e3;
+
+  /* Neutrals */
   --ink:#111827;   /* neutral-900 */
   --muted:#6b7280; /* neutral-500/600 */
-  --card:#f8fafc;  /* slate-50 */
-  --bg:#ffffff;
+  --bg:#fbfdfb;
   --fg:var(--ink);
-  --border:#e5e7eb;
+  --border:rgba(17,24,39,0.12);
+
+  /* Focus */
+  --ring: rgba(31,106,88,0.22);
+  --ring-accent: rgba(136,192,56,0.25);
+
   --brand-contrast:#ffffff;
 }
 
 .btn-primary{
   display:inline-flex; align-items:center; justify-content:center;
   border-radius: 0.75rem; padding: 0.5rem 1rem;
-  background: var(--brand); color:#fff; font-weight:600;
-  transition: opacity .15s ease;
+  background: linear-gradient(180deg, var(--brand), var(--brand-dark));
+  color:#fff; font-weight:600;
+  box-shadow: 0 1px 0 rgba(0,0,0,0.06);
+  transition: filter .15s ease, opacity .15s ease;
 }
-.btn-primary:hover{ opacity:.9; }
-
+.btn-primary:hover{ filter: brightness(0.97); }
 
 html, body { height: 100%; }
 body{
-  background: var(--bg);
+  background:
+    radial-gradient(1000px 600px at 10% -10%, var(--accent-soft), transparent 60%),
+    radial-gradient(900px 550px at 110% 20%, var(--brand-soft), transparent 55%),
+    linear-gradient(180deg, var(--bg), #ffffff 40%, var(--bg));
   color: var(--fg);
   font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, "Noto Sans", sans-serif;
 }
@@ -40,37 +58,49 @@ body{
 
 .btn{
   @apply inline-flex items-center justify-center rounded-2xl px-4 py-2 font-medium border transition;
-  background: var(--brand);
+  background: linear-gradient(180deg, var(--brand), var(--brand-dark));
   color: var(--brand-contrast);
   border-color: transparent;
 }
-.btn:hover{ filter: brightness(0.95); }
+.btn:hover{ filter: brightness(0.97); }
 
 .card{
-  @apply rounded-2xl border bg-white p-5 shadow-sm;
+  @apply rounded-2xl border bg-white p-5 shadow-sm transition;
   border-color: var(--border);
+  background: linear-gradient(180deg, #ffffff 0%, rgba(31,106,88,0.03) 100%);
 }
-
+.card:hover{
+  border-color: rgba(31,106,88,0.35);
+  box-shadow: 0 10px 26px rgba(17,24,39,0.08);
+}
 
 .btn-secondary{
   @apply inline-flex items-center justify-center rounded-2xl px-4 py-2 font-medium border transition;
-  background: #ffffff;
+  background: rgba(255,255,255,0.9);
   color: var(--ink);
-  border-color: #d1d5db;
+  border-color: rgba(17,24,39,0.15);
 }
-.btn-secondary:hover{ background:#f9fafb; }
+.btn-secondary:hover{ background:#ffffff; }
 
 /* Small UI primitives used across Topic, Guide and Shortlist pages */
 .chip{
-  @apply inline-flex items-center rounded-full border border-zinc-200 bg-zinc-50 px-2.5 py-1 text-xs font-medium text-zinc-700;
+  @apply inline-flex items-center rounded-full border px-2.5 py-1 text-xs font-medium;
+  background: rgba(31,106,88,0.05);
+  border-color: rgba(31,106,88,0.18);
+  color: rgba(17,24,39,0.75);
 }
 
 .badge{
-  @apply inline-flex items-center rounded-full bg-emerald-700/10 px-2.5 py-1 text-xs font-semibold text-emerald-800;
+  @apply inline-flex items-center rounded-full px-2.5 py-1 text-xs font-semibold;
+  background: rgba(136,192,56,0.18);
+  color: var(--brand-dark);
 }
 
 .panel{
-  @apply rounded-3xl border border-zinc-200 bg-zinc-50/60 p-6;
+  @apply rounded-3xl border p-6;
+  border-color: rgba(31,106,88,0.16);
+  background:
+    linear-gradient(180deg, rgba(255,255,255,0.85), rgba(231,243,239,0.55));
 }
 
 .section-title{
@@ -81,9 +111,11 @@ body{
   @apply mt-2 text-sm text-zinc-700 max-w-3xl;
 }
 
-
 /* Accessibility */
-:focus-visible{ outline: 2px solid var(--brand); outline-offset: 2px; }
+:focus-visible{
+  outline: 2px solid var(--brand);
+  outline-offset: 2px;
+}
 
 .btn-muted{
   @apply inline-flex items-center justify-center rounded-2xl px-4 py-2 font-medium border transition;
