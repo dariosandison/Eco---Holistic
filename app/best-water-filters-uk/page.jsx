@@ -148,6 +148,16 @@ const itemList = PICKS.map((p, i) => ({
           A shortlist — not an endless list. The best choice is the one you’ll actually use and keep replacing filters for.
         </p>
 
+        {/* Page image */}
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src="/images/photography/water.jpg"
+          alt=""
+          className="mt-6 w-full rounded-3xl border border-zinc-200 shadow-sm"
+          loading="lazy"
+          decoding="async"
+        />
+
         <EducationFirstCallout topicHref="/topics/water" topicLabel="Water topic" insightHref="/blog/water-filter-buying-guide-uk" insightLabel="Water filter buying guide" />
       </header>
 

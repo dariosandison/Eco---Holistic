@@ -52,6 +52,16 @@ export default function Page() {
           Start by choosing the right format for your kitchen. After that, the deciding factor is usually replacement filters: cost, availability, and how often they need changing.
         </p>
 
+        {/* Topic image */}
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src="/images/photography/water.jpg"
+          alt=""
+          className="mt-6 w-full rounded-3xl border border-zinc-200 shadow-sm"
+          loading="lazy"
+          decoding="async"
+        />
+
         <div className="mt-4 flex flex-wrap gap-2">
           <Link className="btn-secondary" href="/blog/water-filter-buying-guide-uk">Read the buying guide</Link>
           <Link className="btn-secondary" href="/best-water-filters-uk">Water filters (UK): shortlist</Link>

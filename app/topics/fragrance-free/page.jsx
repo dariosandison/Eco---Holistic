@@ -40,6 +40,15 @@ export default function Page() {
         <p className="mt-3 text-zinc-700">
           The simplest approach is to remove fragrance from high-contact products first (laundry, dish, body). That usually reduces exposure more than switching a dozen surface sprays.
         </p>
+        {/* Topic image */}
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src="/images/photography/cleaning.jpg"
+          alt=""
+          className="mt-6 w-full rounded-3xl border border-zinc-200 shadow-sm"
+          loading="lazy"
+          decoding="async"
+        />
         <div className="mt-4 flex flex-wrap gap-2">
           <Link className="btn-secondary" href="/blog/non-toxic-cleaning-starter">Cleaning starter guide</Link>
           <Link className="btn-secondary" href="/best-fragrance-free-laundry-detergents-uk">Laundry detergents shortlist</Link>

@@ -95,6 +95,16 @@ const url = `${SITE_URL}/best-low-tox-products-for-beginners`
           If you’re new, this page is your shortcut: one small change first, then build from there. No perfect “everything list” — just the pages that help most UK readers make a good first decision.
         </p>
 
+        {/* Page image */}
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src="/images/photography/cleaning.jpg"
+          alt=""
+          className="mt-6 w-full rounded-3xl border border-zinc-200 shadow-sm"
+          loading="lazy"
+          decoding="async"
+        />
+
         <EducationFirstCallout topicHref="/blog" topicLabel="Read starter explainers" insightHref="/blog/non-toxic-cleaning-starter" insightLabel="Non‑toxic cleaning starter" />
         <div className="mt-5 flex flex-wrap gap-2">
           <Link className="btn-secondary" href="/shopping-list">Get the free shopping list</Link>

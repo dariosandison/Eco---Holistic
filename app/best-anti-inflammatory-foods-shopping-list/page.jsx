@@ -49,6 +49,16 @@ const url = `${SITE_URL}/best-anti-inflammatory-foods-shopping-list`
           This list is food-first and UK-friendly.
         </p>
 
+        {/* Page image */}
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src="/images/photography/nutrition.jpg"
+          alt=""
+          className="mt-6 w-full rounded-3xl border border-zinc-200 shadow-sm"
+          loading="lazy"
+          decoding="async"
+        />
+
         <EducationFirstCallout topicHref="/topics" topicLabel="Explore topics" insightHref="/blog" insightLabel="Read Wellness Insights" />
         <div className="mt-5 flex flex-wrap gap-2">
           <Link className="btn-secondary" href="/shopping-list">Get the free shopping list</Link>

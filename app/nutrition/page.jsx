@@ -42,6 +42,15 @@ export default function Page() {
           Clear, practical nutrition content — focusing on the modern food environment, label reading, and simple upgrades you can repeat.
           When it helps, we link to “favourites” product shortlists (single-ingredient foods, organic staples, and sensible add-ons).
         </p>
+        {/* Page image */}
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src="/images/photography/nutrition.jpg"
+          alt=""
+          className="mt-6 w-full rounded-3xl border border-zinc-200 shadow-sm"
+          loading="lazy"
+          decoding="async"
+        />
         <div className="mt-5 flex flex-wrap gap-2">
           <Link className="btn-secondary" href="/blog">Read Wellness Insights</Link>
           <Link className="btn-secondary" href="/favourites">Browse favourites</Link>

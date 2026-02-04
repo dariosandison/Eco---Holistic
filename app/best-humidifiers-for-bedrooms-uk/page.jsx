@@ -131,6 +131,16 @@ const itemList = PICKS.map((p, i) => ({
           A shortlist with simple decision rules: what to buy, what to avoid, and how to keep humidity in a sensible range.
         </p>
 
+        {/* Page image */}
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src="/images/photography/sleep.jpg"
+          alt=""
+          className="mt-6 w-full rounded-3xl border border-zinc-200 shadow-sm"
+          loading="lazy"
+          decoding="async"
+        />
+
         <EducationFirstCallout topicHref="/topics/sleep" topicLabel="Sleep topic" insightHref="/blog/caffeine-and-sleep-timing" insightLabel="Caffeine & sleep timing" />
       </header>
 

@@ -14,6 +14,15 @@ export default function Page(){
         and simple movement habits. We focus on the stuff that actually changes your day-to-day — and we keep the advice conservative.
       </p>
 
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
+        src="/images/photography/home.jpg"
+        alt=""
+        className="w-full rounded-3xl border border-zinc-200 shadow-sm"
+        loading="lazy"
+        decoding="async"
+      />
+
       <h2>How the site is organised</h2>
       <ul>
         <li><strong>Wellness Insights</strong> — explainers and articles that help you understand what matters.</li>

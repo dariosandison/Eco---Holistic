@@ -146,6 +146,16 @@ export default function Page() {
           A shortlist with simple decision rules: what to buy first for damp rooms, condensation, and laundry drying — without overcomplicating it.
         </p>
 
+        {/* Page image */}
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src="/images/photography/air-quality.png"
+          alt=""
+          className="mt-6 w-full rounded-3xl border border-zinc-200 shadow-sm"
+          loading="lazy"
+          decoding="async"
+        />
+
         <EducationFirstCallout
           topicHref="/topics/air-quality"
           topicLabel="Air quality topic"

@@ -40,6 +40,15 @@ export default function Page() {
         <p className="mt-3 text-zinc-700">
           Better sleep usually comes from a few levers: morning light, consistent timing, a cool dark room, and a repeatable wind-down routine.
         </p>
+        {/* Topic image */}
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src="/images/photography/sleep.jpg"
+          alt=""
+          className="mt-6 w-full rounded-3xl border border-zinc-200 shadow-sm"
+          loading="lazy"
+          decoding="async"
+        />
         <div className="mt-4 flex flex-wrap gap-2">
           <Link className="btn-secondary" href="/blog/sleep-naturally-simple-guide">Cornerstone guide</Link>
           <Link className="btn-secondary" href="/best-natural-sleep-support">Sleep support shortlist</Link>

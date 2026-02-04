@@ -5,10 +5,10 @@ import Link from 'next/link';
 export default function Hero() {
   return (
     <section className="relative isolate">
-      {/* Background image (large OG-style logo) */}
+      {/* Background image */}
       <div className="absolute inset-0 -z-10">
         <Image
-          src="/og.png"            // change to your actual file (e.g. /og-default.png) living in /public
+          src="/images/photography/home-hero.jpg"
           alt=""
           fill
           priority

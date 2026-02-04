@@ -48,10 +48,10 @@ export default function Page() {
       </header>
 
       <section className="mt-10 grid gap-4 md:grid-cols-2">
-        <Card image="/images/cards/sleep.svg" title="Sleep & recovery" desc="Light, timing, temperature, and practical options." href="/topics/sleep" tag="Sleep" />
-        <Card image="/images/cards/air-purifier.svg" title="Air quality (allergies + damp)" desc="HEPA basics, placement, and shortlists for common rooms." href="/topics/air-quality" tag="Home" />
-        <Card image="/images/cards/water-filter.svg" title="Water (filters + hydration)" desc="Under-sink vs jugs, replacement filters, and buying basics." href="/topics/water" tag="Kitchen" />
-        <Card image="/images/cards/laundry.svg" title="Fragrance-free cleaning & laundry" desc="Ingredient checks and the quickest swaps for sensitive households." href="/topics/fragrance-free" tag="Cleaning" />
+        <Card image="/images/photography/thumbs/sleep.png" title="Sleep & recovery" desc="Light, timing, temperature, and practical options." href="/topics/sleep" tag="Sleep" />
+        <Card image="/images/photography/thumbs/air-quality.png" title="Air quality (allergies + damp)" desc="HEPA basics, placement, and shortlists for common rooms." href="/topics/air-quality" tag="Home" />
+        <Card image="/images/photography/thumbs/water.png" title="Water (filters + hydration)" desc="Under-sink vs jugs, replacement filters, and buying basics." href="/topics/water" tag="Kitchen" />
+        <Card image="/images/photography/thumbs/laundry.png" title="Fragrance-free cleaning & laundry" desc="Ingredient checks and the quickest swaps for sensitive households." href="/topics/fragrance-free" tag="Cleaning" />
       </section>
 
       <section className="mt-14 max-w-3xl">

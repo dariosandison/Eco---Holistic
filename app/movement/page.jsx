@@ -40,6 +40,15 @@ export default function Page() {
         <p className="mt-3 text-zinc-700">
           Walking, basic strength, mobility, and recovery — with optional gear when it helps.
         </p>
+        {/* Page image */}
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src="/images/photography/movement.jpg"
+          alt=""
+          className="mt-6 w-full rounded-3xl border border-zinc-200 shadow-sm"
+          loading="lazy"
+          decoding="async"
+        />
         <div className="mt-5 flex flex-wrap gap-2">
           <Link className="btn-secondary" href="/blog">Read Wellness Insights</Link>
           <Link className="btn-secondary" href="/favourites">Browse favourites</Link>
