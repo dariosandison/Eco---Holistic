@@ -102,9 +102,9 @@ export default function ThanksPage({ searchParams }) {
 
         <div className="mt-6">
           <TrackedLink
-            href="/favourites"
+            href="/picks"
             event="lead_next_step"
-            data={{ source: "shopping_list_thanks", destination: "/favourites", label: "Browse all favourites" }}
+            data={{ source: "shopping_list_thanks", destination: "/picks", label: "Browse all favourites" }}
             className="btn-secondary"
           >
             Browse all favourites

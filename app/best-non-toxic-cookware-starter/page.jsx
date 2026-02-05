@@ -58,7 +58,7 @@ function QuickSummary(){
       <div className="mt-4 flex flex-wrap gap-2">
         <Link className="btn-secondary" href="/topics/fragrance-free">Low-tox kitchen basics</Link>
         <Link className="btn-secondary" href="/shopping-list">Free shopping list</Link>
-        <Link className="btn-secondary" href="/favourites">Browse favourites</Link>
+        <Link className="btn-secondary" href="/picks">Browse favourites</Link>
       </div>
       <p className="mt-4 text-xs text-zinc-500">Last updated: February 2, 2026 · Wild & Well Editorial Team</p>
     </div>
@@ -205,7 +205,7 @@ const itemList = PICKS.map((p, i) => ({
         />
 
         <div className="mt-8 flex flex-wrap gap-2">
-          <Link className="btn-primary" href="/favourites">Back to favourites →</Link>
+          <Link className="btn-primary" href="/picks">Back to favourites →</Link>
           <Link className="btn-secondary" href="/shopping-list">Get the free shopping list</Link>
         </div>
       </section>

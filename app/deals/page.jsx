@@ -51,7 +51,7 @@ export default function DealsPage() {
           specs and reviews before buying.
         </p>
         <div className="mt-5 flex flex-wrap gap-2">
-          <Link className="btn-secondary" href="/favourites">
+          <Link className="btn-secondary" href="/picks">
             Browse favourites
           </Link>
           <Link className="btn-secondary" href="/topics">Topics</Link>

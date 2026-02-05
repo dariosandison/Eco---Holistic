@@ -39,7 +39,7 @@ export default function Page() {
           <Link className="btn-primary" href="/shopping-list" data-track="productlist-newsletter">
             Join the free list
           </Link>
-          <Link className="btn-secondary" href="/favourites">
+          <Link className="btn-secondary" href="/picks">
             Browse favourites
           </Link>
         </div>

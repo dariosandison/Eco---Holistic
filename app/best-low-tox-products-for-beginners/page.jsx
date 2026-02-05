@@ -109,7 +109,7 @@ const url = `${SITE_URL}/best-low-tox-products-for-beginners`
         <div className="mt-5 flex flex-wrap gap-2">
           <Link className="btn-secondary" href="/shopping-list">Get the free shopping list</Link>
           <Link className="btn-secondary" href="/topics">Browse Topics</Link>
-          <Link className="btn-secondary" href="/favourites">Browse Favourites</Link>
+          <Link className="btn-secondary" href="/picks">Browse Favourites</Link>
         </div>
         <p className="mt-3 text-xs text-zinc-500">Last updated: February 2, 2026 · Wild & Well Editorial Team</p>
       </header>

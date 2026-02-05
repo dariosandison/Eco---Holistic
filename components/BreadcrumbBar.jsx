@@ -7,7 +7,8 @@ import { SITE_URL } from '@/lib/site'
 
 const LABELS = {
   topics: 'Topics',
-  favourites: 'Favourites',
+  favourites: 'Picks',
+  picks: 'Picks',
   deals: 'Deals',
   blog: 'Wellness Insights',
   nutrition: 'Nutrition',
@@ -42,7 +43,7 @@ function buildCrumbs(pathname) {
     const label = humanizeSlug(segments[0].replace(/^best-/, ''))
     return [
       { label: 'Home', href: '/' },
-      { label: 'Shortlists', href: '/favourites' },
+      { label: 'Shortlists', href: '/picks' },
       { label, href: `/${segments[0]}` },
     ]
   }

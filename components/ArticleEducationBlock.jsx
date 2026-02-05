@@ -62,7 +62,7 @@ export default function ArticleEducationBlock({ frontmatter, content }) {
             <Link href="/topics" className="btn-secondary text-center">
               Browse Topics
             </Link>
-            <Link href="/favourites" className="btn-secondary text-center">
+            <Link href="/picks" className="btn-secondary text-center">
               Browse Favourites
             </Link>
             <Link href="/shopping-list" className="btn-primary text-center">

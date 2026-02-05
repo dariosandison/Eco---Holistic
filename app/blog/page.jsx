@@ -38,7 +38,7 @@ export default function Page() {
           </div>
         </div>
         <Link
-          href="/favourites"
+          href="/picks"
           className="rounded-xl border border-zinc-300 bg-white px-4 py-2.5 text-sm font-semibold text-zinc-900 hover:bg-zinc-50 w-full sm:w-auto text-center"
         >
           Browse Favourites
@@ -93,7 +93,7 @@ export default function Page() {
           When you’re ready to compare options, our Favourites pages keep things simple with small shortlists and clear trade-offs.
         </p>
         <div className="mt-4 flex flex-col gap-3 sm:flex-row sm:items-center">
-          <a href="/favourites" className="btn-primary text-center">Browse Favourites</a>
+          <a href="/picks" className="btn-primary text-center">Browse Favourites</a>
           <a href="/topics" className="btn-secondary text-center">Browse Topics</a>
         </div>
       </div>

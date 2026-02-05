@@ -62,7 +62,7 @@ export default function sitemap() {
     // Fallback: keep the sitemap working even if filesystem access is unavailable.
     routes = [
       '/',
-      '/favourites',
+      '/picks',
       '/topics',
       '/blog',
       '/nutrition',
@@ -77,6 +77,8 @@ export default function sitemap() {
   }
 
   // Stable ordering helps caching and diffing.
+  // Filter out legacy redirect-only routes so Google indexes the canonical versions.
+  routes = routes.filter((r) => !['/picks', '/recommended'].includes(r))
   routes.sort((a, b) => a.localeCompare(b))
 
   // Include blog posts and known author pages.

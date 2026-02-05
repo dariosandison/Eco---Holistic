@@ -95,7 +95,7 @@ export default function ArticleLayout({
         </p>
         <div className="mt-4 flex flex-wrap gap-2">
           <a href="/topics" className="btn-secondary">Topics</a>
-          <a href="/favourites" className="btn-secondary">Shortlists</a>
+          <a href="/picks" className="btn-secondary">Shortlists</a>
           <a href="/shopping-list" className="btn-secondary">Shopping list</a>
           <a href="/blog" className="btn-secondary">Wellness Insights</a>
         </div>

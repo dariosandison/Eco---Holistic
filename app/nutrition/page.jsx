@@ -53,7 +53,7 @@ export default function Page() {
         />
         <div className="mt-5 flex flex-wrap gap-2">
           <Link className="btn-secondary" href="/blog">Read Wellness Insights</Link>
-          <Link className="btn-secondary" href="/favourites">Browse favourites</Link>
+          <Link className="btn-secondary" href="/picks">Browse favourites</Link>
         </div>
         <p className="mt-3 text-xs text-zinc-500">Last updated: February 1, 2026</p>
       </header>

@@ -183,7 +183,7 @@ export default function HomePage() {
       <section className="relative isolate">
         <div className="absolute inset-0 -z-10">
           <Image
-            src="/og-default.jpg"
+            src="/images/photography/home-hero.jpg"
             alt=""
             fill
             priority
@@ -213,8 +213,8 @@ export default function HomePage() {
               >
                 Low‑Tox Shopping List
               </Link>
-              <Link href="/favourites" className="text-sm font-semibold text-zinc-900 hover:underline">
-                Browse favourites →
+              <Link href="/picks" className="text-sm font-semibold text-zinc-900 hover:underline">
+                Browse picks →
               </Link>
             </div>
 
@@ -317,7 +317,7 @@ export default function HomePage() {
 {/* FAVOURITES */}
 <section className="mt-16">
   <div className="mx-auto max-w-6xl px-4">
-    <h2 className="text-2xl font-semibold">Favourites (shortlists)</h2>
+    <h2 className="text-2xl font-semibold">Picks (shortlists)</h2>
     <p className="mt-2 text-sm text-zinc-600">
       Shortlists with the key trade-offs and a small set of options.
     </p>
@@ -389,8 +389,8 @@ export default function HomePage() {
               <div className="text-sm font-semibold text-zinc-900">Topics</div>
               <div className="mt-1 text-sm text-zinc-600">Air, water, fragrance‑free home, sleep & recovery.</div>
             </Link>
-            <Link href="/favourites" className="card">
-              <div className="text-sm font-semibold text-zinc-900">Favourites (shortlists)</div>
+            <Link href="/picks" className="card">
+              <div className="text-sm font-semibold text-zinc-900">Picks (shortlists)</div>
               <div className="mt-1 text-sm text-zinc-600">A small set of options with the main trade-offs.</div>
             </Link>
             <Link href="/shopping-list" className="card">

@@ -12,10 +12,17 @@ const nextConfig = {
   },
   async redirects() {
     return [
-      { source: '/best-of', destination: '/favourites', permanent: true },
-      { source: '/recommended', destination: '/favourites', permanent: true },
-      { source: '/picks', destination: '/topics', permanent: true },
-      { source: '/picks/:path*', destination: '/topics/:path*', permanent: true },
+      // Legacy routes
+      { source: '/best-of', destination: '/picks', permanent: true },
+      { source: '/recommended', destination: '/picks', permanent: true },
+      { source: '/favourites', destination: '/picks', permanent: true },
+
+      // Legacy picks sub-pages -> canonical filtered picks
+      { source: '/picks/water', destination: '/picks?tag=Water', permanent: true },
+      { source: '/picks/sleep', destination: '/picks?tag=Sleep', permanent: true },
+      { source: '/picks/air-quality', destination: '/picks?tag=Air', permanent: true },
+      { source: '/picks/fragrance-free', destination: '/picks?tag=Laundry', permanent: true },
+
       { source: '/guides', destination: '/blog', permanent: true },
       { source: '/guides/:slug*', destination: '/blog/:slug*', permanent: true },
       { source: '/blog/sleep-naturally-without-overwhelm', destination: '/blog/sleep-naturally-simple-guide', permanent: true },
