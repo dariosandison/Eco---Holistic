@@ -42,6 +42,8 @@ export default function RelatedReading({ currentSlug, currentTags = [], posts = 
             title={p.title}
             excerpt={p.description}
             image={p.image}
+            topics={p.tags || []}
+            category={p.category}
             tag={(p.type || '').toLowerCase() === 'explainer' ? 'Explainer' : 'Insight'}
             date={fmtDate(p.updated || p.date)}
           />

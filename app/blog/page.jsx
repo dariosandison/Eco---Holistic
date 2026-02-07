@@ -59,6 +59,8 @@ export default function Page() {
               title={i.title}
               excerpt={i.description}
               image={i.image}
+              topics={i.tags || []}
+              category={i.category}
               tag="Insight"
               date={fmtDate(i.date)}
             />
@@ -80,6 +82,8 @@ export default function Page() {
               title={g.title}
               excerpt={g.description}
               image={g.image}
+              topics={g.tags || []}
+              category={g.category}
               tag="Explainer"
               date={fmtDate(g.date)}
             />

@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import { makeThumbDataUri } from '@/lib/thumb';
 
-export default function Card({ href = '#', title, excerpt, image, tag, date, slug }) {
+export default function Card({ href = '#', title, excerpt, desc, image, tag, date, slug, topics, category }) {
   // Treat the older “base” photography set (e.g. /images/photography/water.jpg) as generic for cards.
   // This allows Wellness Insights + related cards to use the newer rotating photo pool.
   const isBasePhotography =
@@ -29,7 +29,22 @@ export default function Card({ href = '#', title, excerpt, image, tag, date, slu
   }
 
   function pickFallbackPhoto() {
-    const key = `${slug || ''} ${title || ''}`.toLowerCase();
+    // Prefer explicit taxonomy over heuristic keyword matching.
+    // We pass tags/category from blog listings so card images match the actual topic.
+    const topicParts = [];
+    if (Array.isArray(topics)) topicParts.push(...topics);
+    else if (typeof topics === 'string' && topics.trim()) topicParts.push(topics);
+    if (category) topicParts.push(category);
+
+    const key = `${slug || ''} ${title || ''} ${topicParts.join(' ')}`.toLowerCase();
+    const tokens = key
+      .split(/[^a-z0-9]+/)
+      .map((t) => t.trim())
+      .filter(Boolean);
+
+    const has = (w) => tokens.includes(w);
+    const hasAny = (arr) => arr.some((w) => tokens.includes(w));
+    const hasPrefix = (prefixes) => tokens.some((t) => prefixes.some((p) => t.startsWith(p)));
 
     const pools = {
       air: [
@@ -65,80 +80,110 @@ export default function Card({ href = '#', title, excerpt, image, tag, date, slu
       ],
     };
 
-    const match =
-      key.includes('air') ||
-      key.includes('purifier') ||
-      key.includes('hepa') ||
-      key.includes('pollen') ||
-      key.includes('allerg') ||
-      key.includes('mould') ||
-      key.includes('mold') ||
-      key.includes('damp') ||
-      key.includes('humid') ||
-      key.includes('vent') ||
-      key.includes('dehumid');
+    // Topic detection (token-based to avoid substring false-positives like "staples" → "tap")
+    const isAir =
+      has('air') ||
+      has('hepa') ||
+      has('purifier') ||
+      hasAny(['pollen', 'mould', 'mold', 'damp']) ||
+      hasPrefix(['allerg', 'humid', 'dehumid']) ||
+      hasAny(['vent', 'ventilation', 'humidity']);
 
-    const water =
-      key.includes('water') ||
-      key.includes('filter') ||
-      key.includes('jug') ||
-      key.includes('tap') ||
-      key.includes('hydration');
+    const isWater =
+      has('water') ||
+      hasAny(['filter', 'filters', 'jug', 'hydration', 'shower']) ||
+      has('tap');
 
-    const sleep =
-      key.includes('sleep') ||
-      key.includes('bed') ||
-      key.includes('insomnia') ||
-      key.includes('melatonin') ||
-      key.includes('snore');
+    const isSleep =
+      has('sleep') ||
+      has('insomnia') ||
+      has('melatonin') ||
+      has('snore') ||
+      hasAny(['bed', 'bedroom', 'bedding']);
 
-    const laundry =
-      key.includes('laundry') ||
-      key.includes('deterg') ||
-      key.includes('clean') ||
-      key.includes('low-tox') ||
-      key.includes('toxic') ||
-      key.includes('dish') ||
-      key.includes('soap');
+    // Home / cleaning / low-tox home living
+    const isHome =
+      hasAny([
+        'laundry',
+        'detergent',
+        'detergents',
+        'cleaning',
+        'clean',
+        'soap',
+        'dish',
+        'kitchen',
+        'bathroom',
+        'toilet',
+        'paper',
+        'bamboo',
+        'composting',
+        'reusable',
+        'reusables',
+        'zero',
+        'waste',
+        'candles',
+        'eco',
+        'gift',
+        'gifts',
+        'energy',
+        'winter',
+        'label',
+        'labels',
+        'ingredient',
+        'ingredients',
+        'kids',
+        'baby',
+        'budget',
+        'essentials',
+        'starter',
+        'fragrance',
+        'mould',
+        'mold',
+      ]) ||
+      ((has('low') || hasPrefix(['low'])) && (has('tox') || has('toxic') || hasPrefix(['tox'])));
 
-    const nutrition =
-      key.includes('nutrition') ||
-      key.includes('oats') ||
-      key.includes('olive') ||
-      key.includes('chia') ||
-      key.includes('flax') ||
-      key.includes('matcha') ||
-      key.includes('protein') ||
-      key.includes('gut') ||
-      key.includes('ferment') ||
-      key.includes('supplement');
+    const isNutrition =
+      hasAny([
+        'nutrition',
+        'oats',
+        'olive',
+        'chia',
+        'flax',
+        'matcha',
+        'protein',
+        'gut',
+        'fermented',
+        'ferment',
+        'supplement',
+        'supplements',
+        'staples',
+        'ultra',
+        'processed',
+        'upf',
+      ]);
 
-    const movement =
-      key.includes('movement') ||
-      key.includes('fitness') ||
-      key.includes('cardio') ||
-      key.includes('hypertrophy') ||
-      key.includes('walk') ||
-      key.includes('yoga');
+    const isMovement =
+      hasAny(['movement', 'fitness', 'cardio', 'hypertrophy', 'walking', 'walk', 'yoga', 'mobility', 'strength']);
 
-    const pool = match
+    const pool = isAir
       ? pools.air
-      : water
+      : isWater
         ? pools.water
-        : sleep
+        : isSleep
           ? pools.sleep
-          : laundry
-            ? pools.laundry
-            : nutrition
-              ? pools.nutrition
-              : movement
-                ? pools.movement
+          : isNutrition
+            ? pools.nutrition
+            : isMovement
+              ? pools.movement
+              : isHome
+                ? pools.laundry
                 : pools.general;
 
     return pool[hashToIndex(slug || title || 'wild-and-well', pool.length)];
   }
 
   const src = isGeneric ? pickFallbackPhoto() : image;
+  const blurb = excerpt || desc;
 
   return (
     <Link
@@ -169,7 +214,7 @@ export default function Card({ href = '#', title, excerpt, image, tag, date, slu
       <div className="space-y-2 p-4">
         {date ? <span className="text-xs uppercase tracking-wide text-zinc-500">{date}</span> : null}
         <h3 className="text-base font-semibold text-zinc-900">{title}</h3>
-        {excerpt ? <p className="line-clamp-3 text-sm leading-6 text-zinc-600">{excerpt}</p> : null}
+        {blurb ? <p className="line-clamp-3 text-sm leading-6 text-zinc-600">{blurb}</p> : null}
       </div>
     </Link>
   );
