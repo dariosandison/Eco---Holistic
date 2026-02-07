@@ -4,8 +4,20 @@ import Link from 'next/link';
 import { makeThumbDataUri } from '@/lib/thumb';
 
 export default function Card({ href = '#', title, excerpt, image, tag, date, slug }) {
+  // Treat the older “base” photography set (e.g. /images/photography/water.jpg) as generic for cards.
+  // This allows Wellness Insights + related cards to use the newer rotating photo pool.
+  const isBasePhotography =
+    typeof image === 'string' &&
+    image.startsWith('/images/photography/') &&
+    !image.includes('/cards/') &&
+    !image.includes('/thumbs/cards/');
+
   const isGeneric =
-    !image || image === '/og-default.jpg' || image === '/logo.png' || image === '/placeholder.png';
+    !image ||
+    image === '/og-default.jpg' ||
+    image === '/logo.png' ||
+    image === '/placeholder.png' ||
+    isBasePhotography;
 
   function hashToIndex(str, n) {
     if (!str || !n) return 0;
