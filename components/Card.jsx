@@ -29,8 +29,8 @@ export default function Card({ href = '#', title, excerpt, desc, image, tag, dat
   }
 
   function pickFallbackPhoto() {
-    // Prefer explicit taxonomy over heuristic keyword matching.
-    // We pass tags/category from blog listings so card images match the actual topic.
+    // Prefer explicit taxonomy over fuzzy keyword matching.
+    // We pass tags/category from blog listings so card images match the *actual* topic.
     const topicParts = [];
     if (Array.isArray(topics)) topicParts.push(...topics);
     else if (typeof topics === 'string' && topics.trim()) topicParts.push(topics);
@@ -46,11 +46,11 @@ export default function Card({ href = '#', title, excerpt, desc, image, tag, dat
     const hasAny = (arr) => arr.some((w) => tokens.includes(w));
     const hasPrefix = (prefixes) => tokens.some((t) => prefixes.some((p) => t.startsWith(p)));
 
+    // Pools (keep small, on-brand, and clearly relevant)
     const pools = {
       air: [
         '/images/photography/thumbs/cards/air-purifier-beside-a-plant-in-a-minimalist-bedroom-daylight-through-curtains.jpg',
         '/images/photography/thumbs/cards/condensation-on-a-window-with-soft-morning-light-minimal-interior-background.jpg',
-        '/images/photography/thumbs/cards/bathroom-extractor-fan-area-no-branding-clean-tiles-natural-daylight.jpg',
         '/images/photography/thumbs/cards/air-quality-hero.jpg',
       ],
       water: [
@@ -62,123 +62,179 @@ export default function Card({ href = '#', title, excerpt, desc, image, tag, dat
         '/images/photography/thumbs/cards/calm-evening-routine-scene-with-tea-and-book-on-bed-neutral-tones.jpg',
         '/images/photography/thumbs/cards/sleep-hero.jpg',
       ],
-      laundry: [
-        '/images/photography/thumbs/cards/laundry-hero.jpg',
-        '/images/photography/thumbs/cards/cleaning-hero.jpg',
-      ],
+      movement: ['/images/photography/thumbs/cards/movement-hero.jpg'],
       nutrition: [
         '/images/photography/thumbs/cards/cooked-oats-and-seeds-in-small-ceramic-bowls-on-wooden-table-soft-daylight.jpg',
         '/images/photography/thumbs/cards/nutrition-hero.jpg',
       ],
-      movement: [
-        '/images/photography/thumbs/cards/movement-hero.jpg',
+      cleaning: [
+        '/images/photography/thumbs/cards/laundry-hero.jpg',
+        '/images/photography/thumbs/cards/cleaning-hero.jpg',
       ],
-      general: [
+      bathroom: [
+        '/images/photography/thumbs/cards/bathroom-extractor-fan-area-no-branding-clean-tiles-natural-daylight.jpg',
+        '/images/photography/thumbs/cards/cleaning-hero.jpg',
+      ],
+      wellness: [
         '/images/photography/thumbs/cards/close-up-of-hands-holding-a-warm-mug-near-a-window-shallow-depth-of-field.jpg',
         '/images/photography/thumbs/cards/calm-living-room-corner-with-linen-throw-and-houseplant-by-a-window-negative-space.jpg',
         '/images/photography/thumbs/cards/home-hero-small.jpg',
       ],
+      home: [
+        '/images/photography/thumbs/cards/home-hero-small.jpg',
+        '/images/photography/thumbs/cards/calm-living-room-corner-with-linen-throw-and-houseplant-by-a-window-negative-space.jpg',
+        '/images/photography/thumbs/cards/close-up-of-hands-holding-a-warm-mug-near-a-window-shallow-depth-of-field.jpg',
+      ],
     };
 
-    // Topic detection (token-based to avoid substring false-positives like "staples" → "tap")
+    // Pillar detection (token-based to avoid substring false-positives)
     const isAir =
       has('air') ||
       has('hepa') ||
       has('purifier') ||
-      hasAny(['pollen', 'mould', 'mold', 'damp']) ||
+      hasAny(['pollen', 'mould', 'mold', 'damp', 'condensation', 'extractor']) ||
       hasPrefix(['allerg', 'humid', 'dehumid']) ||
-      hasAny(['vent', 'ventilation', 'humidity']);
+      hasAny(['vent', 'ventilation', 'humidity', 'dehumidifier', 'humidifier']);
 
     const isWater =
       has('water') ||
-      hasAny(['filter', 'filters', 'jug', 'hydration', 'shower']) ||
+      hasAny(['filter', 'filters', 'jug', 'hydration', 'shower', 'bottle', 'bottles']) ||
       has('tap');
 
     const isSleep =
       has('sleep') ||
-      has('insomnia') ||
-      has('melatonin') ||
-      has('snore') ||
-      hasAny(['bed', 'bedroom', 'bedding']);
+      hasAny(['insomnia', 'melatonin', 'snore', 'bed', 'bedroom', 'bedding', 'mattress']) ||
+      hasAny(['wind', 'routine', 'caffeine', 'magnesium', 'morning', 'light']);
 
-    // Home / cleaning / low-tox home living
-    const isHome =
-      hasAny([
-        'laundry',
-        'detergent',
-        'detergents',
-        'cleaning',
-        'clean',
-        'soap',
-        'dish',
-        'kitchen',
-        'bathroom',
-        'toilet',
-        'paper',
-        'bamboo',
-        'composting',
-        'reusable',
-        'reusables',
-        'zero',
-        'waste',
-        'candles',
-        'eco',
-        'gift',
-        'gifts',
-        'energy',
-        'winter',
-        'label',
-        'labels',
-        'ingredient',
-        'ingredients',
-        'kids',
-        'baby',
-        'budget',
-        'essentials',
-        'starter',
-        'fragrance',
-        'mould',
-        'mold',
-      ]) ||
-      ((has('low') || hasPrefix(['low'])) && (has('tox') || has('toxic') || hasPrefix(['tox'])));
+    const isMovement = hasAny([
+      'movement',
+      'fitness',
+      'cardio',
+      'hypertrophy',
+      'walking',
+      'walk',
+      'yoga',
+      'mobility',
+      'strength',
+      'stretch',
+      'stretches',
+      'bands',
+      'tracker',
+      'trackers',
+      'shoes',
+      'activewear',
+      'roller',
+      'rollers',
+    ]);
 
-    const isNutrition =
-      hasAny([
-        'nutrition',
-        'oats',
-        'olive',
-        'chia',
-        'flax',
-        'matcha',
-        'protein',
-        'gut',
-        'fermented',
-        'ferment',
-        'supplement',
-        'supplements',
-        'staples',
-        'ultra',
-        'processed',
-        'upf',
-      ]);
+    // Food-first vs supplements/wellness posts
+    const isNutrition = hasAny([
+      'nutrition',
+      'oats',
+      'olive',
+      'chia',
+      'flax',
+      'matcha',
+      'protein',
+      'fermented',
+      'ferment',
+      'upf',
+      'processed',
+      'ultra',
+      'snacks',
+      'food',
+      'foods',
+      'cooking',
+      'oil',
+      'oils',
+      'seed',
+      'seeds',
+      'fibre',
+      'fiber',
+      'gut',
+      'sauerkraut',
+      'kimchi',
+    ]);
 
-    const isMovement =
-      hasAny(['movement', 'fitness', 'cardio', 'hypertrophy', 'walking', 'walk', 'yoga', 'mobility', 'strength']);
+    const isWellness = hasAny([
+      'supplement',
+      'supplements',
+      'adaptogen',
+      'adaptogens',
+      'immune',
+      'stress',
+      'anxiety',
+      'detox',
+      'remedy',
+      'remedies',
+      'herbal',
+    ]);
 
-    const pool = isAir
-      ? pools.air
+    // Keep cleaning/laundry separate from broader eco/home lifestyle so cards don't look “off-topic”.
+    const isBathroom = hasAny(['bathroom', 'toilet']) || (has('paper') && !has('kitchen'));
+
+    // Cleaning/laundry only when the content is *actually* cleaning/laundry.
+    // Avoid broad tokens like "non"/"toxic" which can misclassify kitchen or personal-care posts.
+    const isCleaning =
+      hasAny(['laundry', 'detergent', 'detergents', 'cleaning', 'clean', 'soap', 'dish', 'fragrance']) ||
+      (has('kitchen') && has('roll'));
+
+    const isHome = hasAny([
+      'compost',
+      'composting',
+      'reusable',
+      'reusables',
+      'zero',
+      'waste',
+      'eco',
+      'bamboo',
+      'gift',
+      'gifts',
+      'energy',
+      'winter',
+      'label',
+      'labels',
+      'ingredient',
+      'ingredients',
+      'kids',
+      'baby',
+      'budget',
+      'essentials',
+      'starter',
+      'grooming',
+      'makeup',
+      'sunscreen',
+      'candle',
+      'candles',
+      'kitchen',
+      'containers',
+      'cookware',
+      'lunch',
+      'box',
+      'boxes',
+    ]);
+
+    const poolKey = isAir
+      ? 'air'
       : isWater
-        ? pools.water
+        ? 'water'
         : isSleep
-          ? pools.sleep
-          : isNutrition
-            ? pools.nutrition
-            : isMovement
-              ? pools.movement
-              : isHome
-                ? pools.laundry
-                : pools.general;
+          ? 'sleep'
+          : isMovement
+            ? 'movement'
+            : isNutrition && !isWellness
+              ? 'nutrition'
+              : isWellness
+                ? 'wellness'
+                : isBathroom
+                  ? 'bathroom'
+                  : isCleaning
+                    ? 'cleaning'
+                    : isHome
+                      ? 'home'
+                      : 'home';
 
+    const pool = pools[poolKey] || pools.home;
     return pool[hashToIndex(slug || title || 'wild-and-well', pool.length)];
   }
 
