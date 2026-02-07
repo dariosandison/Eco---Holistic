@@ -13,7 +13,7 @@ import MoneyPageNextLinks from '@/components/MoneyPageNextLinks'
 
 
 export const metadata = {
-  title: 'Herbal options for stress: calm, cautious shortlist | Wild & Well',
+  title: 'Herbal options for stress: calm, cautious shortlist',
   description:
     'A conservative look at herbal options for stress: simple routines first, then common tea/herb choices and what to check on labels.',
 }
@@ -128,19 +128,34 @@ const url = `${SITE_URL}/best-herbal-remedies-for-stress-anxiety`
       <StructuredData data={ld} />
       <StructuredData data={faqLd} />
 
-      <header className="max-w-3xl">
+      <header>
+        <div className="max-w-3xl">
         <h1 className="text-4xl font-bold">Herbal options for stress: calm, cautious shortlist</h1>
         <p className="mt-3 text-zinc-700">
           Herbs can be a helpful part of a calming routine — but the routine is the real engine. This page focuses on simple, widely used options and clear label checks.
         </p>
 
-        <EducationFirstCallout topicHref="/topics" topicLabel="Explore topics" insightHref="/blog" insightLabel="Read Wellness Insights" />
+                </div>
+
+        {/* Hero image */}
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src="/images/photography/nutrition.jpg"
+          alt=""
+          className="mt-6 h-[260px] w-full rounded-3xl border border-zinc-200 object-cover shadow-sm md:h-[380px]"
+          loading="lazy"
+          decoding="async"
+        />
+
+        <div className="max-w-3xl">
+<EducationFirstCallout topicHref="/topics" topicLabel="Explore topics" insightHref="/blog" insightLabel="Read Wellness Insights" />
         <div className="mt-5 flex flex-wrap gap-2">
           <Link className="btn-secondary" href="/topics/sleep">Sleep topic</Link>
           <Link className="btn-secondary" href="/blog/sleep-naturally-simple-guide">Cornerstone sleep guide</Link>
           <Link className="btn-secondary" href="/shopping-list">Free shopping list</Link>
         </div>
         <p className="mt-3 text-xs text-zinc-500">Last updated: February 2, 2026 · Wild & Well Editorial Team</p>
+              </div>
       </header>
 
       

@@ -13,7 +13,7 @@ import MoneyPageNextLinks from '@/components/MoneyPageNextLinks'
 
 
 export const metadata = {
-  title: 'Organic snacks: simple favourites | Wild & Well',
+  title: 'Organic snacks: simple picks',
   description: 'A simple, whole‑ingredient snack shortlist that keeps ultra‑processed extras low — plus what to look for on labels.',
 }
 
@@ -78,7 +78,7 @@ const url = `${SITE_URL}/best-organic-snacks-healthy`
   const ld = {
     '@context': 'https://schema.org',
     '@type': 'Article',
-    headline: 'Organic snacks: simple favourites',
+    headline: 'Organic snacks: simple picks',
     datePublished: '2026-01-24',
     dateModified: '2026-02-02',
     mainEntityOfPage: { '@type': 'WebPage', '@id': url },
@@ -127,19 +127,34 @@ const url = `${SITE_URL}/best-organic-snacks-healthy`
       <StructuredData data={ld} />
       <StructuredData data={faqLd} />
 
-      <header className="max-w-3xl">
-        <h1 className="text-4xl font-bold">Organic snacks: simple favourites</h1>
+      <header>
+        <div className="max-w-3xl">
+        <h1 className="text-4xl font-bold">Organic snacks: simple picks</h1>
         <p className="mt-3 text-zinc-700">
           A clean, repeatable snack shortlist: whole ingredients first, minimal additives, and easy options you’ll actually keep around.
         </p>
 
-        <EducationFirstCallout topicHref="/nutrition" topicLabel="Nutrition basics" insightHref="/blog/fibre-gut-health-practical-guide" insightLabel="Fibre & gut health" />
+                </div>
+
+        {/* Hero image */}
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src="/images/photography/home-hero.jpg"
+          alt=""
+          className="mt-6 h-[260px] w-full rounded-3xl border border-zinc-200 object-cover shadow-sm md:h-[380px]"
+          loading="lazy"
+          decoding="async"
+        />
+
+        <div className="max-w-3xl">
+<EducationFirstCallout topicHref="/nutrition" topicLabel="Nutrition basics" insightHref="/blog/fibre-gut-health-practical-guide" insightLabel="Fibre & gut health" />
         <div className="mt-5 flex flex-wrap gap-2">
           <Link className="btn-secondary" href="/nutrition">Nutrition</Link>
           <Link className="btn-secondary" href="/shopping-list">Free shopping list</Link>
           <Link className="btn-secondary" href="/blog/single-ingredient-staples-that-actually-matter">Single‑ingredient staples</Link>
         </div>
         <p className="mt-3 text-xs text-zinc-500">Last updated: February 2, 2026 · Wild & Well Editorial Team</p>
+              </div>
       </header>
 
       

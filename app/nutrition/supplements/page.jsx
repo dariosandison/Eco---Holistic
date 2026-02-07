@@ -5,7 +5,7 @@ import TopicFAQ from '@/components/TopicFAQ'
 import { amazonSearchUrl } from '@/lib/amazon'
 
 export const metadata = {
-  title: 'Supplements — a simple, low‑additive approach | Wild & Well',
+  title: 'Supplements — a simple, low‑additive approach',
   description:
     'Supplements guide: how to read labels, spot quality signals, and avoid common traps when choosing minimal-additive options.',
 }
@@ -50,7 +50,7 @@ export default function Page() {
 
         <div className="mt-4 flex flex-wrap gap-2">
           <Link className="btn-secondary" href="/nutrition">Back to Nutrition</Link>
-          <Link className="btn-secondary" href="/how-we-test">How we choose favourites</Link>
+          <Link className="btn-secondary" href="/how-we-test">How we choose picks</Link>
         </div>
 
         <div className="mt-4 flex flex-wrap gap-2">
@@ -143,7 +143,7 @@ export default function Page() {
       </section>
 
       <section className="mt-14" id="shortlists">
-        <h2 className="section-title">Favourites shortlists</h2>
+        <h2 className="section-title">Picks shortlists</h2>
         <p className="section-subtitle">Pages with label cues and shortlists for common supplement categories.</p>
         <div className="mt-4 flex flex-wrap gap-2">
           <Link className="btn-secondary" href="/best-organic-supplements-beginners">Organic supplements: beginner shortlist</Link>

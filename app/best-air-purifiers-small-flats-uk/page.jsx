@@ -12,7 +12,7 @@ import MoneyPageNextLinks from '@/components/MoneyPageNextLinks'
 
 
 export const metadata = {
-  title: 'Air Purifiers for Small Flats (UK): shortlist | Wild & Well',
+  title: 'Air Purifiers for Small Flats (UK): shortlist',
   description: 'Shortlisted air purifiers that make sense for small UK flats: quiet bedrooms, compact units, and realistic filter costs.',
 }
 
@@ -102,28 +102,33 @@ const itemList = PICKS.map((p, i) => ({
       <StructuredData data={ld} />
       <StructuredData data={faqLd} />
 
-      <header className="max-w-3xl">
+      <header>
+        <div className="max-w-3xl">
         <h1 className="text-4xl font-bold">Air purifiers for small flats (UK): shortlist</h1>
         <p className="mt-3 text-zinc-700">
           In small spaces, noise and filter costs matter more than fancy features. Buy the unit you’ll actually run every day.
         </p>
+
+        </div>
 
         {/* Page image */}
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src="/images/photography/air-quality.png"
           alt=""
-          className="mt-6 w-full rounded-3xl border border-zinc-200 shadow-sm"
+          className="mt-6 h-[260px] w-full rounded-3xl border border-zinc-200 object-cover shadow-sm md:h-[380px]"
           loading="lazy"
           decoding="async"
         />
 
+        <div className="max-w-3xl">
         <EducationFirstCallout topicHref="/topics/air-quality" topicLabel="Air quality topic" insightHref="/blog/healthy-air-at-home" insightLabel="Healthy air at home" />
         <div className="mt-4 flex flex-wrap gap-2">
           <Link className="btn-secondary" href="/topics/air-quality">Air quality</Link>
           <Link className="btn-secondary" href="/best-air-purifiers-allergies-uk">Allergies list</Link>
         </div>
         <p className="mt-4 text-xs text-zinc-500">Last updated: February 2, 2026 · Wild & Well Editorial Team</p>
+        </div>
       </header>
 
       
@@ -154,7 +159,7 @@ const itemList = PICKS.map((p, i) => ({
         <div className="mt-6 grid gap-4 md:grid-cols-3">
           <ProductPick
             title="compact: Blueair 511i Max"
-            badge="Overall favourite"
+            badge="Overall pick"
             description="A strong small-room choice if you size it correctly for your bedroom."
             href={amazonSearchUrl('Blueair 511i Max air purifier')}
             bullets={['Quiet night mode matters', 'Plan filter replacements', 'Great bedroom starting point']}

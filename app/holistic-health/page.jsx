@@ -3,7 +3,7 @@ import TopicAtAGlance from '@/components/TopicAtAGlance'
 import TopicFAQ from '@/components/TopicFAQ'
 
 export const metadata = {
-  title: 'Holistic health | Wild & Well',
+  title: 'Holistic health',
   description: 'Holistic health: daily habits, whole-body fundamentals, and practical insights on sleep, movement, and a healthier home.',
 }
 

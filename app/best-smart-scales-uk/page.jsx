@@ -12,14 +12,14 @@ import MoneyPageNextLinks from '@/components/MoneyPageNextLinks'
 
 
 export const metadata = {
-  title: "Smart Scales (UK): shortlist | Wild & Well",
+  title: "Smart Scales (UK): shortlist",
   description: "A shortlist of smart scales that track trends over time. Useful if you can use the data calmly and consistently.",
 }
 
 const PICKS = [
   {
     "title": "Withings Body / Body+",
-    "badge": "Overall favourite",
+    "badge": "Overall pick",
     "desc": "Strong app and a trusted smart-scale brand.",
     "query": "Withings Body smart scale",
     "bullets": [
@@ -129,11 +129,26 @@ const itemList = PICKS.map((p, i) => ({
       <StructuredData data={ld} />
       <StructuredData data={{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Are body-fat percentage readings accurate?", "acceptedAnswer": {"@type": "Answer", "text": "Treat them as estimates. The best use is tracking trends over time under similar conditions, not absolute accuracy."}}, {"@type": "Question", "name": "How often should I weigh?", "acceptedAnswer": {"@type": "Answer", "text": "If you use a scale, many people prefer weekly or twice-weekly to avoid fixation. Choose what keeps you sane and consistent."}}]}} />
 
-      <header className="max-w-3xl">
+      <header>
+        <div className="max-w-3xl">
         <h1 className="text-4xl font-bold">Smart scales (UK): shortlist</h1>
         <p className="mt-3 text-zinc-700">A shortlist of smart scales that track trends over time. Useful if you can use the data calmly and consistently.</p>
 
-        <EducationFirstCallout topicHref="/topics" topicLabel="Explore topics" insightHref="/blog" insightLabel="Read Wellness Insights" />
+                </div>
+
+        {/* Hero image */}
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src="/images/photography/movement.jpg"
+          alt=""
+          className="mt-6 h-[260px] w-full rounded-3xl border border-zinc-200 object-cover shadow-sm md:h-[380px]"
+          loading="lazy"
+          decoding="async"
+        />
+
+        <div className="max-w-3xl">
+<EducationFirstCallout topicHref="/topics" topicLabel="Explore topics" insightHref="/blog" insightLabel="Read Wellness Insights" />
+              </div>
       </header>
 
       
@@ -150,7 +165,7 @@ const itemList = PICKS.map((p, i) => ({
         <div className="mt-6 grid gap-4 md:grid-cols-3">
           <ProductPick
             title="Withings Body / Body+"
-            badge="Overall favourite"
+            badge="Overall pick"
             description="Strong app and a trusted smart-scale brand."
             href={amazonSearchUrl('Withings Body smart scale')}
             bullets={["Good long-term trend tracking", "Strong app experience", "Multiple profiles"]}
@@ -181,7 +196,7 @@ const itemList = PICKS.map((p, i) => ({
         <div className="mt-6 grid gap-4 md:grid-cols-2">
           <ProductPick
             title="Withings Body / Body+"
-            badge="Overall favourite"
+            badge="Overall pick"
             description="Strong app and a trusted smart-scale brand."
             href={amazonSearchUrl('Withings Body smart scale')}
             bullets={["Good long-term trend tracking", "Strong app experience", "Multiple profiles"]}

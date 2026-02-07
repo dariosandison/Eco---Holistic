@@ -21,7 +21,7 @@ export default function NewsletterBar() {
     >
       <div className="mx-auto max-w-6xl px-4 py-3 flex flex-col sm:flex-row items-center gap-3">
         <p className="text-sm text-neutral-700">
-          Free: <a className="underline" href="/shopping-list">Low‑Tox Shopping List</a> + weekly favourites + calm insights (no spam).
+          Free: <a className="underline" href="/shopping-list">Low‑Tox Shopping List</a> + weekly picks + calm insights (no spam).
         </p>
 
         <form

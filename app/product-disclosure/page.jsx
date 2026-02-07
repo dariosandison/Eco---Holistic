@@ -24,7 +24,7 @@ export default function ProductDisclosure() {
       <section className="mt-10">
         <h2 className="text-2xl font-semibold">Sponsorships and paid work</h2>
         <p className="mt-3 text-zinc-700">
-          We do not accept paid placements in reviews or Favourites pages. If we ever publish sponsored content, it will be clearly labelled.
+          We do not accept paid placements in reviews or Picks pages. If we ever publish sponsored content, it will be clearly labelled.
         </p>
       </section>
 

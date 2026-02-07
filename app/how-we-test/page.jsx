@@ -28,7 +28,7 @@ export default function HowWeTest() {
           <li><strong>Define the job:</strong> what problem this product solves (and what it can’t).</li>
           <li><strong>Screen for dealbreakers:</strong> hidden ongoing costs, vague claims, poor availability.</li>
           <li><strong>Compare alternatives:</strong> price, usability, and replacement parts/filters.</li>
-          <li><strong>Choose a shortlist:</strong> an overall favourite, a good‑value option, and a few fit‑for‑purpose alternatives.</li>
+          <li><strong>Choose a shortlist:</strong> an overall pick, a good‑value option, and a few fit‑for‑purpose alternatives.</li>
           <li><strong>Update:</strong> we revise pages as products change or better options appear.</li>
         </ol>
         <div className="mt-4 flex flex-wrap gap-2">

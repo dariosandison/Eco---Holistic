@@ -14,7 +14,7 @@ import MoneyPageNextLinks from '@/components/MoneyPageNextLinks'
 
 
 export const metadata = {
-  title: 'Adaptogens for beginners: a calm, cautious guide | Wild & Well',
+  title: 'Adaptogens for beginners: a calm, cautious guide',
   description:
     'A practical beginner guide to adaptogens: what they are, who should skip them, and simple ways to start without building a big supplement stack.',
 }
@@ -97,19 +97,34 @@ const url = `${SITE_URL}/best-adaptogens-beginners-guide`
     <main className="mx-auto max-w-6xl px-4 py-16">
       <StructuredData data={ld} />
 
-      <header className="max-w-3xl">
+      <header>
+        <div className="max-w-3xl">
         <h1 className="text-4xl font-bold">Adaptogens for beginners: a calm, cautious guide</h1>
         <p className="mt-3 text-zinc-700">
           Adaptogens are popular, but they’re not a mandatory part of wellness. If you try them, treat them like an experiment: one change at a time, conservative doses, and clear reasons for using them.
         </p>
 
-        <EducationFirstCallout topicHref="/topics" topicLabel="Explore topics" insightHref="/blog" insightLabel="Read Wellness Insights" />
+                </div>
+
+        {/* Hero image */}
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src="/images/photography/nutrition.jpg"
+          alt=""
+          className="mt-6 h-[260px] w-full rounded-3xl border border-zinc-200 object-cover shadow-sm md:h-[380px]"
+          loading="lazy"
+          decoding="async"
+        />
+
+        <div className="max-w-3xl">
+<EducationFirstCallout topicHref="/topics" topicLabel="Explore topics" insightHref="/blog" insightLabel="Read Wellness Insights" />
         <div className="mt-5 flex flex-wrap gap-2">
           <Link className="btn-secondary" href="/topics/sleep">Sleep topic</Link>
           <Link className="btn-secondary" href="/natural-remedies">Natural remedies</Link>
           <Link className="btn-secondary" href="/shopping-list">Free shopping list</Link>
         </div>
         <p className="mt-3 text-xs text-zinc-500">Last updated: February 2, 2026 · Wild & Well Editorial Team</p>
+              </div>
       </header>
 
       

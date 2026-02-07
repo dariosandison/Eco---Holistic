@@ -13,7 +13,7 @@ import MoneyPageNextLinks from '@/components/MoneyPageNextLinks'
 
 
 export const metadata = {
-  title: 'Natural sleep support (non‑pharma): what helps, what to skip | Wild & Well',
+  title: 'Natural sleep support (non‑pharma): what helps, what to skip',
   description: 'A calm, non‑pharma sleep shortlist: environment upgrades first, then gentle options. No hacks — just repeatable basics.',
 }
 
@@ -127,22 +127,26 @@ const url = `${SITE_URL}/best-natural-sleep-remedies-non-pharma`
       <StructuredData data={ld} />
       <StructuredData data={faqLd} />
 
-      <header className="max-w-3xl">
+      <header>
+        <div className="max-w-3xl">
         <h1 className="text-4xl font-bold">Natural sleep support (non‑pharma): what helps, what to skip</h1>
         <p className="mt-3 text-zinc-700">
           A calm shortlist that prioritises environment upgrades first, then gentle optional tools. No hacks — just repeatable basics.
         </p>
+
+        </div>
 
         {/* Page image */}
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src="/images/photography/sleep.jpg"
           alt=""
-          className="mt-6 w-full rounded-3xl border border-zinc-200 shadow-sm"
+          className="mt-6 h-[260px] w-full rounded-3xl border border-zinc-200 object-cover shadow-sm md:h-[380px]"
           loading="lazy"
           decoding="async"
         />
 
+        <div className="max-w-3xl">
         <EducationFirstCallout topicHref="/topics/sleep" topicLabel="Sleep topic" insightHref="/blog/caffeine-and-sleep-timing" insightLabel="Caffeine & sleep timing" />
         <div className="mt-5 flex flex-wrap gap-2">
           <Link className="btn-secondary" href="/topics/sleep">Sleep topic</Link>
@@ -150,6 +154,7 @@ const url = `${SITE_URL}/best-natural-sleep-remedies-non-pharma`
           <Link className="btn-secondary" href="/blog/sleep-naturally-simple-guide">Cornerstone sleep guide</Link>
         </div>
         <p className="mt-3 text-xs text-zinc-500">Last updated: February 2, 2026 · Wild & Well Editorial Team</p>
+        </div>
       </header>
 
       

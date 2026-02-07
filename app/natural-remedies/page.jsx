@@ -3,7 +3,7 @@ import TopicAtAGlance from '@/components/TopicAtAGlance'
 import TopicFAQ from '@/components/TopicFAQ'
 
 export const metadata = {
-  title: 'Natural remedies | Wild & Well',
+  title: 'Natural remedies',
   description:
     'Evidence-informed natural remedies and supplement explainers, with simple next steps and shortlists when relevant.',
 }

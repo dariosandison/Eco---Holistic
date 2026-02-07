@@ -1,7 +1,7 @@
 import Link from 'next/link'
 
 export const metadata = {
-  title: 'Corrections | Wild & Well',
+  title: 'Corrections',
   description: 'How we handle corrections and updates.',
 }
 

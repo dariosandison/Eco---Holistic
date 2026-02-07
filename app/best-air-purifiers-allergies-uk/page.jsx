@@ -12,7 +12,7 @@ import MoneyPageNextLinks from '@/components/MoneyPageNextLinks'
 
 
 export const metadata = {
-  title: 'Air Purifiers for Allergies (UK): shortlist | Wild & Well',
+  title: 'Air Purifiers for Allergies (UK): shortlist',
   description: 'Shortlisted HEPA air purifiers for allergies in UK homes — what matters, what to skip, and top options for bedrooms and living rooms.',
 }
 
@@ -117,22 +117,26 @@ const itemList = PICKS.map((p, i) => ({
       <StructuredData data={ld} />
       <StructuredData data={faqLd} />
 
-      <header className="max-w-3xl">
+      <header>
+        <div className="max-w-3xl">
         <h1 className="text-4xl font-bold">Air purifiers for allergies (UK): shortlist</h1>
         <p className="mt-3 text-zinc-700">
           The biggest mistake is buying a purifier that’s too small for the room. Size first, features second.
         </p>
+
+        </div>
 
         {/* Page image */}
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src="/images/photography/air-quality.png"
           alt=""
-          className="mt-6 w-full rounded-3xl border border-zinc-200 shadow-sm"
+          className="mt-6 h-[260px] w-full rounded-3xl border border-zinc-200 object-cover shadow-sm md:h-[380px]"
           loading="lazy"
           decoding="async"
         />
 
+        <div className="max-w-3xl">
         <EducationFirstCallout topicHref="/topics/air-quality" topicLabel="Air quality topic" insightHref="/blog/healthy-air-at-home" insightLabel="Healthy air at home" />
         <div className="mt-4 flex flex-wrap gap-2">
           <Link className="btn-secondary" href="/topics/air-quality">Air quality</Link>
@@ -140,6 +144,7 @@ const itemList = PICKS.map((p, i) => ({
           <Link className="btn-secondary" href="/best-air-purifiers-small-flats-uk">Small flats list</Link>
         </div>
         <p className="mt-4 text-xs text-zinc-500">Last updated: February 2, 2026 · Wild & Well Editorial Team</p>
+        </div>
       </header>
 
       
@@ -171,7 +176,7 @@ const itemList = PICKS.map((p, i) => ({
         <div className="mt-6 grid gap-4 md:grid-cols-3">
           <ProductPick
             title="all‑rounder: Blueair 3250i"
-            badge="Overall favourite"
+            badge="Overall pick"
             description="A straightforward everyday choice for general particle control in living areas."
             href={amazonSearchUrl('Blueair Blue Max 3250i air purifier')}
             bullets={['Size it to your room', 'Plan filter replacements', 'Auto mode is optional']}

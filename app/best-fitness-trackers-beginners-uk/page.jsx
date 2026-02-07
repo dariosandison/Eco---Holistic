@@ -12,7 +12,7 @@ import MoneyPageNextLinks from '@/components/MoneyPageNextLinks'
 
 
 export const metadata = {
-  title: "Fitness Trackers for Beginners (UK): shortlist | Wild & Well",
+  title: "Fitness Trackers for Beginners (UK): shortlist",
   description: "A straightforward shortlist of fitness trackers for beginners: steps, sleep, heart-rate, and the features that actually matter.",
 }
 
@@ -94,7 +94,7 @@ function SummaryBox() {
       </p>
       <div className="mt-4 flex flex-wrap gap-2">
         <Link className="btn-secondary" href="/movement">Movement</Link>
-        <Link className="btn-secondary" href="/picks">Favourites</Link>
+        <Link className="btn-secondary" href="/picks">Picks</Link>
         <Link className="btn-secondary" href="/how-we-test">How we test</Link>
       </div>
       <p className="mt-4 text-xs text-zinc-500">Last updated: February 2, 2026 · Wild & Well Editorial Team</p>
@@ -130,11 +130,26 @@ const itemList = PICKS.map((p, i) => ({
       <StructuredData data={ld} />
       <StructuredData data={{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Do I need a tracker to get fitter?", "acceptedAnswer": {"@type": "Answer", "text": "No. A tracker is optional. It helps some people stay consistent by making steps and sleep more visible."}}, {"@type": "Question", "name": "Which metric matters most?", "acceptedAnswer": {"@type": "Answer", "text": "For most beginners: daily steps, weekly minutes of movement, and sleep consistency are the most useful starting points."}}]}} />
 
-      <header className="max-w-3xl">
+      <header>
+        <div className="max-w-3xl">
         <h1 className="text-4xl font-bold">Fitness trackers for beginners (UK): shortlist</h1>
         <p className="mt-3 text-zinc-700">A straightforward shortlist of fitness trackers for beginners: steps, sleep, heart-rate, and the features that actually matter.</p>
 
-        <EducationFirstCallout topicHref="/movement" topicLabel="Movement basics" insightHref="/blog/home-strength-basics-busy-people" insightLabel="Strength basics" />
+                </div>
+
+        {/* Hero image */}
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src="/images/photography/movement.jpg"
+          alt=""
+          className="mt-6 h-[260px] w-full rounded-3xl border border-zinc-200 object-cover shadow-sm md:h-[380px]"
+          loading="lazy"
+          decoding="async"
+        />
+
+        <div className="max-w-3xl">
+<EducationFirstCallout topicHref="/movement" topicLabel="Movement basics" insightHref="/blog/home-strength-basics-busy-people" insightLabel="Strength basics" />
+              </div>
       </header>
 
       

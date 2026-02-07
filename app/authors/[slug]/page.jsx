@@ -11,7 +11,7 @@ export async function generateStaticParams() {
 export async function generateMetadata({ params }) {
   const author = getAuthor(params.slug)
   return {
-    title: `${author.name} | Wild & Well`,
+    title: `${author.name}`,
     description: author.bio || 'Author profile and latest articles.',
   }
 }
@@ -31,7 +31,7 @@ export default function Page({ params }) {
         <div className="mt-5 flex flex-wrap gap-2">
           <Link className="btn-secondary" href="/authors">All authors</Link>
           <Link className="btn-secondary" href="/blog">Wellness Insights</Link>
-          <Link className="btn-secondary" href="/picks">Favourites</Link>
+          <Link className="btn-secondary" href="/picks">Picks</Link>
         </div>
       </header>
 

@@ -12,7 +12,7 @@ import MoneyPageNextLinks from '@/components/MoneyPageNextLinks'
 
 
 export const metadata = {
-  title: 'Water Filters (UK) — Jugs vs Under‑Sink vs Countertop: shortlist | Wild & Well',
+  title: 'Water Filters (UK) — Jugs vs Under‑Sink vs Countertop: shortlist',
   description: 'Shortlisted water filters for UK homes (jugs, under‑sink, gravity) with clear trade-offs and replacement cost notes.',
 }
 
@@ -74,7 +74,7 @@ function QuickSummary() {
         If you want high capacity without plumbing, choose a <strong>countertop gravity filter</strong>.
       </p>
       <div className="mt-4 flex flex-wrap gap-2">
-        <Link className="btn-secondary" href="/picks?tag=Water">Water favourites</Link>
+        <Link className="btn-secondary" href="/picks?tag=Water">Water picks</Link>
         <Link className="btn-secondary" href="/blog/water-filter-buying-guide-uk">Buying guide</Link>
         <Link className="btn-secondary" href="/shopping-list">Free shopping list</Link>
       </div>
@@ -142,23 +142,28 @@ const itemList = PICKS.map((p, i) => ({
       <StructuredData data={ld} />
       <StructuredData data={faqLd} />
 
-      <header className="max-w-3xl">
-        <h1 className="text-4xl font-bold">Water filters (UK): favourites</h1>
+      <header>
+        <div className="max-w-3xl">
+        <h1 className="text-4xl font-bold">Water filters (UK): picks</h1>
         <p className="mt-3 text-zinc-700">
           A shortlist — not an endless list. The best choice is the one you’ll actually use and keep replacing filters for.
         </p>
+
+        </div>
 
         {/* Page image */}
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src="/images/photography/water.jpg"
           alt=""
-          className="mt-6 w-full rounded-3xl border border-zinc-200 shadow-sm"
+          className="mt-6 h-[260px] w-full rounded-3xl border border-zinc-200 object-cover shadow-sm md:h-[380px]"
           loading="lazy"
           decoding="async"
         />
 
+        <div className="max-w-3xl">
         <EducationFirstCallout topicHref="/topics/water" topicLabel="Water topic" insightHref="/blog/water-filter-buying-guide-uk" insightLabel="Water filter buying guide" />
+        </div>
       </header>
 
       
@@ -189,7 +194,7 @@ const itemList = PICKS.map((p, i) => ({
       </section>
 
       <section className="mt-14">
-        <h2 className="text-2xl font-semibold">Top favourites (shortlist)</h2>
+        <h2 className="text-2xl font-semibold">Top picks (shortlist)</h2>
         <p className="mt-2 text-sm text-zinc-600">Three simple routes, depending on how you live.</p>
         <div className="mt-6 grid gap-4 md:grid-cols-3">
           <ProductPick
@@ -205,7 +210,7 @@ const itemList = PICKS.map((p, i) => ({
           />
           <ProductPick
             title="Low effort: under-sink"
-            badge="Overall favourite"
+            badge="Overall pick"
             description="Most convenient for daily use. Ideal if you want filtered water from a tap."
             href={amazonSearchUrl('Doulton under sink water filter system UK')}
             bullets={["Check installation space", "Budget for annual filter changes", "Great for families"]}
@@ -261,7 +266,7 @@ const itemList = PICKS.map((p, i) => ({
       </section>
 
       <section className="mt-14">
-        <h2 className="text-2xl font-semibold">Shortlist (buyer favourites)</h2>
+        <h2 className="text-2xl font-semibold">Shortlist (buyer picks)</h2>
         <p className="mt-2 text-sm text-zinc-600">
           These are curated searches so you can compare prices and check replacement filters.
         </p>
@@ -279,7 +284,7 @@ const itemList = PICKS.map((p, i) => ({
         </div>
 
         <div className="mt-8 flex flex-wrap gap-2">
-          <Link className="btn-primary" href="/picks?tag=Water">Go to Water favourites →</Link>
+          <Link className="btn-primary" href="/picks?tag=Water">Go to Water picks →</Link>
           <Link className="btn-secondary" href="/blog/water-filter-buying-guide-uk">Read the buying guide</Link>
         </div>
       </section>

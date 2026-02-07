@@ -42,7 +42,7 @@ export default function EditorialPolicy() {
       <Section title="How we create content">
         <ul className="list-disc pl-6 space-y-2">
           <li><strong>Wellness Insights</strong> explain basics and help you avoid common mistakes.</li>
-          <li><strong>Favourites pages</strong> are for buyer intent — shortlists, not endless lists.</li>
+          <li><strong>Picks pages</strong> are for buyer intent — shortlists, not endless lists.</li>
           <li><strong>Topics</strong> connect the two: a simple plan + the next best action.</li>
         </ul>
         <p>

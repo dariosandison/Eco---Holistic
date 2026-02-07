@@ -12,7 +12,7 @@ import MoneyPageNextLinks from '@/components/MoneyPageNextLinks'
 
 
 export const metadata = {
-  title: "Resistance Bands for Home Workouts: shortlist | Wild & Well",
+  title: "Resistance Bands for Home Workouts: shortlist",
   description: "A practical shortlist of resistance band types (loop bands and long bands) for strength training, rehab, and mobility at home.",
 }
 
@@ -129,11 +129,26 @@ const itemList = PICKS.map((p, i) => ({
       <StructuredData data={ld} />
       <StructuredData data={{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Do bands build muscle?", "acceptedAnswer": {"@type": "Answer", "text": "They can, especially for beginners, if you use enough tension and progressive overload."}}, {"@type": "Question", "name": "Which should I buy first?", "acceptedAnswer": {"@type": "Answer", "text": "A set of long bands is usually the most versatile starting point."}}]}} />
 
-      <header className="max-w-3xl">
+      <header>
+        <div className="max-w-3xl">
         <h1 className="text-4xl font-bold">Resistance bands for home workouts: shortlist</h1>
         <p className="mt-3 text-zinc-700">A practical shortlist of resistance band types (loop bands and long bands) for strength training, rehab, and mobility at home.</p>
 
-        <EducationFirstCallout topicHref="/movement" topicLabel="Movement basics" insightHref="/blog/home-strength-basics-busy-people" insightLabel="Strength basics" />
+                </div>
+
+        {/* Hero image */}
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src="/images/photography/movement.jpg"
+          alt=""
+          className="mt-6 h-[260px] w-full rounded-3xl border border-zinc-200 object-cover shadow-sm md:h-[380px]"
+          loading="lazy"
+          decoding="async"
+        />
+
+        <div className="max-w-3xl">
+<EducationFirstCallout topicHref="/movement" topicLabel="Movement basics" insightHref="/blog/home-strength-basics-busy-people" insightLabel="Strength basics" />
+              </div>
       </header>
 
       

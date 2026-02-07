@@ -12,7 +12,7 @@ import MoneyPageNextLinks from '@/components/MoneyPageNextLinks'
 
 
 export const metadata = {
-  title: "Yoga Mats for Grip & Comfort: shortlist | Wild & Well",
+  title: "Yoga Mats for Grip & Comfort: shortlist",
   description: "A shortlist of yoga mats that balance grip, cushioning, and durability. Choose based on sweat level and joint comfort.",
 }
 
@@ -128,11 +128,26 @@ const itemList = PICKS.map((p, i) => ({
       <StructuredData data={ld} />
       <StructuredData data={{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "How thick should a mat be?", "acceptedAnswer": {"@type": "Answer", "text": "Most people do well with 4–6mm. Go thicker if you need more cushioning on hard floors."}}, {"@type": "Question", "name": "What about smell/chemicals?", "acceptedAnswer": {"@type": "Answer", "text": "Let new mats air out. If you’re sensitive, choose reputable brands and avoid very strong odours."}}]}} />
 
-      <header className="max-w-3xl">
+      <header>
+        <div className="max-w-3xl">
         <h1 className="text-4xl font-bold">yoga mats for grip & comfort: shortlist</h1>
         <p className="mt-3 text-zinc-700">A shortlist of yoga mats that balance grip, cushioning, and durability. Choose based on sweat level and joint comfort.</p>
 
-        <EducationFirstCallout topicHref="/movement" topicLabel="Movement basics" insightHref="/blog/home-strength-basics-busy-people" insightLabel="Strength basics" />
+                </div>
+
+        {/* Hero image */}
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src="/images/photography/movement.jpg"
+          alt=""
+          className="mt-6 h-[260px] w-full rounded-3xl border border-zinc-200 object-cover shadow-sm md:h-[380px]"
+          loading="lazy"
+          decoding="async"
+        />
+
+        <div className="max-w-3xl">
+<EducationFirstCallout topicHref="/movement" topicLabel="Movement basics" insightHref="/blog/home-strength-basics-busy-people" insightLabel="Strength basics" />
+              </div>
       </header>
 
       

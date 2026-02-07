@@ -13,7 +13,7 @@ import MoneyPageNextLinks from '@/components/MoneyPageNextLinks'
 
 
 export const metadata = {
-  title: "Extra virgin olive oil (UK): our favourites | Wild & Well",
+  title: "Extra virgin olive oil (UK): our picks",
   description: "A practical shortlist of extra virgin olive oils (EVOO) with notes on freshness, storage, and what to look for on the label.",
 }
 
@@ -31,7 +31,7 @@ const PICKS = [
   },
   {
     "title": "Cold-pressed organic EVOO",
-    "badge": "Organic favourite",
+    "badge": "Organic pick",
     "desc": "If organic matters to you, choose reputable brands and check dates.",
     "query": "organic cold pressed extra virgin olive oil",
     "bullets": [
@@ -95,7 +95,7 @@ function SummaryBox() {
       </p>
       <div className="mt-4 flex flex-wrap gap-2">
         <Link className="btn-secondary" href="/nutrition">Nutrition</Link>
-        <Link className="btn-secondary" href="/picks">Favourites</Link>
+        <Link className="btn-secondary" href="/picks">Picks</Link>
       </div>
       <p className="mt-4 text-xs text-zinc-500">Last updated: February 2, 2026 · Wild & Well Editorial Team</p>
     </div>
@@ -116,7 +116,7 @@ const itemList = PICKS.map((p, i) => ({
   const ld = {
     '@context': 'https://schema.org',
     '@type': 'Article',
-    headline: "Extra virgin olive oil (UK): our favourites",
+    headline: "Extra virgin olive oil (UK): our picks",
     dateModified: '2026-02-02',
     datePublished: '2026-01-27',
     mainEntity: {
@@ -129,11 +129,26 @@ const itemList = PICKS.map((p, i) => ({
     <main className="mx-auto max-w-6xl px-4 py-16">
       <StructuredData data={ld} />
 
-      <header className="max-w-3xl">
-        <h1 className="text-4xl font-bold">Extra virgin olive oil (UK): our favourites</h1>
+      <header>
+        <div className="max-w-3xl">
+        <h1 className="text-4xl font-bold">Extra virgin olive oil (UK): our picks</h1>
         <p className="mt-3 text-zinc-700">A practical shortlist of extra virgin olive oils (EVOO) with notes on freshness, storage, and what to look for on the label.</p>
 
-        <EducationFirstCallout topicHref="/nutrition" topicLabel="Nutrition basics" insightHref="/blog/fibre-gut-health-practical-guide" insightLabel="Fibre & gut health" />
+                </div>
+
+        {/* Hero image */}
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src="/images/photography/nutrition.jpg"
+          alt=""
+          className="mt-6 h-[260px] w-full rounded-3xl border border-zinc-200 object-cover shadow-sm md:h-[380px]"
+          loading="lazy"
+          decoding="async"
+        />
+
+        <div className="max-w-3xl">
+<EducationFirstCallout topicHref="/nutrition" topicLabel="Nutrition basics" insightHref="/blog/fibre-gut-health-practical-guide" insightLabel="Fibre & gut health" />
+              </div>
       </header>
 
       
@@ -158,7 +173,7 @@ const itemList = PICKS.map((p, i) => ({
 
           <ProductPick
             title="Cold-pressed organic EVOO"
-            badge="Organic favourite"
+            badge="Organic pick"
             description="If organic matters to you, choose reputable brands and check dates."
             href={amazonSearchUrl('organic cold pressed extra virgin olive oil')}
             bullets={["Check bottling/harvest info", "Avoid big \u201cdetox\u201d claims", "Buy smaller bottles more often"]}
@@ -189,7 +204,7 @@ const itemList = PICKS.map((p, i) => ({
 
           <ProductPick
             title="Cold-pressed organic EVOO"
-            badge="Organic favourite"
+            badge="Organic pick"
             description="If organic matters to you, choose reputable brands and check dates."
             href={amazonSearchUrl('organic cold pressed extra virgin olive oil')}
             bullets={["Check bottling/harvest info", "Avoid big \u201cdetox\u201d claims", "Buy smaller bottles more often"]}

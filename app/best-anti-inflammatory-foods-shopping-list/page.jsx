@@ -12,7 +12,7 @@ import MoneyPageNextLinks from '@/components/MoneyPageNextLinks'
 
 
 export const metadata = {
-  title: 'Anti-inflammatory-style shopping list: simple staples | Wild & Well',
+  title: 'Anti-inflammatory-style shopping list: simple staples',
   description:
     'A simple UK-friendly shopping list built around fibre, colourful plants, and healthy fats — without medical claims or “superfood” marketing.',
 }
@@ -42,30 +42,35 @@ const url = `${SITE_URL}/best-anti-inflammatory-foods-shopping-list`
     <main className="mx-auto max-w-6xl px-4 py-16">
       <StructuredData data={ld} />
 
-      <header className="max-w-3xl">
+      <header>
+        <div className="max-w-3xl">
         <h1 className="text-4xl font-bold">Anti-inflammatory-style shopping list: simple staples</h1>
         <p className="mt-3 text-zinc-700">
           “Anti-inflammatory” works best as a pattern: more fibre and colourful plants, sensible fats, and fewer ultra‑processed extras.
           This list is food-first and UK-friendly.
         </p>
 
+        </div>
+
         {/* Page image */}
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src="/images/photography/nutrition.jpg"
           alt=""
-          className="mt-6 w-full rounded-3xl border border-zinc-200 shadow-sm"
+          className="mt-6 h-[260px] w-full rounded-3xl border border-zinc-200 object-cover shadow-sm md:h-[380px]"
           loading="lazy"
           decoding="async"
         />
 
+        <div className="max-w-3xl">
         <EducationFirstCallout topicHref="/topics" topicLabel="Explore topics" insightHref="/blog" insightLabel="Read Wellness Insights" />
         <div className="mt-5 flex flex-wrap gap-2">
           <Link className="btn-secondary" href="/shopping-list">Get the free shopping list</Link>
           <Link className="btn-secondary" href="/nutrition">Nutrition</Link>
-          <Link className="btn-secondary" href="/best-extra-virgin-olive-oil-uk">Olive oil favourites</Link>
+          <Link className="btn-secondary" href="/best-extra-virgin-olive-oil-uk">Olive oil picks</Link>
         </div>
         <p className="mt-3 text-xs text-zinc-500">Last updated: February 2, 2026 · Wild & Well Editorial Team</p>
+        </div>
       </header>
 
       
@@ -95,7 +100,7 @@ const url = `${SITE_URL}/best-anti-inflammatory-foods-shopping-list`
           <li>Pick one “default” breakfast (oats, yoghurt, eggs) and repeat it.</li>
           <li>Build lunches around fibre + protein (beans, lentils, tinned fish, leftovers).</li>
           <li>Add colour: one extra portion of fruit/veg per day is a win.</li>
-          <li>Keep snacks simple (fruit + nuts; yoghurt + berries). See: <Link className="underline" href="/best-organic-snacks-healthy">snack favourites</Link>.</li>
+          <li>Keep snacks simple (fruit + nuts; yoghurt + berries). See: <Link className="underline" href="/best-organic-snacks-healthy">snack picks</Link>.</li>
         </ul>
       </section>
 

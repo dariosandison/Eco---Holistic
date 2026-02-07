@@ -13,7 +13,7 @@ import MoneyPageNextLinks from '@/components/MoneyPageNextLinks'
 
 
 export const metadata = {
-  title: 'Supplements for beginners: a simple, cautious shortlist | Wild & Well',
+  title: 'Supplements for beginners: a simple, cautious shortlist',
   description:
     'A conservative, beginner-friendly supplement shortlist (UK) focused on simple options, label clarity, and when to skip.',
 }
@@ -128,19 +128,34 @@ const url = `${SITE_URL}/best-organic-supplements-beginners`
       <StructuredData data={ld} />
       <StructuredData data={faqLd} />
 
-      <header className="max-w-3xl">
+      <header>
+        <div className="max-w-3xl">
         <h1 className="text-4xl font-bold">Supplements for beginners: a simple, cautious shortlist</h1>
         <p className="mt-3 text-zinc-700">
           This page is intentionally conservative. If you’re new, the goal is not a “stack” — it’s one or two simple options that fit your life, with clear reasons to skip.
         </p>
 
-        <EducationFirstCallout topicHref="/topics" topicLabel="Explore topics" insightHref="/blog" insightLabel="Read Wellness Insights" />
+                </div>
+
+        {/* Hero image */}
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src="/images/photography/nutrition.jpg"
+          alt=""
+          className="mt-6 h-[260px] w-full rounded-3xl border border-zinc-200 object-cover shadow-sm md:h-[380px]"
+          loading="lazy"
+          decoding="async"
+        />
+
+        <div className="max-w-3xl">
+<EducationFirstCallout topicHref="/topics" topicLabel="Explore topics" insightHref="/blog" insightLabel="Read Wellness Insights" />
         <div className="mt-5 flex flex-wrap gap-2">
           <Link className="btn-secondary" href="/nutrition">Nutrition</Link>
           <Link className="btn-secondary" href="/blog">Wellness Insights</Link>
           <Link className="btn-secondary" href="/shopping-list">Free shopping list</Link>
         </div>
         <p className="mt-3 text-xs text-zinc-500">Last updated: February 2, 2026 · Wild & Well Editorial Team</p>
+              </div>
       </header>
 
       

@@ -13,7 +13,7 @@ import MoneyPageNextLinks from '@/components/MoneyPageNextLinks'
 
 
 export const metadata = {
-  title: 'Shower Filters for UK Hard Water: shortlist | Wild & Well',
+  title: 'Shower Filters for UK Hard Water: shortlist',
   description: 'Shortlisted shower filters for hard-water UK homes — what they can and can’t do, plus buyer shortlist.',
 }
 
@@ -72,18 +72,33 @@ const itemList = PICKS.map((p, i) => ({
     <main className="mx-auto max-w-6xl px-4 py-16">
       <StructuredData data={ld} />
 
-      <header className="max-w-3xl">
+      <header>
+        <div className="max-w-3xl">
         <h1 className="text-4xl font-bold">Shower filters for UK hard water: shortlist</h1>
         <p className="mt-3 text-zinc-700">
           Shower filters can help with feel and chlorine-related dryness for some people — but they won’t “soften” water like a full home softener.
         </p>
 
-        <EducationFirstCallout topicHref="/topics/water" topicLabel="Water topic" insightHref="/blog/water-filter-buying-guide-uk" insightLabel="Water filter buying guide" />
+                </div>
+
+        {/* Hero image */}
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src="/images/photography/water.jpg"
+          alt=""
+          className="mt-6 h-[260px] w-full rounded-3xl border border-zinc-200 object-cover shadow-sm md:h-[380px]"
+          loading="lazy"
+          decoding="async"
+        />
+
+        <div className="max-w-3xl">
+<EducationFirstCallout topicHref="/topics/water" topicLabel="Water topic" insightHref="/blog/water-filter-buying-guide-uk" insightLabel="Water filter buying guide" />
         <div className="mt-4 flex flex-wrap gap-2">
           <Link className="btn-secondary" href="/topics/fragrance-free">Sensitive skin</Link>
           <Link className="btn-secondary" href="/shopping-list">Free shopping list</Link>
         </div>
         <p className="mt-4 text-xs text-zinc-500">Last updated: February 2, 2026 · Wild & Well Editorial Team</p>
+              </div>
       </header>
 
       

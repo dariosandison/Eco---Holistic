@@ -2,7 +2,7 @@ import TrackedLink from "@/components/TrackedLink";
 import TrackOnLoad from "@/components/TrackOnLoad";
 
 export const metadata = {
-  title: "Subscribed | Wild & Well",
+  title: "Subscribed",
   description: "Thanks for subscribing. Use these links to explore the site: Sleep, Water, Air, Cleaning, Nutrition, and Movement.",
 };
 
@@ -75,39 +75,39 @@ export default function ThanksPage({ searchParams }) {
       <section className="mt-10">
         <h2 className="text-2xl font-semibold">Browse by category</h2>
         <p className="mt-2 text-sm text-zinc-600 max-w-3xl">
-          These topic pages explain what matters, what to look for, and link to deeper explainers and “favourites” shortlists when you want them.
+          These topic pages explain what matters, what to look for, and link to deeper explainers and “picks” shortlists when you want them.
         </p>
 
         <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          <Card image="/images/cards/sleep.svg" title="Sleep" desc="Sleep basics + practical options." href="/topics/sleep" />
-          <Card image="/images/cards/water-filter.svg" title="Water" desc="UK-friendly filter types, trade-offs, and recommended options." href="/topics/water" />
-          <Card image="/images/cards/air-purifier.svg" title="Air quality" desc="Allergies, damp, ventilation, and air purifier guidance." href="/topics/air-quality" />
-          <Card image="/images/cards/laundry.svg" title="Cleaning (fragrance-free)" desc="Low-tox swaps for laundry and cleaning without overhauling everything." href="/topics/fragrance-free" />
-          <Card image="/images/cards/supplements.svg" title="Nutrition" desc="Organic and single-ingredient foods, labels, and practical staples." href="/nutrition" />
-          <Card image="/images/cards/bands.svg" title="Movement" desc="Walking, strength training, and simple routines (with optional gear)." href="/movement" />
+          <Card image="/images/photography/thumbs/cards/bedside-table-with-a-book-and-mug-soft-light-through-curtains.jpg" title="Sleep" desc="Sleep basics + practical options." href="/topics/sleep" />
+          <Card image="/images/photography/thumbs/cards/ceramic-cups-and-a-carafe-on-a-kitchen-counter-calm-hydration-vibe.jpg" title="Water" desc="UK-friendly filter types, trade-offs, and recommended options." href="/topics/water" />
+          <Card image="/images/photography/thumbs/cards/air-purifier-beside-a-plant-in-a-minimalist-bedroom-daylight-through-curtains.jpg" title="Air quality" desc="Allergies, damp, ventilation, and air purifier guidance." href="/topics/air-quality" />
+          <Card image="/images/photography/thumbs/cards/laundry-hero.jpg" title="Cleaning (fragrance-free)" desc="Low-tox swaps for laundry and cleaning without overhauling everything." href="/topics/fragrance-free" />
+          <Card image="/images/photography/thumbs/cards/cooked-oats-and-seeds-in-small-ceramic-bowls-on-wooden-table-soft-daylight.jpg" title="Nutrition" desc="Organic and single-ingredient foods, labels, and practical staples." href="/nutrition" />
+          <Card image="/images/photography/thumbs/cards/movement-hero.jpg" title="Movement" desc="Walking, strength training, and simple routines (with optional gear)." href="/movement" />
         </div>
       </section>
 
       <section className="mt-12">
-        <h2 className="text-2xl font-semibold">Popular favourites pages</h2>
+        <h2 className="text-2xl font-semibold">Popular Picks pages</h2>
         <p className="mt-2 text-sm text-zinc-600 max-w-3xl">
           If you’re comparing products, these pages are built to be straightforward — what to look for, what to avoid, and a short shortlist.
         </p>
 
         <div className="mt-6 grid gap-4 md:grid-cols-3">
-          <Card image="/images/cards/water-filter.svg" title="Water filters (UK): favourites" desc="Jugs vs under-sink vs countertop: clear trade-offs." href="/best-water-filters-uk" />
-          <Card image="/images/cards/air-purifier.svg" title="Air purifiers for allergies (UK): shortlist" desc="Room size guidance + a shortlist that makes sense." href="/best-air-purifiers-allergies-uk" />
-          <Card image="/images/cards/laundry.svg" title="Fragrance-free laundry detergents (UK): shortlist" desc="Sensitive-home options, with ingredients to avoid." href="/best-fragrance-free-laundry-detergents-uk" />
+          <Card image="/images/photography/thumbs/cards/ceramic-cups-and-a-carafe-on-a-kitchen-counter-calm-hydration-vibe.jpg" title="Water filters (UK): Picks" desc="Jugs vs under-sink vs countertop: clear trade-offs." href="/best-water-filters-uk" />
+          <Card image="/images/photography/thumbs/cards/air-purifier-beside-a-plant-in-a-minimalist-bedroom-daylight-through-curtains.jpg" title="Air purifiers for allergies (UK): shortlist" desc="Room size guidance + a shortlist that makes sense." href="/best-air-purifiers-allergies-uk" />
+          <Card image="/images/photography/thumbs/cards/laundry-hero.jpg" title="Fragrance-free laundry detergents (UK): shortlist" desc="Sensitive-home options, with ingredients to avoid." href="/best-fragrance-free-laundry-detergents-uk" />
         </div>
 
         <div className="mt-6">
           <TrackedLink
             href="/picks"
             event="lead_next_step"
-            data={{ source: "shopping_list_thanks", destination: "/picks", label: "Browse all favourites" }}
+            data={{ source: "shopping_list_thanks", destination: "/picks", label: "Browse all Picks" }}
             className="btn-secondary"
           >
-            Browse all favourites
+            Browse all Picks
           </TrackedLink>
         </div>
       </section>

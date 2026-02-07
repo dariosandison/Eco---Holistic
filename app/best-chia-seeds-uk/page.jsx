@@ -13,7 +13,7 @@ import MoneyPageNextLinks from '@/components/MoneyPageNextLinks'
 
 
 export const metadata = {
-  title: "Chia seeds (UK): simple shortlist | Wild & Well",
+  title: "Chia seeds (UK): simple shortlist",
   description: "A shortlist of chia seeds for puddings, oats, and smoothies — plus what to look for (freshness and packaging).",
 }
 
@@ -128,11 +128,26 @@ const itemList = PICKS.map((p, i) => ({
     <main className="mx-auto max-w-6xl px-4 py-16">
       <StructuredData data={ld} />
 
-      <header className="max-w-3xl">
+      <header>
+        <div className="max-w-3xl">
         <h1 className="text-4xl font-bold">Chia seeds (UK): simple shortlist</h1>
         <p className="mt-3 text-zinc-700">A shortlist of chia seeds for puddings, oats, and smoothies — plus what to look for (freshness and packaging).</p>
 
-        <EducationFirstCallout topicHref="/nutrition" topicLabel="Nutrition basics" insightHref="/blog/fibre-gut-health-practical-guide" insightLabel="Fibre & gut health" />
+                </div>
+
+        {/* Hero image */}
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src="/images/photography/nutrition.jpg"
+          alt=""
+          className="mt-6 h-[260px] w-full rounded-3xl border border-zinc-200 object-cover shadow-sm md:h-[380px]"
+          loading="lazy"
+          decoding="async"
+        />
+
+        <div className="max-w-3xl">
+<EducationFirstCallout topicHref="/nutrition" topicLabel="Nutrition basics" insightHref="/blog/fibre-gut-health-practical-guide" insightLabel="Fibre & gut health" />
+              </div>
       </header>
 
       

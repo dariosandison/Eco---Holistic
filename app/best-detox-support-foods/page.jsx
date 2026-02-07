@@ -12,7 +12,7 @@ import MoneyPageNextLinks from '@/components/MoneyPageNextLinks'
 
 
 export const metadata = {
-  title: 'Everyday foods that support your body | Wild & Well',
+  title: 'Everyday foods that support your body',
   description:
     'Food-first overview: hydration, fibre, and simple staples that support your body’s normal processes — without “detox” claims.',
 }
@@ -42,19 +42,34 @@ const url = `${SITE_URL}/best-detox-support-foods`
     <main className="mx-auto max-w-6xl px-4 py-16">
       <StructuredData data={ld} />
 
-      <header className="max-w-3xl">
+      <header>
+        <div className="max-w-3xl">
         <h1 className="text-4xl font-bold">Everyday foods that support your body</h1>
         <p className="mt-3 text-zinc-700">
           “Detox” is a marketing term. Your body already has systems for processing and eliminating waste. What helps most is hydration, fibre, and stable meals.
         </p>
 
-        <EducationFirstCallout topicHref="/topics" topicLabel="Explore topics" insightHref="/blog" insightLabel="Read Wellness Insights" />
+                </div>
+
+        {/* Hero image */}
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src="/images/photography/nutrition.jpg"
+          alt=""
+          className="mt-6 h-[260px] w-full rounded-3xl border border-zinc-200 object-cover shadow-sm md:h-[380px]"
+          loading="lazy"
+          decoding="async"
+        />
+
+        <div className="max-w-3xl">
+<EducationFirstCallout topicHref="/topics" topicLabel="Explore topics" insightHref="/blog" insightLabel="Read Wellness Insights" />
         <div className="mt-5 flex flex-wrap gap-2">
           <Link className="btn-secondary" href="/nutrition">Nutrition</Link>
           <Link className="btn-secondary" href="/shopping-list">Free shopping list</Link>
           <Link className="btn-secondary" href="/blog/food-first-basics">Food‑first basics</Link>
         </div>
         <p className="mt-3 text-xs text-zinc-500">Last updated: February 2, 2026 · Wild & Well Editorial Team</p>
+              </div>
       </header>
 
       
@@ -87,7 +102,7 @@ const url = `${SITE_URL}/best-detox-support-foods`
           <li><strong>Simple spices:</strong> turmeric/ginger for flavour (don’t treat as medicine).</li>
         </ul>
         <p className="mt-5 text-sm text-zinc-600 max-w-3xl">
-          If you want product-level buying guidance, use our shortlists: <Link className="underline" href="/best-extra-virgin-olive-oil-uk">olive oil favourites</Link>, <Link className="underline" href="/best-organic-oats-uk">oats favourites</Link>, and <Link className="underline" href="/best-organic-snacks-healthy">snack favourites</Link>.
+          If you want product-level buying guidance, use our shortlists: <Link className="underline" href="/best-extra-virgin-olive-oil-uk">olive oil picks</Link>, <Link className="underline" href="/best-organic-oats-uk">oats picks</Link>, and <Link className="underline" href="/best-organic-snacks-healthy">snack picks</Link>.
         </p>
       </section>
 

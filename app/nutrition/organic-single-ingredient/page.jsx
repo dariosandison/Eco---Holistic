@@ -3,7 +3,7 @@ import TopicAtAGlance from '@/components/TopicAtAGlance'
 import TopicFAQ from '@/components/TopicFAQ'
 
 export const metadata = {
-  title: 'Organic & single‑ingredient foods — practical staples | Wild & Well',
+  title: 'Organic & single‑ingredient foods — practical staples',
   description:
     'Guide to organic and single-ingredient foods: label reading, staple-building, and practical swaps you can repeat.',
 }
@@ -122,7 +122,7 @@ export default function Page() {
       </section>
 
       <section className="mt-14" id="shortlists">
-        <h2 className="section-title">Favourites shortlists (staples)</h2>
+        <h2 className="section-title">Picks shortlists (staples)</h2>
         <p className="section-subtitle">Practical notes and shortlists—start with staples you buy repeatedly.</p>
         <div className="mt-4 flex flex-wrap gap-2">
           <Link className="btn-secondary" href="/best-extra-virgin-olive-oil-uk">Extra virgin olive oil (UK)</Link>

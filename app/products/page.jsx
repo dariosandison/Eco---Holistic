@@ -1,7 +1,7 @@
 import Link from "next/link";
 
 export const metadata = {
-  title: "Digital Products | Wild & Well",
+  title: "Digital Products",
   description:
     "Simple, practical resources designed to help you build sustainable routines.",
 };
@@ -12,7 +12,7 @@ export default function Page() {
       <header className="max-w-3xl">
         <h1 className="text-4xl font-bold">Digital Products</h1>
         <p className="mt-3 text-zinc-700">
-          Calm, step-by-step routines you can follow without overthinking. Built from the same approach as our free Wellness Insights and Favourites.
+          Calm, step-by-step routines you can follow without overthinking. Built from the same approach as our free Wellness Insights and Picks.
         </p>
       </header>
 
@@ -40,7 +40,7 @@ export default function Page() {
             Join the free list
           </Link>
           <Link className="btn-secondary" href="/picks">
-            Browse favourites
+            Browse picks
           </Link>
         </div>
         <p className="mt-4 text-xs text-zinc-500">Last updated: January 25, 2026</p>

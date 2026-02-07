@@ -1,7 +1,7 @@
 import Link from 'next/link'
 
 export const metadata = {
-  title: 'About | Wild & Well',
+  title: 'About',
   description: 'What Wild & Well is, how we choose what we recommend, and how we keep things honest.',
 }
 
@@ -26,7 +26,7 @@ export default function Page(){
       <h2>How the site is organised</h2>
       <ul>
         <li><strong>Wellness Insights</strong> — explainers and articles that help you understand what matters.</li>
-        <li><strong>Favourites</strong> — shortlists with clear trade‑offs, so you can compare options quickly.</li>
+        <li><strong>Picks</strong> — shortlists with clear trade‑offs, so you can compare options quickly.</li>
         <li><strong>Topics</strong> — curated paths (sleep, air quality, water, fragrance‑free) to help you start in the right place.</li>
       </ul>
 

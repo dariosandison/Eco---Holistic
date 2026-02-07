@@ -11,7 +11,7 @@ import MoneyPageNextLinks from '@/components/MoneyPageNextLinks'
 
 
 export const metadata = {
-  title: 'Low‑tox products for beginners: starter favourites | Wild & Well',
+  title: 'Low‑tox products for beginners: starter picks',
   description: 'A simple, UK‑friendly starter path: where to begin, what to avoid, and the few pages that help most people first.',
 }
 
@@ -41,7 +41,7 @@ const url = `${SITE_URL}/best-low-tox-products-for-beginners`
   const ld = {
     '@context': 'https://schema.org',
     '@type': 'Article',
-    headline: 'Low‑tox products for beginners: starter favourites',
+    headline: 'Low‑tox products for beginners: starter picks',
     datePublished: '2026-01-25',
     dateModified: '2026-02-02',
     mainEntityOfPage: { '@type': 'WebPage', '@id': url },
@@ -89,29 +89,34 @@ const url = `${SITE_URL}/best-low-tox-products-for-beginners`
       <StructuredData data={ld} />
       <StructuredData data={faqLd} />
 
-      <header className="max-w-3xl">
-        <h1 className="text-4xl font-bold">Low‑tox products for beginners: starter favourites</h1>
+      <header>
+        <div className="max-w-3xl">
+        <h1 className="text-4xl font-bold">Low‑tox products for beginners: starter picks</h1>
         <p className="mt-3 text-zinc-700">
           If you’re new, this page is your shortcut: one small change first, then build from there. No perfect “everything list” — just the pages that help most UK readers make a good first decision.
         </p>
+
+        </div>
 
         {/* Page image */}
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src="/images/photography/cleaning.jpg"
           alt=""
-          className="mt-6 w-full rounded-3xl border border-zinc-200 shadow-sm"
+          className="mt-6 h-[260px] w-full rounded-3xl border border-zinc-200 object-cover shadow-sm md:h-[380px]"
           loading="lazy"
           decoding="async"
         />
 
+        <div className="max-w-3xl">
         <EducationFirstCallout topicHref="/blog" topicLabel="Read starter explainers" insightHref="/blog/non-toxic-cleaning-starter" insightLabel="Non‑toxic cleaning starter" />
         <div className="mt-5 flex flex-wrap gap-2">
           <Link className="btn-secondary" href="/shopping-list">Get the free shopping list</Link>
           <Link className="btn-secondary" href="/topics">Browse Topics</Link>
-          <Link className="btn-secondary" href="/picks">Browse Favourites</Link>
+          <Link className="btn-secondary" href="/picks">Browse Picks</Link>
         </div>
         <p className="mt-3 text-xs text-zinc-500">Last updated: February 2, 2026 · Wild & Well Editorial Team</p>
+        </div>
       </header>
 
       

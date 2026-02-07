@@ -12,7 +12,7 @@ import MoneyPageNextLinks from '@/components/MoneyPageNextLinks'
 
 
 export const metadata = {
-  title: 'Humidifiers for Bedrooms (UK): shortlist | Wild & Well',
+  title: 'Humidifiers for Bedrooms (UK): shortlist',
   description: 'A shortlist for bedroom humidifiers in the UK: what to look for, what to avoid, and simple maintenance rules.',
 }
 
@@ -125,23 +125,28 @@ const itemList = PICKS.map((p, i) => ({
       <StructuredData data={ld} />
       <StructuredData data={faqLd} />
 
-      <header className="max-w-3xl">
+      <header>
+        <div className="max-w-3xl">
         <h1 className="text-4xl font-bold">Humidifiers for bedrooms (UK): shortlist</h1>
         <p className="mt-3 text-zinc-700">
           A shortlist with simple decision rules: what to buy, what to avoid, and how to keep humidity in a sensible range.
         </p>
+
+        </div>
 
         {/* Page image */}
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src="/images/photography/sleep.jpg"
           alt=""
-          className="mt-6 w-full rounded-3xl border border-zinc-200 shadow-sm"
+          className="mt-6 h-[260px] w-full rounded-3xl border border-zinc-200 object-cover shadow-sm md:h-[380px]"
           loading="lazy"
           decoding="async"
         />
 
+        <div className="max-w-3xl">
         <EducationFirstCallout topicHref="/topics/sleep" topicLabel="Sleep topic" insightHref="/blog/caffeine-and-sleep-timing" insightLabel="Caffeine & sleep timing" />
+        </div>
       </header>
 
       
@@ -172,7 +177,7 @@ const itemList = PICKS.map((p, i) => ({
       </section>
 
       <section className="mt-14">
-        <h2 className="text-2xl font-semibold">Shortlist (favourites)</h2>
+        <h2 className="text-2xl font-semibold">Shortlist (picks)</h2>
         <p className="mt-2 text-sm text-zinc-600">These are curated searches so you can compare current prices and reviews.</p>
         <div className="mt-6 grid gap-4 md:grid-cols-2">
           {PICKS.map((p) => (

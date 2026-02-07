@@ -13,7 +13,7 @@ import MoneyPageNextLinks from '@/components/MoneyPageNextLinks'
 
 
 export const metadata = {
-  title: 'Gut health supplements: beginner shortlist | Wild & Well',
+  title: 'Gut health supplements: beginner shortlist',
   description: 'A food-first, beginner-friendly gut-support shortlist: when to consider fibre, probiotics, and what to avoid if you’re sensitive.',
 }
 
@@ -127,19 +127,34 @@ const url = `${SITE_URL}/best-gut-health-supplements-beginners`
       <StructuredData data={ld} />
       <StructuredData data={faqLd} />
 
-      <header className="max-w-3xl">
+      <header>
+        <div className="max-w-3xl">
         <h1 className="text-4xl font-bold">Gut health supplements: beginner shortlist</h1>
         <p className="mt-3 text-zinc-700">
           This page is intentionally conservative. Most people don’t need a big “gut stack”. Start with food-first basics, then add one simple option at a time if it helps.
         </p>
 
-        <EducationFirstCallout topicHref="/topics" topicLabel="Explore topics" insightHref="/blog" insightLabel="Read Wellness Insights" />
+                </div>
+
+        {/* Hero image */}
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src="/images/photography/nutrition.jpg"
+          alt=""
+          className="mt-6 h-[260px] w-full rounded-3xl border border-zinc-200 object-cover shadow-sm md:h-[380px]"
+          loading="lazy"
+          decoding="async"
+        />
+
+        <div className="max-w-3xl">
+<EducationFirstCallout topicHref="/topics" topicLabel="Explore topics" insightHref="/blog" insightLabel="Read Wellness Insights" />
         <div className="mt-5 flex flex-wrap gap-2">
           <Link className="btn-secondary" href="/nutrition">Nutrition</Link>
           <Link className="btn-secondary" href="/shopping-list">Free shopping list</Link>
           <Link className="btn-secondary" href="/blog/gut-health-basics">Gut health basics</Link>
         </div>
         <p className="mt-3 text-xs text-zinc-500">Last updated: February 2, 2026 · Wild & Well Editorial Team</p>
+              </div>
       </header>
 
       

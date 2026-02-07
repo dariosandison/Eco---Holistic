@@ -9,7 +9,7 @@ import { getMoneyPageEdu } from '@/lib/moneyPageEdu'
 import MoneyPageNextLinks from '@/components/MoneyPageNextLinks'
 
 export const metadata = {
-  title: 'Best dehumidifiers for damp & mould (UK): what to buy first | Wild & Well',
+  title: 'Best dehumidifiers for damp & mould (UK): what to buy first',
   description:
     'A practical shortlist for UK homes: dehumidifiers for damp, condensation and laundry drying — with simple rules on size, type and running costs.',
 }
@@ -140,28 +140,33 @@ export default function Page() {
       <StructuredData data={ld} />
       <StructuredData data={faqLd} />
 
-      <header className="max-w-3xl">
+      <header>
+        <div className="max-w-3xl">
         <h1 className="text-4xl font-bold">Best dehumidifiers for damp &amp; mould (UK)</h1>
         <p className="mt-3 text-zinc-700">
           A shortlist with simple decision rules: what to buy first for damp rooms, condensation, and laundry drying — without overcomplicating it.
         </p>
+
+        </div>
 
         {/* Page image */}
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src="/images/photography/air-quality.png"
           alt=""
-          className="mt-6 w-full rounded-3xl border border-zinc-200 shadow-sm"
+          className="mt-6 h-[260px] w-full rounded-3xl border border-zinc-200 object-cover shadow-sm md:h-[380px]"
           loading="lazy"
           decoding="async"
         />
 
+        <div className="max-w-3xl">
         <EducationFirstCallout
           topicHref="/topics/air-quality"
           topicLabel="Air quality topic"
           insightHref="/blog/winter-humidity-guide"
           insightLabel="Winter humidity guide"
         />
+        </div>
       </header>
 
       <MoneyPageEducationBlock edu={edu} />
@@ -216,7 +221,7 @@ export default function Page() {
       </section>
 
       <section className="mt-14">
-        <h2 className="text-2xl font-semibold">Shortlist (favourites)</h2>
+        <h2 className="text-2xl font-semibold">Shortlist (picks)</h2>
         <p className="mt-2 text-sm text-zinc-600">Curated searches so you can compare current prices, warranties, and filter/maintenance costs.</p>
         <div className="mt-6 grid gap-4 md:grid-cols-2">
           {PICKS.map((p) => (

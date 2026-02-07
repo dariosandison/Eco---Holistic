@@ -12,7 +12,7 @@ import MoneyPageNextLinks from '@/components/MoneyPageNextLinks'
 
 
 export const metadata = {
-  title: 'Natural sleep support: our favourites | Wild & Well',
+  title: 'Natural sleep support: our picks',
   description: 'A calm shortlist of natural sleep support options — what tends to help most, what to skip, and buyer-friendly options.',
 }
 
@@ -75,7 +75,7 @@ const itemList = PICKS.map((p, i) => ({
   const ld = {
     '@context': 'https://schema.org',
     '@type': 'Article',
-    headline: 'Natural sleep support: our favourites',
+    headline: 'Natural sleep support: our picks',
     dateModified: '2026-02-02',
     datePublished: '2026-01-25',
     mainEntity: { '@type': 'ItemList', itemListElement: itemList },
@@ -120,22 +120,26 @@ const itemList = PICKS.map((p, i) => ({
       <StructuredData data={ld} />
       <StructuredData data={faqLd} />
 
-      <header className="max-w-3xl">
-        <h1 className="text-4xl font-bold">Natural sleep support: our favourites</h1>
+      <header>
+        <div className="max-w-3xl">
+        <h1 className="text-4xl font-bold">Natural sleep support: our picks</h1>
         <p className="mt-3 text-zinc-700">
           The best “sleep support” is usually a few simple environment and timing fixes. Supplements are optional — and should stay simple.
         </p>
+
+        </div>
 
         {/* Page image */}
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src="/images/photography/sleep.jpg"
           alt=""
-          className="mt-6 w-full rounded-3xl border border-zinc-200 shadow-sm"
+          className="mt-6 h-[260px] w-full rounded-3xl border border-zinc-200 object-cover shadow-sm md:h-[380px]"
           loading="lazy"
           decoding="async"
         />
 
+        <div className="max-w-3xl">
         <EducationFirstCallout topicHref="/topics/sleep" topicLabel="Sleep topic" insightHref="/blog/caffeine-and-sleep-timing" insightLabel="Caffeine & sleep timing" />
         <div className="mt-4 flex flex-wrap gap-2">
           <Link className="btn-secondary" href="/topics/sleep">Sleep</Link>
@@ -143,6 +147,7 @@ const itemList = PICKS.map((p, i) => ({
           <Link className="btn-secondary" href="/shopping-list">Free shopping list</Link>
         </div>
         <p className="mt-4 text-xs text-zinc-500">Last updated: February 2, 2026 · Wild & Well Editorial Team</p>
+        </div>
       </header>
 
       
@@ -178,7 +183,7 @@ const itemList = PICKS.map((p, i) => ({
         <div className="mt-6 grid gap-4 md:grid-cols-3">
           <ProductPick
             title="Simple option: magnesium glycinate"
-            badge="Overall favourite"
+            badge="Overall pick"
             description="A gentle option many people add to an evening wind-down. Start low and assess tolerance."
             href={amazonSearchUrl('magnesium glycinate capsules UK')}
             bullets={['Look for glycinate/bisglycinate (not oxide)', 'Start low', 'Check interactions if medicated']}

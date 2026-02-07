@@ -14,7 +14,7 @@ import MoneyPageNextLinks from '@/components/MoneyPageNextLinks'
 
 
 export const metadata = {
-  title: 'Holistic wellness starter kit: a small, repeatable setup | Wild & Well',
+  title: 'Holistic wellness starter kit: a small, repeatable setup',
   description:
     'A calm, minimal starter kit: the few upgrades that improve air, water, sleep, and daily routines without turning wellness into a project.',
 }
@@ -109,19 +109,34 @@ const url = `${SITE_URL}/best-holistic-wellness-starter-kit`
     <main className="mx-auto max-w-6xl px-4 py-16">
       <StructuredData data={ld} />
 
-      <header className="max-w-3xl">
+      <header>
+        <div className="max-w-3xl">
         <h1 className="text-4xl font-bold">Holistic wellness starter kit: a small, repeatable setup</h1>
         <p className="mt-3 text-zinc-700">
           A “starter kit” that won’t take over your life: choose a few high‑leverage upgrades, then keep them going.
         </p>
 
-        <EducationFirstCallout topicHref="/topics" topicLabel="Explore topics" insightHref="/blog" insightLabel="Read Wellness Insights" />
+                </div>
+
+        {/* Hero image */}
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src="/images/photography/home-hero.jpg"
+          alt=""
+          className="mt-6 h-[260px] w-full rounded-3xl border border-zinc-200 object-cover shadow-sm md:h-[380px]"
+          loading="lazy"
+          decoding="async"
+        />
+
+        <div className="max-w-3xl">
+<EducationFirstCallout topicHref="/topics" topicLabel="Explore topics" insightHref="/blog" insightLabel="Read Wellness Insights" />
         <div className="mt-5 flex flex-wrap gap-2">
           <Link className="btn-secondary" href="/shopping-list">Free shopping list</Link>
           <Link className="btn-secondary" href="/topics">Browse Topics</Link>
-          <Link className="btn-secondary" href="/picks">Browse Favourites</Link>
+          <Link className="btn-secondary" href="/picks">Browse Picks</Link>
         </div>
         <p className="mt-3 text-xs text-zinc-500">Last updated: February 2, 2026 · Wild & Well Editorial Team</p>
+              </div>
       </header>
 
       

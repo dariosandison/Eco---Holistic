@@ -13,7 +13,7 @@ import MoneyPageNextLinks from '@/components/MoneyPageNextLinks'
 
 
 export const metadata = {
-  title: 'Protein powders (UK): clean shortlist | Wild & Well',
+  title: 'Protein powders (UK): clean shortlist',
   description: 'A practical, minimal‑ingredient shortlist of protein powder styles — plus what to check on labels (sweeteners, gums, and additives).',
 }
 
@@ -127,19 +127,34 @@ const url = `${SITE_URL}/best-organic-protein-powders-uk`
       <StructuredData data={ld} />
       <StructuredData data={faqLd} />
 
-      <header className="max-w-3xl">
+      <header>
+        <div className="max-w-3xl">
         <h1 className="text-4xl font-bold">Protein powders (UK): clean shortlist</h1>
         <p className="mt-3 text-zinc-700">
           A practical shortlist of protein powder styles, focusing on minimal ingredients and everyday usability.
         </p>
 
-        <EducationFirstCallout topicHref="/nutrition" topicLabel="Nutrition basics" insightHref="/blog/fibre-gut-health-practical-guide" insightLabel="Fibre & gut health" />
+                </div>
+
+        {/* Hero image */}
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src="/images/photography/nutrition.jpg"
+          alt=""
+          className="mt-6 h-[260px] w-full rounded-3xl border border-zinc-200 object-cover shadow-sm md:h-[380px]"
+          loading="lazy"
+          decoding="async"
+        />
+
+        <div className="max-w-3xl">
+<EducationFirstCallout topicHref="/nutrition" topicLabel="Nutrition basics" insightHref="/blog/fibre-gut-health-practical-guide" insightLabel="Fibre & gut health" />
         <div className="mt-5 flex flex-wrap gap-2">
           <Link className="btn-secondary" href="/nutrition">Nutrition</Link>
-          <Link className="btn-secondary" href="/picks">Favourites</Link>
+          <Link className="btn-secondary" href="/picks">Picks</Link>
           <Link className="btn-secondary" href="/shopping-list">Free shopping list</Link>
         </div>
         <p className="mt-3 text-xs text-zinc-500">Last updated: February 2, 2026 · Wild & Well Editorial Team</p>
+              </div>
       </header>
 
       

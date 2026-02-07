@@ -12,7 +12,7 @@ import MoneyPageNextLinks from '@/components/MoneyPageNextLinks'
 
 
 export const metadata = {
-  title: "Foam Rollers & Recovery Tools: shortlist | Wild & Well",
+  title: "Foam Rollers & Recovery Tools: shortlist",
   description: "A practical shortlist of foam rollers and simple recovery tools for tight hips, backs, and post-walk stiffness.",
 }
 
@@ -128,11 +128,26 @@ const itemList = PICKS.map((p, i) => ({
       <StructuredData data={ld} />
       <StructuredData data={{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Does foam rolling “remove toxins”?", "acceptedAnswer": {"@type": "Answer", "text": "No. Think of it as a comfort tool: it can reduce stiffness and make movement feel easier."}}, {"@type": "Question", "name": "How long should I roll?", "acceptedAnswer": {"@type": "Answer", "text": "A few minutes after walking or training is enough. More intensity is not always better."}}]}} />
 
-      <header className="max-w-3xl">
+      <header>
+        <div className="max-w-3xl">
         <h1 className="text-4xl font-bold">foam rollers & recovery tools: shortlist</h1>
         <p className="mt-3 text-zinc-700">A practical shortlist of foam rollers and simple recovery tools for tight hips, backs, and post-walk stiffness.</p>
 
-        <EducationFirstCallout topicHref="/movement" topicLabel="Movement basics" insightHref="/blog/home-strength-basics-busy-people" insightLabel="Strength basics" />
+                </div>
+
+        {/* Hero image */}
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src="/images/photography/movement.jpg"
+          alt=""
+          className="mt-6 h-[260px] w-full rounded-3xl border border-zinc-200 object-cover shadow-sm md:h-[380px]"
+          loading="lazy"
+          decoding="async"
+        />
+
+        <div className="max-w-3xl">
+<EducationFirstCallout topicHref="/movement" topicLabel="Movement basics" insightHref="/blog/home-strength-basics-busy-people" insightLabel="Strength basics" />
+              </div>
       </header>
 
       

@@ -12,14 +12,14 @@ import MoneyPageNextLinks from '@/components/MoneyPageNextLinks'
 
 
 export const metadata = {
-  title: 'Fragrance‑Free Laundry Detergents (UK): shortlist | Wild & Well',
+  title: 'Fragrance‑Free Laundry Detergents (UK): shortlist',
   description: 'A shortlist of fragrance‑free detergents for sensitive households in the UK — what to look for, what to avoid, and buyer shortlist.',
 }
 
 const PICKS = [
   {
     title: 'Ecover ZERO (fragrance-free)',
-    badge: 'Mainstream favourite',
+    badge: 'Mainstream pick',
     desc: 'Fragrance-free detergent designed for sensitive skin.',
     query: 'Ecover ZERO laundry liquid fragrance free',
     bullets: ['Fragrance-free', 'Easy to repurchase in the UK', 'Consider refills to cut plastic'],
@@ -95,22 +95,26 @@ const itemList = PICKS.map((p, i) => ({
       <StructuredData data={ld} />
       <StructuredData data={faqLd} />
 
-      <header className="max-w-3xl">
+      <header>
+        <div className="max-w-3xl">
         <h1 className="text-4xl font-bold">Fragrance‑free laundry detergents (UK): shortlist</h1>
         <p className="mt-3 text-zinc-700">
           Laundry touches your skin all day. If you’re sensitive to scent, detergent is the highest-impact swap.
         </p>
+
+        </div>
 
         {/* Page image */}
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src="/images/photography/laundry.jpg"
           alt=""
-          className="mt-6 w-full rounded-3xl border border-zinc-200 shadow-sm"
+          className="mt-6 h-[260px] w-full rounded-3xl border border-zinc-200 object-cover shadow-sm md:h-[380px]"
           loading="lazy"
           decoding="async"
         />
 
+        <div className="max-w-3xl">
         <EducationFirstCallout topicHref="/topics/fragrance-free" topicLabel="Fragrance‑free topic" insightHref="/blog/ingredient-red-flags" insightLabel="Ingredient red flags" />
         <div className="mt-4 flex flex-wrap gap-2">
           <Link className="btn-secondary" href="/topics/fragrance-free">Fragrance-free</Link>
@@ -118,6 +122,7 @@ const itemList = PICKS.map((p, i) => ({
           <Link className="btn-secondary" href="/shopping-list">Free shopping list</Link>
         </div>
         <p className="mt-4 text-xs text-zinc-500">Last updated: February 2, 2026 · Wild & Well Editorial Team</p>
+        </div>
       </header>
 
       
@@ -147,7 +152,7 @@ const itemList = PICKS.map((p, i) => ({
         <div className="mt-6 grid gap-4 md:grid-cols-3">
           <ProductPick
             title="Great for sensitive skin: Surcare 0%"
-            badge="Overall favourite"
+            badge="Overall pick"
             description="Widely available in the UK and a common sensitive-household baseline."
             href={amazonSearchUrl('Surcare non bio laundry liquid 0% fragrance')}
             bullets={['0% fragrance/dyes/enzymes', 'Great for bedding and towels', 'Add an extra rinse for comfort']}

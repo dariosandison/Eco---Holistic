@@ -2,7 +2,7 @@ import Link from "next/link";
 import { amazonSearchUrl } from "@/lib/amazon";
 
 export const metadata = {
-  title: "Deals | Wild & Well",
+  title: "Deals",
   description:
     "Deal searches for products we already cover. Always verify current price and specs before buying.",
 };
@@ -52,7 +52,7 @@ export default function DealsPage() {
         </p>
         <div className="mt-5 flex flex-wrap gap-2">
           <Link className="btn-secondary" href="/picks">
-            Browse favourites
+            Browse picks
           </Link>
           <Link className="btn-secondary" href="/topics">Topics</Link>
         </div>

@@ -13,7 +13,7 @@ import MoneyPageNextLinks from '@/components/MoneyPageNextLinks'
 
 
 export const metadata = {
-  title: "Organic oats (UK): our favourites | Wild & Well",
+  title: "Organic oats (UK): our picks",
   description: "A shortlist of organic oats (rolled, jumbo, steel-cut) and how to choose based on your breakfast and baking habits.",
 }
 
@@ -31,7 +31,7 @@ const PICKS = [
   },
   {
     "title": "Organic porridge oats (rolled)",
-    "badge": "Budget favourite",
+    "badge": "Budget pick",
     "desc": "Reliable daily staple.",
     "query": "organic porridge oats",
     "bullets": [
@@ -116,7 +116,7 @@ const itemList = PICKS.map((p, i) => ({
   const ld = {
     '@context': 'https://schema.org',
     '@type': 'Article',
-    headline: "Organic oats (UK): our favourites",
+    headline: "Organic oats (UK): our picks",
     dateModified: '2026-02-02',
     datePublished: '2026-01-27',
     mainEntity: {
@@ -129,11 +129,26 @@ const itemList = PICKS.map((p, i) => ({
     <main className="mx-auto max-w-6xl px-4 py-16">
       <StructuredData data={ld} />
 
-      <header className="max-w-3xl">
-        <h1 className="text-4xl font-bold">Organic oats (UK): our favourites</h1>
+      <header>
+        <div className="max-w-3xl">
+        <h1 className="text-4xl font-bold">Organic oats (UK): our picks</h1>
         <p className="mt-3 text-zinc-700">A shortlist of organic oats (rolled, jumbo, steel-cut) and how to choose based on your breakfast and baking habits.</p>
 
-        <EducationFirstCallout topicHref="/nutrition" topicLabel="Nutrition basics" insightHref="/blog/fibre-gut-health-practical-guide" insightLabel="Fibre & gut health" />
+                </div>
+
+        {/* Hero image */}
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src="/images/photography/nutrition.jpg"
+          alt=""
+          className="mt-6 h-[260px] w-full rounded-3xl border border-zinc-200 object-cover shadow-sm md:h-[380px]"
+          loading="lazy"
+          decoding="async"
+        />
+
+        <div className="max-w-3xl">
+<EducationFirstCallout topicHref="/nutrition" topicLabel="Nutrition basics" insightHref="/blog/fibre-gut-health-practical-guide" insightLabel="Fibre & gut health" />
+              </div>
       </header>
 
       
@@ -158,7 +173,7 @@ const itemList = PICKS.map((p, i) => ({
 
           <ProductPick
             title="Organic porridge oats (rolled)"
-            badge="Budget favourite"
+            badge="Budget pick"
             description="Reliable daily staple."
             href={amazonSearchUrl('organic porridge oats')}
             bullets={["Affordable", "Good daily use", "Choose size you\u2019ll finish"]}
@@ -189,7 +204,7 @@ const itemList = PICKS.map((p, i) => ({
 
           <ProductPick
             title="Organic porridge oats (rolled)"
-            badge="Budget favourite"
+            badge="Budget pick"
             description="Reliable daily staple."
             href={amazonSearchUrl('organic porridge oats')}
             bullets={["Affordable", "Good daily use", "Choose size you\u2019ll finish"]}

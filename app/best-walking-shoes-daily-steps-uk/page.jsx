@@ -12,7 +12,7 @@ import MoneyPageNextLinks from '@/components/MoneyPageNextLinks'
 
 
 export const metadata = {
-  title: "Walking Shoes for Daily Steps (UK): shortlist | Wild & Well",
+  title: "Walking Shoes for Daily Steps (UK): shortlist",
   description: "A comfort-first shortlist of walking shoes for daily steps. Focus on fit, cushioning, and the surfaces you walk on.",
 }
 
@@ -128,11 +128,26 @@ const itemList = PICKS.map((p, i) => ({
       <StructuredData data={ld} />
       <StructuredData data={{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Should I buy running shoes for walking?", "acceptedAnswer": {"@type": "Answer", "text": "Often yes — many running shoes work well for walking due to cushioning and support."}}, {"@type": "Question", "name": "What matters most?", "acceptedAnswer": {"@type": "Answer", "text": "Fit and comfort. If the shoe annoys you, you won’t wear it."}}]}} />
 
-      <header className="max-w-3xl">
+      <header>
+        <div className="max-w-3xl">
         <h1 className="text-4xl font-bold">Walking shoes for daily steps (UK): shortlist</h1>
         <p className="mt-3 text-zinc-700">A comfort-first shortlist of walking shoes for daily steps. Focus on fit, cushioning, and the surfaces you walk on.</p>
 
-        <EducationFirstCallout topicHref="/movement" topicLabel="Movement basics" insightHref="/blog/home-strength-basics-busy-people" insightLabel="Strength basics" />
+                </div>
+
+        {/* Hero image */}
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src="/images/photography/movement.jpg"
+          alt=""
+          className="mt-6 h-[260px] w-full rounded-3xl border border-zinc-200 object-cover shadow-sm md:h-[380px]"
+          loading="lazy"
+          decoding="async"
+        />
+
+        <div className="max-w-3xl">
+<EducationFirstCallout topicHref="/movement" topicLabel="Movement basics" insightHref="/blog/home-strength-basics-busy-people" insightLabel="Strength basics" />
+              </div>
       </header>
 
       

@@ -77,7 +77,7 @@ const START_HERE = [
     links: [
       { label: "Fragrance-free laundry detergents (UK)", href: "/best-fragrance-free-laundry-detergents-uk" },
       { label: "Non-toxic cleaning starter", href: "/blog/non-toxic-cleaning-starter" },
-      { label: "Low‑tox starter favourites", href: "/best-low-tox-products-for-beginners" },
+      { label: "Low‑tox starter picks", href: "/best-low-tox-products-for-beginners" },
     ],
   },
 ];
@@ -326,7 +326,7 @@ export default function HomePage() {
         
         
         <div className="mt-4 h-12 w-12 overflow-hidden rounded-xl bg-zinc-100"><img src="/images/cards/cleaning.svg" alt="" className="h-full w-full object-cover" loading="lazy" /></div>
-<h3 className="text-lg font-semibold">Low‑tox starter favourites</h3>
+<h3 className="text-lg font-semibold">Low‑tox starter picks</h3>
         <p className="mt-1 text-sm text-zinc-600">A small set of practical first swaps.</p>
       </Link>
       <Link href="/best-water-filters-uk" className="card hover:shadow-sm transition-shadow">
