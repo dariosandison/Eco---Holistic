@@ -146,6 +146,8 @@ export default function Page() {
         <h2 className="section-title">Picks shortlists</h2>
         <p className="section-subtitle">Pages with label cues and shortlists for common supplement categories.</p>
         <div className="mt-4 flex flex-wrap gap-2">
+          <Link className="btn-secondary" href="/blog/creatine-uk-simple-guide">Creatine: simple UK guide</Link>
+          <Link className="btn-secondary" href="/blog/bone-broth-benefits-uk">Bone broth: benefits + swaps</Link>
           <Link className="btn-secondary" href="/best-organic-supplements-beginners">Organic supplements: beginner shortlist</Link>
           <Link className="btn-secondary" href="/best-gut-health-supplements-beginners">Gut health supplements: beginner shortlist</Link>
           <Link className="btn-secondary" href="/best-adaptogens-beginners-guide">Adaptogens: beginner guide</Link>

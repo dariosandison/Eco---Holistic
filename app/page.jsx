@@ -10,12 +10,12 @@ export const metadata = {
 
 
 const FEATURED_EXPLAINERS = [
-  { title: "Non-Toxic Cleaning Starter", href: "/blog/non-toxic-cleaning-starter", cover: "/images/cards/cleaning.svg" },
-  { title: "Low-Tox Kitchen", href: "/blog/low-tox-kitchen", cover: "/images/cards/kitchen.svg" },
-  { title: "Eco Laundry", href: "/blog/eco-laundry", cover: "/images/cards/laundry.svg" },
-  { title: "Zero Waste Bathroom", href: "/blog/zero-waste-bathroom", cover: "/images/cards/neutral.svg" },
-  { title: "Composting", href: "/blog/composting", cover: "/images/cards/neutral.svg" },
-  { title: "Water Filter Buying Guide (UK)", href: "/blog/water-filter-buying-guide-uk", cover: "/images/cards/water-filter.svg" },
+  { title: "Non-Toxic Cleaning Starter", href: "/blog/non-toxic-cleaning-starter", cover: "/images/photography/thumbs/cards/cleaning-hero.jpg" },
+  { title: "Low-Tox Kitchen", href: "/blog/low-tox-kitchen", cover: "/images/photography/thumbs/cards/nutrition-hero.jpg" },
+  { title: "Eco Laundry", href: "/blog/eco-laundry", cover: "/images/photography/thumbs/cards/laundry-hero.jpg" },
+  { title: "Water Filter Buying Guide (UK)", href: "/blog/water-filter-buying-guide-uk", cover: "/images/photography/thumbs/cards/water-hero.jpg" },
+  { title: "Creatine: simple UK guide", href: "/blog/creatine-uk-simple-guide", cover: "/images/photography/thumbs/cards/creatine-jar-morning-light.jpg" },
+  { title: "Bone broth: benefits + swaps", href: "/blog/bone-broth-benefits-uk", cover: "/images/photography/thumbs/cards/bone-broth-mug-steaming.jpg" },
 ];
 
 const FEATURED_TOPICS = [
@@ -198,10 +198,29 @@ export default function HomePage() {
             <h1 className="text-3xl font-semibold tracking-tight text-zinc-900 md:text-5xl">
               Low‑tox living and natural wellness, in plain English.
             </h1>
-            <p className="mt-4 text-base text-zinc-700 md:text-lg">
-              Practical insights and shortlists for air, water, fragrance‑free living, sleep, nutrition, and movement.
+            {/* Intro (short on mobile, fuller on larger screens) */}
+            <p className="mt-4 text-base text-zinc-700 sm:hidden">
+              Everyday exposures and modern habits can shape how you feel — from what’s in your home to the air you breathe.
+              Wild &amp; Well makes the evidence simple for UK life, with practical steps and cleaner alternatives.
             </p>
-            <p className="mt-2 text-sm text-zinc-600">UK‑focused guidance you can use at home, without specialist knowledge.</p>
+
+            <div className="mt-4 hidden sm:block">
+              <p className="text-base text-zinc-700 md:text-lg">
+                Research is increasingly showing that everyday exposures and habits can shape how we feel — from the chemicals in
+                household and personal-care products, to what we eat and drink, to the quality of the air we breathe. Add in modern
+                life’s lack of fresh air, sunlight and regular movement, and it’s easy to see why so many people feel run down
+                physically and mentally.
+              </p>
+              <p className="mt-3 text-base text-zinc-700 md:text-lg">
+                At <span className="font-semibold">Wild &amp; Well</span>, our goal is to make these findings simple and useful. We break
+                down what the evidence says, highlight practical changes that actually fit real life, and share cleaner, better
+                alternatives — so you can build a healthier home and a healthier wellbeing, step by step.
+              </p>
+            </div>
+
+            <p className="mt-3 hidden sm:block text-sm text-zinc-600">
+              UK‑focused guidance you can use at home, without specialist knowledge.
+            </p>
 
             <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
               <Link href="/topics" className="btn-primary w-full sm:w-auto text-center">

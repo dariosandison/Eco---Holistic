@@ -274,7 +274,7 @@ const itemList = PICKS.map((p, i) => ({
         <div className="mt-8 flex flex-wrap gap-2">
           <Link className="btn-primary" href="/topics/sleep">Go to Sleep →</Link>
           <Link className="btn-secondary" href="/blog/magnesium-for-sleep-basics">Magnesium basics</Link>
-          <Link className="btn-secondary" href="/blog/sleep-wind-down-routine">Wind-down routine</Link>
+          <Link className="btn-secondary" href="/blog/sleep-naturally-simple-guide">Sleep guide</Link>
         </div>
       </section>
       <MoneyPageNextLinks slug="best-natural-sleep-support" />

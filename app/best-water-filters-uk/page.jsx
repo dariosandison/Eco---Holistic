@@ -16,9 +16,11 @@ export const metadata = {
   description: 'Shortlisted water filters for UK homes (jugs, under‑sink, gravity) with clear trade-offs and replacement cost notes.',
 }
 
-// Awin (ZeroWater) affiliate links
-const ZW_BESTWATER_STARTER = 'https://www.awin1.com/cread.php?awinmid=30649&awinaffid=2754234&clickref=ww_bestwater_zw_starter&ued=https%3A%2F%2Fwww.zerowater.com%2Fcollections%2Fstarter-kits'
-const ZW_BESTWATER_FILTERS = 'https://www.awin1.com/cread.php?awinmid=30649&awinaffid=2754234&clickref=ww_bestwater_zw_filters&ued=https%3A%2F%2Fwww.zerowater.com%2Fcollections%2F5-stage-replacement-water-filters'
+// AWIN affiliate links (UK)
+const ZW_BESTWATER_STARTER = 'https://www.awin1.com/cread.php?awinmid=30649&awinaffid=2754234&clickref=ww_bestwater_zw_starterpack&ued=https%3A%2F%2Fshop.culligan.co.uk%2Fproducts%2Fthe-starter-pack'
+const DOULTON_BESTWATER_UNDERSINK = 'https://www.awin1.com/cread.php?awinmid=69790&awinaffid=2754234&clickref=ww_bestwater_doulton_undersink&ued=https%3A%2F%2Fdoulton.com%2Fcollections%2Funder-sink-water-filters'
+const WATERTOGO_BESTWATER_ACTIVE75 = 'https://www.awin1.com/cread.php?awinmid=86997&awinaffid=2754234&clickref=ww_bestwater_watertogo_active75&ued=https%3A%2F%2Fwatertogo.eu%2Fproduct%2F75cl-active-bottle-acai%2F'
+const ZW_FILTERS_AMAZON = amazonSearchUrl('ZeroWater replacement filters 5-stage')
 
 const PICKS = [
   {
@@ -198,29 +200,29 @@ const itemList = PICKS.map((p, i) => ({
         <p className="mt-2 text-sm text-zinc-600">Three simple routes, depending on how you live.</p>
         <div className="mt-6 grid gap-4 md:grid-cols-3">
           <ProductPick
-            title="Best jug for taste: ZeroWater"
+            title="Best jug for taste: ZeroWater (UK)"
             badge="Best for taste"
             description="A simple jug route if taste/odour is your main goal. Always check replacement filters before you commit."
             bullets={["Great for renters + small kitchens", "Replacement filters are the ongoing cost", "Start with a starter kit and adjust from there"]}
             links={[
-              { label: 'Check price at ZeroWater', merchant: 'zerowater', href: ZW_BESTWATER_STARTER, variant: 'primary' },
-              { label: 'Replacement filters', merchant: 'zerowater', href: ZW_BESTWATER_FILTERS, variant: 'ghost' },
+              { label: 'Check starter kit (UK)', merchant: 'zerowater', href: ZW_BESTWATER_STARTER, variant: 'primary' },
+              { label: 'Replacement filters', merchant: 'amazon', href: ZW_FILTERS_AMAZON, variant: 'ghost' },
               { label: 'Amazon alternatives', merchant: 'amazon', href: amazonSearchUrl('BRITA Style water filter jug MAXTRA filters'), variant: 'ghost' },
             ]}
           />
           <ProductPick
-            title="Low effort: under-sink"
+            title="Best under‑sink: Doulton"
             badge="Overall pick"
-            description="Most convenient for daily use. Ideal if you want filtered water from a tap."
-            href={amazonSearchUrl('Doulton under sink water filter system UK')}
-            bullets={["Check installation space", "Budget for annual filter changes", "Great for families"]}
+            description="Filtered water from your tap without thinking about it every day. Check space under the sink + ongoing filter costs."
+            href={DOULTON_BESTWATER_UNDERSINK}
+            bullets={["Great for: daily use + families", "Check under-sink space before buying", "Budget for annual replacements"]}
           />
           <ProductPick
-            title="no-plumbing: gravity filter"
-            badge="Great for"
-            description="High capacity without installing anything. Good for batch filtration and renters."
-            href={amazonSearchUrl('British Berkefeld gravity water filter')}
-            bullets={["Takes counter space", "Plan filter replacements", "Clean regularly"]}
+            title="Best portable bottle: Water-to-Go"
+            badge="On-the-go"
+            description="A simple filtered bottle route for gym, commute, or travel."
+            href={WATERTOGO_BESTWATER_ACTIVE75}
+            bullets={["Good for: travel + busy days", "Easy to keep in a bag", "Check replacement cartridge schedule"]}
           />
         </div>
 
@@ -230,7 +232,7 @@ const itemList = PICKS.map((p, i) => ({
             The ongoing cost is the replacements. Before you choose any jug system, check how often you’ll replace filters and what they cost.
           </p>
           <div className="mt-4 flex flex-wrap gap-2">
-            <a className="btn-secondary" href={ZW_BESTWATER_FILTERS} target="_blank" rel="noopener nofollow sponsored">ZeroWater replacement filters</a>
+            <a className="btn-secondary" href={ZW_FILTERS_AMAZON} target="_blank" rel="noopener nofollow sponsored">ZeroWater replacement filters</a>
           </div>
         </div>
 

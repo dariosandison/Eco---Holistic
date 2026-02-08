@@ -4,6 +4,7 @@ import Link from 'next/link'
 import EducationFirstCallout from '@/components/EducationFirstCallout'
 import ShortlistExplorer from '@/components/ShortlistExplorer'
 import { getPicksSections } from '@/lib/picksSections'
+import { PARTNER_PRODUCTS } from '@/lib/partnerProducts'
 
 export const metadata = {
   title: 'Picks (Shortlists)',
@@ -13,6 +14,7 @@ export const metadata = {
 
 export default function Page() {
   const sections = getPicksSections()
+  const partners = PARTNER_PRODUCTS
 
   return (
     <main>
@@ -62,6 +64,83 @@ export default function Page() {
         <div id="start-here" className="scroll-mt-24" />
         <EducationFirstCallout topicHref="/topics" topicLabel="Start with Topics" insightHref="/blog" insightLabel="Read Wellness Insights" />
         <ShortlistExplorer sections={sections} />
+
+        <div className="mt-14">
+          <div className="flex flex-col gap-2 md:flex-row md:items-end md:justify-between">
+            <div>
+              <h2 className="text-2xl font-semibold">Featured partner products</h2>
+              <p className="mt-1 text-sm text-zinc-600 max-w-2xl">
+                A small set of high-fit products from partners you’re approved with. (Links are affiliate links.)
+              </p>
+            </div>
+            <Link
+              href="/affiliate-disclosure"
+              className="text-sm font-semibold text-zinc-900 hover:underline"
+            >
+              How affiliate links work
+            </Link>
+          </div>
+
+          <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {partners.map((p) => (
+              <div key={p.key} className="rounded-2xl border bg-white shadow-sm overflow-hidden">
+                <a
+                  href={p.links.card}
+                  target="_blank"
+                  rel="sponsored nofollow noopener"
+                  className="block"
+                >
+                  <div className="relative h-40">
+                    <Image
+                      src={p.image}
+                      alt=""
+                      fill
+                      sizes="(min-width: 1024px) 320px, (min-width: 640px) 45vw, 90vw"
+                      className="object-cover"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/35 via-black/0 to-black/0" />
+                    <div className="absolute left-3 top-3 inline-flex items-center rounded-full bg-white/90 px-3 py-1 text-xs font-semibold text-zinc-900 backdrop-blur">
+                      {p.tag}
+                    </div>
+                  </div>
+                </a>
+
+                <div className="p-5">
+                  <p className="text-xs font-semibold text-zinc-500">{p.brand}</p>
+                  <h3 className="mt-1 text-base font-semibold text-zinc-900">{p.title}</h3>
+                  <p className="mt-2 text-sm text-zinc-700">{p.desc}</p>
+
+                  <div className="mt-4 flex items-center gap-3">
+                    <a
+                      href={p.links.cta}
+                      target="_blank"
+                      rel="sponsored nofollow noopener"
+                      className="btn-primary"
+                    >
+                      Check price
+                    </a>
+                    <Link
+                      href={
+                        p.tag === 'Water'
+                          ? '/best-water-filters-uk'
+                          : p.tag === 'Sleep'
+                            ? '/best-natural-sleep-support'
+                            : p.tag === 'Movement' || p.tag === 'Strength' || p.tag === 'Walking'
+                              ? '/movement'
+                              : p.tag === 'Staples' || p.tag === 'Drinks'
+                                ? '/nutrition'
+                                : '/holistic-health'
+                      }
+                      className="text-sm font-semibold text-zinc-900 hover:underline"
+                    >
+                      Learn more
+                    </Link>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
       </section>
     </main>
   )
