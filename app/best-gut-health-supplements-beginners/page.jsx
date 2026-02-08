@@ -17,6 +17,9 @@ export const metadata = {
   description: 'A food-first, beginner-friendly gut-support shortlist: when to consider fibre, probiotics, and what to avoid if you’re sensitive.',
 }
 
+// Partner link (AWIN)
+const SYMPROVE_MANGO = 'https://www.awin1.com/cread.php?awinmid=109974&awinaffid=2754234&clickref=ww_nutrition_picks_guthealth_symprove_mango_passionfruit&ued=https%3A%2F%2Fw-wellness.co.uk%2Fproducts%2Fsymprove-daily-live-active-bacteria-mango-passion-fruit'
+
 const PICKS = [
   {
     title: 'Psyllium husk (fibre first)',
@@ -182,6 +185,30 @@ const url = `${SITE_URL}/best-gut-health-supplements-beginners`
             { thing: 'Stacking', aimFor: 'One new thing at a time', avoid: 'Multiple changes at once' },
           ]}
         />
+      </section>
+
+      <section className="mt-12">
+        <div className="flex flex-col gap-2 md:flex-row md:items-end md:justify-between">
+          <div>
+            <h2 className="text-2xl font-semibold">Partner pick (UK)</h2>
+            <p className="mt-1 text-sm text-zinc-600 max-w-2xl">
+              One gut-focused option we feature. (Affiliate link.)
+            </p>
+          </div>
+          <Link href="/partners" className="text-sm font-semibold text-zinc-900 hover:underline">
+            See all partner picks →
+          </Link>
+        </div>
+
+        <div className="mt-6 grid gap-4 md:grid-cols-2">
+          <ProductPick
+            title="Symprove Daily Live & Active Bacteria (Mango & Passion Fruit)"
+            badge="Gut"
+            description="If you try a gut product, keep everything else stable. Track symptoms for 2–4 weeks and avoid adding multiple new supplements at once."
+            bullets={["Change one thing at a time", "Track 2–4 weeks", "Check ingredients + guidance"]}
+            links={[{ label: 'Check price', merchant: 'awin', href: SYMPROVE_MANGO, variant: 'primary' }]}
+          />
+        </div>
       </section>
 
       <section className="mt-12">

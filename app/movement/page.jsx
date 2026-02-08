@@ -1,9 +1,16 @@
 import Link from "next/link";
 
+import ProductPick from '@/components/mdx/ProductPick'
+
 export const metadata = {
   title: "Movement & Fitness",
   description: "Strength, walking, mobility, and gear basics (trackers, bands, shoes, mats).",
 };
+
+// Partner links (AWIN)
+const ON_GOLD_STANDARD_WHEY = 'https://www.awin1.com/cread.php?awinmid=19863&awinaffid=2754234&clickref=ww_movement_picks_whey_optimum_gs100whey&ued=https%3A%2F%2Fwww.optimumnutrition.com%2Fen-gb%2Fproducts%2Fgold-standard-100-whey-protein-powder-eu'
+const WFL_DUMBBELL_TOWER_24KG = 'https://www.awin1.com/cread.php?awinmid=25564&awinaffid=2754234&clickref=ww_movement_picks_dumbbell_tower_body_sculpture_24kg&ued=https%3A%2F%2Fwww.workoutforless.co.uk%2Fcollections%2Fdumbbells%2Fproducts%2Fbody-sculpture-24kg-smart-dumbbell-tower-with-stand'
+const FITNESSOPTIONS_A1_WATERROWER = 'https://www.awin1.com/cread.php?awinmid=899&awinaffid=2754234&clickref=ww_movement_picks_rower_fitnessoptions_a1_waterrower&ued=https%3A%2F%2Ffitnessoptions.co.uk%2Fcollections%2Fpopular%2Fproducts%2Fa1-waterrower'
 
 function Card({ title, desc, href, tag, image }) {
   return (
@@ -82,6 +89,44 @@ export default function Page() {
           <Card image="/images/photography/thumbs/cards/movement-hero.jpg" title="yoga mats for grip & comfort" desc="Grip and cushioning for floor work." href="/best-yoga-mats-grip-comfort" tag="Mobility" />
           <Card image="/images/photography/thumbs/cards/movement-hero.jpg" title="foam rollers & recovery tools" desc="Simple recovery tools for tight hips/backs." href="/best-foam-rollers-recovery-tools" tag="Recovery" />
           <Card image="/images/photography/thumbs/cards/movement-hero.jpg" title="activewear basics (UK)" desc="Comfort-first basics: tops, leggings, socks, layers." href="/best-activewear-basics-uk" tag="Clothing" />
+        </div>
+      </section>
+
+      <section className="mt-12">
+        <div className="flex flex-col gap-2 md:flex-row md:items-end md:justify-between">
+          <div>
+            <h2 className="text-2xl font-semibold">Partner gear picks (UK)</h2>
+            <p className="mt-1 text-sm text-zinc-600 max-w-2xl">
+              A few gear and nutrition add‑ons we feature because they help consistency. (Links are affiliate links.)
+            </p>
+          </div>
+          <Link href="/partners" className="text-sm font-semibold text-zinc-900 hover:underline">
+            See all partner picks →
+          </Link>
+        </div>
+
+        <div className="mt-6 grid gap-4 md:grid-cols-3">
+          <ProductPick
+            title="Compact strength kit: 24kg Smart Dumbbell Tower"
+            badge="Strength"
+            description="A space‑efficient dumbbell setup for home strength training — useful if you want consistency without clutter."
+            bullets={["Great for: small spaces", "Easy to keep set‑up", "Progressive strength without a full rack"]}
+            links={[{ label: 'Check price', merchant: 'awin', href: WFL_DUMBBELL_TOWER_24KG, variant: 'primary' }]}
+          />
+          <ProductPick
+            title="Low‑impact cardio: A1 WaterRower"
+            badge="Cardio"
+            description="Rowing is time‑efficient and joint‑friendly — ideal if you want reliable sessions at home."
+            bullets={["Great for: full‑body cardio", "Low impact", "Check footprint and storage"]}
+            links={[{ label: 'Check price', merchant: 'awin', href: FITNESSOPTIONS_A1_WATERROWER, variant: 'primary' }]}
+          />
+          <ProductPick
+            title="Training day add‑on: Gold Standard 100% Whey"
+            badge="Protein"
+            description="A straightforward protein option if you train and struggle to hit protein targets from food alone."
+            bullets={["Check ingredients/allergens", "Use as a convenience tool", "Keep overall diet food‑first"]}
+            links={[{ label: 'Check price', merchant: 'awin', href: ON_GOLD_STANDARD_WHEY, variant: 'primary' }]}
+          />
         </div>
       </section>
 

@@ -16,6 +16,10 @@ export const metadata = {
   description: 'A calm shortlist of natural sleep support options — what tends to help most, what to skip, and buyer-friendly options.',
 }
 
+// Partner links (AWIN)
+const LEVITEX_SLEEP_POSTURE_PILLOW = 'https://www.awin1.com/cread.php?awinmid=28333&awinaffid=2754234&clickref=ww_sleep_picks_sleep_posture_pillow_levitex&ued=https%3A%2F%2Flevitex.co.uk%2Fproducts%2Fsleep-posture-pillow'
+const RITUALANDFLOW_DREAM_FLOW = 'https://www.awin1.com/cread.php?awinmid=112594&awinaffid=2754234&clickref=ww_sleep_picks_magnesium_hot_chocolate_ritualandflow_dreamflow&ued=https%3A%2F%2Fritualandflow.com%2Fproducts%2Fdream-flow'
+
 const PICKS = [
   {
     title: 'Magnesium glycinate (capsules)',
@@ -172,6 +176,37 @@ const itemList = PICKS.map((p, i) => ({
             <li>Overcomplicated stacks</li>
             <li>Anything that conflicts with medication advice</li>
           </ul>
+        </div>
+      </section>
+
+      <section className="mt-12">
+        <div className="flex flex-col gap-2 md:flex-row md:items-end md:justify-between">
+          <div>
+            <h2 className="text-2xl font-semibold">Partner picks (UK)</h2>
+            <p className="mt-1 text-sm text-zinc-600 max-w-2xl">
+              Two high‑fit options we feature on Wild &amp; Well. (Links are affiliate links.)
+            </p>
+          </div>
+          <Link href="/partners" className="text-sm font-semibold text-zinc-900 hover:underline">
+            See all partner picks →
+          </Link>
+        </div>
+
+        <div className="mt-6 grid gap-4 md:grid-cols-2">
+          <ProductPick
+            title="Neck support option: Levitex Sleep Posture Pillow"
+            badge="Pillow"
+            description="A posture‑focused pillow option if you wake stiff or sore. Make sure it suits your sleeping position and mattress firmness."
+            bullets={['Great for: neck support', 'Check return policy/fit', 'Pair with a cooler, darker room first']}
+            links={[{ label: 'Check price', merchant: 'awin', href: LEVITEX_SLEEP_POSTURE_PILLOW, variant: 'primary' }]}
+          />
+          <ProductPick
+            title="Wind‑down drink: Dream Flow (Ritual and Flow)"
+            badge="Routine"
+            description="A warm evening drink option. Keep routines simple and avoid stacking lots of new supplements at once."
+            bullets={['Good for: evening ritual', 'Keep caffeine cut‑off consistent', 'Track sleep for 5–7 nights']}
+            links={[{ label: 'Check price', merchant: 'awin', href: RITUALANDFLOW_DREAM_FLOW, variant: 'primary' }]}
+          />
         </div>
       </section>
 

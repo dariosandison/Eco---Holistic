@@ -18,6 +18,7 @@ export default function SiteFooter() {
   const shop = [
     { href: '/shopping-list', label: 'Free Shopping List' },
     { href: '/picks', label: 'Picks (Shortlists)' },
+    { href: '/partners', label: 'Partner Picks' },
     { href: '/deals', label: 'Deals' },
   ]
 
@@ -75,7 +76,7 @@ export default function SiteFooter() {
             </p>
           </div>
 
-          <p className="mt-3 text-xs text-neutral-500">Some links may earn us a small commission at no extra cost to you. As an Amazon Associate, we earn from qualifying purchases.</p>
+          <p className="mt-3 text-xs text-neutral-500">Some links may earn us a small commission at no extra cost to you (including Amazon and partner networks). As an Amazon Associate, we earn from qualifying purchases.</p>
         </div>
 
         <div>

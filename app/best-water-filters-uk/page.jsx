@@ -17,9 +17,10 @@ export const metadata = {
 }
 
 // AWIN affiliate links (UK)
-const ZW_BESTWATER_STARTER = 'https://www.awin1.com/cread.php?awinmid=30649&awinaffid=2754234&clickref=ww_bestwater_zw_starterpack&ued=https%3A%2F%2Fshop.culligan.co.uk%2Fproducts%2Fthe-starter-pack'
-const DOULTON_BESTWATER_UNDERSINK = 'https://www.awin1.com/cread.php?awinmid=69790&awinaffid=2754234&clickref=ww_bestwater_doulton_undersink&ued=https%3A%2F%2Fdoulton.com%2Fcollections%2Funder-sink-water-filters'
-const WATERTOGO_BESTWATER_ACTIVE75 = 'https://www.awin1.com/cread.php?awinmid=86997&awinaffid=2754234&clickref=ww_bestwater_watertogo_active75&ued=https%3A%2F%2Fwatertogo.eu%2Fproduct%2F75cl-active-bottle-acai%2F'
+const ZEROWATER_JUG_1_7L = 'https://www.awin1.com/cread.php?awinmid=30649&awinaffid=2754234&clickref=ww_water_picks_filter_jug_zerowater_1_7l&ued=https%3A%2F%2Fshop.culligan.co.uk%2Fproducts%2F1-7-litre-water-filter-jug'
+const WATERDROP_UNDERSINK_DIRECT_CONNECT = 'https://www.awin1.com/cread.php?awinmid=117649&awinaffid=2754234&clickref=ww_water_picks_under_sink_waterdrop_ua&ued=https%3A%2F%2Fwww.waterdropfilter.co.uk%2Fcollections%2Fbest-selling%2Fproducts%2Funder-sink-water-filter-direct-connect-filtration-system'
+const DOULTON_BB_GRAVITY_1L = 'https://www.awin1.com/cread.php?awinmid=69790&awinaffid=2754234&clickref=ww_water_picks_gravity_filter_doulton_bb_1l&ued=https%3A%2F%2Fdoulton.com%2Fproducts%2Fbritish-berkefeld-1-litre-stainless-steel-gravity-system'
+const WATERTOGO_ACTIVE_75CL = 'https://www.awin1.com/cread.php?awinmid=86997&awinaffid=2754234&clickref=ww_water_picks_filter_bottle_watertogo_active_75cl&ued=https%3A%2F%2Fwatertogo.eu%2Fproduct%2F75cl-active-bottles%2F'
 const ZW_FILTERS_AMAZON = amazonSearchUrl('ZeroWater replacement filters 5-stage')
 
 const PICKS = [
@@ -197,32 +198,41 @@ const itemList = PICKS.map((p, i) => ({
 
       <section className="mt-14">
         <h2 className="text-2xl font-semibold">Top picks (shortlist)</h2>
-        <p className="mt-2 text-sm text-zinc-600">Three simple routes, depending on how you live.</p>
-        <div className="mt-6 grid gap-4 md:grid-cols-3">
+        <p className="mt-2 text-sm text-zinc-600">Four simple routes, depending on how you live.</p>
+        <div className="mt-6 grid gap-4 md:grid-cols-2 lg:grid-cols-4">
           <ProductPick
-            title="Best jug for taste: ZeroWater (UK)"
-            badge="Best for taste"
-            description="A simple jug route if taste/odour is your main goal. Always check replacement filters before you commit."
-            bullets={["Great for renters + small kitchens", "Replacement filters are the ongoing cost", "Start with a starter kit and adjust from there"]}
+            title="Best jug (simple start): ZeroWater (UK)"
+            badge="Jug"
+            description="A simple jug route for taste/odour. Always check replacement filters before you commit."
+            bullets={["Great for renters + small kitchens", "Replacement filters are the ongoing cost", "Start simple and keep it consistent"]}
             links={[
-              { label: 'Check starter kit (UK)', merchant: 'zerowater', href: ZW_BESTWATER_STARTER, variant: 'primary' },
+              { label: 'Check price', merchant: 'awin', href: ZEROWATER_JUG_1_7L, variant: 'primary' },
               { label: 'Replacement filters', merchant: 'amazon', href: ZW_FILTERS_AMAZON, variant: 'ghost' },
-              { label: 'Amazon alternatives', merchant: 'amazon', href: amazonSearchUrl('BRITA Style water filter jug MAXTRA filters'), variant: 'ghost' },
             ]}
           />
+
           <ProductPick
-            title="Best under‑sink: Doulton"
-            badge="Overall pick"
-            description="Filtered water from your tap without thinking about it every day. Check space under the sink + ongoing filter costs."
-            href={DOULTON_BESTWATER_UNDERSINK}
-            bullets={["Great for: daily use + families", "Check under-sink space before buying", "Budget for annual replacements"]}
+            title="Best under‑sink (low effort): Waterdrop"
+            badge="Under‑sink"
+            description="Filtered water from your tap without thinking about it every day. Check under‑sink space + ongoing filter costs."
+            bullets={["Great for: daily use + convenience", "Check under‑sink space before buying", "Budget for replacements"]}
+            links={[{ label: 'Check price', merchant: 'awin', href: WATERDROP_UNDERSINK_DIRECT_CONNECT, variant: 'primary' }]}
           />
+
           <ProductPick
-            title="Best portable bottle: Water-to-Go"
-            badge="On-the-go"
+            title="Best countertop (no plumbing): Doulton gravity"
+            badge="Gravity"
+            description="Countertop gravity filtration — useful for renters or batch filtering without installation."
+            bullets={["Great for: no plumbing", "Takes counter space", "Plan filter replacements"]}
+            links={[{ label: 'Check price', merchant: 'awin', href: DOULTON_BB_GRAVITY_1L, variant: 'primary' }]}
+          />
+
+          <ProductPick
+            title="Best portable bottle: Water‑to‑Go (75cl)"
+            badge="On‑the‑go"
             description="A simple filtered bottle route for gym, commute, or travel."
-            href={WATERTOGO_BESTWATER_ACTIVE75}
             bullets={["Good for: travel + busy days", "Easy to keep in a bag", "Check replacement cartridge schedule"]}
+            links={[{ label: 'Check price', merchant: 'awin', href: WATERTOGO_ACTIVE_75CL, variant: 'primary' }]}
           />
         </div>
 

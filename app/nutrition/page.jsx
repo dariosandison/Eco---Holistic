@@ -1,10 +1,22 @@
 import Link from "next/link";
 
+import ProductPick from '@/components/mdx/ProductPick'
+
 export const metadata = {
   title: "Nutrition & Organic Food",
   description:
     "Nutrition, organic food, and single-ingredient staples — with practical guidance and product shortlists when you’re ready to buy.",
 };
+
+// Partner links (AWIN)
+const SIMPLY_SUPPLEMENTS_VITAMIN_D3 = 'https://www.awin1.com/cread.php?awinmid=5959&awinaffid=2754234&clickref=ww_nutrition_picks_vitamin_d3_2000iu_simplysupplements&ued=https%3A%2F%2Fwww.simplysupplements.co.uk%2Fvitamin-d3-2000iu'
+const HEALF_LMNT_VARIETY = 'https://www.awin1.com/cread.php?awinmid=22320&awinaffid=2754234&clickref=ww_nutrition_picks_electrolytes_healf_lmnt_variety&ued=https%3A%2F%2Fhealf.com%2Fproducts%2Flmnt-recharge-electrolytes-variety-pack'
+const KAYTEA_ICE_TEA_SAMPLE = 'https://www.awin1.com/cread.php?awinmid=115673&awinaffid=2754234&clickref=ww_nutrition_picks_ice_tea_sample_kaytea_6pack&ued=https%3A%2F%2Fkaytea.co.uk%2Fproducts%2Fice-tea-6-pack-sample'
+const FARMFETCH_GRASSFED_BEEF_BOX = 'https://www.awin1.com/cread.php?awinmid=75682&awinaffid=2754234&clickref=ww_nutrition_picks_farmfetch_grassfed_beef_box&ued=https%3A%2F%2Ffarmfetch.co%2Fproducts%2Fgrass-fed-beef-selection-box-1'
+const SYMPROVE_MANGO = 'https://www.awin1.com/cread.php?awinmid=109974&awinaffid=2754234&clickref=ww_nutrition_picks_guthealth_symprove_mango_passionfruit&ued=https%3A%2F%2Fw-wellness.co.uk%2Fproducts%2Fsymprove-daily-live-active-bacteria-mango-passion-fruit'
+const GOLD_COLLAGEN_PURE = 'https://www.awin1.com/cread.php?awinmid=20972&awinaffid=2754234&clickref=ww_nutrition_picks_collagen_goldcollagen_pure&ued=https%3A%2F%2Fwww.gold-collagen.com%2Fuk%2Fshop%2Fbest-seller%2Fpure'
+const REVIVE_COLLAGEN_ENHANCEDPLUS = 'https://www.awin1.com/cread.php?awinmid=122882&awinaffid=2754234&clickref=ww_nutrition_picks_liquid_collagen_revive_enhancedplus&ued=https%3A%2F%2Frevivecollagen.com%2Fproducts%2Frevive-collagen-plus-hydrolysed-marine-collagen-drink'
+const COLLAGEN_SUPERDOSE_SKIN = 'https://www.awin1.com/cread.php?awinmid=25052&awinaffid=2754234&clickref=ww_nutrition_picks_liquid_collagen_collagensuperdose_skin_care&ued=https%3A%2F%2Fcollagensuperdose.com%2Fproducts%2Fsuperdose-skin'
 
 function Card({ title, desc, href, tag, image }) {
   return (
@@ -67,6 +79,79 @@ export default function Page() {
           <Card image="/images/photography/thumbs/cards/close-up-of-hands-holding-a-warm-mug-near-a-window-shallow-depth-of-field.jpg" title="Supplements" desc="A low-additive, label-reading approach — quality signals, common traps, and simple tools." href="/nutrition/supplements" tag="Education" />
           <Card image="/images/photography/thumbs/cards/calm-living-room-corner-with-linen-throw-and-houseplant-by-a-window-negative-space.jpg" title="Grow your own" desc="Home or allotment: start small, get the basics right (light, soil, watering), then scale." href="/nutrition/grow-your-own" tag="Education" />
           <Card image="/images/photography/thumbs/cards/cooked-oats-and-seeds-in-small-ceramic-bowls-on-wooden-table-soft-daylight.jpg" title="Organic & single-ingredient" desc="Staples that scale: label-reading, simple swaps, and where organic upgrades make sense." href="/nutrition/organic-single-ingredient" tag="Education" />
+        </div>
+      </section>
+
+      <section className="mt-12">
+        <div className="flex flex-col gap-2 md:flex-row md:items-end md:justify-between">
+          <div>
+            <h2 className="text-2xl font-semibold">Partner picks (UK)</h2>
+            <p className="mt-1 text-sm text-zinc-600 max-w-2xl">
+              High‑fit options we feature across our nutrition pages. (Links are affiliate links.)
+            </p>
+          </div>
+          <Link href="/partners" className="text-sm font-semibold text-zinc-900 hover:underline">
+            See all partner picks →
+          </Link>
+        </div>
+
+        <div className="mt-6 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+          <ProductPick
+            title="Baseline staple: Vitamin D3 (2,000iu)"
+            badge="Staples"
+            description="A simple baseline for UK winters. Check label guidance and talk to a clinician if you have medical concerns."
+            bullets={["Common UK winter staple", "Check dosage guidance", "Avoid stacking lots of new supplements"]}
+            links={[{ label: 'Check price', merchant: 'awin', href: SIMPLY_SUPPLEMENTS_VITAMIN_D3, variant: 'primary' }]}
+          />
+          <ProductPick
+            title="Training day add‑on: LMNT Electrolytes (Variety Pack)"
+            badge="Hydration"
+            description="Electrolytes can help on sweaty training days — keep it simple and check ingredients."
+            bullets={["Good for: training days", "Check ingredients", "Use as a convenience tool"]}
+            links={[{ label: 'Check price', merchant: 'awin', href: HEALF_LMNT_VARIETY, variant: 'primary' }]}
+          />
+          <ProductPick
+            title="Better drinks swap: Kaytea ice tea sample"
+            badge="Drinks"
+            description="A simple lower-friction drinks swap — try flavours before stocking up."
+            bullets={["Try flavours first", "Keep it low-effort", "Check sugar/caffeine on label"]}
+            links={[{ label: 'Check price', merchant: 'awin', href: KAYTEA_ICE_TEA_SAMPLE, variant: 'primary' }]}
+          />
+          <ProductPick
+            title="Whole-food protein: Farmfetch grass fed beef box"
+            badge="Staples"
+            description="If you want high-protein meal prep, this is a simple whole-food route."
+            bullets={["Good for: meal prep", "Food-first approach", "Plan freezer space"]}
+            links={[{ label: 'Check price', merchant: 'awin', href: FARMFETCH_GRASSFED_BEEF_BOX, variant: 'primary' }]}
+          />
+          <ProductPick
+            title="Gut option: Symprove (Mango & Passion Fruit)"
+            badge="Gut"
+            description="If you try a gut-focused product, keep expectations realistic and change one thing at a time."
+            bullets={["Change one thing at a time", "Track 2–4 weeks", "Check ingredients"]}
+            links={[{ label: 'Check price', merchant: 'awin', href: SYMPROVE_MANGO, variant: 'primary' }]}
+          />
+          <ProductPick
+            title="Collagen option: GOLD COLLAGEN® PURE"
+            badge="Staples"
+            description="If you trial collagen, measure results and keep the rest of your routine steady."
+            bullets={["Track outcomes", "Avoid stacking", "Compare ingredients/serving"]}
+            links={[{ label: 'Check price', merchant: 'awin', href: GOLD_COLLAGEN_PURE, variant: 'primary' }]}
+          />
+          <ProductPick
+            title="Collagen option: Revive Collagen Enhanced Plus"
+            badge="Staples"
+            description="Marine collagen drink — compare ingredients and serving size before committing."
+            bullets={["Compare ingredients", "Check serving size", "Keep routine steady"]}
+            links={[{ label: 'Check price', merchant: 'awin', href: REVIVE_COLLAGEN_ENHANCEDPLUS, variant: 'primary' }]}
+          />
+          <ProductPick
+            title="Collagen option: Collagen Superdose (Superdose Skin)"
+            badge="Staples"
+            description="Another liquid collagen option — if you trial it, measure results and avoid lots of changes at once."
+            bullets={["Measure results", "Avoid stacking", "Check ingredients"]}
+            links={[{ label: 'Check price', merchant: 'awin', href: COLLAGEN_SUPERDOSE_SKIN, variant: 'primary' }]}
+          />
         </div>
       </section>
 

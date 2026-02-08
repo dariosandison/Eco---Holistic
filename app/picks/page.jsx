@@ -12,9 +12,12 @@ export const metadata = {
     'Shortlists with clear trade-offs for UK homes: air, water, fragrance-free laundry, sleep, nutrition, and movement.',
 }
 
-export default function Page() {
+export default function Page({ searchParams }) {
   const sections = getPicksSections()
-  const partners = PARTNER_PRODUCTS
+  const tag = searchParams?.tag ? String(searchParams.tag) : ''
+  const partners = tag
+    ? PARTNER_PRODUCTS.filter((p) => String(p.tag || '').toLowerCase() === tag.toLowerCase())
+    : PARTNER_PRODUCTS
 
   return (
     <main>
@@ -81,6 +84,12 @@ export default function Page() {
             </Link>
           </div>
 
+          <div className="mt-3">
+            <Link href="/partners" className="text-sm font-semibold text-zinc-900 hover:underline">
+              See all partner picks →
+            </Link>
+          </div>
+
           <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {partners.map((p) => (
               <div key={p.key} className="rounded-2xl border bg-white shadow-sm overflow-hidden">
@@ -127,9 +136,11 @@ export default function Page() {
                             ? '/best-natural-sleep-support'
                             : p.tag === 'Movement' || p.tag === 'Strength' || p.tag === 'Walking'
                               ? '/movement'
-                              : p.tag === 'Staples' || p.tag === 'Drinks'
+                              : p.tag === 'Staples' || p.tag === 'Drinks' || p.tag === 'Gut'
                                 ? '/nutrition'
-                                : '/holistic-health'
+                                : p.tag === 'Home'
+                                  ? '/best-low-tox-products-for-beginners'
+                                  : '/holistic-health'
                       }
                       className="text-sm font-semibold text-zinc-900 hover:underline"
                     >

@@ -7,6 +7,8 @@ import MoneyPageEducationBlock from '@/components/MoneyPageEducationBlock'
 import { getMoneyPageEdu } from '@/lib/moneyPageEdu'
 import MoneyPageNextLinks from '@/components/MoneyPageNextLinks'
 
+import ProductPick from '@/components/mdx/ProductPick'
+
 
 
 
@@ -14,6 +16,11 @@ export const metadata = {
   title: 'Low‑tox products for beginners: starter picks',
   description: 'A simple, UK‑friendly starter path: where to begin, what to avoid, and the few pages that help most people first.',
 }
+
+// Partner links (AWIN)
+const JUNGLECULTURE_SAFETY_RAZOR = 'https://www.awin1.com/cread.php?awinmid=26152&awinaffid=2754234&clickref=ww_home_picks_safety_razor_jungleculture_diamondgrip&ued=https%3A%2F%2Fjungleculture.eco%2Fcollections%2Fbest-selling-products%2Fproducts%2Fblue-silver-purple-safety-razors'
+const NEUROSCENT_WELLBEING_SET = 'https://www.awin1.com/cread.php?awinmid=117317&awinaffid=2754234&clickref=ww_home_picks_neuroscent_wellbeing_set&ued=https%3A%2F%2Fneuroscent.com%2Fproducts%2Fwellbeing-set-1'
+const ATENAI_SANCTUARY_SHAMPOO = 'https://www.awin1.com/cread.php?awinmid=116677&awinaffid=2754234&clickref=ww_home_picks_hair_shampoo_atenai_sanctuary&ued=https%3A%2F%2Fatenailondon.com%2Fcollections%2Fbestsellers%2Fproducts%2Fsanctuary-hair-shampoo'
 
 function StartCard({ title, desc, href, tag }) {
   return (
@@ -179,6 +186,44 @@ const url = `${SITE_URL}/best-low-tox-products-for-beginners`
             },
           ]}
         />
+      </section>
+
+      <section className="mt-12">
+        <div className="flex flex-col gap-2 md:flex-row md:items-end md:justify-between">
+          <div>
+            <h2 className="text-2xl font-semibold">Partner swaps (UK)</h2>
+            <p className="mt-1 text-sm text-zinc-600 max-w-2xl">
+              Three low‑friction swaps we feature for beginners. (Links are affiliate links.)
+            </p>
+          </div>
+          <Link href="/partners" className="text-sm font-semibold text-zinc-900 hover:underline">
+            See all partner picks →
+          </Link>
+        </div>
+
+        <div className="mt-6 grid gap-4 md:grid-cols-3">
+          <ProductPick
+            title="Bathroom swap: Jungle Culture safety razor"
+            badge="Low‑waste"
+            description="A simple durable swap that reduces disposable plastics. Start slow and use with good technique."
+            bullets={["Great for: long‑term reuse", "Check blade availability", "Use a calm shaving routine"]}
+            links={[{ label: 'Check price', merchant: 'awin', href: JUNGLECULTURE_SAFETY_RAZOR, variant: 'primary' }]}
+          />
+          <ProductPick
+            title="Scent without synthetic fragrance: NeuroScent wellbeing set"
+            badge="Home routine"
+            description="If you want a calmer scent option, this keeps it closer to essential‑oil blends. Always patch-test and ventilate."
+            bullets={["Great for: routines", "Ventilate rooms", "Avoid overuse around kids/pets"]}
+            links={[{ label: 'Check price', merchant: 'awin', href: NEUROSCENT_WELLBEING_SET, variant: 'primary' }]}
+          />
+          <ProductPick
+            title="Personal care swap: Atenai Sanctuary hair shampoo"
+            badge="Simple"
+            description="A calmer personal‑care option if you’re simplifying routines. Always check ingredients for your sensitivities."
+            bullets={["Keep routine simple", "Check ingredients", "One change at a time"]}
+            links={[{ label: 'Check price', merchant: 'awin', href: ATENAI_SANCTUARY_SHAMPOO, variant: 'primary' }]}
+          />
+        </div>
       </section>
 
       <section className="mt-12">
