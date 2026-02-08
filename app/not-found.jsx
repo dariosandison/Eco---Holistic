@@ -17,8 +17,8 @@ export default function NotFound() {
         <Link className="btn-secondary" href="/blog">
           Wellness Insights
         </Link>
-        <Link className="btn-secondary" href="/picks">
-          Picks
+        <Link className="btn-secondary" href="/topics">
+          Topics
         </Link>
         <Link className="btn-secondary" href="/shopping-list">
           Free shopping list

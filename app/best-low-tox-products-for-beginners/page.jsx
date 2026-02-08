@@ -9,11 +9,8 @@ import MoneyPageNextLinks from '@/components/MoneyPageNextLinks'
 
 import ProductPick from '@/components/mdx/ProductPick'
 
-
-
-
 export const metadata = {
-  title: 'Low‑tox products for beginners: starter picks',
+  title: 'Low‑tox products for beginners: starter shortlist',
   description: 'A simple, UK‑friendly starter path: where to begin, what to avoid, and the few pages that help most people first.',
 }
 
@@ -48,7 +45,7 @@ const url = `${SITE_URL}/best-low-tox-products-for-beginners`
   const ld = {
     '@context': 'https://schema.org',
     '@type': 'Article',
-    headline: 'Low‑tox products for beginners: starter picks',
+    headline: 'Low‑tox products for beginners: starter shortlist',
     datePublished: '2026-01-25',
     dateModified: '2026-02-02',
     mainEntityOfPage: { '@type': 'WebPage', '@id': url },
@@ -98,7 +95,7 @@ const url = `${SITE_URL}/best-low-tox-products-for-beginners`
 
       <header>
         <div className="max-w-3xl">
-        <h1 className="text-4xl font-bold">Low‑tox products for beginners: starter picks</h1>
+        <h1 className="text-4xl font-bold">Low‑tox products for beginners: starter shortlist</h1>
         <p className="mt-3 text-zinc-700">
           If you’re new, this page is your shortcut: one small change first, then build from there. No perfect “everything list” — just the pages that help most UK readers make a good first decision.
         </p>
@@ -120,7 +117,7 @@ const url = `${SITE_URL}/best-low-tox-products-for-beginners`
         <div className="mt-5 flex flex-wrap gap-2">
           <Link className="btn-secondary" href="/shopping-list">Get the free shopping list</Link>
           <Link className="btn-secondary" href="/topics">Browse Topics</Link>
-          <Link className="btn-secondary" href="/picks">Browse Picks</Link>
+          <Link className="btn-secondary" href="/topics">Browse Topics</Link>
         </div>
         <p className="mt-3 text-xs text-zinc-500">Last updated: February 2, 2026 · Wild & Well Editorial Team</p>
         </div>
@@ -196,9 +193,6 @@ const url = `${SITE_URL}/best-low-tox-products-for-beginners`
               Three low‑friction swaps we feature for beginners. (Links are affiliate links.)
             </p>
           </div>
-          <Link href="/partners" className="text-sm font-semibold text-zinc-900 hover:underline">
-            See all partner picks →
-          </Link>
         </div>
 
         <div className="mt-6 grid gap-4 md:grid-cols-3">

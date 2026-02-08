@@ -58,7 +58,7 @@ export default function Page() {
         />
         <div className="mt-5 flex flex-wrap gap-2">
           <Link className="btn-secondary" href="/blog">Read Wellness Insights</Link>
-          <Link className="btn-secondary" href="/picks">Browse Picks</Link>
+          <Link className="btn-secondary" href="/topics">Browse Topics</Link>
         </div>
         <p className="mt-3 text-xs text-zinc-500">Last updated: February 1, 2026</p>
       </header>
@@ -76,7 +76,7 @@ export default function Page() {
       </section>
 
       <section className="mt-10">
-        <h2 className="text-2xl font-semibold">Picks shortlists</h2>
+        <h2 className="text-2xl font-semibold">Shortlists</h2>
         <p className="mt-2 text-sm text-zinc-600 max-w-3xl">
           Straightforward roundups: what to look for, what to avoid, and a shortlist of solid options.
         </p>
@@ -95,14 +95,11 @@ export default function Page() {
       <section className="mt-12">
         <div className="flex flex-col gap-2 md:flex-row md:items-end md:justify-between">
           <div>
-            <h2 className="text-2xl font-semibold">Partner gear picks (UK)</h2>
+            <h2 className="text-2xl font-semibold">Partner gear recommendations (UK)</h2>
             <p className="mt-1 text-sm text-zinc-600 max-w-2xl">
               A few gear and nutrition add‑ons we feature because they help consistency. (Links are affiliate links.)
             </p>
           </div>
-          <Link href="/partners" className="text-sm font-semibold text-zinc-900 hover:underline">
-            See all partner picks →
-          </Link>
         </div>
 
         <div className="mt-6 grid gap-4 md:grid-cols-3">

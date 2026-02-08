@@ -39,12 +39,6 @@ export default function SiteHeader() {
           <Link href="/movement" className="text-sm font-medium text-zinc-700 hover:text-zinc-900">
             Movement
           </Link>
-          <Link href="/picks" className="text-sm font-medium text-zinc-700 hover:text-zinc-900">
-            Picks
-          </Link>
-          <Link href="/partners" className="text-sm font-medium text-zinc-700 hover:text-zinc-900">
-            Partner Picks
-          </Link>
           <Link href="/deals" className="text-sm font-medium text-zinc-700 hover:text-zinc-900">
             Deals
           </Link>
@@ -91,12 +85,6 @@ export default function SiteHeader() {
           </Link>
           <Link href="/movement" className="rounded-md px-2 py-2 text-sm text-zinc-800 hover:bg-zinc-50">
             Movement
-          </Link>
-          <Link href="/picks" className="rounded-md px-2 py-2 text-sm text-zinc-800 hover:bg-zinc-50">
-            Picks
-          </Link>
-          <Link href="/partners" className="rounded-md px-2 py-2 text-sm text-zinc-800 hover:bg-zinc-50">
-            Partner Picks
           </Link>
           <Link href="/deals" className="rounded-md px-2 py-2 text-sm text-zinc-800 hover:bg-zinc-50">
             Deals

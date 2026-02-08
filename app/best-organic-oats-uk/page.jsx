@@ -13,7 +13,7 @@ import MoneyPageNextLinks from '@/components/MoneyPageNextLinks'
 
 
 export const metadata = {
-  title: "Organic oats (UK): our picks",
+  title: "Organic oats (UK): our shortlist",
   description: "A shortlist of organic oats (rolled, jumbo, steel-cut) and how to choose based on your breakfast and baking habits.",
 }
 
@@ -116,7 +116,7 @@ const itemList = PICKS.map((p, i) => ({
   const ld = {
     '@context': 'https://schema.org',
     '@type': 'Article',
-    headline: "Organic oats (UK): our picks",
+    headline: "Organic oats (UK): our shortlist",
     dateModified: '2026-02-02',
     datePublished: '2026-01-27',
     mainEntity: {
@@ -131,7 +131,7 @@ const itemList = PICKS.map((p, i) => ({
 
       <header>
         <div className="max-w-3xl">
-        <h1 className="text-4xl font-bold">Organic oats (UK): our picks</h1>
+        <h1 className="text-4xl font-bold">Organic oats (UK): our shortlist</h1>
         <p className="mt-3 text-zinc-700">A shortlist of organic oats (rolled, jumbo, steel-cut) and how to choose based on your breakfast and baking habits.</p>
 
                 </div>

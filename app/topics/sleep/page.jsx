@@ -11,6 +11,11 @@ export const metadata = {
   description: 'Sleep and recovery: light, timing, temperature, and practical options for UK homes.',
 }
 
+
+// Featured sleep products (AWIN)
+const LEVITEX_SLEEP_POSTURE_PILLOW = 'https://www.awin1.com/cread.php?awinmid=28333&awinaffid=2754234&clickref=ww_sleep_picks_sleep_posture_pillow_levitex&ued=https%3A%2F%2Flevitex.co.uk%2Fproducts%2Fsleep-posture-pillow'
+const RITUALANDFLOW_DREAMFLOW = 'https://www.awin1.com/cread.php?awinmid=112594&awinaffid=2754234&clickref=ww_sleep_picks_magnesium_hot_chocolate_ritualandflow_dreamflow&ued=https%3A%2F%2Fritualandflow.com%2Fproducts%2Fdream-flow'
+
 export default function Page() {
   const edu = getTopicEdu('sleep')
 
@@ -136,6 +141,28 @@ export default function Page() {
             href={amazonSearchUrl('all season duvet breathable cotton wool')}
             bullets={['Consider natural fills if you run hot', 'Prioritise easy returns']}
           />
+        
+        </div>
+
+        <div className="mt-10">
+          <h3 className="text-lg font-semibold">Featured sleep products (UK)</h3>
+          <p className="mt-2 text-sm text-zinc-700">A couple of optional add-ons we feature because they can remove friction (comfort + wind-down).</p>
+          <div className="mt-4 grid gap-4 md:grid-cols-2">
+            <ProductPick
+              title="Sleep posture pillow: Levitex"
+              badge="Comfort"
+              description="If you wake with neck/shoulder discomfort, improving pillow support can be a high-leverage change."
+              bullets={["Check return policy", "Give it a 1–2 week trial", "Pair with a consistent sleep window"]}
+              links={[{ label: 'Check price', merchant: 'awin', href: LEVITEX_SLEEP_POSTURE_PILLOW, variant: 'primary' }]}
+            />
+            <ProductPick
+              title="Evening wind-down: Dream Flow hot chocolate (magnesium)"
+              badge="Routine"
+              description="A warm, simple wind-down drink. Keep expectations realistic and start with routine first."
+              bullets={["Use as a routine cue", "Check ingredients/allergens", "Avoid stacking lots of supplements"]}
+              links={[{ label: 'Check price', merchant: 'awin', href: RITUALANDFLOW_DREAMFLOW, variant: 'primary' }]}
+            />
+          </div>
         </div>
 
         <div className="mt-8 flex flex-wrap gap-2">

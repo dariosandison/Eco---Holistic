@@ -77,7 +77,7 @@ const START_HERE = [
     links: [
       { label: "Fragrance-free laundry detergents (UK)", href: "/best-fragrance-free-laundry-detergents-uk" },
       { label: "Non-toxic cleaning starter", href: "/blog/non-toxic-cleaning-starter" },
-      { label: "Low‑tox starter picks", href: "/best-low-tox-products-for-beginners" },
+      { label: "Low‑tox starter shortlist", href: "/best-low-tox-products-for-beginners" },
     ],
   },
 ];
@@ -232,8 +232,8 @@ export default function HomePage() {
               >
                 Low‑Tox Shopping List
               </Link>
-              <Link href="/picks" className="text-sm font-semibold text-zinc-900 hover:underline">
-                Browse picks →
+              <Link href="/topics" className="text-sm font-semibold text-zinc-900 hover:underline">
+                Browse topics →
               </Link>
             </div>
 
@@ -336,7 +336,7 @@ export default function HomePage() {
 {/* FAVOURITES */}
 <section className="mt-16">
   <div className="mx-auto max-w-6xl px-4">
-    <h2 className="text-2xl font-semibold">Picks (shortlists)</h2>
+    <h2 className="text-2xl font-semibold">Shortlists</h2>
     <p className="mt-2 text-sm text-zinc-600">
       Shortlists with the key trade-offs and a small set of options.
     </p>
@@ -345,7 +345,7 @@ export default function HomePage() {
         
         
         <div className="mt-4 h-12 w-12 overflow-hidden rounded-xl bg-zinc-100"><img src="/images/cards/cleaning.svg" alt="" className="h-full w-full object-cover" loading="lazy" /></div>
-<h3 className="text-lg font-semibold">Low‑tox starter picks</h3>
+<h3 className="text-lg font-semibold">Low‑tox starter shortlist</h3>
         <p className="mt-1 text-sm text-zinc-600">A small set of practical first swaps.</p>
       </Link>
       <Link href="/best-water-filters-uk" className="card hover:shadow-sm transition-shadow">
@@ -408,8 +408,8 @@ export default function HomePage() {
               <div className="text-sm font-semibold text-zinc-900">Topics</div>
               <div className="mt-1 text-sm text-zinc-600">Air, water, fragrance‑free home, sleep & recovery.</div>
             </Link>
-            <Link href="/picks" className="card">
-              <div className="text-sm font-semibold text-zinc-900">Picks (shortlists)</div>
+            <Link href="/topics" className="card">
+              <div className="text-sm font-semibold text-zinc-900">Shortlists</div>
               <div className="mt-1 text-sm text-zinc-600">A small set of options with the main trade-offs.</div>
             </Link>
             <Link href="/shopping-list" className="card">

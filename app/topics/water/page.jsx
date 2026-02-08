@@ -15,6 +15,13 @@ export const metadata = {
 const ZW_TOPIC_STARTER = 'https://www.awin1.com/cread.php?awinmid=30649&awinaffid=2754234&clickref=ww_topics_water_zw_starter&ued=https%3A%2F%2Fwww.zerowater.com%2Fcollections%2Fstarter-kits'
 const ZW_TOPIC_FILTERS = 'https://www.awin1.com/cread.php?awinmid=30649&awinaffid=2754234&clickref=ww_topics_water_zw_filters&ued=https%3A%2F%2Fwww.zerowater.com%2Fcollections%2F5-stage-replacement-water-filters'
 
+// Featured water products (AWIN)
+const ZEROWATER_JUG_1_7L = 'https://www.awin1.com/cread.php?awinmid=30649&awinaffid=2754234&clickref=ww_water_picks_filter_jug_zerowater_1_7l&ued=https%3A%2F%2Fshop.culligan.co.uk%2Fproducts%2F1-7-litre-water-filter-jug'
+const WATERDROP_UNDERSINK_DIRECT_CONNECT = 'https://www.awin1.com/cread.php?awinmid=117649&awinaffid=2754234&clickref=ww_water_picks_under_sink_waterdrop_ua&ued=https%3A%2F%2Fwww.waterdropfilter.co.uk%2Fcollections%2Fbest-selling%2Fproducts%2Funder-sink-water-filter-direct-connect-filtration-system'
+const DOULTON_BB_GRAVITY_1L = 'https://www.awin1.com/cread.php?awinmid=69790&awinaffid=2754234&clickref=ww_water_picks_gravity_filter_doulton_bb_1l&ued=https%3A%2F%2Fdoulton.com%2Fproducts%2Fbritish-berkefeld-1-litre-stainless-steel-gravity-system'
+const WATERTOGO_ACTIVE_75CL = 'https://www.awin1.com/cread.php?awinmid=86997&awinaffid=2754234&clickref=ww_water_picks_filter_bottle_watertogo_active_75cl&ued=https%3A%2F%2Fwatertogo.eu%2Fproduct%2F75cl-active-bottles%2F'
+
+
 export default function Page() {
   const edu = getTopicEdu('water')
 
@@ -142,6 +149,42 @@ export default function Page() {
             href={amazonSearchUrl('stainless steel water bottle wide mouth')}
             bullets={['Dishwasher safe is helpful', 'Wide mouth is easier to clean']}
           />
+        
+        </div>
+
+        <div className="mt-10">
+          <h3 className="text-lg font-semibold">Featured water products (UK)</h3>
+          <p className="mt-2 text-sm text-zinc-700">Specific products we feature on Wild &amp; Well because they cover the most common use-cases (jug, under-sink, gravity, on-the-go).</p>
+          <div className="mt-4 grid gap-4 md:grid-cols-2">
+            <ProductPick
+              title="Jug option: Culligan/ZeroWater 1.7L filter jug"
+              badge="Jug"
+              description="Low-friction starter option for taste/odour. Compare filter costs before committing long-term."
+              bullets={["Best for: simple start", "Check replacement filter cost", "Follow the change schedule"]}
+              links={[{ label: 'Check price', merchant: 'awin', href: ZEROWATER_JUG_1_7L, variant: 'primary' }]}
+            />
+            <ProductPick
+              title="Under-sink option: Waterdrop direct-connect system"
+              badge="Under-sink"
+              description="Convenient if you want filtered water from a tap and can install a system."
+              bullets={["Best for: convenience", "Check install requirements", "Compare replacement filters"]}
+              links={[{ label: 'Check price', merchant: 'awin', href: WATERDROP_UNDERSINK_DIRECT_CONNECT, variant: 'primary' }]}
+            />
+            <ProductPick
+              title="Gravity option: British Berkefeld 1L stainless system"
+              badge="Gravity"
+              description="Useful if you want larger capacity without plumbing (often renter-friendly)."
+              bullets={["Best for: no plumbing", "Slower filtration", "Plan countertop space"]}
+              links={[{ label: 'Check price', merchant: 'awin', href: DOULTON_BB_GRAVITY_1L, variant: 'primary' }]}
+            />
+            <ProductPick
+              title="On-the-go option: Water-to-Go Active bottle (75cl)"
+              badge="Bottle"
+              description="If you want a portable option for commuting, travel, or gym days."
+              bullets={["Best for: travel", "Check filter replacement schedule", "Keep it clean"]}
+              links={[{ label: 'Check price', merchant: 'awin', href: WATERTOGO_ACTIVE_75CL, variant: 'primary' }]}
+            />
+          </div>
         </div>
 
         <div className="mt-8 rounded-2xl border bg-white p-6 shadow-sm">

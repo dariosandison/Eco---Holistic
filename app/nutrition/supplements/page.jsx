@@ -50,7 +50,7 @@ export default function Page() {
 
         <div className="mt-4 flex flex-wrap gap-2">
           <Link className="btn-secondary" href="/nutrition">Back to Nutrition</Link>
-          <Link className="btn-secondary" href="/how-we-test">How we choose picks</Link>
+          <Link className="btn-secondary" href="/how-we-test">How we create shortlists</Link>
         </div>
 
         <div className="mt-4 flex flex-wrap gap-2">
@@ -143,7 +143,7 @@ export default function Page() {
       </section>
 
       <section className="mt-14" id="shortlists">
-        <h2 className="section-title">Picks shortlists</h2>
+        <h2 className="section-title">Shortlists</h2>
         <p className="section-subtitle">Pages with label cues and shortlists for common supplement categories.</p>
         <div className="mt-4 flex flex-wrap gap-2">
           <Link className="btn-secondary" href="/blog/creatine-uk-simple-guide">Creatine: simple UK guide</Link>

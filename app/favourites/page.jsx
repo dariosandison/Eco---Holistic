@@ -1,7 +1,7 @@
 import { redirect } from 'next/navigation'
 
 // Legacy route kept for backwards compatibility (old links, bookmarks, search results).
-// Canonical shortlists live at /picks.
+// Canonical content lives across Topics + guides.
 
 export default function Page({ searchParams }) {
   const sp = new URLSearchParams()
@@ -15,5 +15,5 @@ export default function Page({ searchParams }) {
     }
   }
   const qs = sp.toString()
-  redirect(qs ? `/picks?${qs}` : '/picks')
+  redirect(qs ? `/topics?${qs}` : '/topics')
 }

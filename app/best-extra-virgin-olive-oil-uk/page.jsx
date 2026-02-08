@@ -13,7 +13,7 @@ import MoneyPageNextLinks from '@/components/MoneyPageNextLinks'
 
 
 export const metadata = {
-  title: "Extra virgin olive oil (UK): our picks",
+  title: "Extra virgin olive oil (UK): our shortlist",
   description: "A practical shortlist of extra virgin olive oils (EVOO) with notes on freshness, storage, and what to look for on the label.",
 }
 
@@ -95,7 +95,7 @@ function SummaryBox() {
       </p>
       <div className="mt-4 flex flex-wrap gap-2">
         <Link className="btn-secondary" href="/nutrition">Nutrition</Link>
-        <Link className="btn-secondary" href="/picks">Picks</Link>
+        <Link className="btn-secondary" href="/topics">Shortlists</Link>
       </div>
       <p className="mt-4 text-xs text-zinc-500">Last updated: February 2, 2026 · Wild & Well Editorial Team</p>
     </div>
@@ -116,7 +116,7 @@ const itemList = PICKS.map((p, i) => ({
   const ld = {
     '@context': 'https://schema.org',
     '@type': 'Article',
-    headline: "Extra virgin olive oil (UK): our picks",
+    headline: "Extra virgin olive oil (UK): our shortlist",
     dateModified: '2026-02-02',
     datePublished: '2026-01-27',
     mainEntity: {
@@ -131,7 +131,7 @@ const itemList = PICKS.map((p, i) => ({
 
       <header>
         <div className="max-w-3xl">
-        <h1 className="text-4xl font-bold">Extra virgin olive oil (UK): our picks</h1>
+        <h1 className="text-4xl font-bold">Extra virgin olive oil (UK): our shortlist</h1>
         <p className="mt-3 text-zinc-700">A practical shortlist of extra virgin olive oils (EVOO) with notes on freshness, storage, and what to look for on the label.</p>
 
                 </div>

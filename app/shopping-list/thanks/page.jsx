@@ -75,7 +75,7 @@ export default function ThanksPage({ searchParams }) {
       <section className="mt-10">
         <h2 className="text-2xl font-semibold">Browse by category</h2>
         <p className="mt-2 text-sm text-zinc-600 max-w-3xl">
-          These topic pages explain what matters, what to look for, and link to deeper explainers and “picks” shortlists when you want them.
+          These topic pages explain what matters, what to look for, and link to deeper explainers and shortlists when you want them.
         </p>
 
         <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
@@ -89,25 +89,25 @@ export default function ThanksPage({ searchParams }) {
       </section>
 
       <section className="mt-12">
-        <h2 className="text-2xl font-semibold">Popular Picks pages</h2>
+        <h2 className="text-2xl font-semibold">Popular shortlists</h2>
         <p className="mt-2 text-sm text-zinc-600 max-w-3xl">
           If you’re comparing products, these pages are built to be straightforward — what to look for, what to avoid, and a short shortlist.
         </p>
 
         <div className="mt-6 grid gap-4 md:grid-cols-3">
-          <Card image="/images/photography/thumbs/cards/ceramic-cups-and-a-carafe-on-a-kitchen-counter-calm-hydration-vibe.jpg" title="Water filters (UK): Picks" desc="Jugs vs under-sink vs countertop: clear trade-offs." href="/best-water-filters-uk" />
+          <Card image="/images/photography/thumbs/cards/ceramic-cups-and-a-carafe-on-a-kitchen-counter-calm-hydration-vibe.jpg" title="Water filters (UK): Shortlists" desc="Jugs vs under-sink vs countertop: clear trade-offs." href="/best-water-filters-uk" />
           <Card image="/images/photography/thumbs/cards/air-purifier-beside-a-plant-in-a-minimalist-bedroom-daylight-through-curtains.jpg" title="Air purifiers for allergies (UK): shortlist" desc="Room size guidance + a shortlist that makes sense." href="/best-air-purifiers-allergies-uk" />
           <Card image="/images/photography/thumbs/cards/laundry-hero.jpg" title="Fragrance-free laundry detergents (UK): shortlist" desc="Sensitive-home options, with ingredients to avoid." href="/best-fragrance-free-laundry-detergents-uk" />
         </div>
 
         <div className="mt-6">
           <TrackedLink
-            href="/picks"
+            href="/topics"
             event="lead_next_step"
-            data={{ source: "shopping_list_thanks", destination: "/picks", label: "Browse all Picks" }}
+            data={{ source: "shopping_list_thanks", destination: "/topics", label: "Browse all Shortlists" }}
             className="btn-secondary"
           >
-            Browse all Picks
+            Browse all Shortlists
           </TrackedLink>
         </div>
       </section>

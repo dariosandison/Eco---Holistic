@@ -8,11 +8,8 @@ import MoneyPageEducationBlock from '@/components/MoneyPageEducationBlock'
 import { getMoneyPageEdu } from '@/lib/moneyPageEdu'
 import MoneyPageNextLinks from '@/components/MoneyPageNextLinks'
 
-
-
-
 export const metadata = {
-  title: 'Natural sleep support: our picks',
+  title: 'Natural sleep support: our shortlist',
   description: 'A calm shortlist of natural sleep support options — what tends to help most, what to skip, and buyer-friendly options.',
 }
 
@@ -79,7 +76,7 @@ const itemList = PICKS.map((p, i) => ({
   const ld = {
     '@context': 'https://schema.org',
     '@type': 'Article',
-    headline: 'Natural sleep support: our picks',
+    headline: 'Natural sleep support: our shortlist',
     dateModified: '2026-02-02',
     datePublished: '2026-01-25',
     mainEntity: { '@type': 'ItemList', itemListElement: itemList },
@@ -126,7 +123,7 @@ const itemList = PICKS.map((p, i) => ({
 
       <header>
         <div className="max-w-3xl">
-        <h1 className="text-4xl font-bold">Natural sleep support: our picks</h1>
+        <h1 className="text-4xl font-bold">Natural sleep support: our shortlist</h1>
         <p className="mt-3 text-zinc-700">
           The best “sleep support” is usually a few simple environment and timing fixes. Supplements are optional — and should stay simple.
         </p>
@@ -182,14 +179,11 @@ const itemList = PICKS.map((p, i) => ({
       <section className="mt-12">
         <div className="flex flex-col gap-2 md:flex-row md:items-end md:justify-between">
           <div>
-            <h2 className="text-2xl font-semibold">Partner picks (UK)</h2>
+            <h2 className="text-2xl font-semibold">Featured products (UK)</h2>
             <p className="mt-1 text-sm text-zinc-600 max-w-2xl">
               Two high‑fit options we feature on Wild &amp; Well. (Links are affiliate links.)
             </p>
           </div>
-          <Link href="/partners" className="text-sm font-semibold text-zinc-900 hover:underline">
-            See all partner picks →
-          </Link>
         </div>
 
         <div className="mt-6 grid gap-4 md:grid-cols-2">

@@ -9,9 +9,6 @@ import MoneyPageEducationBlock from '@/components/MoneyPageEducationBlock'
 import { getMoneyPageEdu } from '@/lib/moneyPageEdu'
 import MoneyPageNextLinks from '@/components/MoneyPageNextLinks'
 
-
-
-
 export const metadata = {
   title: 'Gut health supplements: beginner shortlist',
   description: 'A food-first, beginner-friendly gut-support shortlist: when to consider fibre, probiotics, and what to avoid if you’re sensitive.',
@@ -195,9 +192,6 @@ const url = `${SITE_URL}/best-gut-health-supplements-beginners`
               One gut-focused option we feature. (Affiliate link.)
             </p>
           </div>
-          <Link href="/partners" className="text-sm font-semibold text-zinc-900 hover:underline">
-            See all partner picks →
-          </Link>
         </div>
 
         <div className="mt-6 grid gap-4 md:grid-cols-2">

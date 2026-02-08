@@ -14,7 +14,7 @@ import MoneyPageNextLinks from '@/components/MoneyPageNextLinks'
 
 
 export const metadata = {
-  title: 'Cooking oils (UK): simple picks',
+  title: 'Cooking oils (UK): simple shortlist',
   description: 'A simple cooking-oil toolkit: which oils for everyday sautéing, salads, and high heat — plus label cues and storage tips.',
 }
 
@@ -80,7 +80,7 @@ const url = `${SITE_URL}/best-organic-cooking-oils-uk`
   const ld = {
     '@context': 'https://schema.org',
     '@type': 'Article',
-    headline: 'Cooking oils (UK): simple picks',
+    headline: 'Cooking oils (UK): simple shortlist',
     datePublished: '2026-01-24',
     dateModified: '2026-02-02',
     mainEntityOfPage: { '@type': 'WebPage', '@id': url },
@@ -99,7 +99,7 @@ const url = `${SITE_URL}/best-organic-cooking-oils-uk`
 
       <header>
         <div className="max-w-3xl">
-        <h1 className="text-4xl font-bold">Cooking oils (UK): simple picks</h1>
+        <h1 className="text-4xl font-bold">Cooking oils (UK): simple shortlist</h1>
         <p className="mt-3 text-zinc-700">
           A simple cooking‑oil toolkit: one default, one higher‑heat option, and a couple of flavour oils — with storage tips that actually help.
         </p>
@@ -120,7 +120,7 @@ const url = `${SITE_URL}/best-organic-cooking-oils-uk`
 <EducationFirstCallout topicHref="/nutrition" topicLabel="Nutrition basics" insightHref="/blog/fibre-gut-health-practical-guide" insightLabel="Fibre & gut health" />
         <div className="mt-5 flex flex-wrap gap-2">
           <Link className="btn-secondary" href="/nutrition">Nutrition</Link>
-          <Link className="btn-secondary" href="/best-extra-virgin-olive-oil-uk">EVOO picks</Link>
+          <Link className="btn-secondary" href="/best-extra-virgin-olive-oil-uk">EVOO shortlist</Link>
           <Link className="btn-secondary" href="/shopping-list">Free shopping list</Link>
         </div>
         <p className="mt-3 text-xs text-zinc-500">Last updated: February 2, 2026 · Wild & Well Editorial Team</p>
@@ -154,7 +154,7 @@ const url = `${SITE_URL}/best-organic-cooking-oils-uk`
       </section>
 
       <section className="mt-12">
-        <h2 className="text-2xl font-semibold">Picks (UK‑friendly searches)</h2>
+        <h2 className="text-2xl font-semibold">Shortlists (UK‑friendly searches)</h2>
         <p className="mt-2 text-sm text-zinc-600 max-w-3xl">
           Where we have a dedicated page, we link internally. Otherwise we link to searches so you can compare availability and labels.
         </p>

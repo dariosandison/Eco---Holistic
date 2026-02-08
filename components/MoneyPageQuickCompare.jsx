@@ -71,7 +71,7 @@ export default function MoneyPageQuickCompare({ picks = [] }) {
             <input
               value={q}
               onChange={(e) => setQ(e.target.value)}
-              placeholder="Search picks…"
+              placeholder="Search options…"
               className="w-full sm:w-56 rounded-2xl border border-zinc-200 bg-white px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-[color:var(--ring)]"
             />
 

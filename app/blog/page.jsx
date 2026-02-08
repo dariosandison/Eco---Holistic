@@ -38,10 +38,10 @@ export default function Page() {
           </div>
         </div>
         <Link
-          href="/picks"
+          href="/topics"
           className="rounded-xl border border-zinc-300 bg-white px-4 py-2.5 text-sm font-semibold text-zinc-900 hover:bg-zinc-50 w-full sm:w-auto text-center"
         >
-          Browse Picks
+          Browse Topics
         </Link>
       </div>
 
@@ -94,11 +94,11 @@ export default function Page() {
       <div className="mt-12 rounded-3xl border border-zinc-200 bg-zinc-50/60 p-6">
         <h2 className="text-lg font-semibold text-zinc-900">Shortlists — when you’re ready</h2>
         <p className="mt-2 text-sm text-zinc-700">
-          When you’re ready to compare options, our Picks pages keep things simple with small shortlists and clear trade-offs.
+          When you’re ready to compare options, our shortlist pages keep things simple with small shortlists and clear trade-offs.
         </p>
         <div className="mt-4 flex flex-col gap-3 sm:flex-row sm:items-center">
-          <a href="/picks" className="btn-primary text-center">Browse Picks</a>
-          <a href="/topics" className="btn-secondary text-center">Browse Topics</a>
+          <a href="/topics" className="btn-primary text-center">Browse Topics</a>
+          <a href="/shopping-list" className="btn-secondary text-center">Get the free shopping list</a>
         </div>
       </div>
     </div>

@@ -12,7 +12,7 @@ import MoneyPageNextLinks from '@/components/MoneyPageNextLinks'
 
 
 export const metadata = {
-  title: 'Non-toxic cookware: starter picks',
+  title: 'Non-toxic cookware: starter shortlist',
   description: 'A simple non-toxic cookware starter shortlist: what to buy first, what to skip, and how to avoid overbuying.',
 }
 
@@ -58,7 +58,7 @@ function QuickSummary(){
       <div className="mt-4 flex flex-wrap gap-2">
         <Link className="btn-secondary" href="/topics/fragrance-free">Low-tox kitchen basics</Link>
         <Link className="btn-secondary" href="/shopping-list">Free shopping list</Link>
-        <Link className="btn-secondary" href="/picks">Browse picks</Link>
+        <Link className="btn-secondary" href="/topics">Browse topics</Link>
       </div>
       <p className="mt-4 text-xs text-zinc-500">Last updated: February 2, 2026 · Wild & Well Editorial Team</p>
     </div>
@@ -79,7 +79,7 @@ const itemList = PICKS.map((p, i) => ({
   const ld = {
     '@context': 'https://schema.org',
     '@type': 'Article',
-    headline: 'Non-toxic cookware: starter picks',
+    headline: 'Non-toxic cookware: starter shortlist',
     dateModified: '2026-02-02',
     datePublished: '2026-01-29',
     mainEntity: {
@@ -126,7 +126,7 @@ const itemList = PICKS.map((p, i) => ({
 
       <header>
         <div className="max-w-3xl">
-        <h1 className="text-4xl font-bold">Non-toxic cookware: starter picks</h1>
+        <h1 className="text-4xl font-bold">Non-toxic cookware: starter shortlist</h1>
         <p className="mt-3 text-zinc-700">A simple shortlist — what to buy first, what to skip, and how to avoid overbuying.</p>
 
                 </div>
@@ -174,7 +174,7 @@ const itemList = PICKS.map((p, i) => ({
       </section>
 
       <section className="mt-14">
-        <h2 className="text-2xl font-semibold">Shortlist (picks)</h2>
+        <h2 className="text-2xl font-semibold">Shortlist</h2>
         <p className="mt-2 text-sm text-zinc-600">Curated searches so you can compare current prices and reviews.</p>
         <div className="mt-6 grid gap-4 md:grid-cols-2">
           {PICKS.map((p) => (
@@ -220,7 +220,7 @@ const itemList = PICKS.map((p, i) => ({
         />
 
         <div className="mt-8 flex flex-wrap gap-2">
-          <Link className="btn-primary" href="/picks">Back to picks →</Link>
+          <Link className="btn-primary" href="/topics">Back to topics →</Link>
           <Link className="btn-secondary" href="/shopping-list">Get the free shopping list</Link>
         </div>
       </section>

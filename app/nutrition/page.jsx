@@ -52,7 +52,7 @@ export default function Page() {
         <h1 className="text-4xl font-bold">Nutrition &amp; Organic Food</h1>
         <p className="mt-3 text-zinc-700">
           Clear, practical nutrition content — focusing on the modern food environment, label reading, and simple upgrades you can repeat.
-          When it helps, we link to “Picks” product shortlists (single-ingredient foods, organic staples, and sensible add-ons).
+          When it helps, we link to “Shortlists” product shortlists (single-ingredient foods, organic staples, and sensible add-ons).
         </p>
         {/* Page image */}
         {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -65,7 +65,7 @@ export default function Page() {
         />
         <div className="mt-5 flex flex-wrap gap-2">
           <Link className="btn-secondary" href="/blog">Read Wellness Insights</Link>
-          <Link className="btn-secondary" href="/picks">Browse Picks</Link>
+          <Link className="btn-secondary" href="/topics">Browse Topics</Link>
         </div>
         <p className="mt-3 text-xs text-zinc-500">Last updated: February 1, 2026</p>
       </header>
@@ -85,14 +85,11 @@ export default function Page() {
       <section className="mt-12">
         <div className="flex flex-col gap-2 md:flex-row md:items-end md:justify-between">
           <div>
-            <h2 className="text-2xl font-semibold">Partner picks (UK)</h2>
+            <h2 className="text-2xl font-semibold">Featured products (UK)</h2>
             <p className="mt-1 text-sm text-zinc-600 max-w-2xl">
               High‑fit options we feature across our nutrition pages. (Links are affiliate links.)
             </p>
           </div>
-          <Link href="/partners" className="text-sm font-semibold text-zinc-900 hover:underline">
-            See all partner picks →
-          </Link>
         </div>
 
         <div className="mt-6 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
@@ -156,14 +153,14 @@ export default function Page() {
       </section>
 
       <section className="mt-10">
-        <h2 className="text-2xl font-semibold">Picks shortlists</h2>
+        <h2 className="text-2xl font-semibold">Shortlists</h2>
         <p className="mt-2 text-sm text-zinc-600 max-w-3xl">
           Straightforward roundups: label cues that matter and a shortlist of solid options.
         </p>
 
         <div className="mt-6 grid gap-4 md:grid-cols-3">
-          <Card image="/images/photography/thumbs/cards/nutrition-hero.jpg" title="Extra virgin olive oil (UK): our Picks" desc="Freshness, storage, and label cues that actually help." href="/best-extra-virgin-olive-oil-uk" tag="Staples" />
-          <Card image="/images/photography/thumbs/cards/nutrition-hero.jpg" title="Organic oats (UK): our Picks" desc="Rolled vs jumbo vs steel-cut — pick what you’ll use." href="/best-organic-oats-uk" tag="Staples" />
+          <Card image="/images/photography/thumbs/cards/nutrition-hero.jpg" title="Extra virgin olive oil (UK): our shortlist" desc="Freshness, storage, and label cues that actually help." href="/best-extra-virgin-olive-oil-uk" tag="Staples" />
+          <Card image="/images/photography/thumbs/cards/nutrition-hero.jpg" title="Organic oats (UK): our shortlist" desc="Rolled vs jumbo vs steel-cut — pick what you’ll use." href="/best-organic-oats-uk" tag="Staples" />
           <Card image="/images/photography/thumbs/cards/nutrition-hero.jpg" title="Chia seeds (UK): simple shortlist" desc="Simple seeds, easy fibre add-in, and storage tips." href="/best-chia-seeds-uk" tag="Superfoods" />
           <Card image="/images/photography/thumbs/cards/nutrition-hero.jpg" title="Ground flaxseed (UK): simple shortlist" desc="Freshness matters — plus easy daily uses." href="/best-ground-flaxseed-uk" tag="Superfoods" />
           <Card image="/images/photography/thumbs/cards/nutrition-hero.jpg" title="Matcha (UK): what to buy" desc="Everyday vs ceremonial-style and what to look for." href="/best-organic-matcha-uk" tag="Drinks" />

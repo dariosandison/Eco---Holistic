@@ -102,7 +102,7 @@ const url = `${SITE_URL}/best-detox-support-foods`
           <li><strong>Simple spices:</strong> turmeric/ginger for flavour (don’t treat as medicine).</li>
         </ul>
         <p className="mt-5 text-sm text-zinc-600 max-w-3xl">
-          If you want product-level buying guidance, use our shortlists: <Link className="underline" href="/best-extra-virgin-olive-oil-uk">olive oil picks</Link>, <Link className="underline" href="/best-organic-oats-uk">oats picks</Link>, and <Link className="underline" href="/best-organic-snacks-healthy">snack picks</Link>.
+          If you want product-level buying guidance, use our shortlists: <Link className="underline" href="/best-extra-virgin-olive-oil-uk">olive oil shortlist</Link>, <Link className="underline" href="/best-organic-oats-uk">oats shortlist</Link>, and <Link className="underline" href="/best-organic-snacks-healthy">snack shortlist</Link>.
         </p>
       </section>
 

@@ -13,7 +13,7 @@ import MoneyPageNextLinks from '@/components/MoneyPageNextLinks'
 
 
 export const metadata = {
-  title: 'Organic snacks: simple picks',
+  title: 'Organic snacks: simple shortlist',
   description: 'A simple, whole‑ingredient snack shortlist that keeps ultra‑processed extras low — plus what to look for on labels.',
 }
 
@@ -78,7 +78,7 @@ const url = `${SITE_URL}/best-organic-snacks-healthy`
   const ld = {
     '@context': 'https://schema.org',
     '@type': 'Article',
-    headline: 'Organic snacks: simple picks',
+    headline: 'Organic snacks: simple shortlist',
     datePublished: '2026-01-24',
     dateModified: '2026-02-02',
     mainEntityOfPage: { '@type': 'WebPage', '@id': url },
@@ -129,7 +129,7 @@ const url = `${SITE_URL}/best-organic-snacks-healthy`
 
       <header>
         <div className="max-w-3xl">
-        <h1 className="text-4xl font-bold">Organic snacks: simple picks</h1>
+        <h1 className="text-4xl font-bold">Organic snacks: simple shortlist</h1>
         <p className="mt-3 text-zinc-700">
           A clean, repeatable snack shortlist: whole ingredients first, minimal additives, and easy options you’ll actually keep around.
         </p>

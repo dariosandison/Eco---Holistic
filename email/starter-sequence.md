@@ -8,7 +8,7 @@ Hi,
 Here’s your Wild & Well Low‑Tox Shopping List.
 
 Start simple:
-→ https://www.wild-and-well.store/picks
+→ https://www.wild-and-well.store/topics
 
 Pick ONE category and make one change this week. That’s enough.
 
@@ -34,7 +34,7 @@ Subject: The easiest wins for a healthier home
 
 If you want the fastest progress, these pages help most readers:
 
-• Favourites → /picks
+• Favourites → /topics
 • Water Filters (UK) → /best-water-filters-uk
 • Sleep Upgrades → /best-natural-sleep-support
 

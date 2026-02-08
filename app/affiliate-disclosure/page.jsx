@@ -32,11 +32,11 @@ export default function Page() {
       <section className="mt-10 rounded-2xl border bg-white p-6 shadow-sm">
         <h2 className="text-xl font-semibold mb-2">Where to start</h2>
         <p className="text-zinc-700 mb-4">
-          If you want the fastest route to a good choice, start with our Picks page.
+          If you want the fastest route to a good choice, start with our Topics page.
         </p>
         <div className="flex flex-wrap gap-2">
-          <Link className="btn-primary" href="/picks">
-            Browse picks
+          <Link className="btn-primary" href="/topics">
+            Browse topics
           </Link>
           <Link className="btn-secondary" href="/shopping-list">
             Get the free shopping list

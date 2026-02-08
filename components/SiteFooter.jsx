@@ -17,8 +17,6 @@ export default function SiteFooter() {
 
   const shop = [
     { href: '/shopping-list', label: 'Free Shopping List' },
-    { href: '/picks', label: 'Picks (Shortlists)' },
-    { href: '/partners', label: 'Partner Picks' },
     { href: '/deals', label: 'Deals' },
   ]
 

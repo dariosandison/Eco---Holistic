@@ -221,7 +221,7 @@ export default function Page() {
       </section>
 
       <section className="mt-14">
-        <h2 className="text-2xl font-semibold">Shortlist (picks)</h2>
+        <h2 className="text-2xl font-semibold">Shortlist</h2>
         <p className="mt-2 text-sm text-zinc-600">Curated searches so you can compare current prices, warranties, and filter/maintenance costs.</p>
         <div className="mt-6 grid gap-4 md:grid-cols-2">
           {PICKS.map((p) => (

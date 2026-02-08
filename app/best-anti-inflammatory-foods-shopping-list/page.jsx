@@ -67,7 +67,7 @@ const url = `${SITE_URL}/best-anti-inflammatory-foods-shopping-list`
         <div className="mt-5 flex flex-wrap gap-2">
           <Link className="btn-secondary" href="/shopping-list">Get the free shopping list</Link>
           <Link className="btn-secondary" href="/nutrition">Nutrition</Link>
-          <Link className="btn-secondary" href="/best-extra-virgin-olive-oil-uk">Olive oil picks</Link>
+          <Link className="btn-secondary" href="/best-extra-virgin-olive-oil-uk">Olive oil shortlist</Link>
         </div>
         <p className="mt-3 text-xs text-zinc-500">Last updated: February 2, 2026 · Wild & Well Editorial Team</p>
         </div>
@@ -100,7 +100,7 @@ const url = `${SITE_URL}/best-anti-inflammatory-foods-shopping-list`
           <li>Pick one “default” breakfast (oats, yoghurt, eggs) and repeat it.</li>
           <li>Build lunches around fibre + protein (beans, lentils, tinned fish, leftovers).</li>
           <li>Add colour: one extra portion of fruit/veg per day is a win.</li>
-          <li>Keep snacks simple (fruit + nuts; yoghurt + berries). See: <Link className="underline" href="/best-organic-snacks-healthy">snack picks</Link>.</li>
+          <li>Keep snacks simple (fruit + nuts; yoghurt + berries). See: <Link className="underline" href="/best-organic-snacks-healthy">snack shortlist</Link>.</li>
         </ul>
       </section>
 
