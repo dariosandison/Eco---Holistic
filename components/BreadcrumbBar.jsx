@@ -6,6 +6,7 @@ import { usePathname } from 'next/navigation'
 import { SITE_URL } from '@/lib/site'
 
 const LABELS = {
+  shortlists: 'Shortlists',
   topics: 'Topics',
   deals: 'Deals',
   blog: 'Wellness Insights',
@@ -41,7 +42,7 @@ function buildCrumbs(pathname) {
     const label = humanizeSlug(segments[0].replace(/^best-/, ''))
     return [
       { label: 'Home', href: '/' },
-      { label: 'Topics', href: '/topics' },
+      { label: 'Shortlists', href: '/shortlists' },
       { label, href: `/${segments[0]}` },
     ]
   }

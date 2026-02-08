@@ -7,6 +7,7 @@ import EducationFirstCallout from '@/components/EducationFirstCallout'
 import MoneyPageEducationBlock from '@/components/MoneyPageEducationBlock'
 import { getMoneyPageEdu } from '@/lib/moneyPageEdu'
 import MoneyPageNextLinks from '@/components/MoneyPageNextLinks'
+import InlineSignup from '@/components/InlineSignup'
 
 
 
@@ -174,6 +175,13 @@ const itemList = PICKS.map((p, i) => ({
 <section className="mt-10">
         <QuickSummary />
       </section>
+
+      <InlineSignup
+        placement="water_filters_uk"
+        title="Free: Low‑Tox Shopping List"
+        description="A beginner-friendly shortcut with simple swaps for air, water, cleaning and sleep — in plain English."
+        cta="Send me the list"
+      />
 
       <section className="mt-14">
         <h2 className="text-2xl font-semibold">How to choose (in 60 seconds)</h2>

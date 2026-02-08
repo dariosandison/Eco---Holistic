@@ -7,6 +7,7 @@ import EducationFirstCallout from '@/components/EducationFirstCallout'
 import MoneyPageEducationBlock from '@/components/MoneyPageEducationBlock'
 import { getMoneyPageEdu } from '@/lib/moneyPageEdu'
 import MoneyPageNextLinks from '@/components/MoneyPageNextLinks'
+import InlineSignup from '@/components/InlineSignup'
 
 
 
@@ -145,6 +146,13 @@ const itemList = PICKS.map((p, i) => ({
           <p className="mt-3 text-sm text-zinc-700">Wash bedding/towels fragrance-free and add an extra rinse for a week.</p>
         </div>
       </section>
+
+      <InlineSignup
+        placement="fragrance_free_laundry"
+        title="Free: Low‑Tox Shopping List"
+        description="A beginner-friendly shortcut with simple swaps for air, water, cleaning and sleep — in plain English."
+        cta="Send me the list"
+      />
 
       <section className="mt-14">
         <h2 className="text-2xl font-semibold">Top options (shortlist)</h2>

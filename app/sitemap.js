@@ -62,6 +62,7 @@ export default function sitemap() {
     // Fallback: keep the sitemap working even if filesystem access is unavailable.
     routes = [
       '/',
+      '/shortlists',
       '/topics',
       '/blog',
       '/nutrition',

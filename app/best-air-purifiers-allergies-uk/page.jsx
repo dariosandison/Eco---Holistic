@@ -7,6 +7,7 @@ import EducationFirstCallout from '@/components/EducationFirstCallout'
 import MoneyPageEducationBlock from '@/components/MoneyPageEducationBlock'
 import { getMoneyPageEdu } from '@/lib/moneyPageEdu'
 import MoneyPageNextLinks from '@/components/MoneyPageNextLinks'
+import InlineSignup from '@/components/InlineSignup'
 
 
 
@@ -169,6 +170,13 @@ const itemList = PICKS.map((p, i) => ({
           <Link className="btn-secondary mt-4 inline-flex" href="/blog/winter-humidity-guide">Humidity guide</Link>
         </div>
       </section>
+
+      <InlineSignup
+        placement="air_purifiers_allergies"
+        title="Free: Low‑Tox Shopping List"
+        description="A beginner-friendly shortcut with simple swaps for air, water, cleaning and sleep — in plain English."
+        cta="Send me the list"
+      />
 
       <section className="mt-14">
         <h2 className="text-2xl font-semibold">Top options (shortlist)</h2>

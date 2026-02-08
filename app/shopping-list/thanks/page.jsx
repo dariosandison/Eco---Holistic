@@ -102,9 +102,9 @@ export default function ThanksPage({ searchParams }) {
 
         <div className="mt-6">
           <TrackedLink
-            href="/topics"
+            href="/shortlists"
             event="lead_next_step"
-            data={{ source: "shopping_list_thanks", destination: "/topics", label: "Browse all Shortlists" }}
+            data={{ source: "shopping_list_thanks", destination: "/shortlists", label: "Browse all Shortlists" }}
             className="btn-secondary"
           >
             Browse all Shortlists

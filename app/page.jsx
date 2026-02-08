@@ -223,8 +223,8 @@ export default function HomePage() {
             </p>
 
             <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
-              <Link href="/topics" className="btn-primary w-full sm:w-auto text-center">
-                Explore topics
+              <Link href="/shortlists" className="btn-primary w-full sm:w-auto text-center">
+                Browse shortlists
               </Link>
               <Link
                 href="/shopping-list"

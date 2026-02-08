@@ -31,7 +31,7 @@ export default function Page({ params }) {
         <div className="mt-5 flex flex-wrap gap-2">
           <Link className="btn-secondary" href="/authors">All authors</Link>
           <Link className="btn-secondary" href="/blog">Wellness Insights</Link>
-          <Link className="btn-secondary" href="/topics">Shortlists</Link>
+          <Link className="btn-secondary" href="/shortlists">Shortlists</Link>
         </div>
       </header>
 

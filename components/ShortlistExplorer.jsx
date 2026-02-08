@@ -50,6 +50,24 @@ function ItemCard({ it }) {
           <div className="min-w-0">
             <h3 className="text-lg font-semibold text-zinc-900">{it.label}</h3>
             {it.desc ? <p className="mt-1 text-sm text-zinc-600">{it.desc}</p> : null}
+
+            {(it.bestFor || it.tradeOff || it.meta) ? (
+              <div className="mt-2 space-y-1 text-xs text-zinc-600">
+                {it.bestFor ? (
+                  <div>
+                    <span className="font-semibold text-zinc-800">Best for:</span> {it.bestFor}
+                  </div>
+                ) : null}
+                {it.tradeOff ? (
+                  <div>
+                    <span className="font-semibold text-zinc-800">Trade-off:</span> {it.tradeOff}
+                  </div>
+                ) : null}
+                {it.meta ? (
+                  <div className="text-zinc-500">{it.meta}</div>
+                ) : null}
+              </div>
+            ) : null}
           </div>
         </div>
         {it.tag ? (

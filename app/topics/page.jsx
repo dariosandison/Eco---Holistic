@@ -41,6 +41,7 @@ export default function Page() {
           Education-first topic pages for UK homes: what the issue is, why it matters, common causes, and no-spend first steps — then optional shortlists.
         </p>
         <div className="mt-4 flex flex-wrap gap-2">
+          <Link className="btn-primary" href="/shortlists">Browse shortlists</Link>
           <Link className="btn-secondary" href="/shopping-list">Free shopping list</Link>
           <Link className="btn-secondary" href="/nutrition">Nutrition</Link>
           <Link className="btn-secondary" href="/movement">Movement</Link>

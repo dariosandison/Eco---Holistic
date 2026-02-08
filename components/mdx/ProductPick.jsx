@@ -14,6 +14,13 @@ export default function ProductPick({
   links = null,
 }) {
 
+  const bulletStrings = Array.isArray(bullets) ? bullets.map((b) => String(b)) : []
+  const bestForLine = bulletStrings.find((b) => /^(great|best|ideal)\s+for\s*:/i.test(b))
+  const avoidIfLine = bulletStrings.find((b) => /^(avoid|skip)\s+if\s*:/i.test(b))
+  const bestFor = bestForLine ? bestForLine.replace(/^[^:]+:\s*/i, '').trim() : ''
+  const avoidIf = avoidIfLine ? avoidIfLine.replace(/^[^:]+:\s*/i, '').trim() : ''
+  const displayBullets = bulletStrings.filter((b) => b !== bestForLine && b !== avoidIfLine)
+
   const needsAutoImage = !image || image === '/og-default.jpg'
   const key = `${title || ''} ${badge || ''}`.toLowerCase()
   const autoImage = needsAutoImage
@@ -36,7 +43,7 @@ export default function ProductPick({
   // Optional scan-friendly chips for product cards. If `facts` are not
   // provided, we infer a few from common keywords.
   const autoFacts = (() => {
-    const t = `${title || ''} ${badge || ''} ${description || ''} ${bullets.join(' ')}`.toLowerCase()
+    const t = `${title || ''} ${badge || ''} ${description || ''} ${bulletStrings.join(' ')}`.toLowerCase()
     const out = []
     if (t.includes('under-sink') || t.includes('undersink')) out.push('Under-sink')
     if (t.includes('countertop')) out.push('Countertop')
@@ -74,6 +81,22 @@ export default function ProductPick({
           </div>
           {description ? <p className="mt-1 text-sm text-zinc-700">{description}</p> : null}
 
+          {(bestFor || avoidIf) ? (
+            <p className="mt-2 text-xs text-zinc-700">
+              {bestFor ? (
+                <>
+                  <span className="font-semibold text-zinc-900">Best for:</span> {bestFor}
+                </>
+              ) : null}
+              {bestFor && avoidIf ? <span className="mx-2 text-zinc-400">·</span> : null}
+              {avoidIf ? (
+                <>
+                  <span className="font-semibold text-zinc-900">Avoid if:</span> {avoidIf}
+                </>
+              ) : null}
+            </p>
+          ) : null}
+
           {chips.length ? (
             <div className="mt-3 flex flex-wrap gap-2">
               {chips.map((c, i) => (
@@ -97,9 +120,9 @@ export default function ProductPick({
             </div>
           ) : null}
 
-          {bullets?.length ? (
+          {displayBullets?.length ? (
             <ul className="mt-3 list-disc pl-5 text-sm text-zinc-700 space-y-1">
-              {bullets.map((b, i) => (
+              {displayBullets.map((b, i) => (
                 <li key={i}>{b}</li>
               ))}
             </ul>

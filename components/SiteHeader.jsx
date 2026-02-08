@@ -33,6 +33,9 @@ export default function SiteHeader() {
           <Link href="/topics" className="text-sm font-medium text-zinc-700 hover:text-zinc-900">
             Topics
           </Link>
+          <Link href="/shortlists" className="text-sm font-medium text-zinc-700 hover:text-zinc-900">
+            Shortlists
+          </Link>
           <Link href="/nutrition" className="text-sm font-medium text-zinc-700 hover:text-zinc-900">
             Nutrition
           </Link>
@@ -79,6 +82,9 @@ export default function SiteHeader() {
           </Link>
           <Link href="/topics" className="rounded-md px-2 py-2 text-sm text-zinc-800 hover:bg-zinc-50">
             Topics
+          </Link>
+          <Link href="/shortlists" className="rounded-md px-2 py-2 text-sm text-zinc-800 hover:bg-zinc-50">
+            Shortlists
           </Link>
           <Link href="/nutrition" className="rounded-md px-2 py-2 text-sm text-zinc-800 hover:bg-zinc-50">
             Nutrition
