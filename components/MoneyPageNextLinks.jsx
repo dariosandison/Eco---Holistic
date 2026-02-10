@@ -1,8 +1,9 @@
 // components/MoneyPageNextLinks.jsx
 import Link from "next/link";
 import { getMoneyPageLinks } from "@/lib/moneyPageLinks";
+import InlineSignup from "@/components/InlineSignup";
 
-export default function MoneyPageNextLinks({ slug }) {
+export default function MoneyPageNextLinks({ slug, includeSignup = true }) {
   const { reading = [], related = [] } = getMoneyPageLinks(slug);
 
   return (
@@ -44,6 +45,16 @@ export default function MoneyPageNextLinks({ slug }) {
         <p className="mt-4 text-xs text-zinc-500">
           Tip: make one change at a time so you can tell what actually helped.
         </p>
+
+        {includeSignup ? (
+          <InlineSignup
+            placement={`money_${slug || 'page'}`}
+            title="Free: Low‑Tox Shopping List"
+            description="A beginner-friendly shortcut with simple swaps for air, water, cleaning and sleep — in plain English."
+            cta="Send me the list"
+          />
+        ) : null}
+
       </div>
     </section>
   );

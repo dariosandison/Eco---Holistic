@@ -332,7 +332,7 @@ const itemList = PICKS.map((p, i) => ({
           </div>
         </div>
       </section>
-      <MoneyPageNextLinks slug="best-water-filters-uk" />
+      <MoneyPageNextLinks slug="best-water-filters-uk"  includeSignup={false} />
 
       <p className="mt-12 text-xs text-zinc-500">
         Some links are affiliate links. If you buy via them, we earn a commission.

@@ -8,6 +8,7 @@ import { SITE_URL } from '@/lib/site'
 const LABELS = {
   shortlists: 'Shortlists',
   topics: 'Topics',
+  'start-here': 'Start here',
   deals: 'Deals',
   blog: 'Wellness Insights',
   nutrition: 'Nutrition',

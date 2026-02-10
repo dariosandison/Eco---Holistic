@@ -10,6 +10,7 @@ export default function SiteFooter() {
   const learn = [
     { href: '/blog', label: 'Wellness Insights' },
     { href: '/topics', label: 'Topics' },
+    { href: '/start-here', label: 'Start here' },
     { href: '/shortlists', label: 'Shortlists' },
     { href: '/nutrition', label: 'Nutrition' },
     { href: '/movement', label: 'Movement' },

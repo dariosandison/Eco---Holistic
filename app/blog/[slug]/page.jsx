@@ -4,6 +4,7 @@ import StructuredData from '@/components/StructuredData'
 import AffiliateNotice from '@/components/mdx/AffiliateNotice'
 import ArticleEducationBlock from '@/components/ArticleEducationBlock'
 import RelatedReading from '@/components/RelatedReading'
+import InlineSignup from '@/components/InlineSignup'
 import { redirect, notFound } from 'next/navigation'
 import { getContent, listContent, tocFromMarkdown } from '@/lib/content'
 import { SITE_NAME, SITE_URL } from '@/lib/site'
@@ -85,6 +86,13 @@ export default function Page({ params }) {
       <ArticleEducationBlock frontmatter={frontmatter} content={content} />
 
       <MDXRenderer source={content} options={mdxOptions} />
+
+      <InlineSignup
+        placement={`blog_${params.slug}`}
+        title="Free: Low‑Tox Shopping List"
+        description="A beginner-friendly shortcut with simple swaps for air, water, cleaning and sleep — in plain English."
+        cta="Send me the list"
+      />
 
       {/* Keep users learning (SEO + conversions, without salesiness) */}
       <RelatedReading currentSlug={params.slug} currentTags={frontmatter.tags || []} posts={allPosts} />

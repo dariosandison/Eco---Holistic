@@ -226,6 +226,9 @@ export default function HomePage() {
               <Link href="/shortlists" className="btn-primary w-full sm:w-auto text-center">
                 Browse shortlists
               </Link>
+              <Link href="/start-here" className="btn-secondary w-full sm:w-auto text-center">
+                Start here
+              </Link>
               <Link
                 href="/shopping-list"
                 className="w-full sm:w-auto text-center rounded-xl border border-zinc-300 bg-white/80 px-4 py-2.5 text-sm font-semibold text-zinc-900 backdrop-blur transition hover:bg-white"
@@ -408,7 +411,7 @@ export default function HomePage() {
               <div className="text-sm font-semibold text-zinc-900">Topics</div>
               <div className="mt-1 text-sm text-zinc-600">Air, water, fragrance‑free home, sleep & recovery.</div>
             </Link>
-            <Link href="/topics" className="card">
+            <Link href="/shortlists" className="card">
               <div className="text-sm font-semibold text-zinc-900">Shortlists</div>
               <div className="mt-1 text-sm text-zinc-600">A small set of options with the main trade-offs.</div>
             </Link>
