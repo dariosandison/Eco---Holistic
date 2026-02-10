@@ -4,6 +4,7 @@ import StructuredData from '@/components/StructuredData'
 import AffiliateNotice from '@/components/mdx/AffiliateNotice'
 import ArticleEducationBlock from '@/components/ArticleEducationBlock'
 import RelatedReading from '@/components/RelatedReading'
+import RelatedShortlists from '@/components/RelatedShortlists'
 import InlineSignup from '@/components/InlineSignup'
 import { redirect, notFound } from 'next/navigation'
 import { getContent, listContent, tocFromMarkdown } from '@/lib/content'
@@ -96,6 +97,7 @@ export default function Page({ params }) {
 
       {/* Keep users learning (SEO + conversions, without salesiness) */}
       <RelatedReading currentSlug={params.slug} currentTags={frontmatter.tags || []} posts={allPosts} />
+      <RelatedShortlists tags={frontmatter.tags || []} />
 
       <StructuredData
         data={{

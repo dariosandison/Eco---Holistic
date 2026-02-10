@@ -2,6 +2,8 @@ import Link from 'next/link'
 import BlogExplorer from '@/components/BlogExplorer'
 import InlineSignup from '@/components/InlineSignup'
 import { listContent } from '@/lib/content'
+import StructuredData from '@/components/StructuredData'
+import { SITE_URL } from '@/lib/site'
 
 export const metadata = {
   title: 'Wellness Insights',
@@ -13,8 +15,22 @@ export default function Page() {
   const insights = listContent('insights')
   const explainers = listContent('explainers')
 
+  const flat = [...(insights || []), ...(explainers || [])]
+  const itemList = {
+    '@context': 'https://schema.org',
+    '@type': 'ItemList',
+    name: 'Wild & Well Wellness Insights',
+    itemListElement: flat.slice(0, 50).map((p, i) => ({
+      '@type': 'ListItem',
+      position: i + 1,
+      name: p.title,
+      url: `${SITE_URL}/blog/${p.slug}`,
+    })),
+  }
+
   return (
     <div className="mx-auto max-w-6xl px-4 py-12">
+      <StructuredData data={itemList} />
       <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
         <div>
           <h1 className="text-2xl font-semibold text-zinc-900">Wellness Insights</h1>

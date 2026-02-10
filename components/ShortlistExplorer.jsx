@@ -35,6 +35,9 @@ const TAG_ICON = {
 }
 
 function ItemCard({ it }) {
+  const updated = it.updated
+    ? new Date(it.updated).toLocaleDateString('en-GB', { year: 'numeric', month: 'short', day: 'numeric' })
+    : null
   return (
     <Link key={it.href} href={it.href} className="card hover:shadow-sm transition-shadow p-5">
       <div className="flex items-start justify-between gap-3">
@@ -74,7 +77,10 @@ function ItemCard({ it }) {
           <span className="chip shrink-0">{it.tag}</span>
         ) : null}
       </div>
-      <p className="mt-3 text-xs text-zinc-500">Open →</p>
+      <div className="mt-3 flex flex-wrap items-center justify-between gap-2 text-xs text-zinc-500">
+        <span>In: {it._sectionTitle}</span>
+        {updated ? <span>Updated: {updated}</span> : null}
+      </div>
     </Link>
   )
 }

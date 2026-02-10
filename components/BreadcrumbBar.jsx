@@ -2,6 +2,7 @@
 
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
+import { useEffect } from 'react'
 
 import { SITE_URL } from '@/lib/site'
 
@@ -63,6 +64,17 @@ export default function BreadcrumbBar() {
   const crumbs = buildCrumbs(pathname)
   if (!crumbs.length) return null
 
+  useEffect(() => {
+    const el = document.getElementById('breadcrumb-bar')
+    if (!el) return
+    const setH = () =>
+      document.documentElement.style.setProperty('--crumbs-h', `${el.offsetHeight}px`)
+    setH()
+    const ro = new ResizeObserver(setH)
+    ro.observe(el)
+    return () => ro.disconnect()
+  }, [pathname])
+
   const ld = {
     '@context': 'https://schema.org',
     '@type': 'BreadcrumbList',
@@ -75,7 +87,7 @@ export default function BreadcrumbBar() {
   }
 
   return (
-    <div className="border-b bg-white">
+    <div id="breadcrumb-bar" className="border-b bg-white">
       <div className="mx-auto max-w-6xl px-4 py-3">
         <nav aria-label="Breadcrumb" className="text-xs text-zinc-600">
           <ol className="flex flex-wrap items-center gap-2">

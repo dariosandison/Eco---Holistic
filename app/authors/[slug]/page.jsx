@@ -1,6 +1,8 @@
 import Link from 'next/link'
 import { listContent } from '@/lib/content'
 import { AUTHORS, getAuthor } from '@/lib/authors'
+import StructuredData from '@/components/StructuredData'
+import { SITE_URL } from '@/lib/site'
 
 export async function generateStaticParams() {
   const fromPosts = listContent('blog').map((p) => ({ slug: (p.author || 'wild-and-well-editorial') }))
@@ -24,6 +26,15 @@ export default function Page({ params }) {
 
   return (
     <main className="mx-auto max-w-6xl px-4 py-16">
+      <StructuredData data={{
+        '@context': 'https://schema.org',
+        '@type': 'Person',
+        name: author.name,
+        url: `${SITE_URL}/authors/${author.slug}`,
+        image: author.image ? `${SITE_URL}${author.image}` : undefined,
+        jobTitle: author.role || undefined,
+        description: author.bio || undefined,
+      }} />
       <header className="max-w-3xl">
         <h1 className="text-4xl font-bold">{author.name}</h1>
         {author.role ? <p className="mt-2 text-zinc-600">{author.role}</p> : null}

@@ -8,6 +8,7 @@ export default function SiteFooter() {
   ].filter((s) => s.href)
 
   const learn = [
+    { href: '/search', label: 'Search' },
     { href: '/blog', label: 'Wellness Insights' },
     { href: '/topics', label: 'Topics' },
     { href: '/start-here', label: 'Start here' },

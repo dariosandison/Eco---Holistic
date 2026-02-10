@@ -3,14 +3,25 @@
 
 import Link from 'next/link';
 import Image from 'next/image';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { trackEvent } from '@/lib/analytics';
 
 export default function SiteHeader() {
   const [open, setOpen] = useState(false);
 
+  useEffect(() => {
+    const el = document.getElementById('site-header');
+    if (!el) return;
+    const setH = () =>
+      document.documentElement.style.setProperty('--header-h', `${el.offsetHeight}px`);
+    setH();
+    const ro = new ResizeObserver(setH);
+    ro.observe(el);
+    return () => ro.disconnect();
+  }, []);
+
   return (
-    <header className="sticky top-0 z-50 border-b border-zinc-200/60 bg-white/85 backdrop-blur supports-[backdrop-filter]:bg-white/70">
+    <header id="site-header" className="sticky top-0 z-50 border-b border-zinc-200/60 bg-white/85 backdrop-blur supports-[backdrop-filter]:bg-white/70">
       <a
         href="#content"
         className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:rounded-xl focus:border focus:bg-white focus:px-3 focus:py-2 focus:text-sm focus:font-semibold"
@@ -27,6 +38,22 @@ export default function SiteHeader() {
 
         {/* Desktop nav */}
         <nav className="ml-auto hidden items-center gap-6 md:flex">
+          <Link
+            href="/search"
+            onClick={(e) => {
+              // Prefer command palette while keeping /search as a real URL (open in new tab works).
+              e.preventDefault();
+              try {
+                window.dispatchEvent(new Event('ww_open_palette'));
+              } catch {}
+            }}
+            className="inline-flex items-center gap-2 text-sm font-medium text-zinc-700 hover:text-zinc-900"
+          >
+            Search
+            <span className="hidden rounded-md border border-zinc-300 bg-white px-1.5 py-0.5 text-[10px] font-semibold text-zinc-600 md:inline">
+              Ctrl/⌘ K
+            </span>
+          </Link>
           <Link href="/blog" className="text-sm font-medium text-zinc-700 hover:text-zinc-900">
             Wellness Insights
           </Link>
@@ -80,6 +107,19 @@ export default function SiteHeader() {
       {/* Mobile nav */}
       <div className={`${open ? 'block' : 'hidden'} border-t border-zinc-200/60 md:hidden`}>
         <nav className="mx-auto flex max-w-6xl flex-col gap-1 px-4 py-3">
+          <Link
+            href="/search"
+            onClick={(e) => {
+              e.preventDefault();
+              try {
+                window.dispatchEvent(new Event('ww_open_palette'));
+              } catch {}
+              setOpen(false);
+            }}
+            className="rounded-md px-2 py-2 text-sm text-zinc-800 hover:bg-zinc-50"
+          >
+            Search
+          </Link>
           <Link href="/blog" className="rounded-md px-2 py-2 text-sm text-zinc-800 hover:bg-zinc-50">
             Wellness Insights
           </Link>

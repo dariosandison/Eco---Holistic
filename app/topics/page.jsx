@@ -1,4 +1,6 @@
 import Link from 'next/link'
+import StructuredData from '@/components/StructuredData'
+import { SITE_URL } from '@/lib/site'
 
 export const metadata = {
   title: 'Topics — Wild & Well',
@@ -33,8 +35,25 @@ function Card({ title, desc, href, tag, image }) {
 }
 
 export default function Page() {
+  const itemList = {
+    '@context': 'https://schema.org',
+    '@type': 'ItemList',
+    name: 'Wild & Well topics',
+    itemListElement: [
+      { name: 'Sleep & recovery', url: `${SITE_URL}/topics/sleep` },
+      { name: 'Air quality (allergies + damp)', url: `${SITE_URL}/topics/air-quality` },
+      { name: 'Water (filters + hydration)', url: `${SITE_URL}/topics/water` },
+      { name: 'Fragrance-free cleaning & laundry', url: `${SITE_URL}/topics/fragrance-free` },
+    ].map((it, i) => ({
+      '@type': 'ListItem',
+      position: i + 1,
+      name: it.name,
+      url: it.url,
+    })),
+  }
   return (
     <main className="mx-auto max-w-6xl px-4 py-16">
+      <StructuredData data={itemList} />
       <header className="max-w-3xl">
         <h1 className="text-4xl font-bold">Topics</h1>
         <p className="mt-3 text-zinc-700">

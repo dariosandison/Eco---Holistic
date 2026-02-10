@@ -7,6 +7,11 @@ import GA from '@/components/GA'
 import SiteJsonLd from '@/components/SiteJsonLd'
 import OutboundAffiliateTracker from '@/components/OutboundAffiliateTracker'
 import BreadcrumbBar from '@/components/BreadcrumbBar'
+import OnPageNav from '@/components/OnPageNav'
+import ReadingProgressBar from '@/components/ReadingProgressBar'
+import CommandPalette from '@/components/CommandPalette'
+
+import { buildCommandPaletteIndex } from '@/lib/commandPaletteIndex'
 
 const SITE_URL = 'https://www.wild-and-well.store'
 const DEFAULT_TITLE = 'Wild & Well'
@@ -44,13 +49,13 @@ export const metadata = {
     siteName: DEFAULT_TITLE,
     title: DEFAULT_TITLE,
     description: DEFAULT_DESC,
-    images: [{ url: '/og-default.jpg', width: 1200, height: 630, alt: DEFAULT_TITLE }],
+    images: [{ url: '/opengraph-image', width: 1200, height: 630, alt: DEFAULT_TITLE }],
   },
   twitter: {
     card: 'summary_large_image',
     title: DEFAULT_TITLE,
     description: DEFAULT_DESC,
-    images: ['/og-default.jpg'],
+    images: ['/twitter-image'],
   },
   robots: {
     index: true,
@@ -66,6 +71,7 @@ export const metadata = {
 }
 
 export default function RootLayout({ children }) {
+  const paletteIndex = buildCommandPaletteIndex()
   return (
     <html lang="en-GB">
       <head>
@@ -77,6 +83,9 @@ export default function RootLayout({ children }) {
         <OutboundAffiliateTracker />
         <SiteHeader />
         <BreadcrumbBar />
+        <ReadingProgressBar />
+        <OnPageNav />
+        <CommandPalette index={paletteIndex} />
         <main id="content" className="flex-1">
           {children}
         </main>

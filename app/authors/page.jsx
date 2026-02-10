@@ -1,5 +1,7 @@
 import Link from 'next/link'
 import { AUTHORS } from '@/lib/authors'
+import StructuredData from '@/components/StructuredData'
+import { SITE_URL } from '@/lib/site'
 
 export const metadata = {
   title: 'Authors',
@@ -7,8 +9,20 @@ export const metadata = {
 }
 
 export default function Page() {
+  const itemList = {
+    '@context': 'https://schema.org',
+    '@type': 'ItemList',
+    name: 'Wild & Well authors',
+    itemListElement: AUTHORS.map((a, i) => ({
+      '@type': 'ListItem',
+      position: i + 1,
+      name: a.name,
+      url: `${SITE_URL}/authors/${a.slug}`,
+    })),
+  }
   return (
     <main className="mx-auto max-w-6xl px-4 py-16">
+      <StructuredData data={itemList} />
       <header className="max-w-3xl">
         <h1 className="text-4xl font-bold">Authors</h1>
         <p className="mt-3 text-zinc-700">
