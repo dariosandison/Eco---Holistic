@@ -180,11 +180,11 @@ const itemList = PICKS.map((p, i) => ({
 
       <section className="mt-14">
         <h2 className="text-2xl font-semibold">Top options (shortlist)</h2>
-        <p className="mt-2 text-sm text-zinc-600">Three common scenarios — pick the one that matches your room and use.</p>
+        <p className="mt-2 text-sm text-zinc-600">Three common scenarios — choose the one that matches your room and use.</p>
         <div className="mt-6 grid gap-4 md:grid-cols-3">
           <ProductPick
             title="all‑rounder: Blueair 3250i"
-            badge="Overall pick"
+            badge="Best overall"
             description="A straightforward everyday choice for general particle control in living areas."
             href={amazonSearchUrl('Blueair Blue Max 3250i air purifier')}
             bullets={['Size it to your room', 'Plan filter replacements', 'Auto mode is optional']}
@@ -199,7 +199,7 @@ const itemList = PICKS.map((p, i) => ({
           <ProductPick
             title="Great for larger rooms: Levoit 600S"
             badge="Good value"
-            description="A common pick for higher coverage without premium pricing."
+            description="A common option for higher coverage without premium pricing."
             href={amazonSearchUrl('Levoit Core 600S air purifier')}
             bullets={['Check noise at high speeds', 'Confirm filter availability']}
           />
@@ -208,7 +208,7 @@ const itemList = PICKS.map((p, i) => ({
         <ComparisonTable
           caption="At-a-glance comparison (what to check before you buy)"
           columns={[
-            { key: 'pick', label: 'Pick' },
+            { key: 'pick', label: 'Option' },
             { key: 'bestFor', label: 'Great for' },
             { key: 'watchOut', label: 'Watch-out' },
             { key: 'check', label: 'Check before buying' },

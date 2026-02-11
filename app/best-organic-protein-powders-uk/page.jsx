@@ -162,7 +162,7 @@ const url = `${SITE_URL}/best-organic-protein-powders-uk`
 <section className="mt-10">
         <h2 className="text-2xl font-semibold">At a glance</h2>
         <p className="mt-2 text-zinc-700 max-w-3xl">
-          For most people, the win is simple: pick an unflavoured (or lightly flavoured) option with a short ingredient list.
+          For most people, the win is simple: choose an unflavoured (or lightly flavoured) option with a short ingredient list.
           If a powder tastes bad or upsets your stomach, you won’t keep using it — and consistency is the whole point.
         </p>
       </section>

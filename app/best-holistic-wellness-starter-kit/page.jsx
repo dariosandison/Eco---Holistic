@@ -142,7 +142,7 @@ const url = `${SITE_URL}/best-holistic-wellness-starter-kit`
       
       <MoneyPageEducationBlock edu={edu} />
 <section className="mt-10">
-        <h2 className="text-2xl font-semibold">Start here (pick one path)</h2>
+        <h2 className="text-2xl font-semibold">Start here (choose one path)</h2>
         <div className="mt-6 grid gap-4 md:grid-cols-3">
           <StartCard title="Sleep" desc="Light, routine, and the basics that actually move the needle." href="/topics/sleep" tag="Sleep" />
           <StartCard title="Air" desc="Bedrooms and allergies: right-sized HEPA and low-tox basics." href="/topics/air-quality" tag="Air" />

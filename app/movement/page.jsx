@@ -11,6 +11,9 @@ export const metadata = {
 const ON_GOLD_STANDARD_WHEY = 'https://www.awin1.com/cread.php?awinmid=19863&awinaffid=2754234&clickref=ww_movement_picks_whey_optimum_gs100whey&ued=https%3A%2F%2Fwww.optimumnutrition.com%2Fen-gb%2Fproducts%2Fgold-standard-100-whey-protein-powder-eu'
 const WFL_DUMBBELL_TOWER_24KG = 'https://www.awin1.com/cread.php?awinmid=25564&awinaffid=2754234&clickref=ww_movement_picks_dumbbell_tower_body_sculpture_24kg&ued=https%3A%2F%2Fwww.workoutforless.co.uk%2Fcollections%2Fdumbbells%2Fproducts%2Fbody-sculpture-24kg-smart-dumbbell-tower-with-stand'
 const FITNESSOPTIONS_A1_WATERROWER = 'https://www.awin1.com/cread.php?awinmid=899&awinaffid=2754234&clickref=ww_movement_picks_rower_fitnessoptions_a1_waterrower&ued=https%3A%2F%2Ffitnessoptions.co.uk%2Fcollections%2Fpopular%2Fproducts%2Fa1-waterrower'
+const ANCIENT_TRUE_CREATINE = 'https://www.awin1.com/cread.php?awinmid=54585&awinaffid=2754234&clickref=ww_movement_strength_ancient_true_creatine&ued=https%3A%2F%2Fancientandbrave.earth%2Fproducts%2Ftrue-creatine'
+const NAKEDPHARMACY_NATRUFLEX = 'https://www.awin1.com/cread.php?awinmid=20100&awinaffid=2754234&clickref=ww_movement_recovery_naked_natruflex_turmeric&ued=https%3A%2F%2Fwww.thenakedpharmacy.com%2Fproducts%2Fnatruflex-turmeric%3Futm_source%3Dchatgpt.com'
+const VIVO_TRACKER_WINTER_III = 'https://www.awin1.com/cread.php?awinmid=7778&awinaffid=2754234&clickref=ww_movement_footstrength_vivo_tracker_winter_iii&ued=https%3A%2F%2Fwww.vivobarefoot.com%2Fuk%2Ftracker-winter-iii-sg-mens%3Futm_source%3Dchatgpt.com'
 
 function Card({ title, desc, href, tag, image }) {
   return (
@@ -66,7 +69,7 @@ export default function Page() {
       <section className="mt-10">
         <h2 className="text-2xl font-semibold">Explore movement styles</h2>
         <p className="mt-2 text-sm text-zinc-600 max-w-3xl">
-          Pick a lane and build a repeatable routine before adding equipment.
+          Choose a lane and build a repeatable routine before adding equipment.
         </p>
         <div className="mt-6 grid gap-4 md:grid-cols-3">
           <Card image="/images/photography/thumbs/cards/movement-hero.jpg" title="Stretches & mobility" desc="A simple 10‑minute routine for desk bodies, stiff hips, and tight backs — plus optional tools." href="/movement/stretches" tag="Guide" />
@@ -99,6 +102,11 @@ export default function Page() {
             <p className="mt-1 text-sm text-zinc-600 max-w-2xl">
               A few gear and nutrition add‑ons we feature because they help consistency. (Links are affiliate links.)
             </p>
+            <div className="mt-3 flex flex-wrap gap-2">
+              <Link className="btn-secondary" href="/best-creatine-supplement-uk-ancient-and-brave-true-creatine">Creatine guide →</Link>
+              <Link className="btn-secondary" href="/best-turmeric-supplement-uk-naked-pharmacy-natruflex">Turmeric guide →</Link>
+              <Link className="btn-secondary" href="/best-barefoot-walking-boots-uk-vivobarefoot-tracker-winter-iii">Barefoot boots guide →</Link>
+            </div>
           </div>
         </div>
 
@@ -124,6 +132,31 @@ export default function Page() {
             bullets={["Check ingredients/allergens", "Use as a convenience tool", "Keep overall diet food‑first"]}
             links={[{ label: 'Check price', merchant: 'awin', href: ON_GOLD_STANDARD_WHEY, variant: 'primary' }]}
           />
+
+          <ProductPick
+            title="Strength add‑on: True Creatine (Ancient + Brave)"
+            badge="Strength"
+            description="A simple creatine option if you train and want a well‑studied performance support tool."
+            bullets={["Consistency beats timing", "Drink enough water", "Keep everything else stable"]}
+            links={[{ label: 'Check price', merchant: 'awin', href: ANCIENT_TRUE_CREATINE, variant: 'primary' }]}
+          />
+
+          <ProductPick
+            title="Recovery add‑on: Natruflex Turmeric"
+            badge="Recovery"
+            description="A turmeric option some people use for joint comfort. Check interactions before using."
+            bullets={["Track for 2–4 weeks", "Avoid stacking changes", "Check medication interactions"]}
+            links={[{ label: 'Check price', merchant: 'awin', href: NAKEDPHARMACY_NATRUFLEX, variant: 'primary' }]}
+          />
+
+          <ProductPick
+            title="Barefoot boots: Vivobarefoot Tracker Winter III"
+            badge="Foot strength"
+            description="For outdoor walking when you want ground feel. Transition slowly to avoid calf/foot overload."
+            bullets={["Short walks first", "Fit matters", "Increase volume gradually"]}
+            links={[{ label: 'Check price', merchant: 'awin', href: VIVO_TRACKER_WINTER_III, variant: 'primary' }]}
+          />
+
         </div>
       </section>
 

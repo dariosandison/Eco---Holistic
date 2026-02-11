@@ -48,7 +48,7 @@ export default function Page() {
       <section className="mt-16 rounded-3xl border border-zinc-200 bg-zinc-50/60 p-6">
         <h2 className="text-lg font-semibold text-zinc-900">Suggested order</h2>
         <ol className="mt-3 list-decimal pl-6 text-sm text-zinc-700 space-y-2">
-          <li>Pick one problem area (air, water, damp, fragrance, sleep).</li>
+          <li>Choose one problem area (air, water, damp, fragrance, sleep).</li>
           <li>Skim the “What matters / Watch-out” sections on the shortlist page.</li>
           <li>Compare 2–3 options, then stop — simplicity wins.</li>
         </ol>

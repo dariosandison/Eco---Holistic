@@ -152,6 +152,29 @@ export default function Page() {
         </div>
       </section>
 
+      <section className="mt-12">
+        <div className="flex flex-col gap-2 md:flex-row md:items-end md:justify-between">
+          <div>
+            <h2 className="text-2xl font-semibold">New partner guides</h2>
+            <p className="mt-1 text-sm text-zinc-600 max-w-2xl">
+              Quick routes to new UK partner pages, placed into the right topic areas.
+            </p>
+          </div>
+        </div>
+
+        <div className="mt-4 flex flex-wrap gap-2">
+          <Link className="btn-secondary" href="/best-daily-essentials-supplement-uk-reviveactive-original">Daily essentials</Link>
+          <Link className="btn-secondary" href="/best-algae-omega-3-supplement-uk-together">Omega‑3 (algae)</Link>
+          <Link className="btn-secondary" href="/best-vegan-vitamin-d3-supplement-uk-together">Vitamin D3</Link>
+          <Link className="btn-secondary" href="/best-electrolytes-hydration-supplement-uk-ancient-and-brave-true-hydration">Electrolytes</Link>
+          <Link className="btn-secondary" href="/best-gut-support-supplement-uk-ancient-and-brave-true-biome">Gut support (True Biome)</Link>
+          <Link className="btn-secondary" href="/best-gut-support-supplement-uk-drvegan-gut-works">Gut support (Gut Works)</Link>
+          <Link className="btn-secondary" href="/high-protein-meal-prep-uk-the-good-prep-wild-berry-collagen-yoghurt">Meal prep</Link>
+          <Link className="btn-secondary" href="/ethical-meat-delivery-uk-real-food-hub-mangalitza-prime-rib">Whole foods delivery</Link>
+        </div>
+      </section>
+
+
       <section className="mt-10">
         <h2 className="text-2xl font-semibold">Shortlists</h2>
         <p className="mt-2 text-sm text-zinc-600 max-w-3xl">
@@ -160,7 +183,7 @@ export default function Page() {
 
         <div className="mt-6 grid gap-4 md:grid-cols-3">
           <Card image="/images/photography/thumbs/cards/nutrition-hero.jpg" title="Extra virgin olive oil (UK): our shortlist" desc="Freshness, storage, and label cues that actually help." href="/best-extra-virgin-olive-oil-uk" tag="Staples" />
-          <Card image="/images/photography/thumbs/cards/nutrition-hero.jpg" title="Organic oats (UK): our shortlist" desc="Rolled vs jumbo vs steel-cut — pick what you’ll use." href="/best-organic-oats-uk" tag="Staples" />
+          <Card image="/images/photography/thumbs/cards/nutrition-hero.jpg" title="Organic oats (UK): our shortlist" desc="Rolled vs jumbo vs steel-cut — choose what you’ll use." href="/best-organic-oats-uk" tag="Staples" />
           <Card image="/images/photography/thumbs/cards/nutrition-hero.jpg" title="Chia seeds (UK): simple shortlist" desc="Simple seeds, easy fibre add-in, and storage tips." href="/best-chia-seeds-uk" tag="Superfoods" />
           <Card image="/images/photography/thumbs/cards/nutrition-hero.jpg" title="Ground flaxseed (UK): simple shortlist" desc="Freshness matters — plus easy daily uses." href="/best-ground-flaxseed-uk" tag="Superfoods" />
           <Card image="/images/photography/thumbs/cards/nutrition-hero.jpg" title="Matcha (UK): what to buy" desc="Everyday vs ceremonial-style and what to look for." href="/best-organic-matcha-uk" tag="Drinks" />

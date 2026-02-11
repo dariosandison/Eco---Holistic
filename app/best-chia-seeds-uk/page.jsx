@@ -65,7 +65,7 @@ const PICKS = [
   {
     "title": "White chia seeds",
     "badge": "Optional",
-    "desc": "Similar use; pick based on preference and price.",
+    "desc": "Similar use; choose based on preference and price.",
     "query": "white chia seeds organic",
     "bullets": [
       "Similar nutrition",
@@ -228,7 +228,7 @@ const itemList = PICKS.map((p, i) => ({
           <ProductPick
             title="White chia seeds"
             badge="Optional"
-            description="Similar use; pick based on preference and price."
+            description="Similar use; choose based on preference and price."
             href={amazonSearchUrl('white chia seeds organic')}
             bullets={["Similar nutrition", "Often pricier", "Choose based on taste/price"]}
           />

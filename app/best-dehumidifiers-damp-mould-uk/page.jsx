@@ -8,6 +8,8 @@ import MoneyPageEducationBlock from '@/components/MoneyPageEducationBlock'
 import { getMoneyPageEdu } from '@/lib/moneyPageEdu'
 import MoneyPageNextLinks from '@/components/MoneyPageNextLinks'
 
+const MEACO_ARETE_ONE_25L = 'https://www.awin1.com/cread.php?awinmid=31711&awinaffid=2754234&clickref=ww_home_air_meaco_arete_one_25l&ued=https%3A%2F%2Fwww.meaco.com%2Fproducts%2Fmeacodry-arete-one-25l-dehumidifier-and-air-purifier'
+
 export const metadata = {
   title: 'Best dehumidifiers for damp & mould (UK): what to buy first',
   description:
@@ -203,7 +205,7 @@ export default function Page() {
         <h2 className="text-2xl font-semibold">How to choose (quick rules)</h2>
         <div className="mt-4 grid gap-4 md:grid-cols-3">
           <div className="card p-5">
-            <h3 className="text-lg font-semibold">Pick the right type</h3>
+            <h3 className="text-lg font-semibold">Choose the right type</h3>
             <p className="mt-2 text-sm text-zinc-700">Cold room or laundry drying? Start with <strong>desiccant</strong>. Warmer rooms? <strong>compressor</strong> often wins on efficiency.</p>
             <p className="mt-3 text-xs text-zinc-500">Watch-out: tiny “mini” units rarely make a dent in real damp.</p>
           </div>
@@ -223,7 +225,24 @@ export default function Page() {
       <section className="mt-14">
         <h2 className="text-2xl font-semibold">Shortlist</h2>
         <p className="mt-2 text-sm text-zinc-600">Curated searches so you can compare current prices, warranties, and filter/maintenance costs.</p>
+        <div className="mt-4 flex flex-wrap gap-2">
+          <Link className="btn-secondary" href="/best-dehumidifier-air-purifier-uk-meaco-arete-one-25l">Meaco Arete guide →</Link>
+        </div>
         <div className="mt-6 grid gap-4 md:grid-cols-2">
+
+          <ProductPick
+            title="Meaco Arete One 25L (dehumidifier + purifier)"
+            badge="Featured option"
+            description="A strong all‑rounder for UK damp + laundry drying. Prioritise sizing, noise, and filter costs."
+            bullets={[
+              'Great for recurring condensation + mould risk',
+              'Check dB if you’ll run it in bedrooms',
+              'Aim for roughly 40–60% humidity',
+            ]}
+            links={[{ label: 'Check price', merchant: 'awin', href: MEACO_ARETE_ONE_25L, variant: 'primary' }]}
+          />
+
+
           {PICKS.map((p) => (
             <ProductPick
               key={p.title}

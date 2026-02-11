@@ -42,7 +42,7 @@ export default function ThanksPage({ searchParams }) {
         <div className="mt-5 rounded-2xl border bg-white p-5 shadow-sm">
           <h2 className="text-lg font-semibold">Start in 2 minutes</h2>
           <p className="mt-2 text-sm text-zinc-600">
-            Pick one area for this week.
+            Choose one area for this week.
           </p>
           <div className="mt-4 flex flex-wrap gap-2">
             <TrackedLink

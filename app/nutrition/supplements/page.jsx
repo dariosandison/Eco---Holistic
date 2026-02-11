@@ -157,6 +157,26 @@ export default function Page() {
       <TopicFAQ faqs={faqs} />
 
       <p className="mt-12 text-xs text-zinc-500">Some links are affiliate links. If you buy via them, we earn a commission.</p>
-    </main>
+    
+
+      <section className="mt-12">
+        <h2 className="text-2xl font-semibold">New partner guides</h2>
+        <p className="mt-2 text-sm text-zinc-600 max-w-3xl">
+          New supplement pages added to Wild &amp; Well. Each guide keeps the “one change at a time” approach.
+        </p>
+
+        <div className="mt-4 flex flex-wrap gap-2">
+          <Link className="btn-secondary" href="/best-daily-essentials-supplement-uk-reviveactive-original">Daily essentials</Link>
+          <Link className="btn-secondary" href="/best-algae-omega-3-supplement-uk-together">Omega‑3 (algae)</Link>
+          <Link className="btn-secondary" href="/best-vegan-vitamin-d3-supplement-uk-together">Vitamin D3</Link>
+          <Link className="btn-secondary" href="/best-marine-magnesium-supplement-uk-together-sleep">Magnesium (wind‑down)</Link>
+          <Link className="btn-secondary" href="/best-creatine-supplement-uk-ancient-and-brave-true-creatine">Creatine</Link>
+          <Link className="btn-secondary" href="/best-electrolytes-hydration-supplement-uk-ancient-and-brave-true-hydration">Electrolytes</Link>
+          <Link className="btn-secondary" href="/best-gut-support-supplement-uk-ancient-and-brave-true-biome">Gut support (True Biome)</Link>
+          <Link className="btn-secondary" href="/best-gut-support-supplement-uk-drvegan-gut-works">Gut support (Gut Works)</Link>
+          <Link className="btn-secondary" href="/best-turmeric-supplement-uk-naked-pharmacy-natruflex">Turmeric (joints)</Link>
+        </div>
+      </section>
+</main>
   )
 }

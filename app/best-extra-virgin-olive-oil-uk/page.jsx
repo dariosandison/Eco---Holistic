@@ -31,7 +31,7 @@ const PICKS = [
   },
   {
     "title": "Cold-pressed organic EVOO",
-    "badge": "Organic pick",
+    "badge": "Organic option",
     "desc": "If organic matters to you, choose reputable brands and check dates.",
     "query": "organic cold pressed extra virgin olive oil",
     "bullets": [
@@ -173,7 +173,7 @@ const itemList = PICKS.map((p, i) => ({
 
           <ProductPick
             title="Cold-pressed organic EVOO"
-            badge="Organic pick"
+            badge="Organic option"
             description="If organic matters to you, choose reputable brands and check dates."
             href={amazonSearchUrl('organic cold pressed extra virgin olive oil')}
             bullets={["Check bottling/harvest info", "Avoid big \u201cdetox\u201d claims", "Buy smaller bottles more often"]}
@@ -204,7 +204,7 @@ const itemList = PICKS.map((p, i) => ({
 
           <ProductPick
             title="Cold-pressed organic EVOO"
-            badge="Organic pick"
+            badge="Organic option"
             description="If organic matters to you, choose reputable brands and check dates."
             href={amazonSearchUrl('organic cold pressed extra virgin olive oil')}
             bullets={["Check bottling/harvest info", "Avoid big \u201cdetox\u201d claims", "Buy smaller bottles more often"]}

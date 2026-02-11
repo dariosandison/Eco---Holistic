@@ -207,12 +207,12 @@ const itemList = PICKS.map((p, i) => ({
       <section className="mt-14">
         <h2 className="text-2xl font-semibold">Top options (shortlist)</h2>
         <p className="mt-2 text-sm text-zinc-600">
-          If you want the shortest path: pick one environment fix + one optional support.
+          If you want the shortest path: choose one environment fix + one optional support.
         </p>
         <div className="mt-6 grid gap-4 md:grid-cols-3">
           <ProductPick
             title="Simple option: magnesium glycinate"
-            badge="Overall pick"
+            badge="Best overall"
             description="A gentle option many people add to an evening wind-down. Start low and assess tolerance."
             href={amazonSearchUrl('magnesium glycinate capsules UK')}
             bullets={['Look for glycinate/bisglycinate (not oxide)', 'Start low', 'Check interactions if medicated']}
@@ -236,7 +236,7 @@ const itemList = PICKS.map((p, i) => ({
         <ComparisonTable
           caption="At-a-glance comparison (check brand specs + your situation)"
           columns={[
-            { key: 'pick', label: 'Pick' },
+            { key: 'pick', label: 'Option' },
             { key: 'bestFor', label: 'Great for' },
             { key: 'tradeoff', label: 'Main tradeoff' },
             { key: 'startTip', label: 'Start tip' },

@@ -19,7 +19,7 @@ export const metadata = {
 const PICKS = [
   {
     "title": "Withings Body / Body+",
-    "badge": "Overall pick",
+    "badge": "Best overall",
     "desc": "Strong app and a trusted smart-scale brand.",
     "query": "Withings Body smart scale",
     "bullets": [
@@ -31,7 +31,7 @@ const PICKS = [
   {
     "title": "RENPHO smart scale",
     "badge": "Good value",
-    "desc": "Popular budget pick with simple trend graphs.",
+    "desc": "Popular budget option with simple trend graphs.",
     "query": "RENPHO smart scale",
     "bullets": [
       "Affordable",
@@ -64,7 +64,7 @@ const PICKS = [
   {
     "title": "Tanita body composition scales",
     "badge": "Premium",
-    "desc": "Long-standing scales brand; pick models that fit your needs.",
+    "desc": "Long-standing scales brand; choose models that fit your needs.",
     "query": "Tanita body composition scale",
     "bullets": [
       "Established brand",
@@ -165,7 +165,7 @@ const itemList = PICKS.map((p, i) => ({
         <div className="mt-6 grid gap-4 md:grid-cols-3">
           <ProductPick
             title="Withings Body / Body+"
-            badge="Overall pick"
+            badge="Best overall"
             description="Strong app and a trusted smart-scale brand."
             href={amazonSearchUrl('Withings Body smart scale')}
             bullets={["Good long-term trend tracking", "Strong app experience", "Multiple profiles"]}
@@ -174,7 +174,7 @@ const itemList = PICKS.map((p, i) => ({
           <ProductPick
             title="RENPHO smart scale"
             badge="Good value"
-            description="Popular budget pick with simple trend graphs."
+            description="Popular budget option with simple trend graphs."
             href={amazonSearchUrl('RENPHO smart scale')}
             bullets={["Affordable", "App is easy", "Ignore the more speculative body metrics"]}
           />
@@ -196,7 +196,7 @@ const itemList = PICKS.map((p, i) => ({
         <div className="mt-6 grid gap-4 md:grid-cols-2">
           <ProductPick
             title="Withings Body / Body+"
-            badge="Overall pick"
+            badge="Best overall"
             description="Strong app and a trusted smart-scale brand."
             href={amazonSearchUrl('Withings Body smart scale')}
             bullets={["Good long-term trend tracking", "Strong app experience", "Multiple profiles"]}
@@ -205,7 +205,7 @@ const itemList = PICKS.map((p, i) => ({
           <ProductPick
             title="RENPHO smart scale"
             badge="Good value"
-            description="Popular budget pick with simple trend graphs."
+            description="Popular budget option with simple trend graphs."
             href={amazonSearchUrl('RENPHO smart scale')}
             bullets={["Affordable", "App is easy", "Ignore the more speculative body metrics"]}
           />
@@ -229,7 +229,7 @@ const itemList = PICKS.map((p, i) => ({
           <ProductPick
             title="Tanita body composition scales"
             badge="Premium"
-            description="Long-standing scales brand; pick models that fit your needs."
+            description="Long-standing scales brand; choose models that fit your needs."
             href={amazonSearchUrl('Tanita body composition scale')}
             bullets={["Established brand", "Many model options", "Choose for features you\u2019ll use"]}
           />

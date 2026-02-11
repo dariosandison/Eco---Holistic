@@ -42,8 +42,8 @@ const PICKS = [
   },
   {
     "title": "Organic sauerkraut",
-    "badge": "Organic pick",
-    "desc": "If organic matters to you, pick simple recipes.",
+    "badge": "Organic option",
+    "desc": "If organic matters to you, choose simple recipes.",
     "query": "organic sauerkraut jar refrigerated",
     "bullets": [
       "Simple recipe",
@@ -181,8 +181,8 @@ const itemList = PICKS.map((p, i) => ({
 
           <ProductPick
             title="Organic sauerkraut"
-            badge="Organic pick"
-            description="If organic matters to you, pick simple recipes."
+            badge="Organic option"
+            description="If organic matters to you, choose simple recipes."
             href={amazonSearchUrl('organic sauerkraut jar refrigerated')}
             bullets={["Simple recipe", "Check storage", "Start with small jar"]}
           />
@@ -212,8 +212,8 @@ const itemList = PICKS.map((p, i) => ({
 
           <ProductPick
             title="Organic sauerkraut"
-            badge="Organic pick"
-            description="If organic matters to you, pick simple recipes."
+            badge="Organic option"
+            description="If organic matters to you, choose simple recipes."
             href={amazonSearchUrl('organic sauerkraut jar refrigerated')}
             bullets={["Simple recipe", "Check storage", "Start with small jar"]}
           />

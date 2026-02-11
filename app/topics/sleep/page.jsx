@@ -15,6 +15,8 @@ export const metadata = {
 // Featured sleep products (AWIN)
 const LEVITEX_SLEEP_POSTURE_PILLOW = 'https://www.awin1.com/cread.php?awinmid=28333&awinaffid=2754234&clickref=ww_sleep_picks_sleep_posture_pillow_levitex&ued=https%3A%2F%2Flevitex.co.uk%2Fproducts%2Fsleep-posture-pillow'
 const RITUALANDFLOW_DREAMFLOW = 'https://www.awin1.com/cread.php?awinmid=112594&awinaffid=2754234&clickref=ww_sleep_picks_magnesium_hot_chocolate_ritualandflow_dreamflow&ued=https%3A%2F%2Fritualandflow.com%2Fproducts%2Fdream-flow'
+const TOGETHER_MARINE_MAGNESIUM = 'https://www.awin1.com/cread.php?awinmid=111680&awinaffid=2754234&clickref=ww_sleep_recovery_together_marine_magnesium&ued=https%3A%2F%2Ftogetherhealthdirect.co.uk%2Fproducts%2Fmarine-magnesium%3Futm_source%3Dchatgpt.com'
+const SIMBA_HYBRID_ORIGINAL = 'https://www.awin1.com/cread.php?awinmid=6878&awinaffid=2754234&clickref=ww_sleep_bedroom_simba_hybrid_original&ued=https%3A%2F%2Fsimbasleep.com%2Fproducts%2Fmattress%3Futm_source%3Dchatgpt.com'
 
 export default function Page() {
   const edu = getTopicEdu('sleep')
@@ -162,6 +164,23 @@ export default function Page() {
               bullets={["Use as a routine cue", "Check ingredients/allergens", "Avoid stacking lots of supplements"]}
               links={[{ label: 'Check price', merchant: 'awin', href: RITUALANDFLOW_DREAMFLOW, variant: 'primary' }]}
             />
+
+          <ProductPick
+            title="Together Health: Marine Magnesium"
+            badge="Wind‑down"
+            description="A simple magnesium option to support a consistent wind‑down routine. Start low and keep everything else stable for 2–4 weeks."
+            bullets={['Start low; assess tolerance', 'Avoid stacking multiple new supplements', 'Check interactions if medicated']}
+            links={[{ label: 'Check price', merchant: 'awin', href: TOGETHER_MARINE_MAGNESIUM, variant: 'primary' }]}
+          />
+
+          <ProductPick
+            title="Simba Hybrid Original Mattress"
+            badge="Bedroom"
+            description="If your routine is good but your sleep still feels “off”, a mattress upgrade can be high impact. Prioritise a real trial + easy returns."
+            bullets={['Look for a meaningful trial period', 'Consider temperature control', 'Support matters more than hype']}
+            links={[{ label: 'Check price', merchant: 'awin', href: SIMBA_HYBRID_ORIGINAL, variant: 'primary' }]}
+          />
+
           </div>
         </div>
 

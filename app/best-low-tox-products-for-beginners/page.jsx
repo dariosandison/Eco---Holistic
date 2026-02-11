@@ -66,7 +66,7 @@ const url = `${SITE_URL}/best-low-tox-products-for-beginners`
         name: 'Where should I start if I only change one thing?',
         acceptedAnswer: {
           '@type': 'Answer',
-          text: 'Start where you will notice the difference: fragrance‑free laundry/cleaning for many homes, or a right‑sized HEPA air purifier for bedrooms and allergies. Pick one change you can keep doing.',
+          text: 'Start where you will notice the difference: fragrance‑free laundry/cleaning for many homes, or a right‑sized HEPA air purifier for bedrooms and allergies. Choose one change you can keep doing.',
         },
       },
       {

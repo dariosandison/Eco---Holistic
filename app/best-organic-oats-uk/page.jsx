@@ -31,7 +31,7 @@ const PICKS = [
   },
   {
     "title": "Organic porridge oats (rolled)",
-    "badge": "Budget pick",
+    "badge": "Budget option",
     "desc": "Reliable daily staple.",
     "query": "organic porridge oats",
     "bullets": [
@@ -173,7 +173,7 @@ const itemList = PICKS.map((p, i) => ({
 
           <ProductPick
             title="Organic porridge oats (rolled)"
-            badge="Budget pick"
+            badge="Budget option"
             description="Reliable daily staple."
             href={amazonSearchUrl('organic porridge oats')}
             bullets={["Affordable", "Good daily use", "Choose size you\u2019ll finish"]}
@@ -204,7 +204,7 @@ const itemList = PICKS.map((p, i) => ({
 
           <ProductPick
             title="Organic porridge oats (rolled)"
-            badge="Budget pick"
+            badge="Budget option"
             description="Reliable daily staple."
             href={amazonSearchUrl('organic porridge oats')}
             bullets={["Affordable", "Good daily use", "Choose size you\u2019ll finish"]}

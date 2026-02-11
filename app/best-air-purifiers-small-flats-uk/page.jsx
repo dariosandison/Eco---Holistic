@@ -20,7 +20,7 @@ const PICKS = [
   {
     title: 'Blueair Blue 511i Max',
     badge: 'compact',
-    desc: 'A strong “bedroom size” pick if you size it correctly.',
+    desc: 'A strong âbedroom‑sized option if you size it correctly.',
     query: 'Blueair 511i Max air purifier',
     bullets: ['Great for: bedrooms', 'Quiet night mode matters', 'Plan filter replacements'],
   },
@@ -159,7 +159,7 @@ const itemList = PICKS.map((p, i) => ({
         <div className="mt-6 grid gap-4 md:grid-cols-3">
           <ProductPick
             title="compact: Blueair 511i Max"
-            badge="Overall pick"
+            badge="Best overall"
             description="A strong small-room choice if you size it correctly for your bedroom."
             href={amazonSearchUrl('Blueair 511i Max air purifier')}
             bullets={['Quiet night mode matters', 'Plan filter replacements', 'Great bedroom starting point']}

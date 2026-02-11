@@ -77,7 +77,7 @@ export default function Page() {
       <section className="mt-14 max-w-3xl">
         <h2 className="section-title">Suggested order</h2>
         <ol className="mt-3 list-decimal pl-6 text-zinc-700 space-y-2">
-          <li>Pick one topic (sleep, air, water, cleaning).</li>
+          <li>Choose one topic (sleep, air, water, cleaning).</li>
           <li>Skim the “At a glance” section and choose one practical next step.</li>
           <li>When you want options, use the shortlist links to compare a few solid choices.</li>
         </ol>

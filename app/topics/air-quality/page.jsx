@@ -11,6 +11,8 @@ export const metadata = {
   description: 'Air quality for UK homes: allergies, damp, and the practical steps that matter most.',
 }
 
+const MEACO_ARETE_ONE_25L = 'https://www.awin1.com/cread.php?awinmid=31711&awinaffid=2754234&clickref=ww_home_air_meaco_arete_one_25l&ued=https%3A%2F%2Fwww.meaco.com%2Fproducts%2Fmeacodry-arete-one-25l-dehumidifier-and-air-purifier'
+
 export default function Page() {
   const edu = getTopicEdu('air-quality')
 
@@ -135,12 +137,22 @@ export default function Page() {
             href={amazonSearchUrl('dehumidifier UK energy efficient quiet')}
             bullets={['Check tank size', 'Look for laundry mode', 'Consider noise for bedrooms']}
           />
+
+          <ProductPick
+            title="Meaco Arete One 25L (dehumidifier + purifier)"
+            badge="UK favourite"
+            description="A strong all‑rounder for damp homes and laundry drying. Prioritise noise + sizing for the rooms you’ll use it in."
+            bullets={['Good for recurring condensation', 'Check dB for bedroom use', 'Measure humidity first (aim 40–60%)']}
+            links={[{ label: 'Check price', merchant: 'awin', href: MEACO_ARETE_ONE_25L, variant: 'primary' }]}
+          />
+
         </div>
 
         <div className="mt-8 flex flex-wrap gap-2">
           <Link className="btn-primary" href="/best-air-purifiers-allergies-uk">Allergy shortlist →</Link>
           <Link className="btn-secondary" href="/best-air-purifiers-small-flats-uk">Small flats →</Link>
           <Link className="btn-secondary" href="/best-dehumidifiers-damp-mould-uk">Dehumidifier shortlist →</Link>
+          <Link className="btn-secondary" href="/best-dehumidifier-air-purifier-uk-meaco-arete-one-25l">Meaco Arete guide →</Link>
         </div>
       </section>
 

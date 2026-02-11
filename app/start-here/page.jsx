@@ -4,7 +4,7 @@ import InlineSignup from '@/components/InlineSignup'
 export const metadata = {
   title: 'Start here',
   description:
-    'A simple, UK-friendly starting point: pick one area (air, water, fragrance-free home, sleep, nutrition, movement) and take the next best step — without overhauling everything.',
+    'A simple, UK-friendly starting point: choose one area (air, water, fragrance-free home, sleep, nutrition, movement) and take the next best step — without overhauling everything.',
 }
 
 function Card({ title, tag, desc, steps = [], links = [] }) {
@@ -49,7 +49,7 @@ export default function Page() {
       <header className="max-w-3xl">
         <h1 className="text-4xl font-bold tracking-tight">Start here</h1>
         <p className="mt-3 text-zinc-700">
-          The fastest way to feel a difference is to pick <span className="font-semibold">one</span> area for this week,
+          The fastest way to feel a difference is to choose <span className="font-semibold">one</span> area for this week,
           do a no-spend step first, then use a shortlist only if you’re buying something.
         </p>
         <div className="mt-5 flex flex-wrap gap-2">

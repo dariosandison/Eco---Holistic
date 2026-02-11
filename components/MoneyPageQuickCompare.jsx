@@ -102,7 +102,7 @@ export default function MoneyPageQuickCompare({ picks = [] }) {
           <table className="min-w-[760px] w-full border-collapse text-sm">
             <thead className="bg-zinc-50 text-left text-zinc-700">
               <tr>
-                <th className="px-4 py-3 font-semibold w-[220px]">Pick</th>
+                <th className="px-4 py-3 font-semibold w-[220px]">Option</th>
                 <th className="px-4 py-3 font-semibold">Best for</th>
                 <th className="px-4 py-3 font-semibold">Key note</th>
                 <th className="px-4 py-3 font-semibold">Trade‑off</th>

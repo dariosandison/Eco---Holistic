@@ -16,6 +16,8 @@ export const metadata = {
 
 // Partner link (AWIN)
 const SYMPROVE_MANGO = 'https://www.awin1.com/cread.php?awinmid=109974&awinaffid=2754234&clickref=ww_nutrition_picks_guthealth_symprove_mango_passionfruit&ued=https%3A%2F%2Fw-wellness.co.uk%2Fproducts%2Fsymprove-daily-live-active-bacteria-mango-passion-fruit'
+const ANCIENT_TRUE_BIOME = 'https://www.awin1.com/cread.php?awinmid=54585&awinaffid=2754234&clickref=ww_nutrition_gut_ancient_true_biome&ued=https%3A%2F%2Fancientandbrave.earth%2Fproducts%2Ftrue-biome'
+const DRVEGAN_GUT_WORKS = 'https://www.awin1.com/cread.php?awinmid=21553&awinaffid=2754234&clickref=ww_nutrition_gut_drvegan_gutworks&ued=https%3A%2F%2Fwww.drvegan.com%2Fproducts%2Fgut-works%3Futm_source%3Dchatgpt.com'
 
 const PICKS = [
   {
@@ -187,10 +189,14 @@ const url = `${SITE_URL}/best-gut-health-supplements-beginners`
       <section className="mt-12">
         <div className="flex flex-col gap-2 md:flex-row md:items-end md:justify-between">
           <div>
-            <h2 className="text-2xl font-semibold">Partner pick (UK)</h2>
+            <h2 className="text-2xl font-semibold">Featured UK options</h2>
             <p className="mt-1 text-sm text-zinc-600 max-w-2xl">
-              One gut-focused option we feature. (Affiliate link.)
+              A few gut-focused options we feature. (Affiliate links.)
             </p>
+            <div className="mt-3 flex flex-wrap gap-2">
+              <Link className="btn-secondary" href="/best-gut-support-supplement-uk-ancient-and-brave-true-biome">True Biome guide →</Link>
+              <Link className="btn-secondary" href="/best-gut-support-supplement-uk-drvegan-gut-works">Gut Works guide →</Link>
+            </div>
           </div>
         </div>
 
@@ -202,6 +208,23 @@ const url = `${SITE_URL}/best-gut-health-supplements-beginners`
             bullets={["Change one thing at a time", "Track 2–4 weeks", "Check ingredients + guidance"]}
             links={[{ label: 'Check price', merchant: 'awin', href: SYMPROVE_MANGO, variant: 'primary' }]}
           />
+
+          <ProductPick
+            title="Ancient + Brave True Biome"
+            badge="Gut"
+            description="A gut-support option to trial conservatively. Keep everything else stable, track for 2–4 weeks, and stop if you worsen."
+            bullets={["Change one thing at a time", "Track 2–4 weeks", "Food-first basics still matter"]}
+            links={[{ label: 'Check price', merchant: 'awin', href: ANCIENT_TRUE_BIOME, variant: 'primary' }]}
+          />
+
+          <ProductPick
+            title="DR.VEGAN Gut Works"
+            badge="Gut"
+            description="A gut blend for a time‑boxed trial when your basics are already stable. Avoid stacking multiple new supplements."
+            bullets={["Time‑boxed trial", "Avoid stacking changes", "Stop if symptoms worsen"]}
+            links={[{ label: 'Check price', merchant: 'awin', href: DRVEGAN_GUT_WORKS, variant: 'primary' }]}
+          />
+
         </div>
       </section>
 

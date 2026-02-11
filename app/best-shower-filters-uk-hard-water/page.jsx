@@ -20,7 +20,7 @@ export const metadata = {
 const PICKS = [
   {
     title: 'Hello Klean shower filter',
-    badge: 'Popular pick',
+    badge: 'Popular option',
     desc: 'A widely discussed shower filter brand. Good if you want simple replacements.',
     query: 'Hello Klean shower filter',
     bullets: ['Great for: simple setup', 'Check cartridge replacement cost', 'Don’t expect miracles on extreme hard water'],

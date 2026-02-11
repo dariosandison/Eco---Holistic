@@ -42,7 +42,7 @@ const PICKS = [
   },
   {
     "title": "Organic matcha",
-    "badge": "Organic pick",
+    "badge": "Organic option",
     "desc": "If you prefer organic, choose reputable brands and check origin.",
     "query": "organic matcha powder",
     "bullets": [
@@ -180,7 +180,7 @@ const itemList = PICKS.map((p, i) => ({
 
           <ProductPick
             title="Organic matcha"
-            badge="Organic pick"
+            badge="Organic option"
             description="If you prefer organic, choose reputable brands and check origin."
             href={amazonSearchUrl('organic matcha powder')}
             bullets={["Check origin", "Avoid big health claims", "Buy quantity you\u2019ll use"]}
@@ -211,7 +211,7 @@ const itemList = PICKS.map((p, i) => ({
 
           <ProductPick
             title="Organic matcha"
-            badge="Organic pick"
+            badge="Organic option"
             description="If you prefer organic, choose reputable brands and check origin."
             href={amazonSearchUrl('organic matcha powder')}
             bullets={["Check origin", "Avoid big health claims", "Buy quantity you\u2019ll use"]}

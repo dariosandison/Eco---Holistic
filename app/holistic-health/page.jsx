@@ -37,7 +37,7 @@ export default function Page() {
     },
     {
       q: 'Where should I start if everything feels overwhelming?',
-      a: 'Pick one lever with the best “effort to impact” ratio: consistent bedtime/wake time, morning light, a daily walk, or one low-tox swap you will actually maintain.',
+      a: 'Choose one lever with the best “effort to impact” ratio: consistent bedtime/wake time, morning light, a daily walk, or one low-tox swap you will actually maintain.',
     },
     {
       q: 'Do I need supplements to be “holistic”?',
@@ -90,7 +90,7 @@ export default function Page() {
           {
             title: 'Simple method',
             bullets: [
-              'Pick one change for 2–4 weeks.',
+              'Choose one change for 2–4 weeks.',
               'Track one outcome (sleep onset, energy, steps, digestion).',
               'Keep what helps; drop what doesn’t.',
             ],

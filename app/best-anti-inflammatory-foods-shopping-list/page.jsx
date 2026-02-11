@@ -97,7 +97,7 @@ const url = `${SITE_URL}/best-anti-inflammatory-foods-shopping-list`
       <section className="mt-12">
         <h2 className="text-2xl font-semibold">How to use this list</h2>
         <ul className="mt-3 list-disc pl-6 text-zinc-700 space-y-1 max-w-3xl">
-          <li>Pick one “default” breakfast (oats, yoghurt, eggs) and repeat it.</li>
+          <li>Choose one “default” breakfast (oats, yoghurt, eggs) and repeat it.</li>
           <li>Build lunches around fibre + protein (beans, lentils, tinned fish, leftovers).</li>
           <li>Add colour: one extra portion of fruit/veg per day is a win.</li>
           <li>Keep snacks simple (fruit + nuts; yoghurt + berries). See: <Link className="underline" href="/best-organic-snacks-healthy">snack shortlist</Link>.</li>

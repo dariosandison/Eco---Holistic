@@ -20,7 +20,7 @@ export const metadata = {
 const PICKS = [
   {
     title: 'Ecover ZERO (fragrance-free)',
-    badge: 'Mainstream pick',
+    badge: 'Mainstream option',
     desc: 'Fragrance-free detergent designed for sensitive skin.',
     query: 'Ecover ZERO laundry liquid fragrance free',
     bullets: ['Fragrance-free', 'Easy to repurchase in the UK', 'Consider refills to cut plastic'],
@@ -156,11 +156,11 @@ const itemList = PICKS.map((p, i) => ({
 
       <section className="mt-14">
         <h2 className="text-2xl font-semibold">Top options (shortlist)</h2>
-        <p className="mt-2 text-sm text-zinc-600">Pick one route: sensitive-skin baseline, refill-friendly, or easy mainstream.</p>
+        <p className="mt-2 text-sm text-zinc-600">Choose one route: sensitive-skin baseline, refill-friendly, or easy mainstream.</p>
         <div className="mt-6 grid gap-4 md:grid-cols-3">
           <ProductPick
             title="Great for sensitive skin: Surcare 0%"
-            badge="Overall pick"
+            badge="Best overall"
             description="Widely available in the UK and a common sensitive-household baseline."
             href={amazonSearchUrl('Surcare non bio laundry liquid 0% fragrance')}
             bullets={['0% fragrance/dyes/enzymes', 'Great for bedding and towels', 'Add an extra rinse for comfort']}
@@ -184,7 +184,7 @@ const itemList = PICKS.map((p, i) => ({
         <ComparisonTable
           caption="At-a-glance comparison (choose what you’ll stick with)"
           columns={[
-            { key: 'pick', label: 'Pick' },
+            { key: 'pick', label: 'Option' },
             { key: 'bestFor', label: 'Great for' },
             { key: 'watchOut', label: 'Watch-out' },
             { key: 'startTip', label: 'Start tip' },
