@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { loadGA } from '@/lib/ga-client'
+import { loadClarity } from '@/lib/clarity-client'
 
 export default function ConsentBanner() {
   const requireConsent = process.env.NEXT_PUBLIC_REQUIRE_CONSENT !== 'false'
@@ -32,6 +33,7 @@ export default function ConsentBanner() {
             onClick={() => {
               localStorage.setItem('consent_analytics', 'granted')
               loadGA()
+              loadClarity()
               setOpen(false)
             }}
           >

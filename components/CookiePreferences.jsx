@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react'
 import { loadGA } from '@/lib/ga-client'
+import { loadClarity } from '@/lib/clarity-client'
 
 export default function CookiePreferences() {
   const [value, setValue] = useState(null)
@@ -14,7 +15,7 @@ export default function CookiePreferences() {
   function setConsent(next) {
     localStorage.setItem('consent_analytics', next)
     setValue(next)
-    if (next === 'granted') loadGA()
+    if (next === 'granted') { loadGA(); loadClarity(); }
   }
 
   return (

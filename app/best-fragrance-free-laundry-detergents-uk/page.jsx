@@ -1,16 +1,22 @@
 import Link from 'next/link'
 import StructuredData from '@/components/StructuredData'
+import { PHASE22_UPDATED, PHASE22_UPDATED_LABEL, PHASE22_PREV_UPDATED_LABEL, PHASE22_DEFAULT_UPDATE_CHANGES } from '@/lib/phase22'
 import ComparisonTable from '@/components/ComparisonTable'
 import ProductPick from '@/components/mdx/ProductPick'
 import { amazonSearchUrl } from '@/lib/amazon'
 import EducationFirstCallout from '@/components/EducationFirstCallout'
 import MoneyPageEducationBlock from '@/components/MoneyPageEducationBlock'
 import { getMoneyPageEdu } from '@/lib/moneyPageEdu'
+import { getTop10Meta } from '@/data/top10Meta'
 import MoneyPageNextLinks from '@/components/MoneyPageNextLinks'
 import InlineSignup from '@/components/InlineSignup'
 import MoneyPageDecisionBox from '@/components/MoneyPageDecisionBox'
 import MoneyPageQuickCompare from '@/components/MoneyPageQuickCompare'
 import MoneyPageUpdateLog from '@/components/MoneyPageUpdateLog'
+import BestForBadges from '@/components/BestForBadges'
+import FAQSection from '@/components/FAQSection'
+import MoneyPageTrustBlock from '@/components/MoneyPageTrustBlock'
+import MoneyPageRoutes from '@/components/MoneyPageRoutes'
 
 
 
@@ -20,14 +26,7 @@ export const metadata = {
   description: 'A shortlist of fragrance‑free detergents for sensitive households in the UK — what to look for, what to avoid, and buyer shortlist.',
 }
 
-const UPDATED = '2026-02-12'
-const UPDATED_LABEL = 'February 12, 2026'
-const PREV_UPDATED_LABEL = 'February 2, 2026'
-const UPDATE_CHANGES = [
-  'Refreshed this shortlist for availability and clarity.',
-  'Added a 10‑second decision box and quick comparison table for faster choosing.',
-  'Updated internal links to supporting guides and topic hubs.',
-]
+const UPDATE_CHANGES = PHASE22_DEFAULT_UPDATE_CHANGES
 const DECISION_RULES = [
   { if: 'Eczema/sensitive skin', then: 'Start with truly fragrance‑free detergent and skip scented fabric conditioners.' },
   { if: 'Your clothes feel coated', then: 'Use less detergent and add an extra rinse; build-up often mimics “irritation”.' },
@@ -69,6 +68,8 @@ export default function Page() {
     
   const edu = getMoneyPageEdu('best-fragrance-free-laundry-detergents-uk')
 
+  const { bestFor, routes, faqs } = getTop10Meta('best-fragrance-free-laundry-detergents-uk')
+
 const itemList = PICKS.map((p, i) => ({
     '@type': 'ListItem',
     position: i + 1,
@@ -80,45 +81,23 @@ const itemList = PICKS.map((p, i) => ({
     '@context': 'https://schema.org',
     '@type': 'Article',
     headline: 'Fragrance‑Free Laundry Detergents (UK): shortlist',
-    dateModified: UPDATED,
+    dateModified: PHASE22_UPDATED,
     datePublished: '2026-01-25',
     mainEntity: { '@type': 'ItemList', itemListElement: itemList },
   }
-
-  const faqLd = {
-    '@context': 'https://schema.org',
-    '@type': 'FAQPage',
-    mainEntity: [
-      {
-        '@type': 'Question',
-        name: 'Is "natural fragrance" the same as fragrance-free?',
-        acceptedAnswer: {
-          '@type': 'Answer',
-          text: 'No. "Natural fragrance" can still contain sensitising compounds. If scent is an issue, choose products labelled fragrance-free (and ideally free from dyes).',
-        },
-      },
-      {
-        '@type': 'Question',
-        name: 'Why does my laundry still smell after switching?',
-        acceptedAnswer: {
-          '@type': 'Answer',
-          text: 'Fragrance can linger in fabrics and in the washing machine. Run a hot maintenance wash, clean the drawer/seal, and consider an extra rinse for bedding and towels for a week or two.',
-        },
-      },
-    ],
-  }
-
   return (
     <main className="mx-auto max-w-6xl px-4 py-16">
       <StructuredData data={ld} />
-      <StructuredData data={faqLd} />
 
       <header>
         <div className="max-w-3xl">
         <h1 className="text-4xl font-bold">Fragrance‑free laundry detergents (UK): shortlist</h1>
         <p className="mt-3 text-zinc-700">
           Laundry touches your skin all day. If you’re sensitive to scent, detergent is the highest-impact swap.
+
         </p>
+
+        <BestForBadges items={bestFor} />
 
         </div>
 
@@ -139,7 +118,7 @@ const itemList = PICKS.map((p, i) => ({
           <Link className="btn-secondary" href="/blog/eco-laundry">Laundry guide</Link>
           <Link className="btn-secondary" href="/shopping-list">Free shopping list</Link>
         </div>
-        <p className="mt-4 text-xs text-zinc-500">Last updated: {UPDATED_LABEL} · Wild & Well Editorial Team</p>
+        <p className="mt-4 text-xs text-zinc-500">Last updated: {PHASE22_UPDATED_LABEL} · Wild & Well Editorial Team</p>
         </div>
       </header>
 
@@ -148,6 +127,8 @@ const itemList = PICKS.map((p, i) => ({
 
       <MoneyPageDecisionBox rules={DECISION_RULES} />
       <MoneyPageQuickCompare picks={PICKS} />
+      <MoneyPageTrustBlock />
+      <MoneyPageRoutes routes={routes} />
 <section className="mt-12 grid gap-4 md:grid-cols-3">
         <div className="card">
           <h2 className="text-lg font-semibold">What to look for</h2>
@@ -232,23 +213,7 @@ const itemList = PICKS.map((p, i) => ({
         />
       </section>
 
-      <section className="mt-14 max-w-3xl">
-        <h2 className="text-2xl font-semibold">FAQ</h2>
-        <div className="mt-4 space-y-5 text-zinc-700">
-          <div>
-            <h3 className="font-semibold">Is “natural fragrance” the same as fragrance-free?</h3>
-            <p className="mt-1 text-sm text-zinc-700">
-              No. “Natural fragrance” can still contain sensitising compounds. If scent is an issue, choose products labelled fragrance-free.
-            </p>
-          </div>
-          <div>
-            <h3 className="font-semibold">Why does my laundry still smell after switching?</h3>
-            <p className="mt-1 text-sm text-zinc-700">
-              Fragrance can linger in fabrics and in the washing machine. Run a hot maintenance wash, clean the drawer/seal, and consider an extra rinse for a week or two.
-            </p>
-          </div>
-        </div>
-      </section>
+      <FAQSection faqs={faqs} />
 
       <section className="mt-14">
         <h2 className="text-2xl font-semibold">Shortlist (buyer-friendly)</h2>
@@ -272,7 +237,7 @@ const itemList = PICKS.map((p, i) => ({
         </div>
       </section>
 
-      <MoneyPageUpdateLog updatedLabel={UPDATED_LABEL} prevUpdatedLabel={PREV_UPDATED_LABEL} changes={UPDATE_CHANGES} />
+      <MoneyPageUpdateLog updatedLabel={PHASE22_UPDATED_LABEL} prevUpdatedLabel={PHASE22_PREV_UPDATED_LABEL} changes={UPDATE_CHANGES} />
       <MoneyPageNextLinks slug="best-fragrance-free-laundry-detergents-uk"  includeSignup={false} />
 
       <p className="mt-12 text-xs text-zinc-500">

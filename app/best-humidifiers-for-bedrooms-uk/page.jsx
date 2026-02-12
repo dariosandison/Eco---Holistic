@@ -1,15 +1,21 @@
 import Link from 'next/link'
 import StructuredData from '@/components/StructuredData'
+import { PHASE22_UPDATED, PHASE22_UPDATED_LABEL, PHASE22_PREV_UPDATED_LABEL, PHASE22_DEFAULT_UPDATE_CHANGES } from '@/lib/phase22'
 import ComparisonTable from '@/components/ComparisonTable'
 import ProductPick from '@/components/mdx/ProductPick'
 import { amazonSearchUrl } from '@/lib/amazon'
 import EducationFirstCallout from '@/components/EducationFirstCallout'
 import MoneyPageEducationBlock from '@/components/MoneyPageEducationBlock'
 import { getMoneyPageEdu } from '@/lib/moneyPageEdu'
+import { getTop10Meta } from '@/data/top10Meta'
 import MoneyPageNextLinks from '@/components/MoneyPageNextLinks'
 import MoneyPageDecisionBox from '@/components/MoneyPageDecisionBox'
 import MoneyPageQuickCompare from '@/components/MoneyPageQuickCompare'
 import MoneyPageUpdateLog from '@/components/MoneyPageUpdateLog'
+import BestForBadges from '@/components/BestForBadges'
+import FAQSection from '@/components/FAQSection'
+import MoneyPageTrustBlock from '@/components/MoneyPageTrustBlock'
+import MoneyPageRoutes from '@/components/MoneyPageRoutes'
 
 
 
@@ -19,14 +25,7 @@ export const metadata = {
   description: 'A shortlist for bedroom humidifiers in the UK: what to look for, what to avoid, and simple maintenance rules.',
 }
 
-const UPDATED = '2026-02-12'
-const UPDATED_LABEL = 'February 12, 2026'
-const PREV_UPDATED_LABEL = 'February 2, 2026'
-const UPDATE_CHANGES = [
-  'Refreshed this shortlist for availability and clarity.',
-  'Added a 10‑second decision box and quick comparison table for faster choosing.',
-  'Updated internal links to supporting guides and topic hubs.',
-]
+const UPDATE_CHANGES = PHASE22_DEFAULT_UPDATE_CHANGES
 const DECISION_RULES = [
   { if: 'Dry air symptoms (throat/skin/static)', then: 'Use a humidifier only if your bedroom regularly sits below ~35–40% RH.', note: 'Measure first with a hygrometer.' },
   { if: 'Condensation/mould risk', then: 'Don’t humidify above ~55% RH; ventilation + dehumidifying may be the fix instead.' },
@@ -78,7 +77,7 @@ function QuickSummary(){
         <Link className="btn-secondary" href="/blog/winter-humidity-guide">Humidity guide</Link>
         <Link className="btn-secondary" href="/shopping-list">Free shopping list</Link>
       </div>
-      <p className="mt-4 text-xs text-zinc-500">Last updated: {UPDATED_LABEL} · Wild & Well Editorial Team</p>
+      <p className="mt-4 text-xs text-zinc-500">Last updated: {PHASE22_UPDATED_LABEL} · Wild & Well Editorial Team</p>
     </div>
   )
 }
@@ -86,6 +85,8 @@ function QuickSummary(){
 export default function Page(){
     
   const edu = getMoneyPageEdu('best-humidifiers-for-bedrooms-uk')
+
+  const { bestFor, routes, faqs } = getTop10Meta('best-humidifiers-for-bedrooms-uk')
 
 const itemList = PICKS.map((p, i) => ({
     '@type': 'ListItem',
@@ -98,56 +99,26 @@ const itemList = PICKS.map((p, i) => ({
     '@context': 'https://schema.org',
     '@type': 'Article',
     headline: 'Humidifiers for Bedrooms (UK): shortlist',
-    dateModified: UPDATED,
+    dateModified: PHASE22_UPDATED,
     datePublished: '2026-01-29',
     mainEntity: {
       '@type': 'ItemList',
       itemListElement: itemList,
     },
   }
-
-  const faqLd = {
-    '@context': 'https://schema.org',
-    '@type': 'FAQPage',
-    mainEntity: [
-      {
-        '@type': 'Question',
-        name: 'What humidity level should I aim for?',
-        acceptedAnswer: {
-          '@type': 'Answer',
-          text: 'Aim for a comfortable mid-range. The key is avoiding very high humidity for long periods, which can increase mould risk in bedrooms.',
-        },
-      },
-      {
-        '@type': 'Question',
-        name: 'Is an ultrasonic humidifier safe?',
-        acceptedAnswer: {
-          '@type': 'Answer',
-          text: 'Generally yes when used correctly, but maintenance matters. Choose an easy-to-clean design, clean it regularly, and avoid over-humidifying small rooms.',
-        },
-      },
-      {
-        '@type': 'Question',
-        name: 'What is the hidden cost of humidifiers?',
-        acceptedAnswer: {
-          '@type': 'Answer',
-          text: 'Maintenance supplies and (for evaporative units) replacement wicks/filters. Check ongoing costs before buying.',
-        },
-      },
-    ],
-  }
-
   return (
     <main className="mx-auto max-w-6xl px-4 py-16">
       <StructuredData data={ld} />
-      <StructuredData data={faqLd} />
 
       <header>
         <div className="max-w-3xl">
         <h1 className="text-4xl font-bold">Humidifiers for bedrooms (UK): shortlist</h1>
         <p className="mt-3 text-zinc-700">
           A shortlist with simple decision rules: what to buy, what to avoid, and how to keep humidity in a sensible range.
+
         </p>
+
+        <BestForBadges items={bestFor} />
 
         </div>
 
@@ -171,6 +142,8 @@ const itemList = PICKS.map((p, i) => ({
 
       <MoneyPageDecisionBox rules={DECISION_RULES} />
       <MoneyPageQuickCompare picks={PICKS} />
+      <MoneyPageTrustBlock />
+      <MoneyPageRoutes routes={routes} />
 <section className="mt-10">
         <QuickSummary />
       </section>
@@ -248,23 +221,7 @@ const itemList = PICKS.map((p, i) => ({
         </div>
       </section>
 
-      <section className="mt-14 max-w-3xl">
-        <h2 className="text-2xl font-semibold">FAQ</h2>
-        <div className="mt-4 space-y-5 text-zinc-700">
-          <div>
-            <h3 className="font-semibold">Do I need a humidifier?</h3>
-            <p className="mt-1 text-sm">Only if your bedroom is consistently dry. Measure first with a hygrometer.</p>
-          </div>
-          <div>
-            <h3 className="font-semibold">What’s the biggest mistake?</h3>
-            <p className="mt-1 text-sm">Over-humidifying. Comfort improves in the mid-range — high humidity increases mould risk.</p>
-          </div>
-          <div>
-            <h3 className="font-semibold">How often should I clean it?</h3>
-            <p className="mt-1 text-sm">Follow the manufacturer guidance, but plan on regular cleaning. Easy-to-clean designs get used properly.</p>
-          </div>
-        </div>
-      </section>
+      <FAQSection faqs={faqs} />
 
       <section className="mt-12 rounded-2xl border bg-white p-6 shadow-sm max-w-3xl">
         <h2 className="text-xl font-semibold mb-2">New to low-tox living?</h2>
@@ -276,7 +233,7 @@ const itemList = PICKS.map((p, i) => ({
         Some links are affiliate links. If you buy via them, we earn a commission.
       </p>
 
-      <MoneyPageUpdateLog updatedLabel={UPDATED_LABEL} prevUpdatedLabel={PREV_UPDATED_LABEL} changes={UPDATE_CHANGES} />
+      <MoneyPageUpdateLog updatedLabel={PHASE22_UPDATED_LABEL} prevUpdatedLabel={PHASE22_PREV_UPDATED_LABEL} changes={UPDATE_CHANGES} />
     
       <MoneyPageNextLinks slug="best-humidifiers-for-bedrooms-uk" />
 

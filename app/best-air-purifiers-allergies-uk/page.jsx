@@ -1,16 +1,22 @@
 import Link from 'next/link'
 import StructuredData from '@/components/StructuredData'
+import { PHASE22_UPDATED, PHASE22_UPDATED_LABEL, PHASE22_PREV_UPDATED_LABEL, PHASE22_DEFAULT_UPDATE_CHANGES } from '@/lib/phase22'
 import ComparisonTable from '@/components/ComparisonTable'
 import ProductPick from '@/components/mdx/ProductPick'
 import { amazonSearchUrl } from '@/lib/amazon'
 import EducationFirstCallout from '@/components/EducationFirstCallout'
 import MoneyPageEducationBlock from '@/components/MoneyPageEducationBlock'
 import { getMoneyPageEdu } from '@/lib/moneyPageEdu'
+import { getTop10Meta } from '@/data/top10Meta'
 import MoneyPageNextLinks from '@/components/MoneyPageNextLinks'
 import InlineSignup from '@/components/InlineSignup'
 import MoneyPageDecisionBox from '@/components/MoneyPageDecisionBox'
 import MoneyPageQuickCompare from '@/components/MoneyPageQuickCompare'
 import MoneyPageUpdateLog from '@/components/MoneyPageUpdateLog'
+import BestForBadges from '@/components/BestForBadges'
+import FAQSection from '@/components/FAQSection'
+import MoneyPageTrustBlock from '@/components/MoneyPageTrustBlock'
+import MoneyPageRoutes from '@/components/MoneyPageRoutes'
 
 
 
@@ -20,14 +26,7 @@ export const metadata = {
   description: 'Shortlisted HEPA air purifiers for allergies in UK homes — what matters, what to skip, and top options for bedrooms and living rooms.',
 }
 
-const UPDATED = '2026-02-12'
-const UPDATED_LABEL = 'February 12, 2026'
-const PREV_UPDATED_LABEL = 'February 2, 2026'
-const UPDATE_CHANGES = [
-  'Refreshed this shortlist for availability and clarity.',
-  'Added a 10‑second decision box and quick comparison table for faster choosing.',
-  'Updated internal links to supporting guides and topic hubs.',
-]
+const UPDATE_CHANGES = PHASE22_DEFAULT_UPDATE_CHANGES
 const DECISION_RULES = [
   { if: 'Allergies worst in the bedroom at night', then: 'Start with a quiet bedroom‑friendly HEPA pick (night mode matters).', note: 'Size it to the bedroom you sleep in, not the whole home.' },
   { if: 'You’re buying for a larger living room', then: 'Choose a higher‑coverage (large room) unit rather than the smallest “HEPA” you can find.', note: 'Too small is the #1 reason people see no benefit.' },
@@ -84,6 +83,8 @@ export default function Page() {
     
   const edu = getMoneyPageEdu('best-air-purifiers-allergies-uk')
 
+  const { bestFor, routes, faqs } = getTop10Meta('best-air-purifiers-allergies-uk')
+
 const itemList = PICKS.map((p, i) => ({
     '@type': 'ListItem',
     position: i + 1,
@@ -95,53 +96,23 @@ const itemList = PICKS.map((p, i) => ({
     '@context': 'https://schema.org',
     '@type': 'Article',
     headline: 'Air Purifiers for Allergies (UK): shortlist',
-    dateModified: UPDATED,
+    dateModified: PHASE22_UPDATED,
     datePublished: '2026-01-25',
     mainEntity: { '@type': 'ItemList', itemListElement: itemList },
   }
-
-  const faqLd = {
-    '@context': 'https://schema.org',
-    '@type': 'FAQPage',
-    mainEntity: [
-      {
-        '@type': 'Question',
-        name: 'Do air purifiers help with pollen allergies?',
-        acceptedAnswer: {
-          '@type': 'Answer',
-          text: 'They can reduce airborne particles indoors, but only if the unit is sized correctly for the room and you run it consistently (especially during high pollen periods).',
-        },
-      },
-      {
-        '@type': 'Question',
-        name: 'What matters most when choosing an air purifier?',
-        acceptedAnswer: {
-          '@type': 'Answer',
-          text: 'Room-size coverage, true HEPA filtration for particles, and realistic filter replacement costs. Quiet operation matters most for bedrooms.',
-        },
-      },
-      {
-        '@type': 'Question',
-        name: 'How often do air purifier filters need replacing?',
-        acceptedAnswer: {
-          '@type': 'Answer',
-          text: 'It varies by model, home conditions, and run time. Check the manufacturer guidance and always confirm replacement filter price and availability before buying.',
-        },
-      },
-    ],
-  }
-
   return (
     <main className="mx-auto max-w-6xl px-4 py-16">
       <StructuredData data={ld} />
-      <StructuredData data={faqLd} />
 
       <header>
         <div className="max-w-3xl">
         <h1 className="text-4xl font-bold">Air purifiers for allergies (UK): shortlist</h1>
         <p className="mt-3 text-zinc-700">
           The biggest mistake is buying a purifier that’s too small for the room. Size first, features second.
+
         </p>
+
+        <BestForBadges items={bestFor} />
 
         </div>
 
@@ -162,7 +133,7 @@ const itemList = PICKS.map((p, i) => ({
           <Link className="btn-secondary" href="/blog/healthy-air-at-home">Healthy air guide</Link>
           <Link className="btn-secondary" href="/best-air-purifiers-small-flats-uk">Small flats list</Link>
         </div>
-        <p className="mt-4 text-xs text-zinc-500">Last updated: {UPDATED_LABEL} · Wild & Well Editorial Team</p>
+        <p className="mt-4 text-xs text-zinc-500">Last updated: {PHASE22_UPDATED_LABEL} · Wild & Well Editorial Team</p>
         </div>
       </header>
 
@@ -171,6 +142,8 @@ const itemList = PICKS.map((p, i) => ({
 
       <MoneyPageDecisionBox rules={DECISION_RULES} />
       <MoneyPageQuickCompare picks={PICKS} />
+      <MoneyPageTrustBlock />
+      <MoneyPageRoutes routes={routes} />
 <section className="mt-12 grid gap-4 md:grid-cols-3">
         <div className="card">
           <h2 className="text-lg font-semibold">What matters</h2>
@@ -279,25 +252,9 @@ const itemList = PICKS.map((p, i) => ({
         </div>
       </section>
 
-      <section className="mt-14 max-w-3xl">
-        <h2 className="text-2xl font-semibold">FAQ</h2>
-        <div className="mt-4 space-y-5 text-zinc-700">
-          <div>
-            <h3 className="font-semibold">Do air purifiers help with pollen?</h3>
-            <p className="mt-1 text-sm text-zinc-700">
-              They can reduce airborne particles indoors — but only if the unit is sized correctly and you run it consistently.
-            </p>
-          </div>
-          <div>
-            <h3 className="font-semibold">How often do filters need replacing?</h3>
-            <p className="mt-1 text-sm text-zinc-700">
-              It depends on your home and how often you run it. Always check the replacement cost before you buy.
-            </p>
-          </div>
-        </div>
-      </section>
+      <FAQSection faqs={faqs} />
 
-      <MoneyPageUpdateLog updatedLabel={UPDATED_LABEL} prevUpdatedLabel={PREV_UPDATED_LABEL} changes={UPDATE_CHANGES} />
+      <MoneyPageUpdateLog updatedLabel={PHASE22_UPDATED_LABEL} prevUpdatedLabel={PHASE22_PREV_UPDATED_LABEL} changes={UPDATE_CHANGES} />
       <MoneyPageNextLinks slug="best-air-purifiers-allergies-uk"  includeSignup={false} />
 
       <p className="mt-12 text-xs text-zinc-500">

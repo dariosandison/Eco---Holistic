@@ -1,16 +1,22 @@
 import Link from 'next/link'
 import StructuredData from '@/components/StructuredData'
+import { PHASE22_UPDATED, PHASE22_UPDATED_LABEL, PHASE22_PREV_UPDATED_LABEL, PHASE22_DEFAULT_UPDATE_CHANGES } from '@/lib/phase22'
 import ComparisonTable from '@/components/ComparisonTable'
 import ProductPick from '@/components/mdx/ProductPick'
 import { amazonSearchUrl } from '@/lib/amazon'
 import EducationFirstCallout from '@/components/EducationFirstCallout'
 import MoneyPageEducationBlock from '@/components/MoneyPageEducationBlock'
 import { getMoneyPageEdu } from '@/lib/moneyPageEdu'
+import { getTop10Meta } from '@/data/top10Meta'
 import MoneyPageNextLinks from '@/components/MoneyPageNextLinks'
 import InlineSignup from '@/components/InlineSignup'
 import MoneyPageDecisionBox from '@/components/MoneyPageDecisionBox'
 import MoneyPageQuickCompare from '@/components/MoneyPageQuickCompare'
 import MoneyPageUpdateLog from '@/components/MoneyPageUpdateLog'
+import BestForBadges from '@/components/BestForBadges'
+import FAQSection from '@/components/FAQSection'
+import MoneyPageTrustBlock from '@/components/MoneyPageTrustBlock'
+import MoneyPageRoutes from '@/components/MoneyPageRoutes'
 
 
 
@@ -27,14 +33,7 @@ const DOULTON_BB_GRAVITY_1L = 'https://www.awin1.com/cread.php?awinmid=69790&awi
 const WATERTOGO_ACTIVE_75CL = 'https://www.awin1.com/cread.php?awinmid=86997&awinaffid=2754234&clickref=ww_water_picks_filter_bottle_watertogo_active_75cl&ued=https%3A%2F%2Fwatertogo.eu%2Fproduct%2F75cl-active-bottles%2F'
 const ZW_FILTERS_AMAZON = amazonSearchUrl('ZeroWater replacement filters 5-stage')
 
-const UPDATED = '2026-02-12'
-const UPDATED_LABEL = 'February 12, 2026'
-const PREV_UPDATED_LABEL = 'February 2, 2026'
-const UPDATE_CHANGES = [
-  'Refreshed this shortlist for availability and clarity.',
-  'Added a 10‑second decision box and quick comparison table for faster choosing.',
-  'Updated internal links to supporting guides and topic hubs.',
-]
+const UPDATE_CHANGES = PHASE22_DEFAULT_UPDATE_CHANGES
 const DECISION_RULES = [
   { if: 'You want the simplest start', then: 'Begin with a reputable jug filter and see if taste improves.', note: 'Jugs aren’t a full solution for every contaminant.' },
   { if: 'You want the most convenient daily option', then: 'Consider an under‑sink or tap‑mounted system if installation is possible.', note: 'Check replacement cartridge availability/cost.' },
@@ -99,7 +98,7 @@ function QuickSummary() {
         <Link className="btn-secondary" href="/blog/water-filter-buying-guide-uk">Buying guide</Link>
         <Link className="btn-secondary" href="/shopping-list">Free shopping list</Link>
       </div>
-      <p className="mt-4 text-xs text-zinc-500">Last updated: {UPDATED_LABEL} · Wild & Well Editorial Team</p>
+      <p className="mt-4 text-xs text-zinc-500">Last updated: {PHASE22_UPDATED_LABEL} · Wild & Well Editorial Team</p>
     </div>
   )
 }
@@ -107,6 +106,8 @@ function QuickSummary() {
 export default function Page() {
     
   const edu = getMoneyPageEdu('best-water-filters-uk')
+
+  const { bestFor, routes, faqs } = getTop10Meta('best-water-filters-uk')
 
 const itemList = PICKS.map((p, i) => ({
     '@type': 'ListItem',
@@ -119,56 +120,26 @@ const itemList = PICKS.map((p, i) => ({
     '@context': 'https://schema.org',
     '@type': 'Article',
     headline: 'Water Filters (UK) — Jugs vs Under‑Sink vs Countertop: shortlist',
-    dateModified: UPDATED,
+    dateModified: PHASE22_UPDATED,
     datePublished: '2026-01-25',
     mainEntity: {
       '@type': 'ItemList',
       itemListElement: itemList,
     },
   }
-
-  const faqLd = {
-    '@context': 'https://schema.org',
-    '@type': 'FAQPage',
-    mainEntity: [
-      {
-        '@type': 'Question',
-        name: 'Is an under-sink filter better than a jug?',
-        acceptedAnswer: {
-          '@type': 'Answer',
-          text: 'Not automatically. Under-sink filters are mainly about convenience. The best choice is the one you will maintain and replace filters for.',
-        },
-      },
-      {
-        '@type': 'Question',
-        name: 'What is the hidden cost of water filters?',
-        acceptedAnswer: {
-          '@type': 'Answer',
-          text: 'Replacement filters. Before buying, check the replacement price and how often you will replace it based on your household usage.',
-        },
-      },
-      {
-        '@type': 'Question',
-        name: 'Do certifications matter?',
-        acceptedAnswer: {
-          '@type': 'Answer',
-          text: 'When brands make big performance claims, credible test reports matter. If claims are vague or unsupported, treat them as marketing until proven.',
-        },
-      },
-    ],
-  }
-
   return (
     <main className="mx-auto max-w-6xl px-4 py-16">
       <StructuredData data={ld} />
-      <StructuredData data={faqLd} />
 
       <header>
         <div className="max-w-3xl">
         <h1 className="text-4xl font-bold">Water filters (UK): shortlist</h1>
         <p className="mt-3 text-zinc-700">
           A shortlist — not an endless list. The best choice is the one you’ll actually use and keep replacing filters for.
+
         </p>
+
+        <BestForBadges items={bestFor} />
 
         </div>
 
@@ -192,6 +163,8 @@ const itemList = PICKS.map((p, i) => ({
 
       <MoneyPageDecisionBox rules={DECISION_RULES} />
       <MoneyPageQuickCompare picks={PICKS} />
+      <MoneyPageTrustBlock />
+      <MoneyPageRoutes routes={routes} />
 <section className="mt-10">
         <QuickSummary />
       </section>
@@ -329,31 +302,9 @@ const itemList = PICKS.map((p, i) => ({
         </div>
       </section>
 
-      <section className="mt-14 max-w-3xl">
-        <h2 className="text-2xl font-semibold">FAQ</h2>
-        <div className="mt-4 space-y-5 text-zinc-700">
-          <div>
-            <h3 className="font-semibold">Is an under‑sink filter “better” than a jug?</h3>
-            <p className="mt-1 text-sm text-zinc-700">
-              Not automatically. Under‑sink is mainly about convenience. The best filter is the one you’ll maintain.
-            </p>
-          </div>
-          <div>
-            <h3 className="font-semibold">What’s the hidden cost?</h3>
-            <p className="mt-1 text-sm text-zinc-700">
-              Replacements. Before buying, check filter price + how often you’ll replace it.
-            </p>
-          </div>
-          <div>
-            <h3 className="font-semibold">Should I worry about “certifications”?</h3>
-            <p className="mt-1 text-sm text-zinc-700">
-              When brands make big claims, credible test reports matter. If claims are vague, treat them as marketing.
-            </p>
-          </div>
-        </div>
-      </section>
+      <FAQSection faqs={faqs} />
 
-      <MoneyPageUpdateLog updatedLabel={UPDATED_LABEL} prevUpdatedLabel={PREV_UPDATED_LABEL} changes={UPDATE_CHANGES} />
+      <MoneyPageUpdateLog updatedLabel={PHASE22_UPDATED_LABEL} prevUpdatedLabel={PHASE22_PREV_UPDATED_LABEL} changes={UPDATE_CHANGES} />
       <MoneyPageNextLinks slug="best-water-filters-uk"  includeSignup={false} />
 
       <p className="mt-12 text-xs text-zinc-500">

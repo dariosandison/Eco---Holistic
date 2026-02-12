@@ -1,15 +1,21 @@
 import Link from 'next/link'
 import StructuredData from '@/components/StructuredData'
+import { PHASE22_UPDATED, PHASE22_UPDATED_LABEL, PHASE22_PREV_UPDATED_LABEL, PHASE22_DEFAULT_UPDATE_CHANGES } from '@/lib/phase22'
 import ComparisonTable from '@/components/ComparisonTable'
 import ProductPick from '@/components/mdx/ProductPick'
 import { amazonSearchUrl } from '@/lib/amazon'
 import EducationFirstCallout from '@/components/EducationFirstCallout'
 import MoneyPageEducationBlock from '@/components/MoneyPageEducationBlock'
 import { getMoneyPageEdu } from '@/lib/moneyPageEdu'
+import { getTop10Meta } from '@/data/top10Meta'
 import MoneyPageNextLinks from '@/components/MoneyPageNextLinks'
 import MoneyPageDecisionBox from '@/components/MoneyPageDecisionBox'
 import MoneyPageQuickCompare from '@/components/MoneyPageQuickCompare'
 import MoneyPageUpdateLog from '@/components/MoneyPageUpdateLog'
+import BestForBadges from '@/components/BestForBadges'
+import FAQSection from '@/components/FAQSection'
+import MoneyPageTrustBlock from '@/components/MoneyPageTrustBlock'
+import MoneyPageRoutes from '@/components/MoneyPageRoutes'
 
 export const metadata = {
   title: 'Natural sleep support: our shortlist',
@@ -20,14 +26,7 @@ export const metadata = {
 const LEVITEX_SLEEP_POSTURE_PILLOW = 'https://www.awin1.com/cread.php?awinmid=28333&awinaffid=2754234&clickref=ww_sleep_picks_sleep_posture_pillow_levitex&ued=https%3A%2F%2Flevitex.co.uk%2Fproducts%2Fsleep-posture-pillow'
 const RITUALANDFLOW_DREAM_FLOW = 'https://www.awin1.com/cread.php?awinmid=112594&awinaffid=2754234&clickref=ww_sleep_picks_magnesium_hot_chocolate_ritualandflow_dreamflow&ued=https%3A%2F%2Fritualandflow.com%2Fproducts%2Fdream-flow'
 
-const UPDATED = '2026-02-12'
-const UPDATED_LABEL = 'February 12, 2026'
-const PREV_UPDATED_LABEL = 'February 2, 2026'
-const UPDATE_CHANGES = [
-  'Refreshed this shortlist for availability and clarity.',
-  'Added a 10‑second decision box and quick comparison table for faster choosing.',
-  'Updated internal links to supporting guides and topic hubs.',
-]
+const UPDATE_CHANGES = PHASE22_DEFAULT_UPDATE_CHANGES
 const DECISION_RULES = [
   { if: 'Trouble falling asleep', then: 'Start with basics (light/caffeine/timing) then consider a simple supplement option.' },
   { if: 'You wake in the night', then: 'Look at temperature/light/noise first; supplements help less if the environment is wrong.' },
@@ -83,6 +82,8 @@ export default function Page() {
     
   const edu = getMoneyPageEdu('best-natural-sleep-support')
 
+  const { bestFor, routes, faqs } = getTop10Meta('best-natural-sleep-support')
+
 const itemList = PICKS.map((p, i) => ({
     '@type': 'ListItem',
     position: i + 1,
@@ -94,56 +95,23 @@ const itemList = PICKS.map((p, i) => ({
     '@context': 'https://schema.org',
     '@type': 'Article',
     headline: 'Natural sleep support: our shortlist',
-    dateModified: UPDATED,
+    dateModified: PHASE22_UPDATED,
     datePublished: '2026-01-25',
     mainEntity: { '@type': 'ItemList', itemListElement: itemList },
   }
-
-  const faqLd = {
-    '@context': 'https://schema.org',
-    '@type': 'FAQPage',
-    mainEntity: [
-      {
-        '@type': 'Question',
-        name: 'What is the best natural sleep support to try first?',
-        acceptedAnswer: {
-          '@type': 'Answer',
-          text:
-            'Start with environment and timing: consistent wake time, morning light, a cooler darker room, and an earlier caffeine cut-off. If you add a product, try one simple option at a time (not a big stack).',
-        },
-      },
-      {
-        '@type': 'Question',
-        name: 'Is magnesium good for sleep?',
-        acceptedAnswer: {
-          '@type': 'Answer',
-          text:
-            'Many people choose magnesium as a gentle evening supplement. Look for glycinate/bisglycinate rather than oxide, start low, and check with a clinician if you are pregnant or on medication.',
-        },
-      },
-      {
-        '@type': 'Question',
-        name: 'How long should I test a sleep supplement?',
-        acceptedAnswer: {
-          '@type': 'Answer',
-          text:
-            'Give one change 5–7 nights while keeping your routine steady. Track bedtime, wake-ups, and next-day grogginess before adding anything else.',
-        },
-      },
-    ],
-  }
-
   return (
     <main className="mx-auto max-w-6xl px-4 py-16">
       <StructuredData data={ld} />
-      <StructuredData data={faqLd} />
 
       <header>
         <div className="max-w-3xl">
         <h1 className="text-4xl font-bold">Natural sleep support: our shortlist</h1>
         <p className="mt-3 text-zinc-700">
           The best “sleep support” is usually a few simple environment and timing fixes. Supplements are optional — and should stay simple.
+
         </p>
+
+        <BestForBadges items={bestFor} />
 
         </div>
 
@@ -164,7 +132,7 @@ const itemList = PICKS.map((p, i) => ({
           <Link className="btn-secondary" href="/blog/sleep-naturally-simple-guide">Cornerstone sleep guide</Link>
           <Link className="btn-secondary" href="/shopping-list">Free shopping list</Link>
         </div>
-        <p className="mt-4 text-xs text-zinc-500">Last updated: {UPDATED_LABEL} · Wild & Well Editorial Team</p>
+        <p className="mt-4 text-xs text-zinc-500">Last updated: {PHASE22_UPDATED_LABEL} · Wild & Well Editorial Team</p>
         </div>
       </header>
 
@@ -173,6 +141,8 @@ const itemList = PICKS.map((p, i) => ({
 
       <MoneyPageDecisionBox rules={DECISION_RULES} />
       <MoneyPageQuickCompare picks={PICKS} />
+      <MoneyPageTrustBlock />
+      <MoneyPageRoutes routes={routes} />
 <section className="mt-12 grid gap-4 md:grid-cols-3">
         <div className="card">
           <h2 className="text-lg font-semibold">Start here</h2>
@@ -327,7 +297,9 @@ const itemList = PICKS.map((p, i) => ({
         </div>
       </section>
 
-      <MoneyPageUpdateLog updatedLabel={UPDATED_LABEL} prevUpdatedLabel={PREV_UPDATED_LABEL} changes={UPDATE_CHANGES} />
+      <FAQSection faqs={faqs} />
+
+      <MoneyPageUpdateLog updatedLabel={PHASE22_UPDATED_LABEL} prevUpdatedLabel={PHASE22_PREV_UPDATED_LABEL} changes={UPDATE_CHANGES} />
       <MoneyPageNextLinks slug="best-natural-sleep-support" />
 
       <p className="mt-12 text-xs text-zinc-500">

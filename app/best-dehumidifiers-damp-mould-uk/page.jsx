@@ -1,15 +1,21 @@
 import Link from 'next/link'
 import StructuredData from '@/components/StructuredData'
+import { PHASE22_UPDATED, PHASE22_UPDATED_LABEL, PHASE22_PREV_UPDATED_LABEL, PHASE22_DEFAULT_UPDATE_CHANGES } from '@/lib/phase22'
 import ComparisonTable from '@/components/ComparisonTable'
 import ProductPick from '@/components/mdx/ProductPick'
 import { amazonSearchUrl } from '@/lib/amazon'
 import EducationFirstCallout from '@/components/EducationFirstCallout'
 import MoneyPageEducationBlock from '@/components/MoneyPageEducationBlock'
 import { getMoneyPageEdu } from '@/lib/moneyPageEdu'
+import { getTop10Meta } from '@/data/top10Meta'
 import MoneyPageNextLinks from '@/components/MoneyPageNextLinks'
 import MoneyPageDecisionBox from '@/components/MoneyPageDecisionBox'
 import MoneyPageQuickCompare from '@/components/MoneyPageQuickCompare'
 import MoneyPageUpdateLog from '@/components/MoneyPageUpdateLog'
+import BestForBadges from '@/components/BestForBadges'
+import FAQSection from '@/components/FAQSection'
+import MoneyPageTrustBlock from '@/components/MoneyPageTrustBlock'
+import MoneyPageRoutes from '@/components/MoneyPageRoutes'
 
 const MEACO_ARETE_ONE_25L = 'https://www.awin1.com/cread.php?awinmid=31711&awinaffid=2754234&clickref=ww_home_air_meaco_arete_one_25l&ued=https%3A%2F%2Fwww.meaco.com%2Fproducts%2Fmeacodry-arete-one-25l-dehumidifier-and-air-purifier'
 
@@ -19,14 +25,7 @@ export const metadata = {
     'A practical shortlist for UK homes: dehumidifiers for damp, condensation and laundry drying — with simple rules on size, type and running costs.',
 }
 
-const UPDATED = '2026-02-12'
-const UPDATED_LABEL = 'February 12, 2026'
-const PREV_UPDATED_LABEL = 'February 2, 2026'
-const UPDATE_CHANGES = [
-  'Refreshed this shortlist for availability and clarity.',
-  'Added a 10‑second decision box and quick comparison table for faster choosing.',
-  'Updated internal links to supporting guides and topic hubs.',
-]
+const UPDATE_CHANGES = PHASE22_DEFAULT_UPDATE_CHANGES
 const DECISION_RULES = [
   { if: 'Cold rooms / laundry drying is the problem', then: 'A desiccant dehumidifier is often the easiest win in UK winters.', note: 'Trade‑off: can cost more to run than compressor units.' },
   { if: 'Warmer living areas with steady damp', then: 'A compressor unit often wins on running cost for everyday use.', note: 'Less effective in colder rooms.' },
@@ -96,7 +95,7 @@ function QuickSummary() {
         <Link className="btn-secondary" href="/blog/damp-and-mould-uk-renters-playbook">Renters damp &amp; mould playbook</Link>
         <Link className="btn-secondary" href="/shopping-list">Free shopping list</Link>
       </div>
-      <p className="mt-4 text-xs text-zinc-500">Last updated: {UPDATED_LABEL} · Wild & Well Editorial Team</p>
+      <p className="mt-4 text-xs text-zinc-500">Last updated: {PHASE22_UPDATED_LABEL} · Wild & Well Editorial Team</p>
     </div>
   )
 }
@@ -116,56 +115,26 @@ export default function Page() {
     '@context': 'https://schema.org',
     '@type': 'Article',
     headline: 'Best dehumidifiers for damp & mould (UK): what to buy first',
-    dateModified: UPDATED,
+    dateModified: PHASE22_UPDATED,
     datePublished: '2026-02-01',
     mainEntity: {
       '@type': 'ItemList',
       itemListElement: itemList,
     },
   }
-
-  const faqLd = {
-    '@context': 'https://schema.org',
-    '@type': 'FAQPage',
-    mainEntity: [
-      {
-        '@type': 'Question',
-        name: 'Do I need a dehumidifier or an air purifier for damp and mould?',
-        acceptedAnswer: {
-          '@type': 'Answer',
-          text: 'For damp and condensation, dehumidifying plus ventilation is usually more direct. Air purifiers can help with particles, but they do not remove moisture from the air.',
-        },
-      },
-      {
-        '@type': 'Question',
-        name: 'Desiccant vs compressor: which is better for UK winters?',
-        acceptedAnswer: {
-          '@type': 'Answer',
-          text: 'Desiccant units often perform well in colder rooms and can be great for laundry drying. Compressor units are often more efficient in warmer rooms but can struggle more as temperatures drop.',
-        },
-      },
-      {
-        '@type': 'Question',
-        name: 'What size dehumidifier should I buy?',
-        acceptedAnswer: {
-          '@type': 'Answer',
-          text: 'Choose based on room size and moisture load (laundry drying, condensation, number of occupants). As a rule, go a bit larger than you think if the problem is persistent — small units can take much longer.',
-        },
-      },
-    ],
-  }
-
   return (
     <main className="mx-auto max-w-6xl px-4 py-16">
       <StructuredData data={ld} />
-      <StructuredData data={faqLd} />
 
       <header>
         <div className="max-w-3xl">
         <h1 className="text-4xl font-bold">Best dehumidifiers for damp &amp; mould (UK)</h1>
         <p className="mt-3 text-zinc-700">
           A shortlist with simple decision rules: what to buy first for damp rooms, condensation, and laundry drying — without overcomplicating it.
+
         </p>
+
+        <BestForBadges items={bestFor} />
 
         </div>
 
@@ -193,6 +162,8 @@ export default function Page() {
 
       <MoneyPageDecisionBox rules={DECISION_RULES} />
       <MoneyPageQuickCompare picks={PICKS} />
+      <MoneyPageTrustBlock />
+      <MoneyPageRoutes routes={routes} />
 
       <section className="mt-10">
         <QuickSummary />
@@ -315,7 +286,9 @@ export default function Page() {
         <p className="mt-3 text-xs text-zinc-500">Some links are affiliate links. If you buy via them, we earn a commission.</p>
       </section>
 
-      <MoneyPageUpdateLog updatedLabel={UPDATED_LABEL} prevUpdatedLabel={PREV_UPDATED_LABEL} changes={UPDATE_CHANGES} />
+      <FAQSection faqs={faqs} />
+
+      <MoneyPageUpdateLog updatedLabel={PHASE22_UPDATED_LABEL} prevUpdatedLabel={PHASE22_PREV_UPDATED_LABEL} changes={UPDATE_CHANGES} />
 
       <MoneyPageNextLinks slug={slug} />
 

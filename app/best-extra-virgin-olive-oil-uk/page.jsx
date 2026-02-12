@@ -1,15 +1,21 @@
 import Link from 'next/link'
 import StructuredData from '@/components/StructuredData'
+import { PHASE22_UPDATED, PHASE22_UPDATED_LABEL, PHASE22_PREV_UPDATED_LABEL, PHASE22_DEFAULT_UPDATE_CHANGES } from '@/lib/phase22'
 import ProductPick from '@/components/mdx/ProductPick'
 import { amazonSearchUrl } from '@/lib/amazon'
 import EducationFirstCallout from '@/components/EducationFirstCallout'
 import MoneyPageEducationBlock from '@/components/MoneyPageEducationBlock'
 import { getMoneyPageEdu } from '@/lib/moneyPageEdu'
+import { getTop10Meta } from '@/data/top10Meta'
 import MoneyPageQuickCompare from '@/components/MoneyPageQuickCompare'
 import MoneyPageFAQ from '@/components/MoneyPageFAQ'
 import MoneyPageNextLinks from '@/components/MoneyPageNextLinks'
 import MoneyPageDecisionBox from '@/components/MoneyPageDecisionBox'
 import MoneyPageUpdateLog from '@/components/MoneyPageUpdateLog'
+import BestForBadges from '@/components/BestForBadges'
+import FAQSection from '@/components/FAQSection'
+import MoneyPageTrustBlock from '@/components/MoneyPageTrustBlock'
+import MoneyPageRoutes from '@/components/MoneyPageRoutes'
 
 
 
@@ -19,14 +25,7 @@ export const metadata = {
   description: "A practical shortlist of extra virgin olive oils (EVOO) with notes on freshness, storage, and what to look for on the label.",
 }
 
-const UPDATED = '2026-02-12'
-const UPDATED_LABEL = 'February 12, 2026'
-const PREV_UPDATED_LABEL = 'February 2, 2026'
-const UPDATE_CHANGES = [
-  'Refreshed this shortlist for availability and clarity.',
-  'Added a 10‑second decision box and quick comparison table for faster choosing.',
-  'Updated internal links to supporting guides and topic hubs.',
-]
+const UPDATE_CHANGES = PHASE22_DEFAULT_UPDATE_CHANGES
 const DECISION_RULES = [
   { if: 'You want one bottle for everything', then: 'Choose a good everyday EVOO for cooking + salads (fresh date if available).' },
   { if: 'You mainly drizzle/finish dishes', then: 'Buy a nicer peppery/fruity bottle for flavour and use a cheaper oil for high‑heat.' },
@@ -113,7 +112,7 @@ function SummaryBox() {
         <Link className="btn-secondary" href="/nutrition">Nutrition</Link>
         <Link className="btn-secondary" href="/shortlists">Shortlists</Link>
       </div>
-      <p className="mt-4 text-xs text-zinc-500">Last updated: {UPDATED_LABEL} · Wild & Well Editorial Team</p>
+      <p className="mt-4 text-xs text-zinc-500">Last updated: {PHASE22_UPDATED_LABEL} · Wild & Well Editorial Team</p>
     </div>
   )
 }
@@ -121,6 +120,8 @@ function SummaryBox() {
 export default function Page() {
     
   const edu = getMoneyPageEdu('best-extra-virgin-olive-oil-uk')
+
+  const { bestFor, routes, faqs } = getTop10Meta('best-extra-virgin-olive-oil-uk')
 
 const itemList = PICKS.map((p, i) => ({
     '@type': 'ListItem',
@@ -133,7 +134,7 @@ const itemList = PICKS.map((p, i) => ({
     '@context': 'https://schema.org',
     '@type': 'Article',
     headline: "Extra virgin olive oil (UK): our shortlist",
-    dateModified: UPDATED,
+    dateModified: PHASE22_UPDATED,
     datePublished: '2026-01-27',
     mainEntity: {
       '@type': 'ItemList',
@@ -149,6 +150,8 @@ const itemList = PICKS.map((p, i) => ({
         <div className="max-w-3xl">
         <h1 className="text-4xl font-bold">Extra virgin olive oil (UK): our shortlist</h1>
         <p className="mt-3 text-zinc-700">A practical shortlist of extra virgin olive oils (EVOO) with notes on freshness, storage, and what to look for on the label.</p>
+
+        <BestForBadges items={bestFor} />
 
                 </div>
 
@@ -172,8 +175,12 @@ const itemList = PICKS.map((p, i) => ({
 
       <MoneyPageDecisionBox rules={DECISION_RULES} />
       <MoneyPageQuickCompare picks={PICKS} />
+      <MoneyPageTrustBlock />
+      <MoneyPageRoutes routes={routes} />
 
       <MoneyPageQuickCompare picks={PICKS} />
+      <MoneyPageTrustBlock />
+      <MoneyPageRoutes routes={routes} />
 <section className="mt-8">
         <SummaryBox />
       </section>
@@ -279,7 +286,9 @@ const itemList = PICKS.map((p, i) => ({
         </p>
       </section>
 
-      <MoneyPageUpdateLog updatedLabel={UPDATED_LABEL} prevUpdatedLabel={PREV_UPDATED_LABEL} changes={UPDATE_CHANGES} />
+      <FAQSection faqs={faqs} />
+
+      <MoneyPageUpdateLog updatedLabel={PHASE22_UPDATED_LABEL} prevUpdatedLabel={PHASE22_PREV_UPDATED_LABEL} changes={UPDATE_CHANGES} />
     
       <MoneyPageNextLinks slug="best-extra-virgin-olive-oil-uk" />
 

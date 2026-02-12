@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import StructuredData from '@/components/StructuredData'
+import { PHASE22_UPDATED, PHASE22_UPDATED_LABEL, PHASE22_PREV_UPDATED_LABEL, PHASE22_DEFAULT_UPDATE_CHANGES } from '@/lib/phase22'
 import ProductPick from '@/components/mdx/ProductPick'
 import ComparisonTable from '@/components/ComparisonTable'
 import { amazonSearchUrl } from '@/lib/amazon'
@@ -7,10 +8,15 @@ import { SITE_NAME, SITE_URL } from '@/lib/site'
 import EducationFirstCallout from '@/components/EducationFirstCallout'
 import MoneyPageEducationBlock from '@/components/MoneyPageEducationBlock'
 import { getMoneyPageEdu } from '@/lib/moneyPageEdu'
+import { getTop10Meta } from '@/data/top10Meta'
 import MoneyPageNextLinks from '@/components/MoneyPageNextLinks'
 import MoneyPageDecisionBox from '@/components/MoneyPageDecisionBox'
 import MoneyPageQuickCompare from '@/components/MoneyPageQuickCompare'
 import MoneyPageUpdateLog from '@/components/MoneyPageUpdateLog'
+import BestForBadges from '@/components/BestForBadges'
+import FAQSection from '@/components/FAQSection'
+import MoneyPageTrustBlock from '@/components/MoneyPageTrustBlock'
+import MoneyPageRoutes from '@/components/MoneyPageRoutes'
 
 
 
@@ -20,14 +26,7 @@ export const metadata = {
   description: 'A calm, non‑pharma sleep shortlist: environment upgrades first, then gentle options. No hacks — just repeatable basics.',
 }
 
-const UPDATED = '2026-02-12'
-const UPDATED_LABEL = 'February 12, 2026'
-const PREV_UPDATED_LABEL = 'February 2, 2026'
-const UPDATE_CHANGES = [
-  'Refreshed this shortlist for availability and clarity.',
-  'Added a 10‑second decision box and quick comparison table for faster choosing.',
-  'Updated internal links to supporting guides and topic hubs.',
-]
+const UPDATE_CHANGES = PHASE22_DEFAULT_UPDATE_CHANGES
 const DECISION_RULES = [
   { if: 'You want non‑supplement fixes', then: 'Start with morning light + consistent wake time + a wind‑down routine.' },
   { if: 'Stress is driving poor sleep', then: 'Use a short pre‑bed downshift (breathing/journaling) and reduce late stimulation.' },
@@ -83,6 +82,8 @@ export default function Page() {
     
   const edu = getMoneyPageEdu('best-natural-sleep-remedies-non-pharma')
 
+  const { bestFor, routes, faqs } = getTop10Meta('best-natural-sleep-remedies-non-pharma')
+
 const url = `${SITE_URL}/best-natural-sleep-remedies-non-pharma`
 
   const itemList = PICKS.map((p, i) => ({
@@ -97,7 +98,7 @@ const url = `${SITE_URL}/best-natural-sleep-remedies-non-pharma`
     '@type': 'Article',
     headline: 'Natural sleep support (non‑pharma): what helps, what to skip',
     datePublished: '2026-01-24',
-    dateModified: UPDATED,
+    dateModified: PHASE22_UPDATED,
     mainEntityOfPage: { '@type': 'WebPage', '@id': url },
     mainEntity: { '@type': 'ItemList', itemListElement: itemList },
     publisher: {
@@ -107,49 +108,19 @@ const url = `${SITE_URL}/best-natural-sleep-remedies-non-pharma`
       logo: { '@type': 'ImageObject', url: `${SITE_URL}/og-default.jpg` },
     },
   }
-
-  const faqLd = {
-    '@context': 'https://schema.org',
-    '@type': 'FAQPage',
-    mainEntity: [
-      {
-        '@type': 'Question',
-        name: 'What is the best first sleep upgrade?',
-        acceptedAnswer: {
-          '@type': 'Answer',
-          text: 'For many homes: light and noise control. A darker bedroom plus consistent noise management (earplugs or white noise) often beats chasing supplements.',
-        },
-      },
-      {
-        '@type': 'Question',
-        name: 'Do supplements fix sleep on their own?',
-        acceptedAnswer: {
-          '@type': 'Answer',
-          text: 'Usually no. Supplements may help some people, but foundations (schedule, light, caffeine timing, and bedroom comfort) matter more for long-term results.',
-        },
-      },
-      {
-        '@type': 'Question',
-        name: 'When should I speak to a professional?',
-        acceptedAnswer: {
-          '@type': 'Answer',
-          text: 'If you have severe insomnia, suspected sleep apnoea, or you are using medication that affects sleep. This page is informational and not medical advice.',
-        },
-      },
-    ],
-  }
-
   return (
     <main className="mx-auto max-w-6xl px-4 py-16">
       <StructuredData data={ld} />
-      <StructuredData data={faqLd} />
 
       <header>
         <div className="max-w-3xl">
         <h1 className="text-4xl font-bold">Natural sleep support (non‑pharma): what helps, what to skip</h1>
         <p className="mt-3 text-zinc-700">
           A calm shortlist that prioritises environment upgrades first, then gentle optional tools. No hacks — just repeatable basics.
+
         </p>
+
+        <BestForBadges items={bestFor} />
 
         </div>
 
@@ -170,7 +141,7 @@ const url = `${SITE_URL}/best-natural-sleep-remedies-non-pharma`
           <Link className="btn-secondary" href="/best-humidifiers-for-bedrooms-uk">Bedroom humidifiers</Link>
           <Link className="btn-secondary" href="/blog/sleep-naturally-simple-guide">Cornerstone sleep guide</Link>
         </div>
-        <p className="mt-3 text-xs text-zinc-500">Last updated: {UPDATED_LABEL} · Wild & Well Editorial Team</p>
+        <p className="mt-3 text-xs text-zinc-500">Last updated: {PHASE22_UPDATED_LABEL} · Wild & Well Editorial Team</p>
         </div>
       </header>
 
@@ -179,6 +150,8 @@ const url = `${SITE_URL}/best-natural-sleep-remedies-non-pharma`
 
       <MoneyPageDecisionBox rules={DECISION_RULES} />
       <MoneyPageQuickCompare picks={PICKS} />
+      <MoneyPageTrustBlock />
+      <MoneyPageRoutes routes={routes} />
 <section className="mt-10">
         <h2 className="text-2xl font-semibold">At a glance</h2>
         <p className="mt-2 text-zinc-700 max-w-3xl">
@@ -227,7 +200,9 @@ const url = `${SITE_URL}/best-natural-sleep-remedies-non-pharma`
         This page is informational and not medical advice. Some links are affiliate links. If you buy via them, we earn a commission.
       </p>
 
-      <MoneyPageUpdateLog updatedLabel={UPDATED_LABEL} prevUpdatedLabel={PREV_UPDATED_LABEL} changes={UPDATE_CHANGES} />
+      <FAQSection faqs={faqs} />
+
+      <MoneyPageUpdateLog updatedLabel={PHASE22_UPDATED_LABEL} prevUpdatedLabel={PHASE22_PREV_UPDATED_LABEL} changes={UPDATE_CHANGES} />
     
       <MoneyPageNextLinks slug="best-natural-sleep-remedies-non-pharma" />
 

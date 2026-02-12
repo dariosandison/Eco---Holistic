@@ -1,15 +1,21 @@
 import Link from 'next/link'
 import StructuredData from '@/components/StructuredData'
+import { PHASE22_UPDATED, PHASE22_UPDATED_LABEL, PHASE22_PREV_UPDATED_LABEL, PHASE22_DEFAULT_UPDATE_CHANGES } from '@/lib/phase22'
 import ProductPick from '@/components/mdx/ProductPick'
 import { amazonSearchUrl } from '@/lib/amazon'
 import EducationFirstCallout from '@/components/EducationFirstCallout'
 import MoneyPageEducationBlock from '@/components/MoneyPageEducationBlock'
 import { getMoneyPageEdu } from '@/lib/moneyPageEdu'
+import { getTop10Meta } from '@/data/top10Meta'
 import MoneyPageQuickCompare from '@/components/MoneyPageQuickCompare'
 import MoneyPageFAQ from '@/components/MoneyPageFAQ'
 import MoneyPageNextLinks from '@/components/MoneyPageNextLinks'
 import MoneyPageDecisionBox from '@/components/MoneyPageDecisionBox'
 import MoneyPageUpdateLog from '@/components/MoneyPageUpdateLog'
+import BestForBadges from '@/components/BestForBadges'
+import FAQSection from '@/components/FAQSection'
+import MoneyPageTrustBlock from '@/components/MoneyPageTrustBlock'
+import MoneyPageRoutes from '@/components/MoneyPageRoutes'
 
 
 
@@ -19,14 +25,7 @@ export const metadata = {
   description: 'Shortlisted shower filters for hard-water UK homes — what they can and can’t do, plus buyer shortlist.',
 }
 
-const UPDATED = '2026-02-12'
-const UPDATED_LABEL = 'February 12, 2026'
-const PREV_UPDATED_LABEL = 'February 2, 2026'
-const UPDATE_CHANGES = [
-  'Refreshed this shortlist for availability and clarity.',
-  'Added a 10‑second decision box and quick comparison table for faster choosing.',
-  'Updated internal links to supporting guides and topic hubs.',
-]
+const UPDATE_CHANGES = PHASE22_DEFAULT_UPDATE_CHANGES
 const DECISION_RULES = [
   { if: 'Your skin/hair feels worse after showers', then: 'Try a well‑reviewed shower filter first and track results for 2–4 weeks.' },
   { if: 'You have low water pressure', then: 'Choose a filter designed to maintain flow and avoid overly restrictive heads.' },
@@ -68,6 +67,8 @@ export default function Page() {
     
   const edu = getMoneyPageEdu('best-shower-filters-uk-hard-water')
 
+  const { bestFor, routes, faqs } = getTop10Meta('best-shower-filters-uk-hard-water')
+
 const itemList = PICKS.map((p, i) => ({
     '@type': 'ListItem',
     position: i + 1,
@@ -79,7 +80,7 @@ const itemList = PICKS.map((p, i) => ({
     '@context': 'https://schema.org',
     '@type': 'Article',
     headline: 'Shower Filters for UK Hard Water: shortlist',
-    dateModified: UPDATED,
+    dateModified: PHASE22_UPDATED,
     datePublished: '2026-01-25',
     mainEntity: { '@type': 'ItemList', itemListElement: itemList },
   }
@@ -93,7 +94,10 @@ const itemList = PICKS.map((p, i) => ({
         <h1 className="text-4xl font-bold">Shower filters for UK hard water: shortlist</h1>
         <p className="mt-3 text-zinc-700">
           Shower filters can help with feel and chlorine-related dryness for some people — but they won’t “soften” water like a full home softener.
+
         </p>
+
+        <BestForBadges items={bestFor} />
 
                 </div>
 
@@ -113,7 +117,7 @@ const itemList = PICKS.map((p, i) => ({
           <Link className="btn-secondary" href="/topics/fragrance-free">Sensitive skin</Link>
           <Link className="btn-secondary" href="/shopping-list">Free shopping list</Link>
         </div>
-        <p className="mt-4 text-xs text-zinc-500">Last updated: {UPDATED_LABEL} · Wild & Well Editorial Team</p>
+        <p className="mt-4 text-xs text-zinc-500">Last updated: {PHASE22_UPDATED_LABEL} · Wild & Well Editorial Team</p>
               </div>
       </header>
 
@@ -122,8 +126,12 @@ const itemList = PICKS.map((p, i) => ({
 
       <MoneyPageDecisionBox rules={DECISION_RULES} />
       <MoneyPageQuickCompare picks={PICKS} />
+      <MoneyPageTrustBlock />
+      <MoneyPageRoutes routes={routes} />
 
       <MoneyPageQuickCompare picks={PICKS} />
+      <MoneyPageTrustBlock />
+      <MoneyPageRoutes routes={routes} />
 <section className="mt-12 grid gap-4 md:grid-cols-3">
         <div className="card">
           <h2 className="text-lg font-semibold">What they can do</h2>
@@ -167,7 +175,9 @@ const itemList = PICKS.map((p, i) => ({
         </div>
       </section>
 
-      <MoneyPageUpdateLog updatedLabel={UPDATED_LABEL} prevUpdatedLabel={PREV_UPDATED_LABEL} changes={UPDATE_CHANGES} />
+      <FAQSection faqs={faqs} />
+
+      <MoneyPageUpdateLog updatedLabel={PHASE22_UPDATED_LABEL} prevUpdatedLabel={PHASE22_PREV_UPDATED_LABEL} changes={UPDATE_CHANGES} />
       <MoneyPageNextLinks slug="best-shower-filters-uk-hard-water" />
 
       

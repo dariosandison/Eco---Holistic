@@ -1,15 +1,21 @@
 import Link from 'next/link'
 import StructuredData from '@/components/StructuredData'
+import { PHASE22_UPDATED, PHASE22_UPDATED_LABEL, PHASE22_PREV_UPDATED_LABEL, PHASE22_DEFAULT_UPDATE_CHANGES } from '@/lib/phase22'
 import ComparisonTable from '@/components/ComparisonTable'
 import ProductPick from '@/components/mdx/ProductPick'
 import { amazonSearchUrl } from '@/lib/amazon'
 import EducationFirstCallout from '@/components/EducationFirstCallout'
 import MoneyPageEducationBlock from '@/components/MoneyPageEducationBlock'
 import { getMoneyPageEdu } from '@/lib/moneyPageEdu'
+import { getTop10Meta } from '@/data/top10Meta'
 import MoneyPageNextLinks from '@/components/MoneyPageNextLinks'
 import MoneyPageDecisionBox from '@/components/MoneyPageDecisionBox'
 import MoneyPageQuickCompare from '@/components/MoneyPageQuickCompare'
 import MoneyPageUpdateLog from '@/components/MoneyPageUpdateLog'
+import BestForBadges from '@/components/BestForBadges'
+import FAQSection from '@/components/FAQSection'
+import MoneyPageTrustBlock from '@/components/MoneyPageTrustBlock'
+import MoneyPageRoutes from '@/components/MoneyPageRoutes'
 
 
 
@@ -19,14 +25,7 @@ export const metadata = {
   description: 'Shortlisted air purifiers that make sense for small UK flats: quiet bedrooms, compact units, and realistic filter costs.',
 }
 
-const UPDATED = '2026-02-12'
-const UPDATED_LABEL = 'February 12, 2026'
-const PREV_UPDATED_LABEL = 'February 2, 2026'
-const UPDATE_CHANGES = [
-  'Refreshed this shortlist for availability and clarity.',
-  'Added a 10‑second decision box and quick comparison table for faster choosing.',
-  'Updated internal links to supporting guides and topic hubs.',
-]
+const UPDATE_CHANGES = PHASE22_DEFAULT_UPDATE_CHANGES
 const DECISION_RULES = [
   { if: 'You want one unit for a small flat', then: 'Start with the bedroom: quiet mode + filter cost beat “smart” features.' },
   { if: 'Noise wakes you', then: 'Pick the quietest option you can tolerate and run it daily at a lower speed.' },
@@ -75,6 +74,8 @@ export default function Page() {
     
   const edu = getMoneyPageEdu('best-air-purifiers-small-flats-uk')
 
+  const { bestFor, routes, faqs } = getTop10Meta('best-air-purifiers-small-flats-uk')
+
 const itemList = PICKS.map((p, i) => ({
     '@type': 'ListItem',
     position: i + 1,
@@ -86,45 +87,23 @@ const itemList = PICKS.map((p, i) => ({
     '@context': 'https://schema.org',
     '@type': 'Article',
     headline: 'Air Purifiers for Small Flats (UK): shortlist',
-    dateModified: UPDATED,
+    dateModified: PHASE22_UPDATED,
     datePublished: '2026-01-25',
     mainEntity: { '@type': 'ItemList', itemListElement: itemList },
   }
-
-  const faqLd = {
-    '@context': 'https://schema.org',
-    '@type': 'FAQPage',
-    mainEntity: [
-      {
-        '@type': 'Question',
-        name: 'What size air purifier is best for a small flat?',
-        acceptedAnswer: {
-          '@type': 'Answer',
-          text: 'Size it to the room you care about most (often the bedroom). A too-small unit is the most common mistake. Noise and replacement filters matter more than smart features in small spaces.',
-        },
-      },
-      {
-        '@type': 'Question',
-        name: 'Do I need a purifier in every room?',
-        acceptedAnswer: {
-          '@type': 'Answer',
-          text: 'Not usually. Start with the bedroom or main living space and run it consistently. You can add a second unit later if needed.',
-        },
-      },
-    ],
-  }
-
   return (
     <main className="mx-auto max-w-6xl px-4 py-16">
       <StructuredData data={ld} />
-      <StructuredData data={faqLd} />
 
       <header>
         <div className="max-w-3xl">
         <h1 className="text-4xl font-bold">Air purifiers for small flats (UK): shortlist</h1>
         <p className="mt-3 text-zinc-700">
           In small spaces, noise and filter costs matter more than fancy features. Buy the unit you’ll actually run every day.
+
         </p>
+
+        <BestForBadges items={bestFor} />
 
         </div>
 
@@ -144,7 +123,7 @@ const itemList = PICKS.map((p, i) => ({
           <Link className="btn-secondary" href="/topics/air-quality">Air quality</Link>
           <Link className="btn-secondary" href="/best-air-purifiers-allergies-uk">Allergies list</Link>
         </div>
-        <p className="mt-4 text-xs text-zinc-500">Last updated: {UPDATED_LABEL} · Wild & Well Editorial Team</p>
+        <p className="mt-4 text-xs text-zinc-500">Last updated: {PHASE22_UPDATED_LABEL} · Wild & Well Editorial Team</p>
         </div>
       </header>
 
@@ -153,6 +132,8 @@ const itemList = PICKS.map((p, i) => ({
 
       <MoneyPageDecisionBox rules={DECISION_RULES} />
       <MoneyPageQuickCompare picks={PICKS} />
+      <MoneyPageTrustBlock />
+      <MoneyPageRoutes routes={routes} />
 <section className="mt-12 grid gap-4 md:grid-cols-3">
         <div className="card">
           <h2 className="text-lg font-semibold">The 3 checks</h2>
@@ -253,25 +234,9 @@ const itemList = PICKS.map((p, i) => ({
         </div>
       </section>
 
-      <section className="mt-14 max-w-3xl">
-        <h2 className="text-2xl font-semibold">FAQ</h2>
-        <div className="mt-4 space-y-5 text-zinc-700">
-          <div>
-            <h3 className="font-semibold">What size purifier should I buy?</h3>
-            <p className="mt-1 text-sm text-zinc-700">
-              Size it to the room you care about most (often the bedroom). Too small is the most common mistake.
-            </p>
-          </div>
-          <div>
-            <h3 className="font-semibold">Do I need one in every room?</h3>
-            <p className="mt-1 text-sm text-zinc-700">
-              Not usually. Start with the bedroom or main living space, run it daily, then add a second unit later if needed.
-            </p>
-          </div>
-        </div>
-      </section>
+      <FAQSection faqs={faqs} />
 
-      <MoneyPageUpdateLog updatedLabel={UPDATED_LABEL} prevUpdatedLabel={PREV_UPDATED_LABEL} changes={UPDATE_CHANGES} />
+      <MoneyPageUpdateLog updatedLabel={PHASE22_UPDATED_LABEL} prevUpdatedLabel={PHASE22_PREV_UPDATED_LABEL} changes={UPDATE_CHANGES} />
       <MoneyPageNextLinks slug="best-air-purifiers-small-flats-uk" />
 
       <p className="mt-12 text-xs text-zinc-500">

@@ -19,6 +19,7 @@ export default function SignupFormTracker({ formId, placement = "unknown" }) {
         trackEvent("sign_up", { method: "email", placement });
         // Keep a site-specific event too (handy for funnels)
         trackEvent("newsletter_signup", { placement });
+        trackEvent("email_signup", { placement });
       } catch {
         // ignore
       }
