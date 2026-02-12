@@ -83,6 +83,11 @@ export default function MDXRenderer({ source, options }) {
           remarkPlugins: [remarkGfm],
           rehypePlugins: [rehypeSlug, [rehypeAutolinkHeadings, { behavior: 'wrap' }]],
         },
+        // next-mdx-remote v6+ disables JS expressions in MDX by default for security.
+        // Our MDX lives in-repo (trusted), and some posts use expressions for props
+        // (e.g. bullets={['a','b']}). Allow expressions but keep dangerous globals blocked.
+        blockJS: false,
+        blockDangerousJS: true,
         ...options,
       }}
     />
