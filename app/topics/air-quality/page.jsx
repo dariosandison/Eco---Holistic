@@ -56,6 +56,7 @@ export default function Page() {
         />
         <div className="mt-4 flex flex-wrap gap-2">
           <Link className="btn-secondary" href="/blog/healthy-air-at-home">Read the air guide</Link>
+          <Link className="btn-secondary" href="/blog/damp-and-mould-uk-renters-playbook">Damp &amp; mould renters playbook</Link>
           <Link className="btn-secondary" href="/best-air-purifiers-allergies-uk">Air purifiers for allergies</Link>
           <Link className="btn-secondary" href="/best-air-purifiers-small-flats-uk">Air purifiers for small flats</Link>
           <Link className="btn-secondary" href="/best-dehumidifiers-damp-mould-uk">Dehumidifiers for damp &amp; mould</Link>
@@ -68,7 +69,7 @@ export default function Page() {
           <a className="chip" href="#faqs">FAQs</a>
         </div>
 
-        <p className="mt-3 text-xs text-zinc-500">Last updated: February 2, 2026</p>
+        <p className="mt-3 text-xs text-zinc-500">Last updated: February 12, 2026</p>
       </header>
 
       <TopicEducationDeepDive edu={edu} />

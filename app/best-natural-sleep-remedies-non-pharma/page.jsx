@@ -8,6 +8,9 @@ import EducationFirstCallout from '@/components/EducationFirstCallout'
 import MoneyPageEducationBlock from '@/components/MoneyPageEducationBlock'
 import { getMoneyPageEdu } from '@/lib/moneyPageEdu'
 import MoneyPageNextLinks from '@/components/MoneyPageNextLinks'
+import MoneyPageDecisionBox from '@/components/MoneyPageDecisionBox'
+import MoneyPageQuickCompare from '@/components/MoneyPageQuickCompare'
+import MoneyPageUpdateLog from '@/components/MoneyPageUpdateLog'
 
 
 
@@ -16,6 +19,20 @@ export const metadata = {
   title: 'Natural sleep support (non‑pharma): what helps, what to skip',
   description: 'A calm, non‑pharma sleep shortlist: environment upgrades first, then gentle options. No hacks — just repeatable basics.',
 }
+
+const UPDATED = '2026-02-12'
+const UPDATED_LABEL = 'February 12, 2026'
+const PREV_UPDATED_LABEL = 'February 2, 2026'
+const UPDATE_CHANGES = [
+  'Refreshed this shortlist for availability and clarity.',
+  'Added a 10‑second decision box and quick comparison table for faster choosing.',
+  'Updated internal links to supporting guides and topic hubs.',
+]
+const DECISION_RULES = [
+  { if: 'You want non‑supplement fixes', then: 'Start with morning light + consistent wake time + a wind‑down routine.' },
+  { if: 'Stress is driving poor sleep', then: 'Use a short pre‑bed downshift (breathing/journaling) and reduce late stimulation.' },
+  { if: 'Your room feels too warm', then: 'Aim cooler (about 16–19°C) and adjust bedding before adding products.' },
+]
 
 const PICKS = [
   {
@@ -80,7 +97,7 @@ const url = `${SITE_URL}/best-natural-sleep-remedies-non-pharma`
     '@type': 'Article',
     headline: 'Natural sleep support (non‑pharma): what helps, what to skip',
     datePublished: '2026-01-24',
-    dateModified: '2026-02-02',
+    dateModified: UPDATED,
     mainEntityOfPage: { '@type': 'WebPage', '@id': url },
     mainEntity: { '@type': 'ItemList', itemListElement: itemList },
     publisher: {
@@ -153,12 +170,15 @@ const url = `${SITE_URL}/best-natural-sleep-remedies-non-pharma`
           <Link className="btn-secondary" href="/best-humidifiers-for-bedrooms-uk">Bedroom humidifiers</Link>
           <Link className="btn-secondary" href="/blog/sleep-naturally-simple-guide">Cornerstone sleep guide</Link>
         </div>
-        <p className="mt-3 text-xs text-zinc-500">Last updated: February 2, 2026 · Wild & Well Editorial Team</p>
+        <p className="mt-3 text-xs text-zinc-500">Last updated: {UPDATED_LABEL} · Wild & Well Editorial Team</p>
         </div>
       </header>
 
       
       <MoneyPageEducationBlock edu={edu} />
+
+      <MoneyPageDecisionBox rules={DECISION_RULES} />
+      <MoneyPageQuickCompare picks={PICKS} />
 <section className="mt-10">
         <h2 className="text-2xl font-semibold">At a glance</h2>
         <p className="mt-2 text-zinc-700 max-w-3xl">
@@ -206,6 +226,8 @@ const url = `${SITE_URL}/best-natural-sleep-remedies-non-pharma`
       <p className="mt-12 text-sm text-zinc-500 max-w-3xl">
         This page is informational and not medical advice. Some links are affiliate links. If you buy via them, we earn a commission.
       </p>
+
+      <MoneyPageUpdateLog updatedLabel={UPDATED_LABEL} prevUpdatedLabel={PREV_UPDATED_LABEL} changes={UPDATE_CHANGES} />
     
       <MoneyPageNextLinks slug="best-natural-sleep-remedies-non-pharma" />
 

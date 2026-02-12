@@ -8,6 +8,9 @@ import MoneyPageEducationBlock from '@/components/MoneyPageEducationBlock'
 import { getMoneyPageEdu } from '@/lib/moneyPageEdu'
 import MoneyPageNextLinks from '@/components/MoneyPageNextLinks'
 import InlineSignup from '@/components/InlineSignup'
+import MoneyPageDecisionBox from '@/components/MoneyPageDecisionBox'
+import MoneyPageQuickCompare from '@/components/MoneyPageQuickCompare'
+import MoneyPageUpdateLog from '@/components/MoneyPageUpdateLog'
 
 
 
@@ -16,6 +19,21 @@ export const metadata = {
   title: 'Air Purifiers for Allergies (UK): shortlist',
   description: 'Shortlisted HEPA air purifiers for allergies in UK homes — what matters, what to skip, and top options for bedrooms and living rooms.',
 }
+
+const UPDATED = '2026-02-12'
+const UPDATED_LABEL = 'February 12, 2026'
+const PREV_UPDATED_LABEL = 'February 2, 2026'
+const UPDATE_CHANGES = [
+  'Refreshed this shortlist for availability and clarity.',
+  'Added a 10‑second decision box and quick comparison table for faster choosing.',
+  'Updated internal links to supporting guides and topic hubs.',
+]
+const DECISION_RULES = [
+  { if: 'Allergies worst in the bedroom at night', then: 'Start with a quiet bedroom‑friendly HEPA pick (night mode matters).', note: 'Size it to the bedroom you sleep in, not the whole home.' },
+  { if: 'You’re buying for a larger living room', then: 'Choose a higher‑coverage (large room) unit rather than the smallest “HEPA” you can find.', note: 'Too small is the #1 reason people see no benefit.' },
+  { if: 'Smells/odours bother you', then: 'Prefer a model with a carbon stage (and check carbon filter replacement cost).' },
+  { if: 'Damp/condensation is the main issue', then: 'A dehumidifier + ventilation is usually the direct fix; a purifier doesn’t remove moisture.', note: 'See the damp & mould shortlist for the right tool.' },
+]
 
 const PICKS = [
   {
@@ -77,7 +95,7 @@ const itemList = PICKS.map((p, i) => ({
     '@context': 'https://schema.org',
     '@type': 'Article',
     headline: 'Air Purifiers for Allergies (UK): shortlist',
-    dateModified: '2026-02-02',
+    dateModified: UPDATED,
     datePublished: '2026-01-25',
     mainEntity: { '@type': 'ItemList', itemListElement: itemList },
   }
@@ -144,12 +162,15 @@ const itemList = PICKS.map((p, i) => ({
           <Link className="btn-secondary" href="/blog/healthy-air-at-home">Healthy air guide</Link>
           <Link className="btn-secondary" href="/best-air-purifiers-small-flats-uk">Small flats list</Link>
         </div>
-        <p className="mt-4 text-xs text-zinc-500">Last updated: February 2, 2026 · Wild & Well Editorial Team</p>
+        <p className="mt-4 text-xs text-zinc-500">Last updated: {UPDATED_LABEL} · Wild & Well Editorial Team</p>
         </div>
       </header>
 
       
       <MoneyPageEducationBlock edu={edu} />
+
+      <MoneyPageDecisionBox rules={DECISION_RULES} />
+      <MoneyPageQuickCompare picks={PICKS} />
 <section className="mt-12 grid gap-4 md:grid-cols-3">
         <div className="card">
           <h2 className="text-lg font-semibold">What matters</h2>
@@ -275,6 +296,8 @@ const itemList = PICKS.map((p, i) => ({
           </div>
         </div>
       </section>
+
+      <MoneyPageUpdateLog updatedLabel={UPDATED_LABEL} prevUpdatedLabel={PREV_UPDATED_LABEL} changes={UPDATE_CHANGES} />
       <MoneyPageNextLinks slug="best-air-purifiers-allergies-uk"  includeSignup={false} />
 
       <p className="mt-12 text-xs text-zinc-500">

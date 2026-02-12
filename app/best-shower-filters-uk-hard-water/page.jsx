@@ -8,6 +8,8 @@ import { getMoneyPageEdu } from '@/lib/moneyPageEdu'
 import MoneyPageQuickCompare from '@/components/MoneyPageQuickCompare'
 import MoneyPageFAQ from '@/components/MoneyPageFAQ'
 import MoneyPageNextLinks from '@/components/MoneyPageNextLinks'
+import MoneyPageDecisionBox from '@/components/MoneyPageDecisionBox'
+import MoneyPageUpdateLog from '@/components/MoneyPageUpdateLog'
 
 
 
@@ -16,6 +18,20 @@ export const metadata = {
   title: 'Shower Filters for UK Hard Water: shortlist',
   description: 'Shortlisted shower filters for hard-water UK homes — what they can and can’t do, plus buyer shortlist.',
 }
+
+const UPDATED = '2026-02-12'
+const UPDATED_LABEL = 'February 12, 2026'
+const PREV_UPDATED_LABEL = 'February 2, 2026'
+const UPDATE_CHANGES = [
+  'Refreshed this shortlist for availability and clarity.',
+  'Added a 10‑second decision box and quick comparison table for faster choosing.',
+  'Updated internal links to supporting guides and topic hubs.',
+]
+const DECISION_RULES = [
+  { if: 'Your skin/hair feels worse after showers', then: 'Try a well‑reviewed shower filter first and track results for 2–4 weeks.' },
+  { if: 'You have low water pressure', then: 'Choose a filter designed to maintain flow and avoid overly restrictive heads.' },
+  { if: 'Limescale is the main issue', then: 'A filter may help a bit, but hard‑water scale is mostly a plumbing/softener problem.' },
+]
 
 const PICKS = [
   {
@@ -63,7 +79,7 @@ const itemList = PICKS.map((p, i) => ({
     '@context': 'https://schema.org',
     '@type': 'Article',
     headline: 'Shower Filters for UK Hard Water: shortlist',
-    dateModified: '2026-02-02',
+    dateModified: UPDATED,
     datePublished: '2026-01-25',
     mainEntity: { '@type': 'ItemList', itemListElement: itemList },
   }
@@ -97,12 +113,15 @@ const itemList = PICKS.map((p, i) => ({
           <Link className="btn-secondary" href="/topics/fragrance-free">Sensitive skin</Link>
           <Link className="btn-secondary" href="/shopping-list">Free shopping list</Link>
         </div>
-        <p className="mt-4 text-xs text-zinc-500">Last updated: February 2, 2026 · Wild & Well Editorial Team</p>
+        <p className="mt-4 text-xs text-zinc-500">Last updated: {UPDATED_LABEL} · Wild & Well Editorial Team</p>
               </div>
       </header>
 
       
       <MoneyPageEducationBlock edu={edu} />
+
+      <MoneyPageDecisionBox rules={DECISION_RULES} />
+      <MoneyPageQuickCompare picks={PICKS} />
 
       <MoneyPageQuickCompare picks={PICKS} />
 <section className="mt-12 grid gap-4 md:grid-cols-3">
@@ -147,6 +166,8 @@ const itemList = PICKS.map((p, i) => ({
           <Link className="btn-secondary" href="/shopping-list">Get the free shopping list</Link>
         </div>
       </section>
+
+      <MoneyPageUpdateLog updatedLabel={UPDATED_LABEL} prevUpdatedLabel={PREV_UPDATED_LABEL} changes={UPDATE_CHANGES} />
       <MoneyPageNextLinks slug="best-shower-filters-uk-hard-water" />
 
       

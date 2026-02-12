@@ -7,6 +7,9 @@ import EducationFirstCallout from '@/components/EducationFirstCallout'
 import MoneyPageEducationBlock from '@/components/MoneyPageEducationBlock'
 import { getMoneyPageEdu } from '@/lib/moneyPageEdu'
 import MoneyPageNextLinks from '@/components/MoneyPageNextLinks'
+import MoneyPageDecisionBox from '@/components/MoneyPageDecisionBox'
+import MoneyPageQuickCompare from '@/components/MoneyPageQuickCompare'
+import MoneyPageUpdateLog from '@/components/MoneyPageUpdateLog'
 
 
 
@@ -15,6 +18,20 @@ export const metadata = {
   title: 'Humidifiers for Bedrooms (UK): shortlist',
   description: 'A shortlist for bedroom humidifiers in the UK: what to look for, what to avoid, and simple maintenance rules.',
 }
+
+const UPDATED = '2026-02-12'
+const UPDATED_LABEL = 'February 12, 2026'
+const PREV_UPDATED_LABEL = 'February 2, 2026'
+const UPDATE_CHANGES = [
+  'Refreshed this shortlist for availability and clarity.',
+  'Added a 10‑second decision box and quick comparison table for faster choosing.',
+  'Updated internal links to supporting guides and topic hubs.',
+]
+const DECISION_RULES = [
+  { if: 'Dry air symptoms (throat/skin/static)', then: 'Use a humidifier only if your bedroom regularly sits below ~35–40% RH.', note: 'Measure first with a hygrometer.' },
+  { if: 'Condensation/mould risk', then: 'Don’t humidify above ~55% RH; ventilation + dehumidifying may be the fix instead.' },
+  { if: 'You want lowest-maintenance', then: 'Prioritise easy cleaning and a design you’ll actually maintain weekly.' },
+]
 
 const PICKS = [
   {
@@ -61,7 +78,7 @@ function QuickSummary(){
         <Link className="btn-secondary" href="/blog/winter-humidity-guide">Humidity guide</Link>
         <Link className="btn-secondary" href="/shopping-list">Free shopping list</Link>
       </div>
-      <p className="mt-4 text-xs text-zinc-500">Last updated: February 2, 2026 · Wild & Well Editorial Team</p>
+      <p className="mt-4 text-xs text-zinc-500">Last updated: {UPDATED_LABEL} · Wild & Well Editorial Team</p>
     </div>
   )
 }
@@ -81,7 +98,7 @@ const itemList = PICKS.map((p, i) => ({
     '@context': 'https://schema.org',
     '@type': 'Article',
     headline: 'Humidifiers for Bedrooms (UK): shortlist',
-    dateModified: '2026-02-02',
+    dateModified: UPDATED,
     datePublished: '2026-01-29',
     mainEntity: {
       '@type': 'ItemList',
@@ -151,6 +168,9 @@ const itemList = PICKS.map((p, i) => ({
 
       
       <MoneyPageEducationBlock edu={edu} />
+
+      <MoneyPageDecisionBox rules={DECISION_RULES} />
+      <MoneyPageQuickCompare picks={PICKS} />
 <section className="mt-10">
         <QuickSummary />
       </section>
@@ -255,6 +275,8 @@ const itemList = PICKS.map((p, i) => ({
       <p className="mt-12 text-sm text-zinc-500 max-w-3xl">
         Some links are affiliate links. If you buy via them, we earn a commission.
       </p>
+
+      <MoneyPageUpdateLog updatedLabel={UPDATED_LABEL} prevUpdatedLabel={PREV_UPDATED_LABEL} changes={UPDATE_CHANGES} />
     
       <MoneyPageNextLinks slug="best-humidifiers-for-bedrooms-uk" />
 

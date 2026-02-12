@@ -8,6 +8,9 @@ import MoneyPageEducationBlock from '@/components/MoneyPageEducationBlock'
 import { getMoneyPageEdu } from '@/lib/moneyPageEdu'
 import MoneyPageNextLinks from '@/components/MoneyPageNextLinks'
 import InlineSignup from '@/components/InlineSignup'
+import MoneyPageDecisionBox from '@/components/MoneyPageDecisionBox'
+import MoneyPageQuickCompare from '@/components/MoneyPageQuickCompare'
+import MoneyPageUpdateLog from '@/components/MoneyPageUpdateLog'
 
 
 
@@ -23,6 +26,20 @@ const WATERDROP_UNDERSINK_DIRECT_CONNECT = 'https://www.awin1.com/cread.php?awin
 const DOULTON_BB_GRAVITY_1L = 'https://www.awin1.com/cread.php?awinmid=69790&awinaffid=2754234&clickref=ww_water_picks_gravity_filter_doulton_bb_1l&ued=https%3A%2F%2Fdoulton.com%2Fproducts%2Fbritish-berkefeld-1-litre-stainless-steel-gravity-system'
 const WATERTOGO_ACTIVE_75CL = 'https://www.awin1.com/cread.php?awinmid=86997&awinaffid=2754234&clickref=ww_water_picks_filter_bottle_watertogo_active_75cl&ued=https%3A%2F%2Fwatertogo.eu%2Fproduct%2F75cl-active-bottles%2F'
 const ZW_FILTERS_AMAZON = amazonSearchUrl('ZeroWater replacement filters 5-stage')
+
+const UPDATED = '2026-02-12'
+const UPDATED_LABEL = 'February 12, 2026'
+const PREV_UPDATED_LABEL = 'February 2, 2026'
+const UPDATE_CHANGES = [
+  'Refreshed this shortlist for availability and clarity.',
+  'Added a 10‑second decision box and quick comparison table for faster choosing.',
+  'Updated internal links to supporting guides and topic hubs.',
+]
+const DECISION_RULES = [
+  { if: 'You want the simplest start', then: 'Begin with a reputable jug filter and see if taste improves.', note: 'Jugs aren’t a full solution for every contaminant.' },
+  { if: 'You want the most convenient daily option', then: 'Consider an under‑sink or tap‑mounted system if installation is possible.', note: 'Check replacement cartridge availability/cost.' },
+  { if: 'You’re in an older property / worried about lead', then: 'Check your water report and consider a certified reduction system (and replace cartridges on time).' },
+]
 
 const PICKS = [
   {
@@ -82,7 +99,7 @@ function QuickSummary() {
         <Link className="btn-secondary" href="/blog/water-filter-buying-guide-uk">Buying guide</Link>
         <Link className="btn-secondary" href="/shopping-list">Free shopping list</Link>
       </div>
-      <p className="mt-4 text-xs text-zinc-500">Last updated: February 2, 2026 · Wild & Well Editorial Team</p>
+      <p className="mt-4 text-xs text-zinc-500">Last updated: {UPDATED_LABEL} · Wild & Well Editorial Team</p>
     </div>
   )
 }
@@ -102,7 +119,7 @@ const itemList = PICKS.map((p, i) => ({
     '@context': 'https://schema.org',
     '@type': 'Article',
     headline: 'Water Filters (UK) — Jugs vs Under‑Sink vs Countertop: shortlist',
-    dateModified: '2026-02-02',
+    dateModified: UPDATED,
     datePublished: '2026-01-25',
     mainEntity: {
       '@type': 'ItemList',
@@ -172,6 +189,9 @@ const itemList = PICKS.map((p, i) => ({
 
       
       <MoneyPageEducationBlock edu={edu} />
+
+      <MoneyPageDecisionBox rules={DECISION_RULES} />
+      <MoneyPageQuickCompare picks={PICKS} />
 <section className="mt-10">
         <QuickSummary />
       </section>
@@ -332,6 +352,8 @@ const itemList = PICKS.map((p, i) => ({
           </div>
         </div>
       </section>
+
+      <MoneyPageUpdateLog updatedLabel={UPDATED_LABEL} prevUpdatedLabel={PREV_UPDATED_LABEL} changes={UPDATE_CHANGES} />
       <MoneyPageNextLinks slug="best-water-filters-uk"  includeSignup={false} />
 
       <p className="mt-12 text-xs text-zinc-500">

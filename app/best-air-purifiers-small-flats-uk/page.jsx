@@ -7,6 +7,9 @@ import EducationFirstCallout from '@/components/EducationFirstCallout'
 import MoneyPageEducationBlock from '@/components/MoneyPageEducationBlock'
 import { getMoneyPageEdu } from '@/lib/moneyPageEdu'
 import MoneyPageNextLinks from '@/components/MoneyPageNextLinks'
+import MoneyPageDecisionBox from '@/components/MoneyPageDecisionBox'
+import MoneyPageQuickCompare from '@/components/MoneyPageQuickCompare'
+import MoneyPageUpdateLog from '@/components/MoneyPageUpdateLog'
 
 
 
@@ -16,11 +19,25 @@ export const metadata = {
   description: 'Shortlisted air purifiers that make sense for small UK flats: quiet bedrooms, compact units, and realistic filter costs.',
 }
 
+const UPDATED = '2026-02-12'
+const UPDATED_LABEL = 'February 12, 2026'
+const PREV_UPDATED_LABEL = 'February 2, 2026'
+const UPDATE_CHANGES = [
+  'Refreshed this shortlist for availability and clarity.',
+  'Added a 10‑second decision box and quick comparison table for faster choosing.',
+  'Updated internal links to supporting guides and topic hubs.',
+]
+const DECISION_RULES = [
+  { if: 'You want one unit for a small flat', then: 'Start with the bedroom: quiet mode + filter cost beat “smart” features.' },
+  { if: 'Noise wakes you', then: 'Pick the quietest option you can tolerate and run it daily at a lower speed.' },
+  { if: 'You cook often / notice odours', then: 'Consider carbon (or accept that ventilation is still the main fix).' },
+]
+
 const PICKS = [
   {
     title: 'Blueair Blue 511i Max',
     badge: 'compact',
-    desc: 'A strong âbedroom‑sized option if you size it correctly.',
+    desc: 'A strong “bedroom‑sized option if you size it correctly.',
     query: 'Blueair 511i Max air purifier',
     bullets: ['Great for: bedrooms', 'Quiet night mode matters', 'Plan filter replacements'],
   },
@@ -69,7 +86,7 @@ const itemList = PICKS.map((p, i) => ({
     '@context': 'https://schema.org',
     '@type': 'Article',
     headline: 'Air Purifiers for Small Flats (UK): shortlist',
-    dateModified: '2026-02-02',
+    dateModified: UPDATED,
     datePublished: '2026-01-25',
     mainEntity: { '@type': 'ItemList', itemListElement: itemList },
   }
@@ -127,12 +144,15 @@ const itemList = PICKS.map((p, i) => ({
           <Link className="btn-secondary" href="/topics/air-quality">Air quality</Link>
           <Link className="btn-secondary" href="/best-air-purifiers-allergies-uk">Allergies list</Link>
         </div>
-        <p className="mt-4 text-xs text-zinc-500">Last updated: February 2, 2026 · Wild & Well Editorial Team</p>
+        <p className="mt-4 text-xs text-zinc-500">Last updated: {UPDATED_LABEL} · Wild & Well Editorial Team</p>
         </div>
       </header>
 
       
       <MoneyPageEducationBlock edu={edu} />
+
+      <MoneyPageDecisionBox rules={DECISION_RULES} />
+      <MoneyPageQuickCompare picks={PICKS} />
 <section className="mt-12 grid gap-4 md:grid-cols-3">
         <div className="card">
           <h2 className="text-lg font-semibold">The 3 checks</h2>
@@ -250,6 +270,8 @@ const itemList = PICKS.map((p, i) => ({
           </div>
         </div>
       </section>
+
+      <MoneyPageUpdateLog updatedLabel={UPDATED_LABEL} prevUpdatedLabel={PREV_UPDATED_LABEL} changes={UPDATE_CHANGES} />
       <MoneyPageNextLinks slug="best-air-purifiers-small-flats-uk" />
 
       <p className="mt-12 text-xs text-zinc-500">

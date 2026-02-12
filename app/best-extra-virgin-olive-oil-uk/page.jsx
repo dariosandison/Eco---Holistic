@@ -8,6 +8,8 @@ import { getMoneyPageEdu } from '@/lib/moneyPageEdu'
 import MoneyPageQuickCompare from '@/components/MoneyPageQuickCompare'
 import MoneyPageFAQ from '@/components/MoneyPageFAQ'
 import MoneyPageNextLinks from '@/components/MoneyPageNextLinks'
+import MoneyPageDecisionBox from '@/components/MoneyPageDecisionBox'
+import MoneyPageUpdateLog from '@/components/MoneyPageUpdateLog'
 
 
 
@@ -16,6 +18,20 @@ export const metadata = {
   title: "Extra virgin olive oil (UK): our shortlist",
   description: "A practical shortlist of extra virgin olive oils (EVOO) with notes on freshness, storage, and what to look for on the label.",
 }
+
+const UPDATED = '2026-02-12'
+const UPDATED_LABEL = 'February 12, 2026'
+const PREV_UPDATED_LABEL = 'February 2, 2026'
+const UPDATE_CHANGES = [
+  'Refreshed this shortlist for availability and clarity.',
+  'Added a 10‑second decision box and quick comparison table for faster choosing.',
+  'Updated internal links to supporting guides and topic hubs.',
+]
+const DECISION_RULES = [
+  { if: 'You want one bottle for everything', then: 'Choose a good everyday EVOO for cooking + salads (fresh date if available).' },
+  { if: 'You mainly drizzle/finish dishes', then: 'Buy a nicer peppery/fruity bottle for flavour and use a cheaper oil for high‑heat.' },
+  { if: 'You want best value', then: 'Look for harvest/“best before” information and buy smaller bottles more often.' },
+]
 
 const PICKS = [
   {
@@ -97,7 +113,7 @@ function SummaryBox() {
         <Link className="btn-secondary" href="/nutrition">Nutrition</Link>
         <Link className="btn-secondary" href="/shortlists">Shortlists</Link>
       </div>
-      <p className="mt-4 text-xs text-zinc-500">Last updated: February 2, 2026 · Wild & Well Editorial Team</p>
+      <p className="mt-4 text-xs text-zinc-500">Last updated: {UPDATED_LABEL} · Wild & Well Editorial Team</p>
     </div>
   )
 }
@@ -117,7 +133,7 @@ const itemList = PICKS.map((p, i) => ({
     '@context': 'https://schema.org',
     '@type': 'Article',
     headline: "Extra virgin olive oil (UK): our shortlist",
-    dateModified: '2026-02-02',
+    dateModified: UPDATED,
     datePublished: '2026-01-27',
     mainEntity: {
       '@type': 'ItemList',
@@ -153,6 +169,9 @@ const itemList = PICKS.map((p, i) => ({
 
       
       <MoneyPageEducationBlock edu={edu} />
+
+      <MoneyPageDecisionBox rules={DECISION_RULES} />
+      <MoneyPageQuickCompare picks={PICKS} />
 
       <MoneyPageQuickCompare picks={PICKS} />
 <section className="mt-8">
@@ -259,6 +278,8 @@ const itemList = PICKS.map((p, i) => ({
           Some links are affiliate links. If you buy via them, we earn a commission.
         </p>
       </section>
+
+      <MoneyPageUpdateLog updatedLabel={UPDATED_LABEL} prevUpdatedLabel={PREV_UPDATED_LABEL} changes={UPDATE_CHANGES} />
     
       <MoneyPageNextLinks slug="best-extra-virgin-olive-oil-uk" />
 

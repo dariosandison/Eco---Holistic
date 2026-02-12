@@ -7,6 +7,9 @@ import EducationFirstCallout from '@/components/EducationFirstCallout'
 import MoneyPageEducationBlock from '@/components/MoneyPageEducationBlock'
 import { getMoneyPageEdu } from '@/lib/moneyPageEdu'
 import MoneyPageNextLinks from '@/components/MoneyPageNextLinks'
+import MoneyPageDecisionBox from '@/components/MoneyPageDecisionBox'
+import MoneyPageQuickCompare from '@/components/MoneyPageQuickCompare'
+import MoneyPageUpdateLog from '@/components/MoneyPageUpdateLog'
 
 export const metadata = {
   title: 'Natural sleep support: our shortlist',
@@ -16,6 +19,20 @@ export const metadata = {
 // Partner links (AWIN)
 const LEVITEX_SLEEP_POSTURE_PILLOW = 'https://www.awin1.com/cread.php?awinmid=28333&awinaffid=2754234&clickref=ww_sleep_picks_sleep_posture_pillow_levitex&ued=https%3A%2F%2Flevitex.co.uk%2Fproducts%2Fsleep-posture-pillow'
 const RITUALANDFLOW_DREAM_FLOW = 'https://www.awin1.com/cread.php?awinmid=112594&awinaffid=2754234&clickref=ww_sleep_picks_magnesium_hot_chocolate_ritualandflow_dreamflow&ued=https%3A%2F%2Fritualandflow.com%2Fproducts%2Fdream-flow'
+
+const UPDATED = '2026-02-12'
+const UPDATED_LABEL = 'February 12, 2026'
+const PREV_UPDATED_LABEL = 'February 2, 2026'
+const UPDATE_CHANGES = [
+  'Refreshed this shortlist for availability and clarity.',
+  'Added a 10‑second decision box and quick comparison table for faster choosing.',
+  'Updated internal links to supporting guides and topic hubs.',
+]
+const DECISION_RULES = [
+  { if: 'Trouble falling asleep', then: 'Start with basics (light/caffeine/timing) then consider a simple supplement option.' },
+  { if: 'You wake in the night', then: 'Look at temperature/light/noise first; supplements help less if the environment is wrong.' },
+  { if: 'You want “gentle” support', then: 'Choose one change at a time and assess for 7–14 days before stacking products.' },
+]
 
 const PICKS = [
   {
@@ -77,7 +94,7 @@ const itemList = PICKS.map((p, i) => ({
     '@context': 'https://schema.org',
     '@type': 'Article',
     headline: 'Natural sleep support: our shortlist',
-    dateModified: '2026-02-02',
+    dateModified: UPDATED,
     datePublished: '2026-01-25',
     mainEntity: { '@type': 'ItemList', itemListElement: itemList },
   }
@@ -147,12 +164,15 @@ const itemList = PICKS.map((p, i) => ({
           <Link className="btn-secondary" href="/blog/sleep-naturally-simple-guide">Cornerstone sleep guide</Link>
           <Link className="btn-secondary" href="/shopping-list">Free shopping list</Link>
         </div>
-        <p className="mt-4 text-xs text-zinc-500">Last updated: February 2, 2026 · Wild & Well Editorial Team</p>
+        <p className="mt-4 text-xs text-zinc-500">Last updated: {UPDATED_LABEL} · Wild & Well Editorial Team</p>
         </div>
       </header>
 
       
       <MoneyPageEducationBlock edu={edu} />
+
+      <MoneyPageDecisionBox rules={DECISION_RULES} />
+      <MoneyPageQuickCompare picks={PICKS} />
 <section className="mt-12 grid gap-4 md:grid-cols-3">
         <div className="card">
           <h2 className="text-lg font-semibold">Start here</h2>
@@ -306,6 +326,8 @@ const itemList = PICKS.map((p, i) => ({
           <Link className="btn-secondary" href="/blog/sleep-naturally-simple-guide">Sleep guide</Link>
         </div>
       </section>
+
+      <MoneyPageUpdateLog updatedLabel={UPDATED_LABEL} prevUpdatedLabel={PREV_UPDATED_LABEL} changes={UPDATE_CHANGES} />
       <MoneyPageNextLinks slug="best-natural-sleep-support" />
 
       <p className="mt-12 text-xs text-zinc-500">

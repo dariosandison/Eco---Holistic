@@ -7,8 +7,7 @@ import { useMemo, useState } from 'react'
  * Quick comparison table built from a PICKS array.
  * Designed for scanning: best-for label + one key note + one trade-off.
  *
- * This is intentionally lightweight: filtering/searching helps readers
- * find the right row fast without changing the editorial order by default.
+ * Works even if older pages don't have note/tradeoff yet (fallbacks to desc/bullets).
  */
 export default function MoneyPageQuickCompare({ picks = [] }) {
   const [q, setQ] = useState('')
@@ -38,6 +37,7 @@ export default function MoneyPageQuickCompare({ picks = [] }) {
           p?.badge,
           p?.note,
           p?.tradeoff,
+          p?.desc,
           ...(Array.isArray(p?.bullets) ? p.bullets : []),
         ]
           .filter(Boolean)
@@ -54,6 +54,12 @@ export default function MoneyPageQuickCompare({ picks = [] }) {
     return out
   }, [picks, q, badge, sort])
 
+  const noteFor = (p) =>
+    p?.note || p?.desc || (Array.isArray(p?.bullets) ? p.bullets[0] : '') || ''
+
+  const tradeoffFor = (p) =>
+    p?.tradeoff || (Array.isArray(p?.bullets) ? (p.bullets[1] || p.bullets[0]) : '') || ''
+
   if (!picks || picks.length === 0) return null
 
   return (
@@ -62,7 +68,7 @@ export default function MoneyPageQuickCompare({ picks = [] }) {
         <div className="flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
           <div className="min-w-0">
             <h2 className="text-xl font-semibold text-zinc-900">Quick comparison</h2>
-            <p className="mt-2 text-sm text-zinc-700 max-w-3xl">
+            <p className="mt-2 max-w-3xl text-sm text-zinc-700">
               Scan the best‑for label, one key note, and one trade‑off.
             </p>
           </div>
@@ -72,24 +78,26 @@ export default function MoneyPageQuickCompare({ picks = [] }) {
               value={q}
               onChange={(e) => setQ(e.target.value)}
               placeholder="Search options…"
-              className="w-full sm:w-56 rounded-2xl border border-zinc-200 bg-white px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-[color:var(--ring)]"
+              className="w-full rounded-2xl border border-zinc-200 bg-white px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-[color:var(--ring)] sm:w-56"
             />
 
             <select
               value={badge}
               onChange={(e) => setBadge(e.target.value)}
-              className="w-full sm:w-48 rounded-2xl border border-zinc-200 bg-white px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-[color:var(--ring)]"
+              className="w-full rounded-2xl border border-zinc-200 bg-white px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-[color:var(--ring)] sm:w-48"
               aria-label="Filter by label"
             >
               {badgeOptions.map((b) => (
-                <option key={b} value={b}>{b}</option>
+                <option key={b} value={b}>
+                  {b}
+                </option>
               ))}
             </select>
 
             <select
               value={sort}
               onChange={(e) => setSort(e.target.value)}
-              className="w-full sm:w-40 rounded-2xl border border-zinc-200 bg-white px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-[color:var(--ring)]"
+              className="w-full rounded-2xl border border-zinc-200 bg-white px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-[color:var(--ring)] sm:w-40"
               aria-label="Sort order"
             >
               <option value="Recommended">Recommended</option>
@@ -102,7 +110,7 @@ export default function MoneyPageQuickCompare({ picks = [] }) {
           <table className="min-w-[760px] w-full border-collapse text-sm">
             <thead className="bg-zinc-50 text-left text-zinc-700">
               <tr>
-                <th className="px-4 py-3 font-semibold w-[220px]">Option</th>
+                <th className="w-[220px] px-4 py-3 font-semibold">Option</th>
                 <th className="px-4 py-3 font-semibold">Best for</th>
                 <th className="px-4 py-3 font-semibold">Key note</th>
                 <th className="px-4 py-3 font-semibold">Trade‑off</th>
@@ -113,8 +121,8 @@ export default function MoneyPageQuickCompare({ picks = [] }) {
                 <tr key={i} className="border-t">
                   <td className="px-4 py-3 font-semibold text-zinc-900">{p.title}</td>
                   <td className="px-4 py-3 text-zinc-700">{p.badge}</td>
-                  <td className="px-4 py-3 text-zinc-700">{p.note}</td>
-                  <td className="px-4 py-3 text-zinc-700">{p.tradeoff}</td>
+                  <td className="px-4 py-3 text-zinc-700">{noteFor(p)}</td>
+                  <td className="px-4 py-3 text-zinc-700">{tradeoffFor(p)}</td>
                 </tr>
               ))}
               {filtered.length === 0 ? (

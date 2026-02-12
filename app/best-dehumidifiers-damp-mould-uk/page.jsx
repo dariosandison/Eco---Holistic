@@ -7,6 +7,9 @@ import EducationFirstCallout from '@/components/EducationFirstCallout'
 import MoneyPageEducationBlock from '@/components/MoneyPageEducationBlock'
 import { getMoneyPageEdu } from '@/lib/moneyPageEdu'
 import MoneyPageNextLinks from '@/components/MoneyPageNextLinks'
+import MoneyPageDecisionBox from '@/components/MoneyPageDecisionBox'
+import MoneyPageQuickCompare from '@/components/MoneyPageQuickCompare'
+import MoneyPageUpdateLog from '@/components/MoneyPageUpdateLog'
 
 const MEACO_ARETE_ONE_25L = 'https://www.awin1.com/cread.php?awinmid=31711&awinaffid=2754234&clickref=ww_home_air_meaco_arete_one_25l&ued=https%3A%2F%2Fwww.meaco.com%2Fproducts%2Fmeacodry-arete-one-25l-dehumidifier-and-air-purifier'
 
@@ -15,6 +18,20 @@ export const metadata = {
   description:
     'A practical shortlist for UK homes: dehumidifiers for damp, condensation and laundry drying — with simple rules on size, type and running costs.',
 }
+
+const UPDATED = '2026-02-12'
+const UPDATED_LABEL = 'February 12, 2026'
+const PREV_UPDATED_LABEL = 'February 2, 2026'
+const UPDATE_CHANGES = [
+  'Refreshed this shortlist for availability and clarity.',
+  'Added a 10‑second decision box and quick comparison table for faster choosing.',
+  'Updated internal links to supporting guides and topic hubs.',
+]
+const DECISION_RULES = [
+  { if: 'Cold rooms / laundry drying is the problem', then: 'A desiccant dehumidifier is often the easiest win in UK winters.', note: 'Trade‑off: can cost more to run than compressor units.' },
+  { if: 'Warmer living areas with steady damp', then: 'A compressor unit often wins on running cost for everyday use.', note: 'Less effective in colder rooms.' },
+  { if: 'Not sure if it’s damp or just a feeling', then: 'Measure humidity first with a hygrometer (aim roughly 40–60% RH).' },
+]
 
 const PICKS = [
   {
@@ -76,9 +93,10 @@ function QuickSummary() {
       <div className="mt-4 flex flex-wrap gap-2">
         <Link className="btn-secondary" href="/topics/air-quality">Air quality topic</Link>
         <Link className="btn-secondary" href="/blog/winter-humidity-guide">Winter humidity guide</Link>
+        <Link className="btn-secondary" href="/blog/damp-and-mould-uk-renters-playbook">Renters damp &amp; mould playbook</Link>
         <Link className="btn-secondary" href="/shopping-list">Free shopping list</Link>
       </div>
-      <p className="mt-4 text-xs text-zinc-500">Last updated: February 2, 2026 · Wild & Well Editorial Team</p>
+      <p className="mt-4 text-xs text-zinc-500">Last updated: {UPDATED_LABEL} · Wild & Well Editorial Team</p>
     </div>
   )
 }
@@ -98,7 +116,7 @@ export default function Page() {
     '@context': 'https://schema.org',
     '@type': 'Article',
     headline: 'Best dehumidifiers for damp & mould (UK): what to buy first',
-    dateModified: '2026-02-02',
+    dateModified: UPDATED,
     datePublished: '2026-02-01',
     mainEntity: {
       '@type': 'ItemList',
@@ -172,6 +190,9 @@ export default function Page() {
       </header>
 
       <MoneyPageEducationBlock edu={edu} />
+
+      <MoneyPageDecisionBox rules={DECISION_RULES} />
+      <MoneyPageQuickCompare picks={PICKS} />
 
       <section className="mt-10">
         <QuickSummary />
@@ -293,6 +314,8 @@ export default function Page() {
         </p>
         <p className="mt-3 text-xs text-zinc-500">Some links are affiliate links. If you buy via them, we earn a commission.</p>
       </section>
+
+      <MoneyPageUpdateLog updatedLabel={UPDATED_LABEL} prevUpdatedLabel={PREV_UPDATED_LABEL} changes={UPDATE_CHANGES} />
 
       <MoneyPageNextLinks slug={slug} />
 
