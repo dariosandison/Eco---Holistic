@@ -104,6 +104,8 @@ export default function Page() {
   const slug = 'best-dehumidifiers-damp-mould-uk'
   const edu = getMoneyPageEdu(slug)
 
+  const { bestFor, routes, faqs } = getTop10Meta(slug)
+
   const itemList = PICKS.map((p, i) => ({
     '@type': 'ListItem',
     position: i + 1,
