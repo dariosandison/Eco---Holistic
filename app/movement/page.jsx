@@ -14,6 +14,8 @@ const FITNESSOPTIONS_A1_WATERROWER = 'https://www.awin1.com/cread.php?awinmid=89
 const ANCIENT_TRUE_CREATINE = 'https://www.awin1.com/cread.php?awinmid=54585&awinaffid=2754234&clickref=ww_movement_strength_ancient_true_creatine&ued=https%3A%2F%2Fancientandbrave.earth%2Fproducts%2Ftrue-creatine'
 const NAKEDPHARMACY_NATRUFLEX = 'https://www.awin1.com/cread.php?awinmid=20100&awinaffid=2754234&clickref=ww_movement_recovery_naked_natruflex_turmeric&ued=https%3A%2F%2Fwww.thenakedpharmacy.com%2Fproducts%2Fnatruflex-turmeric%3Futm_source%3Dchatgpt.com'
 const VIVO_TRACKER_WINTER_III = 'https://www.awin1.com/cread.php?awinmid=7778&awinaffid=2754234&clickref=ww_movement_footstrength_vivo_tracker_winter_iii&ued=https%3A%2F%2Fwww.vivobarefoot.com%2Fuk%2Ftracker-winter-iii-sg-mens%3Futm_source%3Dchatgpt.com'
+const VIVO_PRIMUS_LITE_KNIT = 'https://www.awin1.com/cread.php?awinmid=7778&awinaffid=2754234&clickref=ww_movement_footstrength_vivo_primus_lite_knit&ued=https%3A%2F%2Fwww.vivobarefoot.com%2Fuk%2Fprimus-lite-knit-training-footwear'
+const REVIVEACTIVE_JOINT_COMPLEX = 'https://www.awin1.com/cread.php?awinmid=72881&awinaffid=2754234&clickref=ww_movement_recovery_reviveactive_joint_complex&ued=https%3A%2F%2Freviveactive.com%2Fproducts%2Fjoint-complex'
 
 function Card({ title, desc, href, tag, image }) {
   return (
@@ -63,7 +65,7 @@ export default function Page() {
           <Link className="btn-secondary" href="/blog">Read Wellness Insights</Link>
           <Link className="btn-secondary" href="/topics">Browse Topics</Link>
         </div>
-        <p className="mt-3 text-xs text-zinc-500">Last updated: February 1, 2026</p>
+        <p className="mt-3 text-xs text-zinc-500">Last updated: February 13, 2026</p>
       </header>
 
       <section className="mt-10">
@@ -150,11 +152,36 @@ export default function Page() {
           />
 
           <ProductPick
+            title="Joint support: Revive Active Joint Complex"
+            badge="Recovery"
+            description="A joint support supplement option for active people. Keep the trial clean: one change at a time."
+            bullets={["Best for: training consistency + recovery routines", "Trial 2–4 weeks", "Check suitability if you take medication"]}
+            links={[
+              { label: 'Check price', merchant: 'awin', href: REVIVEACTIVE_JOINT_COMPLEX, variant: 'primary' },
+              { label: 'Read the guide', merchant: 'internal', href: '/best-joint-support-supplement-uk-reviveactive-joint-complex', variant: 'ghost' },
+            ]}
+          />
+
+          <ProductPick
             title="Barefoot boots: Vivobarefoot Tracker Winter III"
             badge="Foot strength"
             description="For outdoor walking when you want ground feel. Transition slowly to avoid calf/foot overload."
             bullets={["Short walks first", "Fit matters", "Increase volume gradually"]}
-            links={[{ label: 'Check price', merchant: 'awin', href: VIVO_TRACKER_WINTER_III, variant: 'primary' }]}
+            links={[
+              { label: 'Check price', merchant: 'awin', href: VIVO_TRACKER_WINTER_III, variant: 'primary' },
+              { label: 'Read the guide', merchant: 'internal', href: '/best-barefoot-walking-boots-uk-vivobarefoot-tracker-winter-iii', variant: 'ghost' },
+            ]}
+          />
+
+          <ProductPick
+            title="Barefoot training: Vivobarefoot Primus Lite Knit"
+            badge="Foot strength"
+            description="A popular barefoot training option for gym work. Prioritise fit and transition gradually."
+            bullets={["Best for: gym training + foot strength", "Transition slowly (short sessions first)", "Check returns so you can trial"]}
+            links={[
+              { label: 'Check price', merchant: 'awin', href: VIVO_PRIMUS_LITE_KNIT, variant: 'primary' },
+              { label: 'Read the guide', merchant: 'internal', href: '/best-barefoot-training-shoes-uk-vivobarefoot-primus-lite-knit', variant: 'ghost' },
+            ]}
           />
 
         </div>

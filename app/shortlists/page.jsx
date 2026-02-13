@@ -40,7 +40,7 @@ export default function Page() {
           <Link className="btn-secondary" href="/shopping-list">Get the free shopping list</Link>
           <Link className="btn-secondary" href="/deals">Browse deals</Link>
         </div>
-        <p className="mt-3 text-xs text-zinc-500">Last updated: February 8, 2026</p>
+        <p className="mt-3 text-xs text-zinc-500">Last updated: February 13, 2026</p>
       </header>
 
       <ShortlistExplorer sections={SHORTLIST_SECTIONS} />

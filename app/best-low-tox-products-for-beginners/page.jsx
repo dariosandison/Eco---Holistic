@@ -18,6 +18,8 @@ export const metadata = {
 const JUNGLECULTURE_SAFETY_RAZOR = 'https://www.awin1.com/cread.php?awinmid=26152&awinaffid=2754234&clickref=ww_home_picks_safety_razor_jungleculture_diamondgrip&ued=https%3A%2F%2Fjungleculture.eco%2Fcollections%2Fbest-selling-products%2Fproducts%2Fblue-silver-purple-safety-razors'
 const NEUROSCENT_WELLBEING_SET = 'https://www.awin1.com/cread.php?awinmid=117317&awinaffid=2754234&clickref=ww_home_picks_neuroscent_wellbeing_set&ued=https%3A%2F%2Fneuroscent.com%2Fproducts%2Fwellbeing-set-1'
 const ATENAI_SANCTUARY_SHAMPOO = 'https://www.awin1.com/cread.php?awinmid=116677&awinaffid=2754234&clickref=ww_home_picks_hair_shampoo_atenai_sanctuary&ued=https%3A%2F%2Fatenailondon.com%2Fcollections%2Fbestsellers%2Fproducts%2Fsanctuary-hair-shampoo'
+const ATENAI_OASIS_HAND_CREAM = 'https://www.awin1.com/cread.php?awinmid=116677&awinaffid=2754234&clickref=ww_home_bathroom_atenai_oasis_hand_cream&ued=https%3A%2F%2Fatenailondon.com%2Fcollections%2Fbestsellers%2Fproducts%2Foasis-hand-cream'
+const JUNGLECULTURE_NATURAL_LOOFAH = 'https://www.awin1.com/cread.php?awinmid=26152&awinaffid=2754234&clickref=ww_home_lowtox_jungleculture_natural_loofah&ued=https%3A%2F%2Fjungleculture.eco%2Fcollections%2Fbest-selling-products%2Fproducts%2Fnatural-loofah-sponge'
 
 function StartCard({ title, desc, href, tag }) {
   return (
@@ -47,7 +49,7 @@ const url = `${SITE_URL}/best-low-tox-products-for-beginners`
     '@type': 'Article',
     headline: 'Low‑tox products for beginners: starter shortlist',
     datePublished: '2026-01-25',
-    dateModified: '2026-02-02',
+    dateModified: '2026-02-13',
     mainEntityOfPage: { '@type': 'WebPage', '@id': url },
     publisher: {
       '@type': 'Organization',
@@ -116,10 +118,10 @@ const url = `${SITE_URL}/best-low-tox-products-for-beginners`
         <EducationFirstCallout topicHref="/blog" topicLabel="Read starter explainers" insightHref="/blog/non-toxic-cleaning-starter" insightLabel="Non‑toxic cleaning starter" />
         <div className="mt-5 flex flex-wrap gap-2">
           <Link className="btn-secondary" href="/shopping-list">Get the free shopping list</Link>
-          <Link className="btn-secondary" href="/topics">Browse Topics</Link>
-          <Link className="btn-secondary" href="/topics">Browse Topics</Link>
+          <Link className="btn-secondary" href="/topics">Browse topics</Link>
+          <Link className="btn-secondary" href="/shortlists">Browse shortlists</Link>
         </div>
-        <p className="mt-3 text-xs text-zinc-500">Last updated: February 2, 2026 · Wild & Well Editorial Team</p>
+        <p className="mt-3 text-xs text-zinc-500">Last updated: February 13, 2026 · Wild & Well Editorial Team</p>
         </div>
       </header>
 
@@ -190,7 +192,7 @@ const url = `${SITE_URL}/best-low-tox-products-for-beginners`
           <div>
             <h2 className="text-2xl font-semibold">Partner swaps (UK)</h2>
             <p className="mt-1 text-sm text-zinc-600 max-w-2xl">
-              Three low‑friction swaps we feature for beginners. (Links are affiliate links.)
+              Five low‑friction swaps we feature for beginners. (Links are affiliate links.)
             </p>
           </div>
         </div>
@@ -216,6 +218,28 @@ const url = `${SITE_URL}/best-low-tox-products-for-beginners`
             description="A calmer personal‑care option if you’re simplifying routines. Always check ingredients for your sensitivities."
             bullets={["Keep routine simple", "Check ingredients", "One change at a time"]}
             links={[{ label: 'Check price', merchant: 'awin', href: ATENAI_SANCTUARY_SHAMPOO, variant: 'primary' }]}
+          />
+
+          <ProductPick
+            title="Skin care swap: Atenai Oasis hand cream"
+            badge="Bathroom"
+            description="A simple daily hand-cream option if you’re reducing fragrance and keeping routines calm. Patch-test if you’re sensitive."
+            bullets={["Best for: dry hands", "Keep it simple", "Patch-test if sensitive"]}
+            links={[
+              { label: 'Check price', merchant: 'awin', href: ATENAI_OASIS_HAND_CREAM, variant: 'primary' },
+              { label: 'Read the guide', merchant: 'internal', href: '/best-hand-cream-uk-atenai-oasis-hand-cream', variant: 'ghost' },
+            ]}
+          />
+
+          <ProductPick
+            title="Bathroom swap: Jungle Culture natural loofah sponge"
+            badge="Plastic‑free"
+            description="A plastic-free shower swap that keeps things simple. Let it dry fully between uses and replace when worn."
+            bullets={["Best for: low-tox basics", "Let it dry fully", "Replace when worn"]}
+            links={[
+              { label: 'Check price', merchant: 'awin', href: JUNGLECULTURE_NATURAL_LOOFAH, variant: 'primary' },
+              { label: 'Read the guide', merchant: 'internal', href: '/best-natural-loofah-sponge-uk-jungleculture', variant: 'ghost' },
+            ]}
           />
         </div>
       </section>

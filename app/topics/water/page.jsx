@@ -18,7 +18,9 @@ const ZW_TOPIC_FILTERS = 'https://www.awin1.com/cread.php?awinmid=30649&awinaffi
 // Featured water products (AWIN)
 const ZEROWATER_JUG_1_7L = 'https://www.awin1.com/cread.php?awinmid=30649&awinaffid=2754234&clickref=ww_water_picks_filter_jug_zerowater_1_7l&ued=https%3A%2F%2Fshop.culligan.co.uk%2Fproducts%2F1-7-litre-water-filter-jug'
 const WATERDROP_UNDERSINK_DIRECT_CONNECT = 'https://www.awin1.com/cread.php?awinmid=117649&awinaffid=2754234&clickref=ww_water_picks_under_sink_waterdrop_ua&ued=https%3A%2F%2Fwww.waterdropfilter.co.uk%2Fcollections%2Fbest-selling%2Fproducts%2Funder-sink-water-filter-direct-connect-filtration-system'
+const WATERDROP_RO_G3P600 = 'https://www.awin1.com/cread.php?awinmid=117649&awinaffid=2754234&clickref=ww_water_ro_waterdrop_g3p600&ued=https%3A%2F%2Fwww.waterdropfilter.co.uk%2Fproducts%2Fwaterdrop-reverse-osmosis-water-filtration-system'
 const DOULTON_BB_GRAVITY_1L = 'https://www.awin1.com/cread.php?awinmid=69790&awinaffid=2754234&clickref=ww_water_picks_gravity_filter_doulton_bb_1l&ued=https%3A%2F%2Fdoulton.com%2Fproducts%2Fbritish-berkefeld-1-litre-stainless-steel-gravity-system'
+const DOULTON_COUNTERTOP_BIOTECT_ULTRA = 'https://www.awin1.com/cread.php?awinmid=69790&awinaffid=2754234&clickref=ww_water_countertop_doulton_biotect_ultra&ued=https%3A%2F%2Fdoulton.com%2Fproducts%2Fd-cs-d-cp-biotect-ultra'
 const WATERTOGO_ACTIVE_75CL = 'https://www.awin1.com/cread.php?awinmid=86997&awinaffid=2754234&clickref=ww_water_picks_filter_bottle_watertogo_active_75cl&ued=https%3A%2F%2Fwatertogo.eu%2Fproduct%2F75cl-active-bottles%2F'
 
 
@@ -81,7 +83,7 @@ export default function Page() {
           <a className="chip" href="#faqs">FAQs</a>
         </div>
 
-        <p className="mt-3 text-xs text-zinc-500">Last updated: February 2, 2026</p>
+        <p className="mt-3 text-xs text-zinc-500">Last updated: February 13, 2026</p>
       </header>
 
       <TopicEducationDeepDive edu={edu} />
@@ -170,6 +172,28 @@ export default function Page() {
               bullets={["Best for: convenience", "Check install requirements", "Compare replacement filters"]}
               links={[{ label: 'Check price', merchant: 'awin', href: WATERDROP_UNDERSINK_DIRECT_CONNECT, variant: 'primary' }]}
             />
+
+            <ProductPick
+              title="Under-sink RO option: Waterdrop 600 GPD (G3P600)"
+              badge="Reverse osmosis"
+              description="A fast-flow reverse osmosis system for households who want high-volume filtered water from a dedicated tap."
+              bullets={["Best for: high-volume filtered water", "Check install requirements + filter replacements", "Plan space under-sink"]}
+              links={[
+                { label: 'Check price', merchant: 'awin', href: WATERDROP_RO_G3P600, variant: 'primary' },
+                { label: 'Read the guide', merchant: 'internal', href: '/best-reverse-osmosis-water-filter-uk-waterdrop-g3p600', variant: 'ghost' },
+              ]}
+            />
+            <ProductPick
+              title="Countertop option: Doulton system (Biotect Ultra)"
+              badge="Countertop"
+              description="A renter-friendly countertop route (no plumbing changes) if you want filtered water without under-sink installation."
+              bullets={["Best for: renters + no-plumbing kitchens", "Check replacement cartridges", "Plan counter space"]}
+              links={[
+                { label: 'Check price', merchant: 'awin', href: DOULTON_COUNTERTOP_BIOTECT_ULTRA, variant: 'primary' },
+                { label: 'Read the guide', merchant: 'internal', href: '/best-countertop-water-filter-uk-doulton-biotect-ultra', variant: 'ghost' },
+              ]}
+            />
+
             <ProductPick
               title="Gravity option: British Berkefeld 1L stainless system"
               badge="Gravity"
