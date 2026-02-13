@@ -60,6 +60,7 @@ export default function Page() {
           <Link className="btn-secondary" href="/best-air-purifiers-allergies-uk">Air purifiers for allergies</Link>
           <Link className="btn-secondary" href="/best-air-purifiers-small-flats-uk">Air purifiers for small flats</Link>
           <Link className="btn-secondary" href="/best-dehumidifiers-damp-mould-uk">Dehumidifiers for damp &amp; mould</Link>
+          <Link className="btn-secondary" href="/air-quality-shortlist-uk">Partner shortlist</Link>
         </div>
 
         <div className="mt-4 flex flex-wrap gap-2">

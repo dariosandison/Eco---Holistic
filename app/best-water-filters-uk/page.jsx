@@ -155,6 +155,11 @@ const itemList = PICKS.map((p, i) => ({
 
         <div className="max-w-3xl">
         <EducationFirstCallout topicHref="/topics/water" topicLabel="Water topic" insightHref="/blog/water-filter-buying-guide-uk" insightLabel="Water filter buying guide" />
+        <div className="mt-4 flex flex-wrap gap-2">
+          <Link className="btn-secondary" href="/water-filtration-shortlist-uk">Partner shortlist (20 links)</Link>
+          <Link className="btn-secondary" href="/best-shower-filters-uk-hard-water">Shower filters</Link>
+        </div>
+
         </div>
       </header>
 

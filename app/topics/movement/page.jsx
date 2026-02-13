@@ -56,6 +56,7 @@ export default function Page() {
 
         <div className="mt-4 flex flex-wrap gap-2">
           <Link className="btn-secondary" href="/movement">Explore Movement section</Link>
+          <Link className="btn-secondary" href="/movement/movement-shortlist">Movement shortlist</Link>
           <Link className="btn-secondary" href="/blog/walking-for-health-how-much-is-enough">Walking guide</Link>
           <Link className="btn-secondary" href="/blog/home-strength-basics-busy-people">Home strength basics</Link>
           <Link className="btn-secondary" href="/blog/mobility-for-desk-workers">Mobility for desk workers</Link>

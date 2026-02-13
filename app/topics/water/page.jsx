@@ -72,6 +72,7 @@ export default function Page() {
         <div className="mt-4 flex flex-wrap gap-2">
           <Link className="btn-secondary" href="/blog/water-filter-buying-guide-uk">Read the buying guide</Link>
           <Link className="btn-secondary" href="/best-water-filters-uk">Water filters (UK): shortlist</Link>
+          <Link className="btn-secondary" href="/water-filtration-shortlist-uk">Partner shortlist</Link>
         </div>
 
         <div className="mt-4 flex flex-wrap gap-2">
