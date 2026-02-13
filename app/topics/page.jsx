@@ -4,7 +4,7 @@ import { SITE_URL } from '@/lib/site'
 
 export const metadata = {
   title: 'Topics — Wild & Well',
-  description: 'Education-first topic insights for sleep, air quality, water, and fragrance-free home in the UK.',
+  description: 'Education-first topic insights for sleep, movement, nutrition, skin health, air quality, water, and low-tox home habits in the UK.',
 }
 
 function Card({ title, desc, href, tag, image }) {
@@ -41,6 +41,14 @@ export default function Page() {
     name: 'Wild & Well topics',
     itemListElement: [
       { name: 'Sleep & recovery', url: `${SITE_URL}/topics/sleep` },
+      { name: 'Movement (walking + strength)', url: `${SITE_URL}/topics/movement` },
+      { name: 'Recovery (training + soreness)', url: `${SITE_URL}/topics/recovery` },
+      { name: 'Foot strength (natural movement)', url: `${SITE_URL}/topics/foot-strength` },
+      { name: 'Nutrition (food + labels)', url: `${SITE_URL}/topics/nutrition` },
+      { name: 'Gut health (fibre + diversity)', url: `${SITE_URL}/topics/gut-health` },
+      { name: 'Hydration (habits + electrolytes)', url: `${SITE_URL}/topics/hydration` },
+      { name: 'Skin health (barrier basics)', url: `${SITE_URL}/topics/skin-health` },
+      { name: 'Sun protection (SPF + habits)', url: `${SITE_URL}/topics/sun-protection` },
       { name: 'Air quality (allergies + damp)', url: `${SITE_URL}/topics/air-quality` },
       { name: 'Water (filters + hydration)', url: `${SITE_URL}/topics/water` },
       { name: 'Fragrance-free cleaning & laundry', url: `${SITE_URL}/topics/fragrance-free` },
@@ -69,15 +77,23 @@ export default function Page() {
 
       <section className="mt-10 grid gap-4 md:grid-cols-2">
         <Card image="/images/photography/thumbs/sleep.png" title="Sleep & recovery" desc="Light, timing, temperature, and practical options." href="/topics/sleep" tag="Sleep" />
+        <Card image="/images/photography/thumbs/movement.svg" title="Movement (walking + strength)" desc="Build a base layer: steps, simple strength, and mobility." href="/topics/movement" tag="Movement" />
+        <Card image="/images/photography/thumbs/movement.svg" title="Recovery" desc="Soreness, load management, and the basics that drive adaptation." href="/topics/recovery" tag="Movement" />
+        <Card image="/images/photography/thumbs/movement.svg" title="Foot strength" desc="Natural movement basics and how to transition gradually." href="/topics/foot-strength" tag="Movement" />
+        <Card image="/images/photography/thumbs/nutrition.svg" title="Nutrition (food + labels)" desc="Food-first upgrades, label reading, and consistency tools." href="/topics/nutrition" tag="Nutrition" />
+        <Card image="/images/photography/thumbs/nutrition.svg" title="Gut health" desc="Fibre, diversity, fermented foods, and sensible expectations." href="/topics/gut-health" tag="Nutrition" />
+        <Card image="/images/photography/thumbs/water.png" title="Hydration" desc="Habits first, then electrolytes when they actually help." href="/topics/hydration" tag="Nutrition" />
+        <Card image="/images/cards/neutral.svg" title="Skin health" desc="Barrier basics, fragrance triggers, and simple routines." href="/topics/skin-health" tag="Skin" />
+        <Card image="/images/cards/neutral.svg" title="Sun protection" desc="Shade + clothing habits, then a sunscreen you will use." href="/topics/sun-protection" tag="Skin" />
         <Card image="/images/photography/thumbs/air-quality.png" title="Air quality (allergies + damp)" desc="HEPA basics, placement, and shortlists for common rooms." href="/topics/air-quality" tag="Home" />
-        <Card image="/images/photography/thumbs/water.png" title="Water (filters + hydration)" desc="Under-sink vs jugs, replacement filters, and buying basics." href="/topics/water" tag="Kitchen" />
+        <Card image="/images/photography/thumbs/water.png" title="Water (filters + drinking)" desc="Under-sink vs jugs, replacement filters, and buying basics." href="/topics/water" tag="Kitchen" />
         <Card image="/images/photography/thumbs/laundry.png" title="Fragrance-free cleaning & laundry" desc="Ingredient checks and the quickest swaps for sensitive households." href="/topics/fragrance-free" tag="Cleaning" />
       </section>
 
       <section className="mt-14 max-w-3xl">
         <h2 className="section-title">Suggested order</h2>
         <ol className="mt-3 list-decimal pl-6 text-zinc-700 space-y-2">
-          <li>Choose one topic (sleep, air, water, cleaning).</li>
+          <li>Choose one topic (sleep, movement, nutrition, skin, air, water, cleaning).</li>
           <li>Skim the “At a glance” section and choose one practical next step.</li>
           <li>When you want options, use the shortlist links to compare a few solid choices.</li>
         </ol>

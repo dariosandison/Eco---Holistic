@@ -11,10 +11,7 @@ export const metadata = {
 // Partner links (AWIN)
 const SIMPLY_SUPPLEMENTS_VITAMIN_D3 = 'https://www.awin1.com/cread.php?awinmid=5959&awinaffid=2754234&clickref=ww_nutrition_picks_vitamin_d3_2000iu_simplysupplements&ued=https%3A%2F%2Fwww.simplysupplements.co.uk%2Fvitamin-d3-2000iu'
 const HEALF_LMNT_VARIETY = 'https://www.awin1.com/cread.php?awinmid=22320&awinaffid=2754234&clickref=ww_nutrition_picks_electrolytes_healf_lmnt_variety&ued=https%3A%2F%2Fhealf.com%2Fproducts%2Flmnt-recharge-electrolytes-variety-pack'
-const KAYTEA_ULTIMATE_TASTER_BUNDLE = 'https://www.awin1.com/cread.php?awinmid=115673&awinaffid=2754234&clickref=ww_nutrition_drinks_kaytea_ultimate_taster_bundle&ued=https%3A%2F%2Fkaytea.co.uk%2Fproducts%2Fultimate-taster-bundle'
-const RITUALANDFLOW_MATCHA_FLOW = 'https://www.awin1.com/cread.php?awinmid=112594&awinaffid=2754234&clickref=ww_nutrition_energy_ritualandflow_matcha_flow&ued=https%3A%2F%2Fritualandflow.com%2Fproducts%2Fmatcha-flow'
-const HEALF_AG1_TRAVEL_PACKS = 'https://www.awin1.com/cread.php?awinmid=22320&awinaffid=2754234&clickref=ww_nutrition_daily_essentials_healf_ag1_travel_packs&ued=https%3A%2F%2Fhealf.com%2Fproducts%2Fag1-travel-packs'
-const ANCIENT_TRUE_COLLAGEN = 'https://www.awin1.com/cread.php?awinmid=54585&awinaffid=2754234&clickref=ww_nutrition_collagen_ancient_true_collagen&ued=https%3A%2F%2Fancientandbrave.earth%2Fproducts%2Ftrue-collagen-powder'
+const KAYTEA_ICE_TEA_SAMPLE = 'https://www.awin1.com/cread.php?awinmid=115673&awinaffid=2754234&clickref=ww_nutrition_picks_ice_tea_sample_kaytea_6pack&ued=https%3A%2F%2Fkaytea.co.uk%2Fproducts%2Fice-tea-6-pack-sample'
 const FARMFETCH_GRASSFED_BEEF_BOX = 'https://www.awin1.com/cread.php?awinmid=75682&awinaffid=2754234&clickref=ww_nutrition_picks_farmfetch_grassfed_beef_box&ued=https%3A%2F%2Ffarmfetch.co%2Fproducts%2Fgrass-fed-beef-selection-box-1'
 const SYMPROVE_MANGO = 'https://www.awin1.com/cread.php?awinmid=109974&awinaffid=2754234&clickref=ww_nutrition_picks_guthealth_symprove_mango_passionfruit&ued=https%3A%2F%2Fw-wellness.co.uk%2Fproducts%2Fsymprove-daily-live-active-bacteria-mango-passion-fruit'
 const GOLD_COLLAGEN_PURE = 'https://www.awin1.com/cread.php?awinmid=20972&awinaffid=2754234&clickref=ww_nutrition_picks_collagen_goldcollagen_pure&ued=https%3A%2F%2Fwww.gold-collagen.com%2Fuk%2Fshop%2Fbest-seller%2Fpure'
@@ -70,7 +67,7 @@ export default function Page() {
           <Link className="btn-secondary" href="/blog">Read Wellness Insights</Link>
           <Link className="btn-secondary" href="/topics">Browse Topics</Link>
         </div>
-        <p className="mt-3 text-xs text-zinc-500">Last updated: February 13, 2026</p>
+        <p className="mt-3 text-xs text-zinc-500">Last updated: February 1, 2026</p>
       </header>
 
       <section className="mt-10">
@@ -97,36 +94,6 @@ export default function Page() {
 
         <div className="mt-6 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
           <ProductPick
-            title="Better coffee swap: Matcha Flow (Ritual & Flow)"
-            badge="Energy"
-            description="A matcha latte blend for a smoother daily caffeine swap. Keep the trial clean and check sweeteners/allergens."
-            bullets={["Best for: smoother caffeine routine", "Start with half a serving if sensitive", "Trial 1–2 weeks"]}
-            links={[
-              { label: 'Check price', merchant: 'awin', href: RITUALANDFLOW_MATCHA_FLOW, variant: 'primary' },
-              { label: 'Read the guide', merchant: 'internal', href: '/best-matcha-latte-uk-ritual-and-flow-matcha-flow', variant: 'ghost' },
-            ]}
-          />
-          <ProductPick
-            title="Daily essentials: AG1 travel packs (Healf)"
-            badge="Daily"
-            description="Convenient travel packs for a greens habit. Compare ingredients and avoid stacking multiple new supplements at once."
-            bullets={["Best for: convenience + travel", "Trial 2–4 weeks", "Stop if adverse effects"]}
-            links={[
-              { label: 'Check price', merchant: 'awin', href: HEALF_AG1_TRAVEL_PACKS, variant: 'primary' },
-              { label: 'Read the guide', merchant: 'internal', href: '/best-ag1-travel-packs-uk-healf', variant: 'ghost' },
-            ]}
-          />
-          <ProductPick
-            title="Collagen powder: True Collagen (Ancient + Brave)"
-            badge="Collagen"
-            description="A simple collagen powder option. Run a clean 4‑week trial and track one measurable outcome."
-            bullets={["Trial 4 weeks", "One change at a time", "Compare serving size + additives"]}
-            links={[
-              { label: 'Check price', merchant: 'awin', href: ANCIENT_TRUE_COLLAGEN, variant: 'primary' },
-              { label: 'Read the guide', merchant: 'internal', href: '/best-collagen-powder-uk-ancient-and-brave-true-collagen', variant: 'ghost' },
-            ]}
-          />
-          <ProductPick
             title="Baseline staple: Vitamin D3 (2,000iu)"
             badge="Staples"
             description="A simple baseline for UK winters. Check label guidance and talk to a clinician if you have medical concerns."
@@ -141,14 +108,11 @@ export default function Page() {
             links={[{ label: 'Check price', merchant: 'awin', href: HEALF_LMNT_VARIETY, variant: 'primary' }]}
           />
           <ProductPick
-            title="Better drinks swap: Kaytea Ultimate Taster Bundle"
+            title="Better drinks swap: Kaytea ice tea sample"
             badge="Drinks"
-            description="A low-friction drinks swap — a taster bundle to find flavours you’ll actually use."
+            description="A simple lower-friction drinks swap — try flavours before stocking up."
             bullets={["Try flavours first", "Keep it low-effort", "Check sugar/caffeine on label"]}
-            links={[
-              { label: 'Check price', merchant: 'awin', href: KAYTEA_ULTIMATE_TASTER_BUNDLE, variant: 'primary' },
-              { label: 'Read the guide', merchant: 'internal', href: '/best-iced-tea-uk-kaytea-ultimate-taster-bundle', variant: 'ghost' },
-            ]}
+            links={[{ label: 'Check price', merchant: 'awin', href: KAYTEA_ICE_TEA_SAMPLE, variant: 'primary' }]}
           />
           <ProductPick
             title="Whole-food protein: Farmfetch grass fed beef box"
@@ -199,10 +163,6 @@ export default function Page() {
         </div>
 
         <div className="mt-4 flex flex-wrap gap-2">
-          <Link className="btn-secondary" href="/best-matcha-latte-uk-ritual-and-flow-matcha-flow">Matcha latte</Link>
-          <Link className="btn-secondary" href="/best-iced-tea-uk-kaytea-ultimate-taster-bundle">Better drinks swap</Link>
-          <Link className="btn-secondary" href="/best-ag1-travel-packs-uk-healf">Greens powder (AG1)</Link>
-          <Link className="btn-secondary" href="/best-collagen-powder-uk-ancient-and-brave-true-collagen">Collagen powder</Link>
           <Link className="btn-secondary" href="/best-daily-essentials-supplement-uk-reviveactive-original">Daily essentials</Link>
           <Link className="btn-secondary" href="/best-algae-omega-3-supplement-uk-together">Omega‑3 (algae)</Link>
           <Link className="btn-secondary" href="/best-vegan-vitamin-d3-supplement-uk-together">Vitamin D3</Link>

@@ -1,5 +1,5 @@
-import Link from 'next/link'
 import Image from 'next/image'
+import Link from 'next/link'
 import AmazonButton from '@/components/mdx/AmazonButton'
 
 export default function ProductPick({
@@ -68,22 +68,6 @@ export default function ProductPick({
   const resolvedLinks = Array.isArray(links) && links.length
     ? links
     : [{ label: 'Check price', merchant: 'amazon', asin, href, variant: 'primary' }]
-
-  const isInternalHref = (h) => {
-    if (!h) return false
-    const s = String(h)
-    if (s.startsWith('/')) return true
-    // Treat same-site absolute URLs as internal
-    if (s.startsWith('http://') || s.startsWith('https://')) {
-      try {
-        const u = new URL(s)
-        return u.hostname === 'www.wild-and-well.store' || u.hostname === 'wild-and-well.store'
-      } catch (_) {
-        return false
-      }
-    }
-    return false
-  }
   return (
     <div className="not-prose overflow-hidden rounded-2xl border border-zinc-200 bg-white p-5 shadow-sm">
       <div className="grid gap-4 sm:grid-cols-[96px,1fr] sm:items-start">
@@ -151,8 +135,6 @@ export default function ProductPick({
                 const merchant = String(l.merchant || '').toLowerCase()
                 const label = l.label || 'Check price'
                 const v = l.variant || 'primary'
-                const hrefResolved = l.href || href
-                const internal = merchant === 'internal' || isInternalHref(hrefResolved)
 
                 if (merchant.includes('amazon') || merchant === '') {
                   return (
@@ -168,9 +150,16 @@ export default function ProductPick({
                     ? 'inline-flex items-center justify-center rounded-xl border border-zinc-300 bg-white px-4 py-2.5 text-sm font-semibold text-zinc-900 transition hover:bg-zinc-50'
                     : 'btn-secondary'
 
-                if (internal) {
+                const hrefResolved = String(l.href || '')
+                const isInternal = merchant === 'internal' || hrefResolved.startsWith('/')
+
+                if (isInternal) {
                   return (
-                    <Link key={i} href={hrefResolved} className={className}>
+                    <Link
+                      key={i}
+                      href={hrefResolved || '/'}
+                      className={className}
+                    >
                       {label}
                     </Link>
                   )
@@ -179,7 +168,7 @@ export default function ProductPick({
                 return (
                   <a
                     key={i}
-                    href={hrefResolved}
+                    href={l.href}
                     target="_blank"
                     rel="noopener nofollow sponsored"
                     className={className}
