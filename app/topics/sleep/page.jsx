@@ -58,6 +58,7 @@ export default function Page() {
         />
         <div className="mt-4 flex flex-wrap gap-2">
           <Link className="btn-secondary" href="/blog/sleep-naturally-simple-guide">Cornerstone guide</Link>
+          <Link className="btn-secondary" href="/blog/morning-light-sleep-10-minute-plan">Morning light 10‑min plan</Link>
           <Link className="btn-secondary" href="/best-natural-sleep-support">Sleep support shortlist</Link>
           <Link className="btn-secondary" href="/sleep-recovery-shortlist-uk">Partner shortlist</Link>
           <Link className="btn-secondary" href="/shopping-list">Free shopping list</Link>

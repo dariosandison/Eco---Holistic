@@ -5,7 +5,7 @@ import StructuredData from '@/components/StructuredData'
 import { SITE_URL } from '@/lib/site'
 
 export async function generateStaticParams() {
-  const fromPosts = listContent('blog').map((p) => ({ slug: (p.author || 'wild-and-well-editorial') }))
+  const fromPosts = listContent('blog').map((p) => ({ slug: getAuthor(p.author).slug }))
   const fromAuthors = AUTHORS.map((a) => ({ slug: a.slug }))
   return [...fromAuthors, ...fromPosts].filter((v, i, arr) => arr.findIndex((x) => x.slug === v.slug) === i)
 }
@@ -21,7 +21,7 @@ export async function generateMetadata({ params }) {
 export default function Page({ params }) {
   const author = getAuthor(params.slug)
   const posts = listContent('blog')
-    .filter((p) => String(p.author || 'wild-and-well-editorial') === author.slug)
+    .filter((p) => getAuthor(p.author).slug === author.slug)
     .slice(0, 12)
 
   return (
@@ -43,7 +43,14 @@ export default function Page({ params }) {
           <Link className="btn-secondary" href="/authors">All authors</Link>
           <Link className="btn-secondary" href="/blog">Wellness Insights</Link>
           <Link className="btn-secondary" href="/shortlists">Shortlists</Link>
+        
+        <div className="mt-6 flex flex-wrap gap-2">
+          <span className="chip">UK-focused</span>
+          <span className="chip">Trade-offs first</span>
+          <span className="chip">Running costs</span>
+          <span className="chip">Conservative claims</span>
         </div>
+
       </header>
 
       <section className="mt-10">
@@ -59,7 +66,7 @@ export default function Page({ params }) {
             ))}
           </div>
         ) : (
-          <p className="mt-3 text-zinc-700">No posts yet.</p>
+          <p className="mt-3 text-zinc-700">No posts yet — check back soon. In the meantime, browse Topics or Shortlists.</p>
         )}
       </section>
     </main>

@@ -75,6 +75,45 @@ export default function Page() {
         </div>
       </header>
 
+      <section className="mt-8">
+        <h2 className="text-xl font-semibold">Pick a goal (fast path)</h2>
+        <p className="mt-2 text-sm text-zinc-700 max-w-3xl">
+          Choose the outcome you care about right now. You’ll land on the most useful topic hub, with no‑spend steps first and shortlists only if you’re buying.
+        </p>
+        <div className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+          <Link className="card hover:shadow-sm transition-shadow" href="/topics/air-quality">
+            <div className="text-sm font-semibold">Breathe easier indoors</div>
+            <p className="mt-1 text-sm text-zinc-600">Allergies, stale air, damp basics.</p>
+            <p className="mt-3 text-xs text-zinc-500">Open →</p>
+          </Link>
+          <Link className="card hover:shadow-sm transition-shadow" href="/topics/water">
+            <div className="text-sm font-semibold">Hard water comfort</div>
+            <p className="mt-1 text-sm text-zinc-600">Skin/hair feel, jugs vs under‑sink.</p>
+            <p className="mt-3 text-xs text-zinc-500">Open →</p>
+          </Link>
+          <Link className="card hover:shadow-sm transition-shadow" href="/topics/sleep">
+            <div className="text-sm font-semibold">Sleep feels off</div>
+            <p className="mt-1 text-sm text-zinc-600">Light, timing, temperature, wind‑down.</p>
+            <p className="mt-3 text-xs text-zinc-500">Open →</p>
+          </Link>
+          <Link className="card hover:shadow-sm transition-shadow" href="/topics/skin-health">
+            <div className="text-sm font-semibold">Sensitive skin</div>
+            <p className="mt-1 text-sm text-zinc-600">Barrier basics + fragrance pitfalls.</p>
+            <p className="mt-3 text-xs text-zinc-500">Open →</p>
+          </Link>
+          <Link className="card hover:shadow-sm transition-shadow" href="/topics/nutrition">
+            <div className="text-sm font-semibold">Eat better (without perfection)</div>
+            <p className="mt-1 text-sm text-zinc-600">Protein, fibre, and repeatable staples.</p>
+            <p className="mt-3 text-xs text-zinc-500">Open →</p>
+          </Link>
+          <Link className="card hover:shadow-sm transition-shadow" href="/topics/movement">
+            <div className="text-sm font-semibold">Start moving</div>
+            <p className="mt-1 text-sm text-zinc-600">Steps + simple strength.</p>
+            <p className="mt-3 text-xs text-zinc-500">Open →</p>
+          </Link>
+        </div>
+      </section>
+
       <section className="mt-10 grid gap-4 md:grid-cols-2">
         <Card image="/images/photography/thumbs/sleep.png" title="Sleep & recovery" desc="Light, timing, temperature, and practical options." href="/topics/sleep" tag="Sleep" />
         <Card image="/images/photography/thumbs/movement.svg" title="Movement (walking + strength)" desc="Build a base layer: steps, simple strength, and mobility." href="/topics/movement" tag="Movement" />

@@ -58,6 +58,7 @@ export default function Page() {
           <Link className="btn-secondary" href="/topics/fragrance-free">Fragrance-free basics</Link>
           <Link className="btn-secondary" href="/blog/best-mineral-sunscreens-uk">Mineral sunscreens (UK)</Link>
           <Link className="btn-secondary" href="/blog/low-tox-makeup-beginners">Low-tox makeup (beginners)</Link>
+          <Link className="btn-secondary" href="/blog/hard-water-uk-myths-and-comfort">Hard water comfort guide</Link>
           <Link className="btn-secondary" href="/best-shower-filters-uk-hard-water">Shower filters (hard water)</Link>
         </div>
 

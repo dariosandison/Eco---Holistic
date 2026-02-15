@@ -56,6 +56,7 @@ export default function Page() {
         />
         <div className="mt-4 flex flex-wrap gap-2">
           <Link className="btn-secondary" href="/blog/healthy-air-at-home">Read the air guide</Link>
+          <Link className="btn-secondary" href="/blog/filter-replacement-costs-uk">Filter replacement costs</Link>
           <Link className="btn-secondary" href="/blog/damp-and-mould-uk-renters-playbook">Damp &amp; mould renters playbook</Link>
           <Link className="btn-secondary" href="/best-air-purifiers-allergies-uk">Air purifiers for allergies</Link>
           <Link className="btn-secondary" href="/best-air-purifiers-small-flats-uk">Air purifiers for small flats</Link>
