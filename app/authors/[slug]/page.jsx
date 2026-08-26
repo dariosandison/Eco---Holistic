@@ -43,14 +43,14 @@ export default function Page({ params }) {
           <Link className="btn-secondary" href="/authors">All authors</Link>
           <Link className="btn-secondary" href="/blog">Wellness Insights</Link>
           <Link className="btn-secondary" href="/shortlists">Shortlists</Link>
-        
+        </div>
+
         <div className="mt-6 flex flex-wrap gap-2">
           <span className="chip">UK-focused</span>
           <span className="chip">Trade-offs first</span>
           <span className="chip">Running costs</span>
           <span className="chip">Conservative claims</span>
         </div>
-
       </header>
 
       <section className="mt-10">
