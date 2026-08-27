@@ -9,6 +9,15 @@ export const metadata = {
   description: 'Air quality for UK homes: identify whether particles, damp, humidity or smoke is the problem before choosing a purifier, dehumidifier or other solution.',
 }
 
+const guides = [
+  { href: '/blog/air-purifier-bedroom-uk', title: 'Air purifier for a bedroom', text: 'Room size, useful-speed noise and filter cost for overnight use.' },
+  { href: '/blog/air-purifier-pollen-uk', title: 'Air purifier for pollen', text: 'A practical route for seasonal airborne-particle problems.' },
+  { href: '/blog/air-purifier-pet-dander-uk', title: 'Air purifier for pet dander', text: 'What filtration can help with and what still needs source control.' },
+  { href: '/blog/air-purifier-smoke-odours-uk', title: 'Smoke and odours: HEPA vs carbon', text: 'Understand why particle and odour filtration are different jobs.' },
+  { href: '/blog/condensation-windows-dehumidifier-uk', title: 'Condensation on windows', text: 'Work out whether recurring moisture is a ventilation issue, a dehumidifier job or both.' },
+  { href: '/blog/dehumidifier-running-cost-uk', title: 'Dehumidifier running costs', text: 'Compare capacity, runtime and electricity use before choosing a unit.' },
+]
+
 export default function Page() {
   const edu = getTopicEdu('air-quality')
   const faqs = [
@@ -29,10 +38,10 @@ export default function Page() {
           <Link className="btn-primary" href="/air-quality-shortlist-uk">Choose the right air-quality route</Link>
           <Link className="btn-secondary" href="/blog/healthy-air-at-home">Healthy air guide</Link>
           <Link className="btn-secondary" href="/blog/damp-and-mould-uk-renters-playbook">Damp & mould</Link>
-          <Link className="btn-secondary" href="/blog/filter-replacement-costs-uk">Filter costs</Link>
-          <Link className="btn-secondary" href="/blog/indoor-air-smoke-pollution-uk">Smoke & pollution</Link>
+          <Link className="btn-secondary" href="/blog/air-purifier-filter-replacement-cost-uk">Purifier filter costs</Link>
+          <Link className="btn-secondary" href="/blog/air-purifier-smoke-odours-uk">Smoke & odours</Link>
         </div>
-        <div className="mt-4 flex flex-wrap gap-2"><a className="chip" href="#understand">Understand</a><a className="chip" href="#start">Start</a><a className="chip" href="#options">Choose</a><a className="chip" href="#faqs">FAQs</a></div>
+        <div className="mt-4 flex flex-wrap gap-2"><a className="chip" href="#understand">Understand</a><a className="chip" href="#start">Start</a><a className="chip" href="#guides">Popular questions</a><a className="chip" href="#options">Choose</a><a className="chip" href="#faqs">FAQs</a></div>
       </header>
 
       <TopicEducationDeepDive edu={edu} />
@@ -43,10 +52,26 @@ export default function Page() {
         { title: 'Common mistakes', bullets: ['Buying a purifier to solve a moisture problem.', 'Buying an undersized unit.', 'Ignoring replacement filters, noise and running costs.'] },
       ]} />
 
+      <section className="mt-14" id="guides">
+        <div className="max-w-3xl">
+          <h2 className="section-title">Popular UK air-quality questions</h2>
+          <p className="section-subtitle">Focused guides for the problems people usually search before they are ready to compare equipment.</p>
+        </div>
+        <div className="mt-6 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+          {guides.map((guide) => (
+            <Link key={guide.href} href={guide.href} className="card transition-shadow hover:shadow-sm">
+              <h3 className="font-semibold">{guide.title}</h3>
+              <p className="mt-2 text-sm text-zinc-600">{guide.text}</p>
+              <p className="mt-3 text-sm font-semibold">Read guide →</p>
+            </Link>
+          ))}
+        </div>
+      </section>
+
       <section className="mt-14" id="options">
         <div className="max-w-3xl">
           <h2 className="section-title">Choose by problem</h2>
-          <p className="section-subtitle">The commercial shortlist now separates the main jobs so visitors compare the right type of equipment.</p>
+          <p className="section-subtitle">The commercial shortlist separates the main jobs so visitors compare the right type of equipment.</p>
         </div>
         <div className="mt-6 grid gap-4 md:grid-cols-2">
           <Link href="/air-quality-shortlist-uk#air-purifiers" className="card hover:shadow-sm transition-shadow"><h3 className="font-semibold">Allergies, particles & smoke</h3><p className="mt-2 text-sm text-zinc-600">Compare air purifiers by room suitability, filtration, noise and filter availability.</p><p className="mt-3 text-sm font-semibold">Compare purifiers →</p></Link>
@@ -55,9 +80,9 @@ export default function Page() {
           <Link href="/air-quality-shortlist-uk#fans-cooling" className="card hover:shadow-sm transition-shadow"><h3 className="font-semibold">Airflow & cooling</h3><p className="mt-2 text-sm text-zinc-600">Useful for comfort and airflow, but not a substitute for filtration or moisture control.</p><p className="mt-3 text-sm font-semibold">Compare airflow options →</p></Link>
         </div>
         <div className="mt-8 rounded-3xl border border-zinc-200 bg-zinc-50/60 p-6">
-          <h3 className="text-xl font-semibold">Smoke or outdoor pollution event?</h3>
-          <p className="mt-2 text-sm text-zinc-700">Use the dedicated guide for short-term indoor-air decisions, then return to the purifier shortlist if equipment is appropriate.</p>
-          <div className="mt-4 flex flex-wrap gap-2"><Link className="btn-primary" href="/blog/indoor-air-smoke-pollution-uk">Indoor-air event guide</Link><Link className="btn-secondary" href="/topics/resilience">Practical resilience</Link></div>
+          <h3 className="text-xl font-semibold">Not sure whether you need a purifier or dehumidifier?</h3>
+          <p className="mt-2 text-sm text-zinc-700">Start with the comparison guide before buying equipment for mould or condensation.</p>
+          <div className="mt-4 flex flex-wrap gap-2"><Link className="btn-primary" href="/blog/air-purifier-vs-dehumidifier-mould-uk">Purifier vs dehumidifier</Link><Link className="btn-secondary" href="/air-quality-shortlist-uk">Compare current options</Link></div>
         </div>
       </section>
 
