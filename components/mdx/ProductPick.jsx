@@ -1,6 +1,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import AmazonButton from '@/components/mdx/AmazonButton'
+import { withAwinContext } from '@/lib/affiliates'
 
 export default function ProductPick({
   title,
@@ -13,8 +14,8 @@ export default function ProductPick({
   facts = [],
   meta = null,
   links = null,
+  trackingContext = '',
 }) {
-
   const bulletStrings = Array.isArray(bullets) ? bullets.map((b) => String(b)) : []
   const bestForLine = bulletStrings.find((b) => /^(great|best|ideal)\s+for\s*:/i.test(b))
   const avoidIfLine = bulletStrings.find((b) => /^(avoid|skip)\s+if\s*:/i.test(b))
@@ -41,8 +42,6 @@ export default function ProductPick({
       })()
     : image
 
-  // Optional scan-friendly chips for product cards. If `facts` are not
-  // provided, we infer a few from common keywords.
   const autoFacts = (() => {
     const t = `${title || ''} ${badge || ''} ${description || ''} ${bulletStrings.join(' ')}`.toLowerCase()
     const out = []
@@ -58,16 +57,11 @@ export default function ProductPick({
   })()
 
   const chips = Array.from(new Set([...(Array.isArray(facts) ? facts : []), ...autoFacts])).slice(0, 4)
-
-  const metaRows = Array.isArray(meta)
-    ? meta
-    : meta
-      ? [meta]
-      : []
-
+  const metaRows = Array.isArray(meta) ? meta : meta ? [meta] : []
   const resolvedLinks = Array.isArray(links) && links.length
     ? links
     : [{ label: 'Check price', merchant: 'amazon', asin, href, variant: 'primary' }]
+
   return (
     <div className="not-prose overflow-hidden rounded-2xl border border-zinc-200 bg-white p-5 shadow-sm">
       <div className="grid gap-4 sm:grid-cols-[96px,1fr] sm:items-start">
@@ -84,25 +78,15 @@ export default function ProductPick({
 
           {(bestFor || avoidIf) ? (
             <p className="mt-2 text-xs text-zinc-700">
-              {bestFor ? (
-                <>
-                  <span className="font-semibold text-zinc-900">Best for:</span> {bestFor}
-                </>
-              ) : null}
+              {bestFor ? <><span className="font-semibold text-zinc-900">Best for:</span> {bestFor}</> : null}
               {bestFor && avoidIf ? <span className="mx-2 text-zinc-400">·</span> : null}
-              {avoidIf ? (
-                <>
-                  <span className="font-semibold text-zinc-900">Avoid if:</span> {avoidIf}
-                </>
-              ) : null}
+              {avoidIf ? <><span className="font-semibold text-zinc-900">Avoid if:</span> {avoidIf}</> : null}
             </p>
           ) : null}
 
           {chips.length ? (
             <div className="mt-3 flex flex-wrap gap-2">
-              {chips.map((c, i) => (
-                <span key={i} className="chip">{c}</span>
-              ))}
+              {chips.map((c, i) => <span key={i} className="chip">{c}</span>)}
             </div>
           ) : null}
 
@@ -123,9 +107,7 @@ export default function ProductPick({
 
           {displayBullets?.length ? (
             <ul className="mt-3 list-disc pl-5 text-sm text-zinc-700 space-y-1">
-              {displayBullets.map((b, i) => (
-                <li key={i}>{b}</li>
-              ))}
+              {displayBullets.map((b, i) => <li key={i}>{b}</li>)}
             </ul>
           ) : null}
 
@@ -154,24 +136,21 @@ export default function ProductPick({
                 const isInternal = merchant === 'internal' || hrefResolved.startsWith('/')
 
                 if (isInternal) {
-                  return (
-                    <Link
-                      key={i}
-                      href={hrefResolved || '/'}
-                      className={className}
-                    >
-                      {label}
-                    </Link>
-                  )
+                  return <Link key={i} href={hrefResolved || '/'} className={className}>{label}</Link>
                 }
+
+                const outboundHref = merchant === 'awin'
+                  ? withAwinContext(hrefResolved, `${trackingContext}_${i + 1}`)
+                  : hrefResolved
 
                 return (
                   <a
                     key={i}
-                    href={l.href}
+                    href={outboundHref}
                     target="_blank"
                     rel="noopener nofollow sponsored"
                     className={className}
+                    data-affiliate-context={trackingContext || undefined}
                   >
                     {label}
                   </a>
