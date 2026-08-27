@@ -2,25 +2,49 @@ import Link from 'next/link'
 
 export const metadata = {
   title: 'Practical Resilience — Wild & Well',
-  description: 'Calm, practical UK guidance for short-term household disruption: water, power, food, communication and essential supplies.',
+  description: 'Calm, practical UK guidance for short-term household disruption: water, power, food, communication, air quality and essential supplies.',
 }
 
 const GUIDES = [
-  {
-    title: '72-Hour Household Water Plan (UK)',
-    description: 'How much drinking water to keep, how to store it, and where filtration does — and does not — help.',
-    href: '/blog/72-hour-household-water-plan-uk',
-  },
   {
     title: 'UK 72-Hour Household Kit',
     description: 'A sensible, non-panic checklist for water, food, light, power, first aid, hygiene and communication.',
     href: '/blog/72-hour-household-emergency-kit-uk',
   },
   {
+    title: '72-Hour Household Water Plan (UK)',
+    description: 'How much drinking water to keep, how to store it, and where filtration does — and does not — help.',
+    href: '/blog/72-hour-household-water-plan-uk',
+  },
+  {
+    title: 'Power Cut Preparation (UK)',
+    description: 'Lighting, phone power, refrigeration, warmth and when a larger battery system may actually be useful.',
+    href: '/blog/power-cut-preparation-uk',
+  },
+  {
+    title: 'Indoor Air During Smoke or Pollution',
+    description: 'A practical plan for ventilation timing, cleaner rooms and HEPA filtration when outdoor air quality is temporarily poor.',
+    href: '/blog/indoor-air-smoke-pollution-uk',
+  },
+  {
     title: 'Water Filters (UK): shortlist',
     description: 'Compare jug, under-sink, gravity and portable filtration routes with the main trade-offs explained.',
     href: '/best-water-filters-uk',
   },
+  {
+    title: 'Air Quality hub',
+    description: 'HEPA basics, damp, dehumidification and practical indoor-air comparisons for UK homes.',
+    href: '/topics/air-quality',
+  },
+]
+
+const PILLARS = [
+  ['Water', 'Stored drinking water first; filtration as a separate layer.'],
+  ['Power', 'Light, communication and essential-device charging before expensive backup systems.'],
+  ['Food', 'Normal shelf-stable foods you already eat, rotated rather than forgotten.'],
+  ['Air', 'Source control, ventilation timing and filtration matched to the actual problem.'],
+  ['Communication', 'Important numbers and information should not exist only on one phone.'],
+  ['Household needs', 'Medication, infants, pets, mobility and other household-specific essentials.'],
 ]
 
 export default function Page() {
@@ -33,7 +57,7 @@ export default function Page() {
           Healthy living is easier when normal systems are working. This section covers the boring-but-useful basics that help a household cope with short-term disruption — without fear, stockpiling or doomsday hype.
         </p>
         <p className="mt-3 text-sm text-zinc-600">
-          UK-focused guidance for water, power, food, communication, hygiene and other everyday essentials.
+          UK-focused guidance for water, power, food, communication, air quality, hygiene and other everyday essentials.
         </p>
       </header>
 
@@ -52,8 +76,21 @@ export default function Page() {
       </section>
 
       <section className="mt-12">
+        <h2 className="text-2xl font-semibold">Six practical pillars</h2>
+        <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {PILLARS.map(([title, copy]) => (
+            <div key={title} className="rounded-2xl border border-zinc-200 bg-white p-5">
+              <h3 className="font-semibold">{title}</h3>
+              <p className="mt-2 text-sm text-zinc-700">{copy}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section className="mt-12">
         <h2 className="text-2xl font-semibold">Guides &amp; shortlists</h2>
-        <div className="mt-6 grid gap-5 md:grid-cols-3">
+        <p className="mt-2 max-w-3xl text-sm text-zinc-700">Start with a problem, understand the free steps, then compare equipment only where it genuinely adds resilience.</p>
+        <div className="mt-6 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
           {GUIDES.map((guide) => (
             <Link key={guide.href} href={guide.href} className="rounded-2xl border border-zinc-200 bg-white p-5 transition hover:shadow-sm">
               <h3 className="text-lg font-semibold">{guide.title}</h3>
