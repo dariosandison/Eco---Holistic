@@ -2,7 +2,7 @@ import Link from 'next/link'
 
 export const metadata = {
   title: 'Free UK Household Wellness Calculators & Tools',
-  description: 'Free practical tools from Wild & Well for household water planning, dehumidifier running costs and other evidence-led home decisions.',
+  description: 'Free practical tools from Wild & Well for household water planning, filtration ownership costs, dehumidifier running costs and evidence-led home decisions.',
 }
 
 const tools = [
@@ -11,6 +11,12 @@ const tools = [
     title: '72-hour household water calculator',
     text: 'Estimate a simple drinking-water planning quantity for a short household disruption.',
     topic: 'Water & resilience',
+  },
+  {
+    href: '/tools/water-filter-running-cost-calculator',
+    title: 'Water filter running cost calculator',
+    text: 'Estimate replacement-filter spend and total ownership cost instead of comparing day-one prices alone.',
+    topic: 'Water & filtration',
   },
   {
     href: '/tools/dehumidifier-running-cost-calculator',
