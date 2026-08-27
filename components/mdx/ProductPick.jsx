@@ -139,7 +139,7 @@ export default function ProductPick({
                   return <Link key={i} href={hrefResolved || '/'} className={className}>{label}</Link>
                 }
 
-                const outboundHref = merchant === 'awin'
+                const outboundHref = merchant === 'awin' && trackingContext
                   ? withAwinContext(hrefResolved, `${trackingContext}_${i + 1}`)
                   : hrefResolved
 
