@@ -4,7 +4,7 @@ import { SITE_URL } from '@/lib/site'
 
 export const metadata = {
   title: 'Topics — Wild & Well',
-  description: 'Education-first topic insights for sleep, movement, nutrition, skin health, air quality, water, low-tox home habits and practical resilience in the UK.',
+  description: 'Education-first guides for sleep, movement, nutrition, skin, air, water, healthy-home habits and practical resilience in the UK.',
 }
 
 function Card({ title, desc, href, tag, image }) {
@@ -12,141 +12,70 @@ function Card({ title, desc, href, tag, image }) {
     <Link href={href} className="card hover:shadow-sm transition-shadow">
       <div className="flex items-start justify-between gap-3">
         <div className="flex min-w-0 gap-3">
-          <div className="relative mt-0.5 h-12 w-12 shrink-0 overflow-hidden rounded-xl bg-zinc-100">
-            <img
-              src={image || '/images/cards/neutral.svg'}
-              alt=""
-              className="h-full w-full object-cover"
-              loading="lazy"
-            />
-          </div>
-          <div className="min-w-0">
-            <h2 className="text-lg font-semibold">{title}</h2>
-            <p className="mt-1 text-sm text-zinc-600">{desc}</p>
-          </div>
+          <div className="relative mt-0.5 h-12 w-12 shrink-0 overflow-hidden rounded-xl bg-zinc-100"><img src={image || '/images/cards/neutral.svg'} alt="" className="h-full w-full object-cover" loading="lazy" /></div>
+          <div className="min-w-0"><h2 className="text-lg font-semibold">{title}</h2><p className="mt-1 text-sm text-zinc-600">{desc}</p></div>
         </div>
-        <span className="shrink-0 rounded-full border px-2 py-0.5 text-[11px] text-zinc-600 bg-white">
-          {tag}
-        </span>
+        <span className="shrink-0 rounded-full border bg-white px-2 py-0.5 text-[11px] text-zinc-600">{tag}</span>
       </div>
       <p className="mt-3 text-xs text-zinc-500">Open →</p>
     </Link>
   )
 }
 
+const CORE_PATHS = [
+  { title: 'Better everyday water', desc: 'Understand the job first, then compare portable, countertop, under-sink or gravity filtration.', learn: '/topics/water', buy: '/water-filtration-shortlist-uk' },
+  { title: 'Breathe easier indoors', desc: 'Separate particles and smoke from damp and excess humidity before choosing equipment.', learn: '/topics/air-quality', buy: '/air-quality-shortlist-uk' },
+  { title: 'Sleep & recover better', desc: 'Light, timing and comfort first; mattresses, bedding and recovery products only when they solve a clear problem.', learn: '/topics/sleep', buy: '/sleep-recovery-shortlist-uk' },
+  { title: 'Eat better without perfection', desc: 'Food-first nutrition, useful staples and convenient meals before optional supplements.', learn: '/topics/nutrition', buy: '/nutrition/food-first-shortlist' },
+  { title: 'Move more consistently', desc: 'Walking and simple strength first, then footwear, home-training equipment or tracking when useful.', learn: '/topics/movement', buy: '/movement/movement-shortlist' },
+  { title: 'Build a lower-tox home', desc: 'Start with high-use laundry, cleaning and bathroom swaps rather than replacing everything.', learn: '/topics/fragrance-free', buy: '/healthy-home/low-tox-shortlist' },
+  { title: 'Handle short disruptions', desc: 'Calm household planning for water, food, power, communication and useful essentials.', learn: '/topics/resilience', buy: '/blog/72-hour-household-emergency-kit-uk' },
+]
+
 export default function Page() {
-  const itemList = {
-    '@context': 'https://schema.org',
-    '@type': 'ItemList',
-    name: 'Wild & Well topics',
-    itemListElement: [
-      { name: 'Sleep & recovery', url: `${SITE_URL}/topics/sleep` },
-      { name: 'Movement (walking + strength)', url: `${SITE_URL}/topics/movement` },
-      { name: 'Recovery (training + soreness)', url: `${SITE_URL}/topics/recovery` },
-      { name: 'Foot strength (natural movement)', url: `${SITE_URL}/topics/foot-strength` },
-      { name: 'Nutrition (food + labels)', url: `${SITE_URL}/topics/nutrition` },
-      { name: 'Gut health (fibre + diversity)', url: `${SITE_URL}/topics/gut-health` },
-      { name: 'Hydration (habits + electrolytes)', url: `${SITE_URL}/topics/hydration` },
-      { name: 'Skin health (barrier basics)', url: `${SITE_URL}/topics/skin-health` },
-      { name: 'Sun protection (SPF + habits)', url: `${SITE_URL}/topics/sun-protection` },
-      { name: 'Air quality (allergies + damp)', url: `${SITE_URL}/topics/air-quality` },
-      { name: 'Water (filters + hydration)', url: `${SITE_URL}/topics/water` },
-      { name: 'Fragrance-free cleaning & laundry', url: `${SITE_URL}/topics/fragrance-free` },
-      { name: 'Practical resilience', url: `${SITE_URL}/topics/resilience` },
-    ].map((it, i) => ({
-      '@type': 'ListItem',
-      position: i + 1,
-      name: it.name,
-      url: it.url,
-    })),
-  }
+  const topicItems = [
+    ['Sleep & recovery', '/topics/sleep'], ['Movement', '/topics/movement'], ['Recovery', '/topics/recovery'], ['Foot strength', '/topics/foot-strength'], ['Nutrition', '/topics/nutrition'], ['Gut health', '/topics/gut-health'], ['Hydration', '/topics/hydration'], ['Skin health', '/topics/skin-health'], ['Sun protection', '/topics/sun-protection'], ['Air quality', '/topics/air-quality'], ['Water', '/topics/water'], ['Fragrance-free cleaning & laundry', '/topics/fragrance-free'], ['Practical resilience', '/topics/resilience'],
+  ]
+  const itemList = { '@context': 'https://schema.org', '@type': 'ItemList', name: 'Wild & Well topics', itemListElement: topicItems.map(([name, href], i) => ({ '@type': 'ListItem', position: i + 1, name, url: `${SITE_URL}${href}` })) }
+
   return (
     <main className="mx-auto max-w-6xl px-4 py-16">
       <StructuredData data={itemList} />
       <header className="max-w-3xl">
-        <h1 className="text-4xl font-bold">Topics</h1>
-        <p className="mt-3 text-zinc-700">
-          Education-first topic pages for UK homes: what the issue is, why it matters, common causes, and no-spend first steps — then optional shortlists.
-        </p>
-        <div className="mt-4 flex flex-wrap gap-2">
-          <Link className="btn-primary" href="/shortlists">Browse shortlists</Link>
-          <Link className="btn-secondary" href="/shopping-list">Free shopping list</Link>
-          <Link className="btn-secondary" href="/nutrition">Nutrition</Link>
-          <Link className="btn-secondary" href="/movement">Movement</Link>
-          <Link className="btn-secondary" href="/topics/resilience">Practical resilience</Link>
-        </div>
+        <p className="text-sm font-semibold uppercase tracking-[0.16em] text-zinc-500">Learn first. Buy second.</p>
+        <h1 className="mt-2 text-4xl font-bold">Topics</h1>
+        <p className="mt-3 text-zinc-700">Start with the problem you want to solve. Each core path gives you education and no-spend steps first, then a focused buying guide if a product genuinely helps.</p>
+        <div className="mt-5 flex flex-wrap gap-2"><Link className="btn-primary" href="/shortlists">Browse all shortlists</Link><Link className="btn-secondary" href="/shopping-list">Free shopping list</Link><Link className="btn-secondary" href="/healthy-home">Healthy Home</Link></div>
       </header>
 
-      <section className="mt-8">
-        <h2 className="text-xl font-semibold">Pick a goal (fast path)</h2>
-        <p className="mt-2 text-sm text-zinc-700 max-w-3xl">
-          Choose the outcome you care about right now. You’ll land on the most useful topic hub, with no‑spend steps first and shortlists only if you’re buying.
-        </p>
-        <div className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-          <Link className="card hover:shadow-sm transition-shadow" href="/topics/air-quality">
-            <div className="text-sm font-semibold">Breathe easier indoors</div>
-            <p className="mt-1 text-sm text-zinc-600">Allergies, stale air, damp basics.</p>
-            <p className="mt-3 text-xs text-zinc-500">Open →</p>
-          </Link>
-          <Link className="card hover:shadow-sm transition-shadow" href="/topics/water">
-            <div className="text-sm font-semibold">Better everyday water</div>
-            <p className="mt-1 text-sm text-zinc-600">Drinking water, filter formats and hard-water comfort.</p>
-            <p className="mt-3 text-xs text-zinc-500">Open →</p>
-          </Link>
-          <Link className="card hover:shadow-sm transition-shadow" href="/topics/sleep">
-            <div className="text-sm font-semibold">Sleep feels off</div>
-            <p className="mt-1 text-sm text-zinc-600">Light, timing, temperature, wind‑down.</p>
-            <p className="mt-3 text-xs text-zinc-500">Open →</p>
-          </Link>
-          <Link className="card hover:shadow-sm transition-shadow" href="/topics/skin-health">
-            <div className="text-sm font-semibold">Sensitive skin</div>
-            <p className="mt-1 text-sm text-zinc-600">Barrier basics + fragrance pitfalls.</p>
-            <p className="mt-3 text-xs text-zinc-500">Open →</p>
-          </Link>
-          <Link className="card hover:shadow-sm transition-shadow" href="/topics/nutrition">
-            <div className="text-sm font-semibold">Eat better (without perfection)</div>
-            <p className="mt-1 text-sm text-zinc-600">Protein, fibre, and repeatable staples.</p>
-            <p className="mt-3 text-xs text-zinc-500">Open →</p>
-          </Link>
-          <Link className="card hover:shadow-sm transition-shadow" href="/topics/movement">
-            <div className="text-sm font-semibold">Start moving</div>
-            <p className="mt-1 text-sm text-zinc-600">Steps + simple strength.</p>
-            <p className="mt-3 text-xs text-zinc-500">Open →</p>
-          </Link>
-          <Link className="card hover:shadow-sm transition-shadow" href="/topics/resilience">
-            <div className="text-sm font-semibold">Handle short-term disruption</div>
-            <p className="mt-1 text-sm text-zinc-600">Water, power, food, communication and household essentials.</p>
-            <p className="mt-3 text-xs text-zinc-500">Open →</p>
-          </Link>
+      <section className="mt-10">
+        <h2 className="text-2xl font-semibold">Choose what you want to improve</h2>
+        <div className="mt-5 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+          {CORE_PATHS.map((path) => <article key={path.title} className="rounded-2xl border border-zinc-200 bg-white p-5 shadow-sm"><h3 className="font-semibold text-zinc-900">{path.title}</h3><p className="mt-2 text-sm text-zinc-600">{path.desc}</p><div className="mt-4 flex flex-wrap gap-2"><Link className="btn-secondary" href={path.learn}>Learn first</Link><Link className="btn-primary" href={path.buy}>Buying route</Link></div></article>)}
         </div>
       </section>
 
-      <section className="mt-10 grid gap-4 md:grid-cols-2">
-        <Card image="/images/photography/thumbs/sleep.png" title="Sleep & recovery" desc="Light, timing, temperature, and practical options." href="/topics/sleep" tag="Sleep" />
-        <Card image="/images/photography/thumbs/movement.svg" title="Movement (walking + strength)" desc="Build a base layer: steps, simple strength, and mobility." href="/topics/movement" tag="Movement" />
-        <Card image="/images/photography/thumbs/movement.svg" title="Recovery" desc="Soreness, load management, and the basics that drive adaptation." href="/topics/recovery" tag="Movement" />
-        <Card image="/images/photography/thumbs/movement.svg" title="Foot strength" desc="Natural movement basics and how to transition gradually." href="/topics/foot-strength" tag="Movement" />
-        <Card image="/images/photography/thumbs/nutrition.svg" title="Nutrition (food + labels)" desc="Food-first upgrades, label reading, and consistency tools." href="/topics/nutrition" tag="Nutrition" />
-        <Card image="/images/photography/thumbs/nutrition.svg" title="Gut health" desc="Fibre, diversity, fermented foods, and sensible expectations." href="/topics/gut-health" tag="Nutrition" />
-        <Card image="/images/photography/thumbs/water.png" title="Hydration" desc="Habits first, then electrolytes when they actually help." href="/topics/hydration" tag="Nutrition" />
-        <Card image="/images/cards/neutral.svg" title="Skin health" desc="Barrier basics, fragrance triggers, and simple routines." href="/topics/skin-health" tag="Skin" />
-        <Card image="/images/cards/neutral.svg" title="Sun protection" desc="Shade + clothing habits, then a sunscreen you will use." href="/topics/sun-protection" tag="Skin" />
-        <Card image="/images/photography/thumbs/air-quality.png" title="Air quality (allergies + damp)" desc="HEPA basics, placement, and shortlists for common rooms." href="/topics/air-quality" tag="Home" />
-        <Card image="/images/photography/thumbs/water.png" title="Water (filters + drinking)" desc="Under-sink vs jugs, replacement filters, and buying basics." href="/topics/water" tag="Kitchen" />
-        <Card image="/images/photography/thumbs/laundry.png" title="Fragrance-free cleaning & laundry" desc="Ingredient checks and the quickest swaps for sensitive households." href="/topics/fragrance-free" tag="Cleaning" />
-        <Card image="/images/cards/neutral.svg" title="Practical resilience" desc="Calm UK guidance for short water, power, food and communication disruption." href="/topics/resilience" tag="Home" />
+      <section className="mt-14">
+        <div className="max-w-3xl"><h2 className="text-2xl font-semibold">Explore the full topic library</h2><p className="mt-2 text-zinc-700">More focused guides for people who want to go deeper before comparing products.</p></div>
+        <div className="mt-6 grid gap-4 md:grid-cols-2">
+          <Card image="/images/photography/thumbs/sleep.png" title="Sleep & recovery" desc="Light, timing, temperature and practical recovery basics." href="/topics/sleep" tag="Sleep" />
+          <Card image="/images/photography/thumbs/movement.svg" title="Movement" desc="Walking, simple strength and mobility." href="/topics/movement" tag="Movement" />
+          <Card image="/images/photography/thumbs/movement.svg" title="Recovery" desc="Soreness, load management and adaptation basics." href="/topics/recovery" tag="Movement" />
+          <Card image="/images/photography/thumbs/movement.svg" title="Foot strength" desc="Natural movement basics and gradual transitions." href="/topics/foot-strength" tag="Movement" />
+          <Card image="/images/photography/thumbs/nutrition.svg" title="Nutrition" desc="Food-first upgrades, labels and consistency." href="/topics/nutrition" tag="Nutrition" />
+          <Card image="/images/photography/thumbs/nutrition.svg" title="Gut health" desc="Fibre, diversity and sensible expectations." href="/topics/gut-health" tag="Nutrition" />
+          <Card image="/images/photography/thumbs/water.png" title="Hydration" desc="Habits first; electrolytes when they actually help." href="/topics/hydration" tag="Nutrition" />
+          <Card title="Skin health" desc="Barrier basics, fragrance and simple routines." href="/topics/skin-health" tag="Skin" />
+          <Card title="Sun protection" desc="Shade, clothing and practical sunscreen habits." href="/topics/sun-protection" tag="Skin" />
+          <Card image="/images/photography/thumbs/air-quality.png" title="Air quality" desc="Particles, damp, humidity and equipment choices." href="/topics/air-quality" tag="Home" />
+          <Card image="/images/photography/thumbs/water.png" title="Water" desc="Filter formats, replacement costs and buying basics." href="/topics/water" tag="Home" />
+          <Card image="/images/photography/thumbs/laundry.png" title="Fragrance-free home" desc="High-contact swaps for laundry, cleaning and bathroom products." href="/topics/fragrance-free" tag="Home" />
+          <Card title="Practical resilience" desc="Water, power, food, communication and household essentials." href="/topics/resilience" tag="Home" />
+        </div>
       </section>
 
-      <section className="mt-14 max-w-3xl">
-        <h2 className="section-title">Suggested order</h2>
-        <ol className="mt-3 list-decimal pl-6 text-zinc-700 space-y-2">
-          <li>Choose one topic that solves a problem you actually have now.</li>
-          <li>Skim the “At a glance” section and choose one practical next step.</li>
-          <li>When products genuinely help, use the linked shortlist to compare a few solid choices.</li>
-        </ol>
-      </section>
-
-      <p className="mt-12 text-xs text-zinc-500">Some links are affiliate links. If you buy via them, we earn a commission.</p>
+      <section className="mt-14 max-w-3xl rounded-3xl border border-zinc-200 bg-zinc-50/60 p-6"><h2 className="text-xl font-semibold">How Wild & Well approaches recommendations</h2><ol className="mt-3 list-decimal space-y-2 pl-6 text-sm text-zinc-700"><li>Understand the problem and try sensible no-spend steps first.</li><li>Decide whether a product would meaningfully improve the situation.</li><li>Use a focused shortlist rather than browsing hundreds of products.</li><li>Check current specifications, running costs, returns and price on the merchant site before buying.</li></ol></section>
+      <p className="mt-12 text-xs text-zinc-500">Some links are affiliate links. If you buy via them, Wild & Well may earn a commission at no extra cost to you.</p>
     </main>
   )
 }
