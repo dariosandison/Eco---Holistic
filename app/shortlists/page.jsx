@@ -26,8 +26,14 @@ const BUYING_PATHS = [
   {
     title: 'Better sleep & recovery',
     problem: 'Comfort, bedding, temperature and simple recovery upgrades.',
-    learn: '/topics/sleep-recovery',
+    learn: '/topics/sleep',
     compare: '/sleep-recovery-shortlist-uk',
+  },
+  {
+    title: 'Food-first nutrition',
+    problem: 'Real-food protein, convenient meals, pantry staples and hydration before supplements.',
+    learn: '/nutrition',
+    compare: '/nutrition/food-first-shortlist',
   },
   {
     title: 'Movement that sticks',
