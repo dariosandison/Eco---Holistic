@@ -33,7 +33,7 @@ export default function Page() {
         <p className="mt-3 text-zinc-700">Don't start with brands. Decide whether you need portable filtration, a simple countertop option, a plumbed-in system or a gravity backup — then compare products within that category.</p>
         <div className="mt-5 flex flex-wrap gap-2">
           <Link className="btn-primary" href="/best-water-filters-uk">Read the full water-filter guide</Link>
-          <Link className="btn-secondary" href="/blog/72-hour-water-plan-uk">Build a 72-hour water plan</Link>
+          <Link className="btn-secondary" href="/blog/72-hour-household-water-plan-uk">Build a 72-hour water plan</Link>
           <Link className="btn-secondary" href="/topics/water">Water topic</Link>
           <Link className="btn-secondary" href="/affiliate-disclosure">How affiliate links work</Link>
         </div>
@@ -76,6 +76,7 @@ export default function Page() {
                 badge={p.badge}
                 description={p.description}
                 bullets={p.bullets}
+                trackingContext={`water_shortlist_${g.id}`}
                 links={[
                   { label: `Check ${p.badge || p.advertiser} price`, merchant: 'awin', href: p.awin, variant: 'primary' },
                   { label: 'Read buying guide', merchant: 'internal', href: '/best-water-filters-uk', variant: 'ghost' },
@@ -90,7 +91,7 @@ export default function Page() {
         <h2 className="text-xl font-semibold">Planning for an interruption rather than everyday filtration?</h2>
         <p className="mt-2 text-sm text-zinc-700">Stored drinking water comes first. Filtration can be a useful additional layer, but it should not replace a sensible household water reserve.</p>
         <div className="mt-4 flex flex-wrap gap-2">
-          <Link className="btn-primary" href="/blog/72-hour-water-plan-uk">72-hour water plan</Link>
+          <Link className="btn-primary" href="/blog/72-hour-household-water-plan-uk">72-hour water plan</Link>
           <Link className="btn-secondary" href="/blog/72-hour-household-emergency-kit-uk">72-hour household kit</Link>
         </div>
       </section>
