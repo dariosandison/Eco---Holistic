@@ -18,15 +18,17 @@ const CORE_TOPICS = [
 const RESILIENCE_GUIDES = [
   { title: 'UK 72-Hour Household Kit', href: '/blog/72-hour-household-emergency-kit-uk', desc: 'A calm checklist for water, food, lighting, power, first aid and hygiene.' },
   { title: '72-Hour Household Water Plan', href: '/blog/72-hour-household-water-plan-uk', desc: 'How much water to store, how to rotate it and where filtration fits.' },
-  { title: 'Power Cut Preparation', href: '/blog/uk-power-cut-preparation-guide', desc: 'Practical steps for lighting, communication, charging and warmth.' },
+  { title: 'Power Cut Preparation', href: '/blog/power-cut-preparation-uk', desc: 'Practical steps for lighting, communication, charging and warmth.' },
   { title: 'Indoor Air During Smoke or Pollution', href: '/blog/indoor-air-smoke-pollution-uk', desc: 'What helps indoors when outside air quality becomes poor.' },
 ]
 
 const COMMERCIAL_PATHS = [
-  { title: 'Best water filters UK', href: '/best-water-filters-uk', desc: 'Compare household and portable filtration routes.' },
-  { title: 'Air purifiers for allergies', href: '/best-air-purifiers-allergies-uk', desc: 'A shortlist for common UK home setups.' },
-  { title: 'Dehumidifiers for damp & mould', href: '/best-dehumidifiers-damp-mould-uk', desc: 'Useful where humidity is part of the problem.' },
-  { title: 'Low-tox starter shortlist', href: '/best-low-tox-products-for-beginners', desc: 'A practical starting point for cleaner household swaps.' },
+  { title: 'Water filtration', href: '/water-filtration-shortlist-uk', desc: 'Portable, countertop, under-sink and gravity routes with direct partner comparisons.' },
+  { title: 'Indoor air', href: '/air-quality-shortlist-uk', desc: 'Purifiers, dehumidifiers, filters and airflow matched to the problem.' },
+  { title: 'Sleep & recovery', href: '/sleep-recovery-shortlist-uk', desc: 'Mattresses, pillows, temperature and support after the no-spend basics.' },
+  { title: 'Food-first nutrition', href: '/nutrition/food-first-shortlist', desc: 'Real-food protein, useful staples and convenience before supplement stacks.' },
+  { title: 'Low-tox home', href: '/healthy-home/low-tox-shortlist', desc: 'Laundry, cookware, showering and high-use household swaps.' },
+  { title: 'Movement gear', href: '/movement/movement-shortlist', desc: 'Barefoot footwear, simple home strength and useful tracking.' },
 ]
 
 function TopicCard({ item }) {
@@ -56,23 +58,18 @@ export default function HomePage() {
         <div className="mx-auto max-w-6xl px-4 py-16 md:py-24">
           <div className="max-w-3xl">
             <p className="text-sm font-semibold uppercase tracking-wide text-zinc-600">Wild &amp; Well</p>
-            <h1 className="mt-3 text-4xl font-semibold tracking-tight text-zinc-900 md:text-6xl">
-              Evidence-led wellness for real life.
-            </h1>
-            <p className="mt-5 max-w-2xl text-base text-zinc-700 md:text-lg">
-              Clear UK-focused guidance on water, food, air, sleep, movement, low-tox living and practical household resilience — with useful products only where they genuinely solve a problem.
-            </p>
+            <h1 className="mt-3 text-4xl font-semibold tracking-tight text-zinc-900 md:text-6xl">Evidence-led wellness for real life.</h1>
+            <p className="mt-5 max-w-2xl text-base text-zinc-700 md:text-lg">Clear UK-focused guidance on water, food, air, sleep, movement, low-tox living and practical household resilience — with useful products only where they genuinely solve a problem.</p>
             <div className="mt-8 flex flex-wrap gap-3">
               <Link href="/start-here" className="btn-primary">Start here</Link>
-              <Link href="/topics" className="btn-secondary">Browse topics</Link>
               <Link href="/shortlists" className="btn-secondary">Compare products</Link>
+              <Link href="/topics/resilience" className="btn-secondary">Practical resilience</Link>
             </div>
             <div className="mt-6 flex flex-wrap gap-2 text-sm">
-              <Link href="/topics/water" className="rounded-full border border-zinc-200 bg-white/85 px-3 py-1.5">Water</Link>
-              <Link href="/topics/air-quality" className="rounded-full border border-zinc-200 bg-white/85 px-3 py-1.5">Air quality</Link>
-              <Link href="/topics/sleep" className="rounded-full border border-zinc-200 bg-white/85 px-3 py-1.5">Sleep</Link>
-              <Link href="/topics/nutrition" className="rounded-full border border-zinc-200 bg-white/85 px-3 py-1.5">Nutrition</Link>
-              <Link href="/topics/resilience" className="rounded-full border border-zinc-200 bg-white/85 px-3 py-1.5">Practical resilience</Link>
+              <Link href="/water-filtration-shortlist-uk" className="rounded-full border border-zinc-200 bg-white/85 px-3 py-1.5">Water shortlist</Link>
+              <Link href="/air-quality-shortlist-uk" className="rounded-full border border-zinc-200 bg-white/85 px-3 py-1.5">Air shortlist</Link>
+              <Link href="/sleep-recovery-shortlist-uk" className="rounded-full border border-zinc-200 bg-white/85 px-3 py-1.5">Sleep shortlist</Link>
+              <Link href="/nutrition/food-first-shortlist" className="rounded-full border border-zinc-200 bg-white/85 px-3 py-1.5">Food-first</Link>
             </div>
           </div>
         </div>
@@ -93,9 +90,9 @@ export default function HomePage() {
         <div className="mx-auto max-w-6xl px-4 py-12 md:py-16">
           <div className="grid gap-8 lg:grid-cols-[1.05fr_1.95fr] lg:items-start">
             <div>
-              <p className="text-sm font-semibold uppercase tracking-wide text-zinc-500">New pillar</p>
-              <h2 className="mt-2 text-3xl font-semibold text-zinc-900">Practical resilience</h2>
-              <p className="mt-3 text-zinc-700">Short-term disruption is a household problem before it is a survival problem. Our approach is calm, useful and non-alarmist.</p>
+              <p className="text-sm font-semibold uppercase tracking-wide text-zinc-500">Practical resilience</p>
+              <h2 className="mt-2 text-3xl font-semibold text-zinc-900">Prepare for short disruptions without panic-buying</h2>
+              <p className="mt-3 text-zinc-700">Short-term disruption is a household problem before it is a survival problem. Free preparation comes first; products only fill a clear gap.</p>
               <Link href="/topics/resilience" className="mt-5 inline-block font-semibold text-zinc-900 hover:underline">Explore practical resilience →</Link>
             </div>
             <div className="grid gap-4 sm:grid-cols-2">
@@ -114,18 +111,18 @@ export default function HomePage() {
       <section className="mx-auto max-w-6xl px-4 py-12 md:py-16">
         <div className="flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
           <div>
-            <p className="text-sm font-semibold uppercase tracking-wide text-zinc-500">When you are ready to buy</p>
-            <h2 className="mt-2 text-3xl font-semibold text-zinc-900">Shortlists built around use-cases</h2>
+            <p className="text-sm font-semibold uppercase tracking-wide text-zinc-500">When you are ready to compare</p>
+            <h2 className="mt-2 text-3xl font-semibold text-zinc-900">Go straight to the useful shortlist</h2>
           </div>
-          <Link href="/shortlists" className="text-sm font-semibold text-zinc-900 hover:underline">See all shortlists →</Link>
+          <Link href="/shortlists" className="text-sm font-semibold text-zinc-900 hover:underline">See every shortlist →</Link>
         </div>
-        <p className="mt-3 max-w-3xl text-zinc-700">We prefer a few relevant options with clear trade-offs over endless product grids.</p>
-        <div className="mt-8 grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+        <p className="mt-3 max-w-3xl text-zinc-700">These routes lead to the commercial pages where partner options are grouped by use-case and trade-offs are kept visible.</p>
+        <div className="mt-8 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
           {COMMERCIAL_PATHS.map((item) => (
-            <Link key={item.href} href={item.href} className="rounded-2xl border border-zinc-200 bg-white p-5 transition hover:shadow-sm">
+            <Link key={item.href} href={item.href} className="rounded-2xl border border-zinc-200 bg-white p-5 transition hover:-translate-y-0.5 hover:shadow-md">
               <h3 className="font-semibold text-zinc-900">{item.title}</h3>
               <p className="mt-2 text-sm text-zinc-700">{item.desc}</p>
-              <p className="mt-4 text-sm font-semibold">Compare →</p>
+              <p className="mt-4 text-sm font-semibold">Compare the shortlist →</p>
             </Link>
           ))}
         </div>
