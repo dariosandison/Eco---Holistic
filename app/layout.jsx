@@ -18,7 +18,7 @@ import { buildCommandPaletteIndex } from '@/lib/commandPaletteIndex'
 const SITE_URL = 'https://www.wild-and-well.store'
 const DEFAULT_TITLE = 'Wild & Well'
 const DEFAULT_DESC =
-  'Low‑tox living and natural wellness, in plain English. UK‑focused insights and shortlists for air, water, fragrance‑free living, sleep, nutrition, and movement.'
+  'Practical UK guidance for low-tox living, water, air quality, sleep, nutrition, movement and household resilience — evidence-led, useful and free from hype.'
 
 export const metadata = {
   metadataBase: new URL(SITE_URL),
@@ -27,15 +27,17 @@ export const metadata = {
   applicationName: DEFAULT_TITLE,
   keywords: [
     'low-tox',
-    'non toxic',
     'natural wellness',
-    'uk',
-    'air purifiers',
+    'healthy home',
+    'uk wellness',
+    'air quality',
     'water filters',
     'fragrance-free',
     'sleep',
     'nutrition',
     'movement',
+    'household resilience',
+    'emergency preparedness uk',
   ],
   manifest: '/manifest.webmanifest',
   icons: {
@@ -79,7 +81,6 @@ export default function RootLayout({ children }) {
       <head>
         <SiteJsonLd />
       </head>
-      {/* Reserve space for sticky newsletter bar so it never overlaps the footer */}
       <body className="min-h-screen flex flex-col pb-[var(--newsletter-h,0px)] bg-white text-[var(--ink)]">
         <GA />
         <Clarity />
