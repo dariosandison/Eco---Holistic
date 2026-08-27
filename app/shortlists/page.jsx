@@ -7,7 +7,7 @@ import { SITE_URL } from '@/lib/site'
 export const metadata = {
   title: 'UK Wellness & Healthy Home Shortlists',
   description:
-    'Buyer-friendly UK shortlists for air, water, sleep, nutrition, movement and healthy-home upgrades, with clear trade-offs and practical buying guidance.',
+    'Buyer-friendly UK shortlists for air, water, sleep, nutrition, movement, low-tox home and practical resilience, with clear trade-offs and practical buying guidance.',
 }
 
 const BUYING_PATHS = [
@@ -34,6 +34,12 @@ const BUYING_PATHS = [
     problem: 'Real-food protein, convenient meals, pantry staples and hydration before supplements.',
     learn: '/nutrition',
     compare: '/nutrition/food-first-shortlist',
+  },
+  {
+    title: 'Lower-tox home',
+    problem: 'High-use household swaps across laundry, cookware, showering and bathroom basics.',
+    learn: '/topics/healthy-home',
+    compare: '/healthy-home/low-tox-shortlist',
   },
   {
     title: 'Movement that sticks',
