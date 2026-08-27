@@ -1,154 +1,60 @@
 import Link from 'next/link'
-import ProductPick from '@/components/mdx/ProductPick'
 import TopicEducationDeepDive from '@/components/TopicEducationDeepDive'
 import TopicAtAGlance from '@/components/TopicAtAGlance'
 import TopicFAQ from '@/components/TopicFAQ'
-import { amazonSearchUrl } from '@/lib/amazon'
 import { getTopicEdu } from '@/lib/topicEdu'
 
 export const metadata = {
   title: 'Movement Topics — Wild & Well',
-  description: 'Movement basics: daily walking, simple strength, mobility, and repeatable routines (UK).',
+  description: 'Movement basics: walking, strength, mobility and foot function first, with focused buying routes for equipment that genuinely supports the habit.',
 }
 
 export default function Page() {
   const edu = getTopicEdu('movement')
-
   const faqs = [
-    {
-      q: 'What matters more: steps or workouts?',
-      a: [
-        'For most people, both help — but daily steps are often the easiest “base layer” to build first.',
-        'Two short strength sessions per week is a realistic next step once walking feels consistent.',
-      ],
-    },
-    {
-      q: 'How much strength training do I need?',
-      a: 'A simple minimum: 2 sessions per week, covering push, pull, squat/lunge, and hinge patterns. Consistency beats complexity.',
-    },
-    {
-      q: 'Do I need equipment?',
-      a: 'No. Bodyweight and a resistance band can go a long way. Equipment is optional — it’s there to reduce friction, not create it.',
-    },
-    {
-      q: 'How do I avoid injury when starting?',
-      a: 'Increase volume gradually (10–20% per week), keep most sessions easy, and don’t add lots of new things at once.',
-    },
+    { q: 'What matters more: steps or workouts?', a: ['Both can help, but daily walking is often the easiest base layer to build first.', 'Once that habit is stable, simple strength sessions can add another useful layer.'] },
+    { q: 'How much strength training do I need?', a: 'A simple routine covering major movement patterns a couple of times per week can be a practical starting point. Consistency matters more than complexity.' },
+    { q: 'Do I need equipment?', a: 'No. Bodyweight and simple resistance can go a long way. Equipment should reduce friction or expand what you can do — not become the plan itself.' },
+    { q: 'How do I avoid doing too much too soon?', a: 'Increase walking, training volume and load gradually. Keep the routine repeatable and avoid adding several demanding changes at once.' },
   ]
 
   return (
     <main className="mx-auto max-w-6xl px-4 py-16">
       <header className="max-w-3xl">
-        <h1 className="text-4xl font-bold">Movement (Walk + Strength + Mobility)</h1>
-        <p className="mt-3 text-zinc-700">
-          Build the base first (steps), then add simple strength and mobility. Most “fitness plans” fail because they ask for too much too soon.
-        </p>
-
-        {/* Topic image */}
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          src="/images/photography/movement.jpg"
-          alt=""
-          className="mt-6 w-full rounded-3xl border border-zinc-200 shadow-sm"
-          loading="lazy"
-          decoding="async"
-        />
-
-        <div className="mt-4 flex flex-wrap gap-2">
-          <Link className="btn-secondary" href="/movement">Explore Movement section</Link>
-          <Link className="btn-secondary" href="/movement/movement-shortlist">Movement shortlist</Link>
+        <p className="text-sm font-semibold uppercase tracking-[0.16em] text-zinc-500">Build the habit first</p>
+        <h1 className="mt-2 text-4xl font-bold">Movement (Walk + Strength + Mobility)</h1>
+        <p className="mt-3 text-zinc-700">Build a walking base, add simple strength and mobility, then buy equipment only when it makes that routine easier or more useful.</p>
+        <img src="/images/photography/movement.jpg" alt="" className="mt-6 w-full rounded-3xl border border-zinc-200 shadow-sm" loading="lazy" decoding="async" />
+        <div className="mt-5 flex flex-wrap gap-2">
+          <Link className="btn-primary" href="/movement/movement-shortlist">Choose a movement route</Link>
+          <Link className="btn-secondary" href="/movement">Explore Movement</Link>
           <Link className="btn-secondary" href="/blog/walking-for-health-how-much-is-enough">Walking guide</Link>
-          <Link className="btn-secondary" href="/blog/home-strength-basics-busy-people">Home strength basics</Link>
-          <Link className="btn-secondary" href="/blog/mobility-for-desk-workers">Mobility for desk workers</Link>
+          <Link className="btn-secondary" href="/blog/home-strength-basics-busy-people">Home strength</Link>
+          <Link className="btn-secondary" href="/blog/mobility-for-desk-workers">Desk mobility</Link>
         </div>
-
-        <div className="mt-4 flex flex-wrap gap-2">
-          <a className="chip" href="#understand">Understand</a>
-          <a className="chip" href="#start">Start</a>
-          <a className="chip" href="#options">Options</a>
-          <a className="chip" href="#faqs">FAQs</a>
-        </div>
-
-        <p className="mt-3 text-xs text-zinc-500">Last updated: February 13, 2026</p>
+        <div className="mt-4 flex flex-wrap gap-2"><a className="chip" href="#understand">Understand</a><a className="chip" href="#start">Start</a><a className="chip" href="#options">Choose</a><a className="chip" href="#faqs">FAQs</a></div>
       </header>
 
       <TopicEducationDeepDive edu={edu} />
-
       <div id="start" />
-      <TopicAtAGlance
-        items={[
-          {
-            title: 'Base layer (daily)',
-            bullets: [
-              'Aim for a daily walk (even 10–20 minutes counts).',
-              'Track steps for awareness, not perfection.',
-              'Add hills or brisk segments once the habit is stable.',
-            ],
-          },
-          {
-            title: 'Strength (2×/week)',
-            bullets: [
-              'Push, pull, squat/lunge, hinge, carry/core.',
-              'Start with bodyweight + a band; add load slowly.',
-              'Leave 1–2 reps “in the tank” most sessions.',
-            ],
-          },
-          {
-            title: 'Common mistakes',
-            bullets: [
-              'Starting too hard, too fast (then stopping).',
-              'Buying gear before building the habit.',
-              'Ignoring sleep and recovery when training volume rises.',
-            ],
-          },
-        ]}
-      />
+      <TopicAtAGlance items={[
+        { title: 'Base layer', bullets: ['Walk regularly and make the habit easy to repeat.', 'Use steps as awareness rather than a score to obsess over.', 'Add brisk segments, hills or longer walks gradually.'] },
+        { title: 'Add strength', bullets: ['Use simple push, pull, squat/lunge, hinge and carry/core patterns.', 'Bodyweight or basic resistance is enough to start.', 'Add load when the existing routine feels controlled and repeatable.'] },
+        { title: 'Common mistakes', bullets: ['Buying equipment before establishing the habit.', 'Starting with too much volume or intensity.', 'Treating trackers and gear as substitutes for actually moving.'] },
+      ]} />
 
       <section className="mt-14" id="options">
-        <h2 className="section-title">Options (compare links)</h2>
-        <p className="section-subtitle">A few low‑friction tools that can make consistency easier (not mandatory).</p>
-
-        <div className="mt-6 grid gap-4 md:grid-cols-2">
-          <ProductPick
-            title="Resistance bands set"
-            badge="Strength"
-            description="Small, cheap, and versatile for rows, presses, rehab, and mobility."
-            href={amazonSearchUrl('resistance bands set loops and tube UK')}
-            bullets={['Choose a range of tensions', 'Keep them visible', 'Use 2×/week']}
-          />
-          <ProductPick
-            title="Walking shoes"
-            badge="Steps"
-            description="Comfort-first shoes for regular walking — fit and comfort beat hype."
-            links={[{ label: 'Read the shortlist', merchant: 'internal', href: '/best-walking-shoes-daily-steps-uk', variant: 'primary' }]}
-            bullets={['Try on and walk around', 'Consider returns', 'Use them daily']}
-          />
-          <ProductPick
-            title="Fitness tracker (beginner)"
-            badge="Awareness"
-            description="Steps and sleep trends can help you stay honest — don’t obsess over daily numbers."
-            links={[{ label: 'Read the shortlist', merchant: 'internal', href: '/best-fitness-trackers-beginners-uk', variant: 'primary' }]}
-            bullets={['Use for trends', 'Charge consistently', 'Turn off noisy notifications']}
-          />
-          <ProductPick
-            title="Yoga mat"
-            badge="Mobility"
-            description="A comfortable base for mobility, stretching, and floor work."
-            links={[{ label: 'Read the shortlist', merchant: 'internal', href: '/best-yoga-mats-grip-comfort', variant: 'primary' }]}
-            bullets={['Grip matters', 'Choose thickness for joints', 'Keep it accessible']}
-          />
+        <div className="max-w-3xl"><h2 className="section-title">Choose by what will help you move more</h2><p className="section-subtitle">The movement shortlist groups buying options around the job they perform, not around collecting fitness gear.</p></div>
+        <div className="mt-6 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+          <Link href="/movement/movement-shortlist#foot-strength" className="card hover:shadow-sm transition-shadow"><h3 className="font-semibold">Foot strength & everyday movement</h3><p className="mt-2 text-sm text-zinc-600">Footwear and simple tools for people deliberately working on foot function and walking.</p><p className="mt-3 text-sm font-semibold">Explore foot-strength options →</p></Link>
+          <Link href="/movement/movement-shortlist#home-strength" className="card hover:shadow-sm transition-shadow"><h3 className="font-semibold">Home strength</h3><p className="mt-2 text-sm text-zinc-600">Basic resistance and equipment when it genuinely makes home training easier to repeat.</p><p className="mt-3 text-sm font-semibold">Explore strength options →</p></Link>
+          <Link href="/movement/movement-shortlist#tracking" className="card hover:shadow-sm transition-shadow"><h3 className="font-semibold">Tracking & awareness</h3><p className="mt-2 text-sm text-zinc-600">Trackers can help with trends and consistency, provided the numbers remain a tool rather than the goal.</p><p className="mt-3 text-sm font-semibold">Explore tracking options →</p></Link>
         </div>
-
-        <div className="mt-8 flex flex-wrap gap-2">
-          <Link className="btn-primary" href="/movement">Go deeper in Movement →</Link>
-          <Link className="btn-secondary" href="/topics/recovery">Recovery topic →</Link>
-          <Link className="btn-secondary" href="/topics/foot-strength">Foot strength topic →</Link>
-        </div>
+        <div className="mt-8 rounded-3xl border border-zinc-200 bg-zinc-50/60 p-6"><h3 className="text-xl font-semibold">Not sure you need to buy anything?</h3><p className="mt-2 text-sm text-zinc-700">Start with walking and a simple bodyweight routine. Come back to the shortlist when you can name the specific limitation that equipment would solve.</p><div className="mt-4 flex flex-wrap gap-2"><Link className="btn-primary" href="/blog/home-strength-basics-busy-people">Start strength without a shopping list</Link><Link className="btn-secondary" href="/topics/foot-strength">Foot strength topic</Link></div></div>
       </section>
 
       <TopicFAQ faqs={faqs} />
-
-      <p className="mt-12 text-xs text-zinc-500">Some links are affiliate links. If you buy via them, we earn a commission.</p>
+      <p className="mt-12 text-xs text-zinc-500">Some links are affiliate links. If you buy via them, we may earn a commission at no extra cost to you.</p>
     </main>
   )
 }
