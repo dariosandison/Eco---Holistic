@@ -76,6 +76,7 @@ export default function Page() {
                 badge={p.badge}
                 description={p.description}
                 bullets={p.bullets}
+                trackingContext={`air_shortlist_${g.id}`}
                 links={[
                   { label: `Check ${p.badge || p.advertiser} price`, merchant: 'awin', href: p.awin, variant: 'primary' },
                   { label: 'Read buying guidance', merchant: 'internal', href: '/topics/air-quality', variant: 'ghost' },
