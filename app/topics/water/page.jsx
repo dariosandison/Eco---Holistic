@@ -38,7 +38,7 @@ export default function Page() {
           <Link className="btn-primary" href="/water-filtration-shortlist-uk">Choose a filtration route</Link>
           <Link className="btn-secondary" href="/best-water-filters-uk">Full buying guide</Link>
           <Link className="btn-secondary" href="/blog/hard-water-uk-myths-and-comfort">Hard water</Link>
-          <Link className="btn-secondary" href="/blog/filter-replacement-costs-uk">Replacement costs</Link>
+          <Link className="btn-secondary" href="/tools/water-filter-running-cost-calculator">Filter cost calculator</Link>
           <Link className="btn-secondary" href="/tools/72-hour-water-calculator">72-hour water calculator</Link>
         </div>
         <div className="mt-4 flex flex-wrap gap-2"><a className="chip" href="#understand">Understand</a><a className="chip" href="#start">Start</a><a className="chip" href="#guides">Popular questions</a><a className="chip" href="#options">Choose</a><a className="chip" href="#faqs">FAQs</a></div>
@@ -66,6 +66,7 @@ export default function Page() {
             </Link>
           ))}
         </div>
+        <div className="mt-6 rounded-3xl border border-zinc-200 bg-zinc-50/60 p-6"><h3 className="text-lg font-semibold">Compare ownership cost before choosing</h3><p className="mt-2 text-sm text-zinc-700">Replacement cartridges can change the economics of a filter completely. Put the purchase price and replacement schedule into the free calculator before comparing systems.</p><div className="mt-4 flex flex-wrap gap-2"><Link className="btn-primary" href="/tools/water-filter-running-cost-calculator">Calculate filter running cost</Link><Link className="btn-secondary" href="/blog/filter-replacement-costs-uk">Read replacement-cost guide</Link></div></div>
       </section>
 
       <section className="mt-14" id="options">
