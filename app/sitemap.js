@@ -20,7 +20,8 @@ function isRouteGroup(seg) {
 }
 
 function collectRoutes(appDir) {
-  const routes = new Map()
+  const routes = new Set()
+
   function walk(dir, segments = []) {
     const entries = fs.readdirSync(dir, { withFileTypes: true })
     for (const ent of entries) {
@@ -33,11 +34,11 @@ function collectRoutes(appDir) {
       if (ent.isFile() && isPageFile(ent.name)) {
         const route = '/' + segments.join('/')
         if (route.includes('[') || route.includes(']')) continue
-        const cleanRoute = route === '/' ? '/' : route.replace(/\/+$/, '')
-        routes.set(cleanRoute, fs.statSync(full).mtime)
+        routes.add(route === '/' ? '/' : route.replace(/\/+$/, ''))
       }
     }
   }
+
   walk(appDir, [])
   return routes
 }
@@ -45,33 +46,33 @@ function collectRoutes(appDir) {
 export default function sitemap() {
   const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.wild-and-well.store'
   const appDir = path.join(process.cwd(), 'app')
-  const routeDates = new Map()
+  const routes = new Set()
 
   try {
-    for (const [route, modified] of collectRoutes(appDir)) routeDates.set(route, modified)
+    for (const route of collectRoutes(appDir)) routes.add(route)
   } catch (e) {
-    for (const route of ['/', '/shortlists', '/topics', '/blog', '/nutrition', '/movement', '/deals', '/shopping-list', '/about', '/contact', '/privacy', '/terms']) routeDates.set(route, null)
+    for (const route of ['/', '/shortlists', '/topics', '/blog', '/nutrition', '/movement', '/deals', '/shopping-list', '/about', '/contact', '/privacy', '/terms']) routes.add(route)
   }
 
-  for (const legacy of ['/picks', '/partners', '/recommended', '/favourites', '/best-of']) routeDates.delete(legacy)
+  for (const legacy of ['/picks', '/partners', '/recommended', '/favourites', '/best-of']) routes.delete(legacy)
 
   try {
     const blogDir = path.join(process.cwd(), 'content', 'blog')
     if (fs.existsSync(blogDir)) {
       for (const file of fs.readdirSync(blogDir)) {
         if (!file.endsWith('.mdx') || file.endsWith('-duplicate.mdx')) continue
-        routeDates.set(`/blog/${file.replace(/\.mdx$/, '')}`, fs.statSync(path.join(blogDir, file)).mtime)
+        routes.add(`/blog/${file.replace(/\.mdx$/, '')}`)
       }
     }
   } catch (e) {
-    // Keep sitemap functional if content filesystem metadata is unavailable.
+    // Keep sitemap functional if content filesystem access is unavailable.
   }
 
-  for (const route of ['/authors/wild-and-well-founder', '/authors/wild-and-well-editorial', '/authors', '/rss', '/rss.xml']) {
-    if (!routeDates.has(route)) routeDates.set(route, null)
-  }
+  for (const route of ['/authors/wild-and-well-founder', '/authors/wild-and-well-editorial', '/authors', '/rss', '/rss.xml']) routes.add(route)
 
-  return Array.from(routeDates.entries())
-    .sort(([a], [b]) => a.localeCompare(b))
-    .map(([route, modified]) => ({ url: baseUrl + route, ...(modified ? { lastModified: modified } : {}) }))
+  // Do not emit lastModified unless we have a reliable per-URL editorial date.
+  // Build/deploy filesystem mtimes can change without the page itself changing.
+  return Array.from(routes)
+    .sort((a, b) => a.localeCompare(b))
+    .map((route) => ({ url: baseUrl + route }))
 }
