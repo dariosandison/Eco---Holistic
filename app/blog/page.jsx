@@ -7,14 +7,17 @@ import { SITE_URL } from '@/lib/site'
 
 export const metadata = {
   title: 'UK Healthy Home & Wellness Guides',
-  description: 'Practical UK guides on water filtration, air quality, damp, sleep, nutrition and movement — organised by problem so you can find the useful route quickly.',
+  description: 'Practical UK guides on water filtration, air quality, damp, sleep, nutrition, movement, lower-tox living and household resilience — organised by problem.',
 }
 
 const clusters = [
   { title: 'Water & filtration', href: '/topics/water', text: 'Hard water, filter formats, RO, gravity filtration, shower water and replacement costs.', links: [['Jug vs under-sink', '/blog/water-filter-jug-vs-under-sink-uk'], ['RO worth it?', '/blog/reverse-osmosis-water-filter-worth-it-uk'], ['Chlorine taste', '/blog/water-filter-chlorine-taste-uk']] },
   { title: 'Air, damp & condensation', href: '/topics/air-quality', text: 'Purifiers, dehumidifiers, pollen, pets, smoke, mould and indoor humidity.', links: [['Window condensation', '/blog/condensation-on-windows-uk-dehumidifier'], ['Purifier vs dehumidifier', '/blog/air-purifier-vs-dehumidifier-mould-uk'], ['Filter costs', '/blog/air-purifier-filter-replacement-cost-uk']] },
-  { title: 'Sleep & recovery', href: '/topics/sleep-recovery', text: 'Bedroom comfort, bedding, routines and selective recovery tools.', links: [['Bedroom temperature & bedding', '/blog/bedroom-temperature-bedding'], ['Sleep naturally', '/blog/sleep-naturally-simple-guide']] },
+  { title: 'Sleep & recovery', href: '/topics/sleep', text: 'Bedroom comfort, bedding, routines and selective recovery tools.', links: [['Bedroom temperature & bedding', '/blog/bedroom-temperature-bedding'], ['Sleep naturally', '/blog/sleep-naturally-simple-guide']] },
+  { title: 'Nutrition', href: '/topics/nutrition', text: 'Food-first nutrition, useful staples, labels and selective supplement guidance.', links: [['Creatine guide', '/blog/creatine-uk-simple-guide'], ['72-hour food plan', '/blog/72-hour-food-plan-uk'], ['Food-first shortlist', '/nutrition/food-first-shortlist']] },
   { title: 'Movement', href: '/movement', text: 'Strength basics, walking, mobility and barefoot-footwear guidance.', links: [['Home strength basics', '/blog/home-strength-basics-busy-people'], ['Barefoot training shoes', '/best-barefoot-training-shoes-uk-vivobarefoot-primus-lite-knit']] },
+  { title: 'Lower-tox home', href: '/topics/fragrance-free', text: 'Fragrance-free laundry, cleaning and practical lower-exposure household swaps.', links: [['Laundry detergents', '/best-fragrance-free-laundry-detergents-uk'], ['Healthy-home shortlist', '/healthy-home/low-tox-shortlist']] },
+  { title: 'Practical resilience', href: '/topics/resilience', text: 'Calm preparation for short water, food, power and household disruptions.', links: [['72-hour household kit', '/blog/72-hour-household-emergency-kit-uk'], ['Household water plan', '/blog/72-hour-household-water-plan-uk'], ['72-hour food plan', '/blog/72-hour-food-plan-uk']] },
 ]
 
 export default function Page() {
