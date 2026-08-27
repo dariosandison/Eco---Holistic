@@ -32,9 +32,7 @@ export default function Page() {
       <header className="max-w-3xl">
         <p className="text-sm font-semibold uppercase tracking-[0.16em] text-zinc-500">UK buying guide</p>
         <h1 className="mt-2 text-4xl font-bold">Shower filters for UK hard water: know the limit before you buy</h1>
-        <p className="mt-3 text-zinc-700">
-          A shower filter may be useful when you specifically want shower-water filtration, but it should not be sold as a cure for hard water. If your main problem is mineral scale, the solution is usually further upstream.
-        </p>
+        <p className="mt-3 text-zinc-700">A shower filter may be useful when you specifically want shower-water filtration, but it should not be sold as a cure for hard water. If your main problem is mineral scale, the solution is usually further upstream.</p>
         <div className="mt-5 flex flex-wrap gap-2">
           {showerPick && <a className="btn-primary" href="#partner-option">See the tracked partner option</a>}
           <Link className="btn-secondary" href="/blog/hard-water-uk-myths-and-comfort">Understand hard water first</Link>
@@ -55,14 +53,8 @@ export default function Page() {
       <section className="mt-12 panel">
         <h2 className="text-xl font-semibold">The important distinction: filtration vs softening</h2>
         <div className="mt-4 grid gap-5 md:grid-cols-2">
-          <div>
-            <h3 className="font-semibold">A shower filter</h3>
-            <p className="mt-2 text-sm text-zinc-700">Treats water at the shower using a replaceable filter medium. Performance depends on the cartridge and the substances it is designed to reduce.</p>
-          </div>
-          <div>
-            <h3 className="font-semibold">A water softener</h3>
-            <p className="mt-2 text-sm text-zinc-700">Addresses hardness minerals for the household water supply. If visible limescale is your central problem, investigate softening rather than expecting a shower cartridge to do the same job.</p>
-          </div>
+          <div><h3 className="font-semibold">A shower filter</h3><p className="mt-2 text-sm text-zinc-700">Treats water at the shower using a replaceable filter medium. Performance depends on the cartridge and the substances it is designed to reduce.</p></div>
+          <div><h3 className="font-semibold">A water softener</h3><p className="mt-2 text-sm text-zinc-700">Addresses hardness minerals for the household water supply. If visible limescale is your central problem, investigate softening rather than expecting a shower cartridge to do the same job.</p></div>
         </div>
       </section>
 
@@ -78,11 +70,8 @@ export default function Page() {
               title={showerPick.product}
               badge={showerPick.badge}
               description="A direct shower-filter option from a Wild & Well water-filtration partner. Best considered when shower-water filtration — not whole-home softening — is the goal."
-              bullets={[
-                'Check the manufacturer’s current reduction claims',
-                'Confirm fit and water-pressure requirements',
-                'Price the replacement filter before committing',
-              ]}
+              bullets={['Check the manufacturer’s current reduction claims', 'Confirm fit and water-pressure requirements', 'Price the replacement filter before committing']}
+              trackingContext="shower_filter_guide_partner"
               links={[
                 { label: `Check ${showerPick.badge || showerPick.advertiser} price`, merchant: 'awin', href: showerPick.awin, variant: 'primary' },
                 { label: 'Compare all water filtration routes', merchant: 'internal', href: '/water-filtration-shortlist-uk', variant: 'ghost' },
@@ -99,22 +88,8 @@ export default function Page() {
       )}
 
       <section className="mt-14 grid gap-4 md:grid-cols-2">
-        <div className="card">
-          <h2 className="text-lg font-semibold">Choose a shower filter when…</h2>
-          <ul className="mt-3 list-disc space-y-2 pl-5 text-sm text-zinc-700">
-            <li>You have a clear shower-water filtration goal.</li>
-            <li>You understand what the chosen cartridge is designed to reduce.</li>
-            <li>You are comfortable with the ongoing replacement cost.</li>
-          </ul>
-        </div>
-        <div className="card">
-          <h2 className="text-lg font-semibold">Look elsewhere when…</h2>
-          <ul className="mt-3 list-disc space-y-2 pl-5 text-sm text-zinc-700">
-            <li>Your priority is stopping limescale throughout the home.</li>
-            <li>Your concern is damp or bathroom ventilation rather than water quality.</li>
-            <li>You cannot verify what the filter actually targets.</li>
-          </ul>
-        </div>
+        <div className="card"><h2 className="text-lg font-semibold">Choose a shower filter when…</h2><ul className="mt-3 list-disc space-y-2 pl-5 text-sm text-zinc-700"><li>You have a clear shower-water filtration goal.</li><li>You understand what the chosen cartridge is designed to reduce.</li><li>You are comfortable with the ongoing replacement cost.</li></ul></div>
+        <div className="card"><h2 className="text-lg font-semibold">Look elsewhere when…</h2><ul className="mt-3 list-disc space-y-2 pl-5 text-sm text-zinc-700"><li>Your priority is stopping limescale throughout the home.</li><li>Your concern is damp or bathroom ventilation rather than water quality.</li><li>You cannot verify what the filter actually targets.</li></ul></div>
       </section>
 
       <section className="mt-14 rounded-3xl border border-zinc-200 bg-zinc-50/60 p-6">
