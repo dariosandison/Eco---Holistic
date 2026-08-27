@@ -4,7 +4,7 @@ import { SITE_URL } from '@/lib/site'
 
 export const metadata = {
   title: 'Topics — Wild & Well',
-  description: 'Education-first topic insights for sleep, movement, nutrition, skin health, air quality, water, and low-tox home habits in the UK.',
+  description: 'Education-first topic insights for sleep, movement, nutrition, skin health, air quality, water, low-tox home habits and practical resilience in the UK.',
 }
 
 function Card({ title, desc, href, tag, image }) {
@@ -52,6 +52,7 @@ export default function Page() {
       { name: 'Air quality (allergies + damp)', url: `${SITE_URL}/topics/air-quality` },
       { name: 'Water (filters + hydration)', url: `${SITE_URL}/topics/water` },
       { name: 'Fragrance-free cleaning & laundry', url: `${SITE_URL}/topics/fragrance-free` },
+      { name: 'Practical resilience', url: `${SITE_URL}/topics/resilience` },
     ].map((it, i) => ({
       '@type': 'ListItem',
       position: i + 1,
@@ -72,6 +73,7 @@ export default function Page() {
           <Link className="btn-secondary" href="/shopping-list">Free shopping list</Link>
           <Link className="btn-secondary" href="/nutrition">Nutrition</Link>
           <Link className="btn-secondary" href="/movement">Movement</Link>
+          <Link className="btn-secondary" href="/topics/resilience">Practical resilience</Link>
         </div>
       </header>
 
@@ -87,8 +89,8 @@ export default function Page() {
             <p className="mt-3 text-xs text-zinc-500">Open →</p>
           </Link>
           <Link className="card hover:shadow-sm transition-shadow" href="/topics/water">
-            <div className="text-sm font-semibold">Hard water comfort</div>
-            <p className="mt-1 text-sm text-zinc-600">Skin/hair feel, jugs vs under‑sink.</p>
+            <div className="text-sm font-semibold">Better everyday water</div>
+            <p className="mt-1 text-sm text-zinc-600">Drinking water, filter formats and hard-water comfort.</p>
             <p className="mt-3 text-xs text-zinc-500">Open →</p>
           </Link>
           <Link className="card hover:shadow-sm transition-shadow" href="/topics/sleep">
@@ -111,6 +113,11 @@ export default function Page() {
             <p className="mt-1 text-sm text-zinc-600">Steps + simple strength.</p>
             <p className="mt-3 text-xs text-zinc-500">Open →</p>
           </Link>
+          <Link className="card hover:shadow-sm transition-shadow" href="/topics/resilience">
+            <div className="text-sm font-semibold">Handle short-term disruption</div>
+            <p className="mt-1 text-sm text-zinc-600">Water, power, food, communication and household essentials.</p>
+            <p className="mt-3 text-xs text-zinc-500">Open →</p>
+          </Link>
         </div>
       </section>
 
@@ -127,14 +134,15 @@ export default function Page() {
         <Card image="/images/photography/thumbs/air-quality.png" title="Air quality (allergies + damp)" desc="HEPA basics, placement, and shortlists for common rooms." href="/topics/air-quality" tag="Home" />
         <Card image="/images/photography/thumbs/water.png" title="Water (filters + drinking)" desc="Under-sink vs jugs, replacement filters, and buying basics." href="/topics/water" tag="Kitchen" />
         <Card image="/images/photography/thumbs/laundry.png" title="Fragrance-free cleaning & laundry" desc="Ingredient checks and the quickest swaps for sensitive households." href="/topics/fragrance-free" tag="Cleaning" />
+        <Card image="/images/cards/neutral.svg" title="Practical resilience" desc="Calm UK guidance for short water, power, food and communication disruption." href="/topics/resilience" tag="Home" />
       </section>
 
       <section className="mt-14 max-w-3xl">
         <h2 className="section-title">Suggested order</h2>
         <ol className="mt-3 list-decimal pl-6 text-zinc-700 space-y-2">
-          <li>Choose one topic (sleep, movement, nutrition, skin, air, water, cleaning).</li>
+          <li>Choose one topic that solves a problem you actually have now.</li>
           <li>Skim the “At a glance” section and choose one practical next step.</li>
-          <li>When you want options, use the shortlist links to compare a few solid choices.</li>
+          <li>When products genuinely help, use the linked shortlist to compare a few solid choices.</li>
         </ol>
       </section>
 
