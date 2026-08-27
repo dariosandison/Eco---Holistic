@@ -2,40 +2,14 @@ import Link from 'next/link'
 
 export const metadata = {
   title: 'Practical Resilience — Wild & Well',
-  description: 'Calm, practical UK guidance for short-term household disruption: water, power, food, communication, air quality and essential supplies.',
+  description: 'Calm UK guidance for short household disruptions, with practical routes for water, food, power, communication and indoor air.',
 }
 
-const GUIDES = [
-  {
-    title: 'UK 72-Hour Household Kit',
-    description: 'A sensible, non-panic checklist for water, food, light, power, first aid, hygiene and communication.',
-    href: '/blog/72-hour-household-emergency-kit-uk',
-  },
-  {
-    title: '72-Hour Household Water Plan (UK)',
-    description: 'How much drinking water to keep, how to store it, and where filtration does — and does not — help.',
-    href: '/blog/72-hour-household-water-plan-uk',
-  },
-  {
-    title: 'Power Cut Preparation (UK)',
-    description: 'Lighting, phone power, refrigeration, warmth and when a larger battery system may actually be useful.',
-    href: '/blog/power-cut-preparation-uk',
-  },
-  {
-    title: 'Indoor Air During Smoke or Pollution',
-    description: 'A practical plan for ventilation timing, cleaner rooms and HEPA filtration when outdoor air quality is temporarily poor.',
-    href: '/blog/indoor-air-smoke-pollution-uk',
-  },
-  {
-    title: 'Water Filters (UK): shortlist',
-    description: 'Compare jug, under-sink, gravity and portable filtration routes with the main trade-offs explained.',
-    href: '/best-water-filters-uk',
-  },
-  {
-    title: 'Air Quality hub',
-    description: 'HEPA basics, damp, dehumidification and practical indoor-air comparisons for UK homes.',
-    href: '/topics/air-quality',
-  },
+const ROUTES = [
+  { title: 'Water first', description: 'Work out stored drinking-water needs first. Add portable, gravity or home filtration only for the job it actually solves.', learn: '/blog/72-hour-household-water-plan-uk', buy: '/water-filtration-shortlist-uk' },
+  { title: 'Light & phone power', description: 'Start with torches, charged power banks and a simple charging plan before considering larger backup systems.', learn: '/blog/power-cut-preparation-uk', buy: '/blog/72-hour-household-emergency-kit-uk' },
+  { title: 'Normal shelf-stable food', description: 'Build around food your household already eats and rotate it into normal meals rather than creating a forgotten emergency cupboard.', learn: '/nutrition', buy: '/nutrition/food-first-shortlist' },
+  { title: 'Indoor air', description: 'For smoke or pollution events, understand ventilation timing and cleaner-room basics before buying filtration.', learn: '/blog/indoor-air-smoke-pollution-uk', buy: '/air-quality-shortlist-uk' },
 ]
 
 const PILLARS = [
@@ -51,68 +25,22 @@ export default function Page() {
   return (
     <main className="mx-auto max-w-6xl px-4 py-16">
       <header className="max-w-3xl">
-        <p className="text-sm font-semibold uppercase tracking-wide text-zinc-500">Wild &amp; Well</p>
+        <p className="text-sm font-semibold uppercase tracking-[0.16em] text-zinc-500">Calm household preparation</p>
         <h1 className="mt-2 text-4xl font-bold">Practical resilience</h1>
-        <p className="mt-4 text-lg text-zinc-700">
-          Healthy living is easier when normal systems are working. This section covers the boring-but-useful basics that help a household cope with short-term disruption — without fear, stockpiling or doomsday hype.
-        </p>
-        <p className="mt-3 text-sm text-zinc-600">
-          UK-focused guidance for water, power, food, communication, air quality, hygiene and other everyday essentials.
-        </p>
+        <p className="mt-4 text-lg text-zinc-700">Prepare for the ordinary disruptions first: a power cut, temporary water problem, poor outdoor air or a few days when normal shopping is inconvenient. The goal is useful redundancy, not fear or stockpiling.</p>
+        <div className="mt-5 flex flex-wrap gap-2"><Link className="btn-primary" href="/blog/72-hour-household-emergency-kit-uk">Build a 72-hour household plan</Link><Link className="btn-secondary" href="/water-filtration-shortlist-uk">Water options</Link><Link className="btn-secondary" href="/air-quality-shortlist-uk">Air options</Link></div>
       </header>
 
-      <section className="mt-10 rounded-3xl border border-zinc-200 bg-zinc-50 p-6 md:p-8">
-        <h2 className="text-2xl font-semibold">Start with the essentials</h2>
-        <div className="mt-5 grid gap-4 md:grid-cols-2">
-          <div className="rounded-2xl border border-zinc-200 bg-white p-5">
-            <h3 className="font-semibold">Free actions first</h3>
-            <p className="mt-2 text-sm text-zinc-700">Know your utility providers, keep emergency contact details, understand where your stopcock and fuse box are, and make a simple household plan.</p>
-          </div>
-          <div className="rounded-2xl border border-zinc-200 bg-white p-5">
-            <h3 className="font-semibold">Buy only where it solves a problem</h3>
-            <p className="mt-2 text-sm text-zinc-700">Stored water, lighting, power banks, first-aid supplies and suitable filters can be useful. Expensive kit is not automatically better preparation.</p>
-          </div>
-        </div>
-      </section>
+      <section className="mt-10 rounded-3xl border border-zinc-200 bg-zinc-50 p-6 md:p-8"><h2 className="text-2xl font-semibold">Start without spending</h2><div className="mt-5 grid gap-4 md:grid-cols-2"><div className="rounded-2xl border border-zinc-200 bg-white p-5"><h3 className="font-semibold">Know the house</h3><p className="mt-2 text-sm text-zinc-700">Know your utility providers, stopcock and fuse box. Keep key contacts somewhere accessible even if a phone battery is flat.</p></div><div className="rounded-2xl border border-zinc-200 bg-white p-5"><h3 className="font-semibold">Know the household</h3><p className="mt-2 text-sm text-zinc-700">Plan around the people who actually live there: medication, children, pets, mobility, food requirements and essential devices.</p></div></div></section>
 
-      <section className="mt-12">
-        <h2 className="text-2xl font-semibold">Six practical pillars</h2>
-        <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {PILLARS.map(([title, copy]) => (
-            <div key={title} className="rounded-2xl border border-zinc-200 bg-white p-5">
-              <h3 className="font-semibold">{title}</h3>
-              <p className="mt-2 text-sm text-zinc-700">{copy}</p>
-            </div>
-          ))}
-        </div>
-      </section>
+      <section className="mt-12"><h2 className="text-2xl font-semibold">Six practical pillars</h2><div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">{PILLARS.map(([title, copy]) => <div key={title} className="rounded-2xl border border-zinc-200 bg-white p-5"><h3 className="font-semibold">{title}</h3><p className="mt-2 text-sm text-zinc-700">{copy}</p></div>)}</div></section>
 
-      <section className="mt-12">
-        <h2 className="text-2xl font-semibold">Guides &amp; shortlists</h2>
-        <p className="mt-2 max-w-3xl text-sm text-zinc-700">Start with a problem, understand the free steps, then compare equipment only where it genuinely adds resilience.</p>
-        <div className="mt-6 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
-          {GUIDES.map((guide) => (
-            <Link key={guide.href} href={guide.href} className="rounded-2xl border border-zinc-200 bg-white p-5 transition hover:shadow-sm">
-              <h3 className="text-lg font-semibold">{guide.title}</h3>
-              <p className="mt-2 text-sm text-zinc-700">{guide.description}</p>
-              <p className="mt-4 text-sm font-semibold">Read guide →</p>
-            </Link>
-          ))}
-        </div>
-      </section>
+      <section className="mt-14"><div className="max-w-3xl"><p className="text-sm font-semibold uppercase tracking-[0.14em] text-zinc-500">Preparedness funnel</p><h2 className="mt-2 text-2xl font-semibold">Solve one resilience gap at a time</h2><p className="mt-2 text-zinc-700">Each route starts with the free plan, then moves into an existing Wild & Well shortlist only where buying something is useful.</p></div><div className="mt-6 grid gap-5 md:grid-cols-2">{ROUTES.map((route) => <article key={route.title} className="rounded-2xl border border-zinc-200 bg-white p-5 shadow-sm"><h3 className="text-lg font-semibold">{route.title}</h3><p className="mt-2 text-sm text-zinc-700">{route.description}</p><div className="mt-4 flex flex-wrap gap-2"><Link className="btn-secondary" href={route.learn}>Plan first</Link><Link className="btn-primary" href={route.buy}>Useful options</Link></div></article>)}</div></section>
 
-      <section className="mt-12 max-w-3xl">
-        <h2 className="text-2xl font-semibold">Where this fits Wild &amp; Well</h2>
-        <p className="mt-3 text-zinc-700">
-          Practical resilience sits alongside our existing work on water, air quality, sleep, nutrition, movement and low-tox living. The aim is the same: explain the evidence and trade-offs clearly, then recommend sensible options only where they genuinely help.
-        </p>
-        <div className="mt-5 flex flex-wrap gap-2">
-          <Link className="btn-secondary" href="/topics/water">Water</Link>
-          <Link className="btn-secondary" href="/topics/air-quality">Air quality</Link>
-          <Link className="btn-secondary" href="/topics/sleep">Sleep &amp; recovery</Link>
-          <Link className="btn-secondary" href="/topics">All topics</Link>
-        </div>
-      </section>
+      <section className="mt-14 rounded-3xl border border-zinc-200 bg-zinc-50/60 p-6"><div className="max-w-3xl"><h2 className="text-xl font-semibold">A sensible first target</h2><p className="mt-2 text-sm text-zinc-700">Aim to make the household comfortable for roughly 72 hours without relying on last-minute shopping. Start with water, light, phone power, normal food, basic hygiene and household-specific essentials. Add expensive equipment only when you can clearly explain the problem it solves.</p><div className="mt-4"><Link className="btn-primary" href="/blog/72-hour-household-emergency-kit-uk">Open the 72-hour guide</Link></div></div></section>
+
+      <section className="mt-12 max-w-3xl"><h2 className="text-2xl font-semibold">Where this fits Wild & Well</h2><p className="mt-3 text-zinc-700">Practical resilience connects naturally with water, air quality and food-first nutrition. It gives those existing guides another useful search and buying pathway without turning Wild & Well into a fear-driven preparedness site.</p><div className="mt-5 flex flex-wrap gap-2"><Link className="btn-secondary" href="/topics/water">Water</Link><Link className="btn-secondary" href="/topics/air-quality">Air quality</Link><Link className="btn-secondary" href="/nutrition">Nutrition</Link><Link className="btn-secondary" href="/topics">All topics</Link></div></section>
+      <p className="mt-12 text-xs text-zinc-500">Some links are affiliate links. If you buy via them, Wild & Well may earn a commission at no extra cost to you.</p>
     </main>
   )
 }
