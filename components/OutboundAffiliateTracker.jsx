@@ -53,14 +53,10 @@ export default function OutboundAffiliateTracker() {
         const merchant = extractMerchantFromAwin(href)
         const clickref = extractClickref(href)
         try {
-          trackAffiliateClick({ href, label, merchant, clickref, page_path: pagePath, affiliate_context: affiliateContext })
-        } catch {}
-        try {
-          trackEvent('affiliate_click', {
+          trackAffiliateClick({
             href,
-            host: merchant,
             label,
-            kind: 'awin',
+            merchant,
             clickref,
             page_path: pagePath,
             affiliate_context: affiliateContext,
