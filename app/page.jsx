@@ -144,7 +144,7 @@ export default function HomePage() {
           </div>
           <div className="md:col-span-3 flex flex-wrap gap-3 text-sm">
             <Link href="/editorial-policy" className="underline decoration-dotted">Editorial policy</Link>
-            <Link href="/how-we-test" className="underline decoration-dotted">How we test</Link>
+            <Link href="/how-we-test" className="underline decoration-dotted">How we evaluate products</Link>
             <Link href="/affiliate-disclosure" className="underline decoration-dotted">Affiliate disclosure</Link>
           </div>
         </div>
