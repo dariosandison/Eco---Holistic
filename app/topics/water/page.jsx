@@ -1,5 +1,4 @@
 import Link from 'next/link'
-import ProductPick from '@/components/mdx/ProductPick'
 import TopicEducationDeepDive from '@/components/TopicEducationDeepDive'
 import TopicAtAGlance from '@/components/TopicAtAGlance'
 import TopicFAQ from '@/components/TopicFAQ'
@@ -9,6 +8,15 @@ export const metadata = {
   title: 'Water Topics — Wild & Well',
   description: 'Water filtration for UK homes: understand the main formats, replacement costs and sensible buying criteria before comparing products.',
 }
+
+const guides = [
+  { href: '/blog/water-filter-jug-vs-under-sink-uk', title: 'Jug vs under-sink filter', text: 'Compare convenience, installation, capacity and ongoing filter costs.' },
+  { href: '/blog/under-sink-water-filter-worth-it-uk', title: 'Are under-sink filters worth it?', text: 'A practical decision guide before committing to plumbing changes.' },
+  { href: '/blog/reverse-osmosis-water-filter-worth-it-uk', title: 'Is reverse osmosis worth it?', text: 'Understand RO capability, wastewater, maintenance and when simpler filtration may be enough.' },
+  { href: '/blog/gravity-water-filter-worth-it-uk', title: 'Are gravity filters worth it?', text: 'Compare non-plumbed capacity, replacement filters and resilience use.' },
+  { href: '/blog/water-filter-chlorine-taste-uk', title: 'Filtering chlorine taste', text: 'Start with the actual taste problem and choose filtration accordingly.' },
+  { href: '/blog/water-filter-vs-bottled-water-uk', title: 'Filter vs bottled water', text: 'Compare recurring cost, convenience and waste rather than headline price.' },
+]
 
 export default function Page() {
   const edu = getTopicEdu('water')
@@ -31,9 +39,9 @@ export default function Page() {
           <Link className="btn-secondary" href="/best-water-filters-uk">Full buying guide</Link>
           <Link className="btn-secondary" href="/blog/hard-water-uk-myths-and-comfort">Hard water</Link>
           <Link className="btn-secondary" href="/blog/filter-replacement-costs-uk">Replacement costs</Link>
-          <Link className="btn-secondary" href="/blog/72-hour-water-plan-uk">72-hour water plan</Link>
+          <Link className="btn-secondary" href="/blog/72-hour-household-water-plan-uk">72-hour water plan</Link>
         </div>
-        <div className="mt-4 flex flex-wrap gap-2"><a className="chip" href="#understand">Understand</a><a className="chip" href="#start">Start</a><a className="chip" href="#options">Choose</a><a className="chip" href="#faqs">FAQs</a></div>
+        <div className="mt-4 flex flex-wrap gap-2"><a className="chip" href="#understand">Understand</a><a className="chip" href="#start">Start</a><a className="chip" href="#guides">Popular questions</a><a className="chip" href="#options">Choose</a><a className="chip" href="#faqs">FAQs</a></div>
       </header>
 
       <TopicEducationDeepDive edu={edu} />
@@ -43,6 +51,22 @@ export default function Page() {
         { title: 'Which type suits you?', bullets: ['Portable: commuting, travel and days out.', 'Jug/countertop: simple entry point with no installation.', 'Under-sink: higher convenience if installation suits your home.', 'Gravity: useful capacity without plumbing.'] },
         { title: 'Common mistakes', bullets: ['Buying a system with replacements you will not keep up with.', 'Choosing on vague marketing claims instead of checkable details.', 'Paying for capacity or complexity you do not need.'] },
       ]} />
+
+      <section className="mt-14" id="guides">
+        <div className="max-w-3xl">
+          <h2 className="section-title">Popular UK water-filter questions</h2>
+          <p className="section-subtitle">These focused guides answer the questions people usually have before they are ready to compare products.</p>
+        </div>
+        <div className="mt-6 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+          {guides.map((guide) => (
+            <Link key={guide.href} href={guide.href} className="card transition-shadow hover:shadow-sm">
+              <h3 className="font-semibold">{guide.title}</h3>
+              <p className="mt-2 text-sm text-zinc-600">{guide.text}</p>
+              <p className="mt-3 text-sm font-semibold">Read guide →</p>
+            </Link>
+          ))}
+        </div>
+      </section>
 
       <section className="mt-14" id="options">
         <div className="max-w-3xl">
@@ -58,7 +82,7 @@ export default function Page() {
         <div className="mt-8 rounded-3xl border border-zinc-200 bg-zinc-50/60 p-6">
           <h3 className="text-xl font-semibold">Preparing for a short water interruption?</h3>
           <p className="mt-2 text-sm text-zinc-700">Everyday filtration and emergency water planning are different jobs. Stored drinking water comes first for short disruptions.</p>
-          <div className="mt-4 flex flex-wrap gap-2"><Link className="btn-primary" href="/blog/72-hour-water-plan-uk">Build a 72-hour water plan</Link><Link className="btn-secondary" href="/topics/resilience">Practical resilience</Link></div>
+          <div className="mt-4 flex flex-wrap gap-2"><Link className="btn-primary" href="/blog/72-hour-household-water-plan-uk">Build a 72-hour water plan</Link><Link className="btn-secondary" href="/topics/resilience">Practical resilience</Link></div>
         </div>
       </section>
 
