@@ -20,7 +20,6 @@ const ROUTES = [
 export default function Page() {
   const picks = AWIN_PICKS.movement || []
   const groupOrder = ['Barefoot footwear', 'Home strength basics', 'Tracking & feedback', 'Other']
-
   const groups = groupOrder
     .map((g) => ({ title: g, id: slugify(g), items: picks.filter((p) => p.group === g) }))
     .filter((g) => g.items.length)
@@ -30,10 +29,7 @@ export default function Page() {
       <header className="max-w-3xl">
         <p className="text-sm font-semibold uppercase tracking-[0.16em] text-zinc-500">Low-friction movement</p>
         <h1 className="mt-2 text-4xl font-bold">Movement gear: buy only what helps you move more</h1>
-        <p className="mt-3 text-zinc-700">
-          The goal is not more equipment. Start with the habit you want to make easier — walking, foot-strength work, home strength or useful tracking — then choose the simplest tool that removes friction.
-        </p>
-
+        <p className="mt-3 text-zinc-700">The goal is not more equipment. Start with the habit you want to make easier — walking, foot-strength work, home strength or useful tracking — then choose the simplest tool that removes friction.</p>
         <div className="mt-5 flex flex-wrap gap-2">
           <Link className="btn-primary" href="/topics/movement">Movement basics</Link>
           <Link className="btn-secondary" href="/topics/foot-strength">Foot-strength guide</Link>
@@ -71,7 +67,6 @@ export default function Page() {
             </div>
             <Link href="/topics/movement" className="text-sm font-semibold text-zinc-700 underline underline-offset-4">Read movement basics</Link>
           </div>
-
           <div className="mt-6 grid gap-4 md:grid-cols-2">
             {g.items.map((p) => (
               <ProductPick
@@ -80,6 +75,7 @@ export default function Page() {
                 badge={p.badge}
                 description={p.description}
                 bullets={p.bullets}
+                trackingContext={`movement_shortlist_${g.id}`}
                 links={[
                   { label: `Check ${p.badge || p.advertiser} price`, merchant: 'awin', href: p.awin, variant: 'primary' },
                   { label: 'Movement basics', merchant: 'internal', href: '/topics/movement', variant: 'ghost' },
