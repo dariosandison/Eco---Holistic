@@ -16,6 +16,7 @@ const BUYING_PATHS = [
     problem: 'Taste, convenience, hard-water comfort or backup filtration.',
     learn: '/topics/water',
     compare: '/water-filtration-shortlist-uk',
+    extra: { label: 'Shower filters for hard water', href: '/best-shower-filters-uk-hard-water' },
   },
   {
     title: 'Cleaner indoor air',
@@ -38,8 +39,9 @@ const BUYING_PATHS = [
   {
     title: 'Lower-tox home',
     problem: 'High-use household swaps across laundry, cookware, showering and bathroom basics.',
-    learn: '/topics/healthy-home',
+    learn: '/healthy-home',
     compare: '/healthy-home/low-tox-shortlist',
+    extra: { label: 'Fragrance-free laundry', href: '/best-fragrance-free-laundry-detergents-uk' },
   },
   {
     title: 'Movement that sticks',
@@ -100,6 +102,11 @@ export default function Page() {
                 <Link href={path.learn} className="btn-secondary">Learn first</Link>
                 <Link href={path.compare} className="btn-primary">See the best route</Link>
               </div>
+              {path.extra && (
+                <Link href={path.extra.href} className="mt-4 inline-block text-sm font-semibold text-zinc-700 underline underline-offset-4">
+                  {path.extra.label} →
+                </Link>
+              )}
             </article>
           ))}
         </div>
