@@ -30,9 +30,7 @@ export default function Page() {
       <header className="max-w-3xl">
         <p className="text-sm font-semibold uppercase tracking-[0.16em] text-zinc-500">Sleep buying guide</p>
         <h1 className="mt-2 text-4xl font-bold">Fix the sleep problem before buying the sleep product</h1>
-        <p className="mt-3 text-zinc-700">
-          Light, timing, room temperature and routine still come first. If those basics are reasonable, choose one physical upgrade that matches the problem instead of stacking products.
-        </p>
+        <p className="mt-3 text-zinc-700">Light, timing, room temperature and routine still come first. If those basics are reasonable, choose one physical upgrade that matches the problem instead of stacking products.</p>
         <div className="mt-5 flex flex-wrap gap-2">
           <Link className="btn-primary" href="/topics/sleep">Sleep basics</Link>
           <Link className="btn-secondary" href="/topics/recovery">Recovery basics</Link>
@@ -78,6 +76,7 @@ export default function Page() {
                 badge={p.badge}
                 description={p.description}
                 bullets={p.bullets}
+                trackingContext={`sleep_shortlist_${g.id}`}
                 links={[
                   { label: `Check ${p.badge || p.advertiser} price`, merchant: 'awin', href: p.awin, variant: 'primary' },
                   { label: 'Read sleep basics', merchant: 'internal', href: '/topics/sleep', variant: 'ghost' },
