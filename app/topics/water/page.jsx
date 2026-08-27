@@ -39,7 +39,7 @@ export default function Page() {
           <Link className="btn-secondary" href="/best-water-filters-uk">Full buying guide</Link>
           <Link className="btn-secondary" href="/blog/hard-water-uk-myths-and-comfort">Hard water</Link>
           <Link className="btn-secondary" href="/blog/filter-replacement-costs-uk">Replacement costs</Link>
-          <Link className="btn-secondary" href="/blog/72-hour-household-water-plan-uk">72-hour water plan</Link>
+          <Link className="btn-secondary" href="/tools/72-hour-water-calculator">72-hour water calculator</Link>
         </div>
         <div className="mt-4 flex flex-wrap gap-2"><a className="chip" href="#understand">Understand</a><a className="chip" href="#start">Start</a><a className="chip" href="#guides">Popular questions</a><a className="chip" href="#options">Choose</a><a className="chip" href="#faqs">FAQs</a></div>
       </header>
@@ -82,7 +82,7 @@ export default function Page() {
         <div className="mt-8 rounded-3xl border border-zinc-200 bg-zinc-50/60 p-6">
           <h3 className="text-xl font-semibold">Preparing for a short water interruption?</h3>
           <p className="mt-2 text-sm text-zinc-700">Everyday filtration and emergency water planning are different jobs. Stored drinking water comes first for short disruptions.</p>
-          <div className="mt-4 flex flex-wrap gap-2"><Link className="btn-primary" href="/blog/72-hour-household-water-plan-uk">Build a 72-hour water plan</Link><Link className="btn-secondary" href="/topics/resilience">Practical resilience</Link></div>
+          <div className="mt-4 flex flex-wrap gap-2"><Link className="btn-primary" href="/tools/72-hour-water-calculator">Calculate your water quantity</Link><Link className="btn-secondary" href="/blog/72-hour-household-water-plan-uk">Read the water plan</Link><Link className="btn-secondary" href="/topics/resilience">Practical resilience</Link></div>
         </div>
       </section>
 
