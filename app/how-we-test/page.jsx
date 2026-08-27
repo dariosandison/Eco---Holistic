@@ -1,15 +1,15 @@
 import Link from 'next/link'
 
 export const metadata = {
-  title: 'How We Test — Wild & Well',
-  description: 'Our repeatable process for choosing and reviewing low-tox, natural wellness, and holistic health products.',
+  title: 'How We Evaluate Products — Wild & Well',
+  description: 'How Wild & Well researches and evaluates products, what we do not claim to have tested, and how we separate editorial judgement from affiliate income.',
 }
 
 function Section({ title, children }) {
   return (
     <section className="mt-10">
       <h2 className="text-2xl font-semibold">{title}</h2>
-      <div className="mt-3 text-zinc-700 space-y-3">{children}</div>
+      <div className="mt-3 space-y-3 text-zinc-700">{children}</div>
     </section>
   )
 }
@@ -17,86 +17,84 @@ function Section({ title, children }) {
 export default function HowWeTest() {
   return (
     <main className="mx-auto max-w-3xl px-4 py-16">
-      <h1 className="text-4xl font-bold">How we test (and how we choose)</h1>
+      <h1 className="text-4xl font-bold">How we evaluate products</h1>
       <p className="mt-3 text-zinc-700">
-        Wild &amp; Well is built for people who want calmer decisions: fewer products, clearer trade-offs, and recommendations you can trust.
+        Wild &amp; Well is designed to make buying decisions calmer: define the problem first, compare the practical trade-offs, and only recommend a product where it has a clear job to do.
       </p>
 
       <div className="mt-8 rounded-2xl border bg-white p-6 shadow-sm">
-        <h2 className="text-xl font-semibold">The short version</h2>
-        <ol className="mt-3 list-decimal pl-6 text-sm text-zinc-700 space-y-2">
-          <li><strong>Define the job:</strong> what problem this product solves (and what it can’t).</li>
-          <li><strong>Screen for dealbreakers:</strong> hidden ongoing costs, vague claims, poor availability.</li>
-          <li><strong>Compare alternatives:</strong> price, usability, and replacement parts/filters.</li>
-          <li><strong>Choose a shortlist:</strong> a best‑overall option, a good‑value option, and a few fit‑for‑purpose alternatives.</li>
-          <li><strong>Update:</strong> we revise pages as products change or better options appear.</li>
-        </ol>
+        <h2 className="text-xl font-semibold">The important distinction</h2>
+        <p className="mt-3 text-sm text-zinc-700">
+          Unless a page explicitly says otherwise, our product guides are based on editorial research rather than hands-on laboratory or long-term product testing. We do not present manufacturer claims as our own test results.
+        </p>
+        <p className="mt-3 text-sm text-zinc-700">
+          We compare published specifications, stated testing or certification details where relevant, UK availability, replacement costs, warranties, maintenance requirements and practical fit for the use case.
+        </p>
         <div className="mt-4 flex flex-wrap gap-2">
           <Link className="btn-secondary" href="/editorial-policy">Editorial policy</Link>
           <Link className="btn-secondary" href="/affiliate-disclosure">Affiliate disclosure</Link>
         </div>
-        <p className="mt-4 text-xs text-zinc-500">Last updated: January 25, 2026</p>
+        <p className="mt-4 text-xs text-zinc-500">Last updated: August 27, 2026</p>
       </div>
 
-      <Section title="What “testing” means for us">
-        <p>
-          We’re not a laboratory. Our goal is to answer the questions real people ask before they spend money:
-          <strong> will it work in a normal UK home, is it easy to live with, and is it worth the ongoing cost?</strong>
-        </p>
-        <p>
-          When we can’t test every model, we use a consistent evaluation rubric (below) and prioritise brands with transparent specs and replacement parts.
-        </p>
+      <Section title="Our evaluation process">
+        <ol className="list-decimal space-y-2 pl-6">
+          <li><strong>Define the job:</strong> what problem is the product intended to solve, and what is outside its scope?</li>
+          <li><strong>Check the evidence:</strong> look for specific specifications, standards, testing language and limitations rather than broad marketing claims.</li>
+          <li><strong>Check ownership cost:</strong> filters, cartridges, refills, energy use, servicing and other recurring costs.</li>
+          <li><strong>Check UK practicality:</strong> availability, replacement parts, installation requirements, warranty and likely ease of use.</li>
+          <li><strong>Compare alternatives:</strong> including the option of buying nothing, using a simpler product, or solving the problem upstream.</li>
+          <li><strong>Maintain the shortlist:</strong> remove stale products and update routes as better-fitting options or partner availability changes.</li>
+        </ol>
       </Section>
 
-      <Section title="Our evaluation rubric">
-        <ul className="list-disc pl-6 space-y-2">
-          <li><strong>Performance:</strong> does it do the job it claims to do?</li>
-          <li><strong>Safety &amp; transparency:</strong> clear materials/ingredients, credible certifications where relevant.</li>
-          <li><strong>Ongoing costs:</strong> filters, refills, consumables, and realistic replacement schedules.</li>
-          <li><strong>Ease:</strong> setup, cleaning, daily use, and whether you’ll actually keep using it.</li>
-          <li><strong>Value:</strong> cost vs what you get (including durability and warranty).</li>
-        </ul>
-      </Section>
-
-      <Section title="Category-specific checks">
+      <Section title="What we look for by category">
         <h3 className="text-lg font-semibold">Air purifiers</h3>
-        <ul className="list-disc pl-6 space-y-1">
-          <li>Room coverage / CADR suitability (we prioritise “right size for the room”).</li>
-          <li>Filter type (HEPA + carbon for odours) and replacement availability/cost.</li>
-          <li>Noise (especially for bedrooms) and auto/night modes.</li>
+        <ul className="list-disc space-y-1 pl-6">
+          <li>Room suitability and meaningful airflow or CADR information where supplied.</li>
+          <li>Particle filtration, carbon stage where odours matter, and replacement-filter availability.</li>
+          <li>Noise at useful operating speeds and realistic ongoing cost.</li>
         </ul>
 
-        <h3 className="text-lg font-semibold mt-6">Water filters</h3>
-        <ul className="list-disc pl-6 space-y-1">
-          <li>Type fit: jug vs under-sink vs countertop gravity.</li>
-          <li>Replacement filter costs (often the hidden expense).</li>
-          <li>Specificity of claims: “what it removes” vs vague marketing.</li>
+        <h3 className="mt-6 text-lg font-semibold">Water filters</h3>
+        <ul className="list-disc space-y-1 pl-6">
+          <li>Whether the format fits the job: portable, jug, countertop, under-sink, RO or gravity.</li>
+          <li>Specific reduction claims and any relevant testing or certification information.</li>
+          <li>Replacement-filter cost, availability and maintenance burden.</li>
         </ul>
 
-        <h3 className="text-lg font-semibold mt-6">Laundry &amp; cleaning</h3>
-        <ul className="list-disc pl-6 space-y-1">
-          <li>Fragrance-free options (for sensitive households).</li>
-          <li>Concentration and dosing (residue and overdosing are common problems).</li>
-          <li>Availability in the UK (easy to repurchase matters).</li>
+        <h3 className="mt-6 text-lg font-semibold">Dehumidifiers</h3>
+        <ul className="list-disc space-y-1 pl-6">
+          <li>Whether moisture is genuinely the problem rather than particles or ventilation alone.</li>
+          <li>Capacity, room/use case, noise, drainage options and power consumption.</li>
+          <li>Whether a smaller unit or a non-product fix could solve the problem first.</li>
         </ul>
 
-        <h3 className="text-lg font-semibold mt-6">Supplements &amp; natural remedies</h3>
-        <ul className="list-disc pl-6 space-y-1">
-          <li>We focus on general education and common use cases, not medical treatment.</li>
-          <li>We prefer clear labelling, reputable manufacturing, and conservative claims.</li>
-          <li>We always advise checking with a clinician if you’re pregnant, on medication, or managing a condition.</li>
+        <h3 className="mt-6 text-lg font-semibold">Sleep, movement and nutrition products</h3>
+        <ul className="list-disc space-y-1 pl-6">
+          <li>Products are secondary to the basic behaviour or environment they are meant to support.</li>
+          <li>We avoid presenting wellness products as treatments for medical conditions.</li>
+          <li>Claims are kept conservative and tied to the specific use case described on the page.</li>
         </ul>
       </Section>
 
-      <Section title="Updates, corrections, and feedback">
+      <Section title="Affiliate relationships">
         <p>
-          If you spot an error, a broken link, or a better option, tell us via the <Link className="underline" href="/contact">contact page</Link>.
-          We keep pages current by revisiting key “money pages” regularly (especially seasonal topics like allergies and winter humidity).
+          Some merchants pay Wild &amp; Well a commission if a reader buys after following an affiliate link. That commercial relationship does not change the evaluation criteria above.
+        </p>
+        <p>
+          If there is no suitable partner product for a problem, we would rather link to a free solution, a non-commercial guide or no product at all than force an irrelevant recommendation.
+        </p>
+      </Section>
+
+      <Section title="Corrections and updates">
+        <p>
+          Products, prices and specifications change. If you spot an error, broken link or outdated claim, use the <Link className="underline" href="/contact">contact page</Link> and include the page URL.
         </p>
       </Section>
 
       <p className="mt-12 text-xs text-zinc-500">
-        Some links are affiliate links. If you buy via them, we earn a commission. We never accept paid placements in reviews.
+        Some links are affiliate links. If you buy via them, Wild &amp; Well may earn a commission at no extra cost to you.
       </p>
     </main>
   )
