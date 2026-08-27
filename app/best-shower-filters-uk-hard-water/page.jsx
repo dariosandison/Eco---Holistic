@@ -1,190 +1,131 @@
 import Link from 'next/link'
 import StructuredData from '@/components/StructuredData'
-import { PHASE22_UPDATED, PHASE22_UPDATED_LABEL, PHASE22_PREV_UPDATED_LABEL, PHASE22_DEFAULT_UPDATE_CHANGES } from '@/lib/phase22'
 import ProductPick from '@/components/mdx/ProductPick'
-import { amazonSearchUrl } from '@/lib/amazon'
-import EducationFirstCallout from '@/components/EducationFirstCallout'
-import MoneyPageEducationBlock from '@/components/MoneyPageEducationBlock'
-import { getMoneyPageEdu } from '@/lib/moneyPageEdu'
-import { getTop10Meta } from '@/data/top10Meta'
-import MoneyPageQuickCompare from '@/components/MoneyPageQuickCompare'
-import MoneyPageFAQ from '@/components/MoneyPageFAQ'
-import MoneyPageNextLinks from '@/components/MoneyPageNextLinks'
-import MoneyPageDecisionBox from '@/components/MoneyPageDecisionBox'
-import MoneyPageUpdateLog from '@/components/MoneyPageUpdateLog'
-import BestForBadges from '@/components/BestForBadges'
-import FAQSection from '@/components/FAQSection'
-import MoneyPageTrustBlock from '@/components/MoneyPageTrustBlock'
-import MoneyPageRoutes from '@/components/MoneyPageRoutes'
-
-
-
+import { AWIN_PICKS } from '@/data/awinPicks'
 
 export const metadata = {
-  title: 'Shower Filters for UK Hard Water: shortlist',
-  description: 'Shortlisted shower filters for hard-water UK homes — what they can and can’t do, plus buyer shortlist.',
+  title: 'Best Shower Filters UK for Hard Water — What They Can & Can’t Do',
+  description: 'A practical UK shower-filter guide for hard-water homes: understand the limits, compare a tracked partner option, and avoid confusing filtration with water softening.',
 }
 
-const UPDATE_CHANGES = PHASE22_DEFAULT_UPDATE_CHANGES
-const DECISION_RULES = [
-  { if: 'Your skin/hair feels worse after showers', then: 'Try a well‑reviewed shower filter first and track results for 2–4 weeks.' },
-  { if: 'You have low water pressure', then: 'Choose a filter designed to maintain flow and avoid overly restrictive heads.' },
-  { if: 'Limescale is the main issue', then: 'A filter may help a bit, but hard‑water scale is mostly a plumbing/softener problem.' },
-]
+const showerPick = (AWIN_PICKS.water || []).find((p) => p.clickref === 'ww_shower_filter_doulton_shower_head_filter')
 
-const PICKS = [
-  {
-    title: 'Hello Klean shower filter',
-    badge: 'Popular option',
-    desc: 'A widely discussed shower filter brand. Good if you want simple replacements.',
-    query: 'Hello Klean shower filter',
-    bullets: ['Great for: simple setup', 'Check cartridge replacement cost', 'Don’t expect miracles on extreme hard water'],
-  },
-  {
-    title: 'Magichome shower filter',
-    badge: 'Budget',
-    desc: 'Budget-friendly option often compared on UK lists.',
-    query: 'Magichome shower filter hard water',
-    bullets: ['Great for: budget trials', 'Check replacement cartridges'],
-  },
-  {
-    title: 'Philips shower filter',
-    badge: 'Mainstream',
-    desc: 'Mainstream brand option with broad availability.',
-    query: 'Philips shower filter',
-    bullets: ['Great for: easy repurchase', 'Check flow rate'],
-  },
-  {
-    title: 'Universal replacement cartridges (multi-pack)',
-    badge: 'Save long-term',
-    desc: 'Cartridges are the ongoing cost — buying multipacks can reduce cost per change.',
-    query: 'shower filter replacement cartridge multi pack',
-    bullets: ['Compare compatibility with your filter model', 'Set reminders for replacements'],
-  },
+const checks = [
+  ['What is the actual problem?', 'If limescale on taps and screens is the main frustration, a shower filter is not the same thing as a water softener.'],
+  ['What does the cartridge target?', 'Check the manufacturer’s stated reduction claims rather than assuming every shower filter tackles the same substances.'],
+  ['What will replacements cost?', 'A low purchase price can be misleading if cartridges are expensive or need frequent replacement.'],
 ]
 
 export default function Page() {
-    
-  const edu = getMoneyPageEdu('best-shower-filters-uk-hard-water')
-
-  const { bestFor, routes, faqs } = getTop10Meta('best-shower-filters-uk-hard-water')
-
-const itemList = PICKS.map((p, i) => ({
-    '@type': 'ListItem',
-    position: i + 1,
-    name: p.title,
-    url: amazonSearchUrl(p.query),
-  }))
-
   const ld = {
     '@context': 'https://schema.org',
     '@type': 'Article',
-    headline: 'Shower Filters for UK Hard Water: shortlist',
-    dateModified: PHASE22_UPDATED,
+    headline: 'Best shower filters UK for hard water: what they can and can’t do',
+    dateModified: '2026-08-27',
     datePublished: '2026-01-25',
-    mainEntity: { '@type': 'ItemList', itemListElement: itemList },
   }
 
   return (
     <main className="mx-auto max-w-6xl px-4 py-16">
       <StructuredData data={ld} />
 
-      <header>
-        <div className="max-w-3xl">
-        <h1 className="text-4xl font-bold">Shower filters for UK hard water: shortlist</h1>
+      <header className="max-w-3xl">
+        <p className="text-sm font-semibold uppercase tracking-[0.16em] text-zinc-500">UK buying guide</p>
+        <h1 className="mt-2 text-4xl font-bold">Shower filters for UK hard water: know the limit before you buy</h1>
         <p className="mt-3 text-zinc-700">
-          Shower filters can help with feel and chlorine-related dryness for some people — but they won’t “soften” water like a full home softener.
-
+          A shower filter may be useful when you specifically want shower-water filtration, but it should not be sold as a cure for hard water. If your main problem is mineral scale, the solution is usually further upstream.
         </p>
-
-        <BestForBadges items={bestFor} />
-
-                </div>
-
-        {/* Hero image */}
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          src="/images/photography/water.jpg"
-          alt=""
-          className="mt-6 h-[260px] w-full rounded-3xl border border-zinc-200 object-cover shadow-sm md:h-[380px]"
-          loading="lazy"
-          decoding="async"
-        />
-
-        <div className="max-w-3xl">
-<EducationFirstCallout topicHref="/topics/water" topicLabel="Water topic" insightHref="/blog/water-filter-buying-guide-uk" insightLabel="Water filter buying guide" />
-        <div className="mt-4 flex flex-wrap gap-2">
-          <Link className="btn-secondary" href="/topics/fragrance-free">Sensitive skin</Link>
-          <Link className="btn-secondary" href="/shopping-list">Free shopping list</Link>
+        <div className="mt-5 flex flex-wrap gap-2">
+          {showerPick && <a className="btn-primary" href="#partner-option">See the tracked partner option</a>}
+          <Link className="btn-secondary" href="/blog/hard-water-uk-myths-and-comfort">Understand hard water first</Link>
+          <Link className="btn-secondary" href="/water-filtration-shortlist-uk">Compare water filtration</Link>
         </div>
-        <p className="mt-4 text-xs text-zinc-500">Last updated: {PHASE22_UPDATED_LABEL} · Wild & Well Editorial Team</p>
-              </div>
+        <p className="mt-3 text-xs text-zinc-500">Partner links may earn Wild & Well a commission at no extra cost to you. Check current specifications and replacement guidance before buying.</p>
       </header>
 
-      
-      <MoneyPageEducationBlock edu={edu} />
+      <section className="mt-10 grid gap-4 md:grid-cols-3">
+        {checks.map(([title, text]) => (
+          <div key={title} className="rounded-2xl border border-zinc-200 bg-white p-5 shadow-sm">
+            <h2 className="font-semibold text-zinc-900">{title}</h2>
+            <p className="mt-2 text-sm text-zinc-600">{text}</p>
+          </div>
+        ))}
+      </section>
 
-      <MoneyPageDecisionBox rules={DECISION_RULES} />
-      <MoneyPageQuickCompare picks={PICKS} />
-      <MoneyPageTrustBlock />
-      <MoneyPageRoutes routes={routes} />
-
-      <MoneyPageQuickCompare picks={PICKS} />
-      <MoneyPageTrustBlock />
-      <MoneyPageRoutes routes={routes} />
-<section className="mt-12 grid gap-4 md:grid-cols-3">
-        <div className="card">
-          <h2 className="text-lg font-semibold">What they can do</h2>
-          <ul className="mt-3 list-disc pl-6 text-sm text-zinc-700 space-y-2">
-            <li>Reduce chlorine and some impurities (varies by cartridge).</li>
-            <li>Improve hair/skin feel for some households.</li>
-          </ul>
-        </div>
-        <div className="card">
-          <h2 className="text-lg font-semibold">What they can’t do</h2>
-          <ul className="mt-3 list-disc pl-6 text-sm text-zinc-700 space-y-2">
-            <li>Fully soften hard water like a whole-home system.</li>
-            <li>Replace good ventilation for damp bathrooms.</li>
-          </ul>
-        </div>
-        <div className="card">
-          <h2 className="text-lg font-semibold">Hidden cost</h2>
-          <p className="mt-3 text-sm text-zinc-700">Cartridges. Before buying, check the price and replacement schedule.</p>
+      <section className="mt-12 panel">
+        <h2 className="text-xl font-semibold">The important distinction: filtration vs softening</h2>
+        <div className="mt-4 grid gap-5 md:grid-cols-2">
+          <div>
+            <h3 className="font-semibold">A shower filter</h3>
+            <p className="mt-2 text-sm text-zinc-700">Treats water at the shower using a replaceable filter medium. Performance depends on the cartridge and the substances it is designed to reduce.</p>
+          </div>
+          <div>
+            <h3 className="font-semibold">A water softener</h3>
+            <p className="mt-2 text-sm text-zinc-700">Addresses hardness minerals for the household water supply. If visible limescale is your central problem, investigate softening rather than expecting a shower cartridge to do the same job.</p>
+          </div>
         </div>
       </section>
 
-      <section className="mt-14">
-        <h2 className="text-2xl font-semibold">Shortlist (buyer-friendly)</h2>
-        <p className="mt-2 text-sm text-zinc-600">Curated searches so you can compare price and replacement cartridges.</p>
-        <div className="mt-6 grid gap-4 md:grid-cols-2">
-          {PICKS.map((p) => (
+      {showerPick ? (
+        <section className="mt-14 scroll-mt-28" id="partner-option">
+          <div className="max-w-3xl">
+            <p className="text-sm font-semibold uppercase tracking-[0.16em] text-zinc-500">Wild & Well partner option</p>
+            <h2 className="mt-2 text-2xl font-semibold">A direct option to compare</h2>
+            <p className="mt-2 text-sm text-zinc-700">Rather than sending you to a generic marketplace search, this is a current tracked partner option already available through Wild & Well. Compare its stated filtration performance, compatibility and replacement costs against your actual reason for buying.</p>
+          </div>
+          <div className="mt-6 max-w-2xl">
             <ProductPick
-              key={p.title}
-              title={p.title}
-              badge={p.badge}
-              description={p.desc}
-              href={amazonSearchUrl(p.query)}
-              bullets={p.bullets}
+              title={showerPick.product}
+              badge={showerPick.badge}
+              description="A direct shower-filter option from a Wild & Well water-filtration partner. Best considered when shower-water filtration — not whole-home softening — is the goal."
+              bullets={[
+                'Check the manufacturer’s current reduction claims',
+                'Confirm fit and water-pressure requirements',
+                'Price the replacement filter before committing',
+              ]}
+              links={[
+                { label: `Check ${showerPick.badge || showerPick.advertiser} price`, merchant: 'awin', href: showerPick.awin, variant: 'primary' },
+                { label: 'Compare all water filtration routes', merchant: 'internal', href: '/water-filtration-shortlist-uk', variant: 'ghost' },
+              ]}
             />
-          ))}
-        </div>
+          </div>
+        </section>
+      ) : (
+        <section className="mt-14 rounded-3xl border border-zinc-200 bg-zinc-50 p-6">
+          <h2 className="text-xl font-semibold">Compare the wider water shortlist</h2>
+          <p className="mt-2 text-sm text-zinc-700">No shower-specific partner option is currently loaded, so use the water shortlist rather than an untracked marketplace search.</p>
+          <Link className="btn-primary mt-4 inline-flex" href="/water-filtration-shortlist-uk">Compare water filtration</Link>
+        </section>
+      )}
 
-        <div className="mt-8 flex flex-wrap gap-2">
-          <Link className="btn-primary" href="/topics/fragrance-free">Go to Sensitive household →</Link>
-          <Link className="btn-secondary" href="/shopping-list">Get the free shopping list</Link>
+      <section className="mt-14 grid gap-4 md:grid-cols-2">
+        <div className="card">
+          <h2 className="text-lg font-semibold">Choose a shower filter when…</h2>
+          <ul className="mt-3 list-disc space-y-2 pl-5 text-sm text-zinc-700">
+            <li>You have a clear shower-water filtration goal.</li>
+            <li>You understand what the chosen cartridge is designed to reduce.</li>
+            <li>You are comfortable with the ongoing replacement cost.</li>
+          </ul>
+        </div>
+        <div className="card">
+          <h2 className="text-lg font-semibold">Look elsewhere when…</h2>
+          <ul className="mt-3 list-disc space-y-2 pl-5 text-sm text-zinc-700">
+            <li>Your priority is stopping limescale throughout the home.</li>
+            <li>Your concern is damp or bathroom ventilation rather than water quality.</li>
+            <li>You cannot verify what the filter actually targets.</li>
+          </ul>
         </div>
       </section>
 
-      <FAQSection faqs={faqs} />
-
-      <MoneyPageUpdateLog updatedLabel={PHASE22_UPDATED_LABEL} prevUpdatedLabel={PHASE22_PREV_UPDATED_LABEL} changes={UPDATE_CHANGES} />
-      <MoneyPageNextLinks slug="best-shower-filters-uk-hard-water" />
-
-      
-      <MoneyPageFAQ slug="best-shower-filters-uk-hard-water" />
-<p className="mt-12 text-xs text-zinc-500">
-        Some links are affiliate links. If you buy via them, we earn a commission.
-      </p>
+      <section className="mt-14 rounded-3xl border border-zinc-200 bg-zinc-50/60 p-6">
+        <h2 className="text-xl font-semibold">Not sure a shower filter is the right purchase?</h2>
+        <p className="mt-2 text-sm text-zinc-700">Start with the hard-water explainer, then use the wider filtration shortlist if your concern is drinking water or household resilience instead.</p>
+        <div className="mt-4 flex flex-wrap gap-2">
+          <Link className="btn-primary" href="/blog/hard-water-uk-myths-and-comfort">Read the hard-water guide</Link>
+          <Link className="btn-secondary" href="/water-filtration-shortlist-uk">Water filtration shortlist</Link>
+          <Link className="btn-secondary" href="/topics/resilience">Household resilience</Link>
+        </div>
+      </section>
     </main>
   )
 }
