@@ -17,6 +17,14 @@ function extractMerchantFromAwin(href) {
   }
 }
 
+function extractClickref(href) {
+  try {
+    return new URL(href).searchParams.get('clickref') || ''
+  } catch {
+    return ''
+  }
+}
+
 function isExternalHttpLink(href) {
   return href.startsWith('http://') || href.startsWith('https://')
 }
@@ -30,35 +38,62 @@ export default function OutboundAffiliateTracker() {
       const href = a.getAttribute('href') || ''
       if (!href) return
 
+      const pagePath = window.location.pathname || '/'
+      const label = (a.textContent || '').trim().slice(0, 120)
+      const affiliateContext = a.getAttribute('data-affiliate-context') || ''
+
       if (href.startsWith('mailto:')) {
         try {
-          trackEvent('mailto_click', { href })
+          trackEvent('mailto_click', { href, page_path: pagePath })
         } catch {}
         return
       }
 
-      // Track Awin affiliate links (used for non-Amazon merchants like ZeroWater).
       if (href.includes('awin1.com/cread.php')) {
-        const label = (a.textContent || '').trim().slice(0, 120)
         const merchant = extractMerchantFromAwin(href)
+        const clickref = extractClickref(href)
         try {
-          trackAffiliateClick({ href, label, merchant })
+          trackAffiliateClick({ href, label, merchant, clickref, page_path: pagePath, affiliate_context: affiliateContext })
         } catch {}
         try {
-          trackEvent('outbound_click', { href, host: merchant, label, kind: 'awin' })
+          trackEvent('affiliate_click', {
+            href,
+            host: merchant,
+            label,
+            kind: 'awin',
+            clickref,
+            page_path: pagePath,
+            affiliate_context: affiliateContext,
+          })
+        } catch {}
+        try {
+          trackEvent('outbound_click', {
+            href,
+            host: merchant,
+            label,
+            kind: 'awin',
+            clickref,
+            page_path: pagePath,
+            affiliate_context: affiliateContext,
+          })
         } catch {}
         return
       }
 
-      // Track any external http(s) click (Amazon, brand sites, evidence links)
       if (isExternalHttpLink(href)) {
         try {
           const u = new URL(href)
           const destHost = (u.hostname || '').replace(/^www[.]/, '')
           const currentHost = (window.location.hostname || '').replace(/^www[.]/, '')
           if (destHost && destHost !== currentHost) {
-            const label = (a.textContent || '').trim().slice(0, 120)
-            trackEvent('outbound_click', { href, host: destHost, label, kind: 'external' })
+            trackEvent('outbound_click', {
+              href,
+              host: destHost,
+              label,
+              kind: 'external',
+              page_path: pagePath,
+              affiliate_context: affiliateContext,
+            })
           }
         } catch {}
       }
