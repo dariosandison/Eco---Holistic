@@ -22,7 +22,7 @@ export default function Page() {
     '@type': 'Article',
     headline: 'Reverse osmosis water filter (UK): Waterdrop 600 GPD Fast Flow RO (G3P600)',
     datePublished: '2026-02-13',
-    dateModified: '2026-08-27',
+    dateModified: '2026-08-28',
   }
 
   return (
@@ -44,10 +44,11 @@ export default function Page() {
           <EducationFirstCallout topicHref="/topics/water" topicLabel="Water" insightHref="/blog/water-filter-buying-guide-uk" insightLabel="Water filter buying guide" />
           <div className="mt-5 flex flex-wrap gap-2">
             <Link className="btn-secondary" href="/topics/water">Water basics</Link>
-            <Link className="btn-secondary" href="/water-filtration-shortlist-uk">Compare filtration options</Link>
+            <Link className="btn-secondary" href="/water-filtration-shortlist-uk#under-sink-ro">Compare under-sink &amp; RO</Link>
+            <Link className="btn-secondary" href="/tools/water-filter-running-cost-calculator">Compare running costs</Link>
             <Link className="btn-secondary" href="/affiliate-disclosure">Affiliate disclosure</Link>
           </div>
-          <p className="mt-3 text-xs text-zinc-500">Last updated: August 27, 2026 · Wild &amp; Well Editorial Team</p>
+          <p className="mt-3 text-xs text-zinc-500">Last updated: August 28, 2026 · Wild &amp; Well Editorial Team</p>
         </div>
       </header>
 
@@ -61,6 +62,9 @@ export default function Page() {
           <li><strong>Water use:</strong> understand the system's wastewater ratio and whether that trade-off is acceptable to you.</li>
           <li><strong>Simpler alternatives:</strong> under-sink ceramic, countertop and gravity systems may solve the same household problem with less complexity.</li>
         </ul>
+        <p className="mt-3 text-sm text-zinc-600">
+          If you have not decided that RO is the right format yet, start with the <Link className="font-medium underline" href="/best-water-filters-uk">main Water Filters UK guide</Link> rather than choosing a system first.
+        </p>
       </section>
 
       <section className="mt-12">
@@ -79,7 +83,7 @@ export default function Page() {
             trackingContext="waterdrop_g3p600_guide"
             links={[
               { label: 'Check Waterdrop price', merchant: 'awin', href: FEATURED_AWIN, variant: 'primary' },
-              { label: 'Compare simpler filtration routes', merchant: 'internal', href: '/water-filtration-shortlist-uk', variant: 'ghost' },
+              { label: 'Compare under-sink and RO options', merchant: 'internal', href: '/water-filtration-shortlist-uk#under-sink-ro', variant: 'ghost' },
             ]}
           />
         </div>
