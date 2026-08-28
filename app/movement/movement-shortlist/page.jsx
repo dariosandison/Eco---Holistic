@@ -69,22 +69,22 @@ export default function Page() {
           </div>
           <div className="mt-6 grid gap-4 md:grid-cols-2">
             {g.items.map((p) => (
-              <ProductPick
-                key={p.clickref}
-                title={p.product}
-                badge={p.badge}
-                description={p.description}
-                bullets={p.bullets}
-                trackingContext={`movement_shortlist_${g.id}`}
-                links={[
-                  { label: `Check ${p.badge || p.advertiser} price`, merchant: 'awin', href: p.awin, variant: 'primary' },
-                  { label: 'Movement basics', merchant: 'internal', href: '/topics/movement', variant: 'ghost' },
-                ]}
-              />
+              <ProductPick key={p.clickref} title={p.product} badge={p.badge} description={p.description} bullets={p.bullets} trackingContext={`movement_shortlist_${g.id}`} links={[{ label: `Check ${p.badge || p.advertiser} price`, merchant: 'awin', href: p.awin, variant: 'primary' }, { label: 'Movement basics', merchant: 'internal', href: '/topics/movement', variant: 'ghost' }]} />
             ))}
           </div>
         </section>
       ))}
+
+      <section className="mt-16 rounded-3xl border border-zinc-200 bg-white p-6 shadow-sm">
+        <div className="max-w-3xl">
+          <p className="text-sm font-semibold uppercase tracking-[0.14em] text-zinc-500">Kids' movement — in development</p>
+          <h2 className="mt-2 text-2xl font-semibold">Designing for active play</h2>
+          <p className="mt-2 text-zinc-700">We are exploring a Wild & Well kids' movement range built around a simple question: can clothing make energetic indoor and outdoor play more comfortable and less frustrating?</p>
+          <p className="mt-3 text-sm text-zinc-600">The first concept is playwear designed with soft-play movement in mind. It is still at concept and testing stage, so there is nothing to buy yet and we are not making performance claims before the idea has been properly prototyped and tested.</p>
+          <div className="mt-5 rounded-2xl bg-zinc-50 p-5"><h3 className="font-semibold">What we want to test</h3><ul className="mt-2 list-disc space-y-1 pl-5 text-sm text-zinc-700"><li>Comfort through climbing, crawling and sliding.</li><li>Fabric durability and easy washing for real family use.</li><li>Whether fabric choice meaningfully reduces unwanted drag on soft-play slides.</li><li>A design children actually want to wear beyond the soft-play centre.</li></ul></div>
+          <p className="mt-4 text-xs text-zinc-500">Working concept: PlayGlide by Wild & Well. Product name, design and launch details may change during development.</p>
+        </div>
+      </section>
 
       <section className="mt-16 rounded-3xl border border-zinc-200 bg-zinc-50/60 p-6">
         <h2 className="text-xl font-semibold">The Wild & Well rule</h2>
