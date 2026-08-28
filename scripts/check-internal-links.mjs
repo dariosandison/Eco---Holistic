@@ -1,13 +1,9 @@
 /**
  * Internal link checker (fast, no network).
  *
- * - Uses app/sitemap.js to collect static routes
- * - Scans app/, components/, and content/ for internal href="/..." links
- * - Verifies targets exist as:
- *    - a static route (from sitemap), OR
- *    - a blog slug in content/blog (for /blog/<slug>), OR
- *    - a blog slug for /guides/<slug> (guides redirect), OR
- *    - an author slug in lib/authors.js (for /authors/<slug>)
+ * Checks links against both the public sitemap and real static app routes.
+ * This matters because a few legacy/utility pages intentionally exist but are
+ * excluded from the sitemap; they should not be reported as 404s.
  */
 
 import fs from 'fs'
@@ -30,57 +26,6 @@ function listFiles(dir, exts) {
   return out
 }
 
-async function routesFromSitemap() {
-  const p = path.join(root, 'app', 'sitemap.js')
-  if (!fs.existsSync(p)) return new Set()
-
-  try {
-    const mod = await import(pathToFileURL(p).href)
-    const entries = await mod.default()
-    const routes = new Set()
-
-    for (const e of entries || []) {
-      try {
-        const u = new URL(e.url)
-        const pathname = u.pathname || '/'
-        routes.add(normalize(pathname))
-      } catch {
-        // ignore
-      }
-    }
-
-    return routes
-  } catch (e) {
-    return new Set()
-  }
-}
-
-function blogSlugs() {
-  const dir = path.join(root, 'content', 'blog')
-  if (!fs.existsSync(dir)) return new Set()
-
-  const slugs = new Set()
-  for (const f of fs.readdirSync(dir)) {
-    if (f.endsWith('.mdx') || f.endsWith('.md')) {
-      slugs.add(f.replace(/\.(mdx|md)$/, ''))
-    }
-  }
-  return slugs
-}
-
-async function authorSlugs() {
-  const p = path.join(root, 'lib', 'authors.js')
-  if (!fs.existsSync(p)) return new Set()
-
-  try {
-    const mod = await import(pathToFileURL(p).href)
-    const AUTHORS = mod.AUTHORS || []
-    return new Set(AUTHORS.map((a) => a.slug).filter(Boolean))
-  } catch (e) {
-    return new Set()
-  }
-}
-
 function normalize(urlPath) {
   if (!urlPath) return '/'
   const clean = String(urlPath).split('#')[0].split('?')[0]
@@ -88,20 +33,77 @@ function normalize(urlPath) {
   return clean.replace(/\/+$/, '')
 }
 
-function isSkippableTarget(target) {
-  if (!target) return true
-  if (!target.startsWith('/')) return true
-  if (target.startsWith('//')) return true
-  if (target.startsWith('/api')) return true
+function routesFromApp() {
+  const appDir = path.join(root, 'app')
+  const routes = new Set()
+  if (!fs.existsSync(appDir)) return routes
 
+  function walk(dir, segments = []) {
+    for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
+      const full = path.join(dir, entry.name)
+      if (entry.isDirectory()) {
+        if (entry.name.startsWith('.') || entry.name.startsWith('_')) continue
+        const next = entry.name.startsWith('(') && entry.name.endsWith(')') ? segments : [...segments, entry.name]
+        walk(full, next)
+        continue
+      }
+      if (!/^page\.(js|jsx|ts|tsx)$/.test(entry.name)) continue
+      const route = '/' + segments.join('/')
+      if (route.includes('[') || route.includes(']')) continue
+      routes.add(normalize(route))
+    }
+  }
+
+  walk(appDir)
+  return routes
+}
+
+async function routesFromSitemap() {
+  const p = path.join(root, 'app', 'sitemap.js')
+  if (!fs.existsSync(p)) return new Set()
+  try {
+    const mod = await import(pathToFileURL(p).href)
+    const entries = await mod.default()
+    const routes = new Set()
+    for (const e of entries || []) {
+      try {
+        routes.add(normalize(new URL(e.url).pathname || '/'))
+      } catch {
+        // Ignore malformed sitemap entries here; the build will surface them separately.
+      }
+    }
+    return routes
+  } catch {
+    return new Set()
+  }
+}
+
+function blogSlugs() {
+  const dir = path.join(root, 'content', 'blog')
+  if (!fs.existsSync(dir)) return new Set()
+  const slugs = new Set()
+  for (const f of fs.readdirSync(dir)) {
+    if (f.endsWith('.mdx') || f.endsWith('.md')) slugs.add(f.replace(/\.(mdx|md)$/, ''))
+  }
+  return slugs
+}
+
+async function authorSlugs() {
+  const p = path.join(root, 'lib', 'authors.js')
+  if (!fs.existsSync(p)) return new Set()
+  try {
+    const mod = await import(pathToFileURL(p).href)
+    const AUTHORS = mod.AUTHORS || []
+    return new Set(AUTHORS.map((a) => a.slug).filter(Boolean))
+  } catch {
+    return new Set()
+  }
+}
+
+function isSkippableTarget(target) {
+  if (!target || !target.startsWith('/') || target.startsWith('//') || target.startsWith('/api')) return true
   const c = normalize(target)
-  const allowed = new Set([
-    '/manifest.webmanifest',
-    '/robots.txt',
-    '/sitemap.xml',
-    '/rss.xml',
-  ])
-  return allowed.has(c)
+  return new Set(['/manifest.webmanifest', '/robots.txt', '/sitemap.xml', '/rss.xml']).has(c)
 }
 
 const scanDirs = [
@@ -114,52 +116,42 @@ const hrefRe = /href\s*=\s*(?:\{\s*)?["'](\/[^"']+)["']\s*(?:\}\s*)?/g
 const mdLinkRe = /\[[^\]]+\]\((\/[^)]+)\)/g
 
 const routes = await routesFromSitemap()
+for (const route of routesFromApp()) routes.add(route)
 const blog = blogSlugs()
 const authors = await authorSlugs()
 
 function isOk(target) {
   const clean = normalize(target)
-
   if (routes.has(clean)) return true
 
   if (clean.startsWith('/blog/')) {
     const slug = clean.replace('/blog/', '')
-    return blog.has(slug) || routes.has('/blog')
+    return blog.has(slug)
   }
-
   if (clean.startsWith('/guides/')) {
     const slug = clean.replace('/guides/', '')
-    return blog.has(slug) || routes.has('/guides')
+    return blog.has(slug) || routes.has(clean)
   }
-
   if (clean.startsWith('/authors/')) {
     const slug = clean.replace('/authors/', '')
-    return authors.has(slug) || routes.has('/authors')
+    return authors.has(slug)
   }
-
   return false
 }
 
 const errors = []
-
 for (const sd of scanDirs) {
   if (!fs.existsSync(sd.dir)) continue
-  const files = listFiles(sd.dir, sd.exts)
-
-  for (const file of files) {
+  for (const file of listFiles(sd.dir, sd.exts)) {
     const txt = readText(file)
     let m
-
     while ((m = hrefRe.exec(txt))) {
       const target = m[1]
-      if (isSkippableTarget(target)) continue
-      if (!isOk(target)) errors.push({ file, target })
+      if (!isSkippableTarget(target) && !isOk(target)) errors.push({ file, target })
     }
-
     while ((m = mdLinkRe.exec(txt))) {
       const target = m[1]
-      if (isSkippableTarget(target)) continue
-      if (!isOk(target)) errors.push({ file, target })
+      if (!isSkippableTarget(target) && !isOk(target)) errors.push({ file, target })
     }
   }
 }
@@ -168,6 +160,6 @@ if (errors.length) {
   console.error('Broken internal links found:')
   for (const e of errors) console.error(`- ${e.target}  (${e.file})`)
   process.exit(1)
-} else {
-  console.log('✅ Internal link check passed.')
 }
+
+console.log(`✅ Internal link check passed across ${routes.size} static routes.`)
