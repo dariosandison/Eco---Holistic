@@ -1,254 +1,55 @@
 import Link from 'next/link'
 import StructuredData from '@/components/StructuredData'
-import ComparisonTable from '@/components/ComparisonTable'
-import ProductPick from '@/components/mdx/ProductPick'
-import { amazonSearchUrl } from '@/lib/amazon'
 import EducationFirstCallout from '@/components/EducationFirstCallout'
 import MoneyPageEducationBlock from '@/components/MoneyPageEducationBlock'
 import { getMoneyPageEdu } from '@/lib/moneyPageEdu'
 import MoneyPageNextLinks from '@/components/MoneyPageNextLinks'
 
-
-
-
 export const metadata = {
-  title: 'Non-toxic cookware: starter shortlist',
-  description: 'A simple non-toxic cookware starter shortlist: what to buy first, what to skip, and how to avoid overbuying.',
+  title: 'Lower-Tox Cookware Starter UK — Buy Less, Use It Well',
+  description: 'A practical cookware starter guide focused on durable materials, heat control and replacing damaged pieces gradually rather than buying a whole new kitchen.',
 }
 
-const PICKS = [
-  {
-    title: 'Stainless steel frying pan (everyday)',
-    badge: 'First buy',
-    desc: 'A workhorse pan you’ll use daily. Learn heat control once and you’re set.',
-    query: 'stainless steel frying pan 24cm UK',
-    bullets: ['Great for: most cooking', 'Look for: thick base + comfortable handle', 'Use medium heat; preheat properly'],
-  },
-  {
-    title: 'Cast iron skillet (simple + durable)',
-    badge: 'Budget-friendly',
-    desc: 'Great once seasoned and cared for. Heavy, but lasts forever.',
-    query: 'cast iron skillet pre-seasoned UK',
-    bullets: ['Great for: searing + oven use', 'Watch-out: heavy + needs drying', 'Seasoning maintenance is the tradeoff'],
-  },
-  {
-    title: 'Stainless steel saucepan (1–2L)',
-    badge: 'Every kitchen',
-    desc: 'For sauces, grains, and reheating. Start with one good pot, not a full set.',
-    query: 'stainless steel saucepan 1.5L UK',
-    bullets: ['Great for: daily basics', 'Look for: tight lid + solid base', 'Avoid buying sets you won’t use'],
-  },
-  {
-    title: 'Enameled cast iron (dutch oven)',
-    badge: 'If you cook a lot',
-    desc: 'Optional, but brilliant for soups, stews, and slow cooking.',
-    query: 'enameled cast iron dutch oven UK',
-    bullets: ['Great for: batch cooking', 'Watch-out: expensive + heavy', 'Great if you actually use it weekly'],
-  },
+const MATERIALS = [
+  { title: 'Stainless steel', text: 'Durable and versatile for most everyday cooking. The main learning curve is heat control rather than the material itself.' },
+  { title: 'Cast iron', text: 'Long-lasting and useful for searing and oven cooking. The trade-offs are weight, drying and seasoning care.' },
+  { title: 'Enameled cast iron', text: 'Useful for soups, stews and batch cooking when you genuinely use that style of pot often.' },
+  { title: 'Coated non-stick', text: 'Treat coatings as consumable surfaces: avoid overheating and replace cookware when the coating is materially damaged or peeling.' },
 ]
 
-function QuickSummary(){
-  return (
-    <div className="rounded-2xl border bg-white p-6 shadow-sm">
-      <h2 className="text-xl font-semibold">At a glance</h2>
-      <p className="mt-2 text-zinc-700">
-        If you’re starting from scratch, buy <strong>one</strong> high‑quality pan you’ll use daily (usually stainless steel),
-        then add pieces only if you need them. Heat control and cooking habits matter more than chasing perfection.
-      </p>
-      <div className="mt-4 flex flex-wrap gap-2">
-        <Link className="btn-secondary" href="/topics/fragrance-free">Low-tox kitchen basics</Link>
-        <Link className="btn-secondary" href="/shopping-list">Free shopping list</Link>
-        <Link className="btn-secondary" href="/topics">Browse topics</Link>
-      </div>
-      <p className="mt-4 text-xs text-zinc-500">Last updated: February 2, 2026 · Wild & Well Editorial Team</p>
-    </div>
-  )
-}
-
-export default function Page(){
-    
-  const edu = getMoneyPageEdu('best-non-toxic-cookware-starter')
-
-const itemList = PICKS.map((p, i) => ({
-    '@type': 'ListItem',
-    position: i + 1,
-    name: p.title,
-    url: amazonSearchUrl(p.query),
-  }))
-
-  const ld = {
-    '@context': 'https://schema.org',
-    '@type': 'Article',
-    headline: 'Non-toxic cookware: starter shortlist',
-    dateModified: '2026-02-02',
-    datePublished: '2026-01-29',
-    mainEntity: {
-      '@type': 'ItemList',
-      itemListElement: itemList,
-    },
-  }
-
-  const faqLd = {
-    '@context': 'https://schema.org',
-    '@type': 'FAQPage',
-    mainEntity: [
-      {
-        '@type': 'Question',
-        name: 'Do I need to replace all cookware at once?',
-        acceptedAnswer: {
-          '@type': 'Answer',
-          text: 'No. Replace the most-used piece first (often a frying pan), then add only what you actually cook with.',
-        },
-      },
-      {
-        '@type': 'Question',
-        name: 'Is stainless steel better than non-stick?',
-        acceptedAnswer: {
-          '@type': 'Answer',
-          text: 'Stainless steel is durable and versatile, but it requires basic heat control. If you use non-stick, treat it as a consumable and replace it when damaged.',
-        },
-      },
-      {
-        '@type': 'Question',
-        name: 'What should I avoid?',
-        acceptedAnswer: {
-          '@type': 'Answer',
-          text: 'Avoid buying large sets you won’t use, and avoid overheating or using damaged coatings. Choose durable basics and use them well.',
-        },
-      },
-    ],
-  }
+export default function Page() {
+  const slug = 'best-non-toxic-cookware-starter'
+  const edu = getMoneyPageEdu(slug)
+  const ld = { '@context': 'https://schema.org', '@type': 'Article', headline: 'Lower-tox cookware starter UK: buy less, use it well', datePublished: '2026-01-29', dateModified: '2026-08-28' }
 
   return (
     <main className="mx-auto max-w-6xl px-4 py-16">
       <StructuredData data={ld} />
-      <StructuredData data={faqLd} />
-
       <header>
         <div className="max-w-3xl">
-        <h1 className="text-4xl font-bold">Non-toxic cookware: starter shortlist</h1>
-        <p className="mt-3 text-zinc-700">A simple shortlist — what to buy first, what to skip, and how to avoid overbuying.</p>
-
-                </div>
-
-        {/* Hero image */}
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          src="/images/photography/cleaning.jpg"
-          alt=""
-          className="mt-6 h-[260px] w-full rounded-3xl border border-zinc-200 object-cover shadow-sm md:h-[380px]"
-          loading="lazy"
-          decoding="async"
-        />
-
+          <p className="text-sm font-semibold uppercase tracking-[0.16em] text-zinc-500">Healthy Home kitchen guide</p>
+          <h1 className="mt-2 text-4xl font-bold">Cookware: replace the piece that needs replacing, not the whole kitchen</h1>
+          <p className="mt-3 text-zinc-700">A lower-tox approach should not create unnecessary waste. Keep sound cookware you use safely, replace damaged or unsuitable pieces when needed and learn the technique required by the material you choose.</p>
+        </div>
+        <img src="/images/photography/cleaning.jpg" alt="" className="mt-6 h-[260px] w-full rounded-3xl border border-zinc-200 object-cover shadow-sm md:h-[380px]" loading="lazy" decoding="async" />
         <div className="max-w-3xl">
-<EducationFirstCallout topicHref="/blog" topicLabel="Read starter explainers" insightHref="/blog/non-toxic-cleaning-starter" insightLabel="Non‑toxic cleaning starter" />
-              </div>
+          <EducationFirstCallout topicHref="/healthy-home" topicLabel="Healthy Home principles" insightHref="/blog/non-toxic-cleaning-starter" insightLabel="Lower-tox starter" />
+          <div className="mt-5 flex flex-wrap gap-2"><Link className="btn-primary" href="/healthy-home/low-tox-shortlist">Compare Healthy Home swaps</Link><Link className="btn-secondary" href="/healthy-home">Healthy Home hub</Link><Link className="btn-secondary" href="/shopping-list">Free shopping list</Link></div>
+        </div>
       </header>
 
-      
       <MoneyPageEducationBlock edu={edu} />
-<section className="mt-10">
-        <QuickSummary />
-      </section>
 
-      <section className="mt-14">
-        <h2 className="text-2xl font-semibold">What to buy first</h2>
-        <div className="mt-4 grid gap-4 md:grid-cols-3">
-          <div className="card p-5">
-            <h3 className="text-lg font-semibold">1) One everyday pan</h3>
-            <p className="mt-2 text-sm text-zinc-700">Start with stainless steel or cast iron — whichever you’ll actually use.</p>
-            <p className="mt-3 text-xs text-zinc-500">Watch-out: technique matters (preheat + medium heat).</p>
-          </div>
-          <div className="card p-5">
-            <h3 className="text-lg font-semibold">2) One small pot</h3>
-            <p className="mt-2 text-sm text-zinc-700">A saucepan covers grains, sauces, soups, and reheating.</p>
-            <p className="mt-3 text-xs text-zinc-500">Watch-out: don’t buy sets unless you’ll use every piece.</p>
-          </div>
-          <div className="card p-5">
-            <h3 className="text-lg font-semibold">3) Add only if needed</h3>
-            <p className="mt-2 text-sm text-zinc-700">A dutch oven is great, but only if you cook stews/soups regularly.</p>
-            <p className="mt-3 text-xs text-zinc-500">Watch-out: expensive + heavy.</p>
-          </div>
-        </div>
-      </section>
+      <section className="mt-12"><h2 className="text-2xl font-semibold">Choose material by how you cook</h2><div className="mt-6 grid gap-4 md:grid-cols-2">{MATERIALS.map((item) => <div key={item.title} className="card"><h3 className="font-semibold">{item.title}</h3><p className="mt-2 text-sm text-zinc-700">{item.text}</p></div>)}</div></section>
 
-      <section className="mt-14">
-        <h2 className="text-2xl font-semibold">Shortlist</h2>
-        <p className="mt-2 text-sm text-zinc-600">Curated searches so you can compare current prices and reviews.</p>
-        <div className="mt-6 grid gap-4 md:grid-cols-2">
-          {PICKS.map((p) => (
-            <ProductPick
-              key={p.title}
-              title={p.title}
-              badge={p.badge}
-              description={p.desc}
-              href={amazonSearchUrl(p.query)}
-              bullets={p.bullets}
-            />
-          ))}
-        </div>
+      <section className="mt-14 max-w-3xl"><h2 className="text-2xl font-semibold">The useful starter set is usually small</h2><p className="mt-3 text-zinc-700">For many kitchens, one dependable frying pan and one saucepan cover a large share of everyday cooking. Add larger pots, oven-safe pieces or specialist cookware when your actual cooking habits justify them rather than buying a large matched set up front.</p></section>
 
-        <ComparisonTable
-          caption="At-a-glance comparison"
-          columns={[
-            { key: 'material', label: 'Material' },
-            { key: 'bestFor', label: 'Great for' },
-            { key: 'tradeoff', label: 'Main tradeoff' },
-            { key: 'care', label: 'Care notes' },
-          ]}
-          rows={[
-            {
-              material: 'Stainless steel',
-              bestFor: 'Most everyday cooking',
-              tradeoff: 'Needs basic heat control',
-              care: 'Preheat + medium heat; deglaze to clean',
-            },
-            {
-              material: 'Cast iron',
-              bestFor: 'Searing + oven use',
-              tradeoff: 'Heavy + needs seasoning care',
-              care: 'Dry fully; light oil; re-season if needed',
-            },
-            {
-              material: 'Enameled cast iron',
-              bestFor: 'Soups/stews/batch cooking',
-              tradeoff: 'Price + weight',
-              care: 'Avoid thermal shock; use gentle utensils',
-            },
-          ]}
-        />
+      <section className="mt-14 rounded-3xl border border-zinc-200 bg-zinc-50/60 p-6"><div className="max-w-3xl"><p className="text-sm font-semibold uppercase tracking-[0.14em] text-zinc-500">Current buying route</p><h2 className="mt-2 text-2xl font-semibold">Keep household replacements in the Healthy Home shortlist</h2><p className="mt-2 text-zinc-700">The previous version sent readers to generic marketplace searches for four cookware categories. This page now handles the cookware decision; the maintained Healthy Home shortlist is where current partner products and broader household swaps belong.</p><div className="mt-5"><Link className="btn-primary" href="/healthy-home/low-tox-shortlist">Open Healthy Home shortlist</Link></div></div></section>
 
-        <div className="mt-8 flex flex-wrap gap-2">
-          <Link className="btn-primary" href="/topics">Back to topics →</Link>
-          <Link className="btn-secondary" href="/shopping-list">Get the free shopping list</Link>
-        </div>
-      </section>
+      <section className="mt-14 max-w-3xl"><h2 className="text-2xl font-semibold">Use matters as much as material</h2><p className="mt-3 text-zinc-700">Avoid unnecessary overheating, follow manufacturer care guidance and inspect surfaces and handles as cookware ages. “Non-toxic” is often used loosely in marketing, so favour clear material information and durable construction over dramatic safety claims.</p></section>
 
-      <section className="mt-14 max-w-3xl">
-        <h2 className="text-2xl font-semibold">FAQ</h2>
-        <div className="mt-4 space-y-5 text-zinc-700">
-          <div>
-            <h3 className="font-semibold">Do I need a full set?</h3>
-            <p className="mt-1 text-sm">Usually no. Most people cook with a few core pieces — buy those first.</p>
-          </div>
-          <div>
-            <h3 className="font-semibold">What if food sticks on stainless steel?</h3>
-            <p className="mt-1 text-sm">Preheat, use medium heat, and add oil before food. It’s a technique upgrade, not a product problem.</p>
-          </div>
-          <div>
-            <h3 className="font-semibold">When should I replace non-stick?</h3>
-            <p className="mt-1 text-sm">Replace if the coating is scratched, peeling, or damaged. Don’t overheat it.</p>
-          </div>
-        </div>
-      </section>
-
-      <p className="mt-12 text-sm text-zinc-500 max-w-3xl">
-        Some links are affiliate links. If you buy via them, we earn a commission.
-      </p>
-    
-      <MoneyPageNextLinks slug="best-non-toxic-cookware-starter" />
-
-</main>
+      <MoneyPageNextLinks slug={slug} />
+      <p className="mt-12 text-xs text-zinc-500">Some links are affiliate links; Wild & Well may earn a commission at no extra cost to you.</p>
+    </main>
   )
 }
