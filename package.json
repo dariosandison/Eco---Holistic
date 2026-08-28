@@ -36,6 +36,6 @@
     "@next/swc-win32-x64-msvc": "14.2.35"
   },
   "engines": {
-    "node": "20.x"
+    "node": "22.x"
   }
 }
