@@ -22,7 +22,7 @@ export default function Page() {
     '@type': 'Article',
     headline: 'Countertop water filter (UK): Doulton Biotect Ultra system',
     datePublished: '2026-02-13',
-    dateModified: '2026-08-27',
+    dateModified: '2026-08-28',
   }
 
   return (
@@ -44,10 +44,11 @@ export default function Page() {
           <EducationFirstCallout topicHref="/topics/water" topicLabel="Water" insightHref="/blog/water-filter-buying-guide-uk" insightLabel="Water filter buying guide" />
           <div className="mt-5 flex flex-wrap gap-2">
             <Link className="btn-secondary" href="/topics/water">Water basics</Link>
-            <Link className="btn-secondary" href="/water-filtration-shortlist-uk">Compare filtration options</Link>
+            <Link className="btn-secondary" href="/water-filtration-shortlist-uk#jugs-dispensers">Compare countertop options</Link>
+            <Link className="btn-secondary" href="/tools/water-filter-running-cost-calculator">Compare running costs</Link>
             <Link className="btn-secondary" href="/affiliate-disclosure">Affiliate disclosure</Link>
           </div>
-          <p className="mt-3 text-xs text-zinc-500">Last updated: August 27, 2026 · Wild &amp; Well Editorial Team</p>
+          <p className="mt-3 text-xs text-zinc-500">Last updated: August 28, 2026 · Wild &amp; Well Editorial Team</p>
         </div>
       </header>
 
@@ -60,6 +61,9 @@ export default function Page() {
           <li><strong>Choose under-sink</strong> when you want the filter hidden and are happy with installation.</li>
           <li><strong>Choose gravity or jug filtration</strong> when tap compatibility or portability matters more than flow rate.</li>
         </ul>
+        <p className="mt-3 text-sm text-zinc-600">
+          Still deciding between formats? Use the <Link className="font-medium underline" href="/best-water-filters-uk">main Water Filters UK guide</Link> before comparing individual products.
+        </p>
       </section>
 
       <section className="mt-12">
@@ -78,7 +82,7 @@ export default function Page() {
             trackingContext="doulton_countertop_guide"
             links={[
               { label: 'Check Doulton price', merchant: 'awin', href: FEATURED_AWIN, variant: 'primary' },
-              { label: 'Compare all water-filter formats', merchant: 'internal', href: '/water-filtration-shortlist-uk', variant: 'ghost' },
+              { label: 'Compare countertop and jug options', merchant: 'internal', href: '/water-filtration-shortlist-uk#jugs-dispensers', variant: 'ghost' },
             ]}
           />
         </div>
