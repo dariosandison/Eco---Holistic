@@ -1,258 +1,55 @@
 import Link from 'next/link'
 import StructuredData from '@/components/StructuredData'
-import ProductPick from '@/components/mdx/ProductPick'
-import ComparisonTable from '@/components/ComparisonTable'
-import { amazonSearchUrl } from '@/lib/amazon'
-import { SITE_NAME, SITE_URL } from '@/lib/site'
 import EducationFirstCallout from '@/components/EducationFirstCallout'
 import MoneyPageEducationBlock from '@/components/MoneyPageEducationBlock'
 import { getMoneyPageEdu } from '@/lib/moneyPageEdu'
 import MoneyPageNextLinks from '@/components/MoneyPageNextLinks'
 
 export const metadata = {
-  title: 'Gut health supplements: beginner shortlist',
-  description: 'A food-first, beginner-friendly gut-support shortlist: when to consider fibre, probiotics, and what to avoid if you’re sensitive.',
+  title: 'Gut Health Supplements for Beginners — Food First',
+  description: 'A conservative beginner guide to gut health: meals, fibre, hydration and symptom tracking first, with supplements kept secondary and current nutrition routes in one place.',
 }
 
-// Partner link (AWIN)
-const SYMPROVE_MANGO = 'https://www.awin1.com/cread.php?awinmid=109974&awinaffid=2754234&clickref=ww_nutrition_picks_guthealth_symprove_mango_passionfruit&ued=https%3A%2F%2Fw-wellness.co.uk%2Fproducts%2Fsymprove-daily-live-active-bacteria-mango-passion-fruit'
-const ANCIENT_TRUE_BIOME = 'https://www.awin1.com/cread.php?awinmid=54585&awinaffid=2754234&clickref=ww_nutrition_gut_ancient_true_biome&ued=https%3A%2F%2Fancientandbrave.earth%2Fproducts%2Ftrue-biome'
-const DRVEGAN_GUT_WORKS = 'https://www.awin1.com/cread.php?awinmid=21553&awinaffid=2754234&clickref=ww_nutrition_gut_drvegan_gutworks&ued=https%3A%2F%2Fwww.drvegan.com%2Fproducts%2Fgut-works%3Futm_source%3Dchatgpt.com'
-
-const PICKS = [
-  {
-    title: 'Psyllium husk (fibre first)',
-    badge: 'Food-first',
-    desc: 'Often the most practical “first” step: gentle fibre support when you don’t hit fibre targets.',
-    query: 'psyllium husk powder UK unflavoured',
-    bullets: ['Start low and increase slowly', 'Drink enough water', 'Avoid if it worsens symptoms'],
-  },
-  {
-    title: 'Partially hydrolysed guar gum (PHGG)',
-    badge: 'Gentle fibre',
-    desc: 'A fibre option some people tolerate well — still start low and go slow.',
-    query: 'PHGG partially hydrolysed guar gum supplement UK',
-    bullets: ['Start with a small dose', 'Keep other changes stable', 'Give it time (weeks, not days)'],
-  },
-  {
-    title: 'Single-strain probiotic (simple)',
-    badge: 'Simple',
-    desc: 'If you try a probiotic, a simpler product makes it easier to judge how you respond.',
-    query: 'single strain probiotic UK shelf stable',
-    bullets: ['Try one at a time', 'Stop if it makes you feel worse', 'Not everyone needs probiotics'],
-  },
-  {
-    title: 'Multi-strain probiotic (only if you do well with them)',
-    badge: 'Optional',
-    desc: 'A broader option for people who already tolerate probiotics — avoid stacking multiple changes.',
-    query: 'multi strain probiotic UK third party tested',
-    bullets: ['Be cautious with “mega CFU” marketing', 'Check storage requirements', 'Keep dose consistent'],
-  },
-  {
-    title: 'Digestive enzyme blends (situational)',
-    badge: 'Situational',
-    desc: 'Some people use these with heavier meals. If you try them, keep it simple and track response.',
-    query: 'digestive enzymes supplement UK',
-    bullets: ['Avoid complex stacks', 'Use only if needed', 'Check medication interactions'],
-  },
-  {
-    title: 'What to skip (most beginners)',
-    badge: 'Skip',
-    desc: '“Detox” gut cleanses and aggressive protocols often backfire. Start with fibre + meals + consistency.',
-    query: 'gut cleanse detox supplement UK',
-    bullets: ['Avoid harsh laxative blends', 'Avoid miracle claims', 'Prefer food-first changes'],
-  },
+const ORDER = [
+  { title: '1. Build repeatable meals', text: 'Start with a varied food pattern you can sustain. A supplement cannot compensate for a diet that is consistently very low in fibre or overall food variety.' },
+  { title: '2. Increase fibre gradually', text: 'Whole foods come first. If you increase fibre, do it gradually and pay attention to tolerance rather than chasing a target overnight.' },
+  { title: '3. Keep hydration sensible', text: 'Fibre and hydration work together. Large abrupt changes in either can make digestion less comfortable.' },
+  { title: '4. Change one variable at a time', text: 'If you later trial a fibre supplement or probiotic, keep other changes stable long enough to judge the response.' },
 ]
 
 export default function Page() {
-    
-  const edu = getMoneyPageEdu('best-gut-health-supplements-beginners')
-
-const url = `${SITE_URL}/best-gut-health-supplements-beginners`
-
-  const itemList = PICKS.map((p, i) => ({
-    '@type': 'ListItem',
-    position: i + 1,
-    name: p.title,
-    url: amazonSearchUrl(p.query),
-  }))
-
-  const ld = {
-    '@context': 'https://schema.org',
-    '@type': 'Article',
-    headline: 'Gut health supplements: beginner shortlist',
-    datePublished: '2026-01-24',
-    dateModified: '2026-02-02',
-    mainEntityOfPage: { '@type': 'WebPage', '@id': url },
-    mainEntity: { '@type': 'ItemList', itemListElement: itemList },
-    publisher: {
-      '@type': 'Organization',
-      name: SITE_NAME,
-      url: SITE_URL,
-      logo: { '@type': 'ImageObject', url: `${SITE_URL}/og-default.jpg` },
-    },
-  }
-
-  const faqLd = {
-    '@context': 'https://schema.org',
-    '@type': 'FAQPage',
-    mainEntity: [
-      {
-        '@type': 'Question',
-        name: 'Do I need probiotics for gut health?',
-        acceptedAnswer: {
-          '@type': 'Answer',
-          text: 'Not necessarily. Many people do best starting with meals, fibre, hydration, and stress/sleep basics. If you try a probiotic, keep everything else stable so you can judge your response.',
-        },
-      },
-      {
-        '@type': 'Question',
-        name: 'What is the safest first supplement-style step?',
-        acceptedAnswer: {
-          '@type': 'Answer',
-          text: 'Often fibre support (like psyllium) — started slowly. It’s simple, easy to adjust, and aligns with a food-first approach.',
-        },
-      },
-      {
-        '@type': 'Question',
-        name: 'When should I talk to a clinician?',
-        acceptedAnswer: {
-          '@type': 'Answer',
-          text: 'If you have persistent symptoms, significant pain, weight loss, blood in stool, or you’re on medication and unsure about interactions. Supplements are not a substitute for medical care.',
-        },
-      },
-    ],
-  }
+  const slug = 'best-gut-health-supplements-beginners'
+  const edu = getMoneyPageEdu(slug)
+  const ld = { '@context': 'https://schema.org', '@type': 'Article', headline: 'Gut health supplements for beginners: food first', datePublished: '2026-01-24', dateModified: '2026-08-28' }
 
   return (
     <main className="mx-auto max-w-6xl px-4 py-16">
       <StructuredData data={ld} />
-      <StructuredData data={faqLd} />
-
       <header>
         <div className="max-w-3xl">
-        <h1 className="text-4xl font-bold">Gut health supplements: beginner shortlist</h1>
-        <p className="mt-3 text-zinc-700">
-          This page is intentionally conservative. Most people don’t need a big “gut stack”. Start with food-first basics, then add one simple option at a time if it helps.
-        </p>
-
-                </div>
-
-        {/* Hero image */}
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          src="/images/photography/nutrition.jpg"
-          alt=""
-          className="mt-6 h-[260px] w-full rounded-3xl border border-zinc-200 object-cover shadow-sm md:h-[380px]"
-          loading="lazy"
-          decoding="async"
-        />
-
-        <div className="max-w-3xl">
-<EducationFirstCallout topicHref="/topics" topicLabel="Explore topics" insightHref="/blog" insightLabel="Read Wellness Insights" />
-        <div className="mt-5 flex flex-wrap gap-2">
-          <Link className="btn-secondary" href="/nutrition">Nutrition</Link>
-          <Link className="btn-secondary" href="/shopping-list">Free shopping list</Link>
-          <Link className="btn-secondary" href="/blog/gut-health-basics">Gut health basics</Link>
+          <p className="text-sm font-semibold uppercase tracking-[0.16em] text-zinc-500">Food-first gut health</p>
+          <h1 className="mt-2 text-4xl font-bold">Gut health supplements: begin with food, fibre and a stable baseline</h1>
+          <p className="mt-3 text-zinc-700">Most beginners do not need a large “gut stack”. Start by making meals, fibre and hydration more consistent. If you later trial a supplement, introduce one thing at a time and judge it against a stable baseline.</p>
         </div>
-        <p className="mt-3 text-xs text-zinc-500">Last updated: February 2, 2026 · Wild & Well Editorial Team</p>
-              </div>
+        <img src="/images/photography/nutrition.jpg" alt="" className="mt-6 h-[260px] w-full rounded-3xl border border-zinc-200 object-cover shadow-sm md:h-[380px]" loading="lazy" decoding="async" />
+        <div className="max-w-3xl">
+          <EducationFirstCallout topicHref="/topics/gut-health" topicLabel="Gut-health fundamentals" insightHref="/blog/fibre-gut-health-practical-guide" insightLabel="Practical fibre guide" />
+          <div className="mt-5 flex flex-wrap gap-2"><Link className="btn-primary" href="/nutrition/food-first-shortlist">Food-first nutrition shortlist</Link><Link className="btn-secondary" href="/nutrition">Nutrition hub</Link><Link className="btn-secondary" href="/nutrition/supplements">Where supplements may fit</Link></div>
+        </div>
       </header>
 
-      
       <MoneyPageEducationBlock edu={edu} />
-<section className="mt-10">
-        <h2 className="text-2xl font-semibold">At a glance</h2>
-        <p className="mt-2 text-zinc-700 max-w-3xl">
-          For beginners, the most reliable “supplement” is often fibre and a repeatable meal routine. If you try probiotics, simpler is usually better.
-        </p>
-      </section>
 
-      <section className="mt-12">
-        <h2 className="text-2xl font-semibold">What to look for</h2>
-        <ComparisonTable
-          caption="Keep it simple"
-          columns={[
-            { key: 'thing', label: 'Thing' },
-            { key: 'aimFor', label: 'Aim for' },
-            { key: 'avoid', label: 'Be wary of' },
-          ]}
-          rows={[
-            { thing: 'Fibre', aimFor: 'Start low, increase slowly', avoid: 'Big jumps in dose' },
-            { thing: 'Probiotics', aimFor: 'Clear strain labeling', avoid: 'Vague proprietary blends' },
-            { thing: 'Claims', aimFor: 'Modest, realistic claims', avoid: '“Cleanse/detox” claims' },
-            { thing: 'Stacking', aimFor: 'One new thing at a time', avoid: 'Multiple changes at once' },
-          ]}
-        />
-      </section>
+      <section className="mt-12 max-w-3xl"><h2 className="text-2xl font-semibold">A better order of operations</h2><div className="mt-5 space-y-4">{ORDER.map((item) => <div key={item.title} className="card"><h3 className="font-semibold">{item.title}</h3><p className="mt-2 text-sm text-zinc-700">{item.text}</p></div>)}</div></section>
 
-      <section className="mt-12">
-        <div className="flex flex-col gap-2 md:flex-row md:items-end md:justify-between">
-          <div>
-            <h2 className="text-2xl font-semibold">Featured UK options</h2>
-            <p className="mt-1 text-sm text-zinc-600 max-w-2xl">
-              A few gut-focused options we feature. (Affiliate links.)
-            </p>
-            <div className="mt-3 flex flex-wrap gap-2">
-              <Link className="btn-secondary" href="/best-gut-support-supplement-uk-ancient-and-brave-true-biome">True Biome guide →</Link>
-              <Link className="btn-secondary" href="/best-gut-support-supplement-uk-drvegan-gut-works">Gut Works guide →</Link>
-            </div>
-          </div>
-        </div>
+      <section className="mt-14 max-w-3xl"><h2 className="text-2xl font-semibold">Where probiotics and fibre supplements fit</h2><p className="mt-3 text-zinc-700">They can be reasonable tools for some people, but the useful question is whether a specific product improves a specific problem for you. More strains, larger numbers and more ingredients do not automatically mean a better result. Keep trials simple and stop if symptoms clearly worsen.</p></section>
 
-        <div className="mt-6 grid gap-4 md:grid-cols-2">
-          <ProductPick
-            title="Symprove Daily Live & Active Bacteria (Mango & Passion Fruit)"
-            badge="Gut"
-            description="If you try a gut product, keep everything else stable. Track symptoms for 2–4 weeks and avoid adding multiple new supplements at once."
-            bullets={["Change one thing at a time", "Track 2–4 weeks", "Check ingredients + guidance"]}
-            links={[{ label: 'Check price', merchant: 'awin', href: SYMPROVE_MANGO, variant: 'primary' }]}
-          />
+      <section className="mt-14 rounded-3xl border border-zinc-200 bg-zinc-50/60 p-6"><div className="max-w-3xl"><p className="text-sm font-semibold uppercase tracking-[0.14em] text-zinc-500">Current nutrition route</p><h2 className="mt-2 text-2xl font-semibold">Supplements are no longer the centre of the Nutrition section</h2><p className="mt-2 text-zinc-700">The previous version mixed direct partner products with six generic marketplace searches. Wild & Well now keeps the main Nutrition journey food-first. Supplement pages remain useful for specific questions, but the primary buying path begins with real food and simple staples.</p><div className="mt-5 flex flex-wrap gap-2"><Link className="btn-primary" href="/nutrition/food-first-shortlist">Open food-first shortlist</Link><Link className="btn-secondary" href="/topics/gut-health">Gut-health basics</Link></div></div></section>
 
-          <ProductPick
-            title="Ancient + Brave True Biome"
-            badge="Gut"
-            description="A gut-support option to trial conservatively. Keep everything else stable, track for 2–4 weeks, and stop if you worsen."
-            bullets={["Change one thing at a time", "Track 2–4 weeks", "Food-first basics still matter"]}
-            links={[{ label: 'Check price', merchant: 'awin', href: ANCIENT_TRUE_BIOME, variant: 'primary' }]}
-          />
+      <section className="mt-14 max-w-3xl"><h2 className="text-2xl font-semibold">When to seek proper advice</h2><p className="mt-3 text-zinc-700">Persistent or severe digestive symptoms, unexplained weight loss, blood in stool, significant pain or concerns about medication interactions deserve appropriate clinical assessment rather than increasingly complex supplement experiments.</p></section>
 
-          <ProductPick
-            title="DR.VEGAN Gut Works"
-            badge="Gut"
-            description="A gut blend for a time‑boxed trial when your basics are already stable. Avoid stacking multiple new supplements."
-            bullets={["Time‑boxed trial", "Avoid stacking changes", "Stop if symptoms worsen"]}
-            links={[{ label: 'Check price', merchant: 'awin', href: DRVEGAN_GUT_WORKS, variant: 'primary' }]}
-          />
-
-        </div>
-      </section>
-
-      <section className="mt-12">
-        <h2 className="text-2xl font-semibold">Shortlist (UK‑friendly searches)</h2>
-        <p className="mt-2 text-sm text-zinc-600 max-w-3xl">
-          We link to searches so you can compare availability and labels. Always read ingredients and consider medical guidance if you’re unsure.
-        </p>
-        <div className="mt-6 grid gap-4 md:grid-cols-2">
-          {PICKS.map((p) => (
-            <ProductPick
-              key={p.title}
-              title={p.title}
-              badge={p.badge}
-              description={p.desc}
-              href={amazonSearchUrl(p.query)}
-              bullets={p.bullets}
-            />
-          ))}
-        </div>
-      </section>
-
-      <p className="mt-12 text-sm text-zinc-500 max-w-3xl">
-        This page is informational and not medical advice. Some links are affiliate links. If you buy via them, we earn a commission.
-      </p>
-    
-      <MoneyPageNextLinks slug="best-gut-health-supplements-beginners" />
-
-</main>
+      <MoneyPageNextLinks slug={slug} />
+      <p className="mt-12 text-xs text-zinc-500">This page is general education, not medical advice. Some links are affiliate links; Wild & Well may earn a commission at no extra cost to you.</p>
+    </main>
   )
 }
