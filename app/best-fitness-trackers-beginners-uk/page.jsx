@@ -1,268 +1,61 @@
 import Link from 'next/link'
 import StructuredData from '@/components/StructuredData'
-import ProductPick from '@/components/mdx/ProductPick'
-import { amazonSearchUrl } from '@/lib/amazon'
 import EducationFirstCallout from '@/components/EducationFirstCallout'
 import MoneyPageEducationBlock from '@/components/MoneyPageEducationBlock'
 import { getMoneyPageEdu } from '@/lib/moneyPageEdu'
-import MoneyPageQuickCompare from '@/components/MoneyPageQuickCompare'
 import MoneyPageNextLinks from '@/components/MoneyPageNextLinks'
 
-
-
-
 export const metadata = {
-  title: "Fitness Trackers for Beginners (UK): shortlist",
-  description: "A straightforward shortlist of fitness trackers for beginners: steps, sleep, heart-rate, and the features that actually matter.",
+  title: 'Fitness Trackers for Beginners UK — What Matters',
+  description: 'A beginner-friendly UK fitness tracker guide focused on useful metrics, battery, comfort and app fit, with current movement options kept in one shortlist.',
 }
 
-const PICKS = [
-  {
-    "title": "Fitbit Charge series",
-    "badge": "all-round",
-    "desc": "Solid balance of step tracking + sleep features.",
-    "query": "Fitbit Charge tracker",
-    "bullets": [
-      "Good sleep tracking features",
-      "Comfortable for daily wear",
-      "Check subscription features"
-    ]
-  },
-  {
-    "title": "Garmin vívosmart / Venu (entry models)",
-    "badge": "Great for training",
-    "desc": "Great if you want activity insights and strong battery.",
-    "query": "Garmin vivosmart fitness tracker",
-    "bullets": [
-      "Great battery on many models",
-      "Good activity insights",
-      "App ecosystem is strong"
-    ]
-  },
-  {
-    "title": "Amazfit Band / GTS series",
-    "badge": "Good value",
-    "desc": "Affordable options with useful basics and good battery.",
-    "query": "Amazfit band fitness tracker",
-    "bullets": [
-      "Good value",
-      "Battery often strong",
-      "Keep expectations realistic on “advanced” metrics"
-    ]
-  },
-  {
-    "title": "Apple Watch SE",
-    "badge": "iPhone",
-    "desc": "If you’re on iPhone and want smart features + fitness.",
-    "query": "Apple Watch SE",
-    "bullets": [
-      "with iPhone",
-      "Lots of apps",
-      "Battery is usually shorter than bands"
-    ]
-  },
-  {
-    "title": "Huawei Band series",
-    "badge": "Simple band",
-    "desc": "Slim, light band for steps and general tracking.",
-    "query": "Huawei Band fitness tracker",
-    "bullets": [
-      "Lightweight",
-      "Good basics",
-      "Check app compatibility"
-    ]
-  },
-  {
-    "title": "Xiaomi Smart Band",
-    "badge": "Easy starter band",
-    "desc": "Popular entry band with the essentials.",
-    "query": "Xiaomi Smart Band",
-    "bullets": [
-      "Very affordable",
-      "Good for steps",
-      "Great as a first tracker"
-    ]
-  }
+const METRICS = [
+  { title: 'Steps and movement', text: 'Useful when a visible daily target helps you stay consistent. Treat the number as a trend, not a precise medical measurement.' },
+  { title: 'Training consistency', text: 'Workout history can be helpful if you use it to spot patterns and keep a routine rather than chase every metric.' },
+  { title: 'Sleep trends', text: 'Wearables can show patterns, but sleep-stage estimates are not a diagnosis and should not replace how you actually feel.' },
+  { title: 'Heart-rate trends', text: 'Useful for general training feedback. Accuracy varies by device, fit and activity, particularly during fast or irregular movement.' },
 ]
 
-function SummaryBox() {
-  return (
-    <div className="rounded-2xl border bg-white p-6 shadow-sm">
-      <h2 className="text-xl font-semibold">At a glance</h2>
-      <p className="mt-2 text-zinc-700">
-        A straightforward shortlist with sensible options for most people — plus guidance on what to look for before you buy.
-      </p>
-      <div className="mt-4 flex flex-wrap gap-2">
-        <Link className="btn-secondary" href="/movement">Movement</Link>
-        <Link className="btn-secondary" href="/shortlists">Shortlists</Link>
-        <Link className="btn-secondary" href="/how-we-test">How we test</Link>
-      </div>
-      <p className="mt-4 text-xs text-zinc-500">Last updated: February 2, 2026 · Wild & Well Editorial Team</p>
-    </div>
-  )
-}
-
 export default function Page() {
-    
-  const edu = getMoneyPageEdu('best-fitness-trackers-beginners-uk')
-
-const itemList = PICKS.map((p, i) => ({
-    '@type': 'ListItem',
-    position: i + 1,
-    name: p.title,
-    url: amazonSearchUrl(p.query),
-  }))
-
-  const ld = {
-    '@context': 'https://schema.org',
-    '@type': 'Article',
-    headline: "Fitness Trackers for Beginners (UK): shortlist",
-    dateModified: '2026-02-02',
-    datePublished: '2026-01-27',
-    mainEntity: {
-      '@type': 'ItemList',
-      itemListElement: itemList,
-    },
-  }
+  const slug = 'best-fitness-trackers-beginners-uk'
+  const edu = getMoneyPageEdu(slug)
+  const ld = { '@context': 'https://schema.org', '@type': 'Article', headline: 'Fitness trackers for beginners UK: what matters', datePublished: '2026-01-27', dateModified: '2026-08-28' }
 
   return (
     <main className="mx-auto max-w-6xl px-4 py-16">
       <StructuredData data={ld} />
-      <StructuredData data={{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Do I need a tracker to get fitter?", "acceptedAnswer": {"@type": "Answer", "text": "No. A tracker is optional. It helps some people stay consistent by making steps and sleep more visible."}}, {"@type": "Question", "name": "Which metric matters most?", "acceptedAnswer": {"@type": "Answer", "text": "For most beginners: daily steps, weekly minutes of movement, and sleep consistency are the most useful starting points."}}]}} />
-
       <header>
         <div className="max-w-3xl">
-        <h1 className="text-4xl font-bold">Fitness trackers for beginners (UK): shortlist</h1>
-        <p className="mt-3 text-zinc-700">A straightforward shortlist of fitness trackers for beginners: steps, sleep, heart-rate, and the features that actually matter.</p>
-
-                </div>
-
-        {/* Hero image */}
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          src="/images/photography/movement.jpg"
-          alt=""
-          className="mt-6 h-[260px] w-full rounded-3xl border border-zinc-200 object-cover shadow-sm md:h-[380px]"
-          loading="lazy"
-          decoding="async"
-        />
-
+          <p className="text-sm font-semibold uppercase tracking-[0.16em] text-zinc-500">Movement buying guide</p>
+          <h1 className="mt-2 text-4xl font-bold">Fitness trackers for beginners: buy for one useful behaviour</h1>
+          <p className="mt-3 text-zinc-700">A tracker is optional. If it helps you walk more, train consistently or notice longer-term trends, it can be useful. If it only gives you more numbers to worry about, it has missed the point.</p>
+        </div>
+        <img src="/images/photography/movement.jpg" alt="" className="mt-6 h-[260px] w-full rounded-3xl border border-zinc-200 object-cover shadow-sm md:h-[380px]" loading="lazy" decoding="async" />
         <div className="max-w-3xl">
-<EducationFirstCallout topicHref="/movement" topicLabel="Movement basics" insightHref="/blog/home-strength-basics-busy-people" insightLabel="Strength basics" />
-              </div>
+          <EducationFirstCallout topicHref="/topics/movement" topicLabel="Movement fundamentals" insightHref="/blog/walking-basics-weekly-plan" insightLabel="Walking plan" />
+          <div className="mt-5 flex flex-wrap gap-2"><Link className="btn-primary" href="/movement/movement-shortlist#tracking-feedback">Compare tracking options</Link><Link className="btn-secondary" href="/topics/movement">Movement basics</Link><Link className="btn-secondary" href="/topics/recovery">Recovery basics</Link></div>
+        </div>
       </header>
 
-      
       <MoneyPageEducationBlock edu={edu} />
 
-      <MoneyPageQuickCompare picks={PICKS} />
-<section className="mt-8">
-        <SummaryBox />
+      <section className="mt-12">
+        <h2 className="text-2xl font-semibold">The metrics most beginners can actually use</h2>
+        <div className="mt-6 grid gap-4 md:grid-cols-2">{METRICS.map((item) => <div key={item.title} className="card"><h3 className="font-semibold">{item.title}</h3><p className="mt-2 text-sm text-zinc-700">{item.text}</p></div>)}</div>
       </section>
 
-      <section className="mt-14">
-        <h2 className="text-2xl font-semibold">Top options (shortlist)</h2>
-        <p className="mt-2 text-sm text-zinc-600">Three solid starting points, then a fuller list below.</p>
-        <div className="mt-6 grid gap-4 md:grid-cols-3">
-          <ProductPick
-            title="Fitbit Charge series"
-            badge="all-round"
-            description="Solid balance of step tracking + sleep features."
-            href={amazonSearchUrl('Fitbit Charge tracker')}
-            bullets={["Good sleep tracking features", "Comfortable for daily wear", "Check subscription features"]}
-          />
-
-          <ProductPick
-            title="Garmin vívosmart / Venu (entry models)"
-            badge="Great for training"
-            description="Great if you want activity insights and strong battery."
-            href={amazonSearchUrl('Garmin vivosmart fitness tracker')}
-            bullets={["Great battery on many models", "Good activity insights", "App ecosystem is strong"]}
-          />
-
-          <ProductPick
-            title="Amazfit Band / GTS series"
-            badge="Good value"
-            description="Affordable options with useful basics and good battery."
-            href={amazonSearchUrl('Amazfit band fitness tracker')}
-            bullets={["Good value", "Battery often strong", "Keep expectations realistic on \u201cadvanced\u201d metrics"]}
-          />
-
-        </div>
+      <section className="mt-14 max-w-3xl">
+        <h2 className="text-2xl font-semibold">What to check before buying</h2>
+        <ul className="mt-4 list-disc space-y-2 pl-6 text-sm text-zinc-700"><li>Battery life that fits how often you are willing to charge it.</li><li>Comfort for the amount of time you intend to wear it.</li><li>Compatibility with your phone and preferred health or training apps.</li><li>Whether useful features require an ongoing subscription.</li><li>A returns policy you are comfortable with if fit or usability is poor.</li></ul>
       </section>
 
-      <section className="mt-14">
-        <h2 className="text-2xl font-semibold">Full shortlist</h2>
-        <p className="mt-2 text-sm text-zinc-600">Choose based on your needs (space, budget, comfort, and how often you’ll actually use it).</p>
-        <div className="mt-6 grid gap-4 md:grid-cols-2">
-          <ProductPick
-            title="Fitbit Charge series"
-            badge="all-round"
-            description="Solid balance of step tracking + sleep features."
-            href={amazonSearchUrl('Fitbit Charge tracker')}
-            bullets={["Good sleep tracking features", "Comfortable for daily wear", "Check subscription features"]}
-          />
-
-          <ProductPick
-            title="Garmin vívosmart / Venu (entry models)"
-            badge="Great for training"
-            description="Great if you want activity insights and strong battery."
-            href={amazonSearchUrl('Garmin vivosmart fitness tracker')}
-            bullets={["Great battery on many models", "Good activity insights", "App ecosystem is strong"]}
-          />
-
-          <ProductPick
-            title="Amazfit Band / GTS series"
-            badge="Good value"
-            description="Affordable options with useful basics and good battery."
-            href={amazonSearchUrl('Amazfit band fitness tracker')}
-            bullets={["Good value", "Battery often strong", "Keep expectations realistic on \u201cadvanced\u201d metrics"]}
-          />
-
-          <ProductPick
-            title="Apple Watch SE"
-            badge="iPhone"
-            description="If you’re on iPhone and want smart features + fitness."
-            href={amazonSearchUrl('Apple Watch SE')}
-            bullets={["with iPhone", "Lots of apps", "Battery is usually shorter than bands"]}
-          />
-
-          <ProductPick
-            title="Huawei Band series"
-            badge="Simple band"
-            description="Slim, light band for steps and general tracking."
-            href={amazonSearchUrl('Huawei Band fitness tracker')}
-            bullets={["Lightweight", "Good basics", "Check app compatibility"]}
-          />
-
-          <ProductPick
-            title="Xiaomi Smart Band"
-            badge="Easy starter band"
-            description="Popular entry band with the essentials."
-            href={amazonSearchUrl('Xiaomi Smart Band')}
-            bullets={["Very affordable", "Good for steps", "Great as a first tracker"]}
-          />
-
-        </div>
+      <section className="mt-14 rounded-3xl border border-zinc-200 bg-zinc-50/60 p-6">
+        <div className="max-w-3xl"><p className="text-sm font-semibold uppercase tracking-[0.14em] text-zinc-500">Current buying route</p><h2 className="mt-2 text-2xl font-semibold">One maintained shortlist, not repeated marketplace lists</h2><p className="mt-2 text-zinc-700">The previous version repeated the same tracker brands in a quick comparison, a top-three section and a full Amazon list. Current partner options now live in the Movement shortlist, while this page keeps the decision criteria.</p><div className="mt-5"><Link className="btn-primary" href="/movement/movement-shortlist#tracking-feedback">Open tracking & feedback options</Link></div></div>
       </section>
 
-      <section className="mt-14">
-        <h2 className="text-2xl font-semibold">How we think about “best”</h2>
-        <div className="mt-3 space-y-3 text-sm text-zinc-700 max-w-3xl">
-          <p>
-            “Shortlist” here means: sensible features, consistent buyer reviews, and a realistic fit for most people.
-          </p>
-          <p>
-            Always check sizing/specs and current pricing before you buy. If a product makes strong health claims without evidence, treat that as marketing.
-          </p>
-        </div>
-        <p className="mt-4 text-sm text-zinc-500">
-          Some links are affiliate links. If you buy via them, we earn a commission.
-        </p>
-      </section>
-    
-      <MoneyPageNextLinks slug="best-fitness-trackers-beginners-uk" />
-
-</main>
+      <MoneyPageNextLinks slug={slug} />
+      <p className="mt-12 text-xs text-zinc-500">Some links are affiliate links. If you buy via them, Wild & Well may earn a commission at no extra cost to you.</p>
+    </main>
   )
 }
