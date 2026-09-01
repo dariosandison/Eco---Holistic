@@ -5,7 +5,7 @@ import { AWIN_PICKS } from '@/data/awinPicks'
 
 export const metadata = {
   title: 'Approved Partner Product Catalogue UK',
-  description: 'Browse Wild & Well approved affiliate products for water, air quality, sleep and movement, with practical checks before buying.',
+  description: 'Browse Wild & Well approved affiliate products for water, air quality, sleep and movement, plus the dog-home catalogue, with practical checks before buying.',
 }
 
 export default function Page() {
@@ -21,6 +21,7 @@ export default function Page() {
           <Link href="/shortlists" className="btn-primary">See curated shortlists</Link>
           <Link href="/how-we-test" className="btn-secondary">How we assess products</Link>
           <Link href="/affiliate-disclosure" className="btn-secondary">Affiliate disclosure</Link>
+          <Link href="/dog-product-catalogue" className="btn-secondary">Dog-home products</Link>
         </div>
         <p className="mt-4 text-sm text-zinc-600">For a shorter decision, use the curated Picks pages. Use this catalogue when you already know the product type or partner you want to compare.</p>
       </header>

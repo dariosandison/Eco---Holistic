@@ -48,7 +48,7 @@ export default function SiteHeader() {
           </Link>
           <Link href="/blog" className="text-sm font-medium text-zinc-700 hover:text-zinc-900">Insights</Link>
           <Link href="/topics" className="text-sm font-medium text-zinc-700 hover:text-zinc-900">Topics</Link>
-          <Link href="/topics/resilience" className="text-sm font-semibold text-zinc-900 hover:underline">Resilience</Link>
+          <Link href="/dogs" className="text-sm font-semibold text-zinc-900 hover:underline">Dogs</Link>
           <Link href="/shortlists" className="text-sm font-medium text-zinc-700 hover:text-zinc-900">Shortlists</Link>
           <Link href="/nutrition" className="text-sm font-medium text-zinc-700 hover:text-zinc-900">Nutrition</Link>
           <Link href="/movement" className="text-sm font-medium text-zinc-700 hover:text-zinc-900">Movement</Link>
@@ -71,6 +71,7 @@ export default function SiteHeader() {
           <Link href="/search" onClick={(e) => { e.preventDefault(); try { window.dispatchEvent(new Event('ww_open_palette')); } catch {} closeMobile(); }} className="rounded-md px-2 py-2 text-sm text-zinc-800 hover:bg-zinc-50">Search</Link>
           <Link href="/blog" onClick={closeMobile} className="rounded-md px-2 py-2 text-sm text-zinc-800 hover:bg-zinc-50">Wellness insights</Link>
           <Link href="/topics" onClick={closeMobile} className="rounded-md px-2 py-2 text-sm text-zinc-800 hover:bg-zinc-50">Topics</Link>
+          <Link href="/dogs" onClick={closeMobile} className="rounded-md bg-emerald-50/60 px-2 py-2 text-sm font-semibold text-zinc-900">Dog wellness</Link>
           <Link href="/topics/resilience" onClick={closeMobile} className="rounded-md bg-zinc-50 px-2 py-2 text-sm font-semibold text-zinc-900">Practical resilience</Link>
           <Link href="/start-here" onClick={closeMobile} className="rounded-md px-2 py-2 text-sm text-zinc-800 hover:bg-zinc-50">Start here</Link>
           <Link href="/shortlists" onClick={closeMobile} className="rounded-md px-2 py-2 text-sm text-zinc-800 hover:bg-zinc-50">Shortlists</Link>

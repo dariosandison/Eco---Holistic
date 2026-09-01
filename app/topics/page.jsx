@@ -29,12 +29,13 @@ const CORE_PATHS = [
   { title: 'Eat better without perfection', desc: 'Food-first nutrition, useful staples and convenient meals before optional supplements.', learn: '/topics/nutrition', buy: '/nutrition/food-first-shortlist' },
   { title: 'Move more consistently', desc: 'Walking and simple strength first, then footwear, home-training equipment or tracking when useful.', learn: '/topics/movement', buy: '/movement/movement-shortlist' },
   { title: 'Build a lower-tox home', desc: 'Start with high-use laundry, cleaning and bathroom swaps rather than replacing everything.', learn: '/topics/fragrance-free', buy: '/healthy-home/low-tox-shortlist' },
+  { title: 'Support a healthier life with dogs', desc: 'Complete nutrition, appropriate movement and a healthier shared home before optional wellness products.', learn: '/dogs', buy: '/dog-wellness-shortlist-uk' },
   { title: 'Handle short disruptions', desc: 'Calm household planning for water, food, power, communication and useful essentials.', learn: '/topics/resilience', buy: '/blog/72-hour-household-emergency-kit-uk' },
 ]
 
 export default function Page() {
   const topicItems = [
-    ['Sleep & recovery', '/topics/sleep'], ['Movement', '/topics/movement'], ['Recovery', '/topics/recovery'], ['Foot strength', '/topics/foot-strength'], ['Nutrition', '/topics/nutrition'], ['Gut health', '/topics/gut-health'], ['Hydration', '/topics/hydration'], ['Skin health', '/topics/skin-health'], ['Sun protection', '/topics/sun-protection'], ['Air quality', '/topics/air-quality'], ['Water', '/topics/water'], ['Fragrance-free cleaning & laundry', '/topics/fragrance-free'], ['Practical resilience', '/topics/resilience'],
+    ['Sleep & recovery', '/topics/sleep'], ['Movement', '/topics/movement'], ['Recovery', '/topics/recovery'], ['Foot strength', '/topics/foot-strength'], ['Nutrition', '/topics/nutrition'], ['Gut health', '/topics/gut-health'], ['Hydration', '/topics/hydration'], ['Skin health', '/topics/skin-health'], ['Sun protection', '/topics/sun-protection'], ['Air quality', '/topics/air-quality'], ['Water', '/topics/water'], ['Fragrance-free cleaning & laundry', '/topics/fragrance-free'], ['Dog health & wellness', '/dogs'], ['Practical resilience', '/topics/resilience'],
   ]
   const itemList = { '@context': 'https://schema.org', '@type': 'ItemList', name: 'Wild & Well topics', itemListElement: topicItems.map(([name, href], i) => ({ '@type': 'ListItem', position: i + 1, name, url: `${SITE_URL}${href}` })) }
 
@@ -70,6 +71,7 @@ export default function Page() {
           <Card image="/images/photography/thumbs/air-quality.png" title="Air quality" desc="Particles, damp, humidity and equipment choices." href="/topics/air-quality" tag="Home" />
           <Card image="/images/photography/thumbs/water.png" title="Water" desc="Filter formats, replacement costs and buying basics." href="/topics/water" tag="Home" />
           <Card image="/images/photography/thumbs/laundry.png" title="Fragrance-free home" desc="High-contact swaps for laundry, cleaning and bathroom products." href="/topics/fragrance-free" tag="Home" />
+          <Card title="Dog health & wellness" desc="Complete food, healthy weight, movement, pet allergies and a healthier shared home." href="/dogs" tag="Dogs" />
           <Card title="Practical resilience" desc="Water, power, food, communication and household essentials." href="/topics/resilience" tag="Home" />
         </div>
       </section>

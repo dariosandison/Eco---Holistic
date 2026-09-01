@@ -32,6 +32,12 @@ const TOPICS = [
     tag: 'Topic',
     description: 'Quick swaps for sensitive households and ingredient checks.',
   },
+  {
+    title: 'Dog health, wellness & healthy home',
+    href: '/dogs',
+    tag: 'Topic',
+    description: 'Dog food, healthy weight, supplements, pet allergies and healthier homes with dogs.',
+  },
 ]
 
 const CORE_PAGES = [
@@ -40,6 +46,8 @@ const CORE_PAGES = [
   { title: 'Deals', href: '/deals', tag: 'Page', description: 'Deal searches for products we already cover.' },
   { title: 'Free shopping list', href: '/shopping-list', tag: 'Free', description: 'Beginner-friendly swaps for air, water, cleaning and sleep.' },
   { title: 'How we test', href: '/how-we-test', tag: 'Policy', description: 'How we choose what to recommend (and what we avoid).' },
+  { title: 'Dog wellness shortlist', href: '/dog-wellness-shortlist-uk', tag: 'Shortlist', description: 'Current approved dog-home and pet-allergy options.' },
+  { title: 'Dog product catalogue', href: '/dog-product-catalogue', tag: 'Catalogue', description: 'Search current approved products for homes with dogs.' },
 ]
 
 function normalise(str) {
@@ -168,7 +176,7 @@ export default function SearchPage({ searchParams }) {
         {!qn ? (
           <div className="mt-5 flex flex-wrap gap-2">
             <span className="text-sm text-zinc-600">Popular:</span>
-            {['air purifier', 'water filter', 'dehumidifier', 'fragrance-free', 'sleep', 'oats', 'matcha'].map((t) => (
+            {['dog wellness', 'pet allergy', 'air purifier', 'water filter', 'dehumidifier', 'sleep', 'nutrition'].map((t) => (
               <Link
                 key={t}
                 href={`/search?q=${encodeURIComponent(t)}`}

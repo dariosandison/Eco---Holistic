@@ -16,6 +16,8 @@ export default function SiteFooter() {
     { href: '/shortlists', label: 'Shortlists' },
     { href: '/nutrition', label: 'Nutrition' },
     { href: '/movement', label: 'Movement' },
+    { href: '/dogs', label: 'Dog health & wellness' },
+    { href: '/dog-wellness-shortlist-uk', label: 'Dog wellness shortlist' },
     { href: '/how-we-test', label: 'How we evaluate products' },
   ]
 

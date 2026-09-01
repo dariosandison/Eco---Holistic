@@ -18,7 +18,7 @@ import { buildCommandPaletteIndex } from '@/lib/commandPaletteIndex'
 const SITE_URL = 'https://www.wild-and-well.store'
 const DEFAULT_TITLE = 'Wild & Well'
 const DEFAULT_DESC =
-  'Practical UK guidance for low-tox living, water, air quality, sleep, nutrition, movement and household resilience — evidence-led, useful and free from hype.'
+  'Practical UK guidance for low-tox living, water, air quality, sleep, nutrition, movement, dog wellness and household resilience — evidence-led, useful and free from hype.'
 
 export const metadata = {
   metadataBase: new URL(SITE_URL),
@@ -36,6 +36,9 @@ export const metadata = {
     'sleep',
     'nutrition',
     'movement',
+    'dog wellness',
+    'natural dog food uk',
+    'pet allergies',
     'household resilience',
     'emergency preparedness uk',
   ],

@@ -50,6 +50,13 @@ const BUYING_PATHS = [
     compare: '/movement/movement-shortlist',
   },
   {
+    title: 'Healthier life with dogs',
+    problem: 'Complete food, sensible movement, pet-allergen exposure and carefully assessed wellness products.',
+    learn: '/dogs',
+    compare: '/dog-wellness-shortlist-uk',
+    extra: { label: 'Search current dog-home products', href: '/dog-product-catalogue' },
+  },
+  {
     title: 'Practical resilience',
     problem: 'Water, food, power and useful household backup basics.',
     learn: '/topics/resilience',
