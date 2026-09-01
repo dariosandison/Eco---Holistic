@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import InterestSignup from '@/components/InterestSignup'
 
 export const metadata = {
   title: 'Healthy Home UK — Air, Water & Lower-Tox Living',
@@ -75,6 +76,8 @@ export default function Page() {
           <li>Use the shortlists only when a product genuinely solves the problem.</li>
         </ol>
       </section>
+
+      <div className="mt-12"><InterestSignup placement="healthy-home-hub" defaultInterest="healthy-home" title="Build a healthier home one decision at a time" description="Practical UK air, water, lower-tox, energy and resilience guidance without scare tactics or constant shopping prompts." /></div>
 
       <p className="mt-10 text-xs text-zinc-500">Some linked pages contain affiliate links. If you buy through them, Wild & Well may earn a commission at no extra cost to you.</p>
     </main>

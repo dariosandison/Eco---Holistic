@@ -14,7 +14,7 @@ function looksLikeUuid(v) {
   return /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(v)
 }
 
-async function subscribeBeehiiv({ email, source, baseUrl }) {
+async function subscribeBeehiiv({ email, source, interest, baseUrl }) {
   const apiKey = process.env.BEEHIV_API_KEY
   const publicationIdRaw = process.env.BEEHIV_PUBLICATION_ID
 
@@ -31,7 +31,7 @@ async function subscribeBeehiiv({ email, source, baseUrl }) {
     send_welcome_email: true,
     utm_source: process.env.NEXT_PUBLIC_UTM_SOURCE || 'wild-and-well',
     utm_medium: 'site',
-    utm_campaign: source || 'site',
+    utm_campaign: [source || 'site', interest].filter(Boolean).join(':'),
     referring_site: referringSite,
   }
 
@@ -78,6 +78,7 @@ export async function POST(req) {
 
   let email = ''
   let source = ''
+  let interest = ''
 
   try {
     const ct = req.headers.get('content-type') || ''
@@ -85,10 +86,12 @@ export async function POST(req) {
       const body = await req.json()
       email = String(body?.email || '')
       source = String(body?.source || '')
+      interest = String(body?.interest || '')
     } else {
       const fd = await req.formData()
       email = String(fd.get('email') || '')
       source = String(fd.get('source') || '')
+      interest = String(fd.get('interest') || '')
     }
   } catch (e) {
     // fall through
@@ -96,6 +99,8 @@ export async function POST(req) {
 
   email = email.trim().toLowerCase()
   source = (source || 'site').trim()
+  interest = String(interest || '').toLowerCase().trim()
+  if (!new Set(['wellness', 'healthy-home', 'dogs', 'outdoors', 'offers']).has(interest)) interest = ''
 
   if (!email || !isValidEmail(email)) {
     if (wantsJson(req)) {
@@ -114,11 +119,12 @@ export async function POST(req) {
   try {
     // Preferred: Beehiiv API (since you already have BEEHIV_API_KEY + BEEHIV_PUBLICATION_ID in Vercel)
     if ((provider.includes('beehiiv') || provider.includes('beehiv') || (process.env.BEEHIV_API_KEY && process.env.BEEHIV_PUBLICATION_ID))) {
-      await subscribeBeehiiv({ email, source, baseUrl })
+      await subscribeBeehiiv({ email, source, interest, baseUrl })
     } else if (formAction) {
       const params = new URLSearchParams()
       params.set(emailField, email)
       params.set('source', source)
+      if (interest) params.set('interest', interest)
 
       // Optional extra fields, provided as JSON string
       // e.g. {"tags":"wild-and-well","ref":"footer"}
@@ -144,7 +150,7 @@ export async function POST(req) {
       const r = await fetch(webhookUrl, {
         method: 'POST',
         headers: { 'content-type': 'application/json' },
-        body: JSON.stringify({ email, source, site: 'wild-and-well' }),
+        body: JSON.stringify({ email, source, interest, site: 'wild-and-well' }),
       })
       if (!r.ok) throw new Error(`newsletter_webhook_failed_${r.status}`)
     } else {

@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import StructuredData from '@/components/StructuredData'
 import { SITE_URL } from '@/lib/site'
+import InterestSignup from '@/components/InterestSignup'
 
 export const metadata = {
   title: 'Dog Health, Wellness & Healthy Home UK',
@@ -119,6 +120,7 @@ export default function Page() {
           <Link href="/air-quality-shortlist-uk#air-purifiers" className="btn-secondary">Compare current air options</Link>
         </div>
       </section>
+      <div className="mt-14"><InterestSignup placement="dogs-hub" defaultInterest="dogs" title="Useful dog guidance, not a pet-shop newsletter" description="Evidence-led feeding, movement, healthy-home and dogs-outdoors guidance, with commercially useful updates kept in proportion." /></div>
     </main>
   )
 }
