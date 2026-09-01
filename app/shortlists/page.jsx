@@ -82,6 +82,7 @@ export default function Page() {
         </p>
         <div className="mt-5 flex flex-wrap gap-2">
           <Link className="btn-primary" href="/topics">Learn first</Link>
+          <Link className="btn-secondary" href="/partner-catalogue">Browse all approved products</Link>
           <Link className="btn-secondary" href="/shopping-list">Get the free shopping list</Link>
           <Link className="btn-secondary" href="/deals">Browse current deals</Link>
         </div>

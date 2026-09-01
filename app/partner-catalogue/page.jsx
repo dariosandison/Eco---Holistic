@@ -18,7 +18,7 @@ export default function Page() {
         <h1 className="mt-2 text-4xl font-bold tracking-tight md:text-5xl">Browse products by the job they do</h1>
         <p className="mt-4 text-lg text-zinc-700">This is the wider catalogue of products available through approved Wild &amp; Well affiliate partners. Inclusion means a tracked partner relationship exists; it does not mean every item is a top recommendation.</p>
         <div className="mt-6 flex flex-wrap gap-3">
-          <Link href="/picks" className="btn-primary">See curated picks</Link>
+          <Link href="/shortlists" className="btn-primary">See curated shortlists</Link>
           <Link href="/how-we-test" className="btn-secondary">How we assess products</Link>
           <Link href="/affiliate-disclosure" className="btn-secondary">Affiliate disclosure</Link>
         </div>
