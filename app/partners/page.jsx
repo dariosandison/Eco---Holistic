@@ -53,6 +53,7 @@ export default function Page() {
 
             <div className="mt-7 flex flex-col gap-3 sm:flex-row sm:items-center">
               <Link href="/picks" className="btn-secondary w-full sm:w-auto text-center">Browse Picks</Link>
+              <Link href="/partner-catalogue" className="btn-secondary w-full sm:w-auto text-center">All approved products</Link>
               <Link href="/topics" className="btn-secondary w-full sm:w-auto text-center">Start with Topics</Link>
               <Link href="/affiliate-disclosure" className="btn-primary w-full sm:w-auto text-center">How affiliate links work</Link>
             </div>

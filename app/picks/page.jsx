@@ -12,9 +12,10 @@ export const metadata = {
     'Shortlists with clear trade-offs for UK homes: air, water, fragrance-free laundry, sleep, nutrition, and movement.',
 }
 
-export default function Page({ searchParams }) {
+export default async function Page({ searchParams }) {
   const sections = getPicksSections()
-  const tag = searchParams?.tag ? String(searchParams.tag) : ''
+  const params = await searchParams
+  const tag = params?.tag ? String(params.tag) : ''
   const partners = tag
     ? PARTNER_PRODUCTS.filter((p) => String(p.tag || '').toLowerCase() === tag.toLowerCase())
     : PARTNER_PRODUCTS
@@ -50,12 +51,12 @@ export default function Page({ searchParams }) {
 
             <div className="mt-6 flex flex-wrap items-center gap-2 text-sm">
               <span className="text-zinc-700">Filter:</span>
-              <Link href="/picks?tag=Air" className="rounded-full border border-zinc-200 bg-white/80 px-3 py-1 text-zinc-900 hover:bg-white">Air</Link>
+              <Link href="/picks?tag=Air%20Quality" className="rounded-full border border-zinc-200 bg-white/80 px-3 py-1 text-zinc-900 hover:bg-white">Air</Link>
               <Link href="/picks?tag=Water" className="rounded-full border border-zinc-200 bg-white/80 px-3 py-1 text-zinc-900 hover:bg-white">Water</Link>
               <Link href="/picks?tag=Laundry" className="rounded-full border border-zinc-200 bg-white/80 px-3 py-1 text-zinc-900 hover:bg-white">Laundry</Link>
               <Link href="/picks?tag=Sleep" className="rounded-full border border-zinc-200 bg-white/80 px-3 py-1 text-zinc-900 hover:bg-white">Sleep</Link>
               <Link href="/picks?tag=Staples" className="rounded-full border border-zinc-200 bg-white/80 px-3 py-1 text-zinc-900 hover:bg-white">Nutrition</Link>
-              <Link href="/picks?tag=Walking" className="rounded-full border border-zinc-200 bg-white/80 px-3 py-1 text-zinc-900 hover:bg-white">Movement</Link>
+              <Link href="/picks?tag=Movement" className="rounded-full border border-zinc-200 bg-white/80 px-3 py-1 text-zinc-900 hover:bg-white">Movement</Link>
             </div>
 
             <p className="mt-4 text-xs text-zinc-600">Some links are affiliate links. If you buy via them, we earn a commission.</p>
@@ -76,6 +77,9 @@ export default function Page({ searchParams }) {
                 A small set of high-fit products from partners you’re approved with. (Links are affiliate links.)
               </p>
             </div>
+            <Link href="/partner-catalogue" className="text-sm font-semibold text-zinc-900 hover:underline">
+              Browse all 80 approved products →
+            </Link>
             <Link
               href="/affiliate-disclosure"
               className="text-sm font-semibold text-zinc-900 hover:underline"
@@ -132,6 +136,8 @@ export default function Page({ searchParams }) {
                       href={
                         p.tag === 'Water'
                           ? '/best-water-filters-uk'
+                          : p.tag === 'Air Quality'
+                            ? '/best-dehumidifiers-uk-damp-mould'
                           : p.tag === 'Sleep'
                             ? '/best-natural-sleep-support'
                             : p.tag === 'Movement' || p.tag === 'Strength' || p.tag === 'Walking'
