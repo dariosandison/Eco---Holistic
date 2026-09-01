@@ -10,7 +10,7 @@ export const metadata = {
   description: 'A curated list of partner products we feature across Wild & Well (affiliate links).',
 }
 
-const GROUP_ORDER = ['Water', 'Sleep', 'Movement', 'Strength', 'Staples', 'Drinks', 'Gut', 'Home']
+const GROUP_ORDER = ['Water', 'Air Quality', 'Sleep', 'Movement', 'Strength', 'Staples', 'Drinks', 'Gut', 'Home']
 
 function groupProducts(products) {
   const map = new Map()
@@ -48,7 +48,7 @@ export default function Page() {
           <div className="max-w-3xl">
             <h1 className="text-4xl font-bold tracking-tight text-zinc-900 md:text-5xl">Partner picks</h1>
             <p className="mt-4 text-base text-zinc-700 md:text-lg">
-              These are the partner products we currently feature across Wild &amp; Well. We keep this list small and high‑fit — no endless catalogue.
+              Approved partner products currently featured across Wild &amp; Well, organised by the job they help with. We expand this catalogue selectively, favouring useful comparisons over an endless product feed.
             </p>
 
             <div className="mt-7 flex flex-col gap-3 sm:flex-row sm:items-center">
@@ -87,6 +87,8 @@ export default function Page() {
                 <p className="mt-1 text-sm text-zinc-600">
                   {g.tag === 'Water'
                     ? 'Low-effort filtration options — jug, under-sink, gravity, and on-the-go.'
+                    : g.tag === 'Air Quality'
+                      ? 'Dehumidification and filtration options selected around room size, moisture source, noise and running costs.'
                     : g.tag === 'Sleep'
                       ? 'Simple support for better nights — environment first, products second.'
                       : g.tag === 'Movement' || g.tag === 'Strength'
@@ -103,6 +105,8 @@ export default function Page() {
                 href={
                   g.tag === 'Water'
                     ? '/best-water-filters-uk'
+                    : g.tag === 'Air Quality'
+                      ? '/best-dehumidifiers-uk-damp-mould'
                     : g.tag === 'Sleep'
                       ? '/best-natural-sleep-support'
                       : g.tag === 'Movement' || g.tag === 'Strength'
