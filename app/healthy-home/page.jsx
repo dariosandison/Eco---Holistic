@@ -7,6 +7,12 @@ export const metadata = {
 
 const ROUTES = [
   {
+    title: 'Efficient home energy',
+    desc: 'Take a measured route through efficiency, monitoring, solar, batteries, heat pumps, EV charging and backup power.',
+    href: '/healthy-home/home-energy',
+    cta: 'Open the home-energy route',
+  },
+  {
     title: 'Lower-tox home swaps',
     desc: 'Start with high-use products: laundry, cookware, bathroom basics and simple fragrance reduction.',
     href: '/healthy-home/low-tox-shortlist',

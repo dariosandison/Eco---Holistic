@@ -17,13 +17,16 @@ export default function SiteFooter() {
     { href: '/nutrition', label: 'Nutrition' },
     { href: '/movement', label: 'Movement' },
     { href: '/dogs', label: 'Dog health & wellness' },
+    { href: '/outdoors', label: 'Outdoors & nature' },
+    { href: '/healthy-home', label: 'Healthy home' },
+    { href: '/healthy-home/home-energy', label: 'Home energy' },
     { href: '/dog-wellness-shortlist-uk', label: 'Dog wellness shortlist' },
     { href: '/how-we-test', label: 'How we evaluate products' },
   ]
 
   const shop = [
     { href: '/shopping-list', label: 'Free Shopping List' },
-    { href: '/deals', label: 'Deals' },
+    { href: '/deals', label: 'Verified offers' },
   ]
 
   const about = [

@@ -1,73 +1,11 @@
-import Link from "next/link";
-import DealExplorer from "@/components/DealExplorer";
+import Link from 'next/link'
+import OfferExplorer from '@/components/OfferExplorer'
+import { getLiveOffers } from '@/data/offers'
 
-export const metadata = {
-  title: "Deals",
-  description:
-    "Deal searches for products we already cover. Always verify current price and specs before buying.",
-};
-
-const DEALS = [
-  { group: 'Home (low-tox, air, water)', title: 'Air purifier deals (UK)', desc: 'HEPA purifiers for allergies and general air quality.', query: 'air purifier HEPA deal UK', guideHref: '/best-air-purifiers-allergies-uk', tag: 'Air' },
-  { group: 'Home (low-tox, air, water)', title: 'Water filter deals (UK)', desc: 'Jugs, countertop, and under-sink filters.', query: 'water filter jug under sink deal UK', guideHref: '/best-water-filters-uk', tag: 'Water' },
-  { group: 'Home (low-tox, air, water)', title: 'Fragrance-free laundry deals', desc: 'Sensitive-home laundry options.', query: 'fragrance free laundry detergent deal', guideHref: '/best-fragrance-free-laundry-detergents-uk', tag: 'Laundry' },
-  { group: 'Home (low-tox, air, water)', title: 'Shower filter deals (UK)', desc: 'Hard water comfort options.', query: 'shower filter hard water deal UK', guideHref: '/best-shower-filters-uk-hard-water', tag: 'Water' },
-  { group: 'Sleep', title: 'Humidifier deals (UK)', desc: 'Bedroom humidifiers — check tank size + cleaning.', query: 'humidifier bedroom deal UK', guideHref: '/best-humidifiers-for-bedrooms-uk', tag: 'Sleep' },
-  { group: 'Sleep', title: 'Sleep essentials deals', desc: 'Practical sleep items.', query: 'blackout curtains earplugs white noise machine deal', guideHref: '/topics/sleep', tag: 'Sleep' },
-  { group: 'Nutrition', title: 'Extra virgin olive oil deals', desc: 'Look for smaller bottles and clear origin info.', query: 'extra virgin olive oil deal', guideHref: '/best-extra-virgin-olive-oil-uk', tag: 'Food' },
-  { group: 'Nutrition', title: 'Organic oats deals', desc: 'Jumbo/rolled/steel-cut — buy what you’ll finish.', query: 'organic oats deal', guideHref: '/best-organic-oats-uk', tag: 'Food' },
-  { group: 'Nutrition', title: 'Chia & flax deals', desc: 'Simple add-ins for oats, yoghurt, smoothies.', query: 'chia seeds flaxseed deal', guideHref: '/best-chia-seeds-uk', tag: 'Food' },
-  { group: 'Nutrition', title: 'Matcha deals', desc: 'Check origin and buy small tins if you want freshness.', query: 'matcha powder deal', guideHref: '/best-organic-matcha-uk', tag: 'Food' },
-  { group: 'Movement', title: 'Fitness tracker deals (UK)', desc: 'Step tracking + sleep basics.', query: 'fitness tracker deal UK', guideHref: '/best-fitness-trackers-beginners-uk', tag: 'Gear' },
-  { group: 'Movement', title: 'Resistance band deals', desc: 'Long bands + mini loops cover most home training.', query: 'resistance bands set deal', guideHref: '/best-resistance-bands-home-workouts', tag: 'Gear' },
-  { group: 'Movement', title: 'Walking shoe deals (UK)', desc: 'Comfort-first walking shoes for regular steps.', query: 'walking shoes deal UK', guideHref: '/best-walking-shoes-daily-steps-uk', tag: 'Footwear' },
-  { group: 'Movement', title: 'Yoga mat deals', desc: 'Grip + comfort for mobility and floor work.', query: 'yoga mat deal', guideHref: '/best-yoga-mats-grip-comfort', tag: 'Gear' },
-  { group: 'Movement', title: 'Activewear deals (UK)', desc: 'Comfort-first basics: socks, layers, simple training gear.', query: 'activewear deal UK training top leggings socks', guideHref: '/best-activewear-basics-uk', tag: 'Clothing' },
-]
+export const dynamic = 'force-dynamic'
+export const metadata = { title: 'Wild & Well Offers — Verified UK Partner Promotions', description: 'Current Wild & Well partner offers that have been checked for relevance, terms and expiry. No stale voucher codes or manufactured urgency.' }
 
 export default function DealsPage() {
-  return (
-    <main className="mx-auto max-w-6xl px-4 py-16">
-      <header className="max-w-3xl">
-        <h1 className="text-4xl font-bold">Deals</h1>
-        <p className="mt-3 text-zinc-700">
-          Quick access to deal searches for products we already cover on our pages. If you see a good price, cross-check
-          specs and reviews before buying.
-        </p>
-        <div className="mt-5 flex flex-wrap gap-2">
-          <Link className="btn-secondary" href="/topics">
-            Browse topics
-          </Link>
-          <Link className="btn-secondary" href="/shortlists">Browse shortlists</Link>
-          <Link className="btn-secondary" href="/search">Search the site</Link>
-        </div>
-        <p className="mt-3 text-xs text-zinc-500">Last checked: January 27, 2026</p>
-      </header>
-
-      <section className="mt-10 grid gap-4 md:grid-cols-2">
-        <div className="rounded-2xl border bg-white p-6 shadow-sm">
-          <h2 className="text-xl font-semibold">Good times to buy</h2>
-          <ul className="mt-3 list-disc pl-6 text-sm text-zinc-700 space-y-1">
-            <li><strong>Seasonal peaks:</strong> air purifiers (spring allergies), humidifiers (autumn/winter), fans (summer).</li>
-            <li><strong>Sales events:</strong> big retailer sales can be real discounts — but check history if you can.</li>
-            <li><strong>End-of-line:</strong> older models can be great value if filters/spares remain available.</li>
-          </ul>
-        </div>
-        <div className="rounded-2xl border bg-white p-6 shadow-sm">
-          <h2 className="text-xl font-semibold">What to check before you buy</h2>
-          <ul className="mt-3 list-disc pl-6 text-sm text-zinc-700 space-y-1">
-            <li><strong>Size fit:</strong> room coverage, tank size, or dimensions (especially bedrooms and small flats).</li>
-            <li><strong>Ongoing costs:</strong> filters, refills, and replacement parts (often the hidden expense).</li>
-            <li><strong>Returns &amp; warranty:</strong> only worth it if you can return easily and the brand supports spares.</li>
-          </ul>
-        </div>
-      </section>
-
-      <DealExplorer deals={DEALS} />
-
-      <p className="mt-12 text-sm text-zinc-500 max-w-3xl">
-        Some links are affiliate links. If you buy via them, we earn a commission.
-      </p>
-    </main>
-  );
+  const offers = getLiveOffers()
+  return <main className="mx-auto max-w-6xl px-4 py-16"><header className="max-w-4xl"><p className="text-sm font-semibold uppercase tracking-[0.16em] text-zinc-500">Wild &amp; Well offers</p><h1 className="mt-2 text-4xl font-bold tracking-tight md:text-5xl">Useful offers, checked before they appear</h1><p className="mt-4 max-w-3xl text-lg text-zinc-700">A small, maintained selection of partner promotions across wellness, healthy home, dogs and outdoors. Inclusion depends on product fit and reader value—not simply the size of the discount.</p><div className="mt-6 flex flex-wrap gap-2"><Link href="/shortlists" className="btn-primary">Browse decision-led shortlists</Link><Link href="/affiliate-disclosure" className="btn-secondary">How affiliate links work</Link></div></header><section className="my-10 grid gap-4 md:grid-cols-3">{[['Checked expiry','Offers automatically disappear after their recorded end date.'],['Independent selection','A commission never guarantees inclusion or a positive verdict.'],['Whole-cost view','We consider delivery, refills, filters, returns and likely useful life.']].map(([title,text]) => <div key={title} className="rounded-2xl border border-zinc-200 bg-white p-5"><h2 className="font-semibold">{title}</h2><p className="mt-2 text-sm text-zinc-600">{text}</p></div>)}</section><OfferExplorer offers={offers} /><p className="mt-10 max-w-3xl text-xs text-zinc-500">Offer links may be affiliate links. Wild &amp; Well may receive a commission at no extra cost to you. Prices, stock and eligibility are confirmed by the retailer at checkout.</p></main>
 }

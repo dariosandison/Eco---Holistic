@@ -47,12 +47,12 @@ export default function SiteHeader() {
             <span className="hidden rounded-md border border-zinc-300 bg-white px-1.5 py-0.5 text-[10px] font-semibold text-zinc-600 lg:inline">Ctrl/⌘ K</span>
           </Link>
           <Link href="/blog" className="text-sm font-medium text-zinc-700 hover:text-zinc-900">Insights</Link>
-          <Link href="/topics" className="text-sm font-medium text-zinc-700 hover:text-zinc-900">Topics</Link>
+          <Link href="/healthy-home" className="text-sm font-medium text-zinc-700 hover:text-zinc-900">Home</Link>
           <Link href="/dogs" className="text-sm font-semibold text-zinc-900 hover:underline">Dogs</Link>
+          <Link href="/outdoors" className="text-sm font-semibold text-zinc-900 hover:underline">Outdoors</Link>
           <Link href="/shortlists" className="text-sm font-medium text-zinc-700 hover:text-zinc-900">Shortlists</Link>
-          <Link href="/nutrition" className="text-sm font-medium text-zinc-700 hover:text-zinc-900">Nutrition</Link>
-          <Link href="/movement" className="text-sm font-medium text-zinc-700 hover:text-zinc-900">Movement</Link>
-          <Link href="/deals" className="text-sm font-medium text-zinc-700 hover:text-zinc-900">Deals</Link>
+          <Link href="/topics" className="text-sm font-medium text-zinc-700 hover:text-zinc-900">Topics</Link>
+          <Link href="/deals" className="text-sm font-medium text-zinc-700 hover:text-zinc-900">Offers</Link>
           <Link href="/shopping-list" onClick={() => trackEvent('click_shopping_list')} className="text-sm font-medium text-zinc-700 hover:text-zinc-900">Free List</Link>
         </nav>
 
@@ -72,12 +72,15 @@ export default function SiteHeader() {
           <Link href="/blog" onClick={closeMobile} className="rounded-md px-2 py-2 text-sm text-zinc-800 hover:bg-zinc-50">Wellness insights</Link>
           <Link href="/topics" onClick={closeMobile} className="rounded-md px-2 py-2 text-sm text-zinc-800 hover:bg-zinc-50">Topics</Link>
           <Link href="/dogs" onClick={closeMobile} className="rounded-md bg-emerald-50/60 px-2 py-2 text-sm font-semibold text-zinc-900">Dog wellness</Link>
+          <Link href="/outdoors" onClick={closeMobile} className="rounded-md bg-amber-50/60 px-2 py-2 text-sm font-semibold text-zinc-900">Outdoors &amp; nature</Link>
+          <Link href="/healthy-home" onClick={closeMobile} className="rounded-md px-2 py-2 text-sm text-zinc-800 hover:bg-zinc-50">Healthy home</Link>
+          <Link href="/healthy-home/home-energy" onClick={closeMobile} className="rounded-md px-2 py-2 text-sm text-zinc-800 hover:bg-zinc-50">Home energy</Link>
           <Link href="/topics/resilience" onClick={closeMobile} className="rounded-md bg-zinc-50 px-2 py-2 text-sm font-semibold text-zinc-900">Practical resilience</Link>
           <Link href="/start-here" onClick={closeMobile} className="rounded-md px-2 py-2 text-sm text-zinc-800 hover:bg-zinc-50">Start here</Link>
           <Link href="/shortlists" onClick={closeMobile} className="rounded-md px-2 py-2 text-sm text-zinc-800 hover:bg-zinc-50">Shortlists</Link>
           <Link href="/nutrition" onClick={closeMobile} className="rounded-md px-2 py-2 text-sm text-zinc-800 hover:bg-zinc-50">Nutrition</Link>
           <Link href="/movement" onClick={closeMobile} className="rounded-md px-2 py-2 text-sm text-zinc-800 hover:bg-zinc-50">Movement</Link>
-          <Link href="/deals" onClick={closeMobile} className="rounded-md px-2 py-2 text-sm text-zinc-800 hover:bg-zinc-50">Deals</Link>
+          <Link href="/deals" onClick={closeMobile} className="rounded-md px-2 py-2 text-sm text-zinc-800 hover:bg-zinc-50">Offers</Link>
           <Link href="/shopping-list" onClick={() => { trackEvent('click_shopping_list'); closeMobile(); }} className="rounded-md px-2 py-2 text-sm text-zinc-800 hover:bg-zinc-50">Free List</Link>
           <Link href="/how-we-test" onClick={closeMobile} className="rounded-md px-2 py-2 text-sm text-zinc-800 hover:bg-zinc-50">How We Test</Link>
           <Link href="/affiliate-disclosure" onClick={closeMobile} className="rounded-md px-2 py-2 text-sm text-zinc-800 hover:bg-zinc-50">Affiliate disclosure</Link>
