@@ -78,6 +78,18 @@ export default function HowWeTest() {
         </ul>
       </Section>
 
+      <Section title="Our UK source hierarchy">
+        <p>We prefer primary UK sources for health, safety, regulation and consumer standards. Depending on the topic, that normally means:</p>
+        <ul className="list-disc space-y-2 pl-6">
+          <li><strong>Drinking water:</strong> the <a className="underline" href="https://www.dwi.gov.uk/" target="_blank" rel="noopener noreferrer">Drinking Water Inspectorate</a>, water-company reports and the specific standard or test method behind a product claim.</li>
+          <li><strong>Health and supplements:</strong> the <a className="underline" href="https://www.nhs.uk/" target="_blank" rel="noopener noreferrer">NHS</a>, UK government guidance and relevant systematic reviews. Merchant copy is not treated as clinical evidence.</li>
+          <li><strong>Indoor air, damp and mould:</strong> UKHSA and current GOV.UK housing-health guidance, followed by recognised technical standards where they apply.</li>
+          <li><strong>Food and food-contact products:</strong> the Food Standards Agency and applicable UK legislation.</li>
+          <li><strong>Commercial and health claims:</strong> ASA/CAP guidance. Affiliate content must remain identifiable and must not imply that a supplement or consumer product treats disease.</li>
+        </ul>
+        <p>Manufacturer specifications remain useful for dimensions, power use, warranties and maintenance instructions. We label them as manufacturer information and look for independent support before repeating performance or health claims.</p>
+      </Section>
+
       <Section title="Affiliate relationships">
         <p>
           Some merchants pay Wild &amp; Well a commission if a reader buys after following an affiliate link. That commercial relationship does not change the evaluation criteria above.
