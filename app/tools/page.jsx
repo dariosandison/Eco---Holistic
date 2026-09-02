@@ -7,6 +7,12 @@ export const metadata = {
 
 const tools = [
   {
+    href: '/tools/portable-power-runtime-calculator',
+    title: 'Portable power runtime calculator',
+    text: 'Estimate the watt-hours needed for camping, short outages or essential low-power devices before comparing battery stations.',
+    topic: 'Home energy & outdoors',
+  },
+  {
     href: '/tools/72-hour-water-calculator',
     title: '72-hour household water calculator',
     text: 'Estimate a simple drinking-water planning quantity for a short household disruption.',

@@ -1,6 +1,7 @@
 'use client'
 
 import { useMemo, useState } from 'react'
+import VisibilityTracker from '@/components/VisibilityTracker'
 
 const TOPIC_LABELS = { water: 'Water', air: 'Air quality', sleep: 'Sleep', movement: 'Movement' }
 
@@ -51,14 +52,16 @@ export default function AffiliateCatalogue({ products }) {
             <h2 className="mt-1 text-2xl font-semibold">{section.group}</h2>
             <div className="mt-5 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
               {section.items.map((product) => (
-                <article key={product.clickref} className="card flex flex-col p-5">
-                  <p className="text-xs font-semibold text-zinc-500">{product.advertiser}</p>
-                  <h3 className="mt-1 text-lg font-semibold text-zinc-900">{product.product}</h3>
-                  <ul className="mt-3 list-disc space-y-1 pl-5 text-sm text-zinc-600">
-                    {(product.bullets || []).slice(0, 3).map((bullet) => <li key={bullet}>{bullet}</li>)}
-                  </ul>
-                  <a href={product.awin} target="_blank" rel="sponsored nofollow noopener" className="btn-primary mt-5 self-start">Check current price</a>
-                </article>
+                <VisibilityTracker key={product.clickref} eventName="product_impression" params={{ catalogue: 'partner_catalogue', advertiser: product.advertiser, product: product.product, topic: product.topic }} className="h-full">
+                  <article className="card flex h-full flex-col p-5">
+                    <p className="text-xs font-semibold text-zinc-500">{product.advertiser}</p>
+                    <h3 className="mt-1 text-lg font-semibold text-zinc-900">{product.product}</h3>
+                    <ul className="mt-3 list-disc space-y-1 pl-5 text-sm text-zinc-600">
+                      {(product.bullets || []).slice(0, 3).map((bullet) => <li key={bullet}>{bullet}</li>)}
+                    </ul>
+                    <a href={product.awin} target="_blank" rel="sponsored nofollow noopener" className="btn-primary mt-5 self-start">Check current price</a>
+                  </article>
+                </VisibilityTracker>
               ))}
             </div>
           </section>

@@ -1,6 +1,7 @@
 'use client'
 
 import { useMemo, useState } from 'react'
+import VisibilityTracker from '@/components/VisibilityTracker'
 
 const NEEDS = {
   purifier: 'Airborne dander',
@@ -54,7 +55,8 @@ export default function DogProductCatalogue({ products }) {
 
       <div className="mt-8 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
         {filtered.map((product) => (
-          <article key={product.clickref} className="card flex flex-col p-5">
+          <VisibilityTracker key={product.clickref} event="product_impression" data={{ product: product.product, merchant: product.advertiser, category: 'dog-home', clickref: product.clickref }}>
+          <article className="card flex h-full flex-col p-5">
             <p className="text-xs font-semibold uppercase tracking-wide text-zinc-500">{NEEDS[product.dogNeed]}</p>
             <h2 className="mt-1 text-lg font-semibold text-zinc-900">{product.product}</h2>
             <p className="mt-1 text-xs text-zinc-500">{product.advertiser}</p>
@@ -73,6 +75,7 @@ export default function DogProductCatalogue({ products }) {
               Check current price
             </a>
           </article>
+          </VisibilityTracker>
         ))}
       </div>
       {!filtered.length ? <div className="panel mt-6 text-sm text-zinc-700">No current products match that search. Try a broader term or select all needs.</div> : null}
