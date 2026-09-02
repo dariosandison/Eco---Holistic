@@ -8,6 +8,7 @@ export const metadata = { title: 'Outdoors & Nature UK — Walking, Family Campi
 const ROUTES = [
   ['Walk more often', 'Build a repeatable walking habit, choose footwear by terrain and take weather and route conditions seriously.', '/blog/walking-for-health-how-much-is-enough', 'Start with walking'],
   ['Family camping', 'Plan shelter, sleep, warmth, food and hygiene before buying convenience extras.', '/outdoors/family-camping-checklist-uk', 'Use the camping framework'],
+  ['Camping sleep systems', 'Match the mat, sleeping bag and night clothing to the coldest likely conditions and your type of camping.', '/outdoors/family-camping-sleep-system-uk', 'Build a warmer sleep system'],
   ['Outdoor hydration', 'Match carried water and treatment to the route; a filter does not remove every possible hazard.', '/water-filtration-shortlist-uk', 'Compare portable water routes'],
   ['Dogs outdoors', 'Balance distance, surface, weather, water and recovery around the individual dog.', '/blog/healthy-weight-exercise-dogs-uk', 'Plan activity with your dog'],
   ['Camping with dogs', 'Keep food, sleep, identification, temperature and campsite boundaries familiar and manageable.', '/outdoors/dog-camping-checklist-uk', 'Use the dog-camping checklist'],

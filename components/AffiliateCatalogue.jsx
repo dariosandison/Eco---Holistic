@@ -2,6 +2,7 @@
 
 import { useMemo, useState } from 'react'
 import VisibilityTracker from '@/components/VisibilityTracker'
+import { trackEvent } from '@/lib/analytics'
 
 const TOPIC_LABELS = { water: 'Water', air: 'Air quality', sleep: 'Sleep', movement: 'Movement' }
 
@@ -33,11 +34,11 @@ export default function AffiliateCatalogue({ products }) {
       <div className="panel grid gap-4 md:grid-cols-[1fr,220px]">
         <div>
           <label htmlFor="catalogue-search" className="text-xs font-semibold uppercase tracking-wide text-zinc-600">Search approved products</label>
-          <input id="catalogue-search" value={query} onChange={(event) => setQuery(event.target.value)} placeholder="Try: under-sink, mattress, dehumidifier…" className="mt-2 w-full rounded-2xl border border-zinc-200 bg-white px-4 py-2.5 text-sm outline-none focus:ring-2 focus:ring-[color:var(--ring)]" />
+          <input id="catalogue-search" value={query} onChange={(event) => setQuery(event.target.value)} onBlur={() => { if (query.trim()) trackEvent('catalogue_search', { catalogue: 'partner_catalogue', query: query.trim().toLowerCase(), result_count: filtered.length }) }} placeholder="Try: under-sink, mattress, dehumidifier…" className="mt-2 w-full rounded-2xl border border-zinc-200 bg-white px-4 py-2.5 text-sm outline-none focus:ring-2 focus:ring-[color:var(--ring)]" />
         </div>
         <div>
           <label htmlFor="catalogue-topic" className="text-xs font-semibold uppercase tracking-wide text-zinc-600">Topic</label>
-          <select id="catalogue-topic" value={topic} onChange={(event) => setTopic(event.target.value)} className="mt-2 w-full rounded-2xl border border-zinc-200 bg-white px-4 py-2.5 text-sm outline-none focus:ring-2 focus:ring-[color:var(--ring)]">
+          <select id="catalogue-topic" value={topic} onChange={(event) => { const value = event.target.value; setTopic(value); trackEvent('catalogue_filter', { catalogue: 'partner_catalogue', topic: value || 'all' }) }} className="mt-2 w-full rounded-2xl border border-zinc-200 bg-white px-4 py-2.5 text-sm outline-none focus:ring-2 focus:ring-[color:var(--ring)]">
             <option value="">All topics</option>
             {Object.entries(TOPIC_LABELS).map(([value, label]) => <option key={value} value={value}>{label}</option>)}
           </select>
@@ -52,14 +53,14 @@ export default function AffiliateCatalogue({ products }) {
             <h2 className="mt-1 text-2xl font-semibold">{section.group}</h2>
             <div className="mt-5 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
               {section.items.map((product) => (
-                <VisibilityTracker key={product.clickref} eventName="product_impression" params={{ catalogue: 'partner_catalogue', advertiser: product.advertiser, product: product.product, topic: product.topic }} className="h-full">
+                <VisibilityTracker key={product.clickref} event="product_impression" data={{ catalogue: 'partner_catalogue', merchant: product.advertiser, product: product.product, topic: product.topic, clickref: product.clickref }} className="h-full">
                   <article className="card flex h-full flex-col p-5">
                     <p className="text-xs font-semibold text-zinc-500">{product.advertiser}</p>
                     <h3 className="mt-1 text-lg font-semibold text-zinc-900">{product.product}</h3>
                     <ul className="mt-3 list-disc space-y-1 pl-5 text-sm text-zinc-600">
                       {(product.bullets || []).slice(0, 3).map((bullet) => <li key={bullet}>{bullet}</li>)}
                     </ul>
-                    <a href={product.awin} target="_blank" rel="sponsored nofollow noopener" className="btn-primary mt-5 self-start">Check current price</a>
+                    <a href={product.awin} target="_blank" rel="sponsored nofollow noopener" className="btn-primary mt-5 self-start" data-affiliate-context={`catalogue:${product.topic}:${product.group}`}>Check current price</a>
                   </article>
                 </VisibilityTracker>
               ))}
