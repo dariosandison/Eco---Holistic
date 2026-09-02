@@ -2,153 +2,85 @@ import Image from 'next/image'
 import Link from 'next/link'
 
 export const metadata = {
-  title: 'Wild & Well — practical wellness for real life',
-  description: 'UK-focused guides for water, air, sleep, nutrition, movement, low-tox living and practical household resilience.',
+  title: 'Wild & Well — clearer choices for healthier everyday living',
+  description: 'Independent, UK-focused guidance for water, air, sleep, nutrition, movement, healthy homes and practical resilience. Learn first. Buy second.',
 }
 
-const CORE_TOPICS = [
-  { title: 'Water', href: '/topics/water', image: '/images/cards/water-filter.svg', desc: 'Drinking water, filter types, hard-water comfort and sensible shortlists.' },
-  { title: 'Air quality', href: '/topics/air-quality', image: '/images/cards/air-purifier.svg', desc: 'Allergies, damp, smoke, ventilation and purifier basics.' },
-  { title: 'Sleep & recovery', href: '/topics/sleep', image: '/images/cards/sleep.svg', desc: 'Light, timing, temperature, routines and recovery options.' },
-  { title: 'Nutrition', href: '/topics/nutrition', image: '/images/photography/thumbs/nutrition.svg', desc: 'Food-first habits, labels, protein, fibre and practical upgrades.' },
-  { title: 'Movement', href: '/topics/movement', image: '/images/photography/thumbs/movement.svg', desc: 'Walking, simple strength, mobility and natural movement.' },
-  { title: 'Low-tox home', href: '/topics/fragrance-free', image: '/images/cards/laundry.svg', desc: 'Fragrance, cleaning, laundry and lower-exposure household swaps.' },
+const JOURNEYS = [
+  { number: '01', title: 'Water', href: '/topics/water', image: '/images/photography/water.jpg', line: 'Taste, filtration, hard-water comfort and household backup.' },
+  { number: '02', title: 'Air', href: '/topics/air-quality', image: '/images/photography/air-quality.png', line: 'Ventilation, particles, damp, humidity and cleaner indoor air.' },
+  { number: '03', title: 'Sleep', href: '/topics/sleep', image: '/images/photography/sleep.jpg', line: 'Light, timing, temperature and a room that helps you recover.' },
+  { number: '04', title: 'Nutrition', href: '/topics/nutrition', image: '/images/photography/nutrition.jpg', line: 'Food-first habits, useful staples and fewer empty promises.' },
+  { number: '05', title: 'Movement', href: '/topics/movement', image: '/images/photography/movement.jpg', line: 'Walking, simple strength and movement that fits real life.' },
+  { number: '06', title: 'Healthy home', href: '/healthy-home', image: '/images/photography/home.jpg', line: 'Practical, lower-exposure changes in the rooms you use most.' },
+  { number: '07', title: 'Practical resilience', href: '/topics/resilience', image: '/images/photography/cards/condensation-on-a-window-with-soft-morning-light-minimal-interior-background.jpg', line: 'Calm preparation for short disruptions to water, power and food.' },
 ]
 
-const RESILIENCE_GUIDES = [
-  { title: 'UK 72-Hour Household Kit', href: '/blog/72-hour-household-emergency-kit-uk', desc: 'A calm checklist for water, food, lighting, power, first aid and hygiene.' },
-  { title: '72-Hour Household Water Plan', href: '/blog/72-hour-household-water-plan-uk', desc: 'How much water to store, how to rotate it and where filtration fits.' },
-  { title: 'Power Cut Preparation', href: '/blog/power-cut-preparation-uk', desc: 'Practical steps for lighting, communication, charging and warmth.' },
-  { title: 'Indoor Air During Smoke or Pollution', href: '/blog/indoor-air-smoke-pollution-uk', desc: 'What helps indoors when outside air quality becomes poor.' },
+const FIELD_NOTES = [
+  { eyebrow: 'Water', title: 'Jug, countertop or under-sink?', href: '/blog/water-filter-jug-vs-under-sink-uk', image: '/images/photography/cards/water-hero.jpg', text: 'Choose the format around the job, the space you have and what replacement filters really cost.' },
+  { eyebrow: 'Healthy home', title: 'Condensation is a clue, not a diagnosis', href: '/blog/condensation-windows-dehumidifier-uk', image: '/images/photography/cards/condensation-on-a-window-with-soft-morning-light-minimal-interior-background.jpg', text: 'Work out whether ventilation, moisture or both are driving the problem before buying equipment.' },
+  { eyebrow: 'Sleep', title: 'A calmer evening starts in the morning', href: '/blog/morning-light-sleep-10-minute-plan', image: '/images/photography/cards/calm-evening-routine-scene-with-tea-and-book-on-bed-neutral-tones.jpg', text: 'A practical light-and-timing plan that costs nothing and takes ten minutes.' },
 ]
 
-const COMMERCIAL_PATHS = [
-  { title: 'Water filtration', href: '/water-filtration-shortlist-uk', desc: 'Portable, countertop, under-sink and gravity routes with direct partner comparisons.' },
-  { title: 'Indoor air', href: '/air-quality-shortlist-uk', desc: 'Purifiers, dehumidifiers, filters and airflow matched to the problem.' },
-  { title: 'Sleep & recovery', href: '/sleep-recovery-shortlist-uk', desc: 'Mattresses, pillows, temperature and support after the no-spend basics.' },
-  { title: 'Food-first nutrition', href: '/nutrition/food-first-shortlist', desc: 'Real-food protein, useful staples and convenience before supplement stacks.' },
-  { title: 'Low-tox home', href: '/healthy-home/low-tox-shortlist', desc: 'Laundry, cookware, showering and high-use household swaps.' },
-  { title: 'Movement gear', href: '/movement/movement-shortlist', desc: 'Barefoot footwear, simple home strength and useful tracking.' },
+const SHORTLISTS = [
+  ['Water filtration', 'Portable, countertop, under-sink and gravity routes.', '/water-filtration-shortlist-uk'],
+  ['Indoor air', 'Purifiers and dehumidifiers matched to the actual problem.', '/air-quality-shortlist-uk'],
+  ['Sleep & recovery', 'Comfort and recovery options after the no-spend basics.', '/sleep-recovery-shortlist-uk'],
+  ['Food-first nutrition', 'Useful food and pantry options before supplement stacks.', '/nutrition/food-first-shortlist'],
 ]
-
-function TopicCard({ item }) {
-  return (
-    <Link href={item.href} className="group rounded-2xl border border-zinc-200 bg-white p-5 transition hover:shadow-md">
-      <div className="flex items-start gap-3">
-        <div className="h-11 w-11 shrink-0 overflow-hidden rounded-xl bg-zinc-100">
-          <img src={item.image} alt="" className="h-full w-full object-cover" loading="lazy" />
-        </div>
-        <div>
-          <h3 className="font-semibold text-zinc-900 group-hover:underline">{item.title}</h3>
-          <p className="mt-2 text-sm text-zinc-700">{item.desc}</p>
-        </div>
-      </div>
-    </Link>
-  )
-}
 
 export default function HomePage() {
   return (
-    <main>
-      <section className="relative isolate overflow-hidden">
-        <div className="absolute inset-0 -z-10">
-          <Image src="/images/photography/home-hero.jpg" alt="" fill priority sizes="100vw" className="object-cover" />
-          <div className="absolute inset-0 bg-gradient-to-b from-white/80 via-white/70 to-white" />
-        </div>
-        <div className="mx-auto max-w-6xl px-4 py-16 md:py-24">
-          <div className="max-w-3xl">
-            <p className="text-sm font-semibold uppercase tracking-wide text-zinc-600">Wild &amp; Well</p>
-            <h1 className="mt-3 text-4xl font-semibold tracking-tight text-zinc-900 md:text-6xl">Evidence-led wellness for real life.</h1>
-            <p className="mt-5 max-w-2xl text-base text-zinc-700 md:text-lg">Clear UK-focused guidance on water, food, air, sleep, movement, low-tox living and practical household resilience — with useful products only where they genuinely solve a problem.</p>
-            <div className="mt-8 flex flex-wrap gap-3">
-              <Link href="/start-here" className="btn-primary">Start here</Link>
-              <Link href="/shortlists" className="btn-secondary">Compare products</Link>
-              <Link href="/topics/resilience" className="btn-secondary">Practical resilience</Link>
-            </div>
-            <div className="mt-6 flex flex-wrap gap-2 text-sm">
-              <Link href="/water-filtration-shortlist-uk" className="rounded-full border border-zinc-200 bg-white/85 px-3 py-1.5">Water shortlist</Link>
-              <Link href="/air-quality-shortlist-uk" className="rounded-full border border-zinc-200 bg-white/85 px-3 py-1.5">Air shortlist</Link>
-              <Link href="/sleep-recovery-shortlist-uk" className="rounded-full border border-zinc-200 bg-white/85 px-3 py-1.5">Sleep shortlist</Link>
-              <Link href="/nutrition/food-first-shortlist" className="rounded-full border border-zinc-200 bg-white/85 px-3 py-1.5">Food-first</Link>
-            </div>
-          </div>
+    <main className="home-page">
+      <section className="home-hero">
+        <div className="home-hero__image"><Image src="/images/photography/home-hero.jpg" alt="A calm, naturally lit home interior" fill priority sizes="(max-width: 900px) 100vw, 54vw" className="object-cover" /></div>
+        <div className="home-hero__content">
+          <p className="eyebrow">Independent guidance for real life</p>
+          <h1>Feel better at home.<br /><em>Choose with clarity.</em></h1>
+          <p className="home-hero__dek">Practical UK guidance for the water you drink, the air you breathe and the everyday habits that shape how you feel—without hype or unnecessary shopping.</p>
+          <div className="home-hero__actions"><Link href="/start-here" className="btn-primary">Find your starting point</Link><Link href="/topics" className="text-link">Explore all seven journeys <span aria-hidden="true">↗</span></Link></div>
+          <div className="home-hero__proof" aria-label="Our approach"><span>Evidence-aware</span><span>No-spend steps first</span><span>UK focused</span></div>
         </div>
       </section>
 
-      <section className="mx-auto max-w-6xl px-4 py-12 md:py-16">
-        <div className="max-w-3xl">
-          <p className="text-sm font-semibold uppercase tracking-wide text-zinc-500">Start with a problem</p>
-          <h2 className="mt-2 text-3xl font-semibold tracking-tight text-zinc-900">Choose what you want to improve</h2>
-          <p className="mt-3 text-zinc-700">Each topic starts with practical steps first, then links to comparisons when buying something would actually help.</p>
-        </div>
-        <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {CORE_TOPICS.map((item) => <TopicCard key={item.href} item={item} />)}
-        </div>
-      </section>
-
-      <section className="border-y border-zinc-200 bg-zinc-50/70">
-        <div className="mx-auto max-w-6xl px-4 py-12 md:py-16">
-          <div className="grid gap-8 lg:grid-cols-[1.05fr_1.95fr] lg:items-start">
-            <div>
-              <p className="text-sm font-semibold uppercase tracking-wide text-zinc-500">Practical resilience</p>
-              <h2 className="mt-2 text-3xl font-semibold text-zinc-900">Prepare for short disruptions without panic-buying</h2>
-              <p className="mt-3 text-zinc-700">Short-term disruption is a household problem before it is a survival problem. Free preparation comes first; products only fill a clear gap.</p>
-              <Link href="/topics/resilience" className="mt-5 inline-block font-semibold text-zinc-900 hover:underline">Explore practical resilience →</Link>
-            </div>
-            <div className="grid gap-4 sm:grid-cols-2">
-              {RESILIENCE_GUIDES.map((guide) => (
-                <Link key={guide.href} href={guide.href} className="rounded-2xl border border-zinc-200 bg-white p-5 transition hover:shadow-sm">
-                  <h3 className="font-semibold text-zinc-900">{guide.title}</h3>
-                  <p className="mt-2 text-sm text-zinc-700">{guide.desc}</p>
-                  <p className="mt-4 text-sm font-semibold">Read guide →</p>
-                </Link>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section className="mx-auto max-w-6xl px-4 py-12 md:py-16">
-        <div className="flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
-          <div>
-            <p className="text-sm font-semibold uppercase tracking-wide text-zinc-500">When you are ready to compare</p>
-            <h2 className="mt-2 text-3xl font-semibold text-zinc-900">Go straight to the useful shortlist</h2>
-          </div>
-          <Link href="/shortlists" className="text-sm font-semibold text-zinc-900 hover:underline">See every shortlist →</Link>
-        </div>
-        <p className="mt-3 max-w-3xl text-zinc-700">These routes lead to the commercial pages where partner options are grouped by use-case and trade-offs are kept visible.</p>
-        <div className="mt-8 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-          {COMMERCIAL_PATHS.map((item) => (
-            <Link key={item.href} href={item.href} className="rounded-2xl border border-zinc-200 bg-white p-5 transition hover:-translate-y-0.5 hover:shadow-md">
-              <h3 className="font-semibold text-zinc-900">{item.title}</h3>
-              <p className="mt-2 text-sm text-zinc-700">{item.desc}</p>
-              <p className="mt-4 text-sm font-semibold">Compare the shortlist →</p>
+      <section className="editorial-intro content-shell">
+        <p className="eyebrow">Seven paths. One clearer way forward.</p>
+        <div className="editorial-intro__heading"><h2>Start with what you want to change.</h2><p>Each journey helps you understand the problem, try the sensible free steps, and decide whether buying something would genuinely help.</p></div>
+        <div className="journey-grid">
+          {JOURNEYS.map((item, index) => (
+            <Link href={item.href} className={`journey-card journey-card--${index + 1}`} key={item.href}>
+              <div className="journey-card__image"><Image src={item.image} alt="" fill sizes="(max-width: 700px) 100vw, 33vw" className="object-cover" /></div>
+              <div className="journey-card__copy"><span>{item.number}</span><h3>{item.title}</h3><p>{item.line}</p><b aria-hidden="true">Explore →</b></div>
             </Link>
           ))}
         </div>
       </section>
 
-      <section className="mx-auto max-w-6xl px-4 pb-16">
-        <div className="grid gap-6 rounded-3xl border border-zinc-200 bg-zinc-50 p-6 md:grid-cols-3 md:p-10">
-          <div>
-            <h2 className="font-semibold text-zinc-900">Research first</h2>
-            <p className="mt-2 text-sm text-zinc-700">We explain the evidence, common standards and practical trade-offs before recommending products.</p>
-          </div>
-          <div>
-            <h2 className="font-semibold text-zinc-900">No-spend steps matter</h2>
-            <p className="mt-2 text-sm text-zinc-700">Many useful improvements cost nothing. We put those before shopping recommendations.</p>
-          </div>
-          <div>
-            <h2 className="font-semibold text-zinc-900">Affiliate-funded, editorially separate</h2>
-            <p className="mt-2 text-sm text-zinc-700">Some links earn commission. Product inclusion should still be based on fit, usefulness and evidence.</p>
-          </div>
-          <div className="md:col-span-3 flex flex-wrap gap-3 text-sm">
-            <Link href="/editorial-policy" className="underline decoration-dotted">Editorial policy</Link>
-            <Link href="/how-we-test" className="underline decoration-dotted">How we evaluate products</Link>
-            <Link href="/affiliate-disclosure" className="underline decoration-dotted">Affiliate disclosure</Link>
-          </div>
-        </div>
+      <section className="field-notes"><div className="content-shell">
+        <div className="section-heading-row"><div><p className="eyebrow">Worth knowing now</p><h2>Useful thinking for everyday decisions.</h2></div><Link href="/blog" className="text-link">All insights <span aria-hidden="true">→</span></Link></div>
+        <div className="story-grid">{FIELD_NOTES.map((story, index) => (
+          <Link href={story.href} className={index === 0 ? 'story story--lead' : 'story'} key={story.href}>
+            <div className="story__image"><Image src={story.image} alt="" fill sizes={index === 0 ? '(max-width: 800px) 100vw, 55vw' : '(max-width: 800px) 100vw, 28vw'} className="object-cover" /></div>
+            <div className="story__copy"><p className="eyebrow">{story.eyebrow}</p><h3>{story.title}</h3><p>{story.text}</p><span>Read the guide →</span></div>
+          </Link>
+        ))}</div>
+      </div></section>
+
+      <section className="decision-section content-shell">
+        <div className="decision-section__intro"><p className="eyebrow">When a product has a job to do</p><h2>Shortlists built around decisions, not endless choice.</h2><p>We narrow the field by use case, ownership cost and meaningful trade-offs. Where we have not independently tested a product, we say so.</p><Link href="/how-we-test" className="text-link">How we evaluate products →</Link></div>
+        <div className="shortlist-list">{SHORTLISTS.map(([title, copy, href], i) => <Link href={href} key={href} className="shortlist-row"><span>0{i + 1}</span><div><h3>{title}</h3><p>{copy}</p></div><b aria-hidden="true">↗</b></Link>)}<Link href="/shortlists" className="shortlist-all">See every shortlist →</Link></div>
       </section>
+
+      <section className="resilience-feature content-shell">
+        <div className="resilience-feature__image"><Image src="/images/photography/cards/ceramic-cups-and-a-carafe-on-a-kitchen-counter-calm-hydration-vibe.jpg" alt="Water stored simply in a home kitchen" fill sizes="(max-width: 800px) 100vw, 48vw" className="object-cover" /></div>
+        <div className="resilience-feature__copy"><p className="eyebrow">Practical resilience</p><h2>Prepare calmly. Buy selectively.</h2><p>Short disruptions are household problems before they are survival problems. Begin with a simple plan for water, food, light, warmth and communication.</p><ol><li><span>01</span>Use what you already have</li><li><span>02</span>Fill the genuine gaps</li><li><span>03</span>Keep it easy to maintain</li></ol><Link href="/topics/resilience" className="btn-primary">Build a sensible plan</Link></div>
+      </section>
+
+      <section className="trust-strip"><div className="content-shell trust-strip__inner">
+        <p className="eyebrow">The Wild &amp; Well standard</p><h2>Learn first.<br />Buy second.</h2>
+        <div className="trust-strip__points"><div><strong>Useful before impressive</strong><p>We prioritise practical changes over wellness theatre.</p></div><div><strong>Clear about evidence</strong><p>Claims, limitations and uncertainty stay visible.</p></div><div><strong>Commercially independent</strong><p>Affiliate links fund the site; they do not buy inclusion.</p></div></div>
+        <div className="trust-strip__links"><Link href="/editorial-policy">Editorial policy</Link><Link href="/corrections">Corrections</Link><Link href="/affiliate-disclosure">Affiliate disclosure</Link></div>
+      </div></section>
     </main>
   )
 }

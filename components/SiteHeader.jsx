@@ -1,93 +1,57 @@
-// components/SiteHeader.jsx
-'use client';
+'use client'
 
-import Link from 'next/link';
-import Image from 'next/image';
-import { useEffect, useState } from 'react';
-import { trackEvent } from '@/lib/analytics';
+import Link from 'next/link'
+import Image from 'next/image'
+import { useEffect, useState } from 'react'
+
+const journeys = [
+  ['Water', '/topics/water'], ['Air', '/topics/air-quality'], ['Sleep', '/topics/sleep'],
+  ['Nutrition', '/topics/nutrition'], ['Movement', '/topics/movement'],
+  ['Healthy home', '/healthy-home'], ['Resilience', '/topics/resilience'],
+]
 
 export default function SiteHeader() {
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(false)
 
   useEffect(() => {
-    const el = document.getElementById('site-header');
-    if (!el) return;
-    const setH = () =>
-      document.documentElement.style.setProperty('--header-h', `${el.offsetHeight}px`);
-    setH();
-    const ro = new ResizeObserver(setH);
-    ro.observe(el);
-    return () => ro.disconnect();
-  }, []);
+    const el = document.getElementById('site-header')
+    if (!el) return
+    const setHeight = () => document.documentElement.style.setProperty('--header-h', `${el.offsetHeight}px`)
+    setHeight()
+    const observer = new ResizeObserver(setHeight)
+    observer.observe(el)
+    return () => observer.disconnect()
+  }, [])
 
-  const closeMobile = () => setOpen(false);
+  useEffect(() => {
+    document.body.style.overflow = open ? 'hidden' : ''
+    return () => { document.body.style.overflow = '' }
+  }, [open])
+
+  const openSearch = (event) => {
+    event.preventDefault()
+    try { window.dispatchEvent(new Event('ww_open_palette')) } catch {}
+    setOpen(false)
+  }
 
   return (
-    <header id="site-header" className="sticky top-0 z-50 border-b border-zinc-200/60 bg-white/85 backdrop-blur supports-[backdrop-filter]:bg-white/70">
-      <a href="#content" className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:rounded-xl focus:border focus:bg-white focus:px-3 focus:py-2 focus:text-sm focus:font-semibold">
-        Skip to content
-      </a>
-
-      <div className="mx-auto flex max-w-6xl items-center gap-4 px-4 py-3">
-        <Link href="/" className="inline-flex items-center gap-2">
-          <Image src="/logo.png" alt="Wild & Well" width={32} height={32} priority />
-          <span className="font-semibold text-zinc-900">Wild &amp; Well</span>
-        </Link>
-
-        <nav className="ml-auto hidden items-center gap-5 md:flex">
-          <Link
-            href="/search"
-            onClick={(e) => {
-              e.preventDefault();
-              try { window.dispatchEvent(new Event('ww_open_palette')); } catch {}
-            }}
-            className="inline-flex items-center gap-2 text-sm font-medium text-zinc-700 hover:text-zinc-900"
-          >
-            Search
-            <span className="hidden rounded-md border border-zinc-300 bg-white px-1.5 py-0.5 text-[10px] font-semibold text-zinc-600 lg:inline">Ctrl/⌘ K</span>
-          </Link>
-          <Link href="/blog" className="text-sm font-medium text-zinc-700 hover:text-zinc-900">Insights</Link>
-          <Link href="/healthy-home" className="text-sm font-medium text-zinc-700 hover:text-zinc-900">Home</Link>
-          <Link href="/dogs" className="text-sm font-semibold text-zinc-900 hover:underline">Dogs</Link>
-          <Link href="/outdoors" className="text-sm font-semibold text-zinc-900 hover:underline">Outdoors</Link>
-          <Link href="/shortlists" className="text-sm font-medium text-zinc-700 hover:text-zinc-900">Shortlists</Link>
-          <Link href="/topics" className="text-sm font-medium text-zinc-700 hover:text-zinc-900">Topics</Link>
-          <Link href="/deals" className="text-sm font-medium text-zinc-700 hover:text-zinc-900">Offers</Link>
-          <Link href="/shopping-list" onClick={() => trackEvent('click_shopping_list')} className="text-sm font-medium text-zinc-700 hover:text-zinc-900">Free List</Link>
+    <header id="site-header" className="site-header">
+      <a href="#content" className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[70] focus:bg-white focus:px-4 focus:py-3">Skip to content</a>
+      <div className="site-header__bar">
+        <Link href="/" className="site-header__brand" aria-label="Wild & Well home"><Image src="/logo.png" alt="" width={34} height={34} priority /><span>Wild <i>&amp;</i> Well</span></Link>
+        <nav className="site-header__nav" aria-label="Primary navigation">
+          <Link href="/topics">Topics</Link><Link href="/blog">Guides</Link><Link href="/shortlists">Shortlists</Link><Link href="/about">Our approach</Link>
         </nav>
-
-        <button type="button" aria-label="Toggle menu" aria-expanded={open} onClick={() => setOpen((v) => !v)} className="ml-auto inline-flex h-9 w-9 items-center justify-center rounded-lg border border-zinc-300 md:hidden">
-          <span className="sr-only">Open menu</span>
-          <div className="space-y-1.5">
-            <span className="block h-0.5 w-5 bg-zinc-900" />
-            <span className="block h-0.5 w-5 bg-zinc-900" />
-            <span className="block h-0.5 w-5 bg-zinc-900" />
-          </div>
-        </button>
+        <div className="site-header__tools"><a href="/search" onClick={openSearch} aria-label="Search">Search</a><Link href="/shopping-list" className="site-header__cta">Free starter list</Link></div>
+        <button type="button" className="site-header__menu" aria-label={open ? 'Close menu' : 'Open menu'} aria-expanded={open} onClick={() => setOpen(!open)}><span /><span /></button>
       </div>
-
-      <div className={`${open ? 'block' : 'hidden'} border-t border-zinc-200/60 md:hidden`}>
-        <nav className="mx-auto flex max-w-6xl flex-col gap-1 px-4 py-3">
-          <Link href="/search" onClick={(e) => { e.preventDefault(); try { window.dispatchEvent(new Event('ww_open_palette')); } catch {} closeMobile(); }} className="rounded-md px-2 py-2 text-sm text-zinc-800 hover:bg-zinc-50">Search</Link>
-          <Link href="/blog" onClick={closeMobile} className="rounded-md px-2 py-2 text-sm text-zinc-800 hover:bg-zinc-50">Wellness insights</Link>
-          <Link href="/topics" onClick={closeMobile} className="rounded-md px-2 py-2 text-sm text-zinc-800 hover:bg-zinc-50">Topics</Link>
-          <Link href="/dogs" onClick={closeMobile} className="rounded-md bg-emerald-50/60 px-2 py-2 text-sm font-semibold text-zinc-900">Dog wellness</Link>
-          <Link href="/outdoors" onClick={closeMobile} className="rounded-md bg-amber-50/60 px-2 py-2 text-sm font-semibold text-zinc-900">Outdoors &amp; nature</Link>
-          <Link href="/healthy-home" onClick={closeMobile} className="rounded-md px-2 py-2 text-sm text-zinc-800 hover:bg-zinc-50">Healthy home</Link>
-          <Link href="/healthy-home/home-energy" onClick={closeMobile} className="rounded-md px-2 py-2 text-sm text-zinc-800 hover:bg-zinc-50">Home energy</Link>
-          <Link href="/topics/resilience" onClick={closeMobile} className="rounded-md bg-zinc-50 px-2 py-2 text-sm font-semibold text-zinc-900">Practical resilience</Link>
-          <Link href="/start-here" onClick={closeMobile} className="rounded-md px-2 py-2 text-sm text-zinc-800 hover:bg-zinc-50">Start here</Link>
-          <Link href="/shortlists" onClick={closeMobile} className="rounded-md px-2 py-2 text-sm text-zinc-800 hover:bg-zinc-50">Shortlists</Link>
-          <Link href="/nutrition" onClick={closeMobile} className="rounded-md px-2 py-2 text-sm text-zinc-800 hover:bg-zinc-50">Nutrition</Link>
-          <Link href="/movement" onClick={closeMobile} className="rounded-md px-2 py-2 text-sm text-zinc-800 hover:bg-zinc-50">Movement</Link>
-          <Link href="/deals" onClick={closeMobile} className="rounded-md px-2 py-2 text-sm text-zinc-800 hover:bg-zinc-50">Offers</Link>
-          <Link href="/shopping-list" onClick={() => { trackEvent('click_shopping_list'); closeMobile(); }} className="rounded-md px-2 py-2 text-sm text-zinc-800 hover:bg-zinc-50">Free List</Link>
-          <Link href="/how-we-test" onClick={closeMobile} className="rounded-md px-2 py-2 text-sm text-zinc-800 hover:bg-zinc-50">How We Test</Link>
-          <Link href="/affiliate-disclosure" onClick={closeMobile} className="rounded-md px-2 py-2 text-sm text-zinc-800 hover:bg-zinc-50">Affiliate disclosure</Link>
-          <Link href="/about" onClick={closeMobile} className="rounded-md px-2 py-2 text-sm text-zinc-800 hover:bg-zinc-50">About</Link>
-          <Link href="/contact" onClick={closeMobile} className="rounded-md px-2 py-2 text-sm text-zinc-800 hover:bg-zinc-50">Contact</Link>
+      <div className="site-header__journeys" aria-label="Explore by topic">{journeys.map(([label, href]) => <Link href={href} key={href}>{label}</Link>)}</div>
+      <div className={`mobile-drawer ${open ? 'mobile-drawer--open' : ''}`} aria-hidden={!open}>
+        <nav aria-label="Mobile navigation">
+          <p>Explore</p>{journeys.map(([label, href], i) => <Link href={href} onClick={() => setOpen(false)} key={href}><span>0{i + 1}</span>{label}</Link>)}
+          <div className="mobile-drawer__secondary"><Link href="/blog" onClick={() => setOpen(false)}>Guides</Link><Link href="/shortlists" onClick={() => setOpen(false)}>Shortlists</Link><Link href="/tools" onClick={() => setOpen(false)}>Free tools</Link><Link href="/about" onClick={() => setOpen(false)}>Our approach</Link><a href="/search" onClick={openSearch}>Search</a></div>
         </nav>
       </div>
     </header>
-  );
+  )
 }
