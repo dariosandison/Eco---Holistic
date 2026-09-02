@@ -3,6 +3,7 @@ import TopicEducationDeepDive from '@/components/TopicEducationDeepDive'
 import TopicAtAGlance from '@/components/TopicAtAGlance'
 import TopicFAQ from '@/components/TopicFAQ'
 import { getTopicEdu } from '@/lib/topicEdu'
+import JourneyHero from '@/components/JourneyHero'
 
 export const metadata = {
   title: 'Sleep Topics — Wild & Well',
@@ -19,20 +20,8 @@ export default function Page() {
   ]
 
   return (
-    <main className="mx-auto max-w-6xl px-4 py-16">
-      <header className="max-w-3xl">
-        <p className="text-sm font-semibold uppercase tracking-[0.16em] text-zinc-500">Habits before hardware</p>
-        <h1 className="mt-2 text-4xl font-bold">Sleep &amp; Recovery</h1>
-        <p className="mt-3 text-zinc-700">Start with light, timing, temperature and a repeatable wind-down routine. If those basics are in place, identify the specific comfort or recovery problem before buying anything.</p>
-        <img src="/images/photography/sleep.jpg" alt="" className="mt-6 w-full rounded-3xl border border-zinc-200 shadow-sm" loading="lazy" decoding="async" />
-        <div className="mt-5 flex flex-wrap gap-2">
-          <Link className="btn-primary" href="/sleep-recovery-shortlist-uk">Choose a sleep/recovery route</Link>
-          <Link className="btn-secondary" href="/blog/sleep-naturally-simple-guide">Cornerstone guide</Link>
-          <Link className="btn-secondary" href="/blog/morning-light-sleep-10-minute-plan">Morning light plan</Link>
-          <Link className="btn-secondary" href="/best-natural-sleep-support">Sleep support guide</Link>
-        </div>
-        <div className="mt-4 flex flex-wrap gap-2"><a className="chip" href="#understand">Understand</a><a className="chip" href="#start">Start</a><a className="chip" href="#options">Choose</a><a className="chip" href="#faqs">FAQs</a></div>
-      </header>
+    <main className="journey-page">
+      <JourneyHero number="03" kicker="Habits before hardware" title="Make the room—and the rhythm—work for sleep." intro="Start with morning light, timing, temperature and a repeatable wind-down. Buy only for a comfort or recovery problem you can clearly name." image="/images/photography/sleep.jpg" imageAlt="A calm, softly lit bedroom" actions={[{label:'Build better sleep',href:'/blog/sleep-naturally-simple-guide'},{label:'Try the morning-light plan',href:'/blog/morning-light-sleep-10-minute-plan'},{label:'Compare sleep options',href:'/sleep-recovery-shortlist-uk'}]} anchors={[{label:'Understand',href:'#understand'},{label:'First steps',href:'#start'},{label:'Choose',href:'#options'},{label:'FAQs',href:'#faqs'}]} />
 
       <TopicEducationDeepDive edu={edu} />
       <div id="start" />

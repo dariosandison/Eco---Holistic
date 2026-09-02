@@ -5,6 +5,7 @@ import TopicAtAGlance from '@/components/TopicAtAGlance'
 import TopicFAQ from '@/components/TopicFAQ'
 import { amazonSearchUrl } from '@/lib/amazon'
 import { getTopicEdu } from '@/lib/topicEdu'
+import JourneyHero from '@/components/JourneyHero'
 
 export const metadata = {
   title: 'Nutrition Topics — Wild & Well',
@@ -22,21 +23,8 @@ export default function Page() {
   ]
 
   return (
-    <main className="mx-auto max-w-6xl px-4 py-16">
-      <header className="max-w-3xl">
-        <p className="text-sm font-semibold uppercase tracking-[0.16em] text-zinc-500">Food first</p>
-        <h1 className="mt-2 text-4xl font-bold">Nutrition (Food + Labels)</h1>
-        <p className="mt-3 text-zinc-700">Food-first basics for modern life: label reading, ultra-processed foods, protein, fibre and simple upgrades you can repeat.</p>
-        <img src="/images/photography/nutrition.jpg" alt="" className="mt-6 w-full rounded-3xl border border-zinc-200 shadow-sm" loading="lazy" decoding="async" />
-        <div className="mt-5 flex flex-wrap gap-2">
-          <Link className="btn-primary" href="/nutrition/food-first-shortlist">Food-first buying guide</Link>
-          <Link className="btn-secondary" href="/nutrition">Explore Nutrition</Link>
-          <Link className="btn-secondary" href="/blog/label-reading-101">Label reading 101</Link>
-          <Link className="btn-secondary" href="/blog/ultra-processed-foods-what-they-are-and-why-they-matter">Ultra-processed foods</Link>
-        </div>
-        <div className="mt-4 flex flex-wrap gap-2"><a className="chip" href="#understand">Understand</a><a className="chip" href="#start">Start</a><a className="chip" href="#options">Options</a><a className="chip" href="#faqs">FAQs</a></div>
-        <p className="mt-3 text-xs text-zinc-500">Education first. Some buying-guide links may be affiliate links.</p>
-      </header>
+    <main className="journey-page">
+      <JourneyHero number="04" kicker="Food first" title="Eat well without turning life into a project." intro="Build around protein, fibre and food you genuinely enjoy. Learn the labels, make one repeatable upgrade, and leave perfection off the shopping list." image="/images/photography/nutrition.jpg" imageAlt="Colourful whole foods prepared in a kitchen" actions={[{label:'Start with food',href:'/nutrition'},{label:'Learn to read labels',href:'/blog/label-reading-101'},{label:'Open the food-first shortlist',href:'/nutrition/food-first-shortlist'}]} anchors={[{label:'Understand',href:'#understand'},{label:'First steps',href:'#start'},{label:'Useful options',href:'#options'},{label:'FAQs',href:'#faqs'}]} note="Education first. Some buying-guide links may be affiliate links." />
 
       <TopicEducationDeepDive edu={edu} />
 

@@ -3,6 +3,7 @@ import TopicEducationDeepDive from '@/components/TopicEducationDeepDive'
 import TopicAtAGlance from '@/components/TopicAtAGlance'
 import TopicFAQ from '@/components/TopicFAQ'
 import { getTopicEdu } from '@/lib/topicEdu'
+import JourneyHero from '@/components/JourneyHero'
 
 export const metadata = {
   title: 'Water Topics — Wild & Well',
@@ -28,21 +29,8 @@ export default function Page() {
   ]
 
   return (
-    <main className="mx-auto max-w-6xl px-4 py-16">
-      <header className="max-w-3xl">
-        <p className="text-sm font-semibold uppercase tracking-[0.16em] text-zinc-500">Understand before buying</p>
-        <h1 className="mt-2 text-4xl font-bold">Water (Filters + Hydration)</h1>
-        <p className="mt-3 text-zinc-700">Start with the job you need the filter to do. Then choose the format and compare replacement cost, availability and credible testing claims.</p>
-        <img src="/images/photography/water.jpg" alt="" className="mt-6 w-full rounded-3xl border border-zinc-200 shadow-sm" loading="lazy" decoding="async" />
-        <div className="mt-5 flex flex-wrap gap-2">
-          <Link className="btn-primary" href="/water-filtration-shortlist-uk">Choose a filtration route</Link>
-          <Link className="btn-secondary" href="/best-water-filters-uk">Full buying guide</Link>
-          <Link className="btn-secondary" href="/blog/hard-water-uk-myths-and-comfort">Hard water</Link>
-          <Link className="btn-secondary" href="/tools/water-filter-running-cost-calculator">Filter cost calculator</Link>
-          <Link className="btn-secondary" href="/tools/72-hour-water-calculator">72-hour water calculator</Link>
-        </div>
-        <div className="mt-4 flex flex-wrap gap-2"><a className="chip" href="#understand">Understand</a><a className="chip" href="#start">Start</a><a className="chip" href="#guides">Popular questions</a><a className="chip" href="#options">Choose</a><a className="chip" href="#faqs">FAQs</a></div>
-      </header>
+    <main className="journey-page">
+      <JourneyHero number="01" kicker="Understand before buying" title="Better water starts with the right question." intro="Begin with the job: taste, convenience, a specific concern or household backup. Then compare formats, credible testing and the real cost of replacement filters." image="/images/photography/water.jpg" imageAlt="Clear water being poured into a glass" actions={[{label:'Choose a filtration route',href:'/water-filtration-shortlist-uk'},{label:'Calculate running cost',href:'/tools/water-filter-running-cost-calculator'},{label:'Read the full guide',href:'/best-water-filters-uk'}]} anchors={[{label:'Understand',href:'#understand'},{label:'First steps',href:'#start'},{label:'Questions',href:'#guides'},{label:'Choose',href:'#options'},{label:'FAQs',href:'#faqs'}]} />
 
       <TopicEducationDeepDive edu={edu} />
       <div id="start" />

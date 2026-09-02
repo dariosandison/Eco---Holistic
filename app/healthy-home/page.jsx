@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import InterestSignup from '@/components/InterestSignup'
+import JourneyHero from '@/components/JourneyHero'
 
 export const metadata = {
   title: 'Healthy Home UK — Air, Water & Lower-Tox Living',
@@ -41,21 +42,10 @@ const ROUTES = [
 
 export default function Page() {
   return (
-    <main className="mx-auto max-w-6xl px-4 py-16">
-      <header className="max-w-3xl">
-        <p className="text-sm font-semibold uppercase tracking-[0.16em] text-zinc-500">Healthy home</p>
-        <h1 className="mt-2 text-4xl font-bold">Improve the home you live in every day</h1>
-        <p className="mt-3 text-zinc-700">
-          Focus on the biggest repeated exposures and practical problems first: the air you breathe, the water you use, the products you handle often and basic household resilience.
-        </p>
-        <div className="mt-5 flex flex-wrap gap-2">
-          <Link className="btn-primary" href="/shortlists">Browse all shortlists</Link>
-          <Link className="btn-secondary" href="/topics">Learn first</Link>
-          <Link className="btn-secondary" href="/shopping-list">Free shopping list</Link>
-        </div>
-      </header>
+    <main className="journey-page">
+      <JourneyHero number="06" kicker="The rooms you live in" title="A healthier home, one useful change at a time." intro="Begin with the things you encounter every day: air, water, laundry, cleaning and comfort. Fix the practical problem first; replace products selectively." image="/images/photography/home.jpg" imageAlt="A calm, naturally lit home interior" actions={[{label:'Find your first change',href:'/shopping-list'},{label:'Explore all topics',href:'/topics'},{label:'Browse focused shortlists',href:'/shortlists'}]} anchors={[{label:'Choose an area',href:'#routes'},{label:'Where to start',href:'#start'}]} />
 
-      <section className="mt-10 grid gap-4 md:grid-cols-2">
+      <section id="routes" className="mt-10 grid gap-4 md:grid-cols-2">
         {ROUTES.map((route) => (
           <article key={route.title} className="rounded-2xl border border-zinc-200 bg-white p-6 shadow-sm">
             <h2 className="text-xl font-semibold text-zinc-900">{route.title}</h2>
@@ -67,7 +57,7 @@ export default function Page() {
         ))}
       </section>
 
-      <section className="mt-12 rounded-3xl border border-zinc-200 bg-zinc-50/60 p-6 md:p-8">
+      <section id="start" className="mt-12 rounded-3xl border border-zinc-200 bg-zinc-50/60 p-6 md:p-8">
         <h2 className="text-2xl font-semibold">Where to start</h2>
         <ol className="mt-4 list-decimal space-y-2 pl-6 text-zinc-700">
           <li>Fix obvious damp, ventilation, water or maintenance problems before shopping.</li>

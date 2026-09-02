@@ -3,6 +3,7 @@ import TopicEducationDeepDive from '@/components/TopicEducationDeepDive'
 import TopicAtAGlance from '@/components/TopicAtAGlance'
 import TopicFAQ from '@/components/TopicFAQ'
 import { getTopicEdu } from '@/lib/topicEdu'
+import JourneyHero from '@/components/JourneyHero'
 
 export const metadata = {
   title: 'Movement Topics — Wild & Well',
@@ -19,21 +20,8 @@ export default function Page() {
   ]
 
   return (
-    <main className="mx-auto max-w-6xl px-4 py-16">
-      <header className="max-w-3xl">
-        <p className="text-sm font-semibold uppercase tracking-[0.16em] text-zinc-500">Build the habit first</p>
-        <h1 className="mt-2 text-4xl font-bold">Movement (Walk + Strength + Mobility)</h1>
-        <p className="mt-3 text-zinc-700">Build a walking base, add simple strength and mobility, then buy equipment only when it makes that routine easier or more useful.</p>
-        <img src="/images/photography/movement.jpg" alt="" className="mt-6 w-full rounded-3xl border border-zinc-200 shadow-sm" loading="lazy" decoding="async" />
-        <div className="mt-5 flex flex-wrap gap-2">
-          <Link className="btn-primary" href="/movement/movement-shortlist">Choose a movement route</Link>
-          <Link className="btn-secondary" href="/movement">Explore Movement</Link>
-          <Link className="btn-secondary" href="/blog/walking-for-health-how-much-is-enough">Walking guide</Link>
-          <Link className="btn-secondary" href="/blog/home-strength-basics-busy-people">Home strength</Link>
-          <Link className="btn-secondary" href="/blog/mobility-for-desk-workers">Desk mobility</Link>
-        </div>
-        <div className="mt-4 flex flex-wrap gap-2"><a className="chip" href="#understand">Understand</a><a className="chip" href="#start">Start</a><a className="chip" href="#options">Choose</a><a className="chip" href="#faqs">FAQs</a></div>
-      </header>
+    <main className="journey-page">
+      <JourneyHero number="05" kicker="Build the habit first" title="Movement that belongs in everyday life." intro="Walk often. Add simple strength and mobility. Let equipment earn its place by making a useful routine easier to repeat—not by becoming the routine." image="/images/photography/movement.jpg" imageAlt="A person walking outdoors in natural surroundings" actions={[{label:'Start moving',href:'/movement'},{label:'Build home strength',href:'/blog/home-strength-basics-busy-people'},{label:'Choose a useful route',href:'/movement/movement-shortlist'}]} anchors={[{label:'Understand',href:'#understand'},{label:'Build the base',href:'#start'},{label:'Choose',href:'#options'},{label:'FAQs',href:'#faqs'}]} />
 
       <TopicEducationDeepDive edu={edu} />
       <div id="start" />

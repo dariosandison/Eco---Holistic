@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import JourneyHero from '@/components/JourneyHero'
 
 export const metadata = {
   title: 'Practical Resilience — Wild & Well',
@@ -23,13 +24,8 @@ const PILLARS = [
 
 export default function Page() {
   return (
-    <main className="mx-auto max-w-6xl px-4 py-16">
-      <header className="max-w-3xl">
-        <p className="text-sm font-semibold uppercase tracking-[0.16em] text-zinc-500">Calm household preparation</p>
-        <h1 className="mt-2 text-4xl font-bold">Practical resilience</h1>
-        <p className="mt-4 text-lg text-zinc-700">Prepare for the ordinary disruptions first: a power cut, temporary water problem, poor outdoor air or a few days when normal shopping is inconvenient. The goal is useful redundancy, not fear or stockpiling.</p>
-        <div className="mt-5 flex flex-wrap gap-2"><Link className="btn-primary" href="/blog/72-hour-household-emergency-kit-uk">Build a 72-hour household plan</Link><Link className="btn-secondary" href="/water-filtration-shortlist-uk">Water options</Link><Link className="btn-secondary" href="/air-quality-shortlist-uk">Air options</Link></div>
-      </header>
+    <main className="journey-page">
+      <JourneyHero number="07" kicker="Calm household preparation" title="Ready for disruption. Free from fear." intro="Prepare for ordinary interruptions first: a power cut, a temporary water problem or a few inconvenient days. The goal is useful redundancy—not stockpiling." image="/images/photography/cards/ceramic-cups-and-a-carafe-on-a-kitchen-counter-calm-hydration-vibe.jpg" imageAlt="A simple water carafe and cups in a home kitchen" actions={[{label:'Build a 72-hour plan',href:'/blog/72-hour-household-emergency-kit-uk'},{label:'Plan household water',href:'/blog/72-hour-household-water-plan-uk'},{label:'Prepare for a power cut',href:'/blog/power-cut-preparation-uk'}]} anchors={[{label:'Start free',href:'#start'},{label:'Six pillars',href:'#pillars'},{label:'Solve a gap',href:'#routes'}]} />
 
       <section className="mt-10 rounded-3xl border border-zinc-200 bg-zinc-50 p-6 md:p-8"><h2 className="text-2xl font-semibold">Start without spending</h2><div className="mt-5 grid gap-4 md:grid-cols-2"><div className="rounded-2xl border border-zinc-200 bg-white p-5"><h3 className="font-semibold">Know the house</h3><p className="mt-2 text-sm text-zinc-700">Know your utility providers, stopcock and fuse box. Keep key contacts somewhere accessible even if a phone battery is flat.</p></div><div className="rounded-2xl border border-zinc-200 bg-white p-5"><h3 className="font-semibold">Know the household</h3><p className="mt-2 text-sm text-zinc-700">Plan around the people who actually live there: medication, children, pets, mobility, food requirements and essential devices.</p></div></div></section>
 
