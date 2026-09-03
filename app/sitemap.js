@@ -17,6 +17,7 @@ const REDIRECTED_ROUTES = new Set([
   '/picks/fragrance-free',
   '/guides',
   '/blog/sleep-naturally-without-overwhelm',
+  '/blog/morning-light-for-better-sleep',
   '/blog/72-hour-water-plan-uk',
   '/blog/bamboo-toilet-paper-facts-duplicate',
   '/best-dehumidifiers-uk',
