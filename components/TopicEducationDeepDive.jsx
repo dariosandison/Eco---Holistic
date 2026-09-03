@@ -1,5 +1,10 @@
 import Link from 'next/link'
 
+function editorialise(value) {
+  if (typeof value !== 'string') return value
+  return value.replace('A £10–£15 hygrometer can tell you', 'A basic hygrometer can tell you')
+}
+
 export default function TopicEducationDeepDive({ edu }) {
   if (!edu) return null
 
@@ -17,7 +22,7 @@ export default function TopicEducationDeepDive({ edu }) {
     references = [],
   } = edu
 
-  const arr = (v) => (Array.isArray(v) ? v.filter(Boolean) : (v ? [v] : []))
+  const arr = (v) => (Array.isArray(v) ? v.filter(Boolean).map(editorialise) : (v ? [editorialise(v)] : []))
   const Intro = arr(intro)
   const Why = arr(whyItMatters)
   const Effects = arr(healthEffects)
