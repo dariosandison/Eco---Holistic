@@ -1,11 +1,14 @@
 import Link from 'next/link'
 import ProductPick from '@/components/mdx/ProductPick'
 import { AWIN_PICKS } from '@/data/awinPicks'
+import { buildPageMetadata } from '@/lib/pageMetadata'
 
-export const metadata = {
+export const metadata = buildPageMetadata({
   title: 'Best Air Quality Options UK — Purifiers, Dehumidifiers & Airflow',
   description: 'Compare UK air-quality routes by problem: particles and allergens, damp and humidity, filter replacements, airflow and cooling, with practical buying guidance and partner links.',
-}
+  path: '/air-quality-shortlist-uk',
+  image: '/images/photography/air-quality.png',
+})
 
 function slugify(s = '') {
   return String(s).toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '')
@@ -64,7 +67,7 @@ export default function Page() {
           <div className="flex flex-wrap items-end justify-between gap-3">
             <div>
               <h2 className="section-title">{g.title}</h2>
-              <p className="section-subtitle">Compare relevant Wild & Well partner options. Prices and availability can change.</p>
+              <p className="section-subtitle">Compare relevant Wild & Well partner options. Product details and availability can change.</p>
             </div>
             <Link href="/topics/air-quality" className="text-sm font-semibold text-zinc-700 underline underline-offset-4">How to choose</Link>
           </div>
@@ -78,7 +81,7 @@ export default function Page() {
                 bullets={p.bullets}
                 trackingContext={`air_shortlist_${g.id}`}
                 links={[
-                  { label: `Check ${p.badge || p.advertiser} price`, merchant: 'awin', href: p.awin, variant: 'primary' },
+                  { label: `Check ${p.badge || p.advertiser} details`, merchant: 'awin', href: p.awin, variant: 'primary' },
                   { label: 'Read buying guidance', merchant: 'internal', href: '/topics/air-quality', variant: 'ghost' },
                 ]}
               />
