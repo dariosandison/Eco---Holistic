@@ -1,6 +1,7 @@
 import './globals.css'
 import './editorial-upgrades.css'
 import './money-page-upgrades.css'
+import './money-page-tail.css'
 import './topic-deep-dive.css'
 import './trust-system.css'
 import './author-system.css'
