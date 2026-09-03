@@ -20,6 +20,12 @@ const LEGACY_SLUG_REDIRECTS = {
   'gut-health-starters': 'fibre-gut-health-practical-guide',
 }
 
+function absoluteImage(image) {
+  if (!image) return undefined
+  if (/^https?:\/\//i.test(image)) return image
+  return `${SITE_URL}${String(image).startsWith('/') ? image : `/${image}`}`
+}
+
 export async function generateStaticParams() {
   return listContent('blog').map(({ slug }) => ({ slug }))
 }
@@ -31,16 +37,20 @@ export async function generateMetadata({ params }) {
   try {
     const { frontmatter } = getContent('blog', params.slug)
     const canonical = `${SITE_URL}/blog/${params.slug}`
+    const image = absoluteImage(frontmatter.image)
+    const noindex = frontmatter.noindex === true || frontmatter.hidden === true || frontmatter.draft === true
+
     return {
       title: frontmatter.title,
       description: frontmatter.description,
       alternates: { canonical },
+      robots: noindex ? { index: false, follow: true } : undefined,
       openGraph: {
         title: frontmatter.title,
         description: frontmatter.description,
         url: canonical,
         siteName: SITE_NAME,
-        images: frontmatter.image ? [{ url: frontmatter.image }] : undefined,
+        images: image ? [{ url: image }] : undefined,
         type: 'article',
         publishedTime: frontmatter.date || undefined,
         modifiedTime: frontmatter.updated || frontmatter.date || undefined,
@@ -49,7 +59,7 @@ export async function generateMetadata({ params }) {
         card: 'summary_large_image',
         title: frontmatter.title,
         description: frontmatter.description,
-        images: frontmatter.image ? [frontmatter.image] : undefined,
+        images: image ? [image] : undefined,
       },
     }
   } catch {
@@ -82,6 +92,7 @@ export default function Page({ params }) {
   const showAffiliateNotice = Boolean(process.env.NEXT_PUBLIC_AMAZON_TAG)
   const allPosts = listContent('blog')
   const authorType = author.schemaType === 'Organization' ? 'Organization' : 'Person'
+  const articleImage = absoluteImage(frontmatter.image)
 
   return (
     <ArticleLayout
@@ -113,7 +124,7 @@ export default function Page({ params }) {
           '@type': 'Article',
           headline: frontmatter.title,
           description: frontmatter.description,
-          image: frontmatter.image ? `${SITE_URL}${frontmatter.image}` : undefined,
+          image: articleImage,
           datePublished: frontmatter.date,
           dateModified: frontmatter.updated || frontmatter.date,
           mainEntityOfPage: { '@type': 'WebPage', '@id': `${SITE_URL}/blog/${params.slug}` },
