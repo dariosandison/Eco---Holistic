@@ -1,11 +1,14 @@
 import Link from 'next/link'
 import ProductPick from '@/components/mdx/ProductPick'
 import { AWIN_PICKS } from '@/data/awinPicks'
+import { buildPageMetadata } from '@/lib/pageMetadata'
 
-export const metadata = {
+export const metadata = buildPageMetadata({
   title: 'Sleep & Recovery Upgrades UK — Mattress, Pillow & Bedding Guide',
   description: 'Choose the right sleep upgrade for your actual problem: support, pillows, bedding temperature and recovery comfort, with conservative UK partner links.',
-}
+  path: '/sleep-recovery-shortlist-uk',
+  image: '/images/photography/sleep.jpg',
+})
 
 function slugify(s = '') {
   return String(s).toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '')
@@ -37,7 +40,7 @@ export default function Page() {
           <Link className="btn-secondary" href="/best-natural-sleep-support">Natural sleep support</Link>
           <Link className="btn-secondary" href="/affiliate-disclosure">How affiliate links work</Link>
         </div>
-        <p className="mt-3 text-xs text-zinc-500">Partner links may earn Wild & Well a commission at no extra cost to you. Trials, returns, warranty and current pricing should always be checked on the merchant site.</p>
+        <p className="mt-3 text-xs text-zinc-500">Partner links may earn Wild & Well a commission at no extra cost to you. Trials, returns, warranty and current retailer terms should always be checked on the merchant site.</p>
       </header>
 
       <section className="mt-10 grid gap-4 md:grid-cols-2 lg:grid-cols-4">
@@ -64,7 +67,7 @@ export default function Page() {
           <div className="flex flex-wrap items-end justify-between gap-3">
             <div>
               <h2 className="section-title">{g.title}</h2>
-              <p className="section-subtitle">Relevant partner options for comparison. Prices and availability can change.</p>
+              <p className="section-subtitle">Relevant partner options for comparison. Product details and availability can change.</p>
             </div>
             <Link href="/topics/sleep" className="text-sm font-semibold text-zinc-700 underline underline-offset-4">Sleep criteria</Link>
           </div>
@@ -78,7 +81,7 @@ export default function Page() {
                 bullets={p.bullets}
                 trackingContext={`sleep_shortlist_${g.id}`}
                 links={[
-                  { label: `Check ${p.badge || p.advertiser} price`, merchant: 'awin', href: p.awin, variant: 'primary' },
+                  { label: `Check ${p.badge || p.advertiser} details`, merchant: 'awin', href: p.awin, variant: 'primary' },
                   { label: 'Read sleep basics', merchant: 'internal', href: '/topics/sleep', variant: 'ghost' },
                 ]}
               />
