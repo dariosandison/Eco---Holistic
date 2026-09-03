@@ -1,10 +1,13 @@
 import Link from 'next/link'
 import ProductPick from '@/components/mdx/ProductPick'
+import { buildPageMetadata } from '@/lib/pageMetadata'
 
-export const metadata = {
+export const metadata = buildPageMetadata({
   title: 'Food-First Nutrition Shortlist UK',
   description: 'A practical UK nutrition buying hub focused on real food, convenient high-protein meals and useful staples before supplements.',
-}
+  path: '/nutrition/food-first-shortlist',
+  image: '/images/photography/nutrition.jpg',
+})
 
 const REAL_FOOD_HUB_AWIN = 'https://www.awin1.com/cread.php?awinmid=20241&awinaffid=2754234&clickref=ww_nutrition_wholefoods_realfoodhub_mangalitza_primerib&ued=https%3A%2F%2Fwww.realfoodhub.co.uk%2Fproduct-detail%2Fmangalitza-pork-prime-rib-steak'
 const GOOD_PREP_AWIN = 'https://www.awin1.com/cread.php?awinmid=16134&awinaffid=2754234&clickref=ww_nutrition_mealprep_goodprep_wildberry_collagen&ued=https%3A%2F%2Fthegoodprep.com%2Fproduct%2Fwild-berry-collagen-protein-yoghurt-large%2F'
@@ -34,10 +37,10 @@ export default function Page() {
         <div className="mt-5 flex flex-wrap gap-2">
           <Link className="btn-primary" href="/nutrition">Nutrition hub</Link>
           <Link className="btn-secondary" href="/topics/nutrition">Nutrition topic</Link>
-          <Link className="btn-secondary" href="/shopping-list">Free shopping list</Link>
+          <Link className="btn-secondary" href="/blog/label-reading-101">Learn label reading</Link>
           <Link className="btn-secondary" href="/affiliate-disclosure">Affiliate disclosure</Link>
         </div>
-        <p className="mt-3 text-xs text-zinc-500">Partner links may earn Wild & Well a commission at no extra cost to you. Check current ingredients, delivery terms and pricing with the merchant.</p>
+        <p className="mt-3 text-xs text-zinc-500">Partner links may earn Wild & Well a commission at no extra cost to you. Check current ingredients, delivery terms and retailer details before buying.</p>
       </header>
 
       <section className="mt-10">
@@ -50,10 +53,10 @@ export default function Page() {
             title="Real Food Hub"
             badge="Whole foods"
             description="A direct route for higher-welfare meat, batch cooking and freezer planning. The linked item is one example; compare the wider range on the merchant site."
-            bullets={["Best for: food-first protein and freezer planning", "Compare provenance, delivery windows and price per serving", "Batch-cook or freeze promptly"]}
+            bullets={["Best for: food-first protein and freezer planning", "Compare provenance, delivery windows and cost per serving", "Batch-cook or freeze promptly"]}
             trackingContext="food_first_realfoodhub"
             links={[
-              { label: 'Check Real Food Hub', merchant: 'awin', href: REAL_FOOD_HUB_AWIN, variant: 'primary' },
+              { label: 'Check Real Food Hub details', merchant: 'awin', href: REAL_FOOD_HUB_AWIN, variant: 'primary' },
               { label: 'Read our buying guide', merchant: 'internal', href: '/ethical-meat-delivery-uk-real-food-hub-mangalitza-prime-rib', variant: 'ghost' },
             ]}
           />
@@ -64,7 +67,7 @@ export default function Page() {
             bullets={["Best for: busy weeks and reduced meal decision fatigue", "Check ingredients, serving size and protein per meal", "Use convenience to support — not replace — a food-first routine"]}
             trackingContext="food_first_goodprep"
             links={[
-              { label: 'Check The Good Prep', merchant: 'awin', href: GOOD_PREP_AWIN, variant: 'primary' },
+              { label: 'Check The Good Prep details', merchant: 'awin', href: GOOD_PREP_AWIN, variant: 'primary' },
               { label: 'Read our buying guide', merchant: 'internal', href: '/high-protein-meal-prep-uk-the-good-prep-wild-berry-collagen-yoghurt', variant: 'ghost' },
             ]}
           />
