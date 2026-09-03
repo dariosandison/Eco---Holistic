@@ -8,7 +8,7 @@ export default function ProductPick({
   description,
   asin,
   href,
-  image = '/og-default.jpg',
+  image,
   badge,
   bullets = [],
   facts = [],
@@ -22,25 +22,7 @@ export default function ProductPick({
   const bestFor = bestForLine ? bestForLine.replace(/^[^:]+:\s*/i, '').trim() : ''
   const avoidIf = avoidIfLine ? avoidIfLine.replace(/^[^:]+:\s*/i, '').trim() : ''
   const displayBullets = bulletStrings.filter((b) => b !== bestForLine && b !== avoidIfLine)
-
-  const needsAutoImage = !image || image === '/og-default.jpg'
-  const key = `${title || ''} ${badge || ''}`.toLowerCase()
-  const autoImage = needsAutoImage
-    ? (() => {
-        if (key.includes('humidifier')) return '/images/products/humidifier.svg'
-        if (key.includes('air purifier') || key.includes('purifier') || key.includes('hepa')) return '/images/products/air-purifier.svg'
-        if (key.includes('shower')) return '/images/products/shower-filter.svg'
-        if (key.includes('laundry') || key.includes('detergent')) return '/images/products/laundry.svg'
-        if (key.includes('water') || key.includes('filter') || key.includes('brita') || key.includes('doulton')) return '/images/products/water-filter.svg'
-        if (key.includes('cookware') || key.includes('pan') || key.includes('skillet')) return '/images/products/kitchen.svg'
-        if (key.includes('magnesium') || key.includes('supplement') || key.includes('capsule') || key.includes('vitamin')) return '/images/products/supplements.svg'
-        if (key.includes('tracker') || key.includes('watch') || key.includes('wearable')) return '/images/products/tracker.svg'
-        if (key.includes('scale')) return '/images/products/scale.svg'
-        if (key.includes('band')) return '/images/products/bands.svg'
-        if (key.includes('shoe') || key.includes('trainer')) return '/images/products/shoe.svg'
-        return '/images/products/neutral.svg'
-      })()
-    : image
+  const hasVerifiedImage = Boolean(image && image !== '/og-default.jpg')
 
   const autoFacts = (() => {
     const t = `${title || ''} ${badge || ''} ${description || ''} ${bulletStrings.join(' ')}`.toLowerCase()
@@ -60,106 +42,77 @@ export default function ProductPick({
   const metaRows = Array.isArray(meta) ? meta : meta ? [meta] : []
   const resolvedLinks = Array.isArray(links) && links.length
     ? links
-    : [{ label: 'Check price', merchant: 'amazon', asin, href, variant: 'primary' }]
+    : [{ label: 'Check retailer details', merchant: 'amazon', asin, href, variant: 'primary' }]
 
   return (
-    <div className="not-prose overflow-hidden rounded-2xl border border-zinc-200 bg-white p-5 shadow-sm">
-      <div className="grid gap-4 sm:grid-cols-[96px,1fr] sm:items-start">
-        <div className="relative h-24 w-24 overflow-hidden rounded-xl bg-zinc-100">
-          <Image src={autoImage} alt="" fill className="object-cover" sizes="96px" />
+    <article className="product-pick not-prose">
+      {hasVerifiedImage ? (
+        <div className="product-pick__image">
+          <Image src={image} alt="" fill className="object-cover" sizes="(max-width: 640px) 100vw, 240px" />
+        </div>
+      ) : null}
+
+      <div className="product-pick__body">
+        <div className="product-pick__heading">
+          <div>
+            <p className="product-pick__eyebrow">Shortlisted option</p>
+            <h3>{title}</h3>
+          </div>
+          {badge ? <span className="product-pick__badge">{badge}</span> : null}
         </div>
 
-        <div className="min-w-0">
-          <div className="flex flex-wrap items-center gap-2">
-            <h3 className="text-base font-semibold text-zinc-900">{title}</h3>
-            {badge ? <span className="chip">{badge}</span> : null}
+        {description ? <p className="product-pick__description">{description}</p> : null}
+
+        {(bestFor || avoidIf) ? (
+          <div className="product-pick__fit">
+            {bestFor ? <div><span>Best for</span><strong>{bestFor}</strong></div> : null}
+            {avoidIf ? <div><span>Skip if</span><strong>{avoidIf}</strong></div> : null}
           </div>
-          {description ? <p className="mt-1 text-sm text-zinc-700">{description}</p> : null}
+        ) : null}
 
-          {(bestFor || avoidIf) ? (
-            <p className="mt-2 text-xs text-zinc-700">
-              {bestFor ? <><span className="font-semibold text-zinc-900">Best for:</span> {bestFor}</> : null}
-              {bestFor && avoidIf ? <span className="mx-2 text-zinc-400">·</span> : null}
-              {avoidIf ? <><span className="font-semibold text-zinc-900">Avoid if:</span> {avoidIf}</> : null}
-            </p>
-          ) : null}
+        {chips.length ? <div className="product-pick__chips">{chips.map((c, i) => <span key={i}>{c}</span>)}</div> : null}
 
-          {chips.length ? (
-            <div className="mt-3 flex flex-wrap gap-2">
-              {chips.map((c, i) => <span key={i} className="chip">{c}</span>)}
-            </div>
-          ) : null}
+        {metaRows.length ? (
+          <dl className="product-pick__meta">
+            {metaRows.slice(0, 4).map((m, i) => {
+              const label = typeof m === 'string' ? 'Detail' : (m.label || 'Detail')
+              const value = typeof m === 'string' ? m : (m.value || '')
+              return <div key={i}><dt>{label}</dt><dd>{value}</dd></div>
+            })}
+          </dl>
+        ) : null}
 
-          {metaRows.length ? (
-            <div className="mt-3 grid gap-2 sm:grid-cols-2">
-              {metaRows.slice(0, 4).map((m, i) => {
-                const label = typeof m === 'string' ? '' : (m.label || '')
-                const value = typeof m === 'string' ? m : (m.value || '')
-                return (
-                  <div key={i} className="rounded-xl border border-zinc-200 bg-zinc-50 px-3 py-2 text-xs text-zinc-700">
-                    {label ? <span className="font-semibold text-zinc-900">{label}: </span> : null}
-                    <span>{value}</span>
-                  </div>
-                )
-              })}
-            </div>
-          ) : null}
-
-          {displayBullets?.length ? (
-            <ul className="mt-3 list-disc pl-5 text-sm text-zinc-700 space-y-1">
-              {displayBullets.map((b, i) => <li key={i}>{b}</li>)}
-            </ul>
-          ) : null}
-
-          <div className="mt-4">
-            <div className="flex flex-wrap gap-2">
-              {resolvedLinks.map((l, i) => {
-                const merchant = String(l.merchant || '').toLowerCase()
-                const label = l.label || 'Check price'
-                const v = l.variant || 'primary'
-
-                if (merchant.includes('amazon') || merchant === '') {
-                  return (
-                    <AmazonButton key={i} asin={l.asin || asin} href={l.href || href} variant={v}>
-                      {label}
-                    </AmazonButton>
-                  )
-                }
-
-                const className = v === 'primary'
-                  ? 'btn-primary'
-                  : v === 'ghost'
-                    ? 'inline-flex items-center justify-center rounded-xl border border-zinc-300 bg-white px-4 py-2.5 text-sm font-semibold text-zinc-900 transition hover:bg-zinc-50'
-                    : 'btn-secondary'
-
-                const hrefResolved = String(l.href || '')
-                const isInternal = merchant === 'internal' || hrefResolved.startsWith('/')
-
-                if (isInternal) {
-                  return <Link key={i} href={hrefResolved || '/'} className={className}>{label}</Link>
-                }
-
-                const outboundHref = merchant === 'awin' && trackingContext
-                  ? withAwinContext(hrefResolved, `${trackingContext}_${i + 1}`)
-                  : hrefResolved
-
-                return (
-                  <a
-                    key={i}
-                    href={outboundHref}
-                    target="_blank"
-                    rel="noopener nofollow sponsored"
-                    className={className}
-                    data-affiliate-context={trackingContext || undefined}
-                  >
-                    {label}
-                  </a>
-                )
-              })}
-            </div>
+        {displayBullets?.length ? (
+          <div className="product-pick__why">
+            <p>Why it made the shortlist</p>
+            <ul>{displayBullets.map((b, i) => <li key={i}>{b}</li>)}</ul>
           </div>
+        ) : null}
+
+        <div className="product-pick__actions">
+          <div className="flex flex-wrap gap-2">
+            {resolvedLinks.map((l, i) => {
+              const merchant = String(l.merchant || '').toLowerCase()
+              const label = l.label || 'Check retailer details'
+              const v = l.variant || 'primary'
+
+              if (merchant.includes('amazon') || merchant === '') {
+                return <AmazonButton key={i} asin={l.asin || asin} href={l.href || href} variant={v}>{label}</AmazonButton>
+              }
+
+              const className = v === 'primary' ? 'btn-primary' : v === 'ghost' ? 'inline-flex items-center justify-center border border-zinc-300 bg-white px-4 py-2.5 text-sm font-semibold text-zinc-900 transition hover:bg-zinc-50' : 'btn-secondary'
+              const hrefResolved = String(l.href || '')
+              const isInternal = merchant === 'internal' || hrefResolved.startsWith('/')
+
+              if (isInternal) return <Link key={i} href={hrefResolved || '/'} className={className}>{label}</Link>
+
+              const outboundHref = merchant === 'awin' && trackingContext ? withAwinContext(hrefResolved, `${trackingContext}_${i + 1}`) : hrefResolved
+              return <a key={i} href={outboundHref} target="_blank" rel="noopener nofollow sponsored" className={className} data-affiliate-context={trackingContext || undefined}>{label}</a>
+            })}
+          </div>
+          <p>Retailer links may be affiliate links. Product details, availability and current price are confirmed by the retailer.</p>
         </div>
       </div>
-    </div>
+    </article>
   )
 }
