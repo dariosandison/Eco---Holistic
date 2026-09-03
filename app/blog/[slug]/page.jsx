@@ -26,22 +26,34 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({ params }) {
   const legacy = LEGACY_SLUG_REDIRECTS[params.slug]
-  if (legacy) return { title: 'Redirecting…' }
+  if (legacy) return { title: 'Redirecting…', robots: { index: false, follow: true } }
 
   try {
     const { frontmatter } = getContent('blog', params.slug)
+    const canonical = `${SITE_URL}/blog/${params.slug}`
     return {
       title: frontmatter.title,
       description: frontmatter.description,
+      alternates: { canonical },
       openGraph: {
         title: frontmatter.title,
         description: frontmatter.description,
+        url: canonical,
+        siteName: SITE_NAME,
         images: frontmatter.image ? [{ url: frontmatter.image }] : undefined,
         type: 'article',
+        publishedTime: frontmatter.date || undefined,
+        modifiedTime: frontmatter.updated || frontmatter.date || undefined,
+      },
+      twitter: {
+        card: 'summary_large_image',
+        title: frontmatter.title,
+        description: frontmatter.description,
+        images: frontmatter.image ? [frontmatter.image] : undefined,
       },
     }
   } catch {
-    return { title: 'Not found' }
+    return { title: 'Not found', robots: { index: false, follow: false } }
   }
 }
 
@@ -69,6 +81,7 @@ export default function Page({ params }) {
 
   const showAffiliateNotice = Boolean(process.env.NEXT_PUBLIC_AMAZON_TAG)
   const allPosts = listContent('blog')
+  const authorType = author.schemaType === 'Organization' ? 'Organization' : 'Person'
 
   return (
     <ArticleLayout
@@ -100,10 +113,11 @@ export default function Page({ params }) {
           '@type': 'Article',
           headline: frontmatter.title,
           description: frontmatter.description,
+          image: frontmatter.image ? `${SITE_URL}${frontmatter.image}` : undefined,
           datePublished: frontmatter.date,
           dateModified: frontmatter.updated || frontmatter.date,
           mainEntityOfPage: { '@type': 'WebPage', '@id': `${SITE_URL}/blog/${params.slug}` },
-          author: { '@type': 'Person', name: author.name, url: author.url },
+          author: { '@type': authorType, name: author.name, url: author.url },
           publisher: {
             '@type': 'Organization',
             name: SITE_NAME,
