@@ -3,12 +3,15 @@ import TopicEducationDeepDive from '@/components/TopicEducationDeepDive'
 import TopicAtAGlance from '@/components/TopicAtAGlance'
 import TopicFAQ from '@/components/TopicFAQ'
 import { getTopicEdu } from '@/lib/topicEdu'
+import { buildPageMetadata } from '@/lib/pageMetadata'
 import JourneyHero from '@/components/JourneyHero'
 
-export const metadata = {
-  title: 'Movement Topics — Wild & Well',
-  description: 'Movement basics: walking, strength, mobility and foot function first, with focused buying routes for equipment that genuinely supports the habit.',
-}
+export const metadata = buildPageMetadata({
+  title: 'Movement — Walking, Strength & Everyday Fitness UK',
+  description: 'Movement guidance for UK life: walking, simple strength, mobility and foot function first, with equipment only when it genuinely supports the habit.',
+  path: '/topics/movement',
+  image: '/images/photography/movement.jpg',
+})
 
 const ROUTES = [
   { title: 'Walk more often', copy: 'Use ordinary walking as the base layer. Add pace, distance or hills gradually once the habit is stable.', href: '/movement', label: 'Start with movement basics' },
@@ -20,7 +23,7 @@ export default function Page() {
   const edu = getTopicEdu('movement')
   const faqs = [
     { q: 'What matters more: steps or workouts?', a: ['Both can help, but daily walking is often the easiest base layer to build first.', 'Once that habit is stable, simple strength sessions can add another useful layer.'] },
-    { q: 'How much strength training do I need?', a: 'A simple routine covering major movement patterns a couple of times per week can be a practical starting point. Consistency matters more than complexity.' },
+    { q: 'How much strength training do I need?', a: 'UK guidance recommends strengthening activities for the major muscle groups on at least two days each week. A simple routine that you can repeat consistently is a practical way to work toward that.' },
     { q: 'Do I need equipment?', a: 'No. Bodyweight and simple resistance can go a long way. Equipment should reduce friction or expand what you can do — not become the plan itself.' },
     { q: 'How do I avoid doing too much too soon?', a: 'Increase walking, training volume and load gradually. Keep the routine repeatable and avoid adding several demanding changes at once.' },
   ]
