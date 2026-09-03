@@ -13,8 +13,8 @@ export async function generateStaticParams() {
 export async function generateMetadata({ params }) {
   const author = getAuthor(params.slug)
   return {
-    title: `${author.name}`,
-    description: author.bio || 'Author profile and latest articles.',
+    title: author.name,
+    description: author.bio || 'Editorial responsibility and latest Wild & Well guides.',
   }
 }
 
@@ -24,51 +24,47 @@ export default function Page({ params }) {
     .filter((p) => getAuthor(p.author).slug === author.slug)
     .slice(0, 12)
 
-  return (
-    <main className="mx-auto max-w-6xl px-4 py-16">
-      <StructuredData data={{
-        '@context': 'https://schema.org',
-        '@type': 'Person',
-        name: author.name,
-        url: `${SITE_URL}/authors/${author.slug}`,
-        image: author.image ? `${SITE_URL}${author.image}` : undefined,
-        jobTitle: author.role || undefined,
-        description: author.bio || undefined,
-      }} />
-      <header className="max-w-3xl">
-        <h1 className="text-4xl font-bold">{author.name}</h1>
-        {author.role ? <p className="mt-2 text-zinc-600">{author.role}</p> : null}
-        {author.bio ? <p className="mt-4 text-zinc-700">{author.bio}</p> : null}
-        <div className="mt-5 flex flex-wrap gap-2">
-          <Link className="btn-secondary" href="/authors">All authors</Link>
-          <Link className="btn-secondary" href="/blog">Wellness Insights</Link>
-          <Link className="btn-secondary" href="/shortlists">Shortlists</Link>
-        </div>
+  const schemaType = author.schemaType === 'Organization' ? 'Organization' : 'Person'
+  const structured = {
+    '@context': 'https://schema.org',
+    '@type': schemaType,
+    name: author.name,
+    url: `${SITE_URL}/authors/${author.slug}`,
+    image: author.image ? `${SITE_URL}${author.image}` : undefined,
+    description: author.bio || undefined,
+  }
+  if (schemaType === 'Person') structured.jobTitle = author.role || undefined
 
-        <div className="mt-6 flex flex-wrap gap-2">
-          <span className="chip">UK-focused</span>
-          <span className="chip">Trade-offs first</span>
-          <span className="chip">Running costs</span>
-          <span className="chip">Conservative claims</span>
-        </div>
+  return (
+    <main className="trust-page author-profile">
+      <StructuredData data={structured} />
+      <header className="trust-hero">
+        <div><p className="trust-hero__kicker">Editorial responsibility</p><h1>{author.name}</h1></div>
+        <div className="trust-hero__lede"><p>{author.bio}</p><div className="author-profile__meta"><span>{author.role}</span><span>UK focused</span><span>Trade-offs first</span><span>Conservative claims</span></div></div>
       </header>
 
-      <section className="mt-10">
-        <h2 className="text-2xl font-semibold">Latest articles</h2>
-        {posts.length ? (
-          <div className="mt-6 grid gap-4 md:grid-cols-2">
-            {posts.map((p) => (
-              <Link key={p.slug} href={`/blog/${p.slug}`} className="card hover:shadow-sm transition-shadow">
-                <h3 className="text-lg font-semibold">{p.title}</h3>
-                {p.description ? <p className="mt-2 text-sm text-zinc-700">{p.description}</p> : null}
-                <p className="mt-3 text-xs text-zinc-500">Open →</p>
-              </Link>
-            ))}
-          </div>
-        ) : (
-          <p className="mt-3 text-zinc-700">No posts yet — check back soon. In the meantime, browse Topics or Shortlists.</p>
-        )}
-      </section>
+      <div className="trust-grid">
+        <aside className="trust-nav"><p>Editorial links</p><Link href="/authors">Authors</Link><Link href="/editorial-policy">Editorial policy</Link><Link href="/how-we-test">How we evaluate products</Link><Link href="/corrections">Corrections</Link></aside>
+        <div className="trust-content">
+          <section className="trust-section"><p className="trust-section__eyebrow">01 / Role</p><h2>What this byline means</h2><p>This profile identifies editorial responsibility; it is not a substitute for specialist qualifications. Health and safety guidance should be grounded in appropriate authoritative sources, while product recommendations should explain research method, trade-offs and commercial relationships.</p></section>
+
+          <section><p className="trust-section__eyebrow">02 / Recent work</p><h2 className="mt-2 text-[clamp(2rem,3.4vw,3rem)] font-serif font-normal leading-none tracking-[-.035em] text-[var(--brand-dark)]">Latest guides</h2>
+            {posts.length ? (
+              <div className="author-articles">
+                {posts.map((p, index) => (
+                  <Link key={p.slug} href={`/blog/${p.slug}`} className="author-article">
+                    <span>{String(index + 1).padStart(2, '0')}</span>
+                    <div><h3>{p.title}</h3>{p.description ? <p>{p.description}</p> : null}</div>
+                    <b>Read →</b>
+                  </Link>
+                ))}
+              </div>
+            ) : <p className="mt-4 text-sm text-zinc-600">No published guides currently carry this byline.</p>}
+          </section>
+
+          <div className="trust-callout"><div><p>03 / Standards</p><h2>Method matters more than biography.</h2></div><div><p>See how Wild &amp; Well separates editorial research from testing, handles affiliate relationships, and corrects material errors.</p><div className="mt-4 flex flex-wrap gap-2"><Link className="btn-secondary" href="/how-we-test">Evaluation method</Link><Link className="btn-secondary" href="/affiliate-disclosure">Affiliate disclosure</Link></div></div></div>
+        </div>
+      </div>
     </main>
   )
 }
