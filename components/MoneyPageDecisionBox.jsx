@@ -1,36 +1,24 @@
-// components/MoneyPageDecisionBox.jsx
-
-/**
- * A fast-scanning decision box for shortlist pages.
- * Keep it short: 3–6 rules max.
- */
 export default function MoneyPageDecisionBox({
-  title = '10‑second decision',
-  intro = 'Pick the rule that matches your situation.',
+  title = 'Fast decision',
+  intro = 'Match your situation to the rule before comparing products.',
   rules = [],
 }) {
   if (!Array.isArray(rules) || rules.length === 0) return null
 
   return (
-    <section className="mt-8">
-      <div className="rounded-2xl border bg-white p-6 shadow-sm">
-        <h2 className="text-xl font-semibold text-zinc-900">{title}</h2>
-        <p className="mt-2 max-w-3xl text-sm text-zinc-700">{intro}</p>
-
-        <ul className="mt-5 space-y-3">
-          {rules.map((r, idx) => (
-            <li key={idx} className="rounded-2xl border border-zinc-200 bg-zinc-50 p-4">
-              <p className="text-sm text-zinc-900">
-                <span className="font-semibold">If:</span> {r?.if}
-              </p>
-              <p className="mt-1 text-sm text-zinc-700">
-                <span className="font-semibold">Then:</span> {r?.then}
-              </p>
-              {r?.note ? <p className="mt-1 text-xs text-zinc-500">{r.note}</p> : null}
-            </li>
-          ))}
-        </ul>
+    <section className="decision-rules mt-10">
+      <div className="decision-rules__header">
+        <div><p>Decision rules</p><h2>{title}</h2></div>
+        <p>{intro}</p>
       </div>
+      <ol className="decision-rules__list">
+        {rules.map((r, idx) => (
+          <li key={idx}>
+            <span className="decision-rules__num">{String(idx + 1).padStart(2, '0')}</span>
+            <div><p className="decision-rules__if">If <strong>{r?.if}</strong></p><p className="decision-rules__then">Then {r?.then}</p>{r?.note ? <p className="decision-rules__note">{r.note}</p> : null}</div>
+          </li>
+        ))}
+      </ol>
     </section>
   )
 }
