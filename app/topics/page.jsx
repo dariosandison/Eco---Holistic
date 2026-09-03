@@ -1,83 +1,96 @@
+import Image from 'next/image'
 import Link from 'next/link'
 import StructuredData from '@/components/StructuredData'
 import { SITE_URL } from '@/lib/site'
 
 export const metadata = {
-  title: 'Topics — Wild & Well',
-  description: 'Education-first guides for sleep, movement, nutrition, skin, air, water, healthy-home habits and practical resilience in the UK.',
-}
-
-function Card({ title, desc, href, tag, image }) {
-  return (
-    <Link href={href} className="card hover:shadow-sm transition-shadow">
-      <div className="flex items-start justify-between gap-3">
-        <div className="flex min-w-0 gap-3">
-          <div className="relative mt-0.5 h-12 w-12 shrink-0 overflow-hidden rounded-xl bg-zinc-100"><img src={image || '/images/cards/neutral.svg'} alt="" className="h-full w-full object-cover" loading="lazy" /></div>
-          <div className="min-w-0"><h2 className="text-lg font-semibold">{title}</h2><p className="mt-1 text-sm text-zinc-600">{desc}</p></div>
-        </div>
-        <span className="shrink-0 rounded-full border bg-white px-2 py-0.5 text-[11px] text-zinc-600">{tag}</span>
-      </div>
-      <p className="mt-3 text-xs text-zinc-500">Open →</p>
-    </Link>
-  )
+  title: 'Explore healthier living — seven practical journeys',
+  description: 'Explore Wild & Well through Water, Air, Sleep, Nutrition, Movement, Healthy Home and Practical Resilience. Understand first, act for free where possible, then buy only if useful.',
 }
 
 const CORE_PATHS = [
-  { title: 'Better everyday water', desc: 'Understand the job first, then compare portable, countertop, under-sink or gravity filtration.', learn: '/topics/water', buy: '/water-filtration-shortlist-uk' },
-  { title: 'Breathe easier indoors', desc: 'Separate particles and smoke from damp and excess humidity before choosing equipment.', learn: '/topics/air-quality', buy: '/air-quality-shortlist-uk' },
-  { title: 'Sleep & recover better', desc: 'Light, timing and comfort first; mattresses, bedding and recovery products only when they solve a clear problem.', learn: '/topics/sleep', buy: '/sleep-recovery-shortlist-uk' },
-  { title: 'Eat better without perfection', desc: 'Food-first nutrition, useful staples and convenient meals before optional supplements.', learn: '/topics/nutrition', buy: '/nutrition/food-first-shortlist' },
-  { title: 'Move more consistently', desc: 'Walking and simple strength first, then footwear, home-training equipment or tracking when useful.', learn: '/topics/movement', buy: '/movement/movement-shortlist' },
-  { title: 'Build a lower-tox home', desc: 'Start with high-use laundry, cleaning and bathroom swaps rather than replacing everything.', learn: '/topics/fragrance-free', buy: '/healthy-home/low-tox-shortlist' },
-  { title: 'Support a healthier life with dogs', desc: 'Complete nutrition, appropriate movement and a healthier shared home before optional wellness products.', learn: '/dogs', buy: '/dog-wellness-shortlist-uk' },
-  { title: 'Handle short disruptions', desc: 'Calm household planning for water, food, power, communication and useful essentials.', learn: '/topics/resilience', buy: '/blog/72-hour-household-emergency-kit-uk' },
+  { number: '01', title: 'Water', desc: 'Taste, filtration, hard-water comfort and household backup—starting with the job you actually need done.', learn: '/topics/water', buy: '/water-filtration-shortlist-uk', image: '/images/photography/water.jpg' },
+  { number: '02', title: 'Air', desc: 'Particles, smoke, damp, humidity and ventilation. Diagnose the problem before choosing equipment.', learn: '/topics/air-quality', buy: '/air-quality-shortlist-uk', image: '/images/photography/air-quality.png' },
+  { number: '03', title: 'Sleep', desc: 'Light, timing, temperature and comfort first; products only when they solve a defined sleep problem.', learn: '/topics/sleep', buy: '/sleep-recovery-shortlist-uk', image: '/images/photography/sleep.jpg' },
+  { number: '04', title: 'Nutrition', desc: 'Food-first nutrition, useful staples and realistic routines before optional supplements.', learn: '/topics/nutrition', buy: '/nutrition/food-first-shortlist', image: '/images/photography/nutrition.jpg' },
+  { number: '05', title: 'Movement', desc: 'Walking and simple strength first, then footwear, home training or tracking when useful.', learn: '/topics/movement', buy: '/movement/movement-shortlist', image: '/images/photography/movement.jpg' },
+  { number: '06', title: 'Healthy Home', desc: 'Air, moisture, cleaning, laundry and high-contact materials—prioritised by what matters most.', learn: '/healthy-home', buy: '/healthy-home/low-tox-shortlist', image: '/images/photography/home.jpg' },
+  { number: '07', title: 'Practical Resilience', desc: 'Calm planning for short disruptions to water, food, power, warmth and communication.', learn: '/topics/resilience', buy: '/blog/72-hour-household-emergency-kit-uk', image: '/images/photography/cards/ceramic-cups-and-a-carafe-on-a-kitchen-counter-calm-hydration-vibe.jpg' },
+]
+
+const DEEPER_TOPICS = [
+  ['Recovery', '/topics/recovery', 'Load management, soreness and adaptation.'],
+  ['Foot strength', '/topics/foot-strength', 'Natural movement basics and gradual transitions.'],
+  ['Gut health', '/topics/gut-health', 'Fibre, diversity and sensible expectations.'],
+  ['Hydration', '/topics/hydration', 'Habits first; electrolytes when they actually help.'],
+  ['Skin health', '/topics/skin-health', 'Barrier basics, fragrance and simple routines.'],
+  ['Sun protection', '/topics/sun-protection', 'Shade, clothing and practical sunscreen habits.'],
+  ['Fragrance-free home', '/topics/fragrance-free', 'High-contact changes for laundry, cleaning and bathrooms.'],
+  ['Dog health & wellness', '/dogs', 'Food, healthy weight, movement, allergies and the shared home.'],
 ]
 
 export default function Page() {
-  const topicItems = [
-    ['Sleep & recovery', '/topics/sleep'], ['Movement', '/topics/movement'], ['Recovery', '/topics/recovery'], ['Foot strength', '/topics/foot-strength'], ['Nutrition', '/topics/nutrition'], ['Gut health', '/topics/gut-health'], ['Hydration', '/topics/hydration'], ['Skin health', '/topics/skin-health'], ['Sun protection', '/topics/sun-protection'], ['Air quality', '/topics/air-quality'], ['Water', '/topics/water'], ['Fragrance-free cleaning & laundry', '/topics/fragrance-free'], ['Dog health & wellness', '/dogs'], ['Practical resilience', '/topics/resilience'],
-  ]
-  const itemList = { '@context': 'https://schema.org', '@type': 'ItemList', name: 'Wild & Well topics', itemListElement: topicItems.map(([name, href], i) => ({ '@type': 'ListItem', position: i + 1, name, url: `${SITE_URL}${href}` })) }
+  const itemList = { '@context': 'https://schema.org', '@type': 'ItemList', name: 'Wild & Well core journeys', itemListElement: CORE_PATHS.map((item, i) => ({ '@type': 'ListItem', position: i + 1, name: item.title, url: `${SITE_URL}${item.learn}` })) }
 
   return (
-    <main className="mx-auto max-w-6xl px-4 py-16">
+    <main className="bg-[#fffdf8] pb-24 text-[var(--ink)]">
       <StructuredData data={itemList} />
-      <header className="max-w-3xl">
-        <p className="text-sm font-semibold uppercase tracking-[0.16em] text-zinc-500">Learn first. Buy second.</p>
-        <h1 className="mt-2 text-4xl font-bold">Topics</h1>
-        <p className="mt-3 text-zinc-700">Start with the problem you want to solve. Each core path gives you education and no-spend steps first, then a focused buying guide if a product genuinely helps.</p>
-        <div className="mt-5 flex flex-wrap gap-2"><Link className="btn-primary" href="/shortlists">Browse all shortlists</Link><Link className="btn-secondary" href="/shopping-list">Free shopping list</Link><Link className="btn-secondary" href="/healthy-home">Healthy Home</Link></div>
+
+      <header className="content-shell grid gap-10 border-b border-[rgba(18,59,50,.14)] py-14 md:grid-cols-[1.25fr_.75fr] md:items-end md:py-20">
+        <div>
+          <p className="eyebrow">Explore Wild &amp; Well</p>
+          <h1 className="mt-4 max-w-4xl font-serif text-[clamp(3.5rem,7vw,7.3rem)] font-normal leading-[.92] tracking-[-.055em] text-[var(--brand-dark)]">Seven ways to make everyday life <em className="font-normal text-[#6b7051]">work better.</em></h1>
+        </div>
+        <div className="md:pb-2">
+          <p className="max-w-lg text-base leading-8 text-[#5b655e]">Start with the problem. Understand what is driving it. Try the useful no-spend steps. Only then decide whether a product deserves your money.</p>
+          <div className="mt-6 flex flex-wrap gap-5"><Link className="btn-primary" href="/start-here">Find your starting point</Link><Link className="text-link" href="/about">Our approach →</Link></div>
+        </div>
       </header>
 
-      <section className="mt-10">
-        <h2 className="text-2xl font-semibold">Choose what you want to improve</h2>
-        <div className="mt-5 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-          {CORE_PATHS.map((path) => <article key={path.title} className="rounded-2xl border border-zinc-200 bg-white p-5 shadow-sm"><h3 className="font-semibold text-zinc-900">{path.title}</h3><p className="mt-2 text-sm text-zinc-600">{path.desc}</p><div className="mt-4 flex flex-wrap gap-2"><Link className="btn-secondary" href={path.learn}>Learn first</Link><Link className="btn-primary" href={path.buy}>Buying route</Link></div></article>)}
+      <section className="content-shell py-16 md:py-24">
+        <div className="mb-10 grid gap-5 md:grid-cols-[1fr_auto] md:items-end">
+          <div><p className="eyebrow">The core journeys</p><h2 className="mt-3 max-w-3xl font-serif text-[clamp(2.6rem,4.8vw,5rem)] font-normal leading-[1] tracking-[-.045em] text-[var(--brand-dark)]">Choose what you want to improve.</h2></div>
+          <p className="max-w-sm text-sm leading-7 text-[#667069]">Each destination combines practical education, free first steps and a restrained route to comparison when buying is justified.</p>
+        </div>
+
+        <div className="grid grid-cols-1 gap-x-6 gap-y-12 md:grid-cols-2 lg:grid-cols-12">
+          {CORE_PATHS.map((path, index) => {
+            const wide = [0, 3, 6].includes(index)
+            return (
+              <article key={path.title} className={wide ? 'group lg:col-span-7' : 'group lg:col-span-5'}>
+                <Link href={path.learn} className="block">
+                  <div className={`relative overflow-hidden bg-[#e4e6df] ${wide ? 'aspect-[16/10]' : 'aspect-[4/3]'}`}>
+                    <Image src={path.image} alt="" fill sizes={wide ? '(max-width: 1024px) 100vw, 58vw' : '(max-width: 1024px) 100vw, 42vw'} className="object-cover transition-transform duration-700 group-hover:scale-[1.025]" />
+                    <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-[rgba(14,42,35,.68)] to-transparent px-5 pb-5 pt-20 text-white"><span className="font-serif text-sm italic opacity-80">{path.number}</span><h3 className="mt-1 font-serif text-3xl font-normal tracking-[-.03em] md:text-4xl">{path.title}</h3></div>
+                  </div>
+                </Link>
+                <div className="grid grid-cols-[1fr_auto] gap-5 border-b border-[#cfd4ce] py-5">
+                  <p className="max-w-2xl text-sm leading-7 text-[#626b65]">{path.desc}</p>
+                  <div className="flex flex-col items-end gap-2 text-xs font-bold uppercase tracking-[.06em]"><Link href={path.learn} className="text-[var(--brand-dark)]">Understand →</Link><Link href={path.buy} className="text-[var(--brand)]">Compare ↗</Link></div>
+                </div>
+              </article>
+            )
+          })}
         </div>
       </section>
 
-      <section className="mt-14">
-        <div className="max-w-3xl"><h2 className="text-2xl font-semibold">Explore the full topic library</h2><p className="mt-2 text-zinc-700">More focused guides for people who want to go deeper before comparing products.</p></div>
-        <div className="mt-6 grid gap-4 md:grid-cols-2">
-          <Card image="/images/photography/thumbs/sleep.png" title="Sleep & recovery" desc="Light, timing, temperature and practical recovery basics." href="/topics/sleep" tag="Sleep" />
-          <Card image="/images/photography/thumbs/movement.svg" title="Movement" desc="Walking, simple strength and mobility." href="/topics/movement" tag="Movement" />
-          <Card image="/images/photography/thumbs/movement.svg" title="Recovery" desc="Soreness, load management and adaptation basics." href="/topics/recovery" tag="Movement" />
-          <Card image="/images/photography/thumbs/movement.svg" title="Foot strength" desc="Natural movement basics and gradual transitions." href="/topics/foot-strength" tag="Movement" />
-          <Card image="/images/photography/thumbs/nutrition.svg" title="Nutrition" desc="Food-first upgrades, labels and consistency." href="/topics/nutrition" tag="Nutrition" />
-          <Card image="/images/photography/thumbs/nutrition.svg" title="Gut health" desc="Fibre, diversity and sensible expectations." href="/topics/gut-health" tag="Nutrition" />
-          <Card image="/images/photography/thumbs/water.png" title="Hydration" desc="Habits first; electrolytes when they actually help." href="/topics/hydration" tag="Nutrition" />
-          <Card title="Skin health" desc="Barrier basics, fragrance and simple routines." href="/topics/skin-health" tag="Skin" />
-          <Card title="Sun protection" desc="Shade, clothing and practical sunscreen habits." href="/topics/sun-protection" tag="Skin" />
-          <Card image="/images/photography/thumbs/air-quality.png" title="Air quality" desc="Particles, damp, humidity and equipment choices." href="/topics/air-quality" tag="Home" />
-          <Card image="/images/photography/thumbs/water.png" title="Water" desc="Filter formats, replacement costs and buying basics." href="/topics/water" tag="Home" />
-          <Card image="/images/photography/thumbs/laundry.png" title="Fragrance-free home" desc="High-contact swaps for laundry, cleaning and bathroom products." href="/topics/fragrance-free" tag="Home" />
-          <Card title="Dog health & wellness" desc="Complete food, healthy weight, movement, pet allergies and a healthier shared home." href="/dogs" tag="Dogs" />
-          <Card title="Practical resilience" desc="Water, power, food, communication and household essentials." href="/topics/resilience" tag="Home" />
+      <section className="bg-[var(--brand-dark)] py-16 text-[#f8f5ed] md:py-20">
+        <div className="content-shell grid gap-10 md:grid-cols-[.8fr_1.2fr] md:gap-20">
+          <div><p className="eyebrow !text-[#a9c9b9]">Go deeper</p><h2 className="mt-3 max-w-md font-serif text-[clamp(2.8rem,5vw,5rem)] font-normal leading-[.98] tracking-[-.045em]">The library behind the journeys.</h2><p className="mt-5 max-w-md text-sm leading-7 text-[#c7d3cd]">Focused subjects live underneath the seven main journeys so the site can go deep without turning the navigation into a catalogue.</p></div>
+          <div className="border-t border-white/20">
+            {DEEPER_TOPICS.map(([title, href, desc], i) => <Link href={href} key={href} className="grid grid-cols-[2rem_1fr_auto] items-start gap-4 border-b border-white/20 py-5 text-inherit"><span className="font-serif text-sm italic text-[#a9b9b0]">{String(i + 1).padStart(2, '0')}</span><div><h3 className="font-serif text-xl font-normal md:text-2xl">{title}</h3><p className="mt-1 text-sm leading-6 text-[#c7d3cd]">{desc}</p></div><span aria-hidden="true">↗</span></Link>)}
+          </div>
         </div>
       </section>
 
-      <section className="mt-14 max-w-3xl rounded-3xl border border-zinc-200 bg-zinc-50/60 p-6"><h2 className="text-xl font-semibold">How Wild & Well approaches recommendations</h2><ol className="mt-3 list-decimal space-y-2 pl-6 text-sm text-zinc-700"><li>Understand the problem and try sensible no-spend steps first.</li><li>Decide whether a product would meaningfully improve the situation.</li><li>Use a focused shortlist rather than browsing hundreds of products.</li><li>Check current specifications, running costs, returns and price on the merchant site before buying.</li></ol></section>
-      <p className="mt-12 text-xs text-zinc-500">Some links are affiliate links. If you buy via them, Wild & Well may earn a commission at no extra cost to you.</p>
+      <section className="content-shell grid gap-10 py-16 md:grid-cols-[1fr_1fr] md:py-24">
+        <div><p className="eyebrow">How decisions work here</p><h2 className="mt-3 max-w-xl font-serif text-[clamp(2.8rem,5vw,5rem)] font-normal leading-[1] tracking-[-.045em] text-[var(--brand-dark)]">Learn first. Buy second.</h2></div>
+        <ol className="border-t border-[rgba(18,59,50,.18)]">
+          {['Understand what is actually causing the problem.', 'Try the sensible actions that cost little or nothing.', 'Decide whether a product would materially help.', 'Compare a focused set of options and check current merchant details before buying.'].map((text, i) => <li key={text} className="grid grid-cols-[2rem_1fr] gap-4 border-b border-[rgba(18,59,50,.18)] py-5 text-sm leading-7 text-[#5b655e]"><span className="font-serif italic text-[#7a867e]">0{i + 1}</span><span>{text}</span></li>)}
+        </ol>
+      </section>
+
+      <div className="content-shell"><p className="border-t border-[rgba(18,59,50,.14)] pt-5 text-xs leading-6 text-[#7a837d]">Some links are affiliate links. If you buy through them, Wild &amp; Well may earn a commission at no extra cost to you. Affiliate relationships do not determine inclusion.</p></div>
     </main>
   )
 }
