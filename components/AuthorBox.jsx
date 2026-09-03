@@ -2,13 +2,12 @@ import Link from 'next/link'
 
 export default function AuthorBox() {
   return (
-    <div className="rounded-3xl border border-zinc-200 bg-white p-6">
+    <aside className="author-box">
       <div className="flex flex-col gap-1">
-        <p className="text-xs font-semibold uppercase tracking-wide text-zinc-600">About this site</p>
-        <h3 className="text-base font-semibold text-zinc-900">Wild &amp; Well editorial</h3>
+        <p className="eyebrow">Our editorial standard</p>
+        <h3>Clear about evidence. Honest about limits.</h3>
         <p className="mt-1 text-sm text-zinc-700">
-          Practical, evidence-informed wellness guidance for healthier living — with UK-friendly product choices and realistic routines.
-          We don&apos;t do miracle claims. We aim for clear trade-offs and update content when things change.
+          Wild &amp; Well publishes practical, evidence-informed guidance for UK homes. We separate research from hands-on testing, show trade-offs and ownership costs, and update advice when the facts change.
         </p>
       </div>
 
@@ -18,6 +17,6 @@ export default function AuthorBox() {
         <Link href="/affiliate-disclosure" className="text-sm font-medium text-zinc-800 hover:underline">Affiliate disclosure</Link>
         <Link href="/contact" className="text-sm font-medium text-zinc-800 hover:underline">Contact</Link>
       </div>
-    </div>
+    </aside>
   )
 }

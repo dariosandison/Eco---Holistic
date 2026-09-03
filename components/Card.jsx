@@ -244,7 +244,7 @@ export default function Card({ href = '#', title, excerpt, desc, image, tag, dat
   return (
     <Link
       href={href}
-      className="group block overflow-hidden rounded-2xl border border-zinc-200 bg-white shadow-sm transition hover:shadow-md hover:border-[color:var(--brand)]"
+      className="editorial-card group block overflow-hidden bg-white transition"
     >
       <div className="relative aspect-[4/3] overflow-hidden bg-zinc-100">
         <img
@@ -259,7 +259,7 @@ export default function Card({ href = '#', title, excerpt, desc, image, tag, dat
         />
         {tag ? (
           <span
-            className="absolute left-3 top-3 rounded-full px-2.5 py-1 text-xs font-semibold text-white shadow-sm"
+            className="editorial-card__tag absolute left-3 top-3 px-2.5 py-1 text-xs font-semibold text-white"
             style={{ backgroundColor: 'var(--brand)' }}
           >
             {tag}
@@ -267,7 +267,7 @@ export default function Card({ href = '#', title, excerpt, desc, image, tag, dat
         ) : null}
       </div>
 
-      <div className="space-y-2 p-4">
+      <div className="editorial-card__copy space-y-2 py-4">
         {date ? <span className="text-xs uppercase tracking-wide text-zinc-500">{date}</span> : null}
         <h3 className="text-base font-semibold text-zinc-900">{title}</h3>
         {blurb ? <p className="line-clamp-3 text-sm leading-6 text-zinc-600">{blurb}</p> : null}
