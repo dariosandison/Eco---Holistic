@@ -1,5 +1,6 @@
 import './globals.css'
 import './editorial-upgrades.css'
+import './money-page-upgrades.css'
 import SiteHeader from '@/components/SiteHeader'
 import SiteFooter from '@/components/SiteFooter'
 import NewsletterBar from '@/components/NewsletterBar'
