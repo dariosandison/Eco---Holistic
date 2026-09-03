@@ -1,6 +1,7 @@
 import './globals.css'
 import './editorial-upgrades.css'
 import './money-page-upgrades.css'
+import './topic-deep-dive.css'
 import SiteHeader from '@/components/SiteHeader'
 import SiteFooter from '@/components/SiteFooter'
 import NewsletterBar from '@/components/NewsletterBar'
@@ -29,51 +30,44 @@ export const metadata = {
   applicationName: DEFAULT_TITLE,
   keywords: [
     'healthy living uk',
-    'healthy home uk',
-    'water filtration uk',
-    'indoor air quality uk',
-    'sleep guidance uk',
-    'food first nutrition',
-    'movement and walking',
-    'household resilience uk',
+    'healthy home',
+    'air quality',
+    'water filters',
+    'sleep',
+    'nutrition',
+    'movement',
+    'fragrance-free',
+    'household resilience',
+    'emergency preparedness uk',
   ],
+  robots: { index: true, follow: true, googleBot: { index: true, follow: true, 'max-video-preview': -1, 'max-image-preview': 'large', 'max-snippet': -1 } },
   manifest: '/manifest.webmanifest',
   icons: {
     icon: [
       { url: '/icon-192.png', sizes: '192x192', type: 'image/png' },
       { url: '/icon-512.png', sizes: '512x512', type: 'image/png' },
     ],
-    apple: '/apple-touch-icon.png',
+    apple: [{ url: '/apple-touch-icon.png' }],
   },
   openGraph: {
-    type: 'website',
-    url: SITE_URL,
-    siteName: DEFAULT_TITLE,
     title: DEFAULT_TITLE,
     description: DEFAULT_DESC,
-    images: [{ url: '/opengraph-image', width: 1200, height: 630, alt: DEFAULT_TITLE }],
+    url: SITE_URL,
+    siteName: DEFAULT_TITLE,
+    type: 'website',
+    images: [{ url: '/opengraph-image', width: 1200, height: 630, type: 'image/png' }],
   },
   twitter: {
     card: 'summary_large_image',
     title: DEFAULT_TITLE,
     description: DEFAULT_DESC,
-    images: ['/twitter-image'],
-  },
-  robots: {
-    index: true,
-    follow: true,
-    googleBot: {
-      index: true,
-      follow: true,
-      'max-image-preview': 'large',
-      'max-snippet': -1,
-      'max-video-preview': -1,
-    },
+    images: [{ url: '/twitter-image', width: 1200, height: 630, type: 'image/png' }],
   },
 }
 
 export default function RootLayout({ children }) {
-  const paletteIndex = buildCommandPaletteIndex()
+  const commandPaletteIndex = buildCommandPaletteIndex()
+
   return (
     <html lang="en-GB">
       <head>
@@ -84,17 +78,15 @@ export default function RootLayout({ children }) {
         <Clarity />
         <OutboundAffiliateTracker />
         <ScrollDepthTracker />
-        <SiteHeader />
-        <BreadcrumbBar />
         <ReadingProgressBar />
+        <BreadcrumbBar />
         <OnPageNav />
-        <CommandPalette index={paletteIndex} />
-        <main id="content" className="flex-1">
-          {children}
-        </main>
+        <SiteHeader />
+        <main id="content" className="flex-1">{children}</main>
         <SiteFooter />
         <NewsletterBar />
         <ConsentBanner />
+        <CommandPalette index={commandPaletteIndex} />
       </body>
     </html>
   )
