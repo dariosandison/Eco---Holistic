@@ -40,16 +40,16 @@ export default function SiteHeader() {
       <div className="site-header__bar">
         <Link href="/" className="site-header__brand" aria-label="Wild & Well home"><Image src="/logo.png" alt="" width={34} height={34} priority /><span>Wild <i>&amp;</i> Well</span></Link>
         <nav className="site-header__nav" aria-label="Primary navigation">
-          <Link href="/topics">Topics</Link><Link href="/blog">Guides</Link><Link href="/shortlists">Shortlists</Link><Link href="/about">Our approach</Link>
+          <Link href="/topics">Explore</Link><Link href="/blog">Guides</Link><Link href="/shortlists">Compare</Link><Link href="/about">Why trust us</Link>
         </nav>
-        <div className="site-header__tools"><a href="/search" onClick={openSearch} aria-label="Search">Search</a><Link href="/shopping-list" className="site-header__cta">Free starter list</Link></div>
+        <div className="site-header__tools"><a href="/search" onClick={openSearch} aria-label="Search Wild & Well">Search</a><Link href="/start-here" className="site-header__cta">Start here</Link></div>
         <button type="button" className="site-header__menu" aria-label={open ? 'Close menu' : 'Open menu'} aria-expanded={open} onClick={() => setOpen(!open)}><span /><span /></button>
       </div>
       <div className="site-header__journeys" aria-label="Explore by topic">{journeys.map(([label, href]) => <Link href={href} key={href}>{label}</Link>)}</div>
       <div className={`mobile-drawer ${open ? 'mobile-drawer--open' : ''}`} aria-hidden={!open}>
         <nav aria-label="Mobile navigation">
-          <p>Explore</p>{journeys.map(([label, href], i) => <Link href={href} onClick={() => setOpen(false)} key={href}><span>0{i + 1}</span>{label}</Link>)}
-          <div className="mobile-drawer__secondary"><Link href="/blog" onClick={() => setOpen(false)}>Guides</Link><Link href="/shortlists" onClick={() => setOpen(false)}>Shortlists</Link><Link href="/tools" onClick={() => setOpen(false)}>Free tools</Link><Link href="/about" onClick={() => setOpen(false)}>Our approach</Link><a href="/search" onClick={openSearch}>Search</a></div>
+          <p>Explore Wild &amp; Well</p>{journeys.map(([label, href], i) => <Link href={href} onClick={() => setOpen(false)} key={href}><span>0{i + 1}</span>{label}</Link>)}
+          <div className="mobile-drawer__secondary"><Link href="/start-here" onClick={() => setOpen(false)}>Start here</Link><Link href="/blog" onClick={() => setOpen(false)}>Guides</Link><Link href="/shortlists" onClick={() => setOpen(false)}>Compare</Link><Link href="/tools" onClick={() => setOpen(false)}>Free tools</Link><Link href="/about" onClick={() => setOpen(false)}>Why trust us</Link><a href="/search" onClick={openSearch}>Search</a></div>
         </nav>
       </div>
     </header>
