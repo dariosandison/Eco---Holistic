@@ -1,109 +1,46 @@
-export default function ArticleLayout({
-  title,
-  description,
-  date,
-  updated,
-  image,
-  author,
-  toc,
-  children,
-}) {
+import Image from 'next/image'
+
+export default function ArticleLayout({ title, description, date, updated, image, author, toc, children }) {
   const parseDate = (d) => {
-    if (!d) return null;
-    const dt = d instanceof Date ? d : new Date(d);
-    if (isNaN(dt)) return null;
+    if (!d) return null
+    const dt = d instanceof Date ? d : new Date(d)
+    if (isNaN(dt)) return null
     return {
       iso: dt.toISOString(),
-      display: dt.toLocaleDateString('en-GB', {
-        year: 'numeric',
-        month: 'short',
-        day: 'numeric',
-      }),
-    };
-  };
+      display: dt.toLocaleDateString('en-GB', { year: 'numeric', month: 'short', day: 'numeric' }),
+    }
+  }
 
-  const published = parseDate(date);
-  const modified = parseDate(updated);
+  const published = parseDate(date)
+  const modified = parseDate(updated)
 
   return (
-    <article className="mx-auto max-w-3xl px-4 py-10">
-      <header className="mb-8">
-        <h1 className="text-3xl font-bold tracking-tight">{title}</h1>
-        {description && (
-          <p className="text-neutral-600 mt-2">{description}</p>
-        )}
-
-        {author?.name ? (
-          <div className="text-sm text-neutral-600 mt-3">
-            <span>By </span>
-            {author.url ? (
-              <a className="underline" href={author.url}>{author.name}</a>
-            ) : (
-              <span className="font-medium">{author.name}</span>
-            )}
-            {author.role ? <span className="text-neutral-500"> · {author.role}</span> : null}
+    <article className="article-page">
+      <header className="article-hero content-shell">
+        <div className="article-hero__copy">
+          <p className="eyebrow">Wild &amp; Well guide</p>
+          <h1>{title}</h1>
+          {description ? <p className="article-hero__dek">{description}</p> : null}
+          <div className="article-hero__meta">
+            {author?.name ? <span>By {author.url ? <a href={author.url}>{author.name}</a> : <b>{author.name}</b>}{author.role ? ` · ${author.role}` : ''}</span> : null}
+            {published ? <span>Published <time dateTime={published.iso}>{published.display}</time></span> : null}
+            {modified ? <span>Updated <time dateTime={modified.iso}>{modified.display}</time></span> : null}
           </div>
-        ) : null}
-        {(published || modified) && (
-          <div className="text-sm text-neutral-500 mt-3">
-            {published && (
-              <>
-                <span>Published </span>
-                <time dateTime={published.iso}>{published.display}</time>
-              </>
-            )}
-            {published && modified && <span> · </span>}
-            {modified && (
-              <>
-                <span>Updated </span>
-                <time dateTime={modified.iso}>{modified.display}</time>
-              </>
-            )}
-          </div>
-        )}
-        {image && (
-          // eslint-disable-next-line @next/next/no-img-element
-          <img
-            src={image}
-            alt=""
-            className="w-full h-auto rounded-2xl mt-6"
-            loading="lazy"
-          />
-        )}
-        {toc && toc.length > 0 && (
-          <nav className="mt-6 text-sm">
-            <h2 className="font-semibold mb-2">On this page</h2>
-            <ul className="space-y-1">
-              {toc.map((item) => (
-                <li key={item.slug} className="text-neutral-600">
-                  <a href={`#${item.slug}`} className="hover:underline">
-                    {item.text}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </nav>
-        )}
+          <div className="article-hero__standards"><span>Evidence-aware</span><span>UK focused</span><span>No-spend options considered</span></div>
+        </div>
+        {image ? <div className="article-hero__image"><Image src={image} alt="" fill priority sizes="(max-width: 900px) 100vw, 48vw" className="object-cover" /></div> : null}
       </header>
 
-      <div className="prose prose-neutral max-w-none">{children}</div>
+      <div className="article-body content-shell">
+        <aside className="article-sidebar">
+          {toc?.length ? <nav aria-label="On this page"><p className="eyebrow">On this page</p><ol>{toc.map((item, i) => <li key={item.slug}><a href={`#${item.slug}`}><span>{String(i + 1).padStart(2, '0')}</span>{item.text}</a></li>)}</ol></nav> : null}
+          <div className="article-sidebar__trust"><strong>Learn first. Buy second.</strong><p>We separate useful action from product recommendations and keep limitations visible.</p><a href="/editorial-policy">Our editorial standard →</a></div>
+        </aside>
 
-      <div className="mt-12 not-prose panel">
-        <h2 className="text-lg font-semibold text-zinc-900">Explore</h2>
-        <p className="mt-2 text-sm text-zinc-700">
-          Related sections of the site.
-        </p>
-        <div className="mt-4 flex flex-wrap gap-2">
-          <a href="/topics" className="btn-secondary">Topics</a>
-          <a href="/shortlists" className="btn-secondary">Shortlists</a>
-          <a href="/shopping-list" className="btn-secondary">Shopping list</a>
-          <a href="/blog" className="btn-secondary">Wellness Insights</a>
-        </div>
-        <p className="mt-3 text-xs text-zinc-600">
-          Some links are affiliate links. If you buy via them, we earn a commission.
-        </p>
+        <div className="article-content prose prose-neutral max-w-none">{children}</div>
       </div>
 
+      <section className="article-next"><div className="content-shell article-next__inner"><div><p className="eyebrow">Keep going</p><h2>Turn the reading into a clearer decision.</h2><p>Explore the wider topic, use a practical tool, or compare a focused shortlist only when a product genuinely has a job to do.</p></div><div className="article-next__links"><a href="/topics">Explore the seven journeys <span>→</span></a><a href="/tools">Use a free tool <span>→</span></a><a href="/shortlists">Compare focused shortlists <span>→</span></a><a href="/blog">More guides <span>→</span></a></div></div></section>
     </article>
-  );
+  )
 }
