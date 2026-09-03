@@ -26,6 +26,7 @@ const nextConfig = {
       { source: '/guides', destination: '/blog', permanent: true },
       { source: '/guides/:slug*', destination: '/blog/:slug*', permanent: true },
       { source: '/blog/sleep-naturally-without-overwhelm', destination: '/blog/sleep-naturally-simple-guide', permanent: true },
+      { source: '/blog/morning-light-for-better-sleep', destination: '/blog/morning-light-sleep-10-minute-plan', permanent: true },
       { source: '/blog/72-hour-water-plan-uk', destination: '/blog/72-hour-household-water-plan-uk', permanent: true },
       { source: '/blog/bamboo-toilet-paper-facts-duplicate', destination: '/blog/bamboo-toilet-paper-facts', permanent: true },
 
