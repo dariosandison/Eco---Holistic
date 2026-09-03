@@ -5,88 +5,30 @@ export const metadata = {
   description: 'How Wild & Well creates and updates content, evaluates products, handles affiliate relationships and corrects errors.',
 }
 
-function Section({ title, children }) {
-  return (
-    <section className="mt-10">
-      <h2 className="text-2xl font-semibold">{title}</h2>
-      <div className="mt-3 space-y-3 text-zinc-700">{children}</div>
-    </section>
-  )
-}
-
 export default function EditorialPolicy() {
   return (
-    <main className="mx-auto max-w-3xl px-4 py-16">
-      <h1 className="text-4xl font-bold">Editorial policy</h1>
-      <p className="mt-3 text-zinc-700">
-        Wild &amp; Well aims to help UK readers make useful, proportionate decisions. We separate the question “what solves the problem?” from the question “can this page earn a commission?”
-      </p>
+    <main className="trust-page">
+      <header className="trust-hero">
+        <div><p className="trust-hero__kicker">Editorial standards</p><h1>Editorial policy</h1></div>
+        <div className="trust-hero__lede"><p>Wild &amp; Well exists to help UK readers make useful, proportionate decisions. We separate “what solves the problem?” from “can this page earn a commission?” and make uncertainty visible where the evidence is limited.</p><div className="trust-proof"><span>No paid rankings</span><span>Evidence labelled</span><span>Meaningful updates only</span></div></div>
+      </header>
 
-      <Section title="Editorial independence">
-        <ul className="list-disc space-y-2 pl-6">
-          <li><strong>No paid ranking positions.</strong> We do not sell places in our shortlists or allow a merchant to buy a higher recommendation.</li>
-          <li><strong>Affiliate availability is not the starting criterion.</strong> A free fix, non-commercial guide or no purchase can be the recommended next step.</li>
-          <li><strong>We state uncertainty.</strong> Where evidence, specifications or product claims are limited, we avoid presenting certainty that is not supported.</li>
-        </ul>
-      </Section>
+      <div className="trust-grid">
+        <aside className="trust-nav"><p>On this page</p><a href="#independence">Independence</a><a href="#creation">How content is made</a><a href="#health">Health claims</a><a href="#freshness">Freshness</a><a href="#commercial">Commercial relationships</a></aside>
+        <div className="trust-content">
+          <section className="trust-section" id="independence"><p className="trust-section__eyebrow">01 / Independence</p><h2>The problem comes before the product</h2><ul><li><strong>No paid ranking positions.</strong> Merchants cannot buy a higher editorial recommendation.</li><li><strong>Affiliate availability is not the starting criterion.</strong> A free fix, non-commercial guide or no purchase can be the recommended next step.</li><li><strong>Uncertainty stays visible.</strong> We avoid presenting certainty where specifications, evidence or claims do not support it.</li></ul></section>
 
-      <Section title="Affiliate income">
-        <p>
-          Some links are affiliate links. If you buy after following one of those links, Wild &amp; Well may earn a commission at no extra cost to you.
-        </p>
-        <p>
-          Merchant relationships and commission rates can change. Our commercial links are disclosed and our product-evaluation criteria are described separately in <Link className="underline" href="/how-we-test">How we evaluate products</Link>.
-        </p>
-        <p>
-          Read the full disclosure here: <Link className="underline" href="/affiliate-disclosure">Affiliate disclosure</Link>.
-        </p>
-      </Section>
+          <section className="trust-section" id="creation"><p className="trust-section__eyebrow">02 / Creation</p><h2>How we create and review content</h2><p>Content is organised around the decision a reader is trying to make. Informational guides explain the problem first; buying guides and shortlists come later when a product is genuinely relevant.</p><p>Unless a page explicitly says otherwise, product coverage is based on editorial research rather than hands-on laboratory or long-term testing. Manufacturer claims are not presented as Wild &amp; Well test results.</p><p>We favour specific, checkable information: intended use, published specifications, relevant standards or testing claims, maintenance, ownership cost, warranty, UK practicality and trade-offs.</p></section>
 
-      <Section title="How we create content">
-        <p>
-          We organise content around the problem a reader is trying to solve. Informational guides explain the decision first; buying guides and shortlists come later when a product is actually relevant.
-        </p>
-        <p>
-          Unless a page explicitly says otherwise, product coverage is based on editorial research rather than hands-on laboratory or long-term testing. We do not present a manufacturer’s published claim as our own test result.
-        </p>
-        <p>
-          We favour specific, checkable information: intended use, published specifications, relevant standards or testing claims, replacement costs, UK availability, maintenance, warranty and practical trade-offs.
-        </p>
-      </Section>
+          <section className="trust-section" id="health"><p className="trust-section__eyebrow">03 / Health</p><h2>Health and wellness claims stay conservative</h2><p>Wild &amp; Well provides general educational information. We do not diagnose or treat medical conditions and we avoid presenting consumer products as substitutes for appropriate medical care.</p><p>Where a topic has meaningful health implications, language is deliberately conservative and readers are encouraged to use qualified professional advice where appropriate.</p></section>
 
-      <Section title="Health and wellness claims">
-        <p>
-          Wild &amp; Well provides general educational information. We do not diagnose or treat medical conditions and we avoid presenting consumer products as substitutes for appropriate medical care.
-        </p>
-        <p>
-          Where a topic has meaningful health implications, our language is deliberately conservative and readers are encouraged to seek qualified professional advice when appropriate.
-        </p>
-      </Section>
+          <section className="trust-section" id="freshness"><p className="trust-section__eyebrow">04 / Freshness</p><h2>Updates should reflect real editorial work</h2><p>Products, links, regulations and specifications change. Important commercial pages are revisited and options can be removed when they become stale, unavailable or no longer fit the use case.</p><p>“Last updated” dates are intended to reflect meaningful editorial changes, not cosmetic edits or automated refreshes. We do not deliberately change dates merely to make old material appear new.</p><Link href="/corrections">Read the corrections standard →</Link></section>
 
-      <Section title="Corrections and updates">
-        <p>
-          Products, links and specifications change. We revisit important commercial pages and update or remove options when they become stale, unavailable or no longer fit the use case.
-        </p>
-        <p>
-          If you spot a factual error, broken link or outdated claim, use the <Link className="underline" href="/contact">contact page</Link> and include the page URL. Material corrections should be made rather than silently preserving information we know is wrong.
-        </p>
-      </Section>
+          <div className="trust-callout" id="commercial"><div><p>05 / Commercial relationships</p><h2>Affiliate funded, not affiliate led.</h2></div><div><p>Some links may earn Wild &amp; Well a commission if a reader buys after following them. Merchant relationships and commission rates can change; the editorial criteria should not.</p><p>The affiliate disclosure and product-evaluation pages explain how recommendations, claims and commercial links are handled.</p></div></div>
 
-      <Section title="Dates and freshness">
-        <p>
-          “Last updated” dates are intended to reflect meaningful editorial changes, not cosmetic edits or automatic refreshes. We do not deliberately change dates simply to make old material appear new.
-        </p>
-      </Section>
-
-      <div className="mt-10 rounded-2xl border bg-white p-6 shadow-sm">
-        <h2 className="text-xl font-semibold">Editorial transparency</h2>
-        <div className="mt-4 flex flex-wrap gap-2">
-          <Link className="btn-secondary" href="/how-we-test">How we evaluate products</Link>
-          <Link className="btn-secondary" href="/affiliate-disclosure">Affiliate disclosure</Link>
-          <Link className="btn-secondary" href="/product-disclosure">Product disclosure</Link>
-          <Link className="btn-secondary" href="/contact">Corrections / contact</Link>
+          <div className="trust-links"><Link href="/how-we-test">How we evaluate products →</Link><Link href="/affiliate-disclosure">Affiliate disclosure →</Link><Link href="/corrections">Corrections →</Link></div>
+          <p className="trust-updated">Last reviewed: September 3, 2026</p>
         </div>
-        <p className="mt-4 text-xs text-zinc-500">Last updated: August 27, 2026</p>
       </div>
     </main>
   )
