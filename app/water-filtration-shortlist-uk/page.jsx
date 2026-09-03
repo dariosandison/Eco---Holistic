@@ -1,11 +1,14 @@
 import Link from 'next/link'
 import ProductPick from '@/components/mdx/ProductPick'
 import { AWIN_PICKS } from '@/data/awinPicks'
+import { buildPageMetadata } from '@/lib/pageMetadata'
 
-export const metadata = {
+export const metadata = buildPageMetadata({
   title: 'Best Water Filtration Options UK — Bottles, Jugs & Under-Sink',
   description: 'Compare UK water filtration routes by use case: portable filter bottles, countertop jugs, gravity systems and under-sink filtration, with running-cost checks and partner links.',
-}
+  path: '/water-filtration-shortlist-uk',
+  image: '/images/photography/water.jpg',
+})
 
 function slugify(s = '') {
   return String(s).toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '')
@@ -37,7 +40,7 @@ export default function Page() {
           <Link className="btn-secondary" href="/topics/water">Water topic</Link>
           <Link className="btn-secondary" href="/affiliate-disclosure">How affiliate links work</Link>
         </div>
-        <p className="mt-3 text-xs text-zinc-500">Partner links may earn Wild & Well a commission at no extra cost to you. Compare specifications and current prices on the merchant site before buying.</p>
+        <p className="mt-3 text-xs text-zinc-500">Partner links may earn Wild & Well a commission at no extra cost to you. Compare specifications and current retailer details before buying.</p>
       </header>
 
       <section className="mt-10 grid gap-4 md:grid-cols-2 lg:grid-cols-4">
@@ -54,7 +57,7 @@ export default function Page() {
         <h2 className="text-lg font-semibold">Three checks before clicking “buy”</h2>
         <ul className="mt-2 list-disc space-y-1 pl-5 text-sm text-zinc-700">
           <li><strong>What problem are you solving?</strong> Taste, specific contaminants, portability and hard-water comfort are different jobs.</li>
-          <li><strong>What will it cost to keep?</strong> Check replacement-filter price, stated life and availability rather than comparing purchase price alone.</li>
+          <li><strong>What will it cost to keep?</strong> Check replacement-filter details, stated life and availability rather than comparing purchase price alone.</li>
           <li><strong>Will you maintain it?</strong> Cleaning and timely cartridge replacement are part of owning any filtration system.</li>
         </ul>
       </section>
@@ -64,7 +67,7 @@ export default function Page() {
           <div className="flex flex-wrap items-end justify-between gap-3">
             <div>
               <h2 className="section-title">{g.title}</h2>
-              <p className="section-subtitle">Compare relevant Wild & Well partner options. Prices and availability can change.</p>
+              <p className="section-subtitle">Compare relevant Wild & Well partner options. Product details and availability can change.</p>
             </div>
             <Link href="/best-water-filters-uk" className="text-sm font-semibold text-zinc-700 underline underline-offset-4">Buying criteria</Link>
           </div>
@@ -78,7 +81,7 @@ export default function Page() {
                 bullets={p.bullets}
                 trackingContext={`water_shortlist_${g.id}`}
                 links={[
-                  { label: `Check ${p.badge || p.advertiser} price`, merchant: 'awin', href: p.awin, variant: 'primary' },
+                  { label: `Check ${p.badge || p.advertiser} details`, merchant: 'awin', href: p.awin, variant: 'primary' },
                   { label: 'Read buying guide', merchant: 'internal', href: '/best-water-filters-uk', variant: 'ghost' },
                 ]}
               />
