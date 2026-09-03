@@ -37,12 +37,12 @@ export default function Page() {
         { title: 'Common mistakes', bullets: ['Buying equipment before establishing the habit.', 'Starting with too much volume or intensity.', 'Treating trackers and gear as substitutes for actually moving.'] },
       ]} />
 
-      <section className="movement-routes mt-16" id="options">
-        <div className="movement-routes__heading"><p>Choose a route</p><div><h2>Build capability before collecting kit.</h2><span>The buying route stays available, but only after the habit and the actual limitation are clear.</span></div></div>
-        <div className="movement-routes__list">{ROUTES.map((route, index) => <Link key={route.title} href={route.href}><span>0{index + 1}</span><div><h3>{route.title}</h3><p>{route.copy}</p></div><b>{route.label} →</b></Link>)}</div>
+      <section className="nutrition-routes mt-16" id="options">
+        <div className="nutrition-routes__heading"><p>Choose a route</p><div><h2>Build capability before collecting kit.</h2><span>The buying route stays available, but only after the habit and the actual limitation are clear.</span></div></div>
+        <div className="nutrition-routes__list">{ROUTES.map((route, index) => <Link key={route.title} href={route.href}><span>0{index + 1}</span><div><h3>{route.title}</h3><p>{route.copy}</p></div><b>{route.label} →</b></Link>)}</div>
       </section>
 
-      <section className="movement-buying mt-16"><div><p>Buying rule</p><h2>Gear should support movement, not replace it.</h2></div><div><p>Before buying, name the friction. If the problem is consistency, more equipment may not help. If the problem is load, weather, comfort, access or feedback, a specific tool may be useful.</p><p>For footwear and trackers, comfort, fit, returns and long-term usefulness matter more than novelty. For strength equipment, start with the smallest setup that covers the training you will actually do.</p><div className="movement-buying__links"><Link href="/movement/movement-shortlist">Open movement shortlist →</Link><Link href="/topics/foot-strength">Explore foot strength →</Link></div></div></section>
+      <section className="nutrition-buying mt-16"><div><p>Buying rule</p><h2>Gear should support movement, not replace it.</h2></div><div><p>Before buying, name the friction. If the problem is consistency, more equipment may not help. If the problem is load, weather, comfort, access or feedback, a specific tool may be useful.</p><p>For footwear and trackers, comfort, fit, returns and long-term usefulness matter more than novelty. For strength equipment, start with the smallest setup that covers the training you will actually do.</p><div className="flex flex-wrap gap-4"><Link href="/movement/movement-shortlist">Open movement shortlist →</Link><Link href="/topics/foot-strength">Explore foot strength →</Link></div></div></section>
 
       <TopicFAQ faqs={faqs} />
       <p className="mt-12 text-xs text-zinc-500">General information only. Some links are affiliate links; if you buy via them, we may earn a commission at no extra cost to you.</p>
