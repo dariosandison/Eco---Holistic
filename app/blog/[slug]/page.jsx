@@ -16,7 +16,6 @@ import rehypeSlug from 'rehype-slug'
 import rehypeAutolinkHeadings from 'rehype-autolink-headings'
 
 const LEGACY_SLUG_REDIRECTS = {
-  // Old guide slugs that may still be indexed/shared.
   'gut-health-basics': 'fibre-gut-health-practical-guide',
   'gut-health-starters': 'fibre-gut-health-practical-guide',
 }
@@ -82,20 +81,16 @@ export default function Page({ params }) {
       toc={toc}
     >
       {showAffiliateNotice && <AffiliateNotice />}
-
-      {/* Education-first framing, especially for shorter posts */}
       <ArticleEducationBlock frontmatter={frontmatter} content={content} />
-
       <MDXRenderer source={content} options={mdxOptions} />
 
       <InlineSignup
         placement={`blog_${params.slug}`}
-        title="Free: Low‑Tox Shopping List"
-        description="A beginner-friendly shortcut with simple swaps for air, water, cleaning and sleep — in plain English."
-        cta="Send me the list"
+        title="Make the next decision easier"
+        description="Occasional Wild & Well notes with practical actions, useful comparisons and no-pressure product guidance."
+        cta="Join Wild & Well"
       />
 
-      {/* Keep users learning (SEO + conversions, without salesiness) */}
       <RelatedReading currentSlug={params.slug} currentTags={frontmatter.tags || []} posts={allPosts} />
       <RelatedShortlists tags={frontmatter.tags || []} />
 
@@ -107,23 +102,13 @@ export default function Page({ params }) {
           description: frontmatter.description,
           datePublished: frontmatter.date,
           dateModified: frontmatter.updated || frontmatter.date,
-          mainEntityOfPage: {
-            '@type': 'WebPage',
-            '@id': `${SITE_URL}/blog/${params.slug}`,
-          },
-          author: {
-            '@type': 'Person',
-            name: author.name,
-            url: author.url,
-          },
+          mainEntityOfPage: { '@type': 'WebPage', '@id': `${SITE_URL}/blog/${params.slug}` },
+          author: { '@type': 'Person', name: author.name, url: author.url },
           publisher: {
             '@type': 'Organization',
             name: SITE_NAME,
             url: SITE_URL,
-            logo: {
-              '@type': 'ImageObject',
-              url: `${SITE_URL}/og-default.jpg`,
-            },
+            logo: { '@type': 'ImageObject', url: `${SITE_URL}/og-default.jpg` },
           },
         }}
       />
@@ -134,7 +119,7 @@ export default function Page({ params }) {
           '@type': 'BreadcrumbList',
           itemListElement: [
             { '@type': 'ListItem', position: 1, name: 'Home', item: SITE_URL },
-            { '@type': 'ListItem', position: 2, name: 'Wellness Insights', item: `${SITE_URL}/blog` },
+            { '@type': 'ListItem', position: 2, name: 'Guides', item: `${SITE_URL}/blog` },
             { '@type': 'ListItem', position: 3, name: frontmatter.title, item: `${SITE_URL}/blog/${params.slug}` },
           ],
         }}
