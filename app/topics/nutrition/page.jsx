@@ -3,12 +3,15 @@ import TopicEducationDeepDive from '@/components/TopicEducationDeepDive'
 import TopicAtAGlance from '@/components/TopicAtAGlance'
 import TopicFAQ from '@/components/TopicFAQ'
 import { getTopicEdu } from '@/lib/topicEdu'
+import { buildPageMetadata } from '@/lib/pageMetadata'
 import JourneyHero from '@/components/JourneyHero'
 
-export const metadata = {
-  title: 'Nutrition Topics — Wild & Well',
-  description: 'Food-first nutrition basics for UK life: labels, ultra-processed foods, fibre, protein, and simple upgrades you can repeat.',
-}
+export const metadata = buildPageMetadata({
+  title: 'Nutrition — Food-First UK Guidance',
+  description: 'Food-first nutrition basics for UK life: labels, fibre, protein and simple upgrades you can repeat without turning eating into a project.',
+  path: '/topics/nutrition',
+  image: '/images/photography/nutrition.jpg',
+})
 
 const ROUTES = [
   { title: 'Build a repeatable plate', copy: 'Start with protein, fibre, fruit or vegetables and food you actually enjoy rather than a perfect diet template.', href: '/nutrition', label: 'Open nutrition basics' },
@@ -20,9 +23,9 @@ export default function Page() {
   const edu = getTopicEdu('nutrition')
   const faqs = [
     { q: 'What is the best “first change” for nutrition?', a: ['Pick one repeatable upgrade for 7–14 days: a higher-protein breakfast, an extra serving of veg at lunch, or swapping one ultra-processed snack for a whole-food option.', 'Avoid changing everything at once — you learn faster when the experiment is simple.'] },
-    { q: 'Do I need supplements?', a: ['Many people don’t. Food, sleep, and movement tend to be the big levers.', 'If you do add supplements, do it one at a time and track effects for 2–4 weeks. If you are pregnant, on medication, or managing a condition, check with a clinician.'] },
+    { q: 'Do I need supplements?', a: ['Many people don’t. Food, sleep, and movement tend to be the big levers.', 'If you do add supplements, introduce them deliberately rather than stacking several new products at once. If you are pregnant, on medication, or managing a condition, check suitability with an appropriate clinician or pharmacist.'] },
     { q: 'Is “organic” always better?', a: 'Not always. A practical approach is “organic where it makes sense”, then prioritise whole foods, fibre, and consistency over perfection.' },
-    { q: 'What should I look for on labels?', a: ['Ingredient lists and nutrition information are most useful for comparing similar foods.', 'Protein, fibre, added sugars, salt and serving size can all matter depending on what you are choosing; no single number defines whether a food belongs in a good diet.'] },
+    { q: 'What should I look for on labels?', a: ['Ingredient lists and nutrition information are most useful for comparing similar foods.', 'Protein, fibre, sugars, salt and serving size can all matter depending on what you are choosing; no single number defines whether a food belongs in a good diet.'] },
   ]
 
   return (
