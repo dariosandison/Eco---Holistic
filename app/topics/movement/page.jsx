@@ -10,6 +10,12 @@ export const metadata = {
   description: 'Movement basics: walking, strength, mobility and foot function first, with focused buying routes for equipment that genuinely supports the habit.',
 }
 
+const ROUTES = [
+  { title: 'Walk more often', copy: 'Use ordinary walking as the base layer. Add pace, distance or hills gradually once the habit is stable.', href: '/movement', label: 'Start with movement basics' },
+  { title: 'Build simple strength', copy: 'Cover the basic movement patterns with bodyweight or simple resistance before considering a larger equipment setup.', href: '/blog/home-strength-basics-busy-people', label: 'Build a simple routine' },
+  { title: 'Use equipment selectively', copy: 'Footwear, resistance and tracking tools should remove friction or expand a routine that already exists.', href: '/movement/movement-shortlist', label: 'Open the movement shortlist' },
+]
+
 export default function Page() {
   const edu = getTopicEdu('movement')
   const faqs = [
@@ -20,8 +26,8 @@ export default function Page() {
   ]
 
   return (
-    <main className="journey-page">
-      <JourneyHero number="05" kicker="Build the habit first" title="Movement that belongs in everyday life." intro="Walk often. Add simple strength and mobility. Let equipment earn its place by making a useful routine easier to repeat—not by becoming the routine." image="/images/photography/movement.jpg" imageAlt="A person walking outdoors in natural surroundings" actions={[{label:'Start moving',href:'/movement'},{label:'Build home strength',href:'/blog/home-strength-basics-busy-people'},{label:'Choose a useful route',href:'/movement/movement-shortlist'}]} anchors={[{label:'Understand',href:'#understand'},{label:'Build the base',href:'#start'},{label:'Choose',href:'#options'},{label:'FAQs',href:'#faqs'}]} />
+    <main className="journey-page movement-hub">
+      <JourneyHero number="05" kicker="Build the habit first" title="Movement that belongs in everyday life." intro="Walk often. Add simple strength and mobility. Let equipment earn its place by making a useful routine easier to repeat—not by becoming the routine." image="/images/photography/movement.jpg" imageAlt="A person walking outdoors in natural surroundings" actions={[{label:'Start moving',href:'/movement'},{label:'Build home strength',href:'/blog/home-strength-basics-busy-people'},{label:'Choose a useful route',href:'/movement/movement-shortlist'}]} anchors={[{label:'Understand',href:'#understand'},{label:'Build the base',href:'#start'},{label:'Choose a route',href:'#options'},{label:'FAQs',href:'#faqs'}]} />
 
       <TopicEducationDeepDive edu={edu} />
       <div id="start" />
@@ -31,18 +37,15 @@ export default function Page() {
         { title: 'Common mistakes', bullets: ['Buying equipment before establishing the habit.', 'Starting with too much volume or intensity.', 'Treating trackers and gear as substitutes for actually moving.'] },
       ]} />
 
-      <section className="mt-14" id="options">
-        <div className="max-w-3xl"><h2 className="section-title">Choose by what will help you move more</h2><p className="section-subtitle">The movement shortlist groups buying options around the job they perform, not around collecting fitness gear.</p></div>
-        <div className="mt-6 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-          <Link href="/movement/movement-shortlist#foot-strength" className="card hover:shadow-sm transition-shadow"><h3 className="font-semibold">Foot strength & everyday movement</h3><p className="mt-2 text-sm text-zinc-600">Footwear and simple tools for people deliberately working on foot function and walking.</p><p className="mt-3 text-sm font-semibold">Explore foot-strength options →</p></Link>
-          <Link href="/movement/movement-shortlist#home-strength" className="card hover:shadow-sm transition-shadow"><h3 className="font-semibold">Home strength</h3><p className="mt-2 text-sm text-zinc-600">Basic resistance and equipment when it genuinely makes home training easier to repeat.</p><p className="mt-3 text-sm font-semibold">Explore strength options →</p></Link>
-          <Link href="/movement/movement-shortlist#tracking" className="card hover:shadow-sm transition-shadow"><h3 className="font-semibold">Tracking & awareness</h3><p className="mt-2 text-sm text-zinc-600">Trackers can help with trends and consistency, provided the numbers remain a tool rather than the goal.</p><p className="mt-3 text-sm font-semibold">Explore tracking options →</p></Link>
-        </div>
-        <div className="mt-8 rounded-3xl border border-zinc-200 bg-zinc-50/60 p-6"><h3 className="text-xl font-semibold">Not sure you need to buy anything?</h3><p className="mt-2 text-sm text-zinc-700">Start with walking and a simple bodyweight routine. Come back to the shortlist when you can name the specific limitation that equipment would solve.</p><div className="mt-4 flex flex-wrap gap-2"><Link className="btn-primary" href="/blog/home-strength-basics-busy-people">Start strength without a shopping list</Link><Link className="btn-secondary" href="/topics/foot-strength">Foot strength topic</Link></div></div>
+      <section className="movement-routes mt-16" id="options">
+        <div className="movement-routes__heading"><p>Choose a route</p><div><h2>Build capability before collecting kit.</h2><span>The buying route stays available, but only after the habit and the actual limitation are clear.</span></div></div>
+        <div className="movement-routes__list">{ROUTES.map((route, index) => <Link key={route.title} href={route.href}><span>0{index + 1}</span><div><h3>{route.title}</h3><p>{route.copy}</p></div><b>{route.label} →</b></Link>)}</div>
       </section>
 
+      <section className="movement-buying mt-16"><div><p>Buying rule</p><h2>Gear should support movement, not replace it.</h2></div><div><p>Before buying, name the friction. If the problem is consistency, more equipment may not help. If the problem is load, weather, comfort, access or feedback, a specific tool may be useful.</p><p>For footwear and trackers, comfort, fit, returns and long-term usefulness matter more than novelty. For strength equipment, start with the smallest setup that covers the training you will actually do.</p><div className="movement-buying__links"><Link href="/movement/movement-shortlist">Open movement shortlist →</Link><Link href="/topics/foot-strength">Explore foot strength →</Link></div></div></section>
+
       <TopicFAQ faqs={faqs} />
-      <p className="mt-12 text-xs text-zinc-500">Some links are affiliate links. If you buy via them, we may earn a commission at no extra cost to you.</p>
+      <p className="mt-12 text-xs text-zinc-500">General information only. Some links are affiliate links; if you buy via them, we may earn a commission at no extra cost to you.</p>
     </main>
   )
 }
