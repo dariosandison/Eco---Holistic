@@ -13,13 +13,14 @@ function safeId(v) {
 
 /**
  * Inline email capture module.
- * Posts to /api/subscribe and redirects to /shopping-list/thanks.
+ * Posts to /api/subscribe and retains the existing subscriber flow.
  */
 export default function InlineSignup({
   placement = "inline",
-  title = "Free: Low‑Tox Shopping List",
-  description = "A beginner-friendly shortcut: simple swaps for air, water, cleaning and sleep — in plain English.",
-  cta = "Send me the list",
+  title = "Make the next decision easier",
+  description = "Occasional Wild & Well notes with practical actions, useful comparisons and no-pressure product guidance.",
+  cta = "Join Wild & Well",
+  showPreview = false,
 }) {
   const id = `inline-signup-${safeId(placement) || "module"}`;
 
@@ -29,14 +30,16 @@ export default function InlineSignup({
         <div className="flex flex-wrap items-start justify-between gap-4">
           <div className="max-w-2xl">
             <div className="inline-flex items-center gap-2">
-              <span className="chip">Free</span>
+              <span className="chip">Email</span>
               <h2 className="text-lg font-semibold text-zinc-900">{title}</h2>
             </div>
             <p className="mt-2 text-sm text-zinc-700">{description}</p>
           </div>
-          <Link href="/shopping-list" className="text-sm font-semibold text-zinc-900 hover:underline whitespace-nowrap">
-            See preview →
-          </Link>
+          {showPreview ? (
+            <Link href="/shopping-list" className="text-sm font-semibold text-zinc-900 hover:underline whitespace-nowrap">
+              See free guide →
+            </Link>
+          ) : null}
         </div>
 
         <SignupFormTracker formId={id} placement={placement} />
@@ -51,7 +54,7 @@ export default function InlineSignup({
             type="email"
             name="email"
             required
-            placeholder="your@email.com"
+            placeholder="Email address"
             aria-label="Email address"
             autoComplete="email"
             inputMode="email"
