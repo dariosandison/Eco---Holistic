@@ -1,9 +1,12 @@
 import Link from 'next/link'
+import { buildPageMetadata } from '@/lib/pageMetadata'
 
-export const metadata = {
+export const metadata = buildPageMetadata({
   title: 'Low-Tox Healthy Home Buying Guide UK',
   description: 'A practical UK low-tox home buying hub covering fragrance-free laundry, cookware, shower filtration and simple household swaps.',
-}
+  path: '/healthy-home/low-tox-shortlist',
+  image: '/images/photography/home.jpg',
+})
 
 const ROUTES = [
   {
@@ -48,9 +51,9 @@ export default function Page() {
           You do not need to replace your whole home. Start with products you use frequently or that stay in close contact with skin, food, water or indoor air, then stop when the change becomes more hassle than benefit.
         </p>
         <div className="mt-5 flex flex-wrap gap-2">
-          <Link className="btn-primary" href="/topics">Browse all topics</Link>
+          <Link className="btn-primary" href="/healthy-home">Healthy Home hub</Link>
+          <Link className="btn-secondary" href="/topics/fragrance-free">Fragrance-free guidance</Link>
           <Link className="btn-secondary" href="/shortlists">All buying shortlists</Link>
-          <Link className="btn-secondary" href="/shopping-list">Free shopping list</Link>
           <Link className="btn-secondary" href="/affiliate-disclosure">Affiliate disclosure</Link>
         </div>
       </header>
