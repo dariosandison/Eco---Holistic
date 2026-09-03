@@ -3,9 +3,16 @@ import TopicEducationDeepDive from '@/components/TopicEducationDeepDive'
 import TopicAtAGlance from '@/components/TopicAtAGlance'
 import TopicFAQ from '@/components/TopicFAQ'
 import { getTopicEdu } from '@/lib/topicEdu'
+import { buildPageMetadata } from '@/lib/pageMetadata'
 import JourneyHero from '@/components/JourneyHero'
 
-export const metadata = { title: 'Air Quality Topics — Wild & Well', description: 'Air quality for UK homes: identify whether particles, damp, humidity or smoke is the problem before choosing a purifier, dehumidifier or other solution.' }
+export const metadata = buildPageMetadata({
+  title: 'Air Quality — Healthier Indoor Air UK',
+  description: 'Air-quality guidance for UK homes: identify whether particles, damp, humidity or smoke is the problem before choosing filtration or moisture-control equipment.',
+  path: '/topics/air-quality',
+  image: '/images/photography/air-quality.png',
+})
+
 const guides = [
   { href: '/blog/air-purifier-bedroom-uk-night-noise', title: 'Air purifier for a bedroom', text: 'Room size, useful-speed noise and filter cost for overnight use.' },
   { href: '/blog/air-purifier-pollen-hay-fever-uk', title: 'Air purifier for pollen', text: 'A practical route for seasonal airborne-particle problems.' },
@@ -14,6 +21,7 @@ const guides = [
   { href: '/blog/condensation-on-windows-uk-dehumidifier', title: 'Condensation on windows', text: 'Work out whether recurring moisture is a ventilation issue, a dehumidifier job or both.' },
   { href: '/blog/dehumidifier-running-cost-uk', title: 'Dehumidifier running costs', text: 'Compare capacity, runtime and electricity use before choosing a unit.' },
 ]
+
 export default function Page() {
   const edu = getTopicEdu('air-quality')
   const faqs = [
@@ -22,6 +30,7 @@ export default function Page() {
     { q: 'How do I choose the right size?', a: 'Match the purifier’s stated coverage or CADR to your room. A small unit in a large room is a common reason for disappointing results.' },
     { q: 'HEPA vs “HEPA-style”: what’s the difference?', a: 'Prefer specific, checkable filtration specifications from reputable manufacturers. “HEPA-style” is not the same as a defined HEPA performance claim.' },
   ]
+
   return <main className="journey-page">
     <JourneyHero number="02" kicker="Diagnose first" title="Fresh air begins with knowing the problem." intro="Particles, smoke and excess moisture need different solutions. Identify what is happening in the room before spending money on equipment." image="/images/photography/air-quality.png" imageAlt="Fresh air moving through a bright home interior" actions={[{label:'Find the right air-quality route',href:'/air-quality-shortlist-uk'},{label:'Read the healthy-air guide',href:'/blog/healthy-air-at-home'},{label:'Calculate running cost',href:'/tools/dehumidifier-running-cost-calculator'}]} anchors={[{label:'Understand',href:'#understand'},{label:'First steps',href:'#start'},{label:'Questions',href:'#guides'},{label:'Choose',href:'#options'},{label:'FAQs',href:'#faqs'}]} />
     <TopicEducationDeepDive edu={edu} /><div id="start" /><TopicAtAGlance items={[{ title: 'If particles are the issue', bullets: ['Match purifier performance to room size.', 'Prioritise filtration, noise and replacement-filter availability.', 'Place the unit where airflow is not obstructed.'] },{ title: 'If damp is the issue', bullets: ['Measure humidity rather than guessing.', 'Address leaks, ventilation and moisture sources first.', 'Consider a dehumidifier when excess humidity remains a recurring problem.'] },{ title: 'Common mistakes', bullets: ['Buying a purifier to solve a moisture problem.', 'Buying an undersized unit.', 'Ignoring replacement filters, noise and running costs.'] }]} />
