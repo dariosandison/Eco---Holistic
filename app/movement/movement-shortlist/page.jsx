@@ -1,11 +1,14 @@
 import Link from 'next/link'
 import ProductPick from '@/components/mdx/ProductPick'
 import { AWIN_PICKS } from '@/data/awinPicks'
+import { buildPageMetadata } from '@/lib/pageMetadata'
 
-export const metadata = {
+export const metadata = buildPageMetadata({
   title: 'Movement Gear UK — Barefoot Shoes, Home Strength & Tracking',
   description: 'Choose movement gear by the problem it solves: foot-strength transition, simple home strength and useful tracking, with UK partner links and practical buying checks.',
-}
+  path: '/movement/movement-shortlist',
+  image: '/images/photography/movement.jpg',
+})
 
 function slugify(s = '') {
   return String(s).toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '')
@@ -36,7 +39,7 @@ export default function Page() {
           <Link className="btn-secondary" href="/topics/recovery">Recovery basics</Link>
           <Link className="btn-secondary" href="/affiliate-disclosure">How affiliate links work</Link>
         </div>
-        <p className="mt-3 text-xs text-zinc-500">Partner links may earn Wild & Well a commission at no extra cost to you.</p>
+        <p className="mt-3 text-xs text-zinc-500">Partner links may earn Wild & Well a commission at no extra cost to you. Check current fit, returns, specifications and retailer terms before buying.</p>
       </header>
 
       <section className="mt-10 grid gap-4 md:grid-cols-3">
@@ -63,28 +66,17 @@ export default function Page() {
           <div className="flex flex-wrap items-end justify-between gap-3">
             <div>
               <h2 className="section-title">{g.title}</h2>
-              <p className="section-subtitle">Relevant Wild & Well partner options for this use case.</p>
+              <p className="section-subtitle">Relevant Wild & Well partner options for this use case. Product details and availability can change.</p>
             </div>
             <Link href="/topics/movement" className="text-sm font-semibold text-zinc-700 underline underline-offset-4">Read movement basics</Link>
           </div>
           <div className="mt-6 grid gap-4 md:grid-cols-2">
             {g.items.map((p) => (
-              <ProductPick key={p.clickref} title={p.product} badge={p.badge} description={p.description} bullets={p.bullets} trackingContext={`movement_shortlist_${g.id}`} links={[{ label: `Check ${p.badge || p.advertiser} price`, merchant: 'awin', href: p.awin, variant: 'primary' }, { label: 'Movement basics', merchant: 'internal', href: '/topics/movement', variant: 'ghost' }]} />
+              <ProductPick key={p.clickref} title={p.product} badge={p.badge} description={p.description} bullets={p.bullets} trackingContext={`movement_shortlist_${g.id}`} links={[{ label: `Check ${p.badge || p.advertiser} details`, merchant: 'awin', href: p.awin, variant: 'primary' }, { label: 'Movement basics', merchant: 'internal', href: '/topics/movement', variant: 'ghost' }]} />
             ))}
           </div>
         </section>
       ))}
-
-      <section className="mt-16 rounded-3xl border border-zinc-200 bg-white p-6 shadow-sm">
-        <div className="max-w-3xl">
-          <p className="text-sm font-semibold uppercase tracking-[0.14em] text-zinc-500">Kids' movement — in development</p>
-          <h2 className="mt-2 text-2xl font-semibold">Designing for active play</h2>
-          <p className="mt-2 text-zinc-700">We are exploring a Wild & Well kids' movement range built around a simple question: can clothing make energetic indoor and outdoor play more comfortable and less frustrating?</p>
-          <p className="mt-3 text-sm text-zinc-600">The first concept is playwear designed with soft-play movement in mind. It is still at concept and testing stage, so there is nothing to buy yet and we are not making performance claims before the idea has been properly prototyped and tested.</p>
-          <div className="mt-5 rounded-2xl bg-zinc-50 p-5"><h3 className="font-semibold">What we want to test</h3><ul className="mt-2 list-disc space-y-1 pl-5 text-sm text-zinc-700"><li>Comfort through climbing, crawling and sliding.</li><li>Fabric durability and easy washing for real family use.</li><li>Whether fabric choice meaningfully reduces unwanted drag on soft-play slides.</li><li>A design children actually want to wear beyond the soft-play centre.</li></ul></div>
-          <p className="mt-4 text-xs text-zinc-500">Working concept: PlayGlide by Wild & Well. Product name, design and launch details may change during development.</p>
-        </div>
-      </section>
 
       <section className="mt-16 rounded-3xl border border-zinc-200 bg-zinc-50/60 p-6">
         <h2 className="text-xl font-semibold">The Wild & Well rule</h2>
