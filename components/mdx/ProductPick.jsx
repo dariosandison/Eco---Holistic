@@ -93,7 +93,10 @@ export default function ProductPick({
           <div className="flex flex-wrap gap-2">
             {resolvedLinks.map((l, i) => {
               const merchant = String(l.merchant || '').toLowerCase()
-              const label = l.label || 'Check retailer details'
+              const rawLabel = l.label || 'Check retailer details'
+              const hrefResolved = String(l.href || '')
+              const isInternal = merchant === 'internal' || hrefResolved.startsWith('/')
+              const label = !isInternal && /\bprice\b/i.test(rawLabel) ? 'Check retailer details' : rawLabel
               const v = l.variant || 'primary'
 
               if (merchant.includes('amazon') || merchant === '') {
@@ -101,8 +104,6 @@ export default function ProductPick({
               }
 
               const className = v === 'primary' ? 'btn-primary' : v === 'ghost' ? 'inline-flex items-center justify-center border border-zinc-300 bg-white px-4 py-2.5 text-sm font-semibold text-zinc-900 transition hover:bg-zinc-50' : 'btn-secondary'
-              const hrefResolved = String(l.href || '')
-              const isInternal = merchant === 'internal' || hrefResolved.startsWith('/')
 
               if (isInternal) return <Link key={i} href={hrefResolved || '/'} className={className}>{label}</Link>
 
