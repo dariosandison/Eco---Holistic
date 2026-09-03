@@ -1,4 +1,5 @@
 import './globals.css'
+import './editorial-upgrades.css'
 import SiteHeader from '@/components/SiteHeader'
 import SiteFooter from '@/components/SiteFooter'
 import NewsletterBar from '@/components/NewsletterBar'
@@ -18,7 +19,7 @@ import { buildCommandPaletteIndex } from '@/lib/commandPaletteIndex'
 const SITE_URL = 'https://www.wild-and-well.store'
 const DEFAULT_TITLE = 'Wild & Well'
 const DEFAULT_DESC =
-  'Independent UK guidance for water, air, sleep, nutrition, movement, healthy homes and practical resilience. Learn first. Buy second.'
+  'Independent UK guidance for water, air, sleep, nutrition, movement, healthy homes and practical resilience — evidence-aware, useful and free from hype.'
 
 export const metadata = {
   metadataBase: new URL(SITE_URL),
@@ -27,15 +28,13 @@ export const metadata = {
   applicationName: DEFAULT_TITLE,
   keywords: [
     'healthy living uk',
-    'healthy home',
-    'air quality',
-    'water filters',
-    'sleep',
-    'nutrition',
-    'movement',
-    'fragrance-free',
-    'household resilience',
-    'emergency preparedness uk',
+    'healthy home uk',
+    'water filtration uk',
+    'indoor air quality uk',
+    'sleep guidance uk',
+    'food first nutrition',
+    'movement and walking',
+    'household resilience uk',
   ],
   manifest: '/manifest.webmanifest',
   icons: {
