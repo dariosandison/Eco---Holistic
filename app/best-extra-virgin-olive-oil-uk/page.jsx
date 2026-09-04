@@ -8,7 +8,6 @@ import MoneyPageEducationBlock from '@/components/MoneyPageEducationBlock'
 import { getMoneyPageEdu } from '@/lib/moneyPageEdu'
 import { getTop10Meta } from '@/data/top10Meta'
 import MoneyPageQuickCompare from '@/components/MoneyPageQuickCompare'
-import MoneyPageFAQ from '@/components/MoneyPageFAQ'
 import MoneyPageNextLinks from '@/components/MoneyPageNextLinks'
 import MoneyPageDecisionBox from '@/components/MoneyPageDecisionBox'
 import MoneyPageUpdateLog from '@/components/MoneyPageUpdateLog'
@@ -178,9 +177,6 @@ const itemList = PICKS.map((p, i) => ({
       <MoneyPageTrustBlock />
       <MoneyPageRoutes routes={routes} />
 
-      <MoneyPageQuickCompare picks={PICKS} />
-      <MoneyPageTrustBlock />
-      <MoneyPageRoutes routes={routes} />
 <section className="mt-8">
         <SummaryBox />
       </section>
@@ -291,10 +287,6 @@ const itemList = PICKS.map((p, i) => ({
       <MoneyPageUpdateLog updatedLabel={PHASE22_UPDATED_LABEL} prevUpdatedLabel={PHASE22_PREV_UPDATED_LABEL} changes={UPDATE_CHANGES} />
     
       <MoneyPageNextLinks slug="best-extra-virgin-olive-oil-uk" />
-
-
-      <MoneyPageFAQ slug="best-extra-virgin-olive-oil-uk" />
-
 </main>
   )
 }
