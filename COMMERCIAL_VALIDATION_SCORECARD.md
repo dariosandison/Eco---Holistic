@@ -14,12 +14,12 @@ No authenticated reporting account was available in the operating session. Missi
 | Google Search clicks | — (NO ACCESS) | Not available | Google Search Console reporting access unavailable |
 | Search CTR | — (NO ACCESS) | Not available | Requires Search Console impressions and clicks |
 | Average position | — (NO ACCESS) | Not available | Google Search Console reporting access unavailable |
-| Organic users / sessions | — (NO ACCESS) | Not available | GA4 reporting access unavailable |
-| Social referral traffic | — (NO ACCESS) | Not available | GA4 reporting access unavailable |
-| Returning visitors | — (NO ACCESS) | Not available | GA4 reporting access unavailable |
+| Organic users / sessions | 5 active users / 8 sessions | 28 Aug–3 Sep 2026 | GA4 Wild & Well property, Last 7 days |
+| Social referral traffic | 0 sessions (Organic Social) | 28 Aug–3 Sep 2026 | GA4 Wild & Well property, Last 7 days |
+| Returning visitors | 2 active users (5 active; 3 new) | 28 Aug–3 Sep 2026 | GA4 Wild & Well property, Last 7 days |
 | Email subscribers | — (NO ACCESS) | Not available | Beehiiv reporting access unavailable |
 | Email signup rate | — (NO ACCESS) | Not available | Requires GA4 and Beehiiv reporting |
-| Affiliate outbound clicks | — (NO ACCESS) | Not available | GA4 reporting access unavailable |
+| Affiliate outbound clicks | Not visible in top event table | 28 Aug–3 Sep 2026 | GA4 Wild & Well property; requires event-level filter/export |
 | AWIN clicks | — (NO ACCESS) | Not available | AWIN reporting access unavailable |
 | Affiliate conversions | — (NO ACCESS) | Not available | AWIN reporting access unavailable |
 | Affiliate revenue | — (NO ACCESS) | Not available | AWIN reporting access unavailable |
