@@ -10,10 +10,10 @@ No authenticated reporting account was available in the operating session. Missi
 
 | Metric | Value | Period | Source |
 | --- | ---: | --- | --- |
-| Google Search impressions | — (NO ACCESS) | Not available | Google Search Console reporting access unavailable |
-| Google Search clicks | — (NO ACCESS) | Not available | Google Search Console reporting access unavailable |
+| Google Search impressions | Pending linked-report propagation | 4 Sep 2026 | Search Console property linked to GA4; performance report not yet populated |
+| Google Search clicks | Pending linked-report propagation | 4 Sep 2026 | Search Console property linked to GA4; performance report not yet populated |
 | Search CTR | — (NO ACCESS) | Not available | Requires Search Console impressions and clicks |
-| Average position | — (NO ACCESS) | Not available | Google Search Console reporting access unavailable |
+| Average position | Pending linked-report propagation | 4 Sep 2026 | Search Console property linked to GA4; query report not yet populated |
 | Organic users / sessions | 5 active users / 8 sessions | 28 Aug–3 Sep 2026 | GA4 Wild & Well property, Last 7 days |
 | Social referral traffic | 0 sessions (Organic Social) | 28 Aug–3 Sep 2026 | GA4 Wild & Well property, Last 7 days |
 | Returning visitors | 2 active users (5 active; 3 new) | 28 Aug–3 Sep 2026 | GA4 Wild & Well property, Last 7 days |
@@ -47,7 +47,7 @@ No authenticated reporting account was available in the operating session. Missi
 | Production repository | WORKING | Read/write access; production branch updated through GitHub. |
 | Deployment | WORKING | A pushed production change was observed live on the public site. Hosting-dashboard access was not available. |
 | Analytics collection | PARTIAL | Consent-gated GA4 bootstrap and site event calls are present; reporting and live-event access are unavailable. |
-| Search Console | NO ACCESS | No authenticated reporting connection was available. |
+| Search Console | PARTIAL | `wild-and-well.store` was linked to the GA4 property on 4 Sep 2026; reports are awaiting propagation. |
 | Email capture | PARTIAL | Forms, server-side provider integration, success redirect and signup events are implemented; a real subscriber was not created without an owner-controlled inbox. |
 | Email delivery | PARTIAL | Beehiiv shows 3 active subscribers; delivery/open behaviour is 0% and no controlled inbox test was performed. |
 | Affiliate outbound tracking | WORKING | Representative AWIN link resolved to the intended Doulton product with affiliate parameters intact; site emits `affiliate_click` and `outbound_click`. |
