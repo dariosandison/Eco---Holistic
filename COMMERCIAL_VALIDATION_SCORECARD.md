@@ -17,12 +17,12 @@ No authenticated reporting account was available in the operating session. Missi
 | Organic users / sessions | 5 active users / 8 sessions | 28 Aug–3 Sep 2026 | GA4 Wild & Well property, Last 7 days |
 | Social referral traffic | 0 sessions (Organic Social) | 28 Aug–3 Sep 2026 | GA4 Wild & Well property, Last 7 days |
 | Returning visitors | 2 active users (5 active; 3 new) | 28 Aug–3 Sep 2026 | GA4 Wild & Well property, Last 7 days |
-| Email subscribers | — (NO ACCESS) | Not available | Beehiiv reporting access unavailable |
+| Email subscribers | 3 active subscribers | Last 4 weeks (dashboard view on 4 Sep 2026) | Beehiiv Wild & Well dashboard |
 | Email signup rate | — (NO ACCESS) | Not available | Requires GA4 and Beehiiv reporting |
 | Affiliate outbound clicks | Not visible in top event table | 28 Aug–3 Sep 2026 | GA4 Wild & Well property; requires event-level filter/export |
-| AWIN clicks | — (NO ACCESS) | Not available | AWIN reporting access unavailable |
-| Affiliate conversions | — (NO ACCESS) | Not available | AWIN reporting access unavailable |
-| Affiliate revenue | — (NO ACCESS) | Not available | AWIN reporting access unavailable |
+| AWIN clicks | 1 | 1–3 Sep 2026 | AWIN publisher dashboard, September overview |
+| Affiliate conversions | 0 transactions | 1–3 Sep 2026 | AWIN publisher dashboard, September overview |
+| Affiliate revenue | GBP 0.00 commission | 1–3 Sep 2026 | AWIN publisher dashboard, September overview |
 | Affiliate click-through rate | — (NO ACCESS) | Not available | Requires measured commercial-page sessions and outbound clicks |
 | Affiliate conversion rate | — (NO ACCESS) | Not available | Requires AWIN clicks and conversions |
 | Other Wild & Well revenue | — (NO ACCESS) | Not available | No authenticated revenue source available |
@@ -49,10 +49,10 @@ No authenticated reporting account was available in the operating session. Missi
 | Analytics collection | PARTIAL | Consent-gated GA4 bootstrap and site event calls are present; reporting and live-event access are unavailable. |
 | Search Console | NO ACCESS | No authenticated reporting connection was available. |
 | Email capture | PARTIAL | Forms, server-side provider integration, success redirect and signup events are implemented; a real subscriber was not created without an owner-controlled inbox. |
-| Email delivery | NO ACCESS | Beehiiv reporting and a controlled receiving inbox were unavailable. |
+| Email delivery | PARTIAL | Beehiiv shows 3 active subscribers; delivery/open behaviour is 0% and no controlled inbox test was performed. |
 | Affiliate outbound tracking | WORKING | Representative AWIN link resolved to the intended Doulton product with affiliate parameters intact; site emits `affiliate_click` and `outbound_click`. |
-| AWIN reporting | NO ACCESS | No authenticated reporting connection was available. |
-| Revenue attribution | NO ACCESS | GA4/AWIN/revenue reporting unavailable. |
+| AWIN reporting | WORKING | Publisher dashboard accessible; 1 September click, 0 transactions and GBP 0.00 commission visible. |
+| Revenue attribution | PARTIAL | AWIN commission is visible; GA4/AWIN joined attribution and total revenue remain incomplete. |
 
 ## Evidence-based prioritisation
 
