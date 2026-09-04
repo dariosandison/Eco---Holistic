@@ -10,10 +10,10 @@ No authenticated reporting account was available in the operating session. Missi
 
 | Metric | Value | Period | Source |
 | --- | ---: | --- | --- |
-| Google Search impressions | Pending linked-report propagation | 4 Sep 2026 | Search Console property linked to GA4; performance report not yet populated |
-| Google Search clicks | Pending linked-report propagation | 4 Sep 2026 | Search Console property linked to GA4; performance report not yet populated |
-| Search CTR | — (NO ACCESS) | Not available | Requires Search Console impressions and clicks |
-| Average position | Pending linked-report propagation | 4 Sep 2026 | Search Console property linked to GA4; query report not yet populated |
+| Google Search impressions | 88 | 3 Jun–2 Sep 2026 | Search Console performance report, Web search |
+| Google Search clicks | 1 | 3 Jun–2 Sep 2026 | Search Console performance report, Web search |
+| Search CTR | 1.1% | 3 Jun–2 Sep 2026 | Search Console performance report, Web search |
+| Average position | 36.5 | 3 Jun–2 Sep 2026 | Search Console performance report, Web search |
 | Organic users / sessions | 5 active users / 8 sessions | 28 Aug–3 Sep 2026 | GA4 Wild & Well property, Last 7 days |
 | Social referral traffic | 0 sessions (Organic Social) | 28 Aug–3 Sep 2026 | GA4 Wild & Well property, Last 7 days |
 | Returning visitors | 2 active users (5 active; 3 new) | 28 Aug–3 Sep 2026 | GA4 Wild & Well property, Last 7 days |
@@ -39,6 +39,7 @@ No authenticated reporting account was available in the operating session. Missi
 - The codebase contains 126 unique Awin destination URLs; every one includes the expected advertiser ID, affiliate ID, click reference and encoded merchant destination.
 - The water-filtration shortlist exposes 20 affiliate routes and is the clearest first commercial test destination.
 - Newsletter forms post to the first-party `/api/subscribe` route. A genuine end-to-end receipt still needs Beehiiv reporting or an owner-controlled test address.
+- Search Console performance is now available: 88 impressions, 1 click, 1.1% CTR and average position 36.5 for 3 June–2 September 2026. Top existing page opportunities by impressions include `/topics/fragrance-free` (14), `/blog/72-hour-household-emergency-kit-uk` (10), `/blog/hard-water-kettle-limescale-uk` (8), `/nutrition` (6) and `/water-filtration-shortlist-uk` (6), each with 0 clicks in the report.
 
 ## System status at baseline
 
@@ -56,15 +57,15 @@ No authenticated reporting account was available in the operating session. Missi
 
 ## Evidence-based prioritisation
 
-- **PUSH:** none yet. No page has authenticated demand plus commercial-result evidence in this session.
-- **FIX:** the ownership-cost education mapping and the residual duplicate comparison/FAQ on the EVOO shortlist were confirmed technical defects and repaired. Do not expand this bucket without Search Console or analytics evidence.
+- **PUSH:** `/water-filtration-shortlist-uk` and the hard-water content cluster are the best measured commercial candidates: they have existing impressions and a maintained affiliate path, though clicks and revenue remain low.
+- **FIX:** high-impression/zero-click pages `/topics/fragrance-free`, `/blog/72-hour-household-emergency-kit-uk`, `/blog/hard-water-kettle-limescale-uk`, `/nutrition` and `/water-filtration-shortlist-uk` merit evidence-led title/CTR and internal-path review. The ownership-cost education mapping and residual EVOO duplication are already repaired.
 - **LEAVE:** all other existing pages and funnels until reporting identifies demand, decline, or a conversion weakness.
 
 ## Strongest currently testable funnel
 
 `hard-water queries/topic → /blog/hard-water-uk-myths-and-comfort → /best-shower-filters-uk-hard-water → “Check retailer details” → Doulton Shower Head with Filter via AWIN`
 
-This is the strongest **structurally verified candidate**, not a performance winner: the internal path is live, the shortlist has a clearly disclosed partner CTA, and the representative AWIN redirect reached the intended product while preserving affiliate attribution. Current traffic, commercial clicks and revenue are unavailable, so no evidence-based commercial winner can yet be declared.
+This is the strongest **measured candidate** so far: the water shortlist has 6 Search Console impressions and a maintained affiliate path; the hard-water cluster also has visible impressions. Current click volume and revenue remain too small to call it a proven winner.
 
 ## Weekly scorecard
 
