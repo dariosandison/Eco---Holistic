@@ -3,11 +3,14 @@ import TopicEducationDeepDive from '@/components/TopicEducationDeepDive'
 import TopicAtAGlance from '@/components/TopicAtAGlance'
 import TopicFAQ from '@/components/TopicFAQ'
 import { getTopicEdu } from '@/lib/topicEdu'
+import { buildPageMetadata } from '@/lib/pageMetadata'
 
-export const metadata = {
+export const metadata = buildPageMetadata({
   title: 'Fragrance-Free Topics — Wild & Well',
   description: 'A practical UK route to reducing fragrance in high-contact laundry, cleaning and bathroom products without replacing everything at once.',
-}
+  path: '/topics/fragrance-free',
+  image: '/images/photography/cleaning.jpg',
+})
 
 export default function Page() {
   const edu = getTopicEdu('fragrance-free')

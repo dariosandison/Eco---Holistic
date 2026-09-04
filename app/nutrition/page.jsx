@@ -1,9 +1,12 @@
 import Link from 'next/link'
+import { buildPageMetadata } from '@/lib/pageMetadata'
 
-export const metadata = {
+export const metadata = buildPageMetadata({
   title: 'Nutrition & Real Food — Wild & Well',
   description: 'Food-first nutrition for UK life: protein, fibre, simple staples, convenient meals and sensible supplement guidance only where it adds value.',
-}
+  path: '/nutrition',
+  image: '/images/photography/nutrition.jpg',
+})
 
 function Card({ title, desc, href, tag }) {
   return (
