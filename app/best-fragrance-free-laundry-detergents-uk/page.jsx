@@ -61,7 +61,7 @@ export default function Page() {
         <div className="max-w-3xl">
           <p className="text-sm font-semibold uppercase tracking-[0.14em] text-zinc-500">One maintained buying layer</p>
           <h2 className="mt-2 text-2xl font-semibold">Compare current lower-tox household options in one place</h2>
-          <p className="mt-2 text-zinc-700">The previous version of this page repeated several generic marketplace searches in multiple shortlist sections. Wild & Well now keeps current partner options in the Healthy Home shortlist, while this page focuses on the laundry decision itself.</p>
+          <p className="mt-2 text-zinc-700">Compare current partner options in the Healthy Home shortlist after deciding whether fragrance, skin contact, washing performance or refill format is the priority.</p>
           <div className="mt-5 flex flex-wrap gap-2">
             <Link className="btn-primary" href="/healthy-home/low-tox-shortlist">Open Healthy Home shortlist</Link>
             <Link className="btn-secondary" href="/topics/fragrance-free">Read fragrance-free basics</Link>

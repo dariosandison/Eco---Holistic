@@ -12,7 +12,7 @@ export const metadata = {
   description: 'A beginner-friendly guide to algae omega‑3: what to look for, who it suits, and how to compare options.',
 }
 
-const FEATURED_AWIN = 'https://www.awin1.com/cread.php?awinmid=111680&awinaffid=2754234&clickref=ww_nutrition_omega3_together_algaeomega3&ued=https%3A%2F%2Ftogetherhealthdirect.co.uk%2Fproducts%2Falgae-omega-3%3Futm_source%3Dchatgpt.com'
+const FEATURED_AWIN = 'https://www.awin1.com/cread.php?awinmid=111680&awinaffid=2754234&clickref=ww_nutrition_omega3_together_algaeomega3&ued=https%3A%2F%2Ftogetherhealthdirect.co.uk%2Fproducts%2Falgae-omega-3'
 
 export default function Page() {
   const slug = 'best-algae-omega-3-supplement-uk-together'

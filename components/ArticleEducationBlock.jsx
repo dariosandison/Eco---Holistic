@@ -15,6 +15,10 @@ export default function ArticleEducationBlock({ frontmatter, content }) {
   const tags = Array.isArray(frontmatter?.tags) ? frontmatter.tags : []
   const edu = pickEduBlock({ title: frontmatter?.title, tags })
 
+  // An irrelevant generic wellness block weakens otherwise specific reporting.
+  // Only render this module when the article matches a researched topic block.
+  if (!edu) return null
+
   // Expand automatically for short/thin posts (keeps site “educational-first”)
   const autoOpen = wc < 650
 

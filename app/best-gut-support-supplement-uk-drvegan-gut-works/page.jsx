@@ -12,7 +12,7 @@ export const metadata = {
   description: 'A conservative guide to gut blends: when they can help, who should be cautious, and how to trial them properly.',
 }
 
-const FEATURED_AWIN = 'https://www.awin1.com/cread.php?awinmid=21553&awinaffid=2754234&clickref=ww_nutrition_gut_drvegan_gutworks&ued=https%3A%2F%2Fwww.drvegan.com%2Fproducts%2Fgut-works%3Futm_source%3Dchatgpt.com'
+const FEATURED_AWIN = 'https://www.awin1.com/cread.php?awinmid=21553&awinaffid=2754234&clickref=ww_nutrition_gut_drvegan_gutworks&ued=https%3A%2F%2Fwww.drvegan.com%2Fproducts%2Fgut-works'
 
 export default function Page() {
   const slug = 'best-gut-support-supplement-uk-drvegan-gut-works'

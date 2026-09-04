@@ -4,6 +4,7 @@ import Link from 'next/link'
 export const metadata = {
   title: 'Why trust Wild & Well',
   description: 'How Wild & Well researches healthier-living decisions, evaluates products, handles affiliate relationships and keeps editorial judgement independent.',
+  alternates: { canonical: '/about' },
 }
 
 const PRINCIPLES = [

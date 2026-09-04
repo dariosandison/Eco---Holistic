@@ -2,8 +2,9 @@ import Link from 'next/link'
 import JourneyHero from '@/components/JourneyHero'
 
 export const metadata = {
-  title: 'Practical Resilience — Wild & Well',
+  title: 'Practical household resilience',
   description: 'Calm UK guidance for short household disruptions, with practical routes for water, food, power, communication and indoor air.',
+  alternates: { canonical: '/topics/resilience' },
 }
 
 const ROUTES = [

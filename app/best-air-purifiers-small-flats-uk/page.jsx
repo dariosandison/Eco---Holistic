@@ -77,7 +77,7 @@ export default function Page() {
           <div className="max-w-3xl">
             <p className="text-sm font-semibold uppercase tracking-[0.14em] text-zinc-500">Current partner options</p>
             <h2 className="mt-2 text-2xl font-semibold">A few current purifiers to compare</h2>
-            <p className="mt-2 text-zinc-700">These are maintained Wild & Well partner options rather than generic marketplace searches. Check the merchant’s current room-coverage guidance, useful-speed noise and replacement-filter price before buying.</p>
+            <p className="mt-2 text-zinc-700">Check each partner’s current room-coverage guidance, noise at a useful speed and replacement-filter price before buying.</p>
           </div>
           <div className="mt-6 grid gap-4 md:grid-cols-2">
             {partnerPicks.map((p) => (

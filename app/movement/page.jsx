@@ -12,8 +12,8 @@ const ON_GOLD_STANDARD_WHEY = 'https://www.awin1.com/cread.php?awinmid=19863&awi
 const WFL_DUMBBELL_TOWER_24KG = 'https://www.awin1.com/cread.php?awinmid=25564&awinaffid=2754234&clickref=ww_movement_picks_dumbbell_tower_body_sculpture_24kg&ued=https%3A%2F%2Fwww.workoutforless.co.uk%2Fcollections%2Fdumbbells%2Fproducts%2Fbody-sculpture-24kg-smart-dumbbell-tower-with-stand'
 const FITNESSOPTIONS_A1_WATERROWER = 'https://www.awin1.com/cread.php?awinmid=899&awinaffid=2754234&clickref=ww_movement_picks_rower_fitnessoptions_a1_waterrower&ued=https%3A%2F%2Ffitnessoptions.co.uk%2Fcollections%2Fpopular%2Fproducts%2Fa1-waterrower'
 const ANCIENT_TRUE_CREATINE = 'https://www.awin1.com/cread.php?awinmid=54585&awinaffid=2754234&clickref=ww_movement_strength_ancient_true_creatine&ued=https%3A%2F%2Fancientandbrave.earth%2Fproducts%2Ftrue-creatine'
-const NAKEDPHARMACY_NATRUFLEX = 'https://www.awin1.com/cread.php?awinmid=20100&awinaffid=2754234&clickref=ww_movement_recovery_naked_natruflex_turmeric&ued=https%3A%2F%2Fwww.thenakedpharmacy.com%2Fproducts%2Fnatruflex-turmeric%3Futm_source%3Dchatgpt.com'
-const VIVO_TRACKER_WINTER_III = 'https://www.awin1.com/cread.php?awinmid=7778&awinaffid=2754234&clickref=ww_movement_footstrength_vivo_tracker_winter_iii&ued=https%3A%2F%2Fwww.vivobarefoot.com%2Fuk%2Ftracker-winter-iii-sg-mens%3Futm_source%3Dchatgpt.com'
+const NAKEDPHARMACY_NATRUFLEX = 'https://www.awin1.com/cread.php?awinmid=20100&awinaffid=2754234&clickref=ww_movement_recovery_naked_natruflex_turmeric&ued=https%3A%2F%2Fwww.thenakedpharmacy.com%2Fproducts%2Fnatruflex-turmeric'
+const VIVO_TRACKER_WINTER_III = 'https://www.awin1.com/cread.php?awinmid=7778&awinaffid=2754234&clickref=ww_movement_footstrength_vivo_tracker_winter_iii&ued=https%3A%2F%2Fwww.vivobarefoot.com%2Fuk%2Ftracker-winter-iii-sg-mens'
 
 function Card({ title, desc, href, tag, image }) {
   return (

@@ -6,8 +6,9 @@ import { getTopicEdu } from '@/lib/topicEdu'
 import JourneyHero from '@/components/JourneyHero'
 
 export const metadata = {
-  title: 'Sleep Topics — Wild & Well',
+  title: 'Practical sleep and recovery guidance',
   description: 'Sleep and recovery basics: light, timing, temperature and comfort first, then a focused UK buying route when equipment may genuinely help.',
+  alternates: { canonical: '/topics/sleep' },
 }
 
 export default function Page() {

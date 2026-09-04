@@ -6,6 +6,7 @@ import { SITE_URL } from '@/lib/site'
 export const metadata = {
   title: 'Explore healthier living — seven practical journeys',
   description: 'Explore Wild & Well through Water, Air, Sleep, Nutrition, Movement, Healthy Home and Practical Resilience. Understand first, act for free where possible, then buy only if useful.',
+  alternates: { canonical: '/topics' },
 }
 
 const CORE_PATHS = [

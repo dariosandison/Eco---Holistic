@@ -5,6 +5,7 @@ import JourneyHero from '@/components/JourneyHero'
 export const metadata = {
   title: 'Healthy Home UK — Air, Water & Lower-Tox Living',
   description: 'A practical UK healthy-home guide to air, water, cleaning, energy and household resilience. Fix the problem first and replace products selectively.',
+  alternates: { canonical: '/healthy-home' },
 }
 
 const ROUTES = [

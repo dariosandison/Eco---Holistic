@@ -51,7 +51,7 @@ export default function Page() {
       </section>
 
       <section className="mt-14 rounded-3xl border border-zinc-200 bg-zinc-50/60 p-6">
-        <div className="max-w-3xl"><p className="text-sm font-semibold uppercase tracking-[0.14em] text-zinc-500">Current buying route</p><h2 className="mt-2 text-2xl font-semibold">One maintained shortlist, not repeated marketplace lists</h2><p className="mt-2 text-zinc-700">The previous version repeated the same tracker brands in a quick comparison, a top-three section and a full Amazon list. Current partner options now live in the Movement shortlist, while this page keeps the decision criteria.</p><div className="mt-5"><Link className="btn-primary" href="/movement/movement-shortlist#tracking-feedback">Open tracking & feedback options</Link></div></div>
+        <div className="max-w-3xl"><p className="text-sm font-semibold uppercase tracking-[0.14em] text-zinc-500">Compare useful trackers</p><h2 className="mt-2 text-2xl font-semibold">Choose a tracker around the feedback you will use</h2><p className="mt-2 text-zinc-700">The Movement shortlist keeps current partner options beside the decision criteria that matter: comfort, battery life, useful trends and whether tracking supports the habit.</p><div className="mt-5"><Link className="btn-primary" href="/movement/movement-shortlist#tracking-feedback">Open tracking & feedback options</Link></div></div>
       </section>
 
       <MoneyPageNextLinks slug={slug} />

@@ -5,6 +5,7 @@ import InlineSignup from '@/components/InlineSignup'
 export const metadata = {
   title: 'Start here — choose one useful change',
   description: 'Choose one area to improve across water, air, sleep, nutrition, movement, healthy home or practical resilience, then start with the simplest useful action.',
+  alternates: { canonical: '/start-here' },
 }
 
 const PATHS = [

@@ -7,6 +7,7 @@ import { SITE_URL } from '@/lib/site'
 export const metadata = {
   title: 'Curated UK wellness & healthy-home shortlists',
   description: 'Focused UK buying guidance for water, air, sleep, nutrition, movement, healthy home and practical resilience. Fewer products, clearer reasons, visible trade-offs.',
+  alternates: { canonical: '/shortlists' },
 }
 
 const BUYING_PATHS = [

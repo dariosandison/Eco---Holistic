@@ -12,7 +12,7 @@ export const metadata = {
   description: 'A practical guide to magnesium for wind-down: what forms to look for, how to start, and who should be cautious.',
 }
 
-const FEATURED_AWIN = 'https://www.awin1.com/cread.php?awinmid=111680&awinaffid=2754234&clickref=ww_sleep_recovery_together_marine_magnesium&ued=https%3A%2F%2Ftogetherhealthdirect.co.uk%2Fproducts%2Fmarine-magnesium%3Futm_source%3Dchatgpt.com'
+const FEATURED_AWIN = 'https://www.awin1.com/cread.php?awinmid=111680&awinaffid=2754234&clickref=ww_sleep_recovery_together_marine_magnesium&ued=https%3A%2F%2Ftogetherhealthdirect.co.uk%2Fproducts%2Fmarine-magnesium'
 
 export default function Page() {
   const slug = 'best-marine-magnesium-supplement-uk-together-sleep'

@@ -12,7 +12,7 @@ export const metadata = {
   description: 'A practical look at turmeric supplements: realistic expectations, who should avoid them, and how to compare options.',
 }
 
-const FEATURED_AWIN = 'https://www.awin1.com/cread.php?awinmid=20100&awinaffid=2754234&clickref=ww_movement_recovery_naked_natruflex_turmeric&ued=https%3A%2F%2Fwww.thenakedpharmacy.com%2Fproducts%2Fnatruflex-turmeric%3Futm_source%3Dchatgpt.com'
+const FEATURED_AWIN = 'https://www.awin1.com/cread.php?awinmid=20100&awinaffid=2754234&clickref=ww_movement_recovery_naked_natruflex_turmeric&ued=https%3A%2F%2Fwww.thenakedpharmacy.com%2Fproducts%2Fnatruflex-turmeric'
 
 export default function Page() {
   const slug = 'best-turmeric-supplement-uk-naked-pharmacy-natruflex'

@@ -6,8 +6,9 @@ import { getTopicEdu } from '@/lib/topicEdu'
 import JourneyHero from '@/components/JourneyHero'
 
 export const metadata = {
-  title: 'Water Topics — Wild & Well',
+  title: 'Water filtration and hard-water guidance',
   description: 'Water filtration for UK homes: understand the main formats, replacement costs and sensible buying criteria before comparing products.',
+  alternates: { canonical: '/topics/water' },
 }
 
 const guides = [

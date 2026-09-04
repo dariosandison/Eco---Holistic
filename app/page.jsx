@@ -4,6 +4,7 @@ import Link from 'next/link'
 export const metadata = {
   title: 'Wild & Well — practical healthy-living decisions, without the noise',
   description: 'Independent UK-focused guidance for water, air, sleep, nutrition, movement, healthy homes and practical resilience. Understand first. Buy only when it helps.',
+  alternates: { canonical: '/' },
 }
 
 const JOURNEYS = [

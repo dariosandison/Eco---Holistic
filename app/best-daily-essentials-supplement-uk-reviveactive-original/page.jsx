@@ -12,7 +12,7 @@ export const metadata = {
   description: 'A practical guide to Revive Active Original: what it is, who it can suit, what to check on the label, and simple alternatives.',
 }
 
-const FEATURED_AWIN = 'https://www.awin1.com/cread.php?awinmid=72881&awinaffid=2754234&clickref=ww_nutrition_daily_essentials_reviveactive_original&ued=https%3A%2F%2Freviveactive.com%2Fproducts%2Frevive-active%3Futm_source%3Dchatgpt.com'
+const FEATURED_AWIN = 'https://www.awin1.com/cread.php?awinmid=72881&awinaffid=2754234&clickref=ww_nutrition_daily_essentials_reviveactive_original&ued=https%3A%2F%2Freviveactive.com%2Fproducts%2Frevive-active'
 
 export default function Page() {
   const slug = 'best-daily-essentials-supplement-uk-reviveactive-original'

@@ -51,7 +51,7 @@ export default function Page() {
         <div className="max-w-3xl">
           <p className="text-sm font-semibold uppercase tracking-[0.14em] text-zinc-500">Keep the buying layer focused</p>
           <h2 className="mt-2 text-2xl font-semibold">One movement shortlist instead of repeated Amazon lists</h2>
-          <p className="mt-2 text-zinc-700">The old version of this page repeated the same activewear recommendations in a quick comparison, a top-three section and a full shortlist. Wild & Well now keeps the broader commercial journey in the Movement shortlist, where footwear, home strength and tracking can be compared in context.</p>
+          <p className="mt-2 text-zinc-700">Use the Movement shortlist to compare footwear, home-strength equipment and useful tracking by the job each option needs to do.</p>
           <div className="mt-5 flex flex-wrap gap-2"><Link className="btn-primary" href="/movement/movement-shortlist">Choose a movement route</Link><Link className="btn-secondary" href="/topics/movement">Learn first</Link></div>
         </div>
       </section>

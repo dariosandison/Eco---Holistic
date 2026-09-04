@@ -3,6 +3,7 @@ import Link from 'next/link'
 export const metadata = {
   title: 'Affiliate Disclosure',
   description: 'How Wild & Well uses affiliate links, keeps editorial decisions separate from commissions, and updates recommendations.',
+  alternates: { canonical: '/affiliate-disclosure' },
 }
 
 export default function Page() {

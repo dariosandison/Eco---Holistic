@@ -9,6 +9,7 @@ import { SITE_URL } from '@/lib/site'
 export const metadata = {
   title: 'UK healthy-living guides',
   description: 'Practical UK guides on water, air, sleep, nutrition, movement, healthy homes and household resilience — organised around the problem you want to solve.',
+  alternates: { canonical: '/blog' },
 }
 
 const CLUSTERS = [

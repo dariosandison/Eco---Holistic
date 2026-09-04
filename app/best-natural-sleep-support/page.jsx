@@ -104,7 +104,7 @@ export default function Page() {
 
       <section className="mt-14 rounded-3xl border border-zinc-200 bg-zinc-50/60 p-6">
         <h2 className="text-xl font-semibold">What happened to the long shopping list?</h2>
-        <p className="mt-2 max-w-3xl text-sm text-zinc-700">We removed the generic marketplace searches for magnesium, glycine, L-theanine, masks and white-noise machines from this page. A long list encouraged shopping before diagnosis of the sleep problem. Wild & Well now keeps this page focused on the decision and routes physical-product comparisons into the maintained sleep shortlist.</p>
+        <p className="mt-2 max-w-3xl text-sm text-zinc-700">Start by naming the sleep problem—timing, light, noise, temperature or comfort—then use the maintained sleep shortlist only if a physical product has a clear role.</p>
         <div className="mt-4 flex flex-wrap gap-2"><Link className="btn-primary" href="/sleep-recovery-shortlist-uk">Open sleep & recovery shortlist</Link><Link className="btn-secondary" href="/blog/magnesium-for-sleep-basics">Read magnesium basics</Link></div>
       </section>
 

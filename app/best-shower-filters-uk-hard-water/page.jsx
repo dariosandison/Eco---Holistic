@@ -63,7 +63,7 @@ export default function Page() {
           <div className="max-w-3xl">
             <p className="text-sm font-semibold uppercase tracking-[0.16em] text-zinc-500">Wild & Well partner option</p>
             <h2 className="mt-2 text-2xl font-semibold">A direct option to compare</h2>
-            <p className="mt-2 text-sm text-zinc-700">Rather than sending you to a generic marketplace search, this is a current tracked partner option already available through Wild & Well. Compare its stated filtration performance, compatibility and replacement costs against your actual reason for buying.</p>
+            <p className="mt-2 text-sm text-zinc-700">Compare this partner option’s stated filtration performance, compatibility and replacement costs against your actual reason for buying.</p>
           </div>
           <div className="mt-6 max-w-2xl">
             <ProductPick

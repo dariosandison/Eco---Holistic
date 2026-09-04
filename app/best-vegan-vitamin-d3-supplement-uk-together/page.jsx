@@ -12,7 +12,7 @@ export const metadata = {
   description: 'A UK-friendly guide to vitamin D: why it’s common, how to choose a dose, and what to avoid.',
 }
 
-const FEATURED_AWIN = 'https://www.awin1.com/cread.php?awinmid=111680&awinaffid=2754234&clickref=ww_nutrition_vitamind_together_vegan_d3&ued=https%3A%2F%2Ftogetherhealthdirect.co.uk%2Fproducts%2Fvegan-vitamin-d3%3Futm_source%3Dchatgpt.com'
+const FEATURED_AWIN = 'https://www.awin1.com/cread.php?awinmid=111680&awinaffid=2754234&clickref=ww_nutrition_vitamind_together_vegan_d3&ued=https%3A%2F%2Ftogetherhealthdirect.co.uk%2Fproducts%2Fvegan-vitamin-d3'
 
 export default function Page() {
   const slug = 'best-vegan-vitamin-d3-supplement-uk-together'

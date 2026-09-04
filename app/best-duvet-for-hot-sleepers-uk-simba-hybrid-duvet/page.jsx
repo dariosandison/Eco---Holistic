@@ -77,7 +77,7 @@ export default function Page() {
       {options.length ? (
         <section className="mt-14">
           <h2 className="text-2xl font-semibold">Current tracked Simba options</h2>
-          <p className="mt-2 max-w-3xl text-sm text-zinc-600">The old page sent alternative shoppers to a generic marketplace search. These options now stay inside the maintained Wild & Well sleep partner catalogue.</p>
+          <p className="mt-2 max-w-3xl text-sm text-zinc-600">Compare alternatives in the maintained sleep shortlist, where temperature, comfort, trials and returns stay visible.</p>
           <div className="mt-6 grid gap-4 md:grid-cols-2">
             {options.map(({ pick, title, badge, description, bullets, context }) => (
               <ProductPick

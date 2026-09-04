@@ -87,7 +87,7 @@ export default function Page() {
       {options.length ? (
         <section className="mt-14">
           <h2 className="text-2xl font-semibold">Current partner options to compare</h2>
-          <p className="mt-2 max-w-3xl text-sm text-zinc-600">These routes come from the maintained Wild & Well sleep partner dataset, so this page no longer sends comparison traffic to a generic marketplace search.</p>
+          <p className="mt-2 max-w-3xl text-sm text-zinc-600">Use the maintained sleep shortlist to compare support, bedding temperature, trials, returns and current partner options.</p>
           <div className="mt-6 grid gap-4 md:grid-cols-2">
             {options.map(({ pick, title, badge, description, bullets, context }) => (
               <ProductPick

@@ -5,6 +5,7 @@ export const metadata = {
   title: "Free Low‑Tox Shopping List",
   description:
     "Download our simple low‑tox shopping list: trusted swaps for air, water, cleaning, and everyday wellness.",
+  alternates: { canonical: "/shopping-list" },
 };
 
 const ERROR_COPY = {
