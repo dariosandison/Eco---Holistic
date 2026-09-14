@@ -45,7 +45,7 @@ export default function Page() {
       </header>
 
       <section className="mt-10 grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-        {ROUTE.map((route) => (
+        {ROUTES.map((route) => (
           <a key={route.title} href={`#${route.target}`} className="rounded-2xl border border-zinc-200 bg-white p-5 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md">
             <h2 className="font-semibold text-zinc-900">{route.title}</h2>
             <p className="mt-2 text-sm text-zinc-600">{route.text}</p>
@@ -58,13 +58,13 @@ export default function Page() {
         <h2 className="text-lg font-semibold">Three checks before clicking “buy”</h2>
         <ul className="mt-2 list-disc space-y-1 pl-5 text-sm text-zinc-700">
           <li><strong>What problem are you solving?</strong> Taste, specific contaminants, portability and hard-water comfort are different jobs.</li>
-          <li><strong>What will it cost to keep?</strong> Check replacem-filter details, stated life and availability rather than comparing purchase price alone. Use the <Link className="font-semibold underline underline-offset-4" href="/tools/water-filter-running-cost-calculator">running-cost calculator</Link> to compare systems on the same basis.</li>
+          <li><strong>What will it cost to keep?</strong> Check replacement-filter details, stated life and availability rather than comparing purchase price alone. Use the <Link className="font-semibold underline underline-offset-4" href="/tools/water-filter-running-cost-calculator">running-cost calculator</Link> to compare systems on the same basis.</li>
           <li><strong>Will you maintain it?</strong> Cleaning and timely cartridge replacement are part of owning any filtration system.</li>
         </ul>
       </section>
 
       {groups.map((g) => (
-        <section key={g.id} className="mt-14 scroll-t-28" id={g.id}>
+        <section key={g.id} className="mt-14 scroll-mt-28" id={g.id}>
           <div className="flex flex-wrap items-end justify-between gap-3">
             <div>
               <h2 className="section-title">{g.title}</h2>
@@ -93,7 +93,7 @@ export default function Page() {
 
       <section className="mt-16 rounded-3xl border border-zinc-200 bg-zinc-50/60 p-6">
         <h2 className="text-xl font-semibold">Planning for an interruption rather than everyday filtration?</h2>
-        <p className="mt-2 text-sm text-zinc-70">Stored drinking water comes first. Filtration can be a useful additional layer, but it should not replace a sensible household water reserve.</p>
+        <p className="mt-2 text-sm text-zinc-700">Stored drinking water comes first. Filtration can be a useful additional layer, but it should not replace a sensible household water reserve.</p>
         <div className="mt-4 flex flex-wrap gap-2">
           <Link className="btn-primary" href="/blog/72-hour-household-water-plan-uk">72-hour water plan</Link>
           <Link className="btn-secondary" href="/blog/72-hour-household-emergency-kit-uk">72-hour household kit</Link>
