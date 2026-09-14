@@ -46,10 +46,10 @@ export default function Page() {
 
       <section className="mt-10 grid gap-4 md:grid-cols-2 lg:grid-cols-4">
         {ROUTE.map((route) => (
-          <a key={route.title} href={`#${route.target}`} className="rounded-$xl border border-zinc-200 bg-white p-5 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md">
+          <a key={route.title} href={`#${route.target}`} className="rounded-2xl border border-zinc-200 bg-white p-5 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md">
             <h2 className="font-semibold text-zinc-900">{route.title}</h2>
             <p className="mt-2 text-sm text-zinc-600">{route.text}</p>
-            <span className="mt-4 inline-block text-sm font-semibold text-zinc-900">Compare options →@/span>
+            <span className="mt-4 inline-block text-sm font-semibold text-zinc-900">Compare options →</span>
           </a>
         ))}
       </section>
