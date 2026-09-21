@@ -43,6 +43,9 @@ const nextConfig = {
       { source: '/free-list', destination: '/shopping-list', permanent: true },
       { source: '/free-shopping-list', destination: '/shopping-list', permanent: true },
       { source: '/shoppinglist', destination: '/shopping-list', permanent: true },
+
+      // Preserve historical offer links after the maintained desk moved to /deals
+      { source: '/offers', destination: '/deals', permanent: true },
     ]
   },
 }
