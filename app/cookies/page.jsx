@@ -3,7 +3,7 @@ import CookiePreferences from '@/components/CookiePreferences'
 
 export const metadata = {
   title: 'Cookies',
-  description: 'Cookie information and preferences for analytics cookies.',
+  description: 'Cookie information, cookieless aggregate measurement and optional analytics preferences.',
 }
 
 export default function Page(){
@@ -11,8 +11,9 @@ export default function Page(){
     <main className='mx-auto max-w-3xl px-4 py-12 prose'>
       <h1>Cookies</h1>
       <p>
-        We use essential cookies required for the site to function. If you choose to allow analytics cookies,
-        we use them to understand traffic and improve content.
+        We use Vercel Web Analytics for cookieless, aggregate traffic measurement. It does not use advertising cookies or track you
+        between websites. If you choose to allow optional analytics cookies, Google Analytics and Microsoft Clarity may also be used to
+        understand traffic and improve content.
       </p>
       <CookiePreferences />
       <p>

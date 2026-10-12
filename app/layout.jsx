@@ -18,6 +18,7 @@ import OnPageNav from '@/components/OnPageNav'
 import ReadingProgressBar from '@/components/ReadingProgressBar'
 import CommandPalette from '@/components/CommandPalette'
 import ScrollDepthTracker from '@/components/ScrollDepthTracker'
+import { Analytics } from '@vercel/analytics/next'
 
 import { buildCommandPaletteIndex } from '@/lib/commandPaletteIndex'
 
@@ -77,6 +78,7 @@ export default function RootLayout({ children }) {
         <SiteJsonLd />
       </head>
       <body className="min-h-screen flex flex-col pb-[var(--newsletter-h,0px)] bg-white text-[var(--ink)]">
+        <Analytics />
         <GA />
         <Clarity />
         <OutboundAffiliateTracker />

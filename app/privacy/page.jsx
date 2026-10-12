@@ -5,7 +5,7 @@ export const metadata = {
   description: 'How Wild & Well handles personal data, cookies, analytics, newsletters, and affiliate links.',
 }
 
-const LAST_UPDATED = '13 February 2026'
+const LAST_UPDATED = '12 October 2026'
 
 export default function Page() {
   return (
@@ -16,7 +16,7 @@ export default function Page() {
       <h2>Quick summary</h2>
       <ul>
         <li><strong>We collect the minimum</strong> data needed to run the site and (if you choose) send emails.</li>
-        <li><strong>Analytics are optional</strong>. You can accept or decline analytics cookies at any time.</li>
+        <li><strong>Aggregate measurement is cookieless</strong>. Optional Google Analytics and Microsoft Clarity remain consent-controlled.</li>
         <li><strong>Affiliate links</strong> may track that a click came from our site so a commission can be paid.</li>
         <li><strong>We don’t sell your personal data.</strong></li>
       </ul>
@@ -43,10 +43,15 @@ export default function Page() {
         If you contact us, we collect the information you submit (such as your email address and message) so we can respond.
       </p>
 
-      <h3>3) Analytics (optional)</h3>
+      <h3>3) Analytics</h3>
       <p>
-        If you accept analytics, we use tools such as Google Analytics and Microsoft Clarity to understand which pages help readers most,
-        diagnose basic issues, and improve content. We do not use analytics to identify you by name.
+        We use Vercel Web Analytics for privacy-focused, aggregate measurement of page views and useful interactions. It does not use
+        cookies, store IP addresses with analytics events, or track visitors between different websites. We do not send email addresses,
+        contact-form content or newsletter form values to Vercel Analytics.
+      </p>
+      <p>
+        If you accept optional analytics cookies, we may also use Google Analytics and Microsoft Clarity to understand which pages help
+        readers most, diagnose basic issues, and improve content. We do not use analytics to identify you by name.
       </p>
       <p>
         You can manage your analytics preference on our <Link href="/cookies">Cookies</Link> page.
@@ -61,8 +66,8 @@ export default function Page() {
 
       <h2>Cookies and local storage</h2>
       <p>
-        We use essential cookies (and similar storage) needed for the site to function. If you allow analytics, analytics tools may also
-        set cookies or store identifiers in your browser.
+        Vercel Web Analytics does not use cookies. We use essential storage needed for the site to function. If you allow optional
+        analytics, Google Analytics or Microsoft Clarity may also set cookies or store identifiers in your browser.
       </p>
       <p>
         We store your analytics choice locally in your browser (for example, using local storage) so we can remember your preference.
@@ -74,7 +79,7 @@ export default function Page() {
       <h2>Legal bases (UK GDPR)</h2>
       <ul>
         <li><strong>Consent</strong>: for optional analytics cookies and marketing emails where required.</li>
-        <li><strong>Legitimate interests</strong>: for essential site security and basic operation (e.g., preventing abuse).</li>
+        <li><strong>Legitimate interests</strong>: for essential site security, basic operation and limited aggregate site measurement.</li>
         <li><strong>Contract</strong>: to deliver the emails or services you explicitly request (e.g., sending a download).</li>
       </ul>
 
@@ -86,7 +91,8 @@ export default function Page() {
       <ul>
         <li>Email delivery (newsletter platform)</li>
         <li>Website hosting and content delivery</li>
-        <li>Analytics providers (only if you consent)</li>
+        <li>Cookieless aggregate analytics (Vercel Web Analytics)</li>
+        <li>Optional analytics providers (only if you consent)</li>
         <li>Affiliate networks/merchants (to track referrals)</li>
       </ul>
 
@@ -100,13 +106,13 @@ export default function Page() {
       <ul>
         <li>Newsletter data: kept until you unsubscribe or request deletion.</li>
         <li>Contact messages: kept as long as needed to respond and keep basic records.</li>
-        <li>Analytics: retained according to the settings of the analytics provider (only if you consent).</li>
+        <li>Analytics: retained according to the settings of the relevant provider.</li>
       </ul>
 
       <h2>Your rights</h2>
       <p>
         Depending on your location, you may have rights to access, correct, delete, or restrict processing of your personal data, and to
-        object to certain processing. You can also withdraw consent for analytics at any time on our <Link href="/cookies">Cookies</Link> page
+        object to certain processing. You can withdraw consent for optional analytics at any time on our <Link href="/cookies">Cookies</Link> page
         and unsubscribe from emails at any time using the unsubscribe link.
       </p>
 
