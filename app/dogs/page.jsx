@@ -33,6 +33,12 @@ const PATHS = [
     href: '/blog/air-purifier-pet-dander-uk',
     label: 'Improve the home first',
   },
+  {
+    title: 'Fireworks & loud-noise planning',
+    text: 'Prepare the home, reduce escape risk and know when fearful behaviour needs veterinary or qualified behaviour support.',
+    href: '/blog/dogs-fireworks-uk-calm-safe-plan',
+    label: 'Make a calm household plan',
+  },
 ]
 
 const FUTURE_AREAS = [
@@ -74,7 +80,7 @@ export default function Page() {
       <section className="mt-12">
         <div className="max-w-3xl">
           <h2 className="text-2xl font-semibold">Start with the job, not the product</h2>
-          <p className="mt-2 text-zinc-700">These four routes cover the strongest current reader needs and connect naturally to Wild &amp; Well’s existing expertise.</p>
+          <p className="mt-2 text-zinc-700">These routes cover strong current reader needs and connect naturally to Wild &amp; Well’s existing expertise.</p>
         </div>
         <div className="mt-6 grid gap-4 md:grid-cols-2">
           {PATHS.map((path) => (
