@@ -3,7 +3,7 @@ import Link from 'next/link'
 
 export const metadata = {
   title: 'Wild & Well — practical healthy-living decisions, without the noise',
-  description: 'Independent UK-focused guidance for water, air, sleep, nutrition, movement, healthy homes and practical resilience. Understand first. Buy only when it helps.',
+  description: 'Independent UK guidance for health, healthy homes, dogs, outdoors and practical resilience. Understand first. Buy only when it helps.',
   alternates: { canonical: '/' },
 }
 
@@ -56,6 +56,17 @@ export default function HomePage() {
         <div className="grid gap-4 border-b border-[rgba(18,59,50,.14)] pb-7 md:grid-cols-[1.15fr_.85fr] md:items-end md:gap-12 md:pb-9">
           <p className="max-w-4xl font-serif text-[clamp(1.8rem,3.2vw,3.4rem)] leading-[1.05] tracking-[-.035em] text-[var(--brand-dark)]">Practical guidance for people who want to feel better, live more deliberately and avoid buying things they do not need.</p>
           <div className="md:justify-self-end"><p className="max-w-md text-sm leading-7 text-[#667069]">We separate useful actions from product decisions, make trade-offs visible and keep affiliate relationships secondary to the advice.</p><Link href="/about" className="text-link mt-4">How Wild &amp; Well works →</Link></div>
+        </div>
+      </section>
+
+      <section className="content-shell pb-2" aria-labelledby="seasonal-dog-guidance">
+        <div className="grid gap-5 border border-[rgba(18,59,50,.16)] bg-[#f1eee5] p-6 md:grid-cols-[1fr_auto] md:items-center md:p-8">
+          <div>
+            <p className="eyebrow">Useful now · dogs and fireworks</p>
+            <h2 id="seasonal-dog-guidance" className="mt-2 font-serif text-[clamp(1.8rem,3vw,2.8rem)] font-normal leading-tight tracking-[-.035em] text-[var(--brand-dark)]">Make the household plan before the noise starts.</h2>
+            <p className="mt-3 max-w-3xl text-sm leading-7 text-[#5b655e]">Prepare a safe space, move walks earlier, reduce escape risk and know when distress needs veterinary support. The guide starts with practical actions, not calming-product promises.</p>
+          </div>
+          <Link href="/blog/dogs-fireworks-uk-calm-safe-plan" className="btn-primary md:justify-self-end">Use the fireworks plan</Link>
         </div>
       </section>
 

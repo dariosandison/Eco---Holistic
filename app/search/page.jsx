@@ -38,6 +38,12 @@ const TOPICS = [
     tag: 'Topic',
     description: 'Dog food, healthy weight, supplements, pet allergies and healthier homes with dogs.',
   },
+  {
+    title: 'Outdoors & nature',
+    href: '/outdoors',
+    tag: 'Topic',
+    description: 'Walking, family camping, outdoor cooking, hydration and practical UK micro-adventures.',
+  },
 ]
 
 const CORE_PAGES = [
@@ -176,7 +182,7 @@ export default function SearchPage({ searchParams }) {
         {!qn ? (
           <div className="mt-5 flex flex-wrap gap-2">
             <span className="text-sm text-zinc-600">Popular:</span>
-            {['dog wellness', 'pet allergy', 'air purifier', 'water filter', 'dehumidifier', 'sleep', 'nutrition'].map((t) => (
+            {['dog wellness', 'fireworks', 'outdoors', 'pet allergy', 'air purifier', 'water filter', 'dehumidifier', 'sleep'].map((t) => (
               <Link
                 key={t}
                 href={`/search?q=${encodeURIComponent(t)}`}

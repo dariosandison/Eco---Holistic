@@ -20,6 +20,7 @@ const CORE_PATHS = [
 ]
 
 const DEEPER_TOPICS = [
+  ['Outdoors & nature', '/outdoors', 'Walking, family camping, outdoor food and repeatable time outside.'],
   ['Recovery', '/topics/recovery', 'Load management, soreness and adaptation.'],
   ['Foot strength', '/topics/foot-strength', 'Natural movement basics and gradual transitions.'],
   ['Gut health', '/topics/gut-health', 'Fibre, diversity and sensible expectations.'],

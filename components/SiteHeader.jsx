@@ -7,7 +7,8 @@ import { useEffect, useState } from 'react'
 const journeys = [
   ['Water', '/topics/water'], ['Air', '/topics/air-quality'], ['Sleep', '/topics/sleep'],
   ['Nutrition', '/topics/nutrition'], ['Movement', '/topics/movement'],
-  ['Healthy home', '/healthy-home'], ['Resilience', '/topics/resilience'],
+  ['Healthy home', '/healthy-home'], ['Dogs', '/dogs'], ['Outdoors', '/outdoors'],
+  ['Resilience', '/topics/resilience'],
 ]
 
 export default function SiteHeader() {
