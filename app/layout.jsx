@@ -87,7 +87,7 @@ export default function RootLayout({ children }) {
         <BreadcrumbBar />
         <OnPageNav />
         <SiteHeader />
-        <main id="content" className="flex-1">{children}</main>
+        <div id="content" className="flex-1">{children}</div>
         <SiteFooter />
         <NewsletterBar />
         <ConsentBanner />

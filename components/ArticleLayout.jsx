@@ -15,7 +15,7 @@ export default function ArticleLayout({ title, description, date, updated, image
   const modified = parseDate(updated)
 
   return (
-    <article className="article-page">
+    <main className="article-page">
       <header className="article-hero content-shell">
         <div className="article-hero__copy">
           <p className="eyebrow">Wild &amp; Well guide</p>
@@ -41,6 +41,6 @@ export default function ArticleLayout({ title, description, date, updated, image
       </div>
 
       <section className="article-next"><div className="content-shell article-next__inner"><div><p className="eyebrow">Keep going</p><h2>Turn the reading into a clearer decision.</h2><p>Explore the wider topic, use a practical tool, or compare a focused shortlist only when a product genuinely has a job to do.</p></div><div className="article-next__links"><a href="/topics">Explore the seven journeys <span>→</span></a><a href="/tools">Use a free tool <span>→</span></a><a href="/shortlists">Compare focused shortlists <span>→</span></a><a href="/blog">More guides <span>→</span></a></div></div></section>
-    </article>
+    </main>
   )
 }
