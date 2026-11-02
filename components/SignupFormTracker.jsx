@@ -7,7 +7,7 @@ import { trackEvent } from "@/lib/analytics";
  * Attaches a submit listener to a given form (by id) and fires GA4-style events.
  * Useful for server-rendered forms that POST to /api/subscribe.
  */
-export default function SignupFormTracker({ formId, placement = "unknown" }) {
+export default function SignupFormTracker({ formId, placement = "unknown", interest = "wellness" }) {
   useEffect(() => {
     if (!formId) return;
     const form = document.getElementById(formId);
@@ -16,10 +16,10 @@ export default function SignupFormTracker({ formId, placement = "unknown" }) {
     const onSubmit = () => {
       try {
         // Recommended GA4 event name
-        trackEvent("sign_up", { method: "email", placement });
+        trackEvent("sign_up", { method: "email", placement, interest });
         // Keep a site-specific event too (handy for funnels)
-        trackEvent("newsletter_signup", { placement });
-        trackEvent("email_signup", { placement });
+        trackEvent("newsletter_signup", { placement, interest });
+        trackEvent("email_signup", { placement, interest });
       } catch {
         // ignore
       }
@@ -27,7 +27,7 @@ export default function SignupFormTracker({ formId, placement = "unknown" }) {
 
     form.addEventListener("submit", onSubmit, { capture: true });
     return () => form.removeEventListener("submit", onSubmit, { capture: true });
-  }, [formId, placement]);
+  }, [formId, placement, interest]);
 
   return null;
 }

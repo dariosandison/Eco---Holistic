@@ -17,6 +17,7 @@ function safeId(v) {
  */
 export default function InlineSignup({
   placement = "inline",
+  interest = "wellness",
   title = "Make the next decision easier",
   description = "Occasional Wild & Well notes with practical actions, useful comparisons and no-pressure product guidance.",
   cta = "Join Wild & Well",
@@ -42,7 +43,7 @@ export default function InlineSignup({
           ) : null}
         </div>
 
-        <SignupFormTracker formId={id} placement={placement} />
+        <SignupFormTracker formId={id} placement={placement} interest={interest} />
         <form
           id={id}
           action="/api/subscribe"
@@ -50,6 +51,7 @@ export default function InlineSignup({
           className="mt-5 flex flex-col gap-2 sm:flex-row"
         >
           <input type="hidden" name="source" value={placement} />
+          <input type="hidden" name="interest" value={interest} />
           <input
             type="email"
             name="email"

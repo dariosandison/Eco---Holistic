@@ -26,6 +26,17 @@ function absoluteImage(image) {
   return `${SITE_URL}${String(image).startsWith('/') ? image : `/${image}`}`
 }
 
+function newsletterInterest(tags = []) {
+  const values = tags.map((tag) => String(tag).toLowerCase())
+  const has = (...needles) => values.some((tag) => needles.some((needle) => tag.includes(needle)))
+
+  if (has('dog', 'pet')) return 'dogs'
+  if (has('outdoor', 'camping', 'walking', 'hiking', 'cycling')) return 'outdoors'
+  if (has('healthy home', 'air quality', 'water', 'cleaning', 'resilience', 'energy')) return 'healthy-home'
+  if (has('offer', 'deal')) return 'offers'
+  return 'wellness'
+}
+
 export async function generateStaticParams() {
   return listContent('blog').map(({ slug }) => ({ slug }))
 }
@@ -93,6 +104,7 @@ export default function Page({ params }) {
   const allPosts = listContent('blog')
   const authorType = author.schemaType === 'Organization' ? 'Organization' : 'Person'
   const articleImage = absoluteImage(frontmatter.image)
+  const signupInterest = newsletterInterest(frontmatter.tags || [])
 
   return (
     <ArticleLayout
@@ -110,6 +122,7 @@ export default function Page({ params }) {
 
       <InlineSignup
         placement={`blog_${params.slug}`}
+        interest={signupInterest}
         title="Make the next decision easier"
         description="Occasional Wild & Well notes with practical actions, useful comparisons and no-pressure product guidance."
         cta="Join Wild & Well"
