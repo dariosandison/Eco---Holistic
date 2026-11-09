@@ -59,14 +59,14 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="content-shell pb-2" aria-labelledby="seasonal-dog-guidance">
+      <section className="content-shell pb-2" aria-labelledby="seasonal-home-guidance">
         <div className="grid gap-5 border border-[rgba(18,59,50,.16)] bg-[#f1eee5] p-6 md:grid-cols-[1fr_auto] md:items-center md:p-8">
           <div>
-            <p className="eyebrow">Useful now · dogs and fireworks</p>
-            <h2 id="seasonal-dog-guidance" className="mt-2 font-serif text-[clamp(1.8rem,3vw,2.8rem)] font-normal leading-tight tracking-[-.035em] text-[var(--brand-dark)]">Make the household plan before the noise starts.</h2>
-            <p className="mt-3 max-w-3xl text-sm leading-7 text-[#5b655e]">Prepare a safe space, move walks earlier, reduce escape risk and know when distress needs veterinary support. The guide starts with practical actions, not calming-product promises.</p>
+            <p className="eyebrow">Useful now · condensation season</p>
+            <h2 id="seasonal-home-guidance" className="mt-2 font-serif text-[clamp(1.8rem,3vw,2.8rem)] font-normal leading-tight tracking-[-.035em] text-[var(--brand-dark)]">Measure the moisture before buying a machine.</h2>
+            <p className="mt-3 max-w-3xl text-sm leading-7 text-[#5b655e]">Separate occasional window condensation from persistent high humidity, damp or a building defect. The winter guide starts with ventilation and source control, then explains when a dehumidifier may genuinely help.</p>
           </div>
-          <Link href="/blog/dogs-fireworks-uk-calm-safe-plan" className="btn-primary md:justify-self-end">Use the fireworks plan</Link>
+          <Link href="/blog/winter-humidity-guide" className="btn-primary md:justify-self-end">Use the winter humidity guide</Link>
         </div>
       </section>
 
