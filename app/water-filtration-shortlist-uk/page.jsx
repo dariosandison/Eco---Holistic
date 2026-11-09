@@ -63,6 +63,23 @@ export default function Page() {
         </ul>
       </section>
 
+      <section className="mt-10 border-y border-zinc-200 py-8">
+        <div className="grid gap-6 md:grid-cols-[0.8fr_1.2fr] md:items-start">
+          <div>
+            <p className="text-sm font-semibold uppercase tracking-[0.16em] text-zinc-500">Large-household decision</p>
+            <h2 className="mt-2 text-2xl font-semibold text-zinc-900">Choosing an 11–12 litre gravity filter</h2>
+          </div>
+          <div className="space-y-4 text-sm leading-7 text-zinc-700">
+            <p>Compare usable filtered-water capacity, not only the headline vessel size. A current 12L UK model, for example, states an 11.5L filtered capacity; other brands and models may differ.</p>
+            <p>For five or six people, also check refill frequency, filtration time, replacement-filter availability, full counter height and whether everyone will actually use filtered water. A larger unit reduces refilling but takes more space and is not automatically the best value.</p>
+            <div className="flex flex-wrap gap-3">
+              <Link className="btn-primary" href="/blog/gravity-water-filter-worth-it-uk">Read the gravity-filter size guide</Link>
+              <a className="btn-secondary" href="https://www.dwi.gov.uk/consumers/learn-more-about-your-water/domestic-water-filters-and-softeners/" target="_blank" rel="noreferrer">Official UK water-filter advice</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {groups.map((g) => (
         <section key={g.id} className="mt-14 scroll-mt-28" id={g.id}>
           <div className="flex flex-wrap items-end justify-between gap-3">

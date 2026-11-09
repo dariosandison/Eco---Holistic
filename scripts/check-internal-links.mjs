@@ -96,7 +96,11 @@ async function authorSlugs() {
     const AUTHORS = mod.AUTHORS || []
     return new Set(AUTHORS.map((a) => a.slug).filter(Boolean))
   } catch {
-    return new Set()
+    // Node cannot always resolve the extensionless imports used by Next.js.
+    // Fall back to reading the local author registry so valid dynamic author
+    // routes are still checked without turning every profile into a false 404.
+    const source = readText(p)
+    return new Set(Array.from(source.matchAll(/slug:\s*["']([^"']+)["']/g), (match) => match[1]))
   }
 }
 

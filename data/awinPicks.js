@@ -90,7 +90,7 @@ export const AWIN_PICKS = {
     },
     {
       "topic": "water",
-      "group": "Gravity & shower filtration",
+      "group": "Under-sink / RO",
       "subtopic": "",
       "advertiser": "Doulton",
       "product": "Biotect Ultra 2501",
@@ -141,7 +141,7 @@ export const AWIN_PICKS = {
     },
     {
       "topic": "water",
-      "group": "Gravity & shower filtration",
+      "group": "Under-sink / RO",
       "subtopic": "",
       "advertiser": "Doulton",
       "product": "Doulton Ecofast Biotect Ultra Undercounter Water Filter System",
@@ -270,8 +270,8 @@ export const AWIN_PICKS = {
       "badge": "Waterdropfilter",
       "description": "Waterdropfilter UK partner link.",
       "bullets": [
-        "Best for: higher flow + long-term convenience",
-        "Check fitting + space under sink",
+        "Best for: compatible under-sink systems",
+        "Confirm the exact model before ordering",
         "Plan for filter changes"
       ]
     },
@@ -328,7 +328,7 @@ export const AWIN_PICKS = {
     },
     {
       "topic": "water",
-      "group": "Under-sink / RO",
+      "group": "Jugs & dispensers",
       "subtopic": "",
       "advertiser": "Waterdropfilter UK",
       "product": "Water Filter Pitcher Chubby Blue",
@@ -338,9 +338,9 @@ export const AWIN_PICKS = {
       "badge": "Waterdropfilter",
       "description": "Waterdropfilter UK partner link.",
       "bullets": [
-        "Best for: higher flow + long-term convenience",
-        "Check fitting + space under sink",
-        "Plan for filter changes"
+        "Best for: simple countertop filtering",
+        "Check usable capacity and fridge space",
+        "Plan for filter changes and cleaning"
       ]
     }
   ],
